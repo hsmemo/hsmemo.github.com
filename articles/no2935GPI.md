@@ -1,0 +1,50 @@
+---
+layout: default
+title: (unrecognied function)(FIXME!)
+---
+[Top](../index.html)
+
+--- 
+### 定義場所(file name)
+hotspot/src/share/vm/prims/jvmtiEnv.cpp
+### 説明(description)
+
+```
+// Threads_lock NOT held, java_thread not protected by lock
+// java_thread - pre-checked
+// java_thread - unchecked
+// depth - pre-checked as non-negative
+// value_ptr - pre-checked for NULL
+```
+
+### 名前(function name)
+```
+jvmtiError
+JvmtiEnv::GetLocalDouble(JavaThread* java_thread, jint depth, jint slot, jdouble* value_ptr) {
+```
+
+### 本体部(body)
+```
+  {- -------------------------------------------
+  (1) (変数宣言など)
+      ---------------------------------------- -}
+
+	  // rm object is created to clean up the javaVFrame created in
+	  // doit_prologue(), but after doit() is finished with it.
+	  ResourceMark rm;
+	
+  {- -------------------------------------------
+  (1) VM_GetOrSetLocal を呼び出して
+      指定された局所変数の値を取得し, 
+      結果を value_ptr 引数が指している箇所に書き込む.
+      ---------------------------------------- -}
+
+	  VM_GetOrSetLocal op(java_thread, depth, slot, T_DOUBLE);
+	  VMThread::execute(&op);
+	  *value_ptr = op.value().d;
+	  return op.result();
+	} /* end GetLocalDouble */
+	
+```
+
+

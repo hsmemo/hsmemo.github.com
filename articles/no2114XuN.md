@@ -1,0 +1,29 @@
+---
+layout: default
+title: (unrecognied function)(FIXME!)
+---
+[Top](../index.html)
+
+--- 
+### 定義場所(file name)
+hotspot/src/share/vm/services/g1MemoryPool.cpp
+
+### 名前(function name)
+```
+G1EdenPool::G1EdenPool(G1CollectedHeap* g1h) :
+```
+
+### 本体部(body)
+```
+  {- -------------------------------------------
+  (1) スーパークラスの初期化
+      ---------------------------------------- -}
+
+	  G1MemoryPoolSuper(g1h,
+	                    "G1 Eden",
+	                    eden_space_committed(g1h), /* init_size */
+	                    false /* support_usage_threshold */) { }
+	
+```
+
+

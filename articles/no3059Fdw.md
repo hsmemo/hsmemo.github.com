@@ -1,0 +1,92 @@
+---
+layout: default
+title: (unrecognied function)(FIXME!)
+---
+[Top](../index.html)
+
+--- 
+### 定義場所(file name)
+hotspot/src/cpu/sparc/vm/templateTable_sparc.cpp
+
+### 名前(function name)
+```
+void TemplateTable::invokestatic(int byte_no) {
+```
+
+### 本体部(body)
+```
+  {- -------------------------------------------
+  (1) (assert) (See: TemplateTable::transition())
+      ---------------------------------------- -}
+
+	  transition(vtos, vtos);
+
+  {- -------------------------------------------
+  (1) (assert)
+      ---------------------------------------- -}
+
+	  assert(byte_no == f1_byte, "use this argument");
+	
+  {- -------------------------------------------
+  (1) (変数宣言など)
+      ---------------------------------------- -}
+
+	  Register Rscratch = G3_scratch;
+	  Register Rtemp = G4_scratch;
+	  Register Rret = Lscratch;
+	
+  {- -------------------------------------------
+  (1) コード生成:
+      「対応する methodOop の情報を CPCache から取得し, G5_method レジスタに設定する.
+        (なお, この時点で resolve が終わってなければ resolve も行う)」
+      ---------------------------------------- -}
+
+	  load_invoke_cp_cache_entry(byte_no, G5_method, noreg, Rret, /*virtual*/ false, false, false);
+
+  {- -------------------------------------------
+  (1) コード生成:
+      「SP の値を O5_savedSP レジスタに退避しておく」
+      ---------------------------------------- -}
+
+	  __ mov(SP, O5_savedSP); // record SP that we wanted the callee to restore
+	
+  {- -------------------------------------------
+  (1) コード生成: (verify)
+      ---------------------------------------- -}
+
+	  __ verify_oop(G5_method);
+	
+  {- -------------------------------------------
+  (1) コード生成:
+      「method data pointer (mdp) の値を更新しておく」
+      ---------------------------------------- -}
+
+	  __ profile_call(O4);
+	
+  {- -------------------------------------------
+  (1) コード生成:
+      「対応する return entry のアドレスを取得して Rret に入れる.
+        (ここでは, 3byte先のバイトコードにdispatchする return entry を取得)」
+      ---------------------------------------- -}
+
+	  // get return address
+	  AddressLiteral table(Interpreter::return_3_addrs_by_index_table());
+	  __ set(table, Rtemp);
+	  __ srl(Rret, ConstantPoolCacheEntry::tosBits, Rret);          // get return type
+	  // Make sure we don't need to mask Rret for tosBits after the above shift
+	  ConstantPoolCacheEntry::verify_tosBits();
+	  __ sll(Rret,  LogBytesPerWord, Rret);
+	  __ ld_ptr(Rtemp, Rret, Rret);         // get return address
+	
+  {- -------------------------------------------
+  (1) コード生成:
+      「実際の呼び出し処理を行う」
+      ---------------------------------------- -}
+
+	  // do the call
+	  __ call_from_interpreter(Rscratch, Gargs, Rret);
+	}
+	
+```
+
+

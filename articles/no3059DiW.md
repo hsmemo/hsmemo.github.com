@@ -1,0 +1,52 @@
+---
+layout: default
+title: (unrecognied function)(FIXME!)
+---
+[Top](../index.html)
+
+--- 
+### 定義場所(file name)
+hotspot/src/cpu/x86/vm/templateTable_x86_64.cpp
+
+### 名前(function name)
+```
+void TemplateTable::irem() {
+```
+
+### 本体部(body)
+```
+  {- -------------------------------------------
+  (1) (assert) (See: TemplateTable::transition())
+      ---------------------------------------- -}
+
+	  transition(itos, itos);
+
+  {- -------------------------------------------
+  (1) コード生成:
+      「divosor を rcx レジスタに待避し, 
+        dividend を rxa レジスタにロードする.」
+      ---------------------------------------- -}
+
+	  __ movl(rcx, rax);
+	  __ pop_i(rax);
+
+  {- -------------------------------------------
+  (1) コード生成:
+      「corrected_idivl() が生成するコードにより, 剰余計算を実施.
+       (なお, 剰余算の結果は rdx に入っているため, 
+        それを rax に移す処理も行っている)」
+    
+      (なおコメントとして, 最適化のアイデアが書かれていたりする)
+      ---------------------------------------- -}
+
+	  // Note: could xor eax and ecx and compare with (-1 ^ min_int). If
+	  //       they are not equal, one could do a normal division (no correction
+	  //       needed), which may speed up this implementation for the common case.
+	  //       (see also JVM spec., p.243 & p.271)
+	  __ corrected_idivl(rcx);
+	  __ movl(rax, rdx);
+	}
+	
+```
+
+

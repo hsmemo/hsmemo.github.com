@@ -1,0 +1,54 @@
+---
+layout: default
+title: (unrecognied function)(FIXME!)
+---
+[Top](../index.html)
+
+--- 
+### 定義場所(file name)
+hotspot/src/cpu/x86/vm/assembler_x86.cpp
+
+### 名前(function name)
+```
+void MacroAssembler::call_VM(Register oop_result,
+                             address entry_point,
+                             Register arg_1,
+                             Register arg_2,
+                             Register arg_3,
+                             bool check_exceptions) {
+```
+
+### 本体部(body)
+```
+  {- -------------------------------------------
+  (1) コード生成:
+      「一旦 call 命令でリターンアドレスをスタック状に積み, 引数をセットした後、
+        MacroAssembler::call_VM_helper() が生成するコードで, 指定のエントリポイントの呼び出しを行う」
+    
+      (一旦リターンアドレスを積んでいるのは, last_Java_pc を取得しやすくするため.
+       詳細は MacroAssembler::call_VM_helper() 内のコメント参照)
+      ---------------------------------------- -}
+
+	  Label C, E;
+	  call(C, relocInfo::none);
+	  jmp(E);
+	
+	  bind(C);
+	
+	  LP64_ONLY(assert(arg_1 != c_rarg3, "smashed arg"));
+	  LP64_ONLY(assert(arg_2 != c_rarg3, "smashed arg"));
+	  pass_arg3(this, arg_3);
+	
+	  LP64_ONLY(assert(arg_1 != c_rarg2, "smashed arg"));
+	  pass_arg2(this, arg_2);
+	
+	  pass_arg1(this, arg_1);
+	  call_VM_helper(oop_result, entry_point, 3, check_exceptions);
+	  ret(0);
+	
+	  bind(E);
+	}
+	
+```
+
+

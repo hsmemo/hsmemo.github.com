@@ -1,0 +1,53 @@
+---
+layout: default
+title: (unrecognied function)(FIXME!)
+---
+[Top](../index.html)
+
+--- 
+### 定義場所(file name)
+hotspot/src/share/vm/prims/jni.cpp
+
+### 名前(function name)
+```
+JNI_ENTRY(jmethodID, jni_GetMethodID(JNIEnv *env, jclass clazz,
+          const char *name, const char *sig))
+```
+
+### 本体部(body)
+```
+  {- -------------------------------------------
+  (1) (デバッグ用の処理)
+      (See: JNIWrapper)
+      ---------------------------------------- -}
+
+	  JNIWrapper("GetMethodID");
+
+  {- -------------------------------------------
+  (1) (DTrace のフック点)
+      ---------------------------------------- -}
+
+	  DTRACE_PROBE4(hotspot_jni, GetMethodID__entry, env, clazz, name, sig);
+
+  {- -------------------------------------------
+  (1) get_method_id() を呼んで, 指定された内容に合致するメソッドの jmethod ID を取得する.
+      ---------------------------------------- -}
+
+	  jmethodID ret = get_method_id(env, clazz, name, sig, false, thread);
+
+  {- -------------------------------------------
+  (1) (DTrace のフック点)
+      ---------------------------------------- -}
+
+	  DTRACE_PROBE1(hotspot_jni, GetMethodID__return, ret);
+
+  {- -------------------------------------------
+  (1) 結果をリターン
+      ---------------------------------------- -}
+
+	  return ret;
+	JNI_END
+	
+```
+
+

@@ -1,0 +1,27 @@
+---
+layout: default
+title: (unrecognied function)(FIXME!)
+---
+[Top](../index.html)
+
+--- 
+### 定義場所(file name)
+hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskManager.hpp
+
+### 名前(function name)
+```
+  static GCTaskManager* create(uint workers, NotifyDoneClosure* ndc) {
+```
+
+### 本体部(body)
+```
+  {- -------------------------------------------
+  (1) 新しい GCTaskManager オブジェクトを生成してリターンする.
+      ---------------------------------------- -}
+
+	    return new GCTaskManager(workers, ndc);
+	  }
+	
+```
+
+

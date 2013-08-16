@@ -29,6 +29,7 @@ title: LinkResolver クラス関連のクラス (LinkInfo, FieldAccessInfo, Call
 ---
 ## <a name="nobJeQAXWL" id="nobJeQAXWL">LinkResolver</a>
 
+### 概要(Summary)
 ConstantPool の解決処理 (resolve 処理) を行うクラス
 (より正確には, そのための機能を納めた名前空間(AllStatic クラス)).
 
@@ -50,6 +51,7 @@ See: [here](../doxygen/classLinkResolver.html) for details
 ---
 ## <a name="no4VJIUNES" id="no4VJIUNES">LinkInfo</a>
 
+### 概要(Summary)
 LinkResolver クラス用の補助クラス(の基底クラス).
 
 resolve 処理で使用されるリンク情報を入れておくためのクラス
@@ -86,6 +88,7 @@ See: [here](../doxygen/classLinkInfo.html) for details
 ---
 ## <a name="nojJ5EelTC" id="nojJ5EelTC">FieldAccessInfo</a>
 
+### 概要(Summary)
 LinkInfo クラスの具象サブクラスの1つ.
 
 フィールドアクセス (getfield/putfield & getstatic/putstatic) に関するリンク情報を格納するクラス.
@@ -107,6 +110,7 @@ See: [here](../doxygen/classFieldAccessInfo.html) for details
 ---
 ## <a name="noz58ZWb82" id="noz58ZWb82">CallInfo</a>
 
+### 概要(Summary)
 LinkInfo クラスの具象サブクラスの1つ.
 
 メソッド呼び出し (invoke*) に関するリンク情報を格納するクラス.

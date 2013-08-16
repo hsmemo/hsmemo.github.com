@@ -2054,8 +2054,6 @@ CountBitsNode クラスの具象サブクラスの1つ.
 このクラスは int 値に対する count leading zero 演算用
 (= java.lang.Integer.numberOfLeadingZeros() 用).
 
- Long.numberOfLeadingZeros(long)
-
 
 ```
     ((cite: hotspot/src/share/vm/opto/connode.hpp))

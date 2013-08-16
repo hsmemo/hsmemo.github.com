@@ -475,6 +475,7 @@ See: [here](../doxygen/classJNIGlobalsDumper.html) for details
 ---
 ## <a name="noR-2LRo7D" id="noR-2LRo7D">MonitorUsedDumper</a>
 
+### 概要(Summary)
 HeapDumper クラス内で使用される補助クラス.
 
 HPROF_GC_ROOT_MONITOR_USED レコードの出力を行う (See: [here](no2114JQO.html) for details).
@@ -495,6 +496,7 @@ See: [here](../doxygen/classMonitorUsedDumper.html) for details
 ---
 ## <a name="nodkfy8VlC" id="nodkfy8VlC">StickyClassDumper</a>
 
+### 概要(Summary)
 HeapDumper クラス内で使用される補助クラス.
 
 HPROF_GC_ROOT_STICKY_CLASS レコードの出力を行う (See: [here](no2114JQO.html) for details).
@@ -515,6 +517,7 @@ See: [here](../doxygen/classStickyClassDumper.html) for details
 ---
 ## <a name="noVE8lQxhp" id="noVE8lQxhp">HeapObjectDumper</a>
 
+### 概要(Summary)
 HeapDumper クラス内で使用される補助クラス.
 
 HPROF_GC_INSTANCE_DUMP レコードや HPROF_GC_OBJ_ARRAY_DUMPレコード, 
@@ -537,6 +540,7 @@ See: [here](../doxygen/classHeapObjectDumper.html) for details
 ---
 ## <a name="norViZ-nV9" id="norViZ-nV9">VM_HeapDumper</a>
 
+### 概要(Summary)
 HeapDumper クラス内で使用される補助クラス.
 
 スレッドを停止させた状態でダンプ処理を行うための VM_GC_Operation クラス.

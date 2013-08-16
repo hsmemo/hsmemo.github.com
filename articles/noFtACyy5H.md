@@ -53,8 +53,8 @@ Decoder::get_elf_file() 内で(のみ)生成されている.
   -> frame::print_on_error()
      -> print_C_frame()
         -> os::dll_address_to_function_name()  (<= Solaris 版 or Linux 版)
-	       -> Decoder::decode()
-	          -> Decoder::get_elf_file()
+           -> Decoder::decode()
+              -> Decoder::get_elf_file()
 
 * FlatProfilerTask による処理
 

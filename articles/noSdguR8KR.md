@@ -137,6 +137,7 @@ See: [here](../doxygen/classMethodLiveness.html) for details
 ---
 ## <a name="noEGNEqT3B" id="noEGNEqT3B">MethodLiveness::BasicBlock</a>
 
+### 概要(Summary)
 MethodLiveness クラス内で使用される補助クラス.
 
 基本ブロック(basic block)に関する情報を表す.

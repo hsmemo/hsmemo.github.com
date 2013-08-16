@@ -73,6 +73,7 @@ See: [here](../doxygen/classDictI.html) for details
 ---
 ## <a name="no5ZkuryC5" id="no5ZkuryC5">bucket</a>
 
+### 概要(Summary)
 Dict クラス内で使用される補助クラス.
 このクラスを用いてハッシュが実装されている.
 

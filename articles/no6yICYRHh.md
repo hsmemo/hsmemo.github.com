@@ -75,8 +75,8 @@ constantPoolKlass::allocate() というファクトリメソッドが用意さ�
 
 * JVMTI の RedefineClasses() 及び RetransformClasses() の処理時
 
-  VM_RedefineClasses::doit_prologue() @ hotspot/src/share/vm/prims/jvmtiRedefineClasses.cpp
-  -> VM_RedefineClasses::load_new_class_versions() @ hotspot/src/share/vm/prims/jvmtiRedefineClasses.cpp
+  VM_RedefineClasses::doit_prologue()
+  -> VM_RedefineClasses::load_new_class_versions()
      -> VM_RedefineClasses::merge_cp_and_rewrite()
         -> oopFactory::new_constantPool()
            -> (同上)

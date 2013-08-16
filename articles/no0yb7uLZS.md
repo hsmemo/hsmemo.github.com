@@ -100,12 +100,6 @@ Node クラスのサブクラスの1つ.
 * 4番目の入力Node : (ストアの場合のみ使用される) ストアする値
 * 5番目の入力Node : (StoreCM の場合のみ使用される) 対応する oop のストア Node
 
-* 1番目の入力Node : Control (Node への control flow 上の依存を示す. 他の Node の第1Nodeと同じ.)
-* 2番目の入力Node : Memory (メモリアクセス間での依存関係を示す #TODO)
-* 3番目の入力Node : ロード/ストアの対象となるメモリアドレス
-* 4番目の入力Node : (ストアの場合のみ使用される) ストアする値
-* 5番目の入力Node : (StoreCM の場合のみ使用される) 対応する oop のストア Node
-
 
 ```
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))

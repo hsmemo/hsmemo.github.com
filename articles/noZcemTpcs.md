@@ -279,8 +279,8 @@ Deoptimization::deoptimize_frame() 内で(のみ)使用されている.
 
   (略) (See: [here](no3059azN.html) for details)
   -> JvmtiEnvBase::force_early_return()
-  	 -> JvmtiEnvBase::check_top_frame()
-  	    -> Deoptimization::deoptimize_frame()
+     -> JvmtiEnvBase::check_top_frame()
+        -> Deoptimization::deoptimize_frame()
 
 * JVMTI の GetLocal*() 及び SetLocal*() 関数の処理
 

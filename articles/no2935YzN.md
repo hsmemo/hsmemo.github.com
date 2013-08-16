@@ -108,7 +108,7 @@ VM_G1IncCollectionPause::doit()
           -> G1CollectedHeap::evacuate_collection_set()
              -> G1ParTask::work()     (<= parallel の場合は WorkGang::run_task() 経由で呼び出される)
                 (1) root から直接参照されているオブジェクトを全て処理する.
-                    -> G1CollectedHeap::g1_process_strong_roots() で root から直接参照されているオブジェクトを全て処理する.
+                    -> G1CollectedHeap::g1_process_strong_roots()
                        -> SharedHeap::process_strong_roots()
                           (なお使用するクロージャーは (Perm領域用/非Perm領域用のどちらも) G1ParCopyClosure. ポインタ配列用は G1ParScanPartialArrayClosure)
                           (<= より正確には, G1ParCopyClosure を BufferingOopClosure や BufferingOopsInGenClosure でラッピングしたものが使われる)

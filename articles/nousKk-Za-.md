@@ -80,7 +80,7 @@ Node クラスのサブクラスの1つ.
 (不定な値を表す際に使用されている. 例えば void や long/double の ２スロット目などに使われる).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------ConNode----------------------------------------
     // Simple constants
@@ -99,7 +99,7 @@ Node クラスのサブクラスの1つ.
 入力ノードは control input のみ. そして control input は常に RootNode.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       ConNode( const Type *t ) : TypeNode(t,1) {
         init_req(0, (Node*)Compile::current()->root());
@@ -123,7 +123,7 @@ ConNode クラスのサブクラスの1つ.
 このクラスは int 型の定数用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------ConINode---------------------------------------
     // Simple integer constants
@@ -134,7 +134,7 @@ ConNode クラスのサブクラスの1つ.
 `#ifdef _LP64` でない場合は, これは ConINode の別名.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     #define ConXNode     ConINode
 ```
@@ -154,7 +154,7 @@ ConNode クラスのサブクラスの1つ.
 入力ノードは control input のみ. そして control input は常に RootNode.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       ConINode( const TypeInt *t ) : ConNode(t) {}
 ```
@@ -173,7 +173,7 @@ ConNode クラスのサブクラスの1つ.
 このクラスはポインタ型の定数用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------ConPNode---------------------------------------
     // Simple pointer constants
@@ -191,7 +191,7 @@ ConNode クラスのサブクラスの1つ.
 入力ノードは control input のみ. そして control input は常に RootNode.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       ConPNode( const TypePtr *t ) : ConNode(t) {}
 ```
@@ -210,7 +210,7 @@ ConNode クラスのサブクラスの1つ.
 このクラスは narrow oop 型の定数用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------ConNNode--------------------------------------
     // Simple narrow oop constants
@@ -227,7 +227,7 @@ ConNode クラスのサブクラスの1つ.
 入力ノードは control input のみ. そして control input は常に RootNode.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       ConNNode( const TypeNarrowOop *t ) : ConNode(t) {}
 ```
@@ -246,7 +246,7 @@ ConNode クラスのサブクラスの1つ.
 このクラスは long 型の定数用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------ConLNode---------------------------------------
     // Simple long constants
@@ -257,7 +257,7 @@ ConNode クラスのサブクラスの1つ.
 `#ifdef _LP64` の場合は, これは ConLNode の別名.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     #define ConXNode     ConLNode
 ```
@@ -274,7 +274,7 @@ ConNode クラスのサブクラスの1つ.
 入力ノードは control input のみ. そして control input は常に RootNode.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       ConLNode( const TypeLong *t ) : ConNode(t) {}
 ```
@@ -293,7 +293,7 @@ ConNode クラスのサブクラスの1つ.
 このクラスは float 型の定数用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------ConFNode---------------------------------------
     // Simple float constants
@@ -311,7 +311,7 @@ ConNode クラスのサブクラスの1つ.
 入力ノードは control input のみ. そして control input は常に RootNode.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       ConFNode( const TypeF *t ) : ConNode(t) {}
 ```
@@ -330,7 +330,7 @@ ConNode クラスのサブクラスの1つ.
 このクラスは double 型の定数用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------ConDNode---------------------------------------
     // Simple double constants
@@ -348,7 +348,7 @@ ConNode クラスのサブクラスの1つ.
 入力ノードは control input のみ. そして control input は常に RootNode.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       ConDNode( const TypeD *t ) : ConNode(t) {}
 ```
@@ -371,7 +371,7 @@ TypeNode クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------CMoveNode--------------------------------------
     // Conditional move
@@ -388,7 +388,7 @@ TypeNode クラスのサブクラスの1つ.
 * 4番目の入力Node : 条件が false の場合に出力する Node
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       enum { Control,               // When is it safe to do this cmove?
              Condition,             // Condition controlling the cmove
@@ -397,7 +397,7 @@ TypeNode クラスのサブクラスの1つ.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       CMoveNode( Node *bol, Node *left, Node *right, const Type *t ) : TypeNode(t,4)
       {
@@ -430,7 +430,7 @@ CMoveNode クラスの具象サブクラスの1つ.
 このクラスは 2つの double 値から 1つを選ぶ場合用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------CMoveDNode-------------------------------------
     class CMoveDNode : public CMoveNode {
@@ -450,7 +450,7 @@ CMoveNode::make() 内で(のみ)生成されている.
 * 4番目の入力Node : 条件が false の場合に出力する Node
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       CMoveDNode( Node *bol, Node *left, Node *right, const Type* t) : CMoveNode(bol,left,right,t){}
 ```
@@ -469,7 +469,7 @@ CMoveNode クラスの具象サブクラスの1つ.
 このクラスは 2つの float 値から 1つを選ぶ場合用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------CMoveFNode-------------------------------------
     class CMoveFNode : public CMoveNode {
@@ -489,7 +489,7 @@ CMoveNode::make() 内で(のみ)生成されている.
 * 4番目の入力Node : 条件が false の場合に出力する Node
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       CMoveFNode( Node *bol, Node *left, Node *right, const Type* t ) : CMoveNode(bol,left,right,t) {}
 ```
@@ -508,7 +508,7 @@ CMoveNode クラスの具象サブクラスの1つ.
 このクラスは 2つの int 値から 1つを選ぶ場合用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------CMoveINode-------------------------------------
     class CMoveINode : public CMoveNode {
@@ -532,7 +532,7 @@ CMoveNode クラスの具象サブクラスの1つ.
 * 4番目の入力Node : 条件が false の場合に出力する Node
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       CMoveINode( Node *bol, Node *left, Node *right, const TypeInt *ti ) : CMoveNode(bol,left,right,ti){}
 ```
@@ -551,7 +551,7 @@ CMoveNode クラスの具象サブクラスの1つ.
 このクラスは 2つの long 値から 1つを選ぶ場合用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------CMoveLNode-------------------------------------
     class CMoveLNode : public CMoveNode {
@@ -574,7 +574,7 @@ CMoveNode クラスの具象サブクラスの1つ.
 * 4番目の入力Node : 条件が false の場合に出力する Node
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       CMoveLNode(Node *bol, Node *left, Node *right, const TypeLong *tl ) : CMoveNode(bol,left,right,tl){}
 ```
@@ -593,7 +593,7 @@ CMoveNode クラスの具象サブクラスの1つ.
 このクラスは 2つのポインタ値から 1つを選ぶ場合用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------CMovePNode-------------------------------------
     class CMovePNode : public CMoveNode {
@@ -613,7 +613,7 @@ CMoveNode::make() 内で(のみ)生成されている.
 * 4番目の入力Node : 条件が false の場合に出力する Node
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       CMovePNode( Node *c, Node *bol, Node *left, Node *right, const TypePtr* t ) : CMoveNode(bol,left,right,t) { init_req(Control,c); }
 ```
@@ -632,7 +632,7 @@ CMoveNode クラスの具象サブクラスの1つ.
 このクラスは 2つの narrow oop 値から 1つを選ぶ場合用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------CMoveNNode-------------------------------------
     class CMoveNNode : public CMoveNode {
@@ -652,7 +652,7 @@ CMoveNode::make() 内で(のみ)生成されている.
 * 4番目の入力Node : 条件が false の場合に出力する Node
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       CMoveNNode( Node *c, Node *bol, Node *left, Node *right, const Type* t ) : CMoveNode(bol,left,right,t) { init_req(Control,c); }
 ```
@@ -674,7 +674,7 @@ CMoveNode は 4つの入力を必要とするが, Matcher は二分木を要求�
 そこで BinaryNode を使って "(CMove (Binary bol cmp) (Binary src1 src2))" という二分木として表現する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------BinaryNode-------------------------------------
     // Place holder for the 2 conditional inputs to a CMove.  CMove needs 4
@@ -693,7 +693,7 @@ Matcher::find_shared() 内で(のみ)生成されている.
 (control input も含めて) 3つの入力ノードを持つ. ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       BinaryNode( Node *n1, Node *n2 ) : Node(0,n1,n2) { }
 ```
@@ -722,7 +722,7 @@ Ideal の型情報を扱うための便宜的な Node クラスの基底クラ�
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------ConstraintCastNode-----------------------------
     // cast to a different range
@@ -734,7 +734,7 @@ Ideal の型情報を扱うための便宜的な Node クラスの基底クラ�
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       ConstraintCastNode (Node *n, const Type *t ): TypeNode(t,2) {
         init_class_id(Class_ConstraintCast);
@@ -757,7 +757,7 @@ ConstraintCastNode クラスの具象サブクラスの1つ.
 このクラスは, 整数型の取り得る値の範囲が変わった場合用 (? #TODO).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------CastIINode-------------------------------------
     // cast integer to integer (different range)
@@ -778,7 +778,7 @@ ConstraintCastNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       CastIINode (Node *n, const Type *t ): ConstraintCastNode(n,t) {}
 ```
@@ -798,7 +798,7 @@ ConstraintCastNode クラスの具象サブクラスの1つ.
 このクラスは, ポインタ型の取り得る値の範囲が変わった場合用 (? #TODO).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------CastPPNode-------------------------------------
     // cast pointer to pointer (different type)
@@ -818,7 +818,7 @@ ConstraintCastNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       CastPPNode (Node *n, const Type *t ): ConstraintCastNode(n, t) {}
 ```
@@ -837,7 +837,7 @@ TypeNode クラスの具象サブクラスの1つ.
 オブジェクトの型を検査する処理 (checkcast 相当の処理) を表す Node.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------CheckCastPPNode--------------------------------
     // for _checkcast, cast pointer to pointer (different type), without JOIN,
@@ -860,7 +860,7 @@ TypeNode クラスの具象サブクラスの1つ.
 単項演算を表すノードなので (control input も含めて) 2つの入力ノードを持つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       CheckCastPPNode( Node *c, Node *n, const Type *t ) : TypeNode(t,2) {
         init_class_id(Class_CheckCastPP);
@@ -883,7 +883,7 @@ UseCompressedOops 機能のための Node.
 ポインタを narrow oop に変換する処理を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------EncodeP--------------------------------
     // Encodes an oop pointers into its compressed form
@@ -906,7 +906,7 @@ UseCompressedOops 機能のための Node.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       EncodePNode(Node* value, const Type* type):
         TypeNode(type, 2) {
@@ -930,7 +930,7 @@ UseCompressedOops 機能のための Node.
 narrow oop をポインタに戻す処理を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------DecodeN--------------------------------
     // Converts a narrow oop into a real oop ptr.
@@ -954,7 +954,7 @@ narrow oop をポインタに戻す処理を表す.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       DecodeNNode(Node* value, const Type* type):
         TypeNode(type, 2) {
@@ -978,7 +978,7 @@ Node クラスの具象サブクラスの1つ.
 int やポインタ値から boolean への型変換処理を表す (0 なら 0, 非0 なら 1 になる).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------Conv2BNode-------------------------------------
     // Convert int/pointer to a Boolean.  Map zero to zero, all else to 1.
@@ -990,7 +990,7 @@ int やポインタ値から boolean への型変換処理を表す (0 なら 0,
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       Conv2BNode( Node *i ) : Node(0,i) {}
 ```
@@ -1009,7 +1009,7 @@ Node クラスの具象サブクラスの1つ.
 double 値から float への型変換処理を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------ConvD2FNode------------------------------------
     // Convert double to float
@@ -1021,7 +1021,7 @@ double 値から float への型変換処理を表す.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       ConvD2FNode( Node *in1 ) : Node(0,in1) {}
 ```
@@ -1030,7 +1030,7 @@ double 値から float への型変換処理を表す.
 なお, ファイル中では Conv*Node はアルファベット順に定義しているとのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     // The conversions operations are all Alpha sorted.  Please keep it that way!
 ```
@@ -1049,7 +1049,7 @@ Node クラスの具象サブクラスの1つ.
 double 値から int への型変換処理を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------ConvD2INode------------------------------------
     // Convert Double to Integer
@@ -1061,7 +1061,7 @@ double 値から int への型変換処理を表す.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       ConvD2INode( Node *in1 ) : Node(0,in1) {}
 ```
@@ -1070,7 +1070,7 @@ double 値から int への型変換処理を表す.
 なお, ファイル中では Conv*Node はアルファベット順に定義しているとのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     // The conversions operations are all Alpha sorted.  Please keep it that way!
 ```
@@ -1089,7 +1089,7 @@ Node クラスの具象サブクラスの1つ.
 double 値から lont への型変換処理を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------ConvD2LNode------------------------------------
     // Convert Double to Long
@@ -1101,7 +1101,7 @@ double 値から lont への型変換処理を表す.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       ConvD2LNode( Node *dbl ) : Node(0,dbl) {}
 ```
@@ -1110,7 +1110,7 @@ double 値から lont への型変換処理を表す.
 なお, ファイル中では Conv*Node はアルファベット順に定義しているとのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     // The conversions operations are all Alpha sorted.  Please keep it that way!
 ```
@@ -1129,7 +1129,7 @@ Node クラスの具象サブクラスの1つ.
 float 値から double への型変換処理を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------ConvF2DNode------------------------------------
     // Convert Float to a Double.
@@ -1141,7 +1141,7 @@ float 値から double への型変換処理を表す.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       ConvF2DNode( Node *in1 ) : Node(0,in1) {}
 ```
@@ -1150,7 +1150,7 @@ float 値から double への型変換処理を表す.
 なお, ファイル中では Conv*Node はアルファベット順に定義しているとのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     // The conversions operations are all Alpha sorted.  Please keep it that way!
 ```
@@ -1169,7 +1169,7 @@ Node クラスの具象サブクラスの1つ.
 float 値から int への型変換処理を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------ConvF2INode------------------------------------
     // Convert float to integer
@@ -1181,7 +1181,7 @@ float 値から int への型変換処理を表す.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       ConvF2INode( Node *in1 ) : Node(0,in1) {}
 ```
@@ -1190,7 +1190,7 @@ float 値から int への型変換処理を表す.
 なお, ファイル中では Conv*Node はアルファベット順に定義しているとのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     // The conversions operations are all Alpha sorted.  Please keep it that way!
 ```
@@ -1209,7 +1209,7 @@ Node クラスの具象サブクラスの1つ.
 float 値から lont への型変換処理を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------ConvF2LNode------------------------------------
     // Convert float to long
@@ -1221,7 +1221,7 @@ float 値から lont への型変換処理を表す.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       ConvF2LNode( Node *in1 ) : Node(0,in1) {}
 ```
@@ -1230,7 +1230,7 @@ float 値から lont への型変換処理を表す.
 なお, ファイル中では Conv*Node はアルファベット順に定義しているとのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     // The conversions operations are all Alpha sorted.  Please keep it that way!
 ```
@@ -1249,7 +1249,7 @@ Node クラスの具象サブクラスの1つ.
 int 値から double への型変換処理を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------ConvI2DNode------------------------------------
     // Convert Integer to Double
@@ -1261,7 +1261,7 @@ int 値から double への型変換処理を表す.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       ConvI2DNode( Node *in1 ) : Node(0,in1) {}
 ```
@@ -1270,7 +1270,7 @@ int 値から double への型変換処理を表す.
 なお, ファイル中では Conv*Node はアルファベット順に定義しているとのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     // The conversions operations are all Alpha sorted.  Please keep it that way!
 ```
@@ -1289,7 +1289,7 @@ Node クラスの具象サブクラスの1つ.
 int 値から float への型変換処理を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------ConvI2FNode------------------------------------
     // Convert Integer to Float
@@ -1301,7 +1301,7 @@ int 値から float への型変換処理を表す.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       ConvI2FNode( Node *in1 ) : Node(0,in1) {}
 ```
@@ -1310,7 +1310,7 @@ int 値から float への型変換処理を表す.
 なお, ファイル中では Conv*Node はアルファベット順に定義しているとのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     // The conversions operations are all Alpha sorted.  Please keep it that way!
 ```
@@ -1332,7 +1332,7 @@ int 値から long への型変換処理を表す.
  中身が int 範囲の (上 32bit は 0 の) long 値だと分かっていれば最適化できることがある?? #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------ConvI2LNode------------------------------------
     // Convert integer to long
@@ -1344,7 +1344,7 @@ int 値から long への型変換処理を表す.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       ConvI2LNode(Node *in1, const TypeLong* t = TypeLong::INT)
         : TypeNode(t, 2)
@@ -1355,7 +1355,7 @@ int 値から long への型変換処理を表す.
 なお, ファイル中では Conv*Node はアルファベット順に定義しているとのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     // The conversions operations are all Alpha sorted.  Please keep it that way!
 ```
@@ -1374,7 +1374,7 @@ Node クラスの具象サブクラスの1つ.
 long 値から double への型変換処理を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------ConvL2DNode------------------------------------
     // Convert Long to Double
@@ -1386,7 +1386,7 @@ long 値から double への型変換処理を表す.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       ConvL2DNode( Node *in1 ) : Node(0,in1) {}
 ```
@@ -1395,7 +1395,7 @@ long 値から double への型変換処理を表す.
 なお, ファイル中では Conv*Node はアルファベット順に定義しているとのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     // The conversions operations are all Alpha sorted.  Please keep it that way!
 ```
@@ -1414,7 +1414,7 @@ Node クラスの具象サブクラスの1つ.
 long 値から float への型変換処理を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------ConvL2FNode------------------------------------
     // Convert Long to Float
@@ -1426,7 +1426,7 @@ long 値から float への型変換処理を表す.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       ConvL2FNode( Node *in1 ) : Node(0,in1) {}
 ```
@@ -1435,7 +1435,7 @@ long 値から float への型変換処理を表す.
 なお, ファイル中では Conv*Node はアルファベット順に定義しているとのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     // The conversions operations are all Alpha sorted.  Please keep it that way!
 ```
@@ -1454,7 +1454,7 @@ Node クラスの具象サブクラスの1つ.
 long 値から int への型変換処理を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------ConvL2INode------------------------------------
     // Convert long to integer
@@ -1466,7 +1466,7 @@ long 値から int への型変換処理を表す.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       ConvL2INode( Node *in1 ) : Node(0,in1) {}
 ```
@@ -1475,7 +1475,7 @@ long 値から int への型変換処理を表す.
 なお, ファイル中では Conv*Node はアルファベット順に定義しているとのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     // The conversions operations are all Alpha sorted.  Please keep it that way!
 ```
@@ -1494,7 +1494,7 @@ Node クラスの具象サブクラスの1つ.
 ポインタと同ビット幅の整数値(int/long)からポインタへのキャスト処理を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------CastX2PNode-------------------------------------
     // convert a machine-pointer-sized integer to a raw pointer
@@ -1506,7 +1506,7 @@ Node クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       CastX2PNode( Node *n ) : Node(NULL, n) {}
 ```
@@ -1525,7 +1525,7 @@ Node クラスの具象サブクラスの1つ.
 ポインタからポインタと同ビット幅の整数値(int/long)へのキャスト処理を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------CastP2XNode-------------------------------------
     // Used in both 32-bit and 64-bit land.
@@ -1540,7 +1540,7 @@ Node クラスの具象サブクラスの1つ.
 (何で制御依存が必要なのかよく分からない. 実質何もしないノード(やるとしてもレジスタ間コピー程度のノード)に見えるが... #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       CastP2XNode( Node *ctrl, Node *n ) : Node(ctrl, n) {}
 ```
@@ -1560,7 +1560,7 @@ See: [here](../doxygen/classCastP2XNode.html) for details
 (メモリ間コピーを表す Node のようだが... #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------MemMoveNode------------------------------------
     // Memory to memory move.  Inserted very late, after allocation.
@@ -1569,7 +1569,7 @@ See: [here](../doxygen/classCastP2XNode.html) for details
 
 ### 内部構造(Internal structure)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       MemMoveNode( Node *dst, Node *src ) : Node(0,dst,src) {}
 ```
@@ -1588,7 +1588,7 @@ Node クラスの具象サブクラスの1つ.
 カレントスレッドに対応する ThreadLocalStorage オブジェクトのアドレスを表す (See: ThreadLocalStorage).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------ThreadLocalNode--------------------------------
     // Ideal Node which returns the base of ThreadLocalStorage.
@@ -1599,7 +1599,7 @@ Node クラスの具象サブクラスの1つ.
 入力ノードは control input のみ. そして control input は常に RootNode.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       ThreadLocalNode( ) : Node((Node*)Compile::current()->root()) {}
 ```
@@ -1617,7 +1617,7 @@ See: [here](../doxygen/classThreadLocalNode.html) for details
 ?? (このクラスは使用箇所が見当たらない...)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------LoadReturnPCNode-------------------------------
     class LoadReturnPCNode: public Node {
@@ -1625,7 +1625,7 @@ See: [here](../doxygen/classThreadLocalNode.html) for details
 
 ### 内部構造(Internal structure)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       LoadReturnPCNode(Node *c) : Node(c) { }
 ```
@@ -1645,7 +1645,7 @@ float 値を IEEE 754 で規定された 32bit のフォーマットに変換す
 (この Node は x87 のような独自フォーマットが使われている場合にのみ意味を持つ).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //-----------------------------RoundFloatNode----------------------------------
     class RoundFloatNode: public Node {
@@ -1662,7 +1662,7 @@ GraphKit::precision_rounding() 内で(のみ)生成されている.
 ただし現状では 0 しか指定されていない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       RoundFloatNode(Node* c, Node *in1): Node(c, in1) {}
 ```
@@ -1682,7 +1682,7 @@ double 値を IEEE 754 で規定された 64bit のフォーマットに変換�
 (この Node は x87 のような独自フォーマットが使われている場合にのみ意味を持つ).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //-----------------------------RoundDoubleNode---------------------------------
     class RoundDoubleNode: public Node {
@@ -1703,7 +1703,7 @@ double 値を IEEE 754 で規定された 64bit のフォーマットに変換�
 ただし現状では 0 しか指定されていない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       RoundDoubleNode(Node* c, Node *in1): Node(c, in1) {}
 ```
@@ -1722,7 +1722,7 @@ Node クラスの具象サブクラスの1つ.
 最適化されたくない箇所を最適化から保護するための Node (?? #TODO).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------Opaque1Node------------------------------------
     // A node to prevent unwanted optimizations.  Allows constant folding.
@@ -1743,7 +1743,7 @@ Node クラスの具象サブクラスの1つ.
 (control input も含めて) 2つまたは3つの入力ノードを持つ. ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       Opaque1Node( Compile* C, Node *n ) : Node(0,n) {
         // Put it on the Macro nodes list to removed during macro nodes expansion.
@@ -1773,7 +1773,7 @@ Node クラスの具象サブクラスの1つ.
 最適化されたくない箇所を最適化から保護するための Node (?? #TODO).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //------------------------------Opaque2Node------------------------------------
     // A node to prevent unwanted optimizations.  Allows constant folding.  Stops
@@ -1798,7 +1798,7 @@ Node クラスの具象サブクラスの1つ.
 (control input も含めて) 2つの入力ノードを持つ. ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       Opaque2Node( Compile* C, Node *n ) : Node(0,n) {
         // Put it on the Macro nodes list to removed during macro nodes expansion.
@@ -1821,7 +1821,7 @@ Node クラスの具象サブクラスの1つ.
 2つのクラス(klassOop)がサブタイプ関係にあるかどうかを判定する処理を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //----------------------PartialSubtypeCheckNode--------------------------------
     // The 2nd slow-half of a subtype check.  Scan the subklass's 2ndary superklass
@@ -1839,7 +1839,7 @@ GraphKit::gen_subtype_check() 内で(のみ)生成されている.
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       PartialSubtypeCheckNode(Node* c, Node* sub, Node* super) : Node(c,sub,super) {}
 ```
@@ -1861,7 +1861,7 @@ LibraryIntrinsic による最適化用の Node クラス.
 (= java.lang.Float.intBitsToFloat() 用の Node).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     class MoveI2FNode : public Node {
 ```
@@ -1875,7 +1875,7 @@ LibraryCallKit::inline_fp_conversions() 内で(のみ)生成されている.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       MoveI2FNode( Node *value ) : Node(0,value) {}
 ```
@@ -1897,7 +1897,7 @@ LibraryIntrinsic による最適化用の Node クラス.
 (= java.lang.Double.longBitsToDouble() 用の Node).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     class MoveL2DNode : public Node {
 ```
@@ -1911,7 +1911,7 @@ LibraryCallKit::inline_fp_conversions() 内で(のみ)生成されている.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       MoveL2DNode( Node *value ) : Node(0,value) {}
 ```
@@ -1932,7 +1932,7 @@ Node クラスの具象サブクラスの1つ.
 なお, この変換では値(ビットのレイアウト)は変わらず型が変わるのみ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     class MoveF2INode : public Node {
 ```
@@ -1952,7 +1952,7 @@ Node クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       MoveF2INode( Node *value ) : Node(0,value) {}
 ```
@@ -1973,7 +1973,7 @@ Node クラスの具象サブクラスの1つ.
 なお, この変換では値(ビットのレイアウト)は変わらず型が変わるのみ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     class MoveD2LNode : public Node {
 ```
@@ -1993,7 +1993,7 @@ Node クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       MoveD2LNode( Node *value ) : Node(0,value) {}
 ```
@@ -2016,7 +2016,7 @@ Node クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //---------- CountBitsNode -----------------------------------------------------
     class CountBitsNode : public Node {
@@ -2027,7 +2027,7 @@ Node クラスのサブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       CountBitsNode(Node* in1) : Node(0, in1) {}
 ```
@@ -2055,7 +2055,7 @@ CountBitsNode クラスの具象サブクラスの1つ.
 (= java.lang.Integer.numberOfLeadingZeros() 用).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //---------- CountLeadingZerosINode --------------------------------------------
     // Count leading zeros (0-bit count starting from MSB) of an integer.
@@ -2071,7 +2071,7 @@ LibraryCallKit::inline_numberOfLeadingZeros() 内で(のみ)生成されてい�
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       CountLeadingZerosINode(Node* in1) : CountBitsNode(in1) {}
 ```
@@ -2093,7 +2093,7 @@ CountBitsNode クラスの具象サブクラスの1つ.
 (= java.lang.Long.numberOfLeadingZeros() 用).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //---------- CountLeadingZerosLNode --------------------------------------------
     // Count leading zeros (0-bit count starting from MSB) of a long.
@@ -2109,7 +2109,7 @@ LibraryCallKit::inline_numberOfLeadingZeros() 内で(のみ)生成されてい�
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       CountLeadingZerosLNode(Node* in1) : CountBitsNode(in1) {}
 ```
@@ -2131,7 +2131,7 @@ CountBitsNode クラスの具象サブクラスの1つ.
 (= java.lang.Integer.numberOfTrailingZeros() 用).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //---------- CountTrailingZerosINode -------------------------------------------
     // Count trailing zeros (0-bit count starting from LSB) of an integer.
@@ -2147,7 +2147,7 @@ LibraryCallKit::inline_numberOfTrailingZeros() 内で(のみ)生成されてい�
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       CountTrailingZerosINode(Node* in1) : CountBitsNode(in1) {}
 ```
@@ -2169,7 +2169,7 @@ CountBitsNode クラスの具象サブクラスの1つ.
 (= java.lang.Integer.numberOfTrailingZeros() 用).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //---------- CountTrailingZerosLNode -------------------------------------------
     // Count trailing zeros (0-bit count starting from LSB) of a long.
@@ -2185,7 +2185,7 @@ LibraryCallKit::inline_numberOfTrailingZeros() 内で(のみ)生成されてい�
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       CountTrailingZerosLNode(Node* in1) : CountBitsNode(in1) {}
 ```
@@ -2207,7 +2207,7 @@ CountBitsNode クラスの具象サブクラスの1つ.
 (= java.lang.Integer.bitCount() 用).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //---------- PopCountINode -----------------------------------------------------
     // Population count (bit count) of an integer.
@@ -2223,7 +2223,7 @@ LibraryCallKit::inline_bitCount() 内で(のみ)生成されている.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       PopCountINode(Node* in1) : CountBitsNode(in1) {}
 ```
@@ -2245,7 +2245,7 @@ CountBitsNode クラスの具象サブクラスの1つ.
 (= java.lang.Long.bitCount() 用).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
     //---------- PopCountLNode -----------------------------------------------------
     // Population count (bit count) of a long.
@@ -2261,7 +2261,7 @@ LibraryCallKit::inline_bitCount() 内で(のみ)生成されている.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/connode.hpp))
       PopCountLNode(Node* in1) : CountBitsNode(in1) {}
 ```

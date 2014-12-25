@@ -35,7 +35,7 @@ RetransformClasses() で指定されたロード済みクラスのクラスフ�
 JVMS で規定された形式に復元するための一時オブジェクト(StackObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiClassFileReconstituter.hpp))
     class JvmtiConstantPoolReconstituter : public StackObj {
 ```
@@ -58,7 +58,7 @@ JvmtiConstantPoolReconstituter クラスのサブクラス.
 JvmtiConstantPoolReconstituter との違いは Constant Pool 情報だけでなくクラスファイル全体の復元を行う点.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiClassFileReconstituter.hpp))
     class JvmtiClassFileReconstituter : public JvmtiConstantPoolReconstituter {
 ```

@@ -38,7 +38,7 @@ Node クラスの具象サブクラスの1つ.
 そのため MinInt/-1 == MinInt としなければいけないことに注意.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/divnode.hpp))
     // Integer division
     // Note: this is division as defined by JVMS, i.e., MinInt/-1 == MinInt.
@@ -55,7 +55,7 @@ Node クラスの具象サブクラスの1つ.
  もちろん必ず 0 ではないと分かっているパスでは省略されるため, control input が 0 になることもある)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/divnode.hpp))
       DivINode( Node *c, Node *dividend, Node *divisor ) : Node(c, dividend, divisor ) {}
 ```
@@ -74,7 +74,7 @@ Node クラスの具象サブクラスの1つ.
 このクラスは long 値同士の除算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/divnode.hpp))
     // Long division
     class DivLNode : public Node {
@@ -88,7 +88,7 @@ Node クラスの具象サブクラスの1つ.
  もちろん必ず 0 ではないと分かっているパスでは省略されるため, control input が 0 になることもある)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/divnode.hpp))
       DivLNode( Node *c, Node *dividend, Node *divisor ) : Node(c, dividend, divisor ) {}
 ```
@@ -107,7 +107,7 @@ Node クラスの具象サブクラスの1つ.
 このクラスは float 値同士の除算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/divnode.hpp))
     // Float division
     class DivFNode : public Node {
@@ -120,7 +120,7 @@ Node クラスの具象サブクラスの1つ.
 ただし現状では 0 しか指定されていない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/divnode.hpp))
       DivFNode( Node *c, Node *dividend, Node *divisor ) : Node(c, dividend, divisor) {}
 ```
@@ -139,7 +139,7 @@ Node クラスの具象サブクラスの1つ.
 このクラスは double 値同士の除算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/divnode.hpp))
     // Double division
     class DivDNode : public Node {
@@ -152,7 +152,7 @@ Node クラスの具象サブクラスの1つ.
 ただし現状では 0 しか指定されていない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/divnode.hpp))
       DivDNode( Node *c, Node *dividend, Node *divisor ) : Node(c,dividend, divisor) {}
 ```
@@ -171,7 +171,7 @@ Node クラスの具象サブクラスの1つ.
 このクラスは int 値同士の剰余演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/divnode.hpp))
     // Integer modulus
     class ModINode : public Node {
@@ -185,7 +185,7 @@ Node クラスの具象サブクラスの1つ.
  もちろん必ず 0 ではないと分かっているパスでは省略されるため, control input が 0 になることもある)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/divnode.hpp))
       ModINode( Node *c, Node *in1, Node *in2 ) : Node(c,in1, in2) {}
 ```
@@ -204,7 +204,7 @@ Node クラスの具象サブクラスの1つ.
 このクラスは long 値同士の剰余演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/divnode.hpp))
     // Long modulus
     class ModLNode : public Node {
@@ -218,7 +218,7 @@ Node クラスの具象サブクラスの1つ.
  もちろん必ず 0 ではないと分かっているパスでは省略されるため, control input が 0 になることもある)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/divnode.hpp))
       ModLNode( Node *c, Node *in1, Node *in2 ) : Node(c,in1, in2) {}
 ```
@@ -237,7 +237,7 @@ Node クラスの具象サブクラスの1つ.
 このクラスは float 値同士の剰余演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/divnode.hpp))
     // Float Modulus
     class ModFNode : public Node {
@@ -250,7 +250,7 @@ Node クラスの具象サブクラスの1つ.
 ただし現状では 0 しか指定されていない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/divnode.hpp))
       ModFNode( Node *c, Node *in1, Node *in2 ) : Node(c,in1, in2) {}
 ```
@@ -269,7 +269,7 @@ Node クラスの具象サブクラスの1つ.
 このクラスは double 値同士の剰余演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/divnode.hpp))
     // Double Modulus
     class ModDNode : public Node {
@@ -282,7 +282,7 @@ Node クラスの具象サブクラスの1つ.
 ただし現状では 0 しか指定されていない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/divnode.hpp))
       ModDNode( Node *c, Node *in1, Node *in2 ) : Node(c, in1, in2) {}
 ```
@@ -306,7 +306,7 @@ MultiNode クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/divnode.hpp))
     // Division with remainder result.
     class DivModNode : public MultiNode {
@@ -318,7 +318,7 @@ MultiNode クラスのサブクラスの1つ.
 なお, コンストラクタで指定することにより 0 以外の control input を設定できる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/divnode.hpp))
       DivModNode( Node *c, Node *dividend, Node *divisor );
 ```
@@ -337,7 +337,7 @@ DivModNode クラスの具象サブクラスの1つ.
 このクラスは int 値同士の除算/剰余演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/divnode.hpp))
     // Integer division with remainder result.
     class DivModINode : public DivModNode {
@@ -374,7 +374,7 @@ See: [here](no17119QyN.html) for details
  もちろん必ず 0 ではないと分かっているパスでは省略されるため, control input が 0 になることもある)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/divnode.hpp))
       DivModINode( Node *c, Node *dividend, Node *divisor ) : DivModNode(c, dividend, divisor) {}
 ```
@@ -384,7 +384,7 @@ See: [here](no17119QyN.html) for details
 ただしデフォルトでは true.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/c2_globals.hpp))
       product(bool, UseDivMod, true,                                            \
               "Use combined DivMod instruction if available")                   \
@@ -405,7 +405,7 @@ DivModNode クラスの具象サブクラスの1つ.
 このクラスは long 値同士の除算/剰余演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/divnode.hpp))
     // Long division with remainder result.
     class DivModLNode : public DivModNode {
@@ -442,7 +442,7 @@ See: [here](no17119d8T.html) for details
  もちろん必ず 0 ではないと分かっているパスでは省略されるため, control input が 0 になることもある)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/divnode.hpp))
       DivModLNode( Node *c, Node *dividend, Node *divisor ) : DivModNode(c, dividend, divisor) {}
 ```
@@ -452,7 +452,7 @@ See: [here](no17119d8T.html) for details
 ただしデフォルトでは true.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/c2_globals.hpp))
       product(bool, UseDivMod, true,                                            \
               "Use combined DivMod instruction if available")                   \

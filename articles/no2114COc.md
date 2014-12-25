@@ -49,7 +49,7 @@ ParkEvent クラスは以下のように使用する.
 4. ...
 
 
-```
+```cpp
     ((cite: hotspot/src/os/linux/vm/os_linux.cpp))
     // Refer to the comments in os_solaris.cpp park-unpark.
     //
@@ -132,7 +132,7 @@ Solaris 版では, 以下の2つのオプションによって
     Solaris スレッドのユーザースレッド用の制御関数を使用する.
 
 
-```
+```cpp
     ((cite: hotspot/src/os/solaris/vm/os_solaris.hpp))
       // initialized to libthread or lwp synchronization primitives depending on UseLWPSychronization
       static int_fnP_mutex_tP _mutex_lock;
@@ -143,7 +143,7 @@ Solaris 版では, 以下の2つのオプションによって
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/os/solaris/vm/os_solaris.hpp))
       static int_fnP_cond_tP_mutex_tP_timestruc_tP _cond_timedwait;
       static int_fnP_cond_tP_mutex_tP _cond_wait;
@@ -154,7 +154,7 @@ Solaris 版では, 以下の2つのオプションによって
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/os/solaris/vm/os_solaris.cpp))
     void os::Solaris::synchronization_init() {
       if(UseLWPSynchronization) {

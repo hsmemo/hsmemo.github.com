@@ -27,7 +27,7 @@ title: JMM 関連の雑多なクラス (Management, TraceVmCreationTime, VmThrea
 JMM に関係する雑多な処理(初期化処理など)や klassOop 等を納めた名前空間(AllStatic クラス) (See: [here](no2114S_x.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/management.hpp))
     class Management : public AllStatic {
 ```
@@ -36,7 +36,7 @@ JMM に関係する雑多な処理(初期化処理など)や klassOop 等を納�
 内部には, JMM の処理に関連する klassOop への参照を保持している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/management.hpp))
       // Management klasses
       static klassOop           _sensor_klass;
@@ -53,7 +53,7 @@ JMM に関係する雑多な処理(初期化処理など)や klassOop 等を納�
 また, 内部には以下のような Perf データを格納している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/management.hpp))
       static PerfVariable*      _begin_vm_creation_time;
       static PerfVariable*      _end_vm_creation_time;
@@ -67,7 +67,7 @@ Perf で公開されたデータには, それぞれ以下の名前でアクセ�
 * sun.rt.vmInitDoneTime
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/management.cpp))
       _begin_vm_creation_time =
                 PerfDataManager::create_variable(SUN_RT, "createVmBeginTime",
@@ -97,7 +97,7 @@ Management クラス用の補助クラス.
 HotSpot の起動処理(Threads::create_vm())に掛かった時間を計測するための一時オブジェクト(StackObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/management.hpp))
     class TraceVmCreationTime : public StackObj {
 ```
@@ -139,7 +139,7 @@ sun.management.HotspotThreadMBean.getInternalThreadCount() の処理で使用さ
 現在存在しているスレッドの合計数を数える (See: [here](no2114vml.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/management.cpp))
     class VmThreadCountClosure: public ThreadClosure {
 ```
@@ -169,7 +169,7 @@ sun.management.HotspotThread.getInternalThreadCpuTimes() の処理で使用さ�
 各スレッドのスレッド名と CPU 使用時間を取得する (See: [here](no2114vml.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/management.cpp))
     class ThreadTimesClosure: public ThreadClosure {
 ```

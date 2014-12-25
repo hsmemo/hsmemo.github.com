@@ -20,7 +20,7 @@ title: Thread の待機処理の枠組み ： SpinLock, Mux による処理
 (#Under Construction)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.cpp))
     // Internal SpinLock and Mutex
     // Based on ParkEvent
@@ -84,7 +84,7 @@ title: Thread の待機処理の枠組み ： SpinLock, Mux による処理
 * ... (#Under Construction)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.cpp))
     // muxAcquire and muxRelease:
     //

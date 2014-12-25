@@ -29,7 +29,7 @@ CompiledIC が megamorphic になった際に使用する dynamic dispatch 用�
 また, 一度生成したスタブは破棄されることはない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/vtableStubs.hpp))
     // VtableStubs creates the code stubs for compiled calls through vtables.
     // There is one stub per (vtable index, args_size) pair, and the stubs are
@@ -43,7 +43,7 @@ itable 経由での呼び出しコード(=インターフェースメソッド�
 vtable 経由での呼び出しコード(=クラスメソッド呼びコード)を生成する create_vtable_stub() というメソッドを持つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/vtableStubs.hpp))
       static VtableStub* create_vtable_stub(int vtable_index);
       static VtableStub* create_itable_stub(int vtable_index);
@@ -55,7 +55,7 @@ vtable 経由での呼び出しコード(=クラスメソッド呼びコード)�
 生成した VtableStub オブジェクトは, ハッシュに格納して管理する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/vtableStubs.hpp))
       static VtableStub* _table[N];                  // table of existing stubs
       static int         _number_of_vtable_stubs;    // number of stubs created so far (for statistics)
@@ -64,7 +64,7 @@ vtable 経由での呼び出しコード(=クラスメソッド呼びコード)�
 ハッシュの lookup 処理, 及び新しい要素の追加処理は, 以下の通り (普通の chain hash).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/vtableStubs.cpp))
     VtableStub* VtableStubs::lookup(bool is_vtable_stub, int vtable_index) {
       MutexLocker ml(VtableStubs_lock);
@@ -101,7 +101,7 @@ dynamic dispatch 用のスタブコードを格納するためのクラス. 1つ
 VtableStubs クラスによって生成され, VtableStubs クラス内のハッシュに格納されて管理される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/vtableStubs.hpp))
     // A VtableStub holds an individual code stub for a pair (vtable index, #args) for either itables or vtables
     // There's a one-to-one relationship between a VtableStub and such a pair.

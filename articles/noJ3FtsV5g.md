@@ -26,7 +26,7 @@ nmethod オブジェクトについて, ソースコードレベルでのデバ�
 ("method activation" と書かれているので, 1つの ScopeDesc がソースコードレベルでの 1つの関数フレームに対応する模様?? #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/scopeDesc.hpp))
     // ScopeDescs contain the information that makes source-level debugging of
     // nmethods possible; each scopeDesc describes a method activation
@@ -60,7 +60,7 @@ ScopeDesc の簡易版.
 欲しい情報が methodOop と bci だけであれば高速なこちらのクラスも利用可能, とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/scopeDesc.hpp))
     // SimpleScopeDesc is used when all you need to extract from
     // a given pc,nmethod pair is a methodOop and a bci. This is

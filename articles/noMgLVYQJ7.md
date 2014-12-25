@@ -29,7 +29,7 @@ Phase クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/coalesce.hpp))
     //------------------------------PhaseCoalesce----------------------------------
     class PhaseCoalesce : public Phase {
@@ -52,7 +52,7 @@ PhaseCoalesce クラスの具象サブクラスの1つ.
 このクラスは, Chaitin の aggressive coalescing による合併を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/coalesce.hpp))
     //------------------------------PhaseAggressiveCoalesce------------------------
     // Aggressively, pessimistic coalesce copies.  Aggressive means ignore graph
@@ -81,7 +81,7 @@ PhaseCoalesce クラスの具象サブクラスの1つ.
 このクラスは, Briggs らの conservative coalescing による合併を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/coalesce.hpp))
     //------------------------------PhaseConservativeCoalesce----------------------
     // Conservatively, pessimistic coalesce copies.  Conservative means do not

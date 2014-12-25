@@ -24,7 +24,7 @@ HotSpot 内の他の機構には頼らない実装になっている (See: [here
 なお, このクラスによるロックは reentrant である (= 同一スレッドが複数回ロックを取得できる).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/threadCritical.hpp))
     // ThreadCritical is used to protect short non-blocking critical sections.
     // This class must use no vm facilities that require initialization.

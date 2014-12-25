@@ -83,7 +83,7 @@ Node クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------MemNode----------------------------------------
     // Load or Store, possibly throwing a NULL pointer exception
@@ -101,7 +101,7 @@ Node クラスのサブクラスの1つ.
 * 5番目の入力Node : (StoreCM の場合のみ使用される) 対応する oop のストア Node
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       enum { Control,               // When is it safe to do this load?
              Memory,                // Chunk of memory is being loaded from
@@ -114,7 +114,7 @@ Node クラスのサブクラスの1つ.
 Load ではこのうち3つが使われる
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       LoadNode( Node *c, Node *mem, Node *adr, const TypePtr* at, const Type *rt )
         : MemNode(c,mem,adr,at), _type(rt) {
@@ -123,14 +123,14 @@ Load ではこのうち3つが使われる
 Store ではこのうち4つ, または5つ全てが使われる
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       StoreNode( Node *c, Node *mem, Node *adr, const TypePtr* at, Node *val )
         : MemNode(c,mem,adr,at,val) {
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       StoreNode( Node *c, Node *mem, Node *adr, const TypePtr* at, Node *val, Node *oop_store )
         : MemNode(c,mem,adr,at,val,oop_store) {
@@ -139,7 +139,7 @@ Store ではこのうち4つ, または5つ全てが使われる
 Load*Node と Store*Node の両方に対応するため, 引数の数が異なるコンストラクタが定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       MemNode( Node *c0, Node *c1, Node *c2, const TypePtr* at )
         : Node(c0,c1,c2   ) {
@@ -166,7 +166,7 @@ Load*Node と Store*Node の両方に対応するため, 引数の数が異な�
 `#ifdef ASSERT` 時にのみ使用される debug 用の情報)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     #ifdef ASSERT
       const TypePtr* _adr_type;     // What kind of memory is being addressed?
@@ -249,7 +249,7 @@ MemNode クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------LoadNode---------------------------------------
     // Load value; requires Memory and Address
@@ -261,7 +261,7 @@ MemNode クラスのサブクラスの1つ.
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       LoadNode( Node *c, Node *mem, Node *adr, const TypePtr* at, const Type *rt )
         : MemNode(c,mem,adr,at), _type(rt) {
@@ -289,7 +289,7 @@ LoadNode クラスの具象サブクラスの1つ.
 このクラスは byte 値のロード用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------LoadBNode--------------------------------------
     // Load a byte (8bits signed) from memory
@@ -301,7 +301,7 @@ LoadNode クラスの具象サブクラスの1つ.
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       LoadBNode( Node *c, Node *mem, Node *adr, const TypePtr* at, const TypeInt *ti = TypeInt::BYTE )
         : LoadNode(c,mem,adr,at,ti) {}
@@ -323,7 +323,7 @@ LoadNode クラスの具象サブクラスの1つ.
 (なお, このクラスは boolean 用)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------LoadUBNode-------------------------------------
     // Load a unsigned byte (8bits unsigned) from memory
@@ -335,7 +335,7 @@ LoadNode クラスの具象サブクラスの1つ.
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       LoadUBNode(Node* c, Node* mem, Node* adr, const TypePtr* at, const TypeInt* ti = TypeInt::UBYTE )
         : LoadNode(c, mem, adr, at, ti) {}
@@ -355,7 +355,7 @@ LoadNode クラスの具象サブクラスの1つ.
 このクラスは unsigned short (= char) 値のロード用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------LoadUSNode-------------------------------------
     // Load an unsigned short/char (16bits unsigned) from memory
@@ -367,7 +367,7 @@ LoadNode クラスの具象サブクラスの1つ.
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       LoadUSNode( Node *c, Node *mem, Node *adr, const TypePtr* at, const TypeInt *ti = TypeInt::CHAR )
         : LoadNode(c,mem,adr,at,ti) {}
@@ -387,7 +387,7 @@ LoadNode クラスの具象サブクラスの1つ.
 このクラスは int 値のロード用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------LoadINode--------------------------------------
     // Load an integer from memory
@@ -399,7 +399,7 @@ LoadNode クラスの具象サブクラスの1つ.
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       LoadINode( Node *c, Node *mem, Node *adr, const TypePtr* at, const TypeInt *ti = TypeInt::INT )
         : LoadNode(c,mem,adr,at,ti) {}
@@ -423,7 +423,7 @@ LoadNode クラスの具象サブクラスの1つ.
 "LoadI + ConvI2L + AndL (0x00000000FFFFFFFF との and)" というパターンの式に対する最適化で使用される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------LoadUI2LNode-----------------------------------
     // Load an unsigned integer into long from memory
@@ -435,7 +435,7 @@ LoadNode クラスの具象サブクラスの1つ.
 AndLNode::Ideal() 内で(のみ)生成されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/mulnode.cpp))
     Node *AndLNode::Ideal(PhaseGVN *phase, bool can_reshape) {
     ...
@@ -461,7 +461,7 @@ AndLNode::Ideal() 内で(のみ)生成されている.
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       LoadUI2LNode(Node* c, Node* mem, Node* adr, const TypePtr* at, const TypeLong* t = TypeLong::UINT)
         : LoadNode(c, mem, adr, at, t) {}
@@ -481,7 +481,7 @@ LoadINode クラスのサブクラスの1つ.
 このクラスは配列オブジェクト内の length フィールドのロード用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------LoadRangeNode----------------------------------
     // Load an array length from the array
@@ -497,7 +497,7 @@ GraphKit::load_array_length() 内で(のみ)生成されている.
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       LoadRangeNode( Node *c, Node *mem, Node *adr, const TypeInt *ti = TypeInt::POS )
         : LoadINode(c,mem,adr,TypeAryPtr::RANGE,ti) {}
@@ -517,7 +517,7 @@ LoadNode クラスの具象サブクラスの1つ.
 このクラスは long 値のロード用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------LoadLNode--------------------------------------
     // Load a long from memory
@@ -529,7 +529,7 @@ LoadNode クラスの具象サブクラスの1つ.
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       LoadLNode( Node *c, Node *mem, Node *adr, const TypePtr* at,
                  const TypeLong *tl = TypeLong::LONG,
@@ -559,7 +559,7 @@ LoadLNode クラスのサブクラスの1つ.
  その際に使用される模様 (#TODO))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------LoadL_unalignedNode----------------------------
     // Load a long from unaligned memory
@@ -582,7 +582,7 @@ Parse::Parse()
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       LoadL_unalignedNode( Node *c, Node *mem, Node *adr, const TypePtr* at )
         : LoadLNode(c,mem,adr,at) {}
@@ -602,7 +602,7 @@ LoadNode クラスの具象サブクラスの1つ.
 このクラスは float 値のロード用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------LoadFNode--------------------------------------
     // Load a float (64 bits) from memory
@@ -614,7 +614,7 @@ LoadNode クラスの具象サブクラスの1つ.
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       LoadFNode( Node *c, Node *mem, Node *adr, const TypePtr* at, const Type *t = Type::FLOAT )
         : LoadNode(c,mem,adr,at,t) {}
@@ -634,7 +634,7 @@ LoadNode クラスの具象サブクラスの1つ.
 このクラスは double 値のロード用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------LoadDNode--------------------------------------
     // Load a double (64 bits) from memory
@@ -646,7 +646,7 @@ LoadNode クラスの具象サブクラスの1つ.
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       LoadDNode( Node *c, Node *mem, Node *adr, const TypePtr* at, const Type *t = Type::DOUBLE )
         : LoadNode(c,mem,adr,at,t) {}
@@ -672,7 +672,7 @@ LoadLNode クラスのサブクラスの1つ.
  その際に使用される模様 (#TODO))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------LoadD_unalignedNode----------------------------
     // Load a double from unaligned memory
@@ -695,7 +695,7 @@ Parse::Parse()
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       LoadD_unalignedNode( Node *c, Node *mem, Node *adr, const TypePtr* at )
         : LoadDNode(c,mem,adr,at) {}
@@ -715,7 +715,7 @@ LoadNode クラスの具象サブクラスの1つ.
 このクラスはポインタ値のロード用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------LoadPNode--------------------------------------
     // Load a pointer from memory (either object or array)
@@ -727,7 +727,7 @@ LoadNode クラスの具象サブクラスの1つ.
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       LoadPNode( Node *c, Node *mem, Node *adr, const TypePtr *at, const TypePtr* t )
         : LoadNode(c,mem,adr,at,t) {}
@@ -747,7 +747,7 @@ LoadNode クラスの具象サブクラスの1つ.
 このクラスは narrow oop 値のロード用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------LoadNNode--------------------------------------
     // Load a narrow oop from memory (either object or array)
@@ -759,7 +759,7 @@ LoadNode クラスの具象サブクラスの1つ.
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       LoadNNode( Node *c, Node *mem, Node *adr, const TypePtr *at, const Type* t )
         : LoadNode(c,mem,adr,at,t) {}
@@ -779,7 +779,7 @@ LoadPNode クラスのサブクラス.
 このクラスは klassOop 型のポインタ値のロード用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------LoadKlassNode----------------------------------
     // Load a Klass from an object
@@ -795,7 +795,7 @@ LoadKlassNode::make() というファクトリメソッドが用意されてお�
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       LoadKlassNode( Node *c, Node *mem, Node *adr, const TypePtr *at, const TypeKlassPtr *tk )
         : LoadPNode(c,mem,adr,at,tk) {}
@@ -815,7 +815,7 @@ LoadNNode クラスのサブクラス.
 このクラスは klassOop 型の narrow oop 値のロード用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------LoadNKlassNode---------------------------------
     // Load a narrow Klass from an object.
@@ -831,7 +831,7 @@ LoadKlassNode::make() というファクトリメソッドが用意されてお�
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       LoadNKlassNode( Node *c, Node *mem, Node *adr, const TypePtr *at, const TypeNarrowOop *tk )
         : LoadNNode(c,mem,adr,at,tk) {}
@@ -851,7 +851,7 @@ LoadNode クラスの具象サブクラスの1つ.
 このクラスは short 値のロード用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------LoadSNode--------------------------------------
     // Load a short (16bits signed) from memory
@@ -863,7 +863,7 @@ LoadNode クラスの具象サブクラスの1つ.
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       LoadSNode( Node *c, Node *mem, Node *adr, const TypePtr* at, const TypeInt *ti = TypeInt::SHORT )
         : LoadNode(c,mem,adr,at,ti) {}
@@ -885,7 +885,7 @@ MemNode クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------StoreNode--------------------------------------
     // Store value; requires Store, Address and Value
@@ -897,7 +897,7 @@ MemNode クラスのサブクラスの1つ.
 これはスーパークラスである MemNode の入力ノードの先頭 4つまたは 5つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       StoreNode( Node *c, Node *mem, Node *adr, const TypePtr* at, Node *val )
         : MemNode(c,mem,adr,at,val) {
@@ -929,7 +929,7 @@ StoreNode クラスの具象サブクラスの1つ.
 このクラスは byte 値のストア用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------StoreBNode-------------------------------------
     // Store byte to memory
@@ -941,7 +941,7 @@ StoreNode クラスの具象サブクラスの1つ.
 これはスーパークラスである MemNode の入力ノードの先頭 4つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       StoreBNode( Node *c, Node *mem, Node *adr, const TypePtr* at, Node *val ) : StoreNode(c,mem,adr,at,val) {}
 ```
@@ -962,7 +962,7 @@ StoreNode クラスの具象サブクラスの1つ.
 (ストアでは signed/unsigned の区別はないので char/short 両方に使用)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------StoreCNode-------------------------------------
     // Store char/short to memory
@@ -974,7 +974,7 @@ StoreNode クラスの具象サブクラスの1つ.
 これはスーパークラスである MemNode の入力ノードの先頭 4つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       StoreCNode( Node *c, Node *mem, Node *adr, const TypePtr* at, Node *val ) : StoreNode(c,mem,adr,at,val) {}
 ```
@@ -993,7 +993,7 @@ StoreNode クラスの具象サブクラスの1つ.
 このクラスは int 値のストア用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------StoreINode-------------------------------------
     // Store int to memory
@@ -1005,7 +1005,7 @@ StoreNode クラスの具象サブクラスの1つ.
 これはスーパークラスである MemNode の入力ノードの先頭 4つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       StoreINode( Node *c, Node *mem, Node *adr, const TypePtr* at, Node *val ) : StoreNode(c,mem,adr,at,val) {}
 ```
@@ -1024,7 +1024,7 @@ StoreNode クラスの具象サブクラスの1つ.
 このクラスは long 値のストア用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------StoreLNode-------------------------------------
     // Store long to memory
@@ -1036,7 +1036,7 @@ StoreNode クラスの具象サブクラスの1つ.
 これはスーパークラスである MemNode の入力ノードの先頭 4つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       StoreLNode( Node *c, Node *mem, Node *adr, const TypePtr* at, Node *val,
                   bool require_atomic_access = false )
@@ -1059,7 +1059,7 @@ StoreNode クラスの具象サブクラスの1つ.
 このクラスは float 値のストア用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------StoreFNode-------------------------------------
     // Store float to memory
@@ -1071,7 +1071,7 @@ StoreNode クラスの具象サブクラスの1つ.
 これはスーパークラスである MemNode の入力ノードの先頭 4つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       StoreFNode( Node *c, Node *mem, Node *adr, const TypePtr* at, Node *val ) : StoreNode(c,mem,adr,at,val) {}
 ```
@@ -1090,7 +1090,7 @@ StoreNode クラスの具象サブクラスの1つ.
 このクラスは double 値のストア用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------StoreDNode-------------------------------------
     // Store double to memory
@@ -1102,7 +1102,7 @@ StoreNode クラスの具象サブクラスの1つ.
 これはスーパークラスである MemNode の入力ノードの先頭 4つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       StoreDNode( Node *c, Node *mem, Node *adr, const TypePtr* at, Node *val ) : StoreNode(c,mem,adr,at,val) {}
 ```
@@ -1121,7 +1121,7 @@ StoreNode クラスの具象サブクラスの1つ.
 このクラスはポインタ値のストア用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------StorePNode-------------------------------------
     // Store pointer to memory
@@ -1133,7 +1133,7 @@ StoreNode クラスの具象サブクラスの1つ.
 これはスーパークラスである MemNode の入力ノードの先頭 4つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       StorePNode( Node *c, Node *mem, Node *adr, const TypePtr* at, Node *val ) : StoreNode(c,mem,adr,at,val) {}
 ```
@@ -1152,7 +1152,7 @@ StoreNode クラスの具象サブクラスの1つ.
 このクラスは narrow oop 値のストア用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------StoreNNode-------------------------------------
     // Store narrow oop to memory
@@ -1164,7 +1164,7 @@ StoreNode クラスの具象サブクラスの1つ.
 これはスーパークラスである MemNode の入力ノードの先頭 4つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       StoreNNode( Node *c, Node *mem, Node *adr, const TypePtr* at, Node *val ) : StoreNode(c,mem,adr,at,val) {}
 ```
@@ -1191,7 +1191,7 @@ Concurrent な GC アルゴリズム(CMS, G1GC)を使っている場合の card 
 とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------StoreCMNode-----------------------------------
     // Store card-mark byte to memory for CM
@@ -1219,7 +1219,7 @@ GraphKit::post_barrier()
 これはスーパークラスである MemNode の入力ノードの先頭 5つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       StoreCMNode( Node *c, Node *mem, Node *adr, const TypePtr* at, Node *val, Node *oop_store, int oop_alias_idx ) :
         StoreNode(c,mem,adr,at,val,oop_store),
@@ -1249,7 +1249,7 @@ LoadPNode クラスのサブクラス.
 とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------LoadPLockedNode---------------------------------
     // Load-locked a pointer from memory (either object or array).
@@ -1267,7 +1267,7 @@ PhaseMacroExpand::expand_allocate_common() 内で(のみ)生成されている.
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       LoadPLockedNode( Node *c, Node *mem, Node *adr )
         : LoadPNode(c,mem,adr,TypeRawPtr::BOTTOM, TypeRawPtr::BOTTOM) {}
@@ -1291,7 +1291,7 @@ LoadLNode クラスのサブクラス.
 とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------LoadLLockedNode---------------------------------
     // Load-locked a pointer from memory (either object or array).
@@ -1308,7 +1308,7 @@ LibraryCallKit::inline_native_AtomicLong_get() 内で(のみ)生成されてい�
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       LoadLLockedNode( Node *c, Node *mem, Node *adr )
         : LoadLNode(c,mem,adr,TypeRawPtr::BOTTOM, TypeLong::LONG) {}
@@ -1327,7 +1327,7 @@ See: [here](../doxygen/classLoadLLockedNode.html) for details
 LoadStoreNode のサブクラス (Store*ConditionalNode または CompareAndSwap*Node) と組み合わせて使用する ProjNode クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------SCMemProjNode---------------------------------------
     // This class defines a projection of the memory  state of a store conditional node.
@@ -1341,7 +1341,7 @@ Store*ConditionalNode は成否を示す condition code 値と変更後の memor
 また, CompareAndSwap*Node の場合は, 
 結果が使用されない場合に最適化で消去されるのを防ぐため SCMemProjNode ノードを合わせて使うことが多い模様.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/library_call.cpp))
     bool LibraryCallKit::inline_unsafe_CAS(BasicType type) {
     ...
@@ -1370,7 +1370,7 @@ control input は持たない. 入力ノードは 1つで, 処理対象の LoadS
 (正確には, 第1入力ノードは型の上ではどんな Node も設定可能になっているが, 実際には LoadStoreNode のサブクラスしか設定されない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       SCMemProjNode( Node *src) : ProjNode( src, SCMEMPROJCON) { }
 ```
@@ -1391,7 +1391,7 @@ Node クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------LoadStoreNode---------------------------
     // Note: is_Mem() method returns 'true' for this class.
@@ -1409,7 +1409,7 @@ Node クラスのサブクラスの1つ.
 * 5番目の入力Node : ストア前の値に対する想定. この値と違っていればストアは失敗する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       enum {
         ExpectedIn = MemNode::ValueIn+1 // One more input than MemNode
@@ -1417,7 +1417,7 @@ Node クラスのサブクラスの1つ.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       LoadStoreNode( Node *c, Node *mem, Node *adr, Node *val, Node *ex);
 ```
@@ -1442,7 +1442,7 @@ LoadStoreNode クラスの具象サブクラスの1つ.
 このクラスは store-conditional 命令によるポインタ値のストア用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------StorePConditionalNode---------------------------
     // Conditionally store pointer to memory, if no change since prior
@@ -1458,7 +1458,7 @@ PhaseMacroExpand::expand_allocate_common() 内で(のみ)生成されている.
 (control input も含めて) 5つの入力ノードを持つ (See: LoadStoreNode).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       StorePConditionalNode( Node *c, Node *mem, Node *adr, Node *val, Node *ll ) : LoadStoreNode(c, mem, adr, val, ll) { }
 ```
@@ -1480,7 +1480,7 @@ LoadStoreNode クラスの具象サブクラスの1つ.
 このクラスは store-conditional 命令による int 値のストア用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------StoreIConditionalNode---------------------------
     // Conditionally store int to memory, if no change since prior
@@ -1492,7 +1492,7 @@ LoadStoreNode クラスの具象サブクラスの1つ.
 `#ifdef _LP64` でない場合は, これは StoreIConditionalNode の別名.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     #define StoreXConditionalNode StoreIConditionalNode
 ```
@@ -1505,7 +1505,7 @@ PhaseMacroExpand::expand_lock_node() 内で(のみ)生成されている.
 (control input も含めて) 5つの入力ノードを持つ (See: LoadStoreNode).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       StoreIConditionalNode( Node *c, Node *mem, Node *adr, Node *val, Node *ii ) : LoadStoreNode(c, mem, adr, val, ii) { }
 ```
@@ -1527,7 +1527,7 @@ LoadStoreNode クラスの具象サブクラスの1つ.
 このクラスは store-conditional 命令による long 値のストア用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------StoreLConditionalNode---------------------------
     // Conditionally store long to memory, if no change since prior
@@ -1539,7 +1539,7 @@ LoadStoreNode クラスの具象サブクラスの1つ.
 `#ifdef _LP64` の場合は, これは StoreLConditionalNode の別名.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     #define StoreXConditionalNode StoreLConditionalNode
 ```
@@ -1555,7 +1555,7 @@ LoadStoreNode クラスの具象サブクラスの1つ.
 (control input も含めて) 5つの入力ノードを持つ (See: LoadStoreNode).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       StoreLConditionalNode( Node *c, Node *mem, Node *adr, Node *val, Node *ll ) : LoadStoreNode(c, mem, adr, val, ll) { }
 ```
@@ -1580,7 +1580,7 @@ LoadStoreNode クラスの具象サブクラスの1つ.
 (= sun.misc.Unsafe.compareAndSwapLong() 用).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------CompareAndSwapLNode---------------------------
     class CompareAndSwapLNode : public LoadStoreNode {
@@ -1601,7 +1601,7 @@ LibraryIntrinsic::generate()
 (control input も含めて) 5つの入力ノードを持つ (See: LoadStoreNode).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       CompareAndSwapLNode( Node *c, Node *mem, Node *adr, Node *val, Node *ex) : LoadStoreNode(c, mem, adr, val, ex) { }
 ```
@@ -1613,7 +1613,7 @@ memory state は SCMemProjNode によって取り出す
 
 (この SCMemProjNode ノードには, 結果が使用されない場合に最適化で消去されるのを防ぐという役割もある模様)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/library_call.cpp))
     bool LibraryCallKit::inline_unsafe_CAS(BasicType type) {
     ...
@@ -1654,7 +1654,7 @@ LoadStoreNode クラスの具象サブクラスの1つ.
 (= sun.misc.Unsafe.compareAndSwapInt() 用).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------CompareAndSwapINode---------------------------
     class CompareAndSwapINode : public LoadStoreNode {
@@ -1675,7 +1675,7 @@ LibraryIntrinsic::generate()
 (control input も含めて) 5つの入力ノードを持つ (See: LoadStoreNode).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       CompareAndSwapINode( Node *c, Node *mem, Node *adr, Node *val, Node *ex) : LoadStoreNode(c, mem, adr, val, ex) { }
 ```
@@ -1687,7 +1687,7 @@ memory state は SCMemProjNode によって取り出す
 
 (この SCMemProjNode ノードには, 結果が使用されない場合に最適化で消去されるのを防ぐという役割もある模様)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/library_call.cpp))
     bool LibraryCallKit::inline_unsafe_CAS(BasicType type) {
     ...
@@ -1728,7 +1728,7 @@ LoadStoreNode クラスの具象サブクラスの1つ.
 (= sun.misc.Unsafe.compareAndSwapObject() 用).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------CompareAndSwapPNode---------------------------
     class CompareAndSwapPNode : public LoadStoreNode {
@@ -1749,7 +1749,7 @@ LibraryIntrinsic::generate()
 (control input も含めて) 5つの入力ノードを持つ (See: LoadStoreNode).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       CompareAndSwapPNode( Node *c, Node *mem, Node *adr, Node *val, Node *ex) : LoadStoreNode(c, mem, adr, val, ex) { }
 ```
@@ -1761,7 +1761,7 @@ memory state は SCMemProjNode によって取り出す
 
 (この SCMemProjNode ノードには, 結果が使用されない場合に最適化で消去されるのを防ぐという役割もある模様)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/library_call.cpp))
     bool LibraryCallKit::inline_unsafe_CAS(BasicType type) {
     ...
@@ -1802,7 +1802,7 @@ LoadStoreNode クラスの具象サブクラスの1つ.
 (= sun.misc.Unsafe.compareAndSwapObject() 用).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------CompareAndSwapNNode---------------------------
     class CompareAndSwapNNode : public LoadStoreNode {
@@ -1823,7 +1823,7 @@ LibraryIntrinsic::generate()
 (control input も含めて) 5つの入力ノードを持つ (See: LoadStoreNode).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       CompareAndSwapNNode( Node *c, Node *mem, Node *adr, Node *val, Node *ex) : LoadStoreNode(c, mem, adr, val, ex) { }
 ```
@@ -1835,7 +1835,7 @@ memory state は SCMemProjNode によって取り出す
 
 (この SCMemProjNode ノードには, 結果が使用されない場合に最適化で消去されるのを防ぐという役割もある模様)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/library_call.cpp))
     bool LibraryCallKit::inline_unsafe_CAS(BasicType type) {
     ...
@@ -1874,7 +1874,7 @@ Node クラスの具象サブクラスの1つ.
 メモリのゼロクリア処理を表す Node クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------ClearArray-------------------------------------
     class ClearArrayNode: public Node {
@@ -1894,7 +1894,7 @@ ClearArrayNode::clear_memory() 内で(のみ)生成されている.
 * 4番目の入力Node : クリア対象の領域の先頭アドレス
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       ClearArrayNode( Node *ctrl, Node *arymem, Node *word_cnt, Node *base )
         : Node(ctrl,arymem,word_cnt,base) {
@@ -1917,7 +1917,7 @@ LibraryIntrinsic による最適化用の Node クラス (の基底クラス)
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------StrIntrinsic-------------------------------
     // Base class for Ideal nodes used in String instrinsic code.
@@ -1928,7 +1928,7 @@ LibraryIntrinsic による最適化用の Node クラス (の基底クラス)
 このクラス(のサブクラス)は (control input も含めて) 6つ, または 5つ, または 4つの入力ノードを持つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       StrIntrinsicNode(Node* control, Node* char_array_mem,
                        Node* s1, Node* c1, Node* s2, Node* c2):
@@ -1963,7 +1963,7 @@ StrIntrinsicNode クラスの具象サブクラスの1つ.
 (= java.lang.String.compareTo() 用).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------StrComp-------------------------------------
     class StrCompNode: public StrIntrinsicNode {
@@ -1994,7 +1994,7 @@ LibraryIntrinsic::generate()
 * 6番目の入力Node : 比較対象の文字列(その2)の長さ
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       StrCompNode(Node* control, Node* char_array_mem,
                   Node* s1, Node* c1, Node* s2, Node* c2):
@@ -2018,7 +2018,7 @@ StrIntrinsicNode クラスの具象サブクラスの1つ.
 (= java.lang.String.equals() 用).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------StrEquals-------------------------------------
     class StrEqualsNode: public StrIntrinsicNode {
@@ -2048,7 +2048,7 @@ LibraryIntrinsic::generate()
 * 5番目の入力Node : 比較対象の文字列(その2)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       StrEqualsNode(Node* control, Node* char_array_mem,
                     Node* s1, Node* s2, Node* c):
@@ -2072,7 +2072,7 @@ StrIntrinsicNode クラスの具象サブクラスの1つ.
 (= java.lang.String.indexOf() 用).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------StrIndexOf-------------------------------------
     class StrIndexOfNode: public StrIntrinsicNode {
@@ -2103,7 +2103,7 @@ LibraryIntrinsic::generate()
 * 6番目の入力Node : 検出する部分文字列を示す文字列の長さ
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       StrIndexOfNode(Node* control, Node* char_array_mem,
                   Node* s1, Node* c1, Node* s2, Node* c2):
@@ -2127,7 +2127,7 @@ StrIntrinsicNode クラスの具象サブクラスの1つ.
 (= java.util.Arrays.equals() 用).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------AryEq---------------------------------------
     class AryEqNode: public StrIntrinsicNode {
@@ -2154,7 +2154,7 @@ LibraryIntrinsic::generate()
 * 4番目の入力Node : 比較対象の配列(その2)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       AryEqNode(Node* control, Node* char_array_mem, Node* s1, Node* s2):
         StrIntrinsicNode(control, char_array_mem, s1, s2) {};
@@ -2176,7 +2176,7 @@ MultiNode クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------MemBar-----------------------------------------
     // There are different flavors of Memory Barriers to match the Java Memory
@@ -2219,7 +2219,7 @@ MultiNode クラスのサブクラスの1つ.
   precedent コンストラクタ引数が指定されていた場合には, ここに格納される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       enum {
         Precedent = TypeFunc::Parms  // optional edge to force precedence
@@ -2227,7 +2227,7 @@ MultiNode クラスのサブクラスの1つ.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.cpp))
     MemBarNode::MemBarNode(Compile* C, int alias_idx, Node* precedent)
       : MultiNode(TypeFunc::Parms + (precedent == NULL? 0: 1)),
@@ -2258,7 +2258,7 @@ MemBarNode クラスの具象サブクラスの1つ.
 (後続の load はこの命令を追い越せない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     // "Acquire" - no following ref can move before (but earlier refs can
     // follow, like an early Load stalled in cache).  Requires multi-cpu
@@ -2283,7 +2283,7 @@ GraphKit::insert_mem_bar_volatile()
 (control input も含めて) 5つまたは6つの入力ノードを持つ (See: MemBar).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       MemBarAcquireNode(Compile* C, int alias_idx, Node* precedent)
         : MemBarNode(C, alias_idx, precedent) {}
@@ -2304,7 +2304,7 @@ MemBarNode クラスの具象サブクラスの1つ.
 (先行する store はこの命令より後ろにリオーダされない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     // "Release" - no earlier ref can move after (but later refs can move
     // up, like a speculative pipelined cache-hitting Load).  Requires
@@ -2329,7 +2329,7 @@ GraphKit::insert_mem_bar_volatile()
 (control input も含めて) 5つまたは6つの入力ノードを持つ (See: MemBar).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       MemBarReleaseNode(Compile* C, int alias_idx, Node* precedent)
         : MemBarNode(C, alias_idx, precedent) {}
@@ -2349,7 +2349,7 @@ MemBarNode クラスの具象サブクラスの1つ.
 このクラスは先行する volatile store と後続の volatile load の順序付け用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     // Ordering between a volatile store and a following volatile load.
     // Requires multi-CPU visibility?
@@ -2382,7 +2382,7 @@ Compile::Compile()
 (control input も含めて) 5つまたは6つの入力ノードを持つ (See: MemBar).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       MemBarVolatileNode(Compile* C, int alias_idx, Node* precedent)
         : MemBarNode(C, alias_idx, precedent) {}
@@ -2404,7 +2404,7 @@ JIT コンパイラ内での最適化によるリオーダを禁止するため�
 (= 同一コア上でのメモリアクセス命令の順序付け用).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     // Ordering within the same CPU.  Used to order unsafe memory references
     // inside the compiler when we lack alias info.  Not needed "outside" the
@@ -2429,7 +2429,7 @@ GraphKit::insert_mem_bar_volatile()
 (control input も含めて) 5つまたは6つの入力ノードを持つ (See: MemBar).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       MemBarCPUOrderNode(Compile* C, int alias_idx, Node* precedent)
         : MemBarNode(C, alias_idx, precedent) {}
@@ -2453,7 +2453,7 @@ MemBarNode クラスの具象サブクラスの1つ.
 なお, この Node は PhaseMacroExpand 時に AllocateNode と一緒に展開される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     // Isolation of object setup after an AllocateNode and before next safepoint.
     // (See comment in memnode.cpp near InitializeNode::InitializeNode for semantics.)
@@ -2461,7 +2461,7 @@ MemBarNode クラスの具象サブクラスの1つ.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.cpp))
     //===========================InitializeNode====================================
     // SUMMARY:
@@ -2572,7 +2572,7 @@ GraphKit::insert_mem_bar_volatile()
 (control input も含めて) 5つまたは6つの入力ノードを持つ (See: MemBar).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       enum {
         Control    = TypeFunc::Control,
@@ -2583,7 +2583,7 @@ GraphKit::insert_mem_bar_volatile()
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.cpp))
     InitializeNode::InitializeNode(Compile* C, int adr_type, Node* rawoop)
       : _is_complete(false),
@@ -2608,7 +2608,7 @@ See: [here](../doxygen/classInitializeNode.html) for details
 
 ### 概要(Summary)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     //------------------------------MergeMem---------------------------------------
     // (See comment in memnode.cpp near MergeMemNode::MergeMemNode for semantics.)
@@ -2629,7 +2629,7 @@ See: [here](../doxygen/classMergeMemNode.html) for details
 MergeMemNode 中の Node をたどるためのイテレータクラス(StackObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     class MergeMemStream : public StackObj {
 ```
@@ -2637,7 +2637,7 @@ MergeMemNode 中の Node をたどるためのイテレータクラス(StackObj�
 ### 使われ方(Usage)
 #### 使用例(usage examples)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/graphKit.cpp))
         for (MergeMemStream mms(phi_mem); mms.next_non_empty(); ) {
           Node* m = mms.memory();
@@ -2663,7 +2663,7 @@ Node クラスの具象サブクラスの1つ.
  及び sun.misc.Unsafe.prefetchReadStatic() 用の Node)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     // Non-faulting prefetch load.  Prefetch for many reads.
     class PrefetchReadNode : public Node {
@@ -2693,7 +2693,7 @@ LibraryIntrinsic::generate()
  (See: LibraryCallKit::inline_unsafe_prefetch()))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       PrefetchReadNode(Node *abio, Node *adr) : Node(0,abio,adr) {}
 ```
@@ -2712,7 +2712,7 @@ Node クラスの具象サブクラスの1つ.
 メモリのプリフェッチ処理(load/store 用)を表す Node クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
     // Non-faulting prefetch load.  Prefetch for many reads & many writes.
     class PrefetchWriteNode : public Node {
@@ -2752,7 +2752,7 @@ PhaseMacroExpand::expand_allocate_common()
  (See: LibraryCallKit::inline_unsafe_prefetch()))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/memnode.hpp))
       PrefetchWriteNode(Node *abio, Node *adr) : Node(0,abio,adr) {}
 ```

@@ -19,7 +19,7 @@ DebugInformationRecorder に格納されるデバッグ情報を表すクラス.
 なお, 内部的には32bit の値にエンコーディングされる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/location.hpp))
     // A Location describes a concrete machine variable location
     // (such as integer or floating point register or a stack-held
@@ -40,7 +40,7 @@ DebugInformationRecorder に格納されるデバッグ情報を表すクラス.
 場所や型情報などを 32 ビット内にエンコードして格納している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/location.hpp))
       juint _value;
     ...
@@ -56,7 +56,7 @@ DebugInformationRecorder に格納されるデバッグ情報を表すクラス.
 なお, Where や Type として指定できる値には以下のようなものがある.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/location.hpp))
       enum Where {
         on_stack,

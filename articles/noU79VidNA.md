@@ -28,7 +28,7 @@ title: Deoptimization クラス関連のクラス (Deoptimization, Deoptimizatio
 (See: [here](no3420xYb.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/deoptimization.hpp))
     class Deoptimization : AllStatic {
 ```
@@ -56,7 +56,7 @@ title: Deoptimization クラス関連のクラス (Deoptimization, Deoptimizatio
     (See: vframeArrayElement::unpack_on_stack())
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/deoptimization.hpp))
       // What condition caused the deoptimization?
       enum DeoptReason {
@@ -119,7 +119,7 @@ title: Deoptimization クラス関連のクラス (Deoptimization, Deoptimizatio
 定義されている public メソッドは, 以下の通り.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/deoptimization.hpp))
       // Checks all compiled methods. Invalid methods are deleted and
       // corresponding activations are deoptimized.
@@ -130,13 +130,13 @@ title: Deoptimization クラス関連のクラス (Deoptimization, Deoptimizatio
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/deoptimization.hpp))
       static vframeArray* create_vframeArray(JavaThread* thread, frame fr, RegisterMap *reg_map, GrowableArray<compiledVFrame*>* chunk);
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/deoptimization.hpp))
       //** Returns an UnrollBlock continuing information
       // how to make room for the resulting interpreter frames.
@@ -248,7 +248,7 @@ title: Deoptimization クラス関連のクラス (Deoptimization, Deoptimizatio
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/deoptimization.hpp))
       static void update_method_data_from_interpreter(methodDataHandle trap_mdo, int trap_bci, int reason);
 ```
@@ -275,7 +275,7 @@ Deoptimization クラス内で使用される補助クラス.
  後から中身を参照できるとデバッグ時に便利なので CHeapObj となっているだけ).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/deoptimization.hpp))
       // Interface used for unpacking deoptimized frames
     
@@ -368,7 +368,7 @@ DeoptimizationMarker はこれを実現するためのクラス
 (See: FlatProfiler::record_vm_operation()))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/deoptimization.hpp))
     class DeoptimizationMarker : StackObj {  // for profiling
 ```
@@ -395,7 +395,7 @@ DeoptimizationMarker はこれを実現するためのクラス
 デストラクタで false に戻すだけ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/deoptimization.hpp))
       DeoptimizationMarker()  { _is_active = true; }
       ~DeoptimizationMarker() { _is_active = false; }
@@ -418,7 +418,7 @@ Deoptimization クラス内で使用される補助クラス(Closureクラス).
 そのフィールドの値をヒープ上に確保したオブジェクト内に移し替えるための Closure クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/deoptimization.cpp))
     // This assumes that the fields are stored in ObjectValue in the same order
     // they are yielded by do_nonstatic_fields.

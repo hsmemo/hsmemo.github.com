@@ -15,7 +15,7 @@ title: Dependencies クラス関連のクラス (Dependencies, Dependencies::Dep
 新たなクラスのロードやクラスの動的書き換え(class evolution)によって仮定が崩れた場合には脱最適化処理(deopt)が行われる
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/dependencies.hpp))
     //** Dependencies represent assertions (approximate invariants) within
     // the class hierarchy.  An example is an assertion that a given
@@ -53,7 +53,7 @@ JIT コンパイル作業中に使用される一時オブジェクト(ResourceO
 コンパイル中に使用した dependency 情報を蓄えていくためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/dependencies.hpp))
     class Dependencies: public ResourceObj {
 ```
@@ -64,7 +64,7 @@ JIT コンパイル作業中に使用される一時オブジェクト(ResourceO
 その後のコンパイル作業中に使用した仮定を蓄えていく.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/compile.cpp))
     void Compile::Init(int aliaslevel) {
     ...
@@ -74,7 +74,7 @@ JIT コンパイル作業中に使用される一時オブジェクト(ResourceO
 そして, 集められた dependencies はコンパイル完了時に nmethod 内にコピーされる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/nmethod.cpp))
     nmethod::nmethod(
       methodOop method,
@@ -116,7 +116,7 @@ nmethod 中に格納されている dependency set をたどるためのイテ�
 (なお, oop は Handle 化されていないので VM 内で使うように, とのこと)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/dependencies.hpp))
       // Use this to iterate over an nmethod's dependency set.
       // Works on new and old dependency sets.
@@ -145,7 +145,7 @@ See: [here](../doxygen/classDependencies_1_1DepStream.html) for details
 dependency 情報が変化したことを表すためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/dependencies.hpp))
     // A class hierarchy change coming through the VM (under the Compile_lock).
     // The change is structured as a single new type with any number of supers
@@ -162,7 +162,7 @@ Universe::flush_dependents_on() 内で使用されている.
  ここで作られたインスタンスが flush 処理に関するいろんなメソッドに渡されていって使われている模様)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/universe.cpp))
     // Flushes compiled methods dependent on dependee.
     void Universe::flush_dependents_on(instanceKlassHandle dependee) {
@@ -183,7 +183,7 @@ Universe::flush_dependents_on() 内で使用されている.
 このフィールドには, 変化を引き起こした新しいクラスが格納される
 (現状では, dependency の変化は新しいクラス1つによってのみ生じる, ということになっている).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/dependencies.hpp))
       // each change set is rooted in exactly one new type (at present):
       KlassHandle _new_type;
@@ -192,7 +192,7 @@ Universe::flush_dependents_on() 内で使用されている.
 この _new_type フィールドには, コンストラクタに渡された引数がセットされる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/dependencies.hpp))
       // notes the new type, marks it and all its super-types
       DepChange(KlassHandle new_type)
@@ -217,7 +217,7 @@ DepChange オブジェクトが表す変化の影響範囲を辿っていくた�
 利用する際には, 以下のコメント中の "Usage:" のように使う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/dependencies.hpp))
       // Usage:
       // for (DepChange::ContextStream str(changes); str.next(); ) {
@@ -239,7 +239,7 @@ iterate 処理では, コンストラクタで指定された DepChange オブ�
    (ついでに, 状態は Start_Klass (_new_type が空なら NO_CHANGE)にしておく).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/dependencies.hpp))
         ContextStream(DepChange& changes)
           : _changes(changes)
@@ -247,7 +247,7 @@ iterate 処理では, コンストラクタで指定された DepChange オブ�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/dependencies.hpp))
         // start at the beginning:
         void start() {
@@ -265,7 +265,7 @@ iterate 処理では, コンストラクタで指定された DepChange オブ�
    そして, super class が無くなったら, 取得していた transitive_interfaces を辿っていく.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/dependencies.cpp))
     bool DepChange::ContextStream::next() {
       switch (_change_type) {
@@ -322,7 +322,7 @@ dependency を壊しているサブクラス("witness" と呼ばれている)を
 (なお, 既に dependency として考慮されているサブクラス("participants"と呼んでいる)については処理は省略している, とのこと)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/dependencies.cpp))
     // This hierarchy walker inspects subtypes of a given type,
     // trying to find a "bad" class which breaks a dependency.

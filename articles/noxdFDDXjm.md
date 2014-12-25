@@ -9,7 +9,7 @@ title: Closure クラス関連のクラス (Closure, OopClosure, ObjectClosure, 
 これらは, メモリ管理用 (主に Garbage Collection 処理用) の補助クラス (See: [here](no2114GzS.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
     // The following classes are C++ `closures` for iterating over objects, roots and spaces
 ```
@@ -118,7 +118,7 @@ Closure クラスには以下のようなサブクラスが用意されている
 全ての Closure クラスの基底クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
     // Closure provides abortability.
     
@@ -140,7 +140,7 @@ See: [here](../doxygen/classClosure.html) for details
 oop へのポインタに対して何らかの処理を行う Closure クラス (の基底クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
     // OopClosure is used for iterating through roots (oop*)
     
@@ -152,7 +152,7 @@ oop* (又は narrowOop*) を処理する do_oop() メソッドを備えている
 
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
       virtual void do_oop(oop* o) = 0;
       virtual void do_oop_v(oop* o) { do_oop(o); }
@@ -173,7 +173,7 @@ See: [here](../doxygen/classOopClosure.html) for details
 oop に対して何らかの処理を行う Closure クラス (の基底クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
     // ObjectClosure is used for iterating through an object space
     
@@ -185,7 +185,7 @@ oop を処理する do_object() メソッドを備えている.
 
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
       // Called for each object.
       virtual void do_object(oop obj) = 0;
@@ -204,7 +204,7 @@ See: [here](../doxygen/classObjectClosure.html) for details
 oop に対して何らかの判定を行う(= bool を返す) Closure クラス (の基底クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
     class BoolObjectClosure : public ObjectClosure {
 ```
@@ -214,7 +214,7 @@ oop を判定する do_object_b() メソッドを備えている.
 
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
       virtual bool do_object_b(oop obj) = 0;
 ```
@@ -234,7 +234,7 @@ See: [here](../doxygen/classBoolObjectClosure.html) for details
 指定された OopClosure をある oop 内の全てのポインタフィールドに対して適用する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
     // Applies an oop closure to all ref fields in objects iterated over in an
     // object iteration.
@@ -244,7 +244,7 @@ See: [here](../doxygen/classBoolObjectClosure.html) for details
 ### 使われ方(Usage)
 コンストラクタ引数として OopClosure オブジェクトを受け取る.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
       ObjectToOopClosure(OopClosure* cl) : _cl(cl) {}
 ```
@@ -267,7 +267,7 @@ See: [here](../doxygen/classObjectToOopClosure.html) for details
 何らかの情報を記憶しておく機能を備えた BoolObjectClosure クラス (の基底クラス)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
     // A version of ObjectClosure with "memory" (see _previous_address below)
     class UpwardsObjectClosure: public BoolObjectClosure {
@@ -283,7 +283,7 @@ See: [here](../doxygen/classObjectToOopClosure.html) for details
 内ではそう使われている. (See: ScanMarkedObjectsAgainClosure))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
       HeapWord* _previous_address;
     ...
@@ -296,7 +296,7 @@ See: [here](../doxygen/classObjectToOopClosure.html) for details
 
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
       // A return value of "true" can be used by the caller to decide
       // if this object's end should *NOT* be recorded in
@@ -317,7 +317,7 @@ See: [here](../doxygen/classUpwardsObjectClosure.html) for details
 処理対象の中に uninitialized な oop があるかもしれない場合用の ObjectClosure クラス (の基底クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
     // A version of ObjectClosure that is expected to be robust
     // in the face of possibly uninitialized objects.
@@ -331,7 +331,7 @@ oop を処理する do_object_careful() メソッド及び do_object_careful_m()
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
       virtual size_t do_object_careful_m(oop p, MemRegion mr) = 0;
       virtual size_t do_object_careful(oop p) = 0;
@@ -352,7 +352,7 @@ See: [here](../doxygen/classObjectClosureCareful.html) for details
 (なお, このクラスは Closure クラスのサブクラスではなく, StackObj のサブクラスになっている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
     // Blk closure (abstract class)
     class BlkClosure : public StackObj {
@@ -361,7 +361,7 @@ See: [here](../doxygen/classObjectClosureCareful.html) for details
 なお, このクラス(のサブクラス)は CMS の処理の中で使用される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
     // The following are used in CompactibleFreeListSpace and
     // ConcurrentMarkSweepGeneration.
@@ -374,7 +374,7 @@ block (を表す HeapWord*) を処理する do_blk() メソッドを備えてい
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
       virtual size_t do_blk(HeapWord* addr) = 0;
 ```
@@ -392,7 +392,7 @@ See: [here](../doxygen/classBlkClosure.html) for details
 処理対象の中に uninitialized な oop があるかもしれない場合用の BlkClosure クラス (の基底クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
     // A version of BlkClosure that is expected to be robust
     // in the face of possibly uninitialized objects.
@@ -402,7 +402,7 @@ See: [here](../doxygen/classBlkClosure.html) for details
 なお, このクラス(のサブクラス)は CMS の処理の中で使用される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
     // The following are used in CompactibleFreeListSpace and
     // ConcurrentMarkSweepGeneration.
@@ -415,14 +415,14 @@ block (を表す HeapWord*) を処理する do_blk_careful() メソッドを備�
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
       virtual size_t do_blk_careful(HeapWord* addr) = 0;
 ```
 
 なお, BlkClosure から引き継いだ do_blk() メソッドは使用禁止にされている.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
       size_t do_blk(HeapWord* addr) {
         guarantee(false, "call do_blk_careful instead");
@@ -445,7 +445,7 @@ Space に対して何らかの処理を行う Closure クラス (の基底クラ
 (なお, このクラスは Closure クラスのサブクラスではなく, StackObj のサブクラスになっている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
     // SpaceClosure is used for iterating over spaces
     ...
@@ -457,7 +457,7 @@ Space* を処理する do_space() メソッドを備えている.
 
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
       // Called for each space
       virtual void do_space(Space* s) = 0;
@@ -478,7 +478,7 @@ CompactibleSpace に対して何らかの処理を行う Closure クラス (の�
 (なお, このクラスは Closure クラスのサブクラスではなく, StackObj のサブクラスになっている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
     class CompactibleSpaceClosure : public StackObj {
 ```
@@ -488,7 +488,7 @@ CompactibleSpace* を処理する do_space() メソッドを備えている.
 
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
       // Called for each compactible space
       virtual void do_space(CompactibleSpace* s) = 0;
@@ -507,7 +507,7 @@ See: [here](../doxygen/classCompactibleSpaceClosure.html) for details
 CodeBlob に対して何らかの処理を行う Closure クラス (の基底クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
     // CodeBlobClosure is used for iterating through code blobs
     // in the code cache or on thread stacks
@@ -520,7 +520,7 @@ CodeBlob* を処理する do_code_blob() メソッドを備えている.
 
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
       // Called for each code blob.
       virtual void do_code_blob(CodeBlob* cb) = 0;
@@ -539,7 +539,7 @@ See: [here](../doxygen/classCodeBlobClosure.html) for details
 同じ CodeBlob に対しては最大1回しか処理を行わない CodeBlobClosure クラス (の基底クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
     class MarkingCodeBlobClosure : public CodeBlobClosure {
 ```
@@ -551,7 +551,7 @@ CodeBlob* を処理する do_newly_marked_nmethod() メソッドを備えてい�
 
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
       // Called for each code blob, but at most once per unique blob.
       virtual void do_newly_marked_nmethod(nmethod* nm) = 0;
@@ -581,7 +581,7 @@ CodeBlob 内の GC 処理で使用される
 GC 処理の前後で, nmethod を処理するための補助構造の準備/後始末を行う).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
       class MarkScope : public StackObj {
 ```
@@ -593,7 +593,7 @@ GC 処理の前後で, nmethod を処理するための補助構造の準備/後
 デストラクタで nmethod 用の後始末を行う (nmethod::oops_do_marking_epilogue() の呼び出し).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.cpp))
     MarkingCodeBlobClosure::MarkScope::MarkScope(bool activate)
       : _active(activate)
@@ -617,7 +617,7 @@ nmethod クラスは, nmethod::_oops_do_mark_nmethods という static フィー
 処理した nmethod オブジェクトをこのフィールドに線形リスト状につないでいく.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/nmethod.cpp))
     #define NMETHOD_SENTINEL ((nmethod*)badAddress)
     
@@ -654,7 +654,7 @@ CodeBlob に対して処理を行う Closure クラス
 指定の CodeBlob に対して指定の OopClosure を適用する処理を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
     // Applies an oop closure to all ref fields in code blobs
     // iterated over in an object iteration.
@@ -666,7 +666,7 @@ CodeBlob に対して処理を行う Closure クラス
 (また, marking 処理を使用するかどうかを示す do_marking 引数も受け取る).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
       CodeBlobToOopClosure(OopClosure* cl, bool do_marking)
 ```
@@ -680,7 +680,7 @@ CodeBlob に対して処理を行う Closure クラス
   * do_marking が false の場合は, CodeBlob に対してコンストラクタ引数で受け取った OopClosure を適用するだけ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
       virtual void do_newly_marked_nmethod(nmethod* cb);
         // = { cb->oops_do(_cl); }
@@ -707,7 +707,7 @@ ObjectMonitor に対して何らかの処理を行う Closure クラス (の基�
 (なお, このクラスは Closure クラスのサブクラスではなく, StackObj のサブクラスになっている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
     // MonitorClosure is used for iterating over monitors in the monitors cache
     ...
@@ -719,7 +719,7 @@ ObjectMonitor* を処理する do_monitor() メソッドを備えている.
 
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
       // called for each monitor in cache
       virtual void do_monitor(ObjectMonitor* m) = 0;
@@ -740,7 +740,7 @@ See: [here](../doxygen/classMonitorClosure.html) for details
 (なお, このクラスは Closure クラスのサブクラスではなく, StackObj のサブクラスになっている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
     // A closure that is applied without any arguments.
     class VoidClosure : public StackObj {
@@ -755,7 +755,7 @@ See: [here](../doxygen/classMonitorClosure.html) for details
 このクラスの do_void() は純粋仮想関数にしたかったがよく分からない理由により上手くいかなかった, 
 とのこと)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
       // I would have liked to declare this a pure virtual, but that breaks
       // in mysterious ways, for unknown reasons.
@@ -781,7 +781,7 @@ See: [here](../doxygen/classVoidClosure.html) for details
 (なお, このクラスは Closure クラスのサブクラスではなく, StackObj のサブクラスになっている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
     // YieldClosure is intended for use by iteration loops
     // to incrementalize their work, allowing interleaving
@@ -800,7 +800,7 @@ should_return() メソッドは, 呼び出し元が処理を止めてリター�
 
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
        virtual bool should_return() = 0;
 ```
@@ -820,7 +820,7 @@ serialize されたデータを読み書きするための Closure クラス (�
 (現状ではサブクラスが WriteClosure と ReadClosure しかいないため, CDS の shared archive 処理専用のクラス)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
     // Abstract closure for serializing data (read or write).
     
@@ -832,7 +832,7 @@ serialize されたデータを処理するための以下のようなメソッ�
 
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
       // Return bool indicating whether closure implements read or write.
       virtual bool reading() const = 0;
@@ -874,7 +874,7 @@ Symbol に対して何らかの処理を行う Closure クラス (の基底ク�
 (なお, このクラスは Closure クラスのサブクラスではなく, StackObj のサブクラスになっている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
     class SymbolClosure : public StackObj {
 ```
@@ -884,7 +884,7 @@ Symbol** を処理する do_symbol() メソッドを備えている.
 
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
       virtual void do_symbol(Symbol**) = 0;
 ```
@@ -912,7 +912,7 @@ GC 処理中のクラス・アンローディングが行われる可能性が�
 これは CMS で使用されている模様)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
     #ifdef ASSERT
     // This class is used to flag phases of a collection that
@@ -944,7 +944,7 @@ RememberKlassesChecker はこのフィールドの値をセット／リセット
 OopClosure::set_must_remember_klasses() 及び OopClosure::must_remember_klasses())
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.cpp))
     #ifdef ASSERT
     bool OopClosure::_must_remember_klasses = false;
@@ -955,7 +955,7 @@ OopClosure::set_must_remember_klasses() 及び OopClosure::must_remember_klasses
 デストラクタで (同じく OopClosure::set_must_remember_klasses() を呼んで) 元に戻している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
       RememberKlassesChecker(bool checking_on) : _saved_state(false),
         _do_check(true) {
@@ -998,7 +998,7 @@ See: [here](no7882U_h.html) for details
 See: [here](no7882TMD.html) for details
 #### 参考(for your information): OopClosure::remember_klass()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/iterator.hpp))
       virtual void remember_klass(Klass* k) { /* do nothing */ }
 ```

@@ -19,7 +19,7 @@ Platform MXBean 機能のためのクラス.
 (See: [here](no211477i.html) for details)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryUsage.hpp))
     class MemoryUsage VALUE_OBJ_CLASS_SPEC {
 ```
@@ -37,7 +37,7 @@ Platform MXBean 機能のためのクラス.
   * committed -- 現在のヒープサイズ [byte]
   * maxSize   -- 最大拡張時のヒープサイズ [byte]
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryUsage.hpp))
     // A memory usage contains the following attributes about memory usage:
     //  initSize - represents the initial amount of memory (in bytes) that
@@ -58,7 +58,7 @@ Platform MXBean 機能のためのクラス.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryUsage.hpp))
       size_t _initSize;
       size_t _used;

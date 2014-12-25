@@ -57,7 +57,7 @@ title: ThreadService クラス関連のクラス (ThreadService, ThreadStatistic
 (See: ThreadService::is_thread_monitoring_contention()).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/threadService.hpp))
     // VM monitoring and management support for the thread and
     // synchronization subsystem
@@ -78,7 +78,7 @@ java.lang.management.ThreadMXBean の機能が実現される.
 (ただしコメントによると, PerfData については Thread クラスに移してもいい, とも書かれているが...)
  
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/threadService.hpp))
       // These counters could be moved to Threads class
       static PerfCounter*  _total_threads_count;
@@ -103,7 +103,7 @@ Perf で公開されたデータには, それぞれ以下の名前でアクセ�
   * java.threads.livePeak
   * java.threads.daemon
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/threadService.cpp))
       // These counters are for java.lang.management API support.
       // They are created even if -XX:-UsePerfData is set and in
@@ -144,7 +144,7 @@ Platform MXBean 機能のためのクラス.
  これらのメソッドは, java.lang.management.ThreadInfo 内に含まれる java.lang.StackTraceElement[] の部分だけを使用する.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/threadService.hpp))
     // Thread snapshot to represent the thread state and statistics
     class ThreadSnapshot : public CHeapObj {
@@ -170,7 +170,7 @@ ThreadSnapshot クラス内で使用される補助クラス (See: ThreadSnapsho
 * java.lang.management.ThreadInfo.getWaitedCount()
 * java.lang.management.ThreadInfo.getWaitedTime()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/threadService.hpp))
     // Per-thread Statistics for synchronization
     class ThreadStatistics : public CHeapObj {
@@ -182,7 +182,7 @@ ThreadSnapshot クラス内で使用される補助クラス (See: ThreadSnapsho
 
 (アクセサメソッドは JavaThread::get_thread_stat())
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.hpp))
     class JavaThread: public Thread {
     ...
@@ -210,7 +210,7 @@ java.lang.management.ThreadInfo 用の情報を蓄えるために使用されて
 * java.lang.Thread.sleep() で寝た回数(および寝ていた合計時間)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/threadService.hpp))
       jlong        _contended_enter_count;
       elapsedTimer _contended_enter_timer;
@@ -224,7 +224,7 @@ java.lang.management.ThreadInfo 用の情報を蓄えるために使用されて
 これは PerfClassTraceTime クラスから(のみ)使用されている模様.
 (See: PerfClassTraceTime)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/threadService.hpp))
       // Keep accurate times for potentially recursive class operations
       int           _perf_recursion_counts[6];
@@ -265,7 +265,7 @@ java.lang.StackTraceElement 配列の実装を担当するクラス
 (See: [here](no2114sqE.html) for details)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/threadService.hpp))
     class ThreadStackTrace : public CHeapObj {
 ```
@@ -289,7 +289,7 @@ ThreadStackTrace クラス内で使用される補助クラス.
 (See: [here](no2114sqE.html) for details)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/threadService.hpp))
     // StackFrameInfo for keeping methodOop and bci during
     // stack walking for later construction of StackTraceElement[]
@@ -315,7 +315,7 @@ Platform MXBean 機能のためのクラス.
 (See: [here](no2114twV.html) and [here](no2114sqE.html) for details)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/threadService.hpp))
     class ThreadConcurrentLocks : public CHeapObj {
 ```
@@ -338,7 +338,7 @@ VM_ThreadDump クラス及び VM_PrintThreads クラス内で使用される補�
 (See: [here](no2114sqE.html) for details)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/threadService.hpp))
     class ConcurrentLocksDump : public StackObj {
 ```
@@ -358,7 +358,7 @@ thread_concurrent_locks() で取得する or print_locks_on() で出力する, �
 * print_locks_on() : 
   収集した情報を出力する.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/threadService.hpp))
       void                        dump_at_safepoint();
       ThreadConcurrentLocks*      thread_concurrent_locks(JavaThread* thread);
@@ -392,7 +392,7 @@ ThreadSnapshot クラス用の補助クラス(StackObjクラス).
 (See: [here](no2114sqE.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/threadService.hpp))
     class ThreadDumpResult : public StackObj {
 ```
@@ -443,7 +443,7 @@ Platform MXBean 機能のためのクラス.
 デッドロック検出処理の結果を格納するためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/threadService.hpp))
     class DeadlockCycle : public CHeapObj {
 ```
@@ -467,7 +467,7 @@ java.lang.Thread.getThreads() 及び JVMTI の GetAllThreads() 用の補助ク�
 全 JavaThread の一覧を取得する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/threadService.hpp))
     // Utility class to get list of java threads.
     class ThreadsListEnumerator : public StackObj {
@@ -478,7 +478,7 @@ java.lang.Thread.getThreads() 及び JVMTI の GetAllThreads() 用の補助ク�
 使用方法は次のような感じ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvm.cpp))
       ThreadsListEnumerator tle(THREAD, false, false);
     ...
@@ -517,7 +517,7 @@ JavaThread の状態(java_lang_Thread::ThreadStatus)を作業途中のあるス�
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/threadService.hpp))
     // abstract utility class to set new thread states, and restore previous after the block exits
     class JavaThreadStatusChanger : public StackObj {
@@ -544,7 +544,7 @@ JavaThreadStatusChanger::set_thread_status() で状態を変更する.
 
 逆にデストラクタでは, JavaThread::set_thread_status() で待避していた状態に復帰させる.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/threadService.hpp))
       JavaThreadStatusChanger(JavaThread* java_thread,
                               java_lang_Thread::ThreadStatus state) {
@@ -576,7 +576,7 @@ JavaThreadStatusChanger クラスの具象サブクラスの1つ.
 JavaThread の状態を一時的に IN_OBJECT_WAIT (もしくは IN_OBJECT_WAIT_TIMED) に変更する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/threadService.hpp))
     // Change status to waiting on an object  (timed or indefinite)
     class JavaThreadInObjectWaitState : public JavaThreadStatusChanger {
@@ -597,7 +597,7 @@ ThreadStatistics::monitor_wait_begin() を呼び出して統計情報の取得�
 (ついでに, ThreadStatistics::monitor_wait_end() を呼び出して統計情報の取得も行っている. (See: [here](no21146np.html) for details)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/threadService.hpp))
       JavaThreadInObjectWaitState(JavaThread *java_thread, bool timed) :
         JavaThreadStatusChanger(java_thread,
@@ -636,7 +636,7 @@ JavaThreadStatusChanger クラスの具象サブクラスの1つ.
 JavaThread の状態を一時的に PARKED (もしくは PARKED_TIMED) に変更する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/threadService.hpp))
     // Change status to parked (timed or indefinite)
     class JavaThreadParkedState : public JavaThreadStatusChanger {
@@ -657,7 +657,7 @@ ThreadStatistics::monitor_wait_begin() を呼び出して統計情報の取得�
 (ついでに, ThreadStatistics::monitor_wait_end() を呼び出して統計情報の取得も行っている. (See: [here](no21146np.html) for details)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/threadService.hpp))
      public:
       JavaThreadParkedState(JavaThread *java_thread, bool timed) :
@@ -697,7 +697,7 @@ JavaThreadStatusChanger クラスの具象サブクラスの1つ.
 JavaThread の状態を一時的に BLOCKED_ON_MONITOR_ENTER に変更する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/threadService.hpp))
     // Change status to blocked on (re-)entering a synchronization block
     class JavaThreadBlockedOnMonitorEnterState : public JavaThreadStatusChanger {
@@ -736,7 +736,7 @@ JavaThread の状態を java_lang_Thread::BLOCKED_ON_MONITOR_ENTER に変更す�
 (ついでに, ThreadStatistics::contended_enter_end() を呼び出して統計情報の取得も行っている. (See: [here](no21146np.html) for details)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/threadService.hpp))
       JavaThreadBlockedOnMonitorEnterState(JavaThread *java_thread, ObjectMonitor *obj_m) :
         JavaThreadStatusChanger(java_thread) {
@@ -774,7 +774,7 @@ JavaThreadStatusChanger クラスの具象サブクラスの1つ.
 JavaThread の状態を一時的に SLEEPING に変更する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/threadService.hpp))
     // Change status to sleeping
     class JavaThreadSleepState : public JavaThreadStatusChanger {
@@ -793,7 +793,7 @@ ThreadStatistics::thread_sleep_begin() を呼び出して統計情報の取得�
 (ついでに, ThreadStatistics::thread_sleep_end() を呼び出して統計情報の取得も行っている. (See: [here](no21146np.html) for details)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/threadService.hpp))
       JavaThreadSleepState(JavaThread *java_thread) :
         JavaThreadStatusChanger(java_thread, java_lang_Thread::SLEEPING) {
@@ -830,7 +830,7 @@ ThreadStackTrace クラス内で使用される補助クラス.
 
 JNI 関数内で取得されているロックの一覧を作成する.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/threadService.cpp))
     // Iterate through monitor cache to find JNI locked monitors
     class InflatedMonitorsClosure: public MonitorClosure {

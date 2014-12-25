@@ -55,7 +55,7 @@ HotSpot を一時的に「GC が発生しない状態」にするためのクラ
 * etc (#TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/gcLocker.hpp))
     // The direct lock/unlock calls do not force a collection if an unlock
     // decrements the count to zero. Avoid calling these if at all possible.
@@ -77,7 +77,7 @@ See: [here](../doxygen/classGC__locker.html) for details
 
 「あるコード範囲で GC が起きない」ということをコード上に明示したい場合に使用される.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/gcLocker.hpp))
     // A No_GC_Verifier object can be placed in methods where one assumes that
     // no garbage collection will occur. The destructor will verify this property
@@ -97,7 +97,7 @@ See: [here](../doxygen/classGC__locker.html) for details
 ### 内部構造(Internal structure)
 `#ifdef ASSERT` でなければ, 中身のないクラスとして定義される.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/gcLocker.hpp))
     #ifdef ASSERT
     ...
@@ -114,7 +114,7 @@ See: [here](../doxygen/classGC__locker.html) for details
 (なお, `#ifdef ASSERT` 時であっても, コンストラクタ引数が false であれば何もしない)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/gcLocker.cpp))
     #ifdef ASSERT
     
@@ -157,7 +157,7 @@ No_GC_Verifier の働きを一時的に無効化したい場合に使用する.
  このため, このクラスも `#ifdef ASSERT` 時でないと意味は無い.
  また, No_GC_Verifier オブジェクトのコンストラクタ引数が false である場合も意味は無い)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/gcLocker.hpp))
     // A Pause_No_GC_Verifier is used to temporarily pause the behavior
     // of a No_GC_Verifier object. If we are not in debug mode or if the
@@ -197,7 +197,7 @@ See: [here](../doxygen/classPause__No__GC__Verifier.html) for details
 (See: Thread::check_for_valid_safepoint_state())
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/gcLocker.hpp))
     // A No_Safepoint_Verifier object will throw an assertion failure if
     // the current thread passes a possible safepoint while this object is
@@ -213,7 +213,7 @@ See: [here](../doxygen/classPause__No__GC__Verifier.html) for details
 明示したいコード箇所で No_Safepoint_Verifier 型の局所変数を宣言するだけ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/classFileParser.cpp))
       {
         debug_only(No_Safepoint_Verifier nsv;)
@@ -235,7 +235,7 @@ See: [here](../doxygen/classPause__No__GC__Verifier.html) for details
 (なお, No_GC_Verifier のサブクラスなので, 以上に加えて No_GC_Verifier としての処理も行われる)
  
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/gcLocker.hpp))
     #ifdef ASSERT
       No_Safepoint_Verifier(bool activated = true, bool verifygc = true ) :
@@ -277,7 +277,7 @@ No_Safepoint_Verifier の働きを一時的に無効化したい場合に使用�
  ただし, このクラスは No_Safepoint_Verifier の No_GC_Verifier としての働きについては抑止しない.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/gcLocker.hpp))
     // A Pause_No_Safepoint_Verifier is used to temporarily pause the
     // behavior of a No_Safepoint_Verifier object. If we are not in debug
@@ -292,7 +292,7 @@ No_Safepoint_Verifier の働きを一時的に無効化したい場合に使用�
 ### 使われ方(Usage)
 コード中で Pause_No_Safepoint_Verifier 型の局所変数を宣言するだけ.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiRedefineClasses.cpp))
                 {
                   Pause_No_Safepoint_Verifier pnsv(&nsv);
@@ -310,7 +310,7 @@ No_Safepoint_Verifier の働きを一時的に無効化したい場合に使用�
 (No_Safepoint_Verifier とちょうど反対の挙動. (See: No_Safepoint_Verifier))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/gcLocker.hpp))
     #ifdef ASSERT
       Pause_No_Safepoint_Verifier(No_Safepoint_Verifier * nsv)
@@ -349,7 +349,7 @@ See: [here](../doxygen/classPause__No__Safepoint__Verifier.html) for details
 現行では, GC 処理中に (GCALot 機能によって) 再び GC 処理に再入してしまうのを防ぐために(のみ)使用されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/gcLocker.hpp))
     // A SkipGCALot object is used to elide the usual effect of gc-a-lot
     // over a section of execution by a thread. Currently, it's used only to
@@ -362,7 +362,7 @@ VMThread::execute() 内で,
 (GCALot により) VM operation 処理に再入するのを防ぐ為に使われている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vmThread.cpp))
     void VMThread::execute(VM_Operation* op) {
     ...
@@ -377,7 +377,7 @@ VMThread::execute() 内で,
 (これが true だと Thread::skip_gcalot() が true を返すようになる. (See: Thread::skip_gcalot()))
  
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/gcLocker.hpp))
     #ifdef ASSERT
         SkipGCALot(Thread* t) : _t(t) {
@@ -411,7 +411,7 @@ JRT_LEAF() マクロを用いて定義された関数について,
  _thread_in_native 状態の場合は, 他のスレッドが GC を発生させるのは問題ない.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/gcLocker.hpp))
     // JRT_LEAF currently can be called from either _thread_in_Java or
     // _thread_in_native mode. In _thread_in_native, it is ok
@@ -423,7 +423,7 @@ JRT_LEAF() マクロを用いて定義された関数について,
 JRT_LEAF() が満たすべき Safepoint に関する規則は以下の通り.
 このうち, JRT_Leaf_Verifier は 1~3 の規則をチェックする.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/gcLocker.cpp))
     // JRT_LEAF rules:
     // A JRT_LEAF method may not interfere with safepointing by
@@ -444,7 +444,7 @@ JRT_LEAF() が満たすべき Safepoint に関する規則は以下の通り.
 (JRT_LEAF() マクロの中で, JRT_Leaf_Verifier 型の局所変数が宣言されている).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/interfaceSupport.hpp))
     #define JRT_LEAF(result_type, header)                                \
       result_type header {                                               \
@@ -460,7 +460,7 @@ JRT_LEAF() が満たすべき Safepoint に関する規則は以下の通り.
  _thread_in_Java 状態なら true, _thread_in_native 状態なら false になる.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/gcLocker.cpp))
     JRT_Leaf_Verifier::JRT_Leaf_Verifier()
       : No_Safepoint_Verifier(true, JRT_Leaf_Verifier::should_verify_GC())
@@ -473,7 +473,7 @@ JRT_LEAF() が満たすべき Safepoint に関する規則は以下の通り.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/gcLocker.cpp))
     bool JRT_Leaf_Verifier::should_verify_GC() {
       switch (JavaThread::current()->thread_state()) {
@@ -506,7 +506,7 @@ See: [here](../doxygen/classJRT__Leaf__Verifier.html) for details
 「あるコード範囲でオブジェクトの確保処理が起きない」ということをコード上に明示したい場合に使用される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/gcLocker.hpp))
     // A No_Alloc_Verifier object can be placed in methods where one assumes that
     // no allocation will occur. The destructor will verify this property
@@ -532,7 +532,7 @@ See: [here](../doxygen/classJRT__Leaf__Verifier.html) for details
 (このフィールドが 1 以上だと Thread::allow_allocation() が false を返すようになる. (See: Thread::allow_allocation())
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/gcLocker.hpp))
     #ifdef ASSERT
       No_Alloc_Verifier(bool activated = true) {

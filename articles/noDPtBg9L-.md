@@ -26,7 +26,7 @@ JIT Compiler 内で JVM の「型」を扱うためのユーティリティ・�
 対応する oop を持つわけではないので ciObject という感じがあんまりしないが... #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciType.hpp))
     // ciType
     //
@@ -57,7 +57,7 @@ ciObjectFactory::init_shared_objects() 内で(のみ)行われている.
   (その ciType オブジェクトが表している型を示す)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciType.hpp))
       BasicType _basic_type;
 ```
@@ -83,7 +83,7 @@ JIT Compiler 内で returnAddress 型の値を扱うためのユーティリテ�
 bci が同じものに対しては同一の ciReturnAddress オブジェクトが返されるようになっている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciType.hpp))
     // ciReturnAddress
     //
@@ -116,7 +116,7 @@ ciObjectFactory::get_return_address() 内で(のみ)生成されている (= 初
   (リターン先のバイトコードを示す (= 要するに対応する jsr バイトコードの次のバイトコード))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciType.hpp))
       // The bci of this return address.
       int _bci;
@@ -126,7 +126,7 @@ ciObjectFactory::get_return_address() 内で(のみ)生成されている (= 初
 なお ciType としての型は T_ADDRESS.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciType.cpp))
     ciReturnAddress::ciReturnAddress(int bci) : ciType(T_ADDRESS) {
       assert(0 <= bci, "bci cannot be negative");

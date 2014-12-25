@@ -26,7 +26,7 @@ DTrace JSDT 用の機能を納めた名前空間(AllStatic クラス).
 DTrace JSDT 関係の機能は全てここに納められている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/dtraceJSDT.hpp))
     class DTraceJSDT : AllStatic {
 ```
@@ -75,7 +75,7 @@ DTraceJSDT::activate() で登録された内容を管理するためのクラス
  このため, DTraceJSDT::activate() の返値は RegisteredProbes オブジェクトそのもの)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/dtraceJSDT.hpp))
     class RegisteredProbes : public CHeapObj {
 ```

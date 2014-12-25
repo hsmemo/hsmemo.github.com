@@ -21,14 +21,14 @@ Symbol オブジェクトの生成も SymbolTable クラスのファクトリメ
 また, Symbol オブジェクトは GC ではなく独自の reference count によって管理されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/symbol.hpp))
     // A Symbol is a canonicalized string.
     // All Symbols reside in global SymbolTable and are reference counted.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/symbol.hpp))
     class Symbol : public CHeapObj {
 ```
@@ -51,7 +51,7 @@ SymbolTable クラス自体が `Hashtable<Symbol*>` のサブクラスなので�
 Symbol オブジェクトの削除は以下の reference counting によって行われている模様 (#TODO).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/symbol.hpp))
     // Reference counting
     //

@@ -26,13 +26,13 @@ title: CVMI 関数用の補助クラス (JVMTraceWrapper, JVMHistogramElement, R
 CVMI 関数が呼び出された際に, その関数名や引数を tty に出力するための一時オブジェクト(StackObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvm.cpp))
     #ifdef ASSERT
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvm.cpp))
       class JVMTraceWrapper : public StackObj {
 ```
@@ -44,7 +44,7 @@ JVMWrapper{|2|3|4} マクロ内で(のみ)使用されている.
  以下の #else 以降が #ifdef ASSERT でない場合)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvm.cpp))
       #define JVMWrapper(arg1)                    JVMCountWrapper(arg1); JVMTraceWrapper(arg1)
       #define JVMWrapper2(arg1, arg2)             JVMCountWrapper(arg1); JVMTraceWrapper(arg1, arg2)
@@ -62,7 +62,7 @@ JVMWrapper{|2|3|4} マクロ内で(のみ)使用されている.
 このため各 CVMI 関数が呼び出されると JVMTraceWrapper による出力が行われる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvm.cpp))
     JVM_ENTRY(jclass, JVM_DefineClass(JNIEnv *env, const char *name, jobject loader, const jbyte *buf, jsize len, jobject pd))
       JVMWrapper2("JVM_DefineClass %s", name);
@@ -74,7 +74,7 @@ JVMWrapper{|2|3|4} マクロ内で(のみ)使用されている.
 なお, このクラスは (デバッグ時であることに加えて) TraceJVMCalls オプションが指定されている場合にしか働かない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvm.cpp))
         JVMTraceWrapper(const char* format, ...) {
           if (TraceJVMCalls) {
@@ -105,13 +105,13 @@ See: [here](../doxygen/classJVMTraceWrapper.html) for details
 各 CVMI 関数が呼び出された回数を記録する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvm.cpp))
     #ifdef ASSERT
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvm.cpp))
       class JVMHistogramElement : public HistogramElement {
 ```
@@ -122,7 +122,7 @@ See: [here](../doxygen/classJVMTraceWrapper.html) for details
 #### インスタンスの格納場所(where its instances are stored)
 JVMHistogram という大域変数の Histogram オブジェクト内に(のみ)格納されている.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvm.cpp))
       Histogram* JVMHistogram;
 ```
@@ -130,7 +130,7 @@ JVMHistogram という大域変数の Histogram オブジェクト内に(のみ)
 #### 生成箇所(where its instances are created)
 JVMCountWrapper() マクロ内で(のみ)生成されている.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvm.cpp))
       #define JVMCountWrapper(arg) \
           static JVMHistogramElement* e = new JVMHistogramElement(arg); \
@@ -143,7 +143,7 @@ JVMCountWrapper() マクロ内で(のみ)生成されている.
  以下の #else 以降が #ifdef ASSERT でない場合)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvm.cpp))
       #define JVMWrapper(arg1)                    JVMCountWrapper(arg1); JVMTraceWrapper(arg1)
       #define JVMWrapper2(arg1, arg2)             JVMCountWrapper(arg1); JVMTraceWrapper(arg1, arg2)
@@ -161,7 +161,7 @@ JVMCountWrapper() マクロ内で(のみ)生成されている.
 このため各 CVMI 関数が呼び出されると JVMHistogramElement による呼び出し回数の記録処理が行われる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvm.cpp))
     JVM_ENTRY(jclass, JVM_DefineClass(JNIEnv *env, const char *name, jobject loader, const jbyte *buf, jsize len, jobject pd))
       JVMWrapper2("JVM_DefineClass %s", name);
@@ -187,7 +187,7 @@ JVM_GetStackAccessControlContext() 用) の補助クラス
 ある oop 配列を作業途中のあるスコープの中でだけ JavaThread オブジェクト内に格納しておきたい, という場合に使われる補助クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvm.cpp))
     class RegisterArrayForGC {
 ```
@@ -205,7 +205,7 @@ JVM_GetStackAccessControlContext() 用) の補助クラス
 デストラクタで (同じく JavaThread::register_array_for_gc() を呼んで) 元に戻している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvm.cpp))
       RegisterArrayForGC(JavaThread *thread, GrowableArray<oop>* array)  {
         _thread = thread;
@@ -232,7 +232,7 @@ CVMI 関数 (より具体的に言うと JVM_GetClassContext() 関数) の処理
  (See: JVM_GetClassContext()))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvm.cpp))
     // Utility object for collecting method holders walking down the stack
     class KlassLink: public ResourceObj {
@@ -242,7 +242,7 @@ CVMI 関数 (より具体的に言うと JVM_GetClassContext() 関数) の処理
 単なる構造体のようなクラス.
 内部には以下の2つの public フィールドのみを持つ (そしてメソッドはない).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvm.cpp))
       KlassHandle klass;
       KlassLink*  next;

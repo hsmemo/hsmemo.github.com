@@ -19,7 +19,7 @@ Java ヒープ中のオブジェクト(oop)のロック管理やハッシュ値�
 実際には oopDesc ではなく単なる word だが歴史的な事情により oop hierarchy に属している, とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/markOop.hpp))
     // The markOop describes the header of an object.
     //
@@ -28,7 +28,7 @@ Java ヒープ中のオブジェクト(oop)のロック管理やハッシュ値�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/markOop.hpp))
     class markOopDesc: public oopDesc {
 ```
@@ -37,7 +37,7 @@ Java ヒープ中のオブジェクト(oop)のロック管理やハッシュ値�
 全ての oopDesc の先頭 1 word 分の領域に埋め込まれている (See: oopDesc).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/oop.hpp))
     class oopDesc {
     ...
@@ -104,7 +104,7 @@ markOopDesc の 1 word は以下のように使用される. (#TODO CMS 時の�
   そのため hashcode が設定された場合は強制的に biased が解除される)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/markOop.hpp))
     // Bit-format of an object header (most significant first, big endian layout below):
     //

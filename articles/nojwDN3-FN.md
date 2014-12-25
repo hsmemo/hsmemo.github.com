@@ -27,7 +27,7 @@ ResourceObj (のサブクラス) のオブジェクトはこのクラスが管�
 なお, このクラス自身は Arena のサブクラスとして定義されている (See: Arena).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/resourceArea.hpp))
     //------------------------------ResourceArea-----------------------------------
     // A ResourceArea is an Arena that supports safe usage of ResourceMark.
@@ -50,7 +50,7 @@ ResourceObj オブジェクトの確保/開放をソースコード上のスコ�
 (参考: [Region-based memory management](http://en.wikipedia.org/wiki/Region-based_memory_management)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/resourceArea.hpp))
     //------------------------------ResourceMark-----------------------------------
     // A resource mark releases all resources allocated after it was constructed
@@ -68,7 +68,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 ResourceMark::initialize() を呼び出すだけ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/resourceArea.hpp))
       ResourceMark()               { initialize(Thread::current()); }
 ```
@@ -107,7 +107,7 @@ ResourceMark の類似品. Deoptimization 処理の中で使用される (See: D
   CHeapObj のサブクラス版である DeoptResourceMark を改めて作ることにした.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/resourceArea.hpp))
     //------------------------------DeoptResourceMark-----------------------------------
     // A deopt resource mark releases all resources allocated after it was constructed
@@ -146,7 +146,7 @@ ResourceMark の類似品. Deoptimization 処理の中で使用される (See: D
 各 JavaThread オブジェクトの _deopt_mark フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.hpp))
     class JavaThread: public Thread {
     ...
@@ -160,7 +160,7 @@ Deoptimization::fetch_unroll_info_helper() 内で(のみ)生成されている.
 (この時点で JavaThread::_deopt_mark フィールドにセットされる)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/deoptimization.cpp))
     Deoptimization::UnrollBlock* Deoptimization::fetch_unroll_info_helper(JavaThread* thread) {
     ...
@@ -176,7 +176,7 @@ Deoptimization::cleanup_deopt_info() 内で削除されている.
 (この時点で JavaThread::_deopt_mark フィールドも NULL に戻される)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/deoptimization.cpp))
     void Deoptimization::cleanup_deopt_info(JavaThread *thread,
                                             vframeArray *array) {

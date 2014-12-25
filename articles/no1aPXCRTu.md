@@ -27,7 +27,7 @@ ParallelScavengeHeap 用の MarkSweep クラス
 シングルスレッドでの Mark-Sweep-Compact 処理を実装している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psMarkSweep.hpp))
     class PSMarkSweep : public MarkSweep {
 ```
@@ -43,13 +43,13 @@ Major GC 処理はこのクラスの PSMarkSweep::invoke() メソッドが呼び
 ### 内部構造(Internal structure)
 内部には, Mark-Sweep-Compact 処理のための以下のようなメソッドが定義されている.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psMarkSweep.hpp))
       static void invoke(bool clear_all_softrefs);
       static void invoke_no_policy(bool clear_all_softrefs);
 ```
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psMarkSweep.hpp))
       // Mark live objects
       static void mark_sweep_phase1(bool clear_all_softrefs);
@@ -57,7 +57,7 @@ Major GC 処理はこのクラスの PSMarkSweep::invoke() メソッドが呼び
       static void mark_sweep_phase2();
 ```
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psMarkSweep.hpp))
       // Update pointers
       static void mark_sweep_phase3();
@@ -88,7 +88,7 @@ PSMarkSweep 用の AlwaysTrueClosure クラス
 このクラスは ParallelScavenge 用のソースファイルではなく全 MarkSweep 共通の部分で定義されるべき, とのこと)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psMarkSweep.cpp))
     // This should be moved to the shared markSweep code!
     class PSAlwaysTrueClosure: public BoolObjectClosure {
@@ -98,7 +98,7 @@ PSMarkSweep 用の AlwaysTrueClosure クラス
 #### インスタンスの格納場所(where its instances are stored)
 always_true という大域変数に(のみ)格納されている.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psMarkSweep.cpp))
     static PSAlwaysTrueClosure always_true;
 ```
@@ -114,7 +114,7 @@ PSMarkSweep::mark_sweep_phase3() 内で(のみ)使用されている.
 ### 内部構造(Internal structure)
 名前の通り, do_object_b() は常に true を返す.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psMarkSweep.cpp))
       void do_object(oop p) { ShouldNotReachHere(); }
       bool do_object_b(oop p) { return true; }

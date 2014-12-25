@@ -26,7 +26,7 @@ Thread クラスの _pending_exception フィールドにアクセスするた�
 (See: [here](no2114VSZ.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/exceptions.hpp))
     // The ThreadShadow class is a helper class to access the _pending_exception
     // field of the Thread class w/o having access to the Thread's interface (for
@@ -41,7 +41,7 @@ Thread オブジェクトを ThreadShadow にキャストしてから
 pending_exception() メソッド等を呼び出せばいい.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/exceptions.hpp))
     #define PENDING_EXCEPTION                        (((ThreadShadow*)THREAD)->pending_exception())
     #define HAS_PENDING_EXCEPTION                    (((ThreadShadow*)THREAD)->has_pending_exception())
@@ -52,7 +52,7 @@ pending_exception() メソッド等を呼び出せばいい.
 なお, 現状の実装では Thread クラス自体が ThreadShadow のサブクラスとなっている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.hpp))
     class Thread: public ThreadShadow {
 ```
@@ -81,7 +81,7 @@ See: [here](../doxygen/classThreadShadow.html) for details
 hotspot/src/share/vm/utilities/exceptions.hpp 内で定義されている (See: [here](no3059qOR.html) for details))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/exceptions.hpp))
     // Exceptions is a helper class that encapsulates all operations
     // that require access to the thread interface and which are
@@ -108,7 +108,7 @@ See: [here](../doxygen/classExceptions.html) for details
 (なお, 実際に使用される際には後述の EXCEPTION_MARK マクロという形で使用される)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/exceptions.hpp))
     // ExceptionMark is a stack-allocated helper class for local exception handling.
     // It is used with the EXCEPTION_MARK macro.
@@ -126,7 +126,7 @@ ExceptionMark オブジェクトを使用するための EXCEPTION_MARK とい�
 * そのスコープから出る際に, pending exception が存在していない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/exceptions.hpp))
     // Use an EXCEPTION_MARK for 'local' exceptions. EXCEPTION_MARK makes sure that no
     // pending exception exists upon entering its scope and tests that no pending exception
@@ -145,7 +145,7 @@ ExceptionMark オブジェクトを使用するための EXCEPTION_MARK とい�
 (もし空でなければ, fatal() や vm_exit_during_initialization() で HotSpot を異常終了させる.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/exceptions.cpp))
     ExceptionMark::ExceptionMark(Thread*& thread) {
       thread     = Thread::current();

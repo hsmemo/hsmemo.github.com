@@ -15,7 +15,7 @@ title: IndexSet クラス関連のクラス (IndexSet, IndexSet::BitBlock, Index
 なお, 現在はレジスタ割り当て処理で使用されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/indexSet.hpp))
     // This file defines the IndexSet class, a set of sparse integer indices.
     // This data structure is used by the compiler in its liveness analysis and
@@ -49,7 +49,7 @@ title: IndexSet クラス関連のクラス (IndexSet, IndexSet::BitBlock, Index
 より正確に言うと, uint 値 (ここでは "index" と呼んでいる) の集合(set)を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/indexSet.hpp))
     //-------------------------------- class IndexSet ----------------------------
     // An IndexSet is a piece-wise bitvector.  At the top level, we have an array
@@ -124,7 +124,7 @@ title: IndexSet クラス関連のクラス (IndexSet, IndexSet::BitBlock, Index
   BitBlock 数がこれ以下に収まるならこの配列が使用される (_blocks フィールド参照).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/indexSet.hpp))
       // When we allocate an IndexSet, it starts off with an array of top level block
       // pointers of a set length.  This size is intended to be large enough for the
@@ -138,7 +138,7 @@ title: IndexSet クラス関連のクラス (IndexSet, IndexSet::BitBlock, Index
 * ...(#TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/indexSet.hpp))
       // The number of elements in the set
       uint      _count;
@@ -175,7 +175,7 @@ IndexSet クラス用の補助クラス.
 実際の情報を格納しておくためのビットマップ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/indexSet.hpp))
       //------------------------------ class BitBlock ----------------------------
       // The BitBlock class is a segment of a bitvector set.
@@ -184,14 +184,14 @@ IndexSet クラス用の補助クラス.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/indexSet.hpp))
         // All of BitBlocks fields and methods are declared private.  We limit
         // access to IndexSet and IndexSetIterator.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/indexSet.hpp))
       // Elements of a IndexSet get decomposed into three fields.  The highest order
       // bits are the block index, which tell which high level block holds the element.
@@ -203,7 +203,7 @@ IndexSet クラス用の補助クラス.
 以下のような操作が可能.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/indexSet.hpp))
         // Operations.  A BitBlock supports four simple operations,
         // clear(), member(), insert(), and remove().  These methods do
@@ -213,7 +213,7 @@ IndexSet クラス用の補助クラス.
 なお, 未使用な BitBlock はフリーリストで管理されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/indexSet.hpp))
       // All IndexSets share an arena from which they allocate BitBlocks.  Unused
       // BitBlocks are placed on a free list.
@@ -258,7 +258,7 @@ IndexSet::populate_free_list()  内で(のみ)生成されている.
   (なお union 型なので _data._words と排他利用)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/indexSet.hpp))
         // A BitBlock is composed of some number of 32 bit words.  When a BitBlock
         // is not in use by any IndexSet, it is stored on a free list.  The next field
@@ -273,7 +273,7 @@ IndexSet::populate_free_list()  内で(のみ)生成されている.
 なお, 関連する定数は以下のように定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/indexSet.hpp))
       // The lengths of the index bitfields
       enum { bit_index_length = 5,
@@ -311,7 +311,7 @@ IndexSet 内の整数値をたどるためのイテレータクラス(ValueObj�
 (なお, このクラスは現状では局所変数としてのみ生成されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/indexSet.hpp))
     //-------------------------------- class IndexSetIterator --------------------
     // An iterator for IndexSets.
@@ -324,7 +324,7 @@ IndexSet 内の整数値をたどるためのイテレータクラス(ValueObj�
 実際に使用する際にはこんな感じになる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/chaitin.cpp))
           IndexSetIterator elements(s);
           uint lidx;

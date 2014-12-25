@@ -35,7 +35,7 @@ liveness analysis 処理中に使用される一時オブジェクト(ResourceOb
 実際の liveness analysis 処理を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/methodLiveness.hpp))
     class MethodLiveness : public ResourceObj {
 ```
@@ -57,7 +57,7 @@ liveness analysis 処理中に使用される一時オブジェクト(ResourceOb
 * ciMethod::bci_block_start() (C1 JIT Compiler の場合のみ)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciMethod.hpp))
       // Returns a bitmap indicating which locals are required to be
       // maintained as live for deopt.  raw_liveness_at_bci is always the
@@ -88,7 +88,7 @@ MethodLiveness はメソッド内の各バイトコード(bci = bytecode index)�
   * 例外のフローについては, 個別の命令単位ではなく basic block 単位でまとめてみている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/methodLiveness.cpp))
     // The MethodLiveness class performs a simple liveness analysis on a method
     // in order to decide which locals are live (that is, will be used again) at
@@ -144,7 +144,7 @@ MethodLiveness クラス内で使用される補助クラス.
 1つの MethodLiveness::BasicBlock オブジェクトが 1つの基本ブロックに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/methodLiveness.hpp))
       // The BasicBlock class is used to represent a basic block in the
       // liveness analysis.
@@ -166,7 +166,7 @@ MethodLiveness による解析結果を格納するためのクラス.
 内部的にはビットマップになっている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/methodLiveness.hpp))
     class MethodLivenessResult : public BitMap {
 ```
@@ -190,7 +190,7 @@ MethodLiveness クラス内で使用される補助クラス.
 なお, このクラスは (デバッグ時であることに加えて) TimeLivenessAnalysis オプションが指定されている場合にしか使用されない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/methodLiveness.cpp))
     //--------------------------------------------------------------------------
     // The BitCounter class is used for counting the number of bits set in

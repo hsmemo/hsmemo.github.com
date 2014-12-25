@@ -31,7 +31,7 @@ Barrier Set が dirty 化されるとともに,
 (See: [here](no2114EV0.html) and [here](no2935dGZ.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/dirtyCardQueue.hpp))
     // A ptrQueue whose elements are "oops", pointers to object heads.
     class DirtyCardQueue: public PtrQueue {
@@ -91,7 +91,7 @@ See: [here](../doxygen/classDirtyCardQueue.html) for details
 DirtyCardQueue クラス用の PtrQueueSet クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/dirtyCardQueue.hpp))
     class DirtyCardQueueSet: public PtrQueueSet {
 ```
@@ -144,7 +144,7 @@ DirtyCardQueue 内の card に対して何らかの処理を行う Closure ク�
 このため, スタック以外の箇所に確保する使い方も可能)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/dirtyCardQueue.hpp))
     // A closure class for processing card table entries.  Note that we don't
     // require these closure objects to be stack-allocated.
@@ -155,7 +155,7 @@ DirtyCardQueue 内の card に対して何らかの処理を行う Closure ク�
 使用する際には, do_card_ptr() メソッドをオーバーライドしたサブクラスを作ればいい.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/dirtyCardQueue.hpp))
       // Process the card whose card table entry is "card_ptr".  If returns
       // "false", terminate the iteration early.

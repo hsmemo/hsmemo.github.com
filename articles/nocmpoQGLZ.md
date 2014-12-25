@@ -16,7 +16,7 @@ JIT Compiler から各メソッド呼び出し箇所 (invoke*バイトコード)
 1つの ciCallProfile オブジェクトが 1つのメソッド呼び出し箇所に対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciCallProfile.hpp))
     // ciCallProfile
     //

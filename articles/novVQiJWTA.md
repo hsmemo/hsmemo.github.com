@@ -17,7 +17,7 @@ ciMethod クラス用の補助クラス.
 メソッドの型を表す文字列(Signature String)情報を管理するクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciSignature.hpp))
     // ciSignature
     //

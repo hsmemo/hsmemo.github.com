@@ -31,7 +31,7 @@ ClassLoader クラス内で使用される補助クラス.
 なお, クラスファイル内のデータを読み取る際には ClassFileStream クラスを使用している (See: ClassFileStream).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/classFileParser.hpp))
     // Parser for for .class files
     //
@@ -61,7 +61,7 @@ ClassFileParser クラス内で使用される補助クラス.
 パース中にインクリメントした Symbol の参照カウンタ(reference count)を元に戻すためのクラス (See: Symbol).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/classFileParser.cpp))
     // This class unreferences constant pool symbols if an error has occurred
     // while parsing the class before it is assigned into the class.
@@ -104,7 +104,7 @@ ClassFileParser クラス用の補助クラス.
  NameSigHash** というポインタの配列を作ることでハッシュ(chain hash)を構成する)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/classFileParser.cpp))
     class NameSigHash: public ResourceObj {
 ```
@@ -125,7 +125,7 @@ ClassFileParser クラス用の補助クラス.
     ハッシュ値を計算する (put_after_lookup() 内部で使用)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/classFileParser.cpp))
     unsigned int hash(Symbol* name, Symbol* sig) {
       unsigned int raw_hash = 0;
@@ -193,7 +193,7 @@ ClassFileParser クラス内で使用される補助クラス.
 データにフィールド名でアクセスできるようになりコードが分かりやすくなる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/classFileParser.cpp))
     // Class file LocalVariableTable elements.
     class Classfile_LVT_Element VALUE_OBJ_CLASS_SPEC {
@@ -205,7 +205,7 @@ ClassFileParser クラス内で使用される補助クラス.
 配列の index(idx という変数) をインクリメントしていくことで自然と次の要素にアクセスできる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/classFileParser.cpp))
         // To fill LocalVariableTable in
         Classfile_LVT_Element*  cf_lvt;
@@ -221,7 +221,7 @@ ClassFileParser クラス内で使用される補助クラス.
 フィールド名でアクセスできるのでコードが分かりやすくなっている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/classFileParser.cpp))
     void copy_lvt_element(Classfile_LVT_Element *src, LocalVariableTableElement *lvt) {
       lvt->start_bci           = Bytes::get_Java_u2((u1*) &src->start_bci);
@@ -257,7 +257,7 @@ LocalVariableTypeTable attribute の要素に対応する LocalVariableTable att
 (なお, このクラスは CHeapObj クラスだが ClassFileParser::parse_method() 内でしか使われないように見えるが... #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/classFileParser.cpp))
     class LVT_Hash: public CHeapObj {
 ```
@@ -287,7 +287,7 @@ clear_hashtable() 内で削除されている.
     ハッシュ値を計算する関数 (LVT_put_after_lookup() 内部等で使用)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/classFileParser.cpp))
     unsigned int hash(LocalVariableTableElement *elem) {
       unsigned int raw_hash = elem->start_bci;

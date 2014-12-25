@@ -15,7 +15,7 @@ title: arrayOopDesc クラス
 「Java の配列」を表すクラスの基底クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/arrayOop.hpp))
     // arrayOopDesc is the abstract baseclass for all arrays.  It doesn't
     // declare pure virtual to enforce this because that would allocate a vtbl
@@ -23,7 +23,7 @@ title: arrayOopDesc クラス
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/arrayOop.hpp))
     class arrayOopDesc : public oopDesc {
 ```
@@ -37,7 +37,7 @@ title: arrayOopDesc クラス
 スーパークラスである oopDesc クラスの mark フィールド(markOopDesc)と klass フィールドに加え, 配列長を示す length フィールドを持つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/arrayOop.hpp))
     // The layout of array Oops is:
     //

@@ -20,7 +20,7 @@ HotSpot 内部で使用するバイトコードの一覧を表すクラス (よ�
 (なお, Serviceability Agent のコード内にもこのクラスのクローンコードのようなものが存在している模様)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodes.hpp))
     // Bytecodes specifies all bytecodes used in the VM and
     // provides utility functions to get bytecode attributes.
@@ -33,7 +33,7 @@ HotSpot 内部で使用するバイトコードの一覧を表すクラス (よ�
 一覧は以下の通り.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodes.hpp))
         _illegal              =  -1,
     

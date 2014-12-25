@@ -27,7 +27,7 @@ CollectedMemoryPool クラスの具象サブクラスの1つ.
 このクラスは, ParallelScavenge 使用時の Old/Perm 領域用 (See: [here](no2114twV.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/psMemoryPool.hpp))
     class PSGenerationPool : public CollectedMemoryPool {
 ```
@@ -46,7 +46,7 @@ CollectedMemoryPool クラスの具象サブクラスの1つ.
 このクラスは, ParallelScavenge 使用時の Eden 領域用 (See: [here](no2114twV.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/psMemoryPool.hpp))
     class EdenMutableSpacePool : public CollectedMemoryPool {
 ```
@@ -65,7 +65,7 @@ CollectedMemoryPool クラスの具象サブクラスの1つ.
 このクラスは, ParallelScavenge 使用時の Survivor 領域用 (See: [here](no2114twV.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/psMemoryPool.hpp))
     class SurvivorMutableSpacePool : public CollectedMemoryPool {
 ```

@@ -27,7 +27,7 @@ title: AllocationProfiler クラス (AllocationProfiler, 及びその補助ク�
 クラス毎の生成されたインスタンスの合計数およびそれらの合計量(byte)を記録/出力する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/aprofiler.hpp))
     // A simple allocation profiler for Java. The profiler collects and prints
     // the number and total size of instances allocated per class, including
@@ -86,7 +86,7 @@ AllocationProfiler クラス内で使用される補助クラス.
 クラス毎の生成されたインスタンスの合計数およびそれらの合計量(byte)を各クラスオブジェクト内に記録する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/aprofiler.cpp))
     class AllocProfClosure : public ObjectClosure {
 ```
@@ -114,7 +114,7 @@ AllocationProfiler クラス内で使用される補助クラス.
 各クラスオブジェクト内の生成されたインスタンスの合計数およびそれらの合計量(byte)情報を 0 にリセットする.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/aprofiler.cpp))
     #ifndef PRODUCT
     

@@ -17,14 +17,14 @@ title: HSpaceCounters クラス
 G1GC で使用される「論理的な Space」に関する PerfData を格納しておくためのクラス
 (See: [here](no3718kvd.html) for details) (See: PerfData).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/hSpaceCounters.hpp))
     // A HSpaceCounter is a holder class for performance counters
     // that track a collections (logical spaces) in a heap;
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/hSpaceCounters.hpp))
     class HSpaceCounters: public CHeapObj {
 ```
@@ -39,7 +39,7 @@ G1GC で使用される「論理的な Space」に関する PerfData を格納�
 * 各 G1MonitoringSupport オブジェクトの _to_counters フィールド
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1MonitoringSupport.hpp))
     class G1MonitoringSupport : public CHeapObj {
     ...
@@ -57,7 +57,7 @@ G1GC で使用される「論理的な Space」に関する PerfData を格納�
 G1MonitoringSupport::G1MonitoringSupport() 内で(のみ)生成されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1MonitoringSupport.cpp))
     G1MonitoringSupport::G1MonitoringSupport(G1CollectedHeap* g1h,
                                              VirtualSpace* g1_storage_addr) :
@@ -96,7 +96,7 @@ G1MonitoringSupport::G1MonitoringSupport() 内で(のみ)生成されている.
 ### 内部構造(Internal structure)
 内部には, パフォーマンスカウンタとして使う PerfVariable 2 個を保持している.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/hSpaceCounters.hpp))
       PerfVariable*        _capacity;
       PerfVariable*        _used;
@@ -104,7 +104,7 @@ G1MonitoringSupport::G1MonitoringSupport() 内で(のみ)生成されている.
 
 これらの PerfVariable には, 対応するアクセサ関数に渡される値が記録される.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/hSpaceCounters.hpp))
       inline void update_capacity(size_t v) {
         _capacity->set_value(v);
@@ -133,7 +133,7 @@ G1MonitoringSupport::G1MonitoringSupport() 内で(のみ)生成されている.
   * sun.gc.generation.${n}.space.${m}.used
   * sun.gc.generation.${n}.space.${m}.initCapacity
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/hSpaceCounters.cpp))
         const char* cns =
           PerfDataManager::name_space(gc->name_space(), "space", ordinal);

@@ -69,7 +69,7 @@ Java ヒープ領域の管理を担当するクラス(CollectedHeapクラス)の
 このクラスは, GC アルゴリズムが G1GC の場合用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.hpp))
     class G1CollectedHeap : public SharedHeap {
 ```
@@ -156,7 +156,7 @@ Java ヒープ領域の管理を担当するクラス(CollectedHeapクラス)の
 
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.hpp))
       // Storage for the G1 heap (excludes the permanent generation).
       VirtualSpace _g1_storage;
@@ -187,7 +187,7 @@ Java ヒープ領域の管理を担当するクラス(CollectedHeapクラス)の
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.hpp))
       // The sequence of all heap regions in the heap.
       HeapRegionSeq* _hrs;
@@ -197,7 +197,7 @@ Java ヒープ領域の管理を担当するクラス(CollectedHeapクラス)の
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.hpp))
       // The to-space memory regions into which objects are being copied during
       // a GC.
@@ -221,7 +221,7 @@ Java ヒープ領域の管理を担当するクラス(CollectedHeapクラス)の
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.hpp))
       // Outside of GC pauses, the number of bytes used in all regions other
       // than the current allocation region.
@@ -254,7 +254,7 @@ Java ヒープ領域の管理を担当するクラス(CollectedHeapクラス)の
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.hpp))
       // Keeps track of how many "full collections" (i.e., Full GCs or
       // concurrent cycles) we have completed. The number of them we have
@@ -263,7 +263,7 @@ Java ヒープ領域の管理を担当するクラス(CollectedHeapクラス)の
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.hpp))
       // The number of regions allocated to hold humongous objects.
       int         _num_humongous_regions;
@@ -274,7 +274,7 @@ Java ヒープ領域の管理を担当するクラス(CollectedHeapクラス)の
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.hpp))
       // The g1 remembered set of the heap.
       G1RemSet* _g1_rem_set;
@@ -293,7 +293,7 @@ Java ヒープ領域の管理を担当するクラス(CollectedHeapクラス)の
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.hpp))
       // A DirtyCardQueueSet that is used to hold cards that contain
       // references into the current collection set. This is used to
@@ -303,7 +303,7 @@ Java ヒープ領域の管理を担当するクラス(CollectedHeapクラス)の
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.hpp))
       // The concurrent marker (and the thread it runs in.)
       ConcurrentMark* _cm;
@@ -321,7 +321,7 @@ Java ヒープ領域の管理を担当するクラス(CollectedHeapクラス)の
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.hpp))
       // When one is non-null, so is the other.  Together, they each pair is
       // an object with a preserved mark, and its mark value.
@@ -330,7 +330,7 @@ Java ヒープ領域の管理を担当するクラス(CollectedHeapクラス)の
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.hpp))
       // The stack of evac-failure objects left to be scanned.
       GrowableArray<oop>*    _evac_failure_scan_stack;
@@ -340,7 +340,7 @@ Java ヒープ領域の管理を担当するクラス(CollectedHeapクラス)の
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.hpp))
       // True iff an invocation of "drain_scan_stack" is in progress; to
       // prevent unnecessary recursion.
@@ -348,7 +348,7 @@ Java ヒープ領域の管理を担当するクラス(CollectedHeapクラス)の
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.hpp))
       // Instance of the concurrent mark is_alive closure for embedding
       // into the reference processor as the is_alive_non_header. This
@@ -361,7 +361,7 @@ Java ヒープ領域の管理を担当するクラス(CollectedHeapクラス)の
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.hpp))
       SubTasksDone* _process_strong_tasks;
     
@@ -369,7 +369,7 @@ Java ヒープ領域の管理を担当するクラス(CollectedHeapクラス)の
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.hpp))
       // The following is just to alert the verification code
       // that a full collection has occurred and that the
@@ -378,7 +378,7 @@ Java ヒープ領域の管理を担当するクラス(CollectedHeapクラス)の
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.hpp))
       // The dirty cards region list is used to record a subset of regions
       // whose cards need clearing. The list if populated during the
@@ -390,7 +390,7 @@ Java ヒープ領域の管理を担当するクラス(CollectedHeapクラス)の
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.hpp))
       size_t _max_heap_capacity;
 ```
@@ -412,7 +412,7 @@ G1CollectedHeap クラス用の補助クラス.
 このリストがある程度長くなると Minor GC 処理が開始される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.hpp))
     class YoungList : public CHeapObj {
 ```
@@ -459,7 +459,7 @@ See: [here](../doxygen/classYoungList.html) for details
 G1AllocRegion クラスの具象サブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.hpp))
     class MutatorAllocRegion : public G1AllocRegion {
 ```
@@ -488,7 +488,7 @@ Minor GC 中に各 GC Thread (GangWorker) がコピー先として使用する T
 (論文中では "GCLABs(GC thread local allocation buffers)").
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.hpp))
     class G1ParGCAllocBuffer: public ParGCAllocBuffer {
 ```
@@ -536,7 +536,7 @@ G1ParGCAllocBuffer がコピー先として使用している HeapRegion 内の�
 作業中に一時的に情報がここに蓄えられ, 適当な契機で ConcurrentMark 内にある mark bitmap (CMBitMap) に反映される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.hpp))
     class GCLabBitMap: public BitMap {
 ```
@@ -569,13 +569,13 @@ See: [here](../doxygen/classGCLabBitMap.html) for details
 ConcurrentMark オブジェクト内の mark bitmap が正しいかどうかのチェックを行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.hpp))
     #ifndef PRODUCT
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.hpp))
     class GCLabBitMapClosure: public BitMapClosure {
 ```
@@ -610,7 +610,7 @@ G1CollectedHeap の Minor GC 処理("Evacuation Pause" 処理)で使用される
   (OopsInHeapRegionClosure, G1ParScanHeapEvacClosure, G1ParScanPartialArrayClosure)
  
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.hpp))
     class G1ParScanThreadState : public StackObj {
 ```
@@ -634,7 +634,7 @@ G1CollectedHeap の Remembered Set の修正処理(= ConcurrentG1RefineThread �
 DirtyCardQueue 内の各 card に対して, 実際に Remembered Set の修正処理を行う Closure クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     class RefineCardTableEntryClosure: public CardTableEntryClosure {
 ```
@@ -665,7 +665,7 @@ See: [here](../doxygen/classRefineCardTableEntryClosure.html) for details
 ?? (このクラスは使用箇所が見当たらない...)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     class ClearLoggedCardTableEntryClosure: public CardTableEntryClosure {
 ```
@@ -687,7 +687,7 @@ See: [here](../doxygen/classClearLoggedCardTableEntryClosure.html) for details
 ?? (このクラスは使用箇所が見当たらない...)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     class RedirtyLoggedCardTableEntryClosure: public CardTableEntryClosure {
 ```
@@ -712,7 +712,7 @@ G1CollectedHeap::dirty_card_queue_set() 内の各 card について (= 処理が
 card の dirty 化を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     class RedirtyLoggedCardTableEntryFastClosure : public CardTableEntryClosure {
 ```
@@ -738,7 +738,7 @@ G1CollectedHeap の Major GC 処理で使用される Closure クラス (See: [h
 (Major GC の処理後に) 全ての HeapRegion の Remembered Set 情報をリセットするための Closure クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     class PostMCRemSetClearClosure: public HeapRegionClosure {
 ```
@@ -759,7 +759,7 @@ See: [here](../doxygen/classPostMCRemSetClearClosure.html) for details
 ?? (このクラスは使用箇所が見当たらない...)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     class PostMCRemSetInvalidateClosure: public HeapRegionClosure {
 ```
@@ -779,7 +779,7 @@ G1CollectedHeap の Major GC 処理で使用される補助クラス (See: [here
 (Major GC の処理後に) 全ての HeapRegion の Remembered Set 情報を作成し直すための Closure クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     class RebuildRSOutOfRegionClosure: public HeapRegionClosure {
 ```
@@ -809,7 +809,7 @@ G1CollectedHeap の Major GC 処理で使用される補助クラス (See: [here
 (Major GC の処理後に) 全ての HeapRegion の Remembered Set 情報を作成し直すための AbstractGangTask クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     class ParRebuildRSTask: public AbstractGangTask {
 ```
@@ -836,7 +836,7 @@ G1CollectedHeap の Minor GC 処理("Evacuation Pause" 処理)および Major GC
 ヒープ中の生きているオブジェクトの合計量 (byte 数) を計算する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     class SumUsedClosure: public HeapRegionClosure {
 ```
@@ -859,7 +859,7 @@ See: [here](../doxygen/classSumUsedClosure.html) for details
 生きているオブジェクトが存在する HeapRegion の個数を調べる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     #ifndef PRODUCT
     class SumUsedRegionsClosure: public HeapRegionClosure {
@@ -885,7 +885,7 @@ G1CollectedHeap の処理で使用される補助クラス.
 指定された OopClosure をある HeapRegion 内の全てのポインタフィールドに対して適用する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     // Iterates an OopClosure over all ref-containing fields of objects
     // within a HeapRegion.
@@ -915,7 +915,7 @@ G1CollectedHeap の処理で使用される補助クラス.
 指定された ObjectClosure をある HeapRegion 内の全てのオブジェクトに対して適用する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     // Iterates an ObjectClosure over all objects within a HeapRegion.
     
@@ -941,7 +941,7 @@ G1CollectedHeap の処理で使用される補助クラス.
 指定された SpaceClosure をある HeapRegion に対して適用する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     // Calls a SpaceClosure on a HeapRegion.
     
@@ -967,7 +967,7 @@ G1CollectedHeap の Major GC 処理で使用される補助クラス (See: [here
 をリセットするための Closure クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     class ResetClaimValuesClosure: public HeapRegionClosure {
 ```
@@ -991,7 +991,7 @@ See: [here](../doxygen/classResetClaimValuesClosure.html) for details
 及び Humongous 情報が正しいかどうかのチェックを行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     #ifdef ASSERT
     // This checks whether all regions in the heap have the correct claim
@@ -1021,7 +1021,7 @@ VerifyObjsInRegionClosure クラス内で使用される補助クラス(Closure�
 処理対象のオブジェクトが生きていることをチェックする.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     class VerifyLivenessOopClosure: public OopClosure {
 ```
@@ -1046,7 +1046,7 @@ VerifyRegionClosure クラス内で使用される補助クラス(Closureクラ�
 また, Concurrent Mark 開始時以前に確保されたオブジェクトの中で現在も生きているものの量(byte 数)も計算している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     class VerifyObjsInRegionClosure: public ObjectClosure {
 ```
@@ -1067,7 +1067,7 @@ See: [here](../doxygen/classVerifyObjsInRegionClosure.html) for details
 ?? (このクラスは使用箇所が見当たらない...)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     class PrintObjsInRegionClosure : public ObjectClosure {
 ```
@@ -1087,7 +1087,7 @@ See: [here](../doxygen/classPrintObjsInRegionClosure.html) for details
 HeapRegion が正しい状態になっていることをチェックするための Closure クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     class VerifyRegionClosure: public HeapRegionClosure {
 ```
@@ -1112,7 +1112,7 @@ See: [here](../doxygen/classVerifyRegionClosure.html) for details
 root から指されている先が生きていることをチェックするための Closure クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     class VerifyRootsClosure: public OopsInGenClosure {
 ```
@@ -1135,7 +1135,7 @@ See: [here](../doxygen/classVerifyRootsClosure.html) for details
 HeapRegion が正しい状態になっていることをチェックするための AbstractGangTask クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     // This is the task used for parallel heap verification.
     
@@ -1160,7 +1160,7 @@ See: [here](../doxygen/classG1ParVerifyTask.html) for details
 処理対象の HeapRegion の情報を出力する Closure クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     class PrintRegionClosure: public HeapRegionClosure {
 ```
@@ -1189,7 +1189,7 @@ See: [here](../doxygen/classPrintRegionClosure.html) for details
 Concurrent Marking 処理の結果が正しいことをチェックするための Closure クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     class VerifyMarkedObjsClosure: public ObjectClosure {
 ```
@@ -1210,7 +1210,7 @@ See: [here](../doxygen/classVerifyMarkedObjsClosure.html) for details
 デバッグ用(開発時用)のクラス (#ifdef G1_DEBUG 時にしか定義されない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     #ifdef G1_DEBUG
     class FindGCAllocRegion: public HeapRegionClosure {
@@ -1235,7 +1235,7 @@ G1CollectedHeap の Minor GC 処理("Evacuation Pause" 処理)で使用される
 G1IsAliveClosure::do_object_b() メソッドが呼ばれると, 処理対象のオブジェクトが生きているかどうかを返す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     class G1IsAliveClosure: public BoolObjectClosure {
 ```
@@ -1260,7 +1260,7 @@ G1CollectedHeap の Minor GC 処理("Evacuation Pause" 処理)で使用される
 さらに元の場所にフォワーディングポインタを埋める処理を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     class G1KeepAliveClosure: public OopClosure {
 ```
@@ -1287,7 +1287,7 @@ Minor GC がメモリ不足で失敗した場合に,
 G1DeferredRSUpdate オプションが false の場合には, 代わりに UpdateRSetImmediate クラスが使用される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     class UpdateRSetDeferred : public OopsInHeapRegionClosure {
 ```
@@ -1311,7 +1311,7 @@ Minor GC がメモリ不足で失敗した場合に,
 コピーできなかったオブジェクトについて, markbit や Remembered Set 情報を作成し直す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     class RemoveSelfPointerClosure: public ObjectClosure {
 ```
@@ -1334,7 +1334,7 @@ G1CollectedHeap の Minor GC 処理("Evacuation Pause" 処理)で使用される
 処理したオブジェクトから辿れる範囲全てについて再帰的に処理を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     class G1ParEvacuateFollowersClosure : public VoidClosure {
 ```
@@ -1357,7 +1357,7 @@ G1CollectedHeap の Minor GC 処理("Evacuation Pause" 処理)で使用される
 実際の Minor GC 処理("Evacuation Pause" 処理) を行う AbstractGangTask クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     class G1ParTask : public AbstractGangTask {
 ```
@@ -1380,7 +1380,7 @@ G1CollectedHeap の Minor GC 処理("Evacuation Pause" 処理)で使用される
 (Minor GC の処理前に) 全ての HeapRegion の top 位置を記録しておく(save_marks)ための Closure クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     class SaveMarksClosure: public HeapRegionClosure {
 ```
@@ -1412,7 +1412,7 @@ G1CollectedHeap の Minor GC 処理("Evacuation Pause" 処理)で使用される
 (ついでに, Survivor として使われている HeapRegion の Barrier Set を dirty 化する処理も行っている).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     class G1ParCleanupCTTask : public AbstractGangTask {
 ```
@@ -1445,7 +1445,7 @@ See: [here](../doxygen/classG1ParCleanupCTTask.html) for details
 * その他の HeapRegion は, 対応する Barrier Set がクリアされている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     #ifndef PRODUCT
     class G1VerifyCardTableCleanup: public HeapRegionClosure {
@@ -1469,7 +1469,7 @@ See: [here](../doxygen/classG1VerifyCardTableCleanup.html) for details
 処理対象の HeapRegion が New 領域に含まれていない(= HeapRegion::_young_type が NotYoung である)ことをチェックする.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     class NoYoungRegionsClosure: public HeapRegionClosure {
 ```
@@ -1505,7 +1505,7 @@ G1CollectedHeap の処理で使用される補助クラス.
 MasterFreeRegionList や MasterHumongousRegionSet を再構築するための Closure クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     class RegionResetter: public HeapRegionClosure {
 ```
@@ -1528,7 +1528,7 @@ See: [here](../doxygen/classRegionResetter.html) for details
 MasterFreeRegionList や MasterHumongousRegionSet が正しい状態になっていることをチェックするための Closure クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     // Heap region set verification
     
@@ -1554,7 +1554,7 @@ HEAP_REGION_SET_FORCE_VERIFY は, デフォルトだと #ifdef ASSERT 時にの�
 (このため #ifdef HEAP_REGION_SET_FORCE_VERIFY は #ifdef ASSERT と同義).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionSet.hpp))
     // Set verification will be forced either if someone defines
     // HEAP_REGION_SET_FORCE_VERIFY to be 1, or in builds in which

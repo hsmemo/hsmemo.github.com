@@ -15,7 +15,7 @@ title: typeArrayKlassKlass クラス
 typeArrayKlass 用の Klass クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/typeArrayKlassKlass.hpp))
     // A typeArrayKlassKlass is the klass of a typeArrayKlass
     

@@ -31,7 +31,7 @@ Concurrent Marking Thread の動作中に Java プログラムによってポイ
 (See: [here](no2114EV0.html) and [here](no2935d4w.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/satbQueue.hpp))
     // A ptrQueue whose elements are "oops", pointers to object heads.
     class ObjPtrQueue: public PtrQueue {
@@ -79,7 +79,7 @@ Concurrent Marking 処理中に変更されたポインタフィールドの値�
 ここに蓄積されたポインタ情報は Concurrent Marking の調査対象になる (See: [here](no2935d4w.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/satbQueue.hpp))
     class SATBMarkQueueSet: public PtrQueueSet {
 ```

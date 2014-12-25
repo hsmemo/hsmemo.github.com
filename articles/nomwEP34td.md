@@ -12,7 +12,7 @@ title: vframe クラス関連のクラス (vframe, javaVFrame, interpretedVFrame
 なお, これらのクラスは以下のような継承関係を持つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vframe.hpp))
     // The vframe inheritance hierarchy:
     // - vframe
@@ -58,7 +58,7 @@ vframe は Java レベルのメソッドと 1対1対応するような論理的�
 (つまり, 実際のスタックフレームとは1対1対応しないことがある).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vframe.hpp))
     // vframes are virtual stack frames representing source level activations.
     // A single frame may hold several source level activations in the case of
@@ -68,7 +68,7 @@ vframe は Java レベルのメソッドと 1対1対応するような論理的�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vframe.hpp))
     class vframe: public ResourceObj {
 ```
@@ -92,7 +92,7 @@ vframe クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vframe.hpp))
     class javaVFrame: public vframe {
 ```
@@ -110,7 +110,7 @@ vframe クラスのサブクラスの1つ.
  「これは JVMTI によるデバッグ機能のためのもので JIT 生成コードのフレームには効かないことに注意」とのこと)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vframe.hpp))
       // JVM state
       virtual methodOop                    method()         const = 0;
@@ -141,7 +141,7 @@ javaVFrame クラスの具象サブクラスの1つ.
 このクラスは, Interpreter 実行されているメソッドのスタックフレーム用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vframe.hpp))
     class interpretedVFrame: public javaVFrame {
 ```
@@ -286,7 +286,7 @@ vframe クラスの具象サブクラスの1つ.
  Java のメソッドによるスタックフレームについては javaVFrame が担当する)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vframe.hpp))
     class externalVFrame: public vframe {
 ```
@@ -430,7 +430,7 @@ See: [here](../doxygen/classexternalVFrame.html) for details
 (おそらく JavaCalls が生成する entry frame (dummy frame) 用のクラスだと思われる).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vframe.hpp))
     class entryVFrame: public externalVFrame {
 ```
@@ -454,7 +454,7 @@ HotSpot 内でのスレッド管理用のユーティリティ・クラス.
 Platform MXBean の java.lang.management.MonitorInfo クラスを実装するという役割もある模様.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vframe.hpp))
     // A MonitorInfo is a ResourceObject that describes a the pair:
     // 1) the owner of the monitor
@@ -555,7 +555,7 @@ Platform MXBean の java.lang.management.MonitorInfo クラスを実装すると
 (そして, メソッドはこれらのフィールドへの getter メソッド(アクセサメソッド)のみ).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vframe.hpp))
       oop        _owner; // the object owning the monitor
       BasicLock* _lock;
@@ -579,7 +579,7 @@ See: [here](../doxygen/classMonitorInfo.html) for details
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vframe.hpp))
     class vframeStreamCommon : StackObj {
 ```
@@ -597,7 +597,7 @@ See: [here](../doxygen/classvframeStreamCommon.html) for details
 vframeStreamCommon の具象サブクラスの 1つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vframe.hpp))
     class vframeStream : public vframeStreamCommon {
 ```

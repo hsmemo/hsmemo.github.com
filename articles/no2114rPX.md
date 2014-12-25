@@ -14,7 +14,7 @@ title: Class のロード/リンク/初期化 ： ロード処理(Loading)
  systemDictionary への klassOop の登録はやってくれないため, 呼び出し元が行う必要がある).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/classFileParser.hpp))
       // Parse .class file and return new klassOop. The klassOop is not hooked up
       // to the system dictionary or any other structures, so a .class file can

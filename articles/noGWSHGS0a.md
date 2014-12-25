@@ -22,7 +22,7 @@ jfieldID の生成や jfieldID から対応するフィールドへの変換を�
 (なお, static フィールドの場合は JNIid オブジェクトも併用される (See: JNIid))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/jfieldIDWorkaround.hpp))
     class jfieldIDWorkaround: AllStatic {
 ```

@@ -23,12 +23,12 @@ title: ThreadLocalStorage クラス
 ThreadLocalStorage::thread() (もしくは ThreadLocalStorage::get_thread_slow()) するためだけのクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/threadLocalStorage.hpp))
     // Interface for thread local storage
 ```
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/threadLocalStorage.hpp))
     class ThreadLocalStorage : AllStatic {
 ```
@@ -81,7 +81,7 @@ TLS 内に記録した情報は,
 (ちなみに 64bit 版でやろうとするとスタック領域を 2MB page にしても最大 512MB. 流石に無理か...)
 
 
-```
+```cpp
     ((cite: hotspot/src/os_cpu/linux_x86/vm/threadLS_linux_x86.cpp))
     // Map stack pointer (%esp) to thread pointer for faster TLS access
     //

@@ -32,7 +32,7 @@ Template Interpreter は以下の 3つの dispatch table を持つ.
  (See: TemplateInterpreter::notice_safepoints(), TemplateInterpreter::ignore_safepoints())).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/templateInterpreter.hpp))
       static DispatchTable _active_table;                           // the active    dispatch table (used by the interpreter for dispatch)
       static DispatchTable _normal_table;                           // the normal    dispatch table (used to set the active table in normal mode)

@@ -30,7 +30,7 @@ strong roots から参照されているポインタに対して Scavenge 処理
 このクラスはそれ以外の strong roots 用 (See: ThreadRootsTask)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psTasks.hpp))
     // ScavengeRootsTask
     //
@@ -47,7 +47,7 @@ PSScavenge::invoke_no_policy() 内で(のみ)使用されている (See: [here](
 ### 内部構造(Internal structure)
 このクラスが処理する strong roots には以下のような種別が存在する (要は「スレッドのスタック内以外の全て」ということだが...).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psTasks.hpp))
       enum RootType {
         universe              = 1,
@@ -79,7 +79,7 @@ strong roots から参照されているポインタに mark を付ける
 それ以外の strong roots は ScavengeRootsTask で処理する (See: ScavengeRootsTask)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psTasks.hpp))
     // ThreadRootsTask
     //
@@ -111,7 +111,7 @@ ParallelScavengeHeap に対する Minor GC 処理で使用される補助クラ�
 (この GCTask 自体は, 全ての GCTaskThread に仕事がなくなった時に終了する).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psTasks.hpp))
     // StealTask
     //
@@ -142,7 +142,7 @@ ParallelScavengeHeap に対する Minor GC 処理で使用される補助クラ�
 Perm 領域から Young 領域を指しているポインタの Scavenge 処理を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psTasks.hpp))
     // SerialOldToYoungRootsTask
     //
@@ -168,7 +168,7 @@ ParallelScavengeHeap に対する Minor GC 処理で使用される補助クラ�
 Old 領域から Young 領域を指しているポインタの Scavenge 処理を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psTasks.hpp))
     // OldToYoungRootsTask
     //
@@ -185,7 +185,7 @@ Old 領域は量が多いため,
 stripe_number という数字で Old 領域内を複数に分割し, 
 複数の GCTaskThread で並列処理できるようにしている.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psTasks.hpp))
       OldToYoungRootsTask(PSOldGen *gen, HeapWord* gen_top, uint stripe_number) :
         _gen(gen), _gen_top(gen_top), _stripe_number(stripe_number) { }

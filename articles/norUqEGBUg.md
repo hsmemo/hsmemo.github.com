@@ -33,7 +33,7 @@ JVMTI の関数 (より具体的に言うと, GenerateEvents() 関数) のため
     (CompiledMethodLoad イベントのハンドラに渡す jvmtiAddrLocationMap 型引数を計算する)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiCodeBlobEvents.hpp))
     // JVMTI code blob event support
     // -- used by GenerateEvents to generate CompiledMethodLoad and
@@ -75,7 +75,7 @@ JVMTI の関数 (より具体的に言うと, GenerateEvents() 関数) のため
     JVMTI の CompiledMethodLoad イベントのハンドラに渡す jvmtiAddrLocationMap 型の引数の値 (およびその長さ)を計算する補助関数.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiCodeBlobEvents.hpp))
       // generate a DYNAMIC_CODE_GENERATED_EVENT event for each non-nmethod
       // code blob in the code cache.
@@ -111,7 +111,7 @@ CodeCache::blobs_do() の iterate 処理に使う関数には自由変数的な�
 そのため, 情報を蓄える先を static 変数にして CodeCache::blobs_do() 内からでも見えるようにしている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiCodeBlobEvents.cpp))
     // Support class to collect a list of the non-nmethod CodeBlobs in
     // the CodeCache.
@@ -146,7 +146,7 @@ JvmtiCodeBlobEvents::generate_dynamic_code_events() 内で(のみ)使用され�
 最終的な計算結果は _code_blobs という配列に蓄えられる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiCodeBlobEvents.cpp))
       GrowableArray<JvmtiCodeBlobDesc*>* _code_blobs;   // collected blobs
       int _pos;                                         // iterator position

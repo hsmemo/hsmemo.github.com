@@ -25,7 +25,7 @@ oopDesc オブジェクトの種別(「クラス」)を表すためのクラス
 (See: Klass).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/klassOop.hpp))
     // A klassOop is the C++ equivalent of a Java class.
     // Part of a klassOopDesc is a Klass which handle the
@@ -33,7 +33,7 @@ oopDesc オブジェクトの種別(「クラス」)を表すためのクラス
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/klassOop.hpp))
     class klassOopDesc : public oopDesc {
 ```
@@ -57,7 +57,7 @@ oopDesc オブジェクトの種別(「クラス」)を表すためのクラス
     klassOopDesc::klass_part() でアクセスできる (あるいはそのラッパーである Klass::cast() でもいい))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/klassOop.hpp))
     //  klassOop object layout:
     //    [header     ]
@@ -81,7 +81,7 @@ klassOopDesc から Klass を取得するには,
 Klass::cast() (または, Klass::cast() が内側で呼んでいる klassOopDesc::klass_part()) を使えばいい.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/klass.hpp))
       // Casting
       static Klass* cast(klassOop k) {

@@ -28,7 +28,7 @@ SystemDictionary クラス内で使用される補助クラス (See: SystemDicti
 SystemDictionary が管理するクラス情報を入れておくハッシュテーブル.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/dictionary.hpp))
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // The data structure for the system dictionary (and the shared system
@@ -50,7 +50,7 @@ SystemDictionary が管理するクラス情報を入れておくハッシュテ
   (shared archive から取得したクラス用 (なお, shared archive とは Class Data Sharing (CDS) の領域のこと))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/systemDictionary.hpp))
       // Hashtable holding loaded classes.
       static Dictionary*            _dictionary;
@@ -90,7 +90,7 @@ Java の "ProtectionDomain" 情報を管理するためのクラス.
 そして, 既にロード済みのクラスと protection_domain が合わなければ例外を出す)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/dictionary.hpp))
     // The following classes can be in dictionary.cpp, but we need these
     // to be in header file so that SA's vmStructs can access.
@@ -105,7 +105,7 @@ Java の "ProtectionDomain" 情報を管理するためのクラス.
 _protection_domain フィールドに, 実際の java.security.ProtectionDomain オブジェクトが入る.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/dictionary.hpp))
       ProtectionDomainEntry* _next;
       oop                    _protection_domain;
@@ -137,7 +137,7 @@ Dictionary クラス内で使用される補助クラス.
 Dictionary オブジェクト内に格納されるハッシュテーブル・エントリ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/dictionary.hpp))
     // An entry in the system dictionary, this describes a class as
     // { klassOop, loader, protection_domain }.
@@ -159,7 +159,7 @@ Dictionary オブジェクト内に格納されるハッシュテーブル・エ
 (なお, 実際のクラスオブジェクトはスーパークラスである HashtableEntry のフィールド中に格納されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/dictionary.hpp))
       // Contains the set of approved protection domains that can access
       // this system dictionary entry.
@@ -183,7 +183,7 @@ java.lang.invoke.MethodHandle.invoke() の処理用のハッシュテーブル.
 メソッド名と型(Signature String)を表す Symbol オブジェクトをキーとして対応する methodOopDesc を引くことが出来る.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/dictionary.hpp))
     // A system-internal mapping of symbols to pointers, both managed
     // and unmanaged.  Used to record the auto-generation of each method
@@ -216,7 +216,7 @@ SymbolPropertyTable クラス内で使用される補助クラス.
 SymbolPropertyTable オブジェクト内に格納されるハッシュテーブル・エントリ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/dictionary.hpp))
     // Entry in a SymbolPropertyTable, mapping a single Symbol*
     // to a managed and an unmanaged pointer.

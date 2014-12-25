@@ -23,7 +23,7 @@ vframe クラス関連のクラス (具体的には interpretedVFrame, compiledV
 * 1つのスタックフレーム上のオペランドスタック内にある値全体
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/stackValueCollection.hpp))
     class StackValueCollection : public ResourceObj {
 ```

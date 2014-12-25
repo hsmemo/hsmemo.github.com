@@ -12,7 +12,7 @@ title: MemoryPool クラス関連のクラス (MemoryPool, CollectedMemoryPool, 
 (See: [here](no211477i.html) for details)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryPool.hpp))
     // A memory pool represents the memory area that the VM manages.
     // The Java virtual machine has at least one memory pool
@@ -46,7 +46,7 @@ title: MemoryPool クラス関連のクラス (MemoryPool, CollectedMemoryPool, 
 全ての MemoryPool クラスの基底クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryPool.hpp))
     class MemoryPool : public CHeapObj {
 ```
@@ -54,7 +54,7 @@ title: MemoryPool クラス関連のクラス (MemoryPool, CollectedMemoryPool, 
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryPool.hpp))
       virtual MemoryUsage get_memory_usage() = 0;
 ```
@@ -74,7 +74,7 @@ MemoryPool クラスのサブクラスの1つ (See: [here](no2114twV.html) and [
 このクラスは, CollectedHeap の領域用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryPool.hpp))
     class CollectedMemoryPool : public MemoryPool {
 ```
@@ -96,7 +96,7 @@ CollectedMemoryPool クラスの具象サブクラスの1つ.
 このクラスは, GenCollectedHeap 使用時の Eden 領域(等)用 (See: [here](no2114twV.html) and [here](no211477i.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryPool.hpp))
     class ContiguousSpacePool : public CollectedMemoryPool {
 ```
@@ -116,7 +116,7 @@ CollectedMemoryPool クラスの具象サブクラスの1つ.
 このクラスは, GenCollectedHeap 使用時の Survivor 領域用 (See: [here](no2114twV.html) and [here](no211477i.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryPool.hpp))
     class SurvivorContiguousSpacePool : public CollectedMemoryPool {
 ```
@@ -136,7 +136,7 @@ CollectedMemoryPool クラスの具象サブクラスの1つ.
 このクラスは, CMS 使用時の Old 領域および Perm 領域用 (See: [here](no2114twV.html) and [here](no211477i.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryPool.hpp))
     class CompactibleFreeListSpacePool : public CollectedMemoryPool {
 ```
@@ -156,7 +156,7 @@ CollectedMemoryPool クラスの具象サブクラスの1つ.
 このクラスは, MarkSweepCompact (= Serial Old) 使用時の Old 領域用 (See: [here](no2114twV.html) and [here](no211477i.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryPool.hpp))
     class GenerationPool : public CollectedMemoryPool {
 ```
@@ -176,7 +176,7 @@ MemoryPool クラスの具象サブクラスの1つ.
 このクラスは, CodeHeap が使用するメモリ領域用 (See: [here](no2114twV.html) and [here](no211477i.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryPool.hpp))
     class CodeHeapPool: public MemoryPool {
 ```

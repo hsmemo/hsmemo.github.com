@@ -32,7 +32,7 @@ JVMTI の関数 (より具体的に言うと, RawMonitor 関係の関数) を実
  RawMonitor が (再帰的な確保が可能等) ObjectMonitor によく似た性質を持っているため?? #TODO).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiRawMonitor.hpp))
     // class JvmtiRawMonitor
     //
@@ -74,7 +74,7 @@ JvmtiPendingMonitors 内に溜められていた JvmtiRawMonitor オブジェク
 初期化が終わってメインスレッドを表す JavaThread ができた段階で, その JavaThread へと引き継がれる.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiRawMonitor.hpp))
     // Onload pending raw monitors
     // Class is used to cache onload or onstart monitor enter
@@ -100,7 +100,7 @@ JvmtiPendingMonitors 内に溜められていた JvmtiRawMonitor オブジェク
 内部では GrowableArray<JvmtiRawMonitor*> で JvmtiRawMonitor を管理している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiRawMonitor.hpp))
       static GrowableArray<JvmtiRawMonitor*> *_monitors; // Cache raw monitor enter
 ```

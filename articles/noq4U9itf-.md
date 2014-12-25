@@ -26,7 +26,7 @@ os::fetch_frame_from_context(void* ucVoid, intptr_t** sp, intptr_t** fp) の返�
  (ByteSize クラスや WordSize クラスのように) バグを防ぐ効果があるのかもしれない (#TODO))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/extendedPC.hpp))
     // An ExtendedPC contains the _pc from a signal handler in a platform
     // independent way.
@@ -97,7 +97,7 @@ os::fetch_frame_from_context(void* ucVoid, intptr_t** sp, intptr_t** fp) の返�
 (そして, メソッドはこのフィールドへの getter メソッド(アクセサメソッド)のみ).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/extendedPC.hpp))
       address _pc;
 ```

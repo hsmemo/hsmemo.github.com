@@ -31,7 +31,7 @@ title: VirtualSpace クラス関連のクラス (ReservedSpace, ReservedHeapSpac
 (まぁ Linux とかならあまり関係ないけど...))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/virtualspace.hpp))
     // ReservedSpace is a data structure for reserving a contiguous address range.
     
@@ -90,7 +90,7 @@ See: [here](../doxygen/classReservedSpace.html) for details
  0 スタートの領域の予約を試みたり, 駄目だった場合は先頭ページにプロテクションを張ったりする) (See: [here](no289165bb.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/virtualspace.hpp))
     // Class encapsulating behavior specific of memory space reserved for Java heap
     class ReservedHeapSpace : public ReservedSpace {
@@ -125,7 +125,7 @@ CodeHeap クラス内で使用される補助クラス.
 (といってもあまり違いはなく, 実行属性が true になっている程度).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/virtualspace.hpp))
     // Class encapsulating behavior specific memory space for Code
     class ReservedCodeSpace : public ReservedSpace {
@@ -154,7 +154,7 @@ See: [here](../doxygen/classReservedCodeSpace.html) for details
 (なお, コミット対象のメモリ空間の予約は ReservedSpace で行う)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/virtualspace.hpp))
     // VirtualSpace is data structure for committing a previously reserved address range in smaller chunks.
     

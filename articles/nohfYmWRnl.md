@@ -92,7 +92,7 @@ hotspot/src/share/vm/ci/compilerInterface.hpp	   | (空のファイル) (※1)
   #include 以外は何も書いていない
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/compilerInterface.hpp))
     // This is a dummy file used for including the complete
     // compiler interface.

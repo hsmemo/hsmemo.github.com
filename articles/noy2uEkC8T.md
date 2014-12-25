@@ -30,7 +30,7 @@ CompressedStream 関連のクラスの基底クラス.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/compressedStream.hpp))
     // Simple interface for filing out and filing in basic types
     // Used for writing out and reading in debugging information.
@@ -64,7 +64,7 @@ CompressedStream クラスのサブクラスの1つ.
 圧縮されたデータを解凍しながら読み込む為のメソッドが定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/compressedStream.hpp))
     class CompressedReadStream : public CompressedStream {
 ```
@@ -73,7 +73,7 @@ CompressedStream クラスのサブクラスの1つ.
 例えば, OopMapStream 内で使われている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/oopMap.hpp))
     class OopMapStream : public StackObj {
     ...
@@ -83,7 +83,7 @@ CompressedStream クラスのサブクラスの1つ.
 また, DepStream 内でも使われている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/dependencies.hpp))
       class DepStream {
     ...
@@ -104,7 +104,7 @@ CompressedStream クラスのサブクラスの1つ.
 データを圧縮しながら書き込む為のメソッドが定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/compressedStream.hpp))
     class CompressedWriteStream : public CompressedStream {
 ```
@@ -113,7 +113,7 @@ CompressedStream クラスのサブクラスの1つ.
 例えば, OopMap の中で使われている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/oopMap.cpp))
     OopMap::OopMap(int frame_size, int arg_count) {
     ...
@@ -123,7 +123,7 @@ CompressedStream クラスのサブクラスの1つ.
 また, Dependencies 内でも使われている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/dependencies.cpp))
     void Dependencies::encode_content_bytes() {
     ...

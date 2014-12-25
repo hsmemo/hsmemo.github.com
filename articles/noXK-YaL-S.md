@@ -13,7 +13,7 @@ title: HashTable クラス関連のクラス (BasicHashtableEntry, HashtableEntr
 なお, 内部実装としては open hash で bucket 数は固定.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/hashtable.hpp))
     // This is a generic hashtable, designed to be used for the symbol
     // and string tables.
@@ -64,7 +64,7 @@ title: HashTable クラス関連のクラス (BasicHashtableEntry, HashtableEntr
 HashTable 内の要素を表すクラスの基底クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/hashtable.hpp))
     class BasicHashtableEntry : public CHeapObj {
 ```
@@ -78,7 +78,7 @@ HashTable 内の要素を表すクラスの基底クラス.
 * _next フィールド : bucket 中での次の要素を示す
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/hashtable.hpp))
       unsigned int         _hash;           // 32-bit hash for item
     
@@ -105,7 +105,7 @@ See: [here](../doxygen/classBasicHashtableEntry.html) for details
 BasicHashtableEntry クラスの具象サブクラスの1つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/hashtable.hpp))
     template <class T> class HashtableEntry : public BasicHashtableEntry {
 ```
@@ -116,7 +116,7 @@ BasicHashtableEntry のフィールドに加えて,
 _literal フィールドが追加されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/hashtable.hpp))
       T               _literal;          // ref to item in table.
 ```
@@ -137,7 +137,7 @@ HashTable クラス内で使用される補助クラス.
 中身は BasicHashtableEntry オブジェクトを格納するための線形リストになっており, HashTable クラスはこのクラスを用いてハッシュテーブルを構築する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/hashtable.hpp))
     class HashtableBucket : public CHeapObj {
 ```
@@ -150,7 +150,7 @@ HashTable クラス内で使用される補助クラス.
 (See: BasicHashtable::add_entry()))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/hashtable.hpp))
       BasicHashtableEntry*       _entry;
 ```
@@ -170,7 +170,7 @@ See: [here](../doxygen/classHashtableBucket.html) for details
 (実質的には, Hashtable クラス用の補助クラスといった感じ)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/hashtable.hpp))
     class BasicHashtable : public CHeapObj {
 ```
@@ -181,7 +181,7 @@ See: [here](../doxygen/classHashtableBucket.html) for details
 内部には HashtableBucket オブジェクトの配列を保持している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/hashtable.hpp))
       HashtableBucket*  _buckets;
 ```
@@ -199,7 +199,7 @@ See: [here](../doxygen/classBasicHashtable.html) for details
 BasicHashtable クラスの具象サブクラスの1つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/hashtable.hpp))
     template <class T> class Hashtable : public BasicHashtable {
 ```
@@ -221,7 +221,7 @@ See: [here](../doxygen/classHashtable.html) for details
 これは, Symbol* 型の引数だけではなくクラスローダーを表す Handle 型の引数まで増えているため.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/hashtable.hpp))
     //  Verions of hashtable where two handles are used to compute the index.
     

@@ -13,7 +13,7 @@ title: (#WIP) Thread の suspend/resume 処理 (java.lang.Thread.suspend(), java
 (#Under Construction)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.hpp))
       // ***************************************************************
       // Suspend and resume support

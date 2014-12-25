@@ -15,7 +15,7 @@ title: ciObjArrayKlassKlass クラス
 ciArrayKlassKlass クラスの具象サブクラスの1つ. objArrayKlassKlass 用の ciKlass クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciObjArrayKlassKlass.hpp))
     // ciObjArrayKlassKlass
     //

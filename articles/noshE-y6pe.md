@@ -11,7 +11,7 @@ title: InlineCacheBuffer クラス関連のクラス (ICStub, InlineCacheBuffer)
 (See: CompiledIC).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/icBuffer.hpp))
     // For CompiledIC's:
     //
@@ -38,7 +38,7 @@ title: InlineCacheBuffer クラス関連のクラス (ICStub, InlineCacheBuffer)
 (#Under Construction)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/icBuffer.hpp))
     class InlineCacheBuffer: public AllStatic {
 ```
@@ -51,7 +51,7 @@ InlineCacheBuffer の中には invokevirtual や invokeinterface での dynamic 
 なお, InlineCacheBuffer::ic_stub_code_size() は, 生成する stub の大きさを返す関数 (コード格納用のバッファの確保時に使用).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/icBuffer.hpp))
       static int ic_stub_code_size();
 ```
@@ -68,7 +68,7 @@ See: [here](../doxygen/classInlineCacheBuffer.html) for details
 (#Under Construction)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/icBuffer.hpp))
     class ICStub: public Stub {
 ```

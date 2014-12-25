@@ -40,7 +40,7 @@ CodeCache        	  |  0
 
 なお, この機能は ServiceThread と連携して動作する (See: ServiceThread).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/lowMemoryDetector.hpp))
     // Low Memory Detection Support
     // Two memory alarms in the JDK (we called them sensors).
@@ -93,7 +93,7 @@ CodeCache        	  |  0
 
 メモリ使用量に関する閾値超過検出処理用の関数を納めた名前空間(AllStatic クラス).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/lowMemoryDetector.hpp))
     class LowMemoryDetector : public AllStatic {
 ```
@@ -116,7 +116,7 @@ LowMemoryDetector クラス内で使用される補助クラス.
 
 各 MemoryPool オブジェクトの閾値情報を記録しておくためのクラス.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/lowMemoryDetector.hpp))
     class ThresholdSupport : public CHeapObj {
 ```
@@ -128,7 +128,7 @@ _gc_usage_threshold フィールドに(のみ)格納されている
 (それぞれ, setUsageThreshold() メソッド用と setCollectionUsageThreshold() メソッド用).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryPool.hpp))
     class MemoryPool : public CHeapObj {
     ...
@@ -152,7 +152,7 @@ sun.management.Sensor クラスを実現するためのクラス.
 Sensor オブジェクトに設定する値を HotSpot 内で記録しておくために使われる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/lowMemoryDetector.hpp))
     class SensorInfo : public CHeapObj {
 ```
@@ -164,7 +164,7 @@ _gc_usage_sensor フィールドに(のみ)格納されている
 (それぞれ, setUsageThreshold() メソッド用と setCollectionUsageThreshold() メソッド用).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryPool.hpp))
     class MemoryPool : public CHeapObj {
     ...
@@ -187,7 +187,7 @@ See: [here](../doxygen/classSensorInfo.html) for details
 ソースコード中のあるスコープの間だけ, LowMemoryDetector の機能を無効にするためのクラス(StackObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/lowMemoryDetector.hpp))
     class LowMemoryDetectorDisabler: public StackObj {
 ```
@@ -199,7 +199,7 @@ See: [here](../doxygen/classSensorInfo.html) for details
 コンストラクタで LowMemoryDetector::disable() を呼び出し, 
 デストラクタで LowMemoryDetector::enable() を呼び出すだけ.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/lowMemoryDetector.hpp))
       LowMemoryDetectorDisabler()
       {

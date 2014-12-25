@@ -17,7 +17,7 @@ ParallelScavenge 用の BlockOffsetTable クラス (See: BlockOffsetTable) (See:
 (継承関係としては BlockOffsetTable クラスと何の関係もないが, 果たしている役割は類似)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/objectStartArray.hpp))
     // This class can be used to locate the beginning of an object in the
     // covered region.
@@ -31,7 +31,7 @@ ParallelScavenge 用の BlockOffsetTable クラス (See: BlockOffsetTable) (See:
 PSOldGen クラスの _start_array フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psOldGen.hpp))
     class PSOldGen : public CHeapObj {
     ...
@@ -46,7 +46,7 @@ PSOldGen クラスの _start_array フィールドに(のみ)格納されてい�
 なお現状の block size は, 2^9 = 512 byte.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/objectStartArray.hpp))
       enum BlockSizeConstants {
         block_shift                  = 9,

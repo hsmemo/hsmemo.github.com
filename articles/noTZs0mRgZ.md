@@ -24,7 +24,7 @@ G1CollectedHeap クラス内で使用される補助クラス.
 全ての HeapRegion オブジェクトを束ねておくためのコンテナクラス (See: HeapRegion).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionSeq.hpp))
     class HeapRegionSeq: public CHeapObj {
 ```
@@ -40,7 +40,7 @@ G1CollectedHeap::initialize() 内で(のみ)生成されている.
 内部的には GrowableArray<HeapRegion*> を用いて HeapRegion を管理している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionSeq.hpp))
       // _regions is kept sorted by start address order, and no two regions are
       // overlapping.
@@ -64,7 +64,7 @@ See: [here](../doxygen/classHeapRegionSeq.html) for details
 HeapRegion の情報を出力する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionSeq.cpp))
     class PrintHeapRegionClosure : public  HeapRegionClosure {
 ```

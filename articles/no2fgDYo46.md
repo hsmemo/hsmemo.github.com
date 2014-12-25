@@ -26,7 +26,7 @@ title: GSpaceCounters 及びその補助クラス (GSpaceCounters, GenerationUse
 Generation と1対1対応するような Space に関する PerfData を格納しておくためのクラス
 (実際の使われ方としては, CompactibleFreeListSpace に関する PerfData を格納しておくためのクラス).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gSpaceCounters.hpp))
     // A GSpaceCounter is a holder class for performance counters
     // that track a space;
@@ -39,7 +39,7 @@ Generation と1対1対応するような Space に関する PerfData を格納�
 各 ConcurrentMarkSweepGeneration オブジェクトの _space_counters フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/concurrentMarkSweep/concurrentMarkSweepGeneration.hpp))
     class ConcurrentMarkSweepGeneration: public CardGeneration {
     ...
@@ -51,7 +51,7 @@ Generation と1対1対応するような Space に関する PerfData を格納�
 
 * ConcurrentMarkSweepGeneration::initialize_performance_counters()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/concurrentMarkSweep/concurrentMarkSweepGeneration.cpp))
     void ConcurrentMarkSweepGeneration::initialize_performance_counters() {
     ...
@@ -62,7 +62,7 @@ Generation と1対1対応するような Space に関する PerfData を格納�
 
 * CMSPermGenGen::initialize_performance_counters()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/concurrentMarkSweep/cmsPermGen.cpp))
     void CMSPermGenGen::initialize_performance_counters() {
     ...
@@ -74,20 +74,20 @@ Generation と1対1対応するような Space に関する PerfData を格納�
 ### 内部構造(Internal structure)
 内部には, 記録対象の Generation と, そのパフォーマンスカウンタとして使う PerfVariable 2 個を保持している.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gSpaceCounters.hpp))
       PerfVariable*      _capacity;
       PerfVariable*      _used;
 ```
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gSpaceCounters.hpp))
       Generation*       _gen;
 ```
 
 これらの PerfVariable には, (そのフィールド名の通り) 対応する Generation の最大量(capacity)と現在使用量(used)が記録される.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gSpaceCounters.hpp))
       inline void update_capacity() {
         _capacity->set_value(_gen->capacity());
@@ -116,7 +116,7 @@ Generation と1対1対応するような Space に関する PerfData を格納�
   * sun.gc.generation.${n}.space.${m}.used
   * sun.gc.generation.${n}.space.${m}.initCapacity
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gSpaceCounters.cpp))
         const char* cns = PerfDataManager::name_space(gc->name_space(), "space",
                                                       ordinal);
@@ -167,7 +167,7 @@ Generation を PerfLongSampleHelper (のサブクラス) として使うため�
 (より具体的に言うと, Generation の使用量情報(used)を PerfVariable で記録するためのクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gSpaceCounters.hpp))
     class GenerationUsedHelper : public PerfLongSampleHelper {
 ```
@@ -175,7 +175,7 @@ Generation を PerfLongSampleHelper (のサブクラス) として使うため�
 ### 内部構造(Internal structure)
 やってることは, PerfLongSampleHelper::take_sample() を Generation::used() に変換するだけ.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gSpaceCounters.hpp))
         inline jlong take_sample() {
           return _gen->used();

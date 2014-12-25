@@ -19,7 +19,7 @@ TemplateInterpreter を生成するための InterpreterGenerator クラス
 このクラスによって TemplateInterpreter クラス用のマシン語コード片が生成される (See: [here](no7882AgC.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/templateInterpreterGenerator.hpp))
     // This file contains the platform-independent parts
     // of the template interpreter generator.

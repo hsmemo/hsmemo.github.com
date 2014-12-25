@@ -17,7 +17,7 @@ Class Data Sharing (CDS) 機能用の補助クラス (See: [here](no2114Sn1.html
 shared archive ファイル (クラス情報をダンプしたファイル) を操作するためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/filemap.hpp))
     class FileMapInfo : public CHeapObj {
 ```
@@ -30,7 +30,7 @@ shared archive ファイル (クラス情報をダンプしたファイル) を�
 
 #### 参考(for your information): メモリの内容をファイルにダンプする処理 (VM_PopulateDumpSharedSpace::doit())
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/dump.cpp))
       void doit() {
     ...
@@ -77,7 +77,7 @@ FileMapInfo::initialize() でファイルをメモリにマッピングする.
  マッピングした内容を表す FileMapInfo オブジェクトを
  FileMapInfo クラスの static フィールドに記録している)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/universe.cpp))
     jint universe_init() {
     ...

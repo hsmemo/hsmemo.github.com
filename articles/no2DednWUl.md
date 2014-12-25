@@ -23,13 +23,13 @@ title: Set クラス関連のクラス (Set, SetI_, SetI)
 ADLC 内で使用される集合クラスの基底クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/libadt/set.hpp))
     // Sets - An Abstract Data Type
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/libadt/set.hpp))
     //------------------------------Set--------------------------------------------
     class Set : public ResourceObj {
@@ -41,7 +41,7 @@ ADLC 内で使用される集合クラスの基底クラス.
 現状では実際に実装されているのは VectorSet だけのように見える(他のクラスは定義が見当たらない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/libadt/set.hpp))
     // These sets can grow or shrink, based on the initial size and the largest
     // element currently in them.  Basically, they allow a bunch of bits to be
@@ -133,7 +133,7 @@ Set の要素を処理するためのイテレータクラス.
   `for( SetI  i(s); i.test(); i++ ) { body = i.elem; }` または `for( i.reset(s); i.test(); i++ ) { body = i.elem; }`
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/libadt/set.hpp))
     //------------------------------Iteration--------------------------------------
     // Loop thru all elements of the set, setting "elem" to the element numbers
@@ -144,7 +144,7 @@ Set の要素を処理するためのイテレータクラス.
     //         for( i.reset(s); i.test(); i++ ) { body = i.elem; }
 ```
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/libadt/set.hpp))
     class SetI {
 ```
@@ -160,7 +160,7 @@ See: [here](../doxygen/classSetI.html) for details
 ### 概要(Summary)
 SetI 内部で使用される補助クラス
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/libadt/set.hpp))
     class SetI_ : public ResourceObj {
 ```

@@ -31,7 +31,7 @@ pending_exception をセットしうる関数については,
 * 使用例: SystemDictionary::resolve_or_fail() の場合:
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/systemDictionary.cpp))
     klassOop SystemDictionary::resolve_or_fail(Symbol* class_name,
                                                bool throw_error, TRAPS)
@@ -40,7 +40,7 @@ pending_exception をセットしうる関数については,
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvm.cpp))
         klassOop access_controller_klass = SystemDictionary::resolve_or_fail(access_controller, false, CHECK);
 ```
@@ -54,7 +54,7 @@ pending_exception をセットしうる関数については,
 
   * 例外を送出する可能性がある関数用のマクロ:
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/exceptions.hpp))
     // The THREAD & TRAPS macros facilitate the declaration of functions that throw exceptions.
     // Convention: Use the TRAPS macro as the last argument of such a function; e.g.:
@@ -67,7 +67,7 @@ pending_exception をセットしうる関数については,
 
   * pending exception のチェック用のマクロ:
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/exceptions.hpp))
     // The CHECK... macros should be used to pass along a THREAD reference and to check for pending
     // exceptions. In special situations it is necessary to handle pending exceptions explicitly,
@@ -98,7 +98,7 @@ pending_exception をセットしうる関数については,
 
   * 例外を送出する関数を呼ぶ側で, 例外が出なかったことを保証しておくためのマクロ : (もしも例外が出ていたら即座に異常終了)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/exceptions.hpp))
     // The CATCH macro checks that no exception has been thrown by a function; it is used at
     // call sites about which is statically known that the callee cannot throw an exception

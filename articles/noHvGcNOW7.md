@@ -11,7 +11,7 @@ title: PreserveExceptionMark クラス関連のクラス (PreserveExceptionMark,
 (なお, 例外処理用の主なクラスは exceptions.hpp に書かれている. このファイルはおまけ的な内容)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/preserveException.hpp))
     // This file provides more support for exception handling; see also exceptions.hpp
 ```
@@ -19,7 +19,7 @@ title: PreserveExceptionMark クラス関連のクラス (PreserveExceptionMark,
 (なおコメントでは, この3つのクラスは全部リファクタリングしたい, みたいなことが書かれていたりするが...)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/preserveException.cpp))
     // TODO: These three classes should be refactored
 ```
@@ -39,7 +39,7 @@ title: PreserveExceptionMark クラス関連のクラス (PreserveExceptionMark,
 ソースコード中のあるスコープの間だけ, カレントスレッドの pending_exception の値をリセットしておくためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/preserveException.hpp))
     class PreserveExceptionMark {
 ```
@@ -48,7 +48,7 @@ title: PreserveExceptionMark クラス関連のクラス (PreserveExceptionMark,
 PRESERVE_EXCEPTION_MARK マクロ内で(のみ)使用されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/preserveException.hpp))
     // use global exception mark when allowing pending exception to be set and
     // saving and restoring them
@@ -68,7 +68,7 @@ PRESERVE_EXCEPTION_MARK マクロ内で(のみ)使用されている.
 デストラクタで復帰させているだけ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/preserveException.cpp))
     PreserveExceptionMark::PreserveExceptionMark(Thread*& thread) {
       thread     = Thread::current();
@@ -112,7 +112,7 @@ PreserveExceptionMark クラスとほとんど同じだが,
  CautiouslyPreserveExceptionMark の場合は, 残っていた pending_exception を消し, 待避していた pending_exception に戻すだけ.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/preserveException.hpp))
     // This is a clone of PreserveExceptionMark which asserts instead
     // of failing when what it wraps generates a pending exception.
@@ -142,7 +142,7 @@ PreserveExceptionMark クラスとほとんど同じだが,
  WeakPreserveExceptionMark の場合は, pending_exception があった場合にはそちらを優先する (待避していた pending_exception には戻さない))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/preserveException.hpp))
     // Like PreserveExceptionMark but allows new exceptions to be generated in
     // the body of the mark. If a new exception is generated then the original one

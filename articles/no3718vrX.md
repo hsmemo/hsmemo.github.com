@@ -27,7 +27,7 @@ ParallelScavengeHeap::mem_allocate() 内では GC を実行してでも確保が
 VM Thread によって実際に実行される VM Operation は1回だけになる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/parallelScavengeHeap.cpp))
     // There are two levels of allocation policy here.
     //

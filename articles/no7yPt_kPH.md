@@ -27,7 +27,7 @@ Compile クラス内で使用される補助クラス.
 (なお, このクラスは StackObjクラスではないが現状では局所変数としてのみ生成されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/output.hpp))
     //------------------------------Scheduling----------------------------------
     // This class contains all the information necessary to implement instruction
@@ -61,7 +61,7 @@ safepoint ではない箇所のメタ情報を DebugInformationRecorder に記�
 (なお, このクラスは StackObjクラスではないが現状では局所変数としてのみ生成されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/output.cpp))
     // A simplified version of Process_OopMap_Node, to handle non-safepoints.
     class NonSafepointEmitter {

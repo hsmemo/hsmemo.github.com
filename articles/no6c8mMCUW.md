@@ -18,7 +18,7 @@ ReferenceProcessor クラスは, 参照オブジェクト(java.lang.ref.Referenc
 各 ReferenceProcessor オブジェクトは, 指定された GC と対応づけられ, 
 指定の "span" 内にある java.lang.ref.Reference の処理を行う.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.hpp))
     // ReferenceProcessor class encapsulates the per-"collector" processing
     // of java.lang.Reference objects for GC. The interface is useful for supporting
@@ -94,7 +94,7 @@ AbstractRefProcTaskExecutor というクラスが用意されている.
 java.lang.ref.Reference オブジェクトの処理を行うためのクラス (See: [here](no289169tf.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.hpp))
     class ReferenceProcessor : public CHeapObj {
 ```
@@ -125,7 +125,7 @@ ReferenceProcessor クラス用のユーティリティ・クラス(StackObjク�
 ソースコード中のあるスコープの間だけ, ReferenceProcessor を無効にするためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.hpp))
     // A utility class to disable reference discovery in
     // the scope which contains it, for given ReferenceProcessor.
@@ -136,7 +136,7 @@ ReferenceProcessor クラス用のユーティリティ・クラス(StackObjク�
 コンストラクタ引数で指定された ReferenceProcessor オブジェクトに対し, 
 コンストラクタで disable_discovery() を呼び出し, デストラクタで元の状態に復元させている.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.hpp))
       NoRefDiscovery(ReferenceProcessor* rp) : _rp(rp) {
         _was_discovering_refs = _rp->discovery_enabled();
@@ -167,7 +167,7 @@ ReferenceProcessor クラス用のユーティリティ・クラス(StackObjク�
 ソースコード中のあるスコープの間だけ, ReferenceProcessor の対象範囲を変更するためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.hpp))
     // A utility class to temporarily mutate the span of the
     // given ReferenceProcessor in the scope that contains it.
@@ -178,7 +178,7 @@ ReferenceProcessor クラス用のユーティリティ・クラス(StackObjク�
 コンストラクタ引数で指定された ReferenceProcessor オブジェクトに対し, 
 コンストラクタで set_span() を呼び出し, デストラクタで元の状態に復元させている.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.hpp))
       ReferenceProcessorSpanMutator(ReferenceProcessor* rp,
                                     MemRegion span):
@@ -207,7 +207,7 @@ ReferenceProcessor クラス用のユーティリティ・クラス(StackObjク�
 ソースコード中のあるスコープの間だけ, ReferenceProcessor の処理をマルチスレッドで行うかどうかの設定を変更するためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.hpp))
     // A utility class to temporarily change the MT'ness of
     // reference discovery for the given ReferenceProcessor
@@ -219,7 +219,7 @@ ReferenceProcessor クラス用のユーティリティ・クラス(StackObjク�
 コンストラクタ引数で指定された ReferenceProcessor オブジェクトに対し, 
 コンストラクタで set_mt_discovery() を呼び出し, デストラクタで元の状態に復元させている.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.hpp))
       ReferenceProcessorMTDiscoveryMutator(ReferenceProcessor* rp,
                                            bool mt):
@@ -248,7 +248,7 @@ ReferenceProcessor クラス用のユーティリティ・クラス(StackObjク�
 ソースコード中のあるスコープの間だけ, ReferenceProcessor の _is_alive_non_header フィールドを変更するためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.hpp))
     // A utility class to temporarily change the disposition
     // of the "is_alive_non_header" closure field of the
@@ -262,7 +262,7 @@ mark フィールドに情報を書き込まない GC アルゴリズムと併�
 (現在は CMS と併用する場合にしか使われない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.hpp))
       // For collectors that do not keep GC marking information
       // in the object header, this field holds a closure that
@@ -276,7 +276,7 @@ mark フィールドに情報を書き込まない GC アルゴリズムと併�
 コンストラクタ引数で指定された ReferenceProcessor オブジェクトに対し, 
 コンストラクタで set_is_alive_non_header() を呼び出し, デストラクタで元の状態に復元させている.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.hpp))
       ReferenceProcessorIsAliveMutator(ReferenceProcessor* rp,
                                        BoolObjectClosure*  cl):
@@ -305,7 +305,7 @@ ReferenceProcessor クラス用のユーティリティ・クラス(StackObjク�
 ソースコード中のあるスコープの間だけ, ReferenceProcessor の discovery_is_atomic フィールドを変更するためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.hpp))
     // A utility class to temporarily change the disposition
     // of the "discovery_is_atomic" field of the
@@ -317,7 +317,7 @@ ReferenceProcessor クラス用のユーティリティ・クラス(StackObjク�
 コンストラクタ引数で指定された ReferenceProcessor オブジェクトに対し, 
 コンストラクタで set_atomic_discovery() を呼び出し, デストラクタで元の状態に復元させている.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.hpp))
       ReferenceProcessorAtomicMutator(ReferenceProcessor* rp,
                                       bool atomic):
@@ -346,7 +346,7 @@ ReferenceProcessor クラス用のユーティリティ・クラス(StackObjク�
 ソースコード中のあるスコープの間だけ, ReferenceProcessor の _processing_is_mt フィールドを変更するためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.hpp))
     // A utility class to temporarily change the MT processing
     // disposition of the given ReferenceProcessor instance
@@ -358,7 +358,7 @@ ReferenceProcessor クラス用のユーティリティ・クラス(StackObjク�
 コンストラクタ引数で指定された ReferenceProcessor オブジェクトに対し, 
 コンストラクタで set_mt_processing() を呼び出し, デストラクタで元の状態に復元させている.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.hpp))
       ReferenceProcessorMTProcMutator(ReferenceProcessor* rp,
                                       bool mt):
@@ -385,7 +385,7 @@ See: [here](../doxygen/classReferenceProcessorMTProcMutator.html) for details
 ReferenceProcessor の処理をマルチスレッド化するクラス (の基底クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.hpp))
     // This class is an interface used to implement task execution for the
     // reference processing.
@@ -407,7 +407,7 @@ See: [here](../doxygen/classAbstractRefProcTaskExecutor.html) for details
 ReferenceProcessor::process_discovered_references() の処理をマルチスレッド化するクラス (の基底クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.hpp))
     // Abstract reference processing task to execute.
     class AbstractRefProcTaskExecutor::ProcessTask {
@@ -428,7 +428,7 @@ See: [here](../doxygen/classAbstractRefProcTaskExecutor_1_1ProcessTask.html) for
 ReferenceProcessor::enqueue_discovered_references() の処理をマルチスレッド化するクラス (の基底クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.hpp))
     // Abstract reference processing task to execute.
     class AbstractRefProcTaskExecutor::EnqueueTask {
@@ -450,7 +450,7 @@ ReferenceProcessor クラス内で使用される補助クラス.
 
 ReferenceProcessor::discover_reference() で見つかった結果を格納しておくためのリスト (See: [here](no289169tf.html) for details).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.cpp))
     // List of discovered references.
     class DiscoveredList {
@@ -468,7 +468,7 @@ See: [here](../doxygen/classDiscoveredList.html) for details
 ### 概要(Summary)
 デバッグ用(開発時用)のクラス (#ifndef PRODUCT 時にしか定義されない).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.cpp))
     #ifndef PRODUCT
 ```
@@ -480,7 +480,7 @@ JNI Weak Global Handle の数を数えてリターンするというもの)
 
 JNI の Weak Global Handle を辿る処理で使用される Closure.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.cpp))
       class AlwaysAliveClosure: public BoolObjectClosure {
 ```
@@ -501,7 +501,7 @@ See: [here](../doxygen/classAlwaysAliveClosure.html) for details
 ### 概要(Summary)
 デバッグ用(開発時用)のクラス (#ifndef PRODUCT 時にしか定義されない).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.cpp))
     #ifndef PRODUCT
 ```
@@ -514,7 +514,7 @@ JNI Weak Global Handle の数を数えてリターンするというもの)
 JNI の Weak Global Handle を数える処理で使用される Closure.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.cpp))
       class CountHandleClosure: public OopClosure {
 ```
@@ -537,7 +537,7 @@ ReferenceProcessor::enqueue_discovered_references() 内で使用される補助�
 (より正確には, そこから呼び出される ReferenceProcessor::enqueue_discovered_reflists() 内で使用される補助クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.cpp))
     // Parallel enqueue task
     class RefProcEnqueueTask: public AbstractRefProcTaskExecutor::EnqueueTask {
@@ -550,7 +550,7 @@ AbstractRefProcTaskExecutor::EnqueueTask のサブクラス.
 ReferenceProcessor::enqueue_discovered_references() の処理がマルチスレッド化される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.cpp))
     // Enqueue references that are not made active again
     void ReferenceProcessor::enqueue_discovered_reflists(HeapWord* pending_list_addr,
@@ -576,7 +576,7 @@ See: [here](../doxygen/classRefProcEnqueueTask.html) for details
 DiscoveredList を辿るためのイテレータクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.cpp))
     // Iterator for the list of discovered references.
     class DiscoveredListIterator {
@@ -596,7 +596,7 @@ ReferenceProcessor::process_discovered_references() 内で使用される補助�
 (より正確には, そこから呼び出される ReferenceProcessor::process_discovered_reflist() 内で使用される補助クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.cpp))
     class RefProcPhase1Task: public AbstractRefProcTaskExecutor::ProcessTask {
 ```
@@ -608,7 +608,7 @@ AbstractRefProcTaskExecutor::ProcessTask のサブクラス.
 ReferenceProcessor::process_discovered_reflist() の Phase 1 の処理がマルチスレッド化される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.cpp))
       // Phase 1 (soft refs only):
       // . Traverse the list and remove any SoftReferences whose
@@ -636,7 +636,7 @@ ReferenceProcessor::process_discovered_references() 内で使用される補助�
 (より正確には, そこから呼び出される ReferenceProcessor::process_discovered_reflist() 内で使用される補助クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.cpp))
     class RefProcPhase2Task: public AbstractRefProcTaskExecutor::ProcessTask {
 ```
@@ -648,7 +648,7 @@ AbstractRefProcTaskExecutor::ProcessTask のサブクラス.
 ReferenceProcessor::process_discovered_reflist() の Phase 2 の処理がマルチスレッド化される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.cpp))
       // Phase 2:
       // . Traverse the list and remove any refs whose referents are alive.
@@ -672,7 +672,7 @@ ReferenceProcessor::process_discovered_references() 内で使用される補助�
 (より正確には, そこから呼び出される ReferenceProcessor::process_discovered_reflist() 内で使用される補助クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.cpp))
     class RefProcPhase3Task: public AbstractRefProcTaskExecutor::ProcessTask {
 ```
@@ -684,7 +684,7 @@ AbstractRefProcTaskExecutor::ProcessTask のサブクラス.
 ReferenceProcessor::process_discovered_reflist() の Phase 3 の処理がマルチスレッド化される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.cpp))
       // Phase 3:
       // . Traverse the list and process referents as appropriate.

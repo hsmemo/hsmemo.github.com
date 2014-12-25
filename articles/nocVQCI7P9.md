@@ -13,7 +13,7 @@ title: G1CollectorPolicy クラス関連のクラス (PauseSummary, MainBodySumm
 * GC を行う契機の決定
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectorPolicy.hpp))
     // A G1CollectorPolicy makes policy decisions that determine the
     // characteristics of the collector.  Examples include:
@@ -48,7 +48,7 @@ G1GC 用の CollectorPolicy クラスの基底クラス (See: CollectorPolicy).
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectorPolicy.hpp))
     class G1CollectorPolicy: public CollectorPolicy {
 ```
@@ -88,7 +88,7 @@ G1CollectorPolicy クラスの具象サブクラス.
     (この部分のコメントの内容は正しいか?? #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectorPolicy.hpp))
     // This encapsulates a particular strategy for a g1 Collector.
     //
@@ -141,7 +141,7 @@ G1CollectorPolicy クラス内で使用される補助クラス(の基底クラ�
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectorPolicy.hpp))
     class PauseSummary: public CHeapObj {
 ```
@@ -152,7 +152,7 @@ G1CollectorPolicy クラス内で使用される補助クラス(の基底クラ�
 (そして, メソッドはこれらのフィールドへの getter メソッド(アクセサメソッド)のみ).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectorPolicy.hpp))
       define_num_seq(total)
         define_num_seq(other)
@@ -163,7 +163,7 @@ NumberSeq 型の private フィールドと, それにアクセスするため�
 (コメントによると, あまりいい方法じゃないけどコピペが氾濫するよりはいい, とのこと).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectorPolicy.hpp))
     // Yes, this is a bit unpleasant... but it saves replicating the same thing
     // over and over again and introducing subtle problems through small typos and
@@ -198,7 +198,7 @@ G1CollectorPolicy クラス内で使用される補助クラス(の基底クラ�
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectorPolicy.hpp))
     class MainBodySummary: public CHeapObj {
 ```
@@ -209,7 +209,7 @@ G1CollectorPolicy クラス内で使用される補助クラス(の基底クラ�
 (そして, メソッドはこれらのフィールドへの getter メソッド(アクセサメソッド)のみ).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectorPolicy.hpp))
       define_num_seq(satb_drain) // optional
       define_num_seq(parallel) // parallel only
@@ -229,7 +229,7 @@ NumberSeq 型の private フィールドと, それにアクセスするため�
 (コメントによると, あまりいい方法じゃないけどコピペが氾濫するよりはいい, とのこと).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectorPolicy.hpp))
     // Yes, this is a bit unpleasant... but it saves replicating the same thing
     // over and over again and introducing subtle problems through small typos and
@@ -263,7 +263,7 @@ G1CollectorPolicy クラス内で使用される補助クラス.
 PauseSummary クラスおよび MainBodySummary クラスの具象サブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectorPolicy.hpp))
     class Summary: public PauseSummary,
                    public MainBodySummary {
@@ -291,7 +291,7 @@ G1CollectorPolicy クラス内で使用される補助クラス.
 ログ出力処理を簡単に行うための補助クラス(StackObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectorPolicy.cpp))
     // Help class for avoiding interleaved logging
     class LineBuffer: public StackObj {
@@ -304,7 +304,7 @@ G1CollectorPolicy クラス内で使用される補助クラス.
 3. 最後に LineBuffer::append_and_print_cr() で出力する
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectorPolicy.cpp))
     void G1CollectorPolicy::print_par_stats(int level,
                                             const char* str,
@@ -323,7 +323,7 @@ G1CollectorPolicy クラス内で使用される補助クラス.
 内部的には 1024 byte の char 配列を用意している (このためこれ以上は出力できない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectorPolicy.cpp))
       static const int BUFFER_LEN = 1024;
     ...
@@ -337,7 +337,7 @@ G1CollectorPolicy クラス内で使用される補助クラス.
 (append() や append_and_print_cr() の呼び忘れが無いかどうか)のチェックを行ってくれる模様.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectorPolicy.cpp))
     #ifndef PRODUCT
       ~LineBuffer() {
@@ -364,7 +364,7 @@ G1Gen オプションが指定されている場合 (かつ UseAdaptiveSizePolic
 New 領域相当の HeapRegion の個数を決定する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectorPolicy.cpp))
     // The easiest way to deal with the parsing of the NewSize /
     // MaxNewSize / etc. parameteres is to re-use the code in the
@@ -389,7 +389,7 @@ G1CollectorPolicy::init() 内で(のみ)使用されている.
 その他のメソッドは定義されてはいるが使用箇所が見当たらない...
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectorPolicy.cpp))
       size_t min_young_region_num() {
         return size_to_region_num(_min_gen0_size);
@@ -417,7 +417,7 @@ G1CollectorPolicy クラス内で使用される補助クラス.
 collection set に選ばれた HeapRegion を辿り, それらの使用量 (HeapRegion::used()) の合計値を計算する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectorPolicy.cpp))
     class CountCSClosure: public HeapRegionClosure {
 ```
@@ -443,7 +443,7 @@ G1CollectorPolicy_BestRegionsFirst クラス内で使用される補助クラス
 実際に CollectionSetChooser が記録している優先順位と合致しているかどうかをチェックする.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectorPolicy.cpp))
     #ifndef PRODUCT
     class HRSortIndexIsOKClosure: public HeapRegionClosure {
@@ -468,7 +468,7 @@ See: [here](../doxygen/classHRSortIndexIsOKClosure.html) for details
 名前の通り, collection set に入っていない HeapRegion を1つ見つける Closure のようだが...
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectorPolicy.cpp))
     class NextNonCSElemFinder: public HeapRegionClosure {
 ```
@@ -489,7 +489,7 @@ G1CollectorPolicy_BestRegionsFirst クラス内で使用される補助クラス
 (ParKnownGarbageHRClosure に似ているが, こちらは処理を single thread で行う際に使われる模様).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectorPolicy.cpp))
     class KnownGarbageClosure: public HeapRegionClosure {
 ```
@@ -513,7 +513,7 @@ ParKnownGarbageTask クラス内で使用される補助クラス.
 (KnownGarbageClosure に似ているが, こちらは処理をマルチスレッドで行う際に使われる模様).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectorPolicy.cpp))
     class ParKnownGarbageHRClosure: public HeapRegionClosure {
 ```
@@ -536,7 +536,7 @@ G1CollectorPolicy_BestRegionsFirst クラス内で使用される補助クラス
 ConcurrentMark::cleanup() の処理 (の一部) を parallel に行うための AbstractGangTask.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectorPolicy.cpp))
     class ParKnownGarbageTask: public AbstractGangTask {
 ```

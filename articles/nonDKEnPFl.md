@@ -23,7 +23,7 @@ title: ArchDesc クラス関連のクラス (ChainList, MatchList, ArchDesc, Out
 ADL ファイル中の OPERANDS 節 (INSTRUCTIONS 節 ?) の chain match rule を記憶しておくためのクラス(? #TODO). (See: [here](nop0Yyr-jc.html) for details)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/adlc/archDesc.hpp))
     class ChainList {
 ```
@@ -40,7 +40,7 @@ See: [here](../doxygen/classChainList.html) for details
 ADL ファイル中の OPERANDS 節 (INSTRUCTIONS 節 ?) の match rule を記憶しておくためのクラス(? #TODO). (See: [here](nop0Yyr-jc.html) for details)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/adlc/archDesc.hpp))
     class MatchList {
 ```
@@ -57,7 +57,7 @@ See: [here](../doxygen/classMatchList.html) for details
 ADL ファイルのパース結果を格納し, match rule 等から DFA 等を構築するクラス. (See: [here](nop0Yyr-jc.html) for details)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/adlc/archDesc.hpp))
     class ArchDesc {
 ```
@@ -76,7 +76,7 @@ ADLC の処理結果を cpp/hpp ファイルに書き出すための補助クラ
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/adlc/archDesc.hpp))
     // Base class for generating a mapping from rule number to value.
     // Used with ArchDesc::build_map() for all maps except "enum MachOperands"

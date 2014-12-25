@@ -86,7 +86,7 @@ hotspot/src/share/vm/prims/unsafe.cpp                        |  sun.misc.Unsafe 
 ### 備考(Notes)
 * ※1: といっても, 実行された場合は ShouldNotReachHere() になるだけの実装. 単に古い JDK をリンクエラーにしないためだけの措置.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/evmCompat.cpp))
     // This file contains definitions for functions that exist
     // in the ExactVM, but not in HotSpot. They are stubbed out

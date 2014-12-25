@@ -31,14 +31,14 @@ instanceOopDesc 用の Klass クラス.
 1つの instanceKlass オブジェクトが Java レベルでの 1つの「クラス」に対応する (See: [here](no7882m2Z.html) and [here](no2935YZn.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/instanceKlass.hpp))
     // An instanceKlass is the VM level representation of a Java class.
     // It contains all information needed for at class at execution runtime.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/instanceKlass.hpp))
     class instanceKlass: public Klass {
 ```
@@ -293,7 +293,7 @@ ClassFileParser::parseClassFile()
     (See: OopMapBlock).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/instanceKlass.hpp))
       //
       // The oop block.  See comment in klass.hpp before making changes.
@@ -403,7 +403,7 @@ ClassFileParser::parseClassFile()
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/instanceKlass.hpp))
     //  instanceKlass layout:
     //    [header                     ] klassOop
@@ -467,7 +467,7 @@ oop フィールドが連続している場合にはその分はまとめて記�
 1つの OopMapBlock オブジェクトが oop フィールドからなる連続領域 1つに対応する.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/instanceKlass.hpp))
     // ValueObjs embedded in klass. Describes where oops are located in instances of
     // this klass.
@@ -521,7 +521,7 @@ ClassFileParser::fill_oop_maps() 内で(のみ)行われている.
   oop(または narrowOop)が何個連続しているか (= その連続領域の大きさ), を示すフィールド (単位は oop の個数).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/instanceKlass.hpp))
       int  _offset;
       uint _count;
@@ -544,7 +544,7 @@ fieldDescriptor オブジェクトへのポインタに対して何らかの処�
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/instanceKlass.hpp))
     // This is used in iterators below.
     class FieldClosure: public StackObj {
@@ -554,7 +554,7 @@ fieldDescriptor オブジェクトへのポインタに対して何らかの処�
 fieldDescriptor* を処理する do_field() メソッドを備えている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/instanceKlass.hpp))
       virtual void do_field(fieldDescriptor* fd) = 0;
 ```
@@ -574,7 +574,7 @@ See: [here](../doxygen/classFieldClosure.html) for details
 フィールドに関する情報を出力する FieldClosure クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/instanceKlass.hpp))
     #ifndef PRODUCT
     // Print fields.
@@ -604,13 +604,13 @@ JNI で取得される jfieldID 値は,
 static field の場合, jfieldID の正体は対応する JNIid オブジェクトへのポインタになっている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/instanceKlass.hpp))
       // JNI identifier support (for static fields - for jni performance)
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/instanceKlass.hpp))
     /* JNIid class for jfieldIDs only */
     class JNIid: public CHeapObj {
@@ -683,7 +683,7 @@ RedefineClass() によって生じた EMCP メソッド (およびそれらに�
 (See: [here](no2935-Vj.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/instanceKlass.hpp))
     // A collection point for interesting information about the previous
     // version(s) of an instanceKlass. This class uses weak references to
@@ -749,7 +749,7 @@ PreviousVersionNode オブジェクト内に記録した情報を参照するた
 (なお, このクラスは ResourceObj クラスだが, C ヒープ上に確保されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/instanceKlass.hpp))
     // A Handle-ized version of PreviousVersionNode.
     class PreviousVersionInfo : public ResourceObj {
@@ -791,7 +791,7 @@ JVMTI の RedefineClass 機能 (RedefineClasses(), RetransformClasses()) の実�
 PreviousVersionNode として記録された情報をたどるためのイテレータクラス(StackObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/instanceKlass.hpp))
     // Helper object for walking previous versions. This helper cleans up
     // the Handles that it allocates when the helper object is destroyed.
@@ -833,7 +833,7 @@ JIT コンパイラが特定のクラスへの仮定に基づいてコードを�
 nmethodBucket クラスは, どの nmethod がどのクラスに依存しているかを記録しておくためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/instanceKlass.cpp))
     //
     // nmethodBucket is used to record dependent nmethods for
@@ -916,7 +916,7 @@ instanceKlass 内で使用される補助クラス.
 かつ差し先が妥当な oop または NULL であることをチェックする.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/instanceKlass.cpp))
     // Verification
     

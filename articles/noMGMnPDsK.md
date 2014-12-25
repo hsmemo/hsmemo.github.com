@@ -11,7 +11,7 @@ title: CompilationPolicy クラス関連のクラス (CompilationPolicy, NonTier
 (See: [here](no3718SNC.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/compilationPolicy.hpp))
     // The CompilationPolicy selects which method (if any) should be compiled.
     // It also decides which methods must always be compiled (i.e., are never
@@ -39,7 +39,7 @@ JIT Compiler 用のクラス.
 (See: [here](no3718SNC.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/compilationPolicy.hpp))
     class CompilationPolicy : public CHeapObj {
 ```
@@ -59,7 +59,7 @@ CompilationPolicy クラスのサブクラス.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/compilationPolicy.hpp))
     // A base class for baseline policies.
     class NonTieredCompPolicy : public CompilationPolicy {
@@ -82,7 +82,7 @@ NonTieredCompPolicy クラスの具象サブクラス
 (そして Tiered Compilation 非使用時のデフォルトは 0). (See: compilationPolicy_init())
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/compilationPolicy.hpp))
     class SimpleCompPolicy : public NonTieredCompPolicy {
 ```
@@ -121,7 +121,7 @@ C2 JIT Compiler 用の CompilationPolicy クラス(= メソッドをコンパイ
 (See: compilationPolicy_init())
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/compilationPolicy.hpp))
     // StackWalkCompPolicy - existing C2 policy
     
@@ -160,7 +160,7 @@ NonTieredCompPolicy クラス内で使用される補助クラス.
 (より正確には, そのための機能を納めた名前空間(AllStatic クラス)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/compilationPolicy.cpp))
     //
     // CounterDecay

@@ -27,7 +27,7 @@ HotSpot 内にある Runtime クラスの1つ
 その中でも InterpreterRuntime クラスには (名前の通り) Interpreter から呼び出されるルーチンが納められている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/interpreterRuntime.hpp))
     // The InterpreterRuntime is called by the interpreter for everything
     // that cannot/should not be dealt with in assembly and needs C support.
@@ -42,7 +42,7 @@ Interpreter 関連の様々な箇所で使用されている (#TODO).
 例えば, ldc や new, 例外送出(throw_*), resolve 処理, monitorenter/monitorexit 処理, 等の機能を提供している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/interpreterRuntime.hpp))
      public:
       // Constants
@@ -99,7 +99,7 @@ InterpreterRuntime クラス内で使用される補助クラス.
 ただし, 引数の個数/型が共通のネイティブメソッド同士では流用できるのでこのクラスでメモイズしている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/interpreterRuntime.hpp))
     class SignatureHandlerLibrary: public AllStatic {
 ```
@@ -119,7 +119,7 @@ InterpreterRuntime クラス内で使用される補助クラス.
 ソースコード中のあるスコープの間だけ, JavaThread の _do_not_unlock フィールドを false にするための一時オブジェクト.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/interpreterRuntime.cpp))
     class UnlockFlagSaver {
 ```
@@ -128,7 +128,7 @@ InterpreterRuntime クラス内で使用される補助クラス.
 コンストラクタで (古い _do_not_unlock を待避した後で) false に設定し, デストラクタで元の値に戻している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/interpreterRuntime.cpp))
         UnlockFlagSaver(JavaThread* t) {
           _thread = t;

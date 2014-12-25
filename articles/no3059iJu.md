@@ -53,7 +53,7 @@ StubRoutines::call_stub() が作るスタックフレームは以下のような
 * x86_64 の場合:
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/stubGenerator_x86_64.cpp))
       // Call stubs are used to call Java from C
       //
@@ -129,7 +129,7 @@ StubRoutines::call_stub() が作るスタックフレームは以下のような
 * sparc の場合:
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/sparc/vm/stubGenerator_sparc.cpp))
         // +---------------+ <--- sp + 0
         // |               |

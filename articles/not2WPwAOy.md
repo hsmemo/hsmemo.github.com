@@ -22,7 +22,7 @@ JVMTI の RedefineClass 機能 (IsModifiableClass(), RedefineClasses(), Retransf
 (See: [here](no2935xLd.html) and [here](no2935-Vj.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiRedefineClasses.hpp))
     class VM_RedefineClasses: public VM_Operation {
 ```
@@ -52,7 +52,7 @@ RedefineClass 時に,
 そういったケースについてもこのクラス内で処理している模様.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiRedefineClasses.cpp))
     // This internal class transfers the native function registration from old methods
     // to new methods.  It is designed to handle both the simple case of unchanged

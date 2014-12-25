@@ -27,7 +27,7 @@ PhaseRegAlloc クラスの具象サブクラス.
 このクラスは, Chaitin (Briggs-Chaitin) の graph coloring によるレジスタ割り当てを行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/chaitin.hpp))
     //------------------------------Chaitin----------------------------------------
     // Briggs-Chaitin style allocation, mostly.
@@ -53,7 +53,7 @@ live-range を表すためのクラス.
 なおクラス名は "Live-RanGe" の略とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/chaitin.hpp))
     //------------------------------LRG--------------------------------------------
     // Live-RanGe structure.
@@ -86,7 +86,7 @@ PhaseChaitin クラス用の補助クラス.
 (より正確には, Node の index から LRG への写像).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/chaitin.hpp))
     //------------------------------LRG_List---------------------------------------
     // Map Node indices to Live RanGe indices.
@@ -121,7 +121,7 @@ Phase クラスの具象サブクラスの1つ.
 干渉グラフ(interference graph)の作成を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/chaitin.hpp))
     //------------------------------IFG--------------------------------------------
     //                         InterFerence Graph

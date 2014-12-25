@@ -18,7 +18,7 @@ title: WaterMark クラス
 (この情報は, 直近の GC 以降に増えたオブジェクトだけを対象に何らかの処理を行いたい, という際に使われる).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/watermark.hpp))
     // A water mark points into a space and is used during GC to keep track of
     // progress.
@@ -31,7 +31,7 @@ title: WaterMark クラス
 OneContigSpaceCardGeneration オブジェクトの _last_gc フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/generation.hpp))
     class OneContigSpaceCardGeneration: public CardGeneration {
     ...
@@ -43,7 +43,7 @@ OneContigSpaceCardGeneration オブジェクトの _last_gc フィールドに(�
 GC 終了時に, OneContigSpaceCardGeneration::gc_epilogue() 内でその時点での top 位置が記録される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/generation.cpp))
     void OneContigSpaceCardGeneration::gc_epilogue(bool full) {
       _last_gc = WaterMark(the_space(), the_space()->top());
@@ -67,7 +67,7 @@ See: [here](no3269-Jk.html) for details
 (そして, メソッドはこれらのフィールドへのアクセサメソッドのみ)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/watermark.hpp))
       HeapWord* _point;
       Space*    _space;

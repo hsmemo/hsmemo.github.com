@@ -26,14 +26,14 @@ IRT_ENTRY は InterpreterRuntime 向け, JRT_ENTRY はその他の Runtime 向�
 (See: InterpreterRuntime, SharedRuntime, Runtime1, OptoRuntime, SharkRuntime).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/interfaceSupport.hpp))
     // Definitions for IRT (Interpreter Runtime)
     // (thread is an argument passed in to all these routines)
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/interfaceSupport.hpp))
     // Definitions for JRT (Java (Compiler/Shared) Runtime)
 ```

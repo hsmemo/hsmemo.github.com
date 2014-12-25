@@ -222,7 +222,7 @@ See: [here](no2114_PR.html) for details
 ### MarkSweep::MarkAndPushClosure::do_oop()
 MarkSweep::mark_and_push() を呼び出すだけ.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/markSweep.cpp))
     void MarkSweep::MarkAndPushClosure::do_oop(oop* p)       { assert(*p == NULL || (*p)->is_oop(), ""); mark_and_push(p); }
     void MarkSweep::MarkAndPushClosure::do_oop(narrowOop* p) { mark_and_push(p); }

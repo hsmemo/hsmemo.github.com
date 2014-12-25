@@ -36,7 +36,7 @@ strong roots から参照されているポインタに mark を付ける
 それ以外の strong roots は MarkFromRootsTask で処理する (See: MarkFromRootsTask)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/pcTasks.hpp))
     // Tasks for parallel compaction of the old generation
     //
@@ -93,7 +93,7 @@ strong roots から参照されているポインタに mark を付ける
 このクラスはそれ以外の strong roots 用 (See: ThreadRootsMarkingTask)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/pcTasks.hpp))
     //
     // MarkFromRootsTask
@@ -126,7 +126,7 @@ AbstractRefProcTaskExecutor::ProcessTask オブジェクトを実行するため
 (See: AbstractRefProcTaskExecutor::ProcessTask))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/pcTasks.hpp))
     //
     // RefProcTaskProxy
@@ -168,7 +168,7 @@ AbstractRefProcTaskExecutor::EnqueueTask オブジェクトを実行するため
 (See: AbstractRefProcTaskExecutor::ProcessTask))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/pcTasks.hpp))
     //
     // RefEnqueueTaskProxy
@@ -204,7 +204,7 @@ Parallel Compaction 処理で使用される AbstractRefProcTaskExecutor クラ�
  (See: AbstractRefProcTaskExecutor)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/pcTasks.hpp))
     //
     // RefProcTaskExecutor
@@ -236,7 +236,7 @@ PSParallelCompact::marking_phase() 内で使用される補助クラス(GCTask�
 (この GCTask 自体は, 全ての GCTaskThread に仕事がなくなった時に終了する).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/pcTasks.hpp))
     //
     // StealMarkingTask
@@ -266,7 +266,7 @@ PSParallelCompact::compact() 内で使用される補助クラス(GCTaskクラ�
 (この GCTask 自体は, 全ての GCTaskThread に仕事がなくなった時に終了する).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/pcTasks.hpp))
     //
     // StealRegionCompactionTask
@@ -294,7 +294,7 @@ Parallel Compaction 処理におけるコンパクション処理時に, dense p
 (live オブジェクト内のポインタの修正処理およびdead オブジェクトをダミーオブジェクトで上書きする処理).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/pcTasks.hpp))
     //
     // UpdateDensePrefixTask
@@ -326,7 +326,7 @@ live object を新しいアドレスに移動させ, それらの中にあるポ
 このクラスはそれ以外の部分用 (See: UpdateDensePrefixTask))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/pcTasks.hpp))
     //
     // DrainStacksCompactionTask

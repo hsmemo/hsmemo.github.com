@@ -15,7 +15,7 @@ title: AdlcVMDeps クラス
 ADLC と HotSpot 内で共通で使われる定数や補助関数を納めた名前空間(AllStatic クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/adlcVMDeps.hpp))
     // Declare commonly known constant and data structures between the
     // ADLC and the VM
@@ -28,7 +28,7 @@ ADLC と HotSpot 内で共通で使われる定数や補助関数を納めた名
 内部には以下の定数定義およびメソッド定義(のみ)を含む.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/adlcVMDeps.hpp))
       // Mirror of TypeFunc types
       enum { Control, I_O, Memory, FramePtr, ReturnAdr, Parms };

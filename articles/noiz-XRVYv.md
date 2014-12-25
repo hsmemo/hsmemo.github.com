@@ -15,7 +15,7 @@ title: PSPermGen クラス
 ParallelScavengeHeap 使用時において, Perm Generation の管理を担当するクラス (See: [here](no3718kvd.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psPermGen.hpp))
     class PSPermGen : public PSOldGen {
 ```
@@ -25,7 +25,7 @@ ParallelScavengeHeap 使用時において, Perm Generation の管理を担当�
 ParallelScavengeHeap オブジェクトの _perm_gen フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/parallelScavengeHeap.hpp))
     class ParallelScavengeHeap : public CollectedHeap {
     ...

@@ -36,7 +36,7 @@ JIT コンパイラに対するユーザーからの指示を扱うためのク�
 (指定しなかった場合は ".hotspot_compiler" というファイルが使われる).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/compilerOracle.hpp))
     // CompilerOracle is an interface for turning on and off compilation
     // for some methods
@@ -48,7 +48,7 @@ JIT コンパイラに対するユーザーからの指示を扱うためのク�
 以下のようなコマンドに対応している模様.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/compilerOracle.cpp))
     // this must parallel the enum OracleCommand
     static const char * command_names[] = {
@@ -68,7 +68,7 @@ JIT コンパイラに対するユーザーからの指示を扱うためのク�
 また, ".hotspot_compiler" に help とだけ書いて java を実行させると以下の usage が表示されるので, それも参考のこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/compilerOracle.cpp))
     static void usage() {
       tty->print_cr("  CompileCommand and the CompilerOracle allows simple control over");
@@ -110,7 +110,7 @@ CompilerOracle クラスの補助クラス.
 (#Under Construction)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/compilerOracle.cpp))
     class MethodMatcher : public CHeapObj {
 ```
@@ -129,7 +129,7 @@ CompilerOracle クラスの補助クラス.
 (#Under Construction)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/compilerOracle.cpp))
     class MethodOptionMatcher: public MethodMatcher {
 ```

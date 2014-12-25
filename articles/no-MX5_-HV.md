@@ -37,7 +37,7 @@ TLAB が空になったら, 次の TLAB 用の領域を大域の空き領域か�
 この時には (当然ながら) 排他を取って領域を確保する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/threadLocalAllocBuffer.hpp))
     // ThreadLocalAllocBuffer: a descriptor for thread-local storage used by
     // the threads for allocation.
@@ -129,7 +129,7 @@ TLAB が空になったら, 次の TLAB 用の領域を大域の空き領域か�
 (_start から _end までが TLAB の領域. _top までは使用済 (= _top 以降は未使用))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/threadLocalAllocBuffer.hpp))
       HeapWord* _start;                              // address of TLAB
       HeapWord* _top;                                // address after last allocation
@@ -156,7 +156,7 @@ ThreadLocalAllocBuffer クラス内で使用される補助クラス.
 TLAB に関するプロファイル情報を溜めておくためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/threadLocalAllocBuffer.hpp))
     class GlobalTLABStats: public CHeapObj {
 ```
@@ -167,7 +167,7 @@ static フィールドである ThreadLocalAllocBuffer::_global_stats に格納�
 (ThreadLocalAllocBuffer::global_stats() がアクセサ).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/threadLocalAllocBuffer.hpp))
       static GlobalTLABStats* _global_stats;
       static GlobalTLABStats* global_stats() { return _global_stats; }
@@ -182,7 +182,7 @@ static フィールドである ThreadLocalAllocBuffer::_global_stats に格納�
   * 
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/threadLocalAllocBuffer.hpp))
       // Write all perf counters to the perf_counters
       void publish();
@@ -229,7 +229,7 @@ static フィールドである ThreadLocalAllocBuffer::_global_stats に格納�
 内部では, (UsePerfData オプションが指定されている場合には) PerfVariable も使用している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/threadLocalAllocBuffer.hpp))
       PerfVariable* _perf_allocating_threads;
       PerfVariable* _perf_total_refills;
@@ -261,7 +261,7 @@ static フィールドである ThreadLocalAllocBuffer::_global_stats に格納�
 * sun.gc.tlab.maxSlowAlloc
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/threadLocalAllocBuffer.cpp))
         char* cname = PerfDataManager::counter_name("tlab", "allocThreads");
         _perf_allocating_threads =

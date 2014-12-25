@@ -11,7 +11,7 @@ title: ciMethodData クラス関連のクラス (ciBitData, ciCounterData, ciJum
 なお ciProfileData という型も使われるが, これは ProfileData の別名.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciMethodData.hpp))
     typedef ProfileData ciProfileData;
 ```
@@ -42,7 +42,7 @@ ciMethodData クラスから BitData オブジェクト内のプロファイル�
 1つの ciBitData オブジェクトが 1つの BitData オブジェクトに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciMethodData.hpp))
     class ciBitData : public BitData {
 ```
@@ -72,7 +72,7 @@ ciMethodData クラスから CounterData オブジェクト内のプロファイ
 1つの ciCounterData オブジェクトが 1つの CounterData オブジェクトに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciMethodData.hpp))
     class ciCounterData : public CounterData {
 ```
@@ -99,7 +99,7 @@ ciMethodData クラスから JumpData オブジェクト内のプロファイル
 1つの ciJumpData オブジェクトが 1つの JumpData オブジェクトに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciMethodData.hpp))
     class ciJumpData : public JumpData {
 ```
@@ -126,7 +126,7 @@ ciMethodData クラスから ReceiverTypeData オブジェクト内のプロフ�
 1つの ciReceiverTypeData オブジェクトが 1つの ReceiverTypeData オブジェクトに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciMethodData.hpp))
     class ciReceiverTypeData : public ReceiverTypeData {
 ```
@@ -158,7 +158,7 @@ ciMethodData クラスから VirtualCallData オブジェクト内のプロフ�
 1つの ciVirtualCallData オブジェクトが 1つの VirtualCallData オブジェクトに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciMethodData.hpp))
     class ciVirtualCallData : public VirtualCallData {
 ```
@@ -174,14 +174,14 @@ ciMethodData::data_at() 内で(のみ)生成されている.
  無理矢理 ciReceiverTypeData にキャストして呼び出している).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciMethodData.hpp))
       // Fake multiple inheritance...  It's a ciReceiverTypeData also.
       ciReceiverTypeData* rtd_super() { return (ciReceiverTypeData*) this; }
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciMethodData.hpp))
       void set_receiver(uint row, ciKlass* recv) {
         rtd_super()->set_receiver(row, recv);
@@ -213,7 +213,7 @@ ciMethodData クラスから RetData オブジェクト内のプロファイル�
 1つの ciRetData オブジェクトが 1つの RetData オブジェクトに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciMethodData.hpp))
     class ciRetData : public RetData {
 ```
@@ -240,7 +240,7 @@ ciMethodData クラスから BranchData オブジェクト内のプロファイ�
 1つの ciBranchData オブジェクトが 1つの BranchData オブジェクトに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciMethodData.hpp))
     class ciBranchData : public BranchData {
 ```
@@ -270,7 +270,7 @@ ArrayData クラス自体が abstract class なので, このクラスは使用�
  このクラスからではなく対応する ArrayData のサブクラス自身から派生している.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciMethodData.hpp))
     class ciArrayData : public ArrayData {
 ```
@@ -294,7 +294,7 @@ ciMethodData クラスから MultiBranchData オブジェクト内のプロフ�
 1つの ciMultiBranchData オブジェクトが 1つの MultiBranchData オブジェクトに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciMethodData.hpp))
     class ciMultiBranchData : public MultiBranchData {
 ```
@@ -321,7 +321,7 @@ ciMethodData クラスから ArgInfoData オブジェクト内のプロファイ
 1つの ciArgInfoData オブジェクトが 1つの ArgInfoData オブジェクトに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciMethodData.hpp))
     class ciArgInfoData : public ArgInfoData {
 ```
@@ -349,7 +349,7 @@ See: [here](../doxygen/classciArgInfoData.html) for details
 ciObject クラスの具象サブクラスの1つ. methodDataOopDesc 用の ciObject クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciMethodData.hpp))
     // ciMethodData
     //

@@ -22,7 +22,7 @@ Interpreter 用に拡張された MacroAssembler クラス.
 (なお, 32bit か 64bit かによってクラス定義が別になっている)
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/interp_masm_x86_32.hpp))
     // This file specializes the assember with interpreter-specific macros
     
@@ -31,7 +31,7 @@ Interpreter 用に拡張された MacroAssembler クラス.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/interp_masm_x86_64.hpp))
     // This file specializes the assember with interpreter-specific macros
     

@@ -9,7 +9,7 @@ title: Stub クラス関連のクラス (Stub, StubInterface, StubQueue)
 これらは, 動的に生成されるマシン語コード片を管理するためのクラス. 特に, 「生成後に滅多に破棄されないコード片」を担当する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/stubs.hpp))
     // The classes in this file provide a simple framework for the
     // management of little pieces of machine code - or stubs -
@@ -32,7 +32,7 @@ title: Stub クラス関連のクラス (Stub, StubInterface, StubQueue)
 動的に生成されるマシンコード片を管理するクラスの基底クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/stubs.hpp))
     class Stub VALUE_OBJ_CLASS_SPEC {
 ```
@@ -47,7 +47,7 @@ Stub の中は以下のような構造になっている
 (なお, data section や code section は空であってもいい).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/stubs.hpp))
     // Stub serves as abstract base class. A concrete stub
     // implementation is a subclass of Stub, implementing
@@ -91,7 +91,7 @@ Stub クラスのサブクラスのメソッドを呼び出すためのラッパ
 StubInterface のメソッドは virtual となっており, そこから対応する Stub サブクラスのメソッドが呼び出される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/stubs.hpp))
     // A stub interface defines the interface between a stub queue
     // and the stubs it queues. In order to avoid a vtable and
@@ -126,7 +126,7 @@ cast() メソッドでそれぞれのサブクラスにキャストしてから�
 この cast() はマクロにより型が確定しているので, コンパイル段階でそれぞれの Stub サブクラスのメソッドにリンクされる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/stubs.hpp))
     // DEF_STUB_INTERFACE is used to create a concrete stub interface
     // class, forwarding stub interface calls to the corresponding
@@ -169,7 +169,7 @@ See: [here](../doxygen/classStubInterface.html) for details
 生成した Stub を格納しておくためのキュー.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/stubs.hpp))
     // A StubQueue maintains a queue of stubs.
     // Note: All sizes (spaces) are given in bytes.

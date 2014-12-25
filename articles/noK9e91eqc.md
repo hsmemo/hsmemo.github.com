@@ -29,7 +29,7 @@ Phase クラスの具象サブクラスの1つ.
 JIT Compile 処理を実行する (= JIT Compile 作業全体のまとめ役).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/compile.hpp))
     //------------------------------Compile----------------------------------------
     // This class defines a top-level Compiler invocation.
@@ -55,7 +55,7 @@ JIT Compile 処理を実行する (= JIT Compile 作業全体のまとめ役).
   HotSpot が内部的に使用する runtime stub の JIT コンパイル用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/compile.hpp))
       // Major entry point.  Given a Scope, compile the associated method.
       // For normal compilations, entry_bci is InvocationEntryBci.  For on stack
@@ -91,7 +91,7 @@ Compile クラス内で使用される補助クラス.
 (なお, このクラスによる時間の記録処理は TimeCompiler オプションがセットされている場合にのみ行われる)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/compile.hpp))
       // Variant of TraceTime(NULL, &_t_accumulator, TimeCompiler);
       // Integrated with logging.  If logging is turned on, and dolog is true,
@@ -111,7 +111,7 @@ C2 JIT Compiler 関連の様々な箇所で使用されている (#TODO).
 コンストラクタとデストラクタで Compile クラスが保持している CompileLog に出力を行っている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/compile.cpp))
     Compile::TracePhase::TracePhase(const char* name, elapsedTimer* accumulator, bool dolog)
       : TraceTime(NULL, accumulator, false NOT_PRODUCT( || TimeCompiler ), false)
@@ -157,7 +157,7 @@ Compile クラス内で使用される補助クラス.
 そして MergeMemNode は (Compile::AliasType オブジェクト自体を指す代わりに) 該当する添字番号(index)を格納している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/compile.hpp))
       // Information per category of alias (memory slice)
       class AliasType {
@@ -198,7 +198,7 @@ Compile::AliasType::Init() で(のみ)行われている.
 (その他の Compile::AliasType オブジェクトは, 必要に応じて Compile::find_alias_type() で生成される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/compile.hpp))
       // Fixed alias indexes.  (See also MergeMemNode.)
       enum {
@@ -229,7 +229,7 @@ JIT コンパイルの終了時にテーブルそのものを CodeBuffer に出�
 実行時にはそこからロードすることになる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/compile.hpp))
       // Constant table.
       class ConstantTable {
@@ -286,7 +286,7 @@ Compile::ConstantTable に登録されている定数値を表すクラス.
 (なお, このクラスはValueObjクラスではないが, 扱われ方はValueObjクラスに近い)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/compile.hpp))
       // Constant entry of the constant table.
       class Constant {
@@ -320,7 +320,7 @@ Compile::ConstantTable に登録されている定数値を表すクラス.
 (そして, メソッドはこれらのフィールドへのアクセサメソッドのみ).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/compile.hpp))
         BasicType _type;
         jvalue    _value;
@@ -345,7 +345,7 @@ Compile クラスによる JIT コンパイル処理を簡単に記述するた�
 Compile オブジェクトの初期化や後始末をソースコード上のスコープに合わせて自動で行ってくれる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/compile.cpp))
     // ============================================================================
     //------------------------------CompileWrapper---------------------------------
@@ -362,7 +362,7 @@ Compile オブジェクトの初期化や後始末をソースコード上のス
 コンストラクタで初期化処理を行い, デストラクタで後始末を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/compile.cpp))
     CompileWrapper::CompileWrapper(Compile* compile) : _compile(compile) {
       // the Compile* pointer is stored in the current ciEnv:

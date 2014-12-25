@@ -10,7 +10,7 @@ title: AbstractAssembler クラス関連のクラス (Label, RegisterOrConstant,
 より具体的に言うと, Assembler クラス (実行時にマシン語を出力するクラス) 関連のプラットフォーム非依存な部分を定義するクラス (See: [here](no7882z5r.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/asm/assembler.hpp))
     // This file contains platform-independent assembler declarations.
 ```
@@ -35,7 +35,7 @@ Assembler クラス (実行時にマシン語を出力するクラス) の基底
 (See: hotspot/src/cpu/${cpu}/vm/assembler_${cpu}.cpp).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/asm/assembler.hpp))
     // The Abstract Assembler: Pure assembler doing NO optimizations on the
     // instruction level; i.e., what you write is what you get.
@@ -49,7 +49,7 @@ Assembler クラス (実行時にマシン語を出力するクラス) の基底
 そして, 最後に set_code_end() で CodeBuffer の管理情報を修正している模様.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/asm/assembler.cpp))
     // The AbstractAssembler is generating code into a CodeBuffer. To make code generation faster,
     // the assembler keeps a copy of the code buffers boundaries & modifies them when
@@ -71,7 +71,7 @@ Assembler クラス用の補助クラス.
 Assembler クラスが生成する branch 命令の飛び先を管理するクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/asm/assembler.hpp))
     /**
      * Labels represent destinations for control transfer instructions.  Such
@@ -111,7 +111,7 @@ bind() で飛び先が束縛される.
 (Label を使用するブランチ命令より後ろで bind してもきちんと設定してくれる)
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/sparc/vm/assembler_sparc.cpp))
     void MacroAssembler::cond_inc(Assembler::Condition cond, address counter_ptr,
                                   Register Rtmp1, Register Rtmp2 /*, Register Rtmp3, Register Rtmp4 */) {
@@ -139,7 +139,7 @@ Assembler クラス用の補助クラス.
 即値とレジスタのどちらでも取れるようなコードを表現するためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/asm/assembler.hpp))
     // A union type for code which has to assemble both constant and
     // non-constant operands, when the distinction cannot be made
@@ -164,7 +164,7 @@ See: [here](../doxygen/classRegisterOrConstant.html) for details
 可変長命令でなければ必要ない模様 (? #TODO).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/asm/assembler.hpp))
       // Instruction boundaries (required when emitting relocatable values).
       class InstructionMark: public StackObj {
@@ -174,7 +174,7 @@ See: [here](../doxygen/classRegisterOrConstant.html) for details
 命令を吐き出す前にインスタンスを生成して, そこからが命令の始まりだと示している.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.cpp))
     void Assembler::adcl(Address dst, int32_t imm32) {
       InstructionMark im(this);
@@ -188,7 +188,7 @@ See: [here](../doxygen/classRegisterOrConstant.html) for details
 デストラクタ内で AbstractAssembler::clear_inst_mark() を呼び出している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/asm/assembler.hpp))
         InstructionMark(AbstractAssembler* assm) : _assm(assm) {
           assert(assm->inst_mark() == NULL, "overlapping instructions");
@@ -203,7 +203,7 @@ See: [here](../doxygen/classRegisterOrConstant.html) for details
 それぞれ CodeSection::set_mark() と CodeSection::clear_mark() を呼んでいるだけ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/asm/assembler.inline.hpp))
     inline void AbstractAssembler::set_inst_mark() {
       code_section()->set_mark();
@@ -219,7 +219,7 @@ See: [here](../doxygen/classRegisterOrConstant.html) for details
 _mark というフィールドの値を更新しているだけ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/asm/codeBuffer.hpp))
       void    set_mark()                { _mark = _end; }
       void    clear_mark()              { _mark = NULL; }

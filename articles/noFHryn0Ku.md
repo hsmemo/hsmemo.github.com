@@ -19,7 +19,7 @@ MemRegionClosures でスキャンする際には注意するように,
 とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/cardTableModRefBS.hpp))
     // This kind of "BarrierSet" allows a "CollectedHeap" to detect and
     // enumerate ref fields that have been modified (since the last
@@ -50,7 +50,7 @@ card 単位で記録を行う BarrierSet クラス (の基底クラス).
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/cardTableModRefBS.hpp))
     class CardTableModRefBS: public ModRefBarrierSet {
 ```
@@ -62,7 +62,7 @@ card 単位で記録を行う BarrierSet クラス (の基底クラス).
  以下の _byte_map フィールドに jbyte 配列の先頭アドレスが格納され, _byte_map_size フィールドに配列の長さが格納されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/cardTableModRefBS.hpp))
       const size_t    _byte_map_size;    // in bytes
       jbyte*          _byte_map;         // the card marking array
@@ -70,7 +70,7 @@ card 単位で記録を行う BarrierSet クラス (の基底クラス).
 
 アドレスに対応する card table のエントリ(のアドレス)を取得したい場合は, byte_for() メソッドを使えばいい.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/cardTableModRefBS.hpp))
       // Mapping from address to card marking array entry
       jbyte* byte_for(const void* p) const {
@@ -78,7 +78,7 @@ card 単位で記録を行う BarrierSet クラス (の基底クラス).
 
 逆に, card table のエントリ(を指すアドレス)から対応するメモリアドレスを取得したい場合は, addr_for() メソッドを使えばいい.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/cardTableModRefBS.hpp))
       // Mapping from card marking array entry to address of first word
       HeapWord* addr_for(const jbyte* p) const {
@@ -98,7 +98,7 @@ CardTableModRefBS クラスの具象サブクラスの1つ
 (= BarrierSet 機能を提供するクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/cardTableModRefBS.hpp))
     // A specialization for the CardTableRS gen rem set.
     class CardTableModRefBSForCTRS: public CardTableModRefBS {
@@ -109,7 +109,7 @@ CardTableModRefBS クラスの具象サブクラスの1つ
 各 CardTableRS オブジェクトの _ct_bs フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/cardTableRS.hpp))
     class CardTableRS: public GenRemSet {
     ...

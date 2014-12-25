@@ -26,7 +26,7 @@ ciObject では klassOop と Klass の区別はない.
 代わりに, Klass のサブクラスは直接 ciKlass のサブクラスとして表現している (See: ciKlass).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciObject.hpp))
     // ciObject
     //
@@ -65,7 +65,7 @@ ciObject では klassOop と Klass の区別はない.
    この ciObject を差し示す一意な番号. (値は ciObjectFactory::init_ident_of() でセットされる)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciObject.hpp))
       // A JNI handle referring to an oop in the VM.  This
       // handle may, in a small set of cases, correctly be NULL.

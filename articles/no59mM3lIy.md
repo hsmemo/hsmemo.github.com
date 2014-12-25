@@ -34,7 +34,7 @@ root から辿れるポインタを配列に格納していき,
     このクラスは使用箇所が見当たらないが... (Java Heap 内にある root を処理する??)
     
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/bufferingOopClosure.hpp))
     // A BufferingOops closure tries to separate out the cost of finding roots
     // from the cost of applying closures to them.  It maintains an array of
@@ -66,7 +66,7 @@ root から辿れるポインタを配列に格納していき,
 G1GC の処理において, root からの参照を辿る処理と実際の OopClosure の処理の時間を分離するために使用される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/bufferingOopClosure.hpp))
     class BufferingOopClosure: public OopClosure {
 ```
@@ -91,7 +91,7 @@ See: [here](../doxygen/classBufferingOopClosure.html) for details
 G1GC の処理において, root からの参照を辿る処理と実際の OopClosure の処理の時間を分離するために使用される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/bufferingOopClosure.hpp))
     class BufferingOopsInGenClosure: public OopsInGenClosure {
 ```
@@ -112,7 +112,7 @@ See: [here](../doxygen/classBufferingOopsInGenClosure.html) for details
 ?? (このクラスは使用箇所が見当たらない...)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/bufferingOopClosure.hpp))
     class BufferingOopsInHeapRegionClosure: public OopsInHeapRegionClosure {
 ```

@@ -29,7 +29,7 @@ title: AbstractICache クラス関連のクラス (AbstractICache, ICacheStubGen
 (といっても AllStatic なので abstract class というのも少し違和感があるが...).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/icache.hpp))
     // Interface for updating the instruction cache.  Whenever the VM modifies
     // code, part of the processor instruction cache potentially has to be flushed.
@@ -61,7 +61,7 @@ AbstractICache クラス内で使用される補助クラス.
 「指定された範囲の icache を invalidat するマシン語コード」を生成するための一時オブジェクト(StackObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/icache.hpp))
     class ICacheStubGenerator : public StubCodeGenerator {
 ```
@@ -71,7 +71,7 @@ AbstractICache クラス内で使用される補助クラス.
 (このコードを生成した領域が既にキャッシュ済みだとどうしようもなくなる).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/icache.cpp))
       // Making this stub must be FIRST use of assembler
 ```
@@ -106,7 +106,7 @@ StubCodeMark のデストラクタから AbstractICache::invalidate_range() が�
 (この関数内で flush_icache_stub にポインタをセットしておく必要がある).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/icache.hpp))
       // Generate the icache flush stub.
       //

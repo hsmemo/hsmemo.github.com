@@ -17,7 +17,7 @@ vmIntrinsics は, よく使われるメソッドに対してそれを一意に�
 内部的に vmSymbols を用いて実装されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/vmSymbols.hpp))
     // The class vmSymbols is a name space for fast lookup of
     // symbols commonly used in the VM.
@@ -42,7 +42,7 @@ vmIntrinsics は, よく使われるメソッドに対してそれを一意に�
 HotSpot 内部でよく使われる Symbol オブジェクトへの参照を納めた名前空間(AllStatic クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/vmSymbols.hpp))
     // Class vmSymbols
     
@@ -59,7 +59,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
  (例えば「これらに対応するメソッドを定義する」とか「この一覧を iterate して何か処理を行う」とか))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/vmSymbols.hpp))
     // Mapping function names to values. New entries should be added below.
     
@@ -551,7 +551,7 @@ See: [here](../doxygen/classvmSymbols.html) for details
 HotSpot 内部でよく用いられるメソッドに対して, それを一意に示す定数値を定義した名前空間(AllStatic クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/vmSymbols.hpp))
     // VM Intrinsic ID's uniquely identify some very special methods
     class vmIntrinsics: AllStatic {
@@ -573,7 +573,7 @@ vmIntrinsics に登録されているメソッドには vmIntrinsics::ID 型の�
 (なお, vmIntrinsics::ID 型は以下のように定義された enum 値. この定義では後述の VM_INTRINSICS_DO() マクロが使用されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/vmSymbols.hpp))
       enum ID {
         _none = 0,                      // not an intrinsic (default answer)
@@ -603,7 +603,7 @@ vmIntrinsics に登録されているメソッドには vmIntrinsics::ID 型の�
  (というか vmSymbols として intern されてないといけないとのこと))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/vmSymbols.hpp))
     // Here are all the intrinsics known to the runtime and the CI.
     // Each intrinsic consists of a public enum name (like _hashCode),

@@ -23,7 +23,7 @@ JVMTI の機能を実現するためのクラス.
 より具体的に言うと, JVMTI 処理で使用される様々な補助関数を納めた名前空間(AllStatic クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiUtil.hpp))
     ///////////////////////////////////////////////////////////////
     //
@@ -38,7 +38,7 @@ JVMTI の機能を実現するためのクラス.
 ### 内部構造(Internal structure)
 定義されているメソッドは以下の通り.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiUtil.hpp))
       static ResourceArea* single_threaded_resource_area();
     
@@ -69,7 +69,7 @@ See: [here](../doxygen/classJvmtiUtil.html) for details
  このクラスの場合, Thread が存在していなければ代わりに JvmtiUtil::single_threaded_resource_area() を使用するため, 
  hread が生成される前でも使用できる.)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiUtil.hpp))
     ///////////////////////////////////////////////////////////////
     //

@@ -34,7 +34,7 @@ Assembler は CodeBuffer にマシン語を書き出すが,
 それらの並行で埋めていって, 最後に 1つにまとめている模様.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/asm/codeBuffer.hpp))
     // A CodeBuffer describes a memory space into which assembly
     // code is generated.  This memory space usually occupies the
@@ -68,14 +68,14 @@ Assembler は CodeBuffer にマシン語を書き出すが,
 最終的に CodeCache 内にコピーする際には, それぞれの CodeSection 中の空の部分は詰めてコピーされる模様.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/asm/codeBuffer.hpp))
       CodeSection  _consts;             // constants, jump tables
       CodeSection  _insts;              // instructions (the main section)
       CodeSection  _stubs;              // stubs (call site support), deopt, exception handling
 ```
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/asm/codeBuffer.cpp))
     // The structure of the CodeBuffer while code is being accumulated:
     //
@@ -115,7 +115,7 @@ Assembler クラスによるコード生成作業中に,
 (主に JIT 生成コード用?? #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/asm/codeBuffer.hpp))
     class CodeOffsets: public StackObj {
 ```
@@ -125,7 +125,7 @@ JIT コンパイラによって収集されたエントリポイントの情報�
 CodeOffsets という形で nmethod のコンストラクタに引き渡されたりしている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/nmethod.cpp))
     nmethod::nmethod(
     ...
@@ -158,7 +158,7 @@ CodeOffsets という形で nmethod のコンストラクタに引き渡され�
 (それぞれどういうエントリポイントか? #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/asm/codeBuffer.hpp))
       enum Entries { Entry,
                      Verified_Entry,
@@ -187,7 +187,7 @@ CodeBuffer 内に格納されている (See: CodeBuffer).
 これらの CodeSection が並行に埋められていき, 最後にそれらの内容が1つにまとめられる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/asm/codeBuffer.hpp))
     // This class represents a stream of code and associated relocations.
     // There are a few in each CodeBuffer.
@@ -204,7 +204,7 @@ _start 〜 _limit というアドレス範囲にマシン語列が入ってい�
 (なお, _locs_end までが使用済, それ以降が未使用スペース) (See: relocInfo).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/asm/codeBuffer.cpp))
     // The structure of a CodeSection:
     //
@@ -246,7 +246,7 @@ See: [here](../doxygen/classCodeSection.html) for details
 block_comment 機能を実現するためのクラス (See: [here](no7882AEy.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/asm/codeBuffer.hpp))
     class CodeComments VALUE_OBJ_CLASS_SPEC {
 ```
@@ -259,13 +259,13 @@ block_comment 機能を実現するためのクラス (See: [here](no7882AEy.htm
 * 各 CodeBlob オブジェクトの _comments フィールド
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/asm/codeBuffer.hpp))
       CodeComments _comments;
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/codeBlob.hpp))
       CodeComments _comments;
 ```
@@ -274,7 +274,7 @@ block_comment 機能を実現するためのクラス (See: [here](no7882AEy.htm
 block_comment() が呼ばれた際の offset と文字列を内部に記録している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/asm/codeBuffer.cpp))
     void CodeBuffer::block_comment(intptr_t offset, const char * comment) {
       _comments.add_comment(offset, comment);
@@ -285,7 +285,7 @@ block_comment() が呼ばれた際の offset と文字列を内部に記録し�
 CodeBuffer 内の CodeComments に溜められたコメントが CodeBlob にコピーされる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/asm/codeBuffer.cpp))
     void CodeBuffer::copy_code_to(CodeBlob* dest_blob) {
     ...
@@ -298,7 +298,7 @@ CodeBuffer 内の CodeComments に溜められたコメントが CodeBlob にコ
 また #ifdef PRODUCT 時にはフィールドも定義されない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/asm/codeBuffer.hpp))
       void add_comment(intptr_t offset, const char * comment) PRODUCT_RETURN;
       void print_block_comment(outputStream* stream, intptr_t offset)  PRODUCT_RETURN;
@@ -307,7 +307,7 @@ CodeBuffer 内の CodeComments に溜められたコメントが CodeBlob にコ
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/asm/codeBuffer.hpp))
     #ifndef PRODUCT
       CodeComment* _comments;
@@ -327,7 +327,7 @@ CodeComments クラス内で使われる補助クラス.
 実際のコメント情報を溜めておくための線形リスト.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/asm/codeBuffer.cpp))
     class CodeComment: public CHeapObj {
 ```
@@ -337,7 +337,7 @@ CodeComments クラス内で使われる補助クラス.
 (要は _next でつながっていく線形リストになっている).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/asm/codeBuffer.cpp))
       intptr_t     _offset;
       const char * _comment;
@@ -347,7 +347,7 @@ CodeComments クラス内で使われる補助クラス.
 なお, 文字列部分(_comment フィールド)は, ちゃんと strdup() でメモリを新規に確保している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/asm/codeBuffer.cpp))
       CodeComment(intptr_t offset, const char * comment) {
         _offset = offset;
@@ -358,7 +358,7 @@ CodeComments クラス内で使われる補助クラス.
 
   (このため, デストラクタ内で free している)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/asm/codeBuffer.cpp))
       ~CodeComment() {
         assert(_next == NULL, "wrong interface for freeing list");

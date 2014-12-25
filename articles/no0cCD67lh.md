@@ -18,7 +18,7 @@ ParallelScavengeHeap の Parallel Compaction 処理
 Mark 処理や Compact 処理を並列化するための機能を提供している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psCompactionManager.hpp))
     class ParCompactionManager : public CHeapObj {
 ```
@@ -27,7 +27,7 @@ Mark 処理や Compact 処理を並列化するための機能を提供してい
 内部には OverflowTaskQueue<oop> 型のフィールド (_marking_stack) を持っており, 
 mark 処理で見つかったポインタはこのスタックに積まれる.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psCompactionManager.hpp))
       OverflowTaskQueue<oop>        _marking_stack;
 ```
@@ -36,7 +36,7 @@ mark 処理で見つかったポインタはこのスタックに積まれる.
 長すぎるために一度に処理したくないポインタ配列については
 (いったん処理を pending した状態で) このスタックに積まれる.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psCompactionManager.hpp))
       ObjArrayTaskQueue             _objarray_stack;
 ```

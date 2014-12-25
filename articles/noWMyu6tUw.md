@@ -15,7 +15,7 @@ title: ciTypeArrayKlass クラス
 ciArrayKlass クラスの具象サブクラスの1つ. typeArrayKlass 用の ciKlass クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciTypeArrayKlass.hpp))
     // ciTypeArrayKlass
     //

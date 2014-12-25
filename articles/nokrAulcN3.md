@@ -25,7 +25,7 @@ title: CSpaceCounters 及びその補助クラス (CSpaceCounters, ContiguousSpa
 
 ContiguousSpace に関する PerfData を格納しておくためのクラス.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/cSpaceCounters.hpp))
     // A CSpaceCounters is a holder class for performance counters
     // that track a space;
@@ -39,7 +39,7 @@ ContiguousSpace (やそのサブクラス) のオブジェクトを保持して�
 
 * DefNewGeneration
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/defNewGeneration.hpp))
     class DefNewGeneration: public Generation {
     ...
@@ -50,7 +50,7 @@ ContiguousSpace (やそのサブクラス) のオブジェクトを保持して�
 
 * TenuredGeneration
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/tenuredGeneration.hpp))
     class TenuredGeneration: public OneContigSpaceCardGeneration {
     ...
@@ -59,7 +59,7 @@ ContiguousSpace (やそのサブクラス) のオブジェクトを保持して�
 
 * CompactingPermGenGen
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/compactingPermGenGen.hpp))
     class CompactingPermGenGen: public OneContigSpaceCardGeneration {
     ...
@@ -70,21 +70,21 @@ ContiguousSpace (やそのサブクラス) のオブジェクトを保持して�
 ### 内部構造(Internal structure)
 内部には, 記録対象の ContigousSpace と, そのパフォーマンスカウンタとして使う PerfVariable 2 個を保持している.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/cSpaceCounters.hpp))
       PerfVariable*      _capacity;
       PerfVariable*      _used;
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/cSpaceCounters.hpp))
       ContiguousSpace*     _space;
 ```
 
 これらの PerfVariable には, (そのフィールド名の通り) 対応する ContiguousSpace の最大量(capacity)と現在使用量(used)が記録される.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/cSpaceCounters.hpp))
       inline void update_capacity() {
         _capacity->set_value(_space->capacity());
@@ -113,7 +113,7 @@ ContiguousSpace (やそのサブクラス) のオブジェクトを保持して�
   * sun.gc.generation.${n}.space.${m}.used
   * sun.gc.generation.${n}.space.${m}.initCapacity
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/cSpaceCounters.cpp))
         const char* cns = PerfDataManager::name_space(gc->name_space(), "space",
                                                       ordinal);
@@ -158,7 +158,7 @@ See: [here](../doxygen/classCSpaceCounters.html) for details
 ContiguousSpace を PerfLongSampleHelper (のサブクラス) として使うためのラッパークラス
 (より具体的に言うと, ContiguousSpace の使用量情報(used)を PerfVariable で記録するためのクラス).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/cSpaceCounters.hpp))
     class ContiguousSpaceUsedHelper : public PerfLongSampleHelper {
 ```
@@ -166,7 +166,7 @@ ContiguousSpace を PerfLongSampleHelper (のサブクラス) として使うた
 ### 内部構造(Internal structure)
 やってることは, PerfLongSampleHelper::take_sample() を ContiguousSpace::used() に変換するだけ.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/cSpaceCounters.hpp))
         inline jlong take_sample() {
           return _space->used();

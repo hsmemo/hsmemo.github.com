@@ -24,7 +24,7 @@ title: VMThread クラス関連のクラス (VMOperationQueue, VMThread, 及び�
 VM Operation を実行するためのスレッドクラス (See: [here](no2480qPC.html) and [here](no2480eqy.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vmThread.hpp))
     // A single VMThread (the primordial thread) spawns all other threads
     // and is itself used by other threads to offload heavy vm operations
@@ -65,7 +65,7 @@ VMThread に対して VM Operation 要求を伝えるための優先順位付き
  VM_Operation オブジェクトをこのキューに詰めることで通知する).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vmThread.hpp))
     // Prioritized queue of VM operations.
     //
@@ -95,7 +95,7 @@ VMThread::create() 内で(のみ)生成されている.
 各リストは _queue というポインタ配列に格納されている.
 各リストの長さは _queue_length フィールドに格納されている.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vmThread.hpp))
       // We maintain a doubled linked list, with explicit count.
       int           _queue_length[nof_priorities];
@@ -106,7 +106,7 @@ VMThread::create() 内で(のみ)生成されている.
 なお, 現状の実装では優先度は３段階
 (Safepoint が必要かどうかに応じて分けられている(? #TODO)).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vmThread.hpp))
       enum Priorities {
          SafepointPriority, // Highest priority (operation executed at a safepoint)
@@ -123,7 +123,7 @@ VMThread::create() 内で(のみ)生成されている.
 (この _drain_list フィールドは GC 時のチェック対象になっている.
  ここに登録しておけば処理途中で GC が起きてもポインタが不正にならないと保証される).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vmThread.hpp))
       // we also allow the vmThread to register the ops it has drained so we
       // can scan them from oops_do
@@ -151,7 +151,7 @@ VMOperationQueue は要求を circular double-linked list で管理しており,
 そして 1 未満になることはない)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vmThread.cpp))
     // Dummy VM operation to act as first element in our circular double-linked list
     class VM_Dummy: public VM_Operation {
@@ -165,7 +165,7 @@ VMOperationQueue は要求を circular double-linked list で管理しており,
 VMOperationQueue::VMOperationQueue() 内で(のみ)生成されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vmThread.cpp))
     VMOperationQueue::VMOperationQueue() {
       // The queue is a circular doubled-linked list, which always contains

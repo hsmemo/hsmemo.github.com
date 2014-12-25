@@ -20,7 +20,7 @@ ClassLoader クラス用の補助クラス (See: [here](no7882m2Z.html) and [her
 なおコメントによると, 使う人がバッファの開放に責任を持たなければいけない, とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/classFileStream.hpp))
     // Input stream for reading .class file
     //

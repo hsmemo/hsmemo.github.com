@@ -31,7 +31,7 @@ title: ブートストラップ・クラスローダ関連のクラス (MetaInde
 ブートストラップ・クラスローダに関する機能を納めた名前空間(AllStatic クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/classLoader.hpp))
     class ClassLoader: AllStatic {
 ```
@@ -54,7 +54,7 @@ ClassLoader クラス用の補助クラス.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/classLoader.hpp))
     // Class path entry (directory or zip file)
     
@@ -76,7 +76,7 @@ ClassPathEntry クラスの具象サブクラスの1つ.
 このクラスは, パスが「クラスファイルの入ったディレクトリ」である場合用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/classLoader.hpp))
     class ClassPathDirEntry: public ClassPathEntry {
 ```
@@ -100,7 +100,7 @@ ClassPathEntry クラスの具象サブクラスの1つ.
 このクラスは, パスが「クラスファイルの入った jar ファイル」である場合用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/classLoader.hpp))
     class ClassPathZipEntry: public ClassPathEntry {
 ```
@@ -129,7 +129,7 @@ ClassPathEntry クラスの具象サブクラスの1つ.
 LazyBootClassLoader オプションが指定されている場合に使用される (See: LazyBootClassLoader オプション).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/classLoader.hpp))
     // For lazier loading of boot class path entries
     class LazyClassPathEntry: public ClassPathEntry {
@@ -155,7 +155,7 @@ LazyClassPathEntry クラス用の補助クラス.
 不必要な jar ファイルのロードを防止するために使われる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/classLoader.hpp))
     // Meta-index (optional, to be able to skip opening boot classpath jar files)
     class MetaIndex: public CHeapObj {
@@ -181,7 +181,7 @@ See: [here](../doxygen/classMetaIndex.html) for details
 クラスローディングにかかった処理時間(あるいは関連する処理時間)を記録するためのユーティリティ・クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/classLoader.hpp))
     // PerfClassTraceTime is used to measure time for class loading related events.
     // This class tracks cumulative time and exclusive time for specific event types.
@@ -229,7 +229,7 @@ ClassLoader クラス内で使用される補助クラス.
 内部はハッシュテーブルとして実装されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/classLoader.cpp))
     class PackageHashtable : public BasicHashtable {
 ```
@@ -239,7 +239,7 @@ ClassLoader クラス内で使用される補助クラス.
 ClassLoader クラスの _package_hash_table フィールド (static フィールド) に(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/classLoader.hpp))
       // Hash table used to keep track of loaded packages
       static PackageHashtable* _package_hash_table;
@@ -249,7 +249,7 @@ ClassLoader クラスの _package_hash_table フィールド (static フィー�
 * ClassLoader::load_classfile() でロードされるたびに add_package() でハッシュに追加されていく.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/classLoader.cpp))
     instanceKlassHandle ClassLoader::load_classfile(Symbol* h_name, TRAPS) {
     ...
@@ -273,7 +273,7 @@ ClassLoader クラスの _package_hash_table フィールド (static フィー�
   最終的に ClassLoader::_package_hash_table 内のデータがコピーされてリターンされる.)
 
 
-```
+```cpp
     ((cite: jdk/src/share/native/java/lang/Package.c))
     JNIEXPORT jstring JNICALL
     Java_java_lang_Package_getSystemPackage0(JNIEnv *env, jclass cls, jstring str)
@@ -289,7 +289,7 @@ ClassLoader クラスの _package_hash_table フィールド (static フィー�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvm.cpp))
     JVM_ENTRY(jobjectArray, JVM_GetSystemPackages(JNIEnv *env))
       JVMWrapper("JVM_GetSystemPackages");
@@ -321,7 +321,7 @@ BasicHashtableEntry のサブクラスになっており,
 パッケージ名をキーとしてハッシュから取得できるようになっている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/classLoader.cpp))
     // PackageInfo data exists in order to support the java.lang.Package
     // class.  A Package object provides information about a java package

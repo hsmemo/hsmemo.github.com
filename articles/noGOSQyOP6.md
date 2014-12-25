@@ -28,7 +28,7 @@ Java ヒープ領域を管理するクラスの基底クラス.
 Java ヒープ領域は, CollectedHeap クラスのサブクラスによって管理される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_interface/collectedHeap.hpp))
     // A "CollectedHeap" is an implementation of a java heap for HotSpot.  This
     // is an abstract class: there may be many different kinds of heaps.  This
@@ -37,7 +37,7 @@ Java ヒープ領域は, CollectedHeap クラスのサブクラスによって�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_interface/collectedHeap.hpp))
     class CollectedHeap : public CHeapObj {
 ```
@@ -52,7 +52,7 @@ Java ヒープ領域は, CollectedHeap クラスのサブクラスによって�
 * ParallelScavengeHeap (ParallelScavenge 用)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_interface/collectedHeap.hpp))
     //
     // CollectedHeap
@@ -79,7 +79,7 @@ CollectedHeap クラス用のユーティリティ・クラス.
 GCCause を変更する (= CollectedHeap に GCCause を設定する) ための一時オブジェクト(StackObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_interface/collectedHeap.hpp))
     // Class to set and reset the GC cause for a CollectedHeap.
     

@@ -29,7 +29,7 @@ title: Reflection クラス関連のクラス (KlassStream, MethodStream, FieldS
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/reflectionUtils.hpp))
     // A KlassStream is an abstract stream for streaming over self, superclasses
     // and (super)interfaces. Streaming is done in reverse order (subclasses first,
@@ -57,7 +57,7 @@ See: [here](../doxygen/classKlassStream.html) for details
 そのスーパークラスやスーパーインターフェースのメソッドを辿っていくためのイテレータクラス(ValueObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/reflectionUtils.hpp))
     // A MethodStream streams over all methods in a class, superclasses and (super)interfaces.
     // Streaming is done in reverse order (subclasses first, methods in reverse order)
@@ -94,7 +94,7 @@ See: [here](../doxygen/classMethodStream.html) for details
 そのスーパークラスやスーパーインターフェースのフィールドを辿っていくためのイテレータクラス(ValueObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/reflectionUtils.hpp))
     // A FieldStream streams over all fields in a class, superclasses and (super)interfaces.
     // Streaming is done in reverse order (subclasses first, fields in reverse order)
@@ -135,7 +135,7 @@ See: [here](../doxygen/classFieldStream.html) for details
 FieldStream と異なり, HotSpot の内部処理用のフィールドはスキップする.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/reflectionUtils.hpp))
     // A FilteredFieldStream streams over all fields in a class, superclasses and
     // (super)interfaces. Streaming is done in reverse order (subclasses first,
@@ -183,7 +183,7 @@ FilteredFieldStream の処理でスキップしたいフィールドを管理す
 (より正確には, そのための機能を納めた名前空間(AllStatic クラス)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/reflectionUtils.hpp))
     class FilteredFieldsMap : AllStatic {
 ```
@@ -218,7 +218,7 @@ FilteredFieldStream の処理でスキップしたいフィールドを管理す
 実際のスキップ対象の情報は FilteredField オブジェクトが格納している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/reflectionUtils.hpp))
      private:
       static GrowableArray<FilteredField *> *_filtered_fields;
@@ -242,7 +242,7 @@ FilteredFieldStream の処理でスキップしたいフィールドを管理す
     除外されている理由は恐らく java.lang.Throwable.backtrace フィールドと同様 (#TODO).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/reflectionUtils.cpp))
     void FilteredFieldsMap::initialize() {
     ...
@@ -276,7 +276,7 @@ FilteredFieldStream の処理でスキップしたいフィールドを表すク
 1つの FilteredField オブジェクトが 1つのフィールドに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/reflectionUtils.hpp))
     class FilteredField {
 ```
@@ -305,7 +305,7 @@ FilteredFieldsMap::initialize() 内で(のみ)生成されている.
 (それぞれ, フィルタリング対象のクラス, およびそのフィールドのオフセットを表す)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/reflectionUtils.hpp))
       klassOop _klass;
       int      _field_offset;

@@ -31,7 +31,7 @@ title: CodeBlob とそのサブクラス (CodeBlob, BufferBlob, AdapterBlob, Met
 動的に生成されたマシン語コードを格納するメモリ領域を表すクラスの基底クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/codeBlob.hpp))
     class CodeBlob VALUE_OBJ_CLASS_SPEC {
 ```
@@ -40,7 +40,7 @@ title: CodeBlob とそのサブクラス (CodeBlob, BufferBlob, AdapterBlob, Met
 (例えば, このクラスの is_alive() 等が abstract)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/codeBlob.hpp))
       virtual bool is_alive() const                  = 0;
 ```
@@ -52,7 +52,7 @@ CodeBlob は以下のような構造を持つ.
  relocation_begin(), relocation_end() でアクセスできる).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/codeBlob.hpp))
     // Layout:
     //   - header
@@ -69,7 +69,7 @@ CodeBlob は以下のような構造を持つ.
 (ちなみに, oopmap 情報(OopMapSet) や block_comment 情報(CodeComments) は header 部分に含まれている).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/codeBlob.hpp))
       const char* _name;
       int        _size;                              // total size of CodeBlob in bytes
@@ -100,7 +100,7 @@ relocate 処理が不要なコードを格納するための CodeBlob
 (例えば, interpreter や stubroutine 用に生成されるコードが該当する).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/codeBlob.hpp))
     //----------------------------------------------------------------------------------------------------
     // BufferBlob: used to hold non-relocatable machine code such as the interpreter, stubroutines, etc.
@@ -113,7 +113,7 @@ relocate 処理が不要なコードを格納するための CodeBlob
 具体的には, 以下のスタブがこのクラスのインスタンスとなっている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/interpreterRuntime.hpp))
     class SignatureHandlerLibrary: public AllStatic {
     ...
@@ -121,7 +121,7 @@ relocate 処理が不要なコードを格納するための CodeBlob
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/compile.hpp))
       class ConstantTable {
     ...
@@ -129,7 +129,7 @@ relocate 処理が不要なコードを格納するための CodeBlob
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntime.hpp))
     class AdapterHandlerLibrary: public AllStatic {
     ...
@@ -137,7 +137,7 @@ relocate 処理が不要なコードを格納するための CodeBlob
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/stubRoutines.hpp))
     class StubRoutines: AllStatic {
     ...
@@ -160,7 +160,7 @@ See: [here](../doxygen/classBufferBlob.html) for details
 c2i adapters および i2c adapters のコードを格納するための CodeBlob (See: [here](no7882a7C.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/codeBlob.hpp))
     //----------------------------------------------------------------------------------------------------
     // AdapterBlob: used to hold C2I/I2C adapters
@@ -173,7 +173,7 @@ c2i adapters および i2c adapters のコードを格納するための CodeBlo
 AdapterHandlerLibrary::get_adapter() の中で生成されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntime.cpp))
     AdapterHandlerEntry* AdapterHandlerLibrary::get_adapter(methodHandle method) {
     ...
@@ -193,7 +193,7 @@ See: [here](../doxygen/classAdapterBlob.html) for details
 MethodHandles adapters を格納するための CodeBlob. (#TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/codeBlob.hpp))
     //----------------------------------------------------------------------------------------------------
     // MethodHandlesAdapterBlob: used to hold MethodHandles adapters
@@ -206,7 +206,7 @@ MethodHandles adapters を格納するための CodeBlob. (#TODO)
 具体的には, 以下のスタブがこのクラスのインスタンスとなっている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/methodHandles.cpp))
     MethodHandlesAdapterBlob* MethodHandles::_adapter_code = NULL;
 ```
@@ -224,7 +224,7 @@ See: [here](../doxygen/classMethodHandlesAdapterBlob.html) for details
 JIT 生成コードから使用されるランタイムスタブ(Runtime を呼び出すためのスタブ)用のコードを格納する CodeBlob.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/codeBlob.hpp))
     //----------------------------------------------------------------------------------------------------
     // RuntimeStub: describes stubs used by compiled code to call a (static) C++ runtime routine
@@ -238,7 +238,7 @@ JIT 生成コードから使用されるランタイムスタブ(Runtime を呼�
 
 ##### SharedRuntime 内:
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntime.cpp))
     // Shared stub locations
     RuntimeStub*        SharedRuntime::_wrong_method_blob;
@@ -252,7 +252,7 @@ JIT 生成コードから使用されるランタイムスタブ(Runtime を呼�
 OptoRuntime::generate_stub() で生成される以下のスタブが該当する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/runtime.cpp))
     void OptoRuntime::generate(ciEnv* env) {
     ...
@@ -285,7 +285,7 @@ OptoRuntime::generate_stub() で生成される以下のスタブが該当する
 
 ##### StubRoutines 内:
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/stubRoutines.cpp))
     address StubRoutines::_throw_AbstractMethodError_entry          = NULL;
     address StubRoutines::_throw_IncompatibleClassChangeError_entry = NULL;
@@ -314,7 +314,7 @@ VM 内に 1つしか存在しない CodeBlob の基底クラス.
 (なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラスである模様)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/codeBlob.hpp))
     //----------------------------------------------------------------------------------------------------
     // Super-class for all blobs that exist in only one instance. Implements default behaviour.
@@ -343,7 +343,7 @@ See: [here](../doxygen/classSingletonBlob.html) for details
 (#Under Construction)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/codeBlob.hpp))
     //----------------------------------------------------------------------------------------------------
     // RicochetBlob
@@ -357,7 +357,7 @@ See: [here](../doxygen/classSingletonBlob.html) for details
 具体的には, 以下のスタブがこのクラスのインスタンスとなっている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntime.cpp))
     RicochetBlob*       SharedRuntime::_ricochet_blob;
 ```
@@ -375,7 +375,7 @@ See: [here](../doxygen/classRicochetBlob.html) for details
 脱最適化処理(deopt 処理)を行うコードを格納する CodeBlob (See: [here](no7882nFJ.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/codeBlob.hpp))
     //----------------------------------------------------------------------------------------------------
     // DeoptimizationBlob
@@ -388,7 +388,7 @@ See: [here](../doxygen/classRicochetBlob.html) for details
 具体的には, 以下のスタブがこのクラスのインスタンスとなっている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntime.cpp))
     DeoptimizationBlob* SharedRuntime::_deopt_blob;
 ```
@@ -408,7 +408,7 @@ uncommon trap 処理を行うコードを格納する CodeBlob (See: [here](no78
 現在は C2 でしか使われていない (というか, #ifdef COMPILER2 でなければ定義もされない)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/codeBlob.hpp))
     //----------------------------------------------------------------------------------------------------
     // UncommonTrapBlob (currently only used by Compiler 2)
@@ -423,7 +423,7 @@ uncommon trap 処理を行うコードを格納する CodeBlob (See: [here](no78
 具体的には, 以下のスタブがこのクラスのインスタンスとなっている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntime.cpp))
     #ifdef COMPILER2
     UncommonTrapBlob*   SharedRuntime::_uncommon_trap_blob;
@@ -445,7 +445,7 @@ See: [here](../doxygen/classUncommonTrapBlob.html) for details
 現在は C2 でしか使われていない (というか, #ifdef COMPILER2 でなければ定義もされない)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/codeBlob.hpp))
     //----------------------------------------------------------------------------------------------------
     // ExceptionBlob: used for exception unwinding in compiled code (currently only used by Compiler 2)
@@ -458,7 +458,7 @@ See: [here](../doxygen/classUncommonTrapBlob.html) for details
 具体的には, 以下のスタブがこのクラスのインスタンスとなっている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/runtime.cpp))
     ExceptionBlob* OptoRuntime::_exception_blob;
 ```
@@ -476,7 +476,7 @@ See: [here](../doxygen/classExceptionBlob.html) for details
 safepoint polling 処理でメモリアクセス違反が起きた際の処理(safepoint 処理)を行うコードを格納する CodeBlob (See: [here](no7882Okb.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/codeBlob.hpp))
     //----------------------------------------------------------------------------------------------------
     // SafepointBlob: handles illegal_instruction exceptions during a safepoint
@@ -492,7 +492,7 @@ SharedRuntime::generate_handler_blob() で作成されている (See: SharedRunt
 具体的には, 以下のスタブがこのクラスのインスタンスとなっている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntime.cpp))
     SafepointBlob*      SharedRuntime::_polling_page_safepoint_handler_blob;
     SafepointBlob*      SharedRuntime::_polling_page_return_handler_blob;

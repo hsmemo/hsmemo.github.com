@@ -20,7 +20,7 @@ AbstractICache クラスの具象サブクラス
 実際には ICacheStubGenerator::generate_icache_flush() にはいろいろと処理が書いてある)
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/icache_x86.hpp))
     // Interface for updating the instruction cache.  Whenever the VM modifies
     // code, part of the processor instruction cache potentially has to be flushed.
@@ -44,7 +44,7 @@ AbstractICache クラスの具象サブクラス
 このクラスが行っているのは, 処理に関する以下の定数値(キャッシュラインサイズ等)をオーバーライドしているだけ.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/icache_x86.hpp))
     #ifdef AMD64
       enum {

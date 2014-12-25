@@ -18,13 +18,13 @@ StubCodeGenerator クラスの具象サブクラスの1つ.
 (なお, 32bit か 64bit かによってクラス定義が別になっている.)
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/stubGenerator_x86_32.cpp))
     class StubGenerator: public StubCodeGenerator {
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/stubGenerator_x86_64.cpp))
     class StubGenerator: public StubCodeGenerator {
 ```

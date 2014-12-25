@@ -21,7 +21,7 @@ JVMTI のイベントの中には, 実際にそのイベントが起こった瞬
 "ServiceThread" という JavaThread が実際の通知処理を行うことにしている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiImpl.hpp))
     /**
      * When a thread (such as the compiler thread or VM thread) cannot post a

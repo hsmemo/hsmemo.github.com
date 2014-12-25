@@ -38,7 +38,7 @@ GrowableCache クラス内に格納されて管理される.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス (See: JvmtiBreakpoint).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiImpl.hpp))
     ///////////////////////////////////////////////////////////////
     //
@@ -61,7 +61,7 @@ GrowableCache クラス内に格納されて管理される.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiImpl.hpp))
     class GrowableElement : public CHeapObj {
 ```
@@ -94,7 +94,7 @@ GrowableElement::getCacheValue() の呼び出しに対して返した結果を�
 _cache のアドレスが変わった場合に呼び出されるコールバックを設定しておくことができる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiImpl.hpp))
     ///////////////////////////////////////////////////////////////
     //
@@ -117,7 +117,7 @@ _cache のアドレスが変わった場合に呼び出されるコールバッ�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiImpl.hpp))
     class GrowableCache VALUE_OBJ_CLASS_SPEC {
 ```
@@ -132,7 +132,7 @@ _cache のアドレスが変わった場合に呼び出されるコールバッ�
 
 ### 内部構造(Internal structure)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiImpl.hpp))
       // Parallel array of cached values
       address *_cache;
@@ -141,7 +141,7 @@ _cache のアドレスが変わった場合に呼び出されるコールバッ�
 ### 備考(Notes)
 なお, 現在の JvmtiBreakpoint::getCacheValue() の実装は JvmtiBreakpoint::getBcp() を返すようになっている模様.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiImpl.hpp))
       address getCacheValue()         { return getBcp(); }
 ```
@@ -149,7 +149,7 @@ _cache のアドレスが変わった場合に呼び出されるコールバッ�
 そして JvmtiBreakpoint::getBcp() の方は, 
 methodOop 内のブレークポイントに該当するアドレスを返すようになっている模様.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiImpl.cpp))
     address JvmtiBreakpoint::getBcp() {
       return _method->bcp_from(_bci);
@@ -186,7 +186,7 @@ GrowableCache だと JvmtiBreakpoint オブジェクトを入れるには Growab
 JvmtiBreakpointCache だと内部的にキャストしてくれるのでキャストの必要が無い, という点.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiImpl.hpp))
     ///////////////////////////////////////////////////////////////
     //
@@ -223,7 +223,7 @@ JVMTI の SetBreakpoint() によって設定されたブレークポイントを
 1つのブレークポイントに付き1つの JvmtiBreakpoint オブジェクトが生成される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiImpl.hpp))
     ///////////////////////////////////////////////////////////////
     //
@@ -237,7 +237,7 @@ JVMTI の SetBreakpoint() によって設定されたブレークポイントを
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiImpl.hpp))
     class JvmtiBreakpoint : public GrowableElement {
 ```
@@ -266,7 +266,7 @@ JVMTI のブレークポイント処理で使用される補助クラス(VM_Oper
 ブレークポイントの追加や削除を行う
 (ブレークポイントの変更は非同期に行うと危険なので VM_Operation となっている).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiImpl.hpp))
     ///////////////////////////////////////////////////////////////
     //
@@ -304,7 +304,7 @@ JVMTI のブレークポイント処理で使用される補助クラス (See: [
 実体としては, 単なるJvmtiBreakpointCacheのラッパー+α, といった感じ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiImpl.hpp))
     ///////////////////////////////////////////////////////////////
     //
@@ -338,7 +338,7 @@ JvmtiCurrentBreakpoints::get_jvmti_breakpoints() 内で(のみ)生成されて�
 ### 内部構造(Internal structure)
 定義されているフィールドは以下のもののみ.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiImpl.hpp))
       JvmtiBreakpointCache _bps;
 ```
@@ -362,7 +362,7 @@ JVMTI のブレークポイント機能の処理を行うクラス
   * JvmtiBreakpoints を, 必要になるまで生成しない(生成を遅延する)機能
   * ブレークポイント関係のクラスが保持しているポインタに関する oops_do() 処理 (Garbage Collection を支援する機能)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiImpl.hpp))
     ///////////////////////////////////////////////////////////////
     //
@@ -396,7 +396,7 @@ JVMTI のブレークポイント機能の処理を行うクラス
     Garbage Collection 処理用の補助関数.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiImpl.hpp))
       static void initialize();
       static void destroy();
@@ -446,7 +446,7 @@ JVMTI の関数 (より具体的に言うと, 局所変数にアクセスする 
  VM_Operation にする代わりに, 
  アクセス先のスレッドを suspend させてロックも取得してからアクセスするという実装でもよいかもしれない, とのこと.)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiImpl.hpp))
     ///////////////////////////////////////////////////////////////
     // The get/set local operations must only be done by the VM thread
@@ -492,7 +492,7 @@ JVMTI の関数 (より具体的に言うと GetLocalInstance() 関数) を実�
 (See: [here](no2935GIU.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiImpl.hpp))
     class VM_GetReceiver : public VM_GetOrSetLocal {
 ```
@@ -525,7 +525,7 @@ JVMTI の関数 (より具体的に言うと, スレッドの suspend/resume 処
 * ResumeThreadList()
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiImpl.hpp))
     ///////////////////////////////////////////////////////////////
     //
@@ -570,7 +570,7 @@ JVMTI の関数 (より具体的に言うと, スレッドの suspend/resume 処
 内部には, 以下のメソッド(のみ)が定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiImpl.hpp))
       // suspend the thread, taking it to a safepoint
       static bool suspend(JavaThread *java_thread);
@@ -598,7 +598,7 @@ JVMTI のイベント通知機能を実装するための補助クラス(ValueOb
 1つの JvmtiDeferredEvent オブジェクトが 1つのイベント通知に対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiImpl.hpp))
     class JvmtiDeferredEvent VALUE_OBJ_CLASS_SPEC {
 ```
@@ -641,7 +641,7 @@ JvmtiExport::post_dynamic_code_generated()
 ### 内部構造(Internal structure)
 定義されているフィールドは以下のもののみ.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiImpl.hpp))
       Type _type;
       union {
@@ -662,7 +662,7 @@ JvmtiExport::post_dynamic_code_generated()
 (なお, Type 型は以下のような enum 型)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiImpl.hpp))
       typedef enum {
         TYPE_NONE,
@@ -690,7 +690,7 @@ JVMTI のイベント通知機能を実装するための補助クラス.
 (より正確には, そのための機能を納めた名前空間(AllStatic クラス)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiImpl.hpp))
     /**
      * Events enqueued on this queue wake up the Service thread which dequeues
@@ -721,7 +721,7 @@ JVMTI のイベント通知機能を実装するための補助クラス.
 フィールドとしては以下のフィールド(のみ)が定義されている
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiImpl.hpp))
       static QueueNode* _queue_head;             // Hold Service_lock to access
       static QueueNode* _queue_tail;             // Hold Service_lock to access
@@ -735,7 +735,7 @@ _queue_head と _queue_tail を操作する.
 JvmtiDeferredEventQueue::add_pending_event() は _pending_list に追加を行う.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiImpl.hpp))
       // Must be holding Service_lock when calling these
       static bool has_events() KERNEL_RETURN_(false);
@@ -756,7 +756,7 @@ _pending_list に追加された要素を _queue_head/_queue_tail に移動す�
 以下の private メソッドによって行われている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiImpl.hpp))
       // Transfers events from the _pending_list to the _queue.
       static void process_pending_events() KERNEL_RETURN;
@@ -777,7 +777,7 @@ JvmtiDeferredEventQueue クラス内で使用される補助クラス.
 遅延したいイベントを線形リスト状にして溜めておくために使用される (See: [here](no3718UPQ.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiImpl.hpp))
       class QueueNode : public CHeapObj {
 ```
@@ -786,7 +786,7 @@ JvmtiDeferredEventQueue クラス内で使用される補助クラス.
 内部には以下のフィールド(のみ)を含む (そして, メソッドはこれらのフィールドへのアクセサメソッドのみ).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiImpl.hpp))
         JvmtiDeferredEvent _event;
         QueueNode* _next;

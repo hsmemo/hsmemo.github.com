@@ -18,7 +18,7 @@ klass フィールドによるポインタの連鎖の不動点として働く K
 klassKlass の klass は klassKlass 自身になっている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/klassKlass.hpp))
     // A klassKlass serves as the fix point of the klass chain.
     // The klass of klassKlass is itself.

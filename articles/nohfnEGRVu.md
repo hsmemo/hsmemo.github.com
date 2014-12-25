@@ -15,7 +15,7 @@ title: ciMethodHandle クラス
 ciInstance クラスのサブクラスの1つ. java.lang.invoke.MethodHandle オブジェクトを表す instanceOopDesc 用の ciObject クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciMethodHandle.hpp))
     // ciMethodHandle
     //

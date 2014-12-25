@@ -12,7 +12,7 @@ title: Form 関連の基本的なクラス (FormDict, Form, FormList, NameList, 
 ArchDesc 内ではパース結果は FormList (Form の集合)として格納されている (See: [here](nop0Yyr-jc.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/adlc/archDesc.hpp))
       FormList      _header;             // List of Source Code Forms for hpp file
       FormList      _pre_header;         // ditto for the very top of the hpp file

@@ -26,7 +26,7 @@ title: StatSampler クラス (StatSampler, 及びその補助クラス(StatSampl
 (See: [here](no3420acA.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/statSampler.hpp))
     /*
      * The StatSampler class is responsible for periodically updating
@@ -47,7 +47,7 @@ title: StatSampler クラス (StatSampler, 及びその補助クラス(StatSampl
   Threads::create_vm() の内で StatSampler::engage() が呼ばれて処理が開始される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.cpp))
     jint Threads::create_vm(JavaVMInitArgs* args, bool* canTryAgain) {
     ...
@@ -63,7 +63,7 @@ title: StatSampler クラス (StatSampler, 及びその補助クラス(StatSampl
   before_exit() の内で StatSampler::disengage() 及び StatSampler::destroy() が呼ばれて後片付けが行われる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/java.cpp))
     void before_exit(JavaThread * thread) {
     ...
@@ -87,7 +87,7 @@ StatSampler クラス内で使用される補助クラス.
 定期間隔で PerfData のデータを共有メモリ(hsperfdataファイル)に反映させるためのクラス(PeriodicTaskクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/statSampler.cpp))
     // --------------------------------------------------------
     // StatSamplerTask
@@ -121,7 +121,7 @@ os クラスが管理している経過時間情報 (os::elapsed_counter()) を
 PerfData から出力するための補助クラス(PerfSampleHelperクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/statSampler.cpp))
     /*
      * helper class to provide for sampling of the elapsed_counter value

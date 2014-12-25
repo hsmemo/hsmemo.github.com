@@ -22,21 +22,21 @@ Remembered Set 機能を提供するクラスは使用する GC アルゴリズ�
 実質的には GenCollectedHeap でしか使われていない模様 #TODO) (See: HeapRegionRemSet, G1RemSet)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/genRemSet.hpp))
     // A GenRemSet provides ways of iterating over pointers accross generations.
     // (This is especially useful for older-to-younger.)
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/genRemSet.hpp))
     class GenRemSet: public CHeapObj {
 ```
 
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/genRemSet.hpp))
       virtual Name rs_kind() = 0;
 ```

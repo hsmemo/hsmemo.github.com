@@ -24,7 +24,7 @@ JVMTI の関数 (より具体的に言うと, GetLoadedClasses() 関数と GetCl
 のための関数を納めた名前空間(AllStatic クラス) (See: [here](no29354IF.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiGetLoadedClasses.hpp))
     class JvmtiGetLoadedClasses : AllStatic {
 ```
@@ -38,7 +38,7 @@ JVMTI の関数 (より具体的に言うと, GetLoadedClasses() 関数と GetCl
 (というか JvmtiEnv は JvmtiGetLoadedClasses に処理を丸投げしているだけ...)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEnv.cpp))
     // class_count_ptr - pre-checked for NULL
     // classes_ptr - pre-checked for NULL
@@ -62,7 +62,7 @@ JVMTI の関数 (より具体的に言うと, GetLoadedClasses() 関数と GetCl
 内部には, 以下のメソッド(のみ)が定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiGetLoadedClasses.hpp))
       static jvmtiError getLoadedClasses(JvmtiEnv *env, jint* classCountPtr, jclass** classesPtr);
       static jvmtiError getClassLoaderClasses(JvmtiEnv *env, jobject initiatingLoader,

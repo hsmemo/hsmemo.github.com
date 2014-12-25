@@ -39,7 +39,7 @@ VM_G1IncCollectionPause::doit() から呼び出される G1CollectedHeap::do_col
 それぞれの root 種別は以下の通り.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/sharedHeap.cpp))
     // The set of potentially parallel tasks in strong root scanning.
     enum SH_process_strong_roots_tasks {
@@ -75,7 +75,7 @@ strong root から辿る処理において
     * Perm 内の root 用 : G1ParScanPermClosure
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
         G1ParScanExtRootClosure         only_scan_root_cl(_g1h, &pss);
         G1ParScanPermClosure            only_scan_perm_cl(_g1h, &pss);
@@ -348,7 +348,7 @@ See: [here](no28916koC.html) for details
   * SO_CodeCache
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/sharedHeap.hpp))
       // Invoke the "do_oop" method the closure "roots" on all root locations.
       // If "collecting_perm_gen" is false, then roots that may only contain
@@ -378,7 +378,7 @@ See: [here](no28916YRb.html) for details
 
 ### G1ParCopyClosure::do_oop()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1OopClosures.hpp))
 
 (1) G1ParCopyClosure::do_oop_nv() を呼び出すだけ.

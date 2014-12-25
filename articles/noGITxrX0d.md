@@ -38,7 +38,7 @@ JNI 参照(JNI references)に関する処理を納めた名前空間(AllStatic �
 
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/jniHandles.hpp))
     // Interface for creating and resolving local/global JNI handles
     
@@ -58,13 +58,13 @@ static フィールドである JNIHandles::_deleted_handle はダミーの hand
  (See: jni_DeleteLocalRef(), jni_DeleteGlobalRef(), jni_DeleteWeakGlobalRef()))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/jniHandles.hpp))
       static oop _deleted_handle;                         // Sentinel marking deleted handles
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/jniHandles.hpp))
       // Sentinel marking deleted handles in block. Note that we cannot store NULL as
       // the sentinel, since clearing weak global JNI refs are done by storing NULL in
@@ -94,7 +94,7 @@ Global references や Weak Global references も全て JNIHandleBlock で管理�
 それぞれが複数個の JNIHandleBlock によって管理されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/jniHandles.hpp))
     // JNI handle blocks holding local/global JNI handles
     
@@ -114,7 +114,7 @@ Global references や Weak Global references も全て JNIHandleBlock で管理�
   この線形リストに JNI Global reference 用の全ての JNIHandleBlock オブジェクトがつながれている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/jniHandles.cpp))
     JNIHandleBlock* JNIHandles::_global_handles       = NULL;
 ```
@@ -128,7 +128,7 @@ Global references や Weak Global references も全て JNIHandleBlock で管理�
   この線形リストに JNI Weak Global reference 用の全ての JNIHandleBlock オブジェクトがつながれている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/jniHandles.cpp))
     JNIHandleBlock* JNIHandles::_weak_global_handles  = NULL;
 ```
@@ -149,7 +149,7 @@ Global references や Weak Global references も全て JNIHandleBlock で管理�
   そのスレッドが PushLocalFrame() で作成した全てのローカル参照フレームに対応する)
   
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.hpp))
       // Active_handles points to a block of handles
       JNIHandleBlock* _active_handles;
@@ -165,7 +165,7 @@ Global references や Weak Global references も全て JNIHandleBlock で管理�
   JNIHandleBlock オブジェクトは _next フィールドで次の JNIHandleBlock オブジェクトを指せる構造になっている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.hpp))
       // One-element thread local free list
       JNIHandleBlock* _free_handle_block;
@@ -180,7 +180,7 @@ Global references や Weak Global references も全て JNIHandleBlock で管理�
   未使用な JNIHandleBlock オブジェクト(でスレッドローカルなフリーリストにつながれていないもの)は, 全てこの線形リストに格納されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/jniHandles.hpp))
       static JNIHandleBlock* _block_free_list;      // Free list of currently unused blocks
 ```
@@ -250,7 +250,7 @@ JNIHandle が 32 個以上になった場合には複数の JNIHandleBlock を�
   (なお, 現在の JNI 参照の実体は「この配列内の対応箇所を指すポインタ」になっている)
  
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/jniHandles.hpp))
       enum SomeConstants {
         block_size_in_oops  = 32                    // Number of handles per handle block
@@ -310,7 +310,7 @@ JNIHandle が 32 個以上になった場合には複数の JNIHandleBlock を�
   JNIHandleBlock::_block_list のリストを作るために使用される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/jniHandles.hpp))
       oop             _handles[block_size_in_oops]; // The handles
       int             _top;                         // Index of next unused handle
@@ -343,7 +343,7 @@ JNIHandles クラス内で使用される補助クラス.
 JNI の Weak Global Handle を辿る処理で使用される Closure.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/jniHandles.cpp))
     class AlwaysAliveClosure: public BoolObjectClosure {
 ```
@@ -393,7 +393,7 @@ JNIHandles クラス内で使用される補助クラス.
 JNI の Weak Global Handle を辿る処理で使用される Closure.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/jniHandles.cpp))
     class CountHandleClosure: public OopClosure {
 ```
@@ -428,7 +428,7 @@ See: [here](../doxygen/classCountHandleClosure.html) for details
 JNIHandles クラス内で使用される補助クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/jniHandles.cpp))
     class VerifyHandleClosure: public OopClosure {
 ```
@@ -446,7 +446,7 @@ Universe::verify()
 処理としては, 単に oopDesc::verify() を呼び出すだけ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/jniHandles.cpp))
       virtual void do_oop(oop* root) {
         (*root)->verify();

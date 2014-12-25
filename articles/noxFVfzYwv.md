@@ -17,7 +17,7 @@ title: GenerationCounters クラス
 Generation に関する PerfData を格納しておくためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/generationCounters.hpp))
     // A GenerationCounter is a holder class for performance counters
     // that track a generation
@@ -33,7 +33,7 @@ G1MonitoringSupport クラス内に保持されている.
 
 * DefNewGeneration
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/defNewGeneration.hpp))
     class DefNewGeneration: public Generation {
     ...
@@ -43,7 +43,7 @@ G1MonitoringSupport クラス内に保持されている.
 
 * TenuredGeneration
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/tenuredGeneration.hpp))
     class TenuredGeneration: public OneContigSpaceCardGeneration {
     ...
@@ -52,7 +52,7 @@ G1MonitoringSupport クラス内に保持されている.
 
 * CompactingPermGenGen
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/compactingPermGenGen.hpp))
     class CompactingPermGenGen: public OneContigSpaceCardGeneration {
     ...
@@ -62,7 +62,7 @@ G1MonitoringSupport クラス内に保持されている.
 
 * ConcurrentMarkSweepGeneration
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/concurrentMarkSweep/concurrentMarkSweepGeneration.hpp))
     class ConcurrentMarkSweepGeneration: public CardGeneration {
     ...
@@ -72,7 +72,7 @@ G1MonitoringSupport クラス内に保持されている.
 
 * G1MonitoringSupport
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1MonitoringSupport.hpp))
     class G1MonitoringSupport : public CHeapObj {
     ...
@@ -90,7 +90,7 @@ G1MonitoringSupport クラス内に保持されている.
 
 * DefNewGeneration::DefNewGeneration()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/defNewGeneration.cpp))
     DefNewGeneration::DefNewGeneration(ReservedSpace rs,
                                        size_t initial_size,
@@ -105,7 +105,7 @@ G1MonitoringSupport クラス内に保持されている.
 
 * TenuredGeneration::TenuredGeneration()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/tenuredGeneration.cpp))
     TenuredGeneration::TenuredGeneration(ReservedSpace rs,
                                          size_t initial_byte_size, int level,
@@ -119,7 +119,7 @@ G1MonitoringSupport クラス内に保持されている.
 
 * CompactingPermGenGen::initialize_performance_counters()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/compactingPermGenGen.cpp))
     void CompactingPermGenGen::initialize_performance_counters() {
     ...
@@ -129,7 +129,7 @@ G1MonitoringSupport クラス内に保持されている.
 
 * CMSPermGenGen::initialize_performance_counters()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/concurrentMarkSweep/cmsPermGen.cpp))
     void CMSPermGenGen::initialize_performance_counters() {
     ...
@@ -139,7 +139,7 @@ G1MonitoringSupport クラス内に保持されている.
 
 * ConcurrentMarkSweepGeneration::initialize_performance_counters()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/concurrentMarkSweep/concurrentMarkSweepGeneration.cpp))
     void ConcurrentMarkSweepGeneration::initialize_performance_counters() {
     ...
@@ -149,7 +149,7 @@ G1MonitoringSupport クラス内に保持されている.
 
 * G1MonitoringSupport::G1MonitoringSupport()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1MonitoringSupport.cpp))
     G1MonitoringSupport::G1MonitoringSupport(G1CollectedHeap* g1h,
                                              VirtualSpace* g1_storage_addr) :
@@ -191,7 +191,7 @@ G1MonitoringSupport クラス内に保持されている.
   * sun.gc.generation.${n}.maxCapacity
   * sun.gc.generation.${n}.capacity
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/generationCounters.cpp))
         const char* cns = PerfDataManager::name_space("generation", ordinal);
     

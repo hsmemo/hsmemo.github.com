@@ -10,7 +10,7 @@ title: StubCodeGenerator クラス関連のクラス (StubCodeDesc, StubCodeGene
 より具体的に言うと, stubcode に対する生成処理やデバッグ/出力処理等に関するクラス (See: [here](no7882z5r.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/stubCodeGenerator.hpp))
     // All the basic framework for stubcode generation/debugging/printing.
 ```
@@ -32,7 +32,7 @@ title: StubCodeGenerator クラス関連のクラス (StubCodeDesc, StubCodeGene
 実際にスタブコードを生成する機能を提供する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/stubCodeGenerator.hpp))
     // The base class for all stub-generating code generators.
     // Provides utility functions.
@@ -54,7 +54,7 @@ StubCodeGenerator に定義されている以下の 2つのメソッドは,
 補助クラスである StubCodeMark のコンストラクタ/デストラクタから呼び出される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/stubCodeGenerator.hpp))
       virtual void stub_prolog(StubCodeDesc* cdesc); // called by StubCodeMark constructor
       virtual void stub_epilog(StubCodeDesc* cdesc); // called by StubCodeMark destructor
@@ -92,7 +92,7 @@ StubCodeGenerator が生成した stub に関する「メタ情報」を格納�
 この情報は主にデバッグや出力用途に使用される模様.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/stubCodeGenerator.hpp))
     // A StubCodeDesc describes a piece of generated code (usually stubs).
     // This information is mainly useful for debugging and printing.
@@ -128,7 +128,7 @@ StubCodeGenerator が生成した stub に関する「メタ情報」を格納�
   生成した StubCodeDesc オブジェクトは全てこの線形リスト内に格納されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/stubCodeGenerator.hpp))
       static StubCodeDesc* _list;                  // the list of all descriptors
       static int           _count;                 // length of list
@@ -204,7 +204,7 @@ StubCodeMark::StubCodeMark() 内で(のみ)生成されている.
     そのスタブコードの終端アドレス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/stubCodeGenerator.hpp))
       StubCodeDesc*        _next;                  // the next element in the linked list
       const char*          _group;                 // the group to which the stub code belongs
@@ -233,7 +233,7 @@ StubCodeDesc オブジェクトの生成処理を簡単に行うための補助�
 ソースコード上のスコープに連動して StubCodeDesc の生成処理(や初期化等)を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/stubCodeGenerator.hpp))
     // Stack-allocated helper class used to assciate a stub code with a name.
     // All stub code generating functions that use a StubCodeMark will be registered
@@ -339,7 +339,7 @@ StubCodeDesc オブジェクトの生成処理を簡単に行うための補助�
 デストラクタでスタブコードの終端アドレスを設定する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/stubCodeGenerator.cpp))
     StubCodeMark::StubCodeMark(StubCodeGenerator* cgen, const char* group, const char* name) {
       _cgen  = cgen;

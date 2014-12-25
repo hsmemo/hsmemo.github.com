@@ -26,7 +26,7 @@ Java の同期排他処理のための関数を納めた名前空間(AllStatic �
 同期排他関係の処理は基本的に全てこのクラスに実装されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/synchronizer.hpp))
     class ObjectSynchronizer : AllStatic {
 ```
@@ -40,7 +40,7 @@ Java の同期排他処理のための関数を納めた名前空間(AllStatic �
 (そのため, このクラスの fast path 用のメソッドを変更する際には (その展開箇所も含めて) 全部変えないと不整合が起きてまずい, とのこと)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/synchronizer.cpp))
     // The "core" versions of monitor enter and exit reside in this file.
     // The interpreter and compilers contain specialized transliterated
@@ -78,7 +78,7 @@ Java の同期排他処理のための関数を納めた名前空間(AllStatic �
   変更する際には全部変えないと不整合になってまずい, とのこと)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/synchronizer.hpp))
       // This is full version of monitor enter and exit. I choose not
       // to use enter() and exit() in order to make sure user be ware
@@ -94,7 +94,7 @@ Java の同期排他処理のための関数を納めた名前空間(AllStatic �
 * monitorenter/monitorexit 命令(や synchronized 修飾子)の slow path 用の処理 (See: [here](noOroadKvi.html) and [here](noXF2ZIHEZ.html) for details)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/synchronizer.hpp))
       // WARNING: They are ONLY used to handle the slow cases. They should
       // only be used when the fast cases failed. Use of these functions
@@ -108,7 +108,7 @@ Java の同期排他処理のための関数を納めた名前空間(AllStatic �
   (インタープリタ, JIT 生成コード, JNI を問わずこれが使われる)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/synchronizer.hpp))
       // Handle all interpreter, compiler and jni cases
       static void wait               (Handle obj, jlong millis, TRAPS);
@@ -119,7 +119,7 @@ Java の同期排他処理のための関数を納めた名前空間(AllStatic �
 * JNI による同期排他処理 (MonitorEnter(), MonitorExit()) の処理 (See: [here](no5248b4E.html) for details)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/synchronizer.hpp))
       // Used only to handle jni locks or other unmatched monitor enter/exit
       // Internally they will use heavy weight monitor.
@@ -146,7 +146,7 @@ HotSpot 内で「Java オブジェクトのロックを取得して何らかの�
 (ただし, pending exception がセットされているかもしれないので必要に応じてチェックするように, とのこと).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/synchronizer.hpp))
     // ObjectLocker enforced balanced locking and can never thrown an
     // IllegalMonitorStateException. However, a pending exception may
@@ -168,7 +168,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 (BasicLock (displaced header) はオブジェクト内にフィールドとして保持している)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/synchronizer.hpp))
       Thread*   _thread;
       Handle    _obj;
@@ -183,7 +183,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 (ただし, doLock コンストラクタ引数が false の場合は, 何も処理を行わない)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/synchronizer.cpp))
     // -----------------------------------------------------------------------------
     // Internal VM locks on java objects
@@ -225,7 +225,7 @@ JNI の DetachCurrentThread() 関数の処理で使用される補助クラス.
 (JNI の仕様で DetachCurrentThread() 時には対象のスレッドが保持しているロックを全て解放しなければいけないと規定されている).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/synchronizer.cpp))
     // Iterate through monitor cache and attempt to release thread's monitors
     // Gives up on a particular monitor if an exception occurs, but continues

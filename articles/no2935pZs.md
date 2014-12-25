@@ -36,7 +36,7 @@ JvmtiEnv::PopFrame()
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEnv.cpp))
     jvmtiError
     JvmtiEnv::PopFrame(JavaThread* java_thread) {
@@ -45,7 +45,7 @@ JvmtiEnv::PopFrame()
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiThreadState.cpp))
     void JvmtiThreadState::update_for_pop_top_frame() {
     ...

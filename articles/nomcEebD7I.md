@@ -18,7 +18,7 @@ C++ Interpreter において Interpreter の初期化や生成されたコード
 (= C++ Interpreter 用の Interpreter クラス). (See: [here](no7882AgC.html) for details)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/cppInterpreter.hpp))
     #ifdef CC_INTERP
     

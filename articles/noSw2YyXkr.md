@@ -15,7 +15,7 @@ title: ciKlassKlass クラス
 ciKlass クラスの具象サブクラスの1つ. klassKlass (またはそのサブクラス) 用の ciKlass クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciKlassKlass.hpp))
     // ciKlassKlass
     //

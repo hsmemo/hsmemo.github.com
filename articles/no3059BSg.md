@@ -32,7 +32,7 @@ java.lang.Object クラスのネイティブメソッドとして実装されて
 
 
 
-```
+```cpp
     ((cite: jdk/src/share/native/java/lang/Object.c))
     static JNINativeMethod methods[] = {
         {"hashCode",    "()I",                    (void *)&JVM_IHashCode},

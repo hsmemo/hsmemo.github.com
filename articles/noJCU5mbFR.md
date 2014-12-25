@@ -16,7 +16,7 @@ Java レベルでのインスタンスオブジェクトを表すためのクラ
 1つの instanceOopDesc オブジェクトが JVM 上での 1つのインスタンスオブジェクトに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/instanceOop.hpp))
     // An instanceOop is an instance of a Java Class
     // Evaluating "new HashTable()" will create an instanceOop.

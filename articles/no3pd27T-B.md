@@ -18,7 +18,7 @@ ParallelScavengeHeap 使用時において, New Generation の管理を担当す
 (= GC Ergonomics を用いた動的領域サイズ調整を行う場合用) (See: PSYoungGen).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/asPSYoungGen.hpp))
     class ASPSYoungGen : public PSYoungGen {
 ```
@@ -32,7 +32,7 @@ ParallelScavengeHeap オブジェクトの _young_gen フィールドに格納�
 その場合にはこのクラスはどこからも使用されない.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/parallelScavengeHeap.hpp))
     class ParallelScavengeHeap : public CollectedHeap {
     ...
@@ -43,7 +43,7 @@ ParallelScavengeHeap オブジェクトの _young_gen フィールドに格納�
 正確には, こちらで生成されたものが ParallelScavengeHeap のフィールドにコピーされる)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/adjoiningGenerations.hpp))
     class AdjoiningGenerations : public CHeapObj {
     ...
@@ -57,7 +57,7 @@ AdjoiningGenerations::AdjoiningGenerations() 内で(のみ)生成されている
 UseAdaptiveGCBoundary オプションが指定されている場合は ASPSYoungGen が生成され, そうでない場合は PSYoungGen が生成される)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/adjoiningGenerations.cpp))
     AdjoiningGenerations::AdjoiningGenerations(ReservedSpace old_young_rs,
                                                size_t init_low_byte_size,

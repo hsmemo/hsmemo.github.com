@@ -37,7 +37,7 @@ title: Serviceability 機能 ： HotSpot Monitoring and Management Interface (JM
         timeGetTime() で取得する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/os.hpp))
       // JVMTI & JVM monitoring and management support
       // The thread_cpu_time() and current_thread_cpu_time() are only
@@ -64,7 +64,7 @@ title: Serviceability 機能 ： HotSpot Monitoring and Management Interface (JM
 Solaris 上での実装について:
 
 
-```
+```cpp
     ((cite: hotspot/src/os/solaris/vm/os_solaris.cpp))
     // JVMTI & JVM monitoring and management support
     // The thread_cpu_time() and current_thread_cpu_time() are only

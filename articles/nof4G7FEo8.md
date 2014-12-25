@@ -34,7 +34,7 @@ methodOopDesc クラス用の補助クラス.
 存在するかどうかは has_linenumber_table() 等のメソッドで確認できる)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/constMethodOop.hpp))
     class constMethodOopDesc : public oopDesc {
 ```
@@ -44,7 +44,7 @@ methodOopDesc クラス用の補助クラス.
 methodOopDesc オブジェクトの _constMethod フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodOop.hpp))
     class methodOopDesc : public oopDesc {
     ...
@@ -54,7 +54,7 @@ methodOopDesc オブジェクトの _constMethod フィールドに(のみ)格�
 (なお, 逆に constMethodOop 側から対応する methodOop を参照するには _method フィールドを用いればいい模様)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/constMethodOop.hpp))
     class constMethodOopDesc : public oopDesc {
     ...
@@ -75,7 +75,7 @@ oopFactory::new_constMethod() というファクトリメソッドが用意さ�
 メソッドは本当に大量に存在しているので constMethodOopDesc をコンパクトにまとめるのはメモリ使用量を下げる上でかなり重要, とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/constMethodOop.hpp))
     // An constMethodOop represents portions of a Java method which
     // do not vary.
@@ -142,7 +142,7 @@ methodOopDesc 内 (正確にはそこから参照されている constMethodOop 
 (言い換えると, クラスファイルにおける method_info 中の Exceptions Attribute の情報を格納しておくクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/constMethodOop.hpp))
     // Utitily class decribing elements in checked exceptions table inlined in methodOop.
     class CheckedExceptionElement VALUE_OBJ_CLASS_SPEC {
@@ -161,7 +161,7 @@ See: [here](no17119ley.html) for details
 内部には以下の public フィールドのみを持つ (そしてメソッドはない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/constMethodOop.hpp))
       u2 class_cp_index;
 ```
@@ -182,7 +182,7 @@ methodOopDesc 内 (正確にはそこから参照されている constMethodOop 
 (言い換えると, クラスファイルにおける method_info 中の LocalVariableTable Attribute の情報を格納しておくクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/constMethodOop.hpp))
     // Utitily class decribing elements in local variable table inlined in methodOop.
     class LocalVariableTableElement VALUE_OBJ_CLASS_SPEC {
@@ -199,7 +199,7 @@ See: [here](no17119ley.html) for details
 内部には以下の public フィールドのみを持つ (そしてメソッドはない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/constMethodOop.hpp))
       u2 start_bci;
       u2 length;

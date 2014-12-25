@@ -23,7 +23,7 @@ HotSpot の製品情報を納めた名前空間(AllStatic クラス).
 * etc
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vm_version.hpp))
     // VM_Version provides information about the VM.
     
@@ -42,7 +42,7 @@ HotSpot の製品情報を納めた名前空間(AllStatic クラス).
 * HOTSPOT_VM_DISTRO
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vm_version.cpp))
     #ifndef HOTSPOT_RELEASE_VERSION
       #error HOTSPOT_RELEASE_VERSION must be defined
@@ -56,7 +56,7 @@ HotSpot の製品情報を納めた名前空間(AllStatic クラス).
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vm_version.cpp))
     #ifndef HOTSPOT_VM_DISTRO
       #error HOTSPOT_VM_DISTRO must be defined

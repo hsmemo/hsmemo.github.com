@@ -36,7 +36,7 @@ CollectedHeap クラスのサブクラスの1つ (= Java ヒープ領域の管�
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/sharedHeap.hpp))
     // A "SharedHeap" is an implementation of a java heap for HotSpot.  This
     // is an abstract class: there may be many different kinds of heaps.  This
@@ -45,7 +45,7 @@ CollectedHeap クラスのサブクラスの1つ (= Java ヒープ領域の管�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/sharedHeap.hpp))
     class SharedHeap : public CollectedHeap {
 ```
@@ -66,7 +66,7 @@ MarkingCodeBlobClosure::MarkScope としての役割の他に,
 SharedHeap::_strong_roots_parity の値をフリップさせるという役割を持っている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/sharedHeap.hpp))
       // Call these in sequential code around process_strong_roots.
       // strong_roots_prologue calls change_strong_roots_parity, if
@@ -79,7 +79,7 @@ SharedHeap::_strong_roots_parity の値をフリップさせるという役割�
 SharedHeap::process_strong_roots() 内の並列化しやすい処理 (threads の処理等) を簡単に並列化するための枠組み (備考参照))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/sharedHeap.hpp))
       // Some collectors will perform "process_strong_roots" in parallel.
       // Such a call will involve claiming some fine-grained tasks, such as
@@ -114,7 +114,7 @@ SharedHeap::_strong_roots_parity の値を変更している
 (なお, デストラクタでは特に何もしていない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/sharedHeap.cpp))
     SharedHeap::StrongRootsScope::StrongRootsScope(SharedHeap* outer, bool activate)
       : MarkScope(activate)
@@ -155,7 +155,7 @@ SharedHeap::_strong_roots_parity の値を 1~2 の間でフリップさせてい
 
 #### 参考(for your information): _strong_roots_parity の初期値
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/sharedHeap.cpp))
     SharedHeap::SharedHeap(CollectorPolicy* policy_) :
     ...
@@ -187,7 +187,7 @@ See: [here](../doxygen/classSharedHeap_1_1StrongRootsScope.html) for details
 処理対象の oop* が Perm 領域内にあることを検証する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/sharedHeap.cpp))
     class AssertIsPermClosure: public OopClosure {
 ```
@@ -197,7 +197,7 @@ See: [here](../doxygen/classSharedHeap_1_1StrongRootsScope.html) for details
 assert_is_perm_closure という大域変数に(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/sharedHeap.cpp))
     static AssertIsPermClosure assert_is_perm_closure;
 ```
@@ -210,7 +210,7 @@ StringTable 内の文字列が Perm 領域内に入っていることを確か�
 develop オプションである JavaObjectsInPerm が指定されている場合でないと実行されない)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/sharedHeap.cpp))
     void SharedHeap::process_strong_roots(bool activate_scope,
                                           bool collecting_perm_gen,
@@ -239,7 +239,7 @@ See: [here](../doxygen/classAssertIsPermClosure.html) for details
 処理対象の oop* が Minor GC の処理対象範囲内にないことを検証する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/sharedHeap.cpp))
     #ifdef ASSERT
     class AssertNonScavengableClosure: public OopClosure {
@@ -250,7 +250,7 @@ See: [here](../doxygen/classAssertIsPermClosure.html) for details
 assert_is_non_scavengable_closure という大域変数に(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/sharedHeap.cpp))
     static AssertNonScavengableClosure assert_is_non_scavengable_closure;
 ```
@@ -263,7 +263,7 @@ CodeCache 内の CodeBlob には New 領域内を指すポインタを持って�
 (なおこの処理は, DEBUG_ONLY 時にしか実行されない)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/sharedHeap.cpp))
     void SharedHeap::process_strong_roots(bool activate_scope,
                                           bool collecting_perm_gen,
@@ -294,7 +294,7 @@ SharedHeap::process_weak_roots() 内で使用される補助クラス
 名前の通り, どんな場合でも常に true を返す BoolObjectClosure.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/sharedHeap.cpp))
     class AlwaysTrueClosure: public BoolObjectClosure {
 ```
@@ -304,7 +304,7 @@ SharedHeap::process_weak_roots() 内で使用される補助クラス
 always_true という大域変数に(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/sharedHeap.cpp))
     static AlwaysTrueClosure always_true;
 ```
@@ -318,7 +318,7 @@ SharedHeap::process_weak_roots() 内で(のみ)使用されている.
  生きている Weak Global Reference だけを全て辿ることができる.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/sharedHeap.cpp))
     void SharedHeap::process_weak_roots(OopClosure* root_closure,
                                         CodeBlobClosure* code_roots,
@@ -341,14 +341,14 @@ SharedHeap::process_weak_roots() 内で使用される補助クラス
 (つまり, JNI の Weak Global Handle を辿る処理で使用される Closure クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/sharedHeap.cpp))
     class SkipAdjustingSharedStrings: public OopClosure {
 ```
 
 ### 使われ方(Usage)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/sharedHeap.cpp))
     void SharedHeap::process_weak_roots(OopClosure* root_closure,
                                         CodeBlobClosure* code_roots,

@@ -16,7 +16,7 @@ title: GCPolicyCounters クラス
 
 CollectorPolicy(?) に関する PerfData を格納しておくためのクラス.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gcPolicyCounters.hpp))
     // GCPolicyCounters is a holder class for performance counters
     // that track a generation
@@ -29,7 +29,7 @@ CollectorPolicy(?) に関する PerfData を格納しておくためのクラス
 各 CollectorPolicy オブジェクトの _gc_policy_counters フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/collectorPolicy.hpp))
     class CollectorPolicy : public CHeapObj {
     ...
@@ -43,7 +43,7 @@ CollectorPolicy(?) に関する PerfData を格納しておくためのクラス
 
 * ConcurrentMarkSweepPolicy::initialize_gc_policy_counters()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/concurrentMarkSweep/cmsCollectorPolicy.cpp))
     void ConcurrentMarkSweepPolicy::initialize_gc_policy_counters() {
       // initialize the policy counters - 2 collectors, 3 generations
@@ -57,7 +57,7 @@ CollectorPolicy(?) に関する PerfData を格納しておくためのクラス
 
 * G1CollectorPolicy::initialize_gc_policy_counters()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectorPolicy.cpp))
     void G1CollectorPolicy::initialize_gc_policy_counters()
     {
@@ -66,7 +66,7 @@ CollectorPolicy(?) に関する PerfData を格納しておくためのクラス
 
 * MarkSweepPolicy::initialize_gc_policy_counters()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/collectorPolicy.cpp))
     void MarkSweepPolicy::initialize_gc_policy_counters() {
       // initialize the policy counters - 2 collectors, 3 generations
@@ -92,7 +92,7 @@ CollectorPolicy(?) に関する PerfData を格納しておくためのクラス
   * sun.gc.policy.tenuringThreshold
   * sun.gc.policy.desiredSurvivorSize
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gcPolicyCounters.cpp))
         _name_space = "policy";
     

@@ -23,7 +23,7 @@ ciMethod クラス用の補助クラス.
 そのメソッド内の基本ブロック(Basic Block)情報を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciMethodBlocks.hpp))
     class ciMethodBlocks : public ResourceObj {
 ```
@@ -58,7 +58,7 @@ ciMethodBlocks クラス用の補助クラス.
 1つの ciBlock オブジェクトが 1つの基本ブロックに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciMethodBlocks.hpp))
     class ciBlock : public ResourceObj {
 ```

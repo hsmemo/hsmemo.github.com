@@ -15,7 +15,7 @@ VM_ChangeSingleStep::doit() により SingleStep モードが始まる.
 VM_ChangeSingleStep::doit() により SingleStep モードが終了する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEventController.cpp))
         // If running in fullspeed mode, single stepping is implemented
         // as follows: first, the interpreter does not dispatch to

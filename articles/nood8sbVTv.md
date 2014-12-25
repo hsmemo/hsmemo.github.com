@@ -19,7 +19,7 @@ title: ResolutionError クラス関連のクラス (ResolutionErrorTable, Resolu
   (constantPoolHandle と constant pool index をキーとして, 対応する ResolutionErrorEntry を返す).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/resolutionErrors.hpp))
     // ResolutionError objects are used to record errors encountered during
     // constant pool resolution (JVMS 5.4.3).
@@ -41,7 +41,7 @@ SystemDictionary クラス内で使用される補助クラス (See: SystemDicti
 SystemDictionary が管理する「リンク中の解決処理(resolution)で生じたエラー情報」を入れておくハッシュテーブル.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/resolutionErrors.hpp))
     class ResolutionErrorTable : public Hashtable<constantPoolOop> {
 ```
@@ -51,7 +51,7 @@ SystemDictionary が管理する「リンク中の解決処理(resolution)で生
 SystemDictionary クラスの _resolution_errors フィールド (static フィールド) に(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/systemDictionary.hpp))
       // Resolution errors
       static ResolutionErrorTable*   _resolution_errors;
@@ -72,7 +72,7 @@ ResolutionErrorTable クラス内で使用される補助クラス.
 ResolutionErrorTable オブジェクト内に格納されるハッシュテーブル・エントリ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/resolutionErrors.hpp))
     class ResolutionErrorEntry : public HashtableEntry<constantPoolOop> {
 ```

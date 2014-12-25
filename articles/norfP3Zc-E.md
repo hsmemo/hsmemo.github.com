@@ -13,7 +13,7 @@ title: AttachListener クラスのプラットフォーム依存な補助クラ�
 Linux では AttachListener クラスは UNIX domain socket を使って実装されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/os/linux/vm/attachListener_linux.cpp))
     // The attach mechanism on Linux uses a UNIX domain socket. An attach listener
     // thread is created at startup or is created on-demand via a signal from
@@ -49,7 +49,7 @@ AttachListener クラス用の関数のうちで Linux に依存したものを�
 (このクラスが Unix domain socket を使った通信処理を AttachListener クラス本体から隠蔽している)
 
 
-```
+```cpp
     ((cite: hotspot/src/os/linux/vm/attachListener_linux.cpp))
     class LinuxAttachListener: AllStatic {
 ```
@@ -67,7 +67,7 @@ See: [here](../doxygen/classLinuxAttachListener.html) for details
 AttachOperation クラスの具象サブクラスの1つ (Linux 用の AttachOperation クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/os/linux/vm/attachListener_linux.cpp))
     class LinuxAttachOperation: public AttachOperation {
 ```
@@ -77,7 +77,7 @@ AttachOperation クラスのフィールドに加えて, client と通信する�
 (このクラスがソケットをカプセル化している).
 
 
-```
+```cpp
     ((cite: hotspot/src/os/linux/vm/attachListener_linux.cpp))
       // the connection to the client
       int _socket;
@@ -98,7 +98,7 @@ LinuxAttachListener クラス内で使用される補助クラス(StackObjクラ
 client から受信したデータ中の引数を切り出す(パースする)処理を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/os/linux/vm/attachListener_linux.cpp))
     // Supporting class to help split a buffer into individual components
     class ArgumentIterator : public StackObj {
@@ -112,7 +112,7 @@ client から送られてきたデータを元に LinuxAttachOperation オブジ
 ArgumentIterator によるパース結果は ArgumentIterator::next() で取り出すことができる.
 
 
-```
+```cpp
     ((cite: hotspot/src/os/linux/vm/attachListener_linux.cpp))
     LinuxAttachOperation* LinuxAttachListener::read_request(int s) {
     ...

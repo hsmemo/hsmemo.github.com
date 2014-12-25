@@ -11,7 +11,7 @@ title: GCStats クラス関連のクラス (GCStats, CMSGCStats)
 
 (この情報は, GC 時に昇格量を予想して promotion 失敗が起きにくくするために使用される)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gcStats.hpp))
       // Avg amount promoted; used for avoiding promotion undo
 ```
@@ -33,7 +33,7 @@ title: GCStats クラス関連のクラス (GCStats, CMSGCStats)
 GC 時における昇格(promotion)量の平均値を記録しておくクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gcStats.hpp))
     class GCStats : public CHeapObj {
 ```
@@ -46,7 +46,7 @@ GC 時における昇格(promotion)量の平均値を記録しておくクラス
 * 各 PSAdaptiveSizePolicy オブジェクトの _gc_stats フィールド
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/generation.hpp))
     class Generation: public CHeapObj {
     ...
@@ -55,7 +55,7 @@ GC 時における昇格(promotion)量の平均値を記録しておくクラス
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psAdaptiveSizePolicy.hpp))
     class PSAdaptiveSizePolicy : public AdaptiveSizePolicy {
     ...
@@ -72,7 +72,7 @@ GCStats クラスではなくそのサブクラスのオブジェクトが格納
 * TenuredGeneration::TenuredGeneration()
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/tenuredGeneration.cpp))
     TenuredGeneration::TenuredGeneration(ReservedSpace rs,
                                          size_t initial_byte_size, int level,
@@ -91,7 +91,7 @@ GCStats クラスではなくそのサブクラスのオブジェクトが格納
 
 内部には AdaptivePaddedNoZeroDevAverage を格納するフィールドがあるだけ.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gcStats.hpp))
       // Avg amount promoted; used for avoiding promotion undo
       // This class does not update deviations if the sample is zero.
@@ -100,7 +100,7 @@ GCStats クラスではなくそのサブクラスのオブジェクトが格納
 
 メソッドも, めぼしいものは AdaptivePaddedNoZeroDevAverage 型のフィールドへのアクセサだけ.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gcStats.hpp))
       AdaptivePaddedNoZeroDevAverage*  avg_promoted() const { return _avg_promoted; }
     
@@ -117,7 +117,7 @@ GCStats クラスではなくそのサブクラスのオブジェクトが格納
 
 単なる AdaptivePaddedNoZeroDevAverage と違うのは, コンストラクタ引数の値が決まっている点くらい??
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gcStats.cpp))
     GCStats::GCStats() {
         _avg_promoted       = new AdaptivePaddedNoZeroDevAverage(
@@ -138,7 +138,7 @@ See: [here](../doxygen/classGCStats.html) for details
 ### 概要(Summary)
 CMS 用の GCStats クラス.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gcStats.hpp))
     class CMSGCStats : public GCStats {
 ```
@@ -151,7 +151,7 @@ CMS 用の GCStats クラス.
 ConcurrentMarkSweepGeneration::ConcurrentMarkSweepGeneration() 内で(のみ)生成されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/concurrentMarkSweep/concurrentMarkSweepGeneration.cpp))
     ConcurrentMarkSweepGeneration::ConcurrentMarkSweepGeneration(
          ReservedSpace rs, size_t initial_byte_size, int level,
@@ -170,7 +170,7 @@ ConcurrentMarkSweepGeneration::ConcurrentMarkSweepGeneration() 内で(のみ)生
 
 GCStats (や単なる AdaptivePaddedNoZeroDevAverage) と違うのは, コンストラクタ引数の値くらい??
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gcStats.cpp))
     CMSGCStats::CMSGCStats() {
         _avg_promoted       = new AdaptivePaddedNoZeroDevAverage(

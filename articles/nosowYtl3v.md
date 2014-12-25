@@ -18,7 +18,7 @@ ParallelScavenge 用の GenerationCounters
 (つまり, Generation に関する PerfData を格納しておくためのクラス (See: GenerationCounters)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psGenerationCounters.hpp))
     // A PSGenerationCounter is a holder class for performance counters
     // that track a generation
@@ -32,7 +32,7 @@ ParallelScavenge 用の GenerationCounters
 PSGenerationCounters も GenerationCounters に統合されるかも)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/generationCounters.hpp))
       // This constructor is only meant for use with the PSGenerationCounters
       // constructor.  The need for such an constructor should be eliminated

@@ -11,7 +11,7 @@ title: ReferencePolicy クラス関連のクラス (ReferencePolicy, NeverClearP
 「いつ soft reference が GC されるべきか」という判断を行うクラス (See: [here](no289169tf.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referencePolicy.hpp))
     // referencePolicy is used to determine when soft reference objects
     // should be cleared.
@@ -44,7 +44,7 @@ LRUCurrentHeapPolicy と LRUMaxHeapPolicy の場合は, 以下の値を使用し
 * SoftRefLRUPolicyMSPerMB オプションの値
 
 
-```
+```java
     ((cite: jdk/src/share/classes/java/lang/ref/SoftReference.java))
     public class SoftReference<T> extends Reference<T> {
     
@@ -79,7 +79,7 @@ LRUCurrentHeapPolicy と LRUMaxHeapPolicy の場合は, 以下の値を使用し
 soft reference の消去に関する判断を行うクラス (の基底クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referencePolicy.hpp))
     class ReferencePolicy : public CHeapObj {
 ```
@@ -100,7 +100,7 @@ ReferencePolicy クラスの具象サブクラスの1つ.
 どんな場合でも soft reference は全て残す(消去しない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referencePolicy.hpp))
     class NeverClearPolicy : public ReferencePolicy {
 ```
@@ -112,7 +112,7 @@ ReferencePolicy クラスの具象サブクラスの1つ.
 その名の通り, should_clear_reference() メソッドは常に false を返す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referencePolicy.hpp))
       bool should_clear_reference(oop p) { return false; }
 ```
@@ -131,7 +131,7 @@ ReferencePolicy クラスの具象サブクラスの1つ.
 どんな場合でも soft reference を全て消去する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referencePolicy.hpp))
     class AlwaysClearPolicy : public ReferencePolicy {
 ```
@@ -141,7 +141,7 @@ ReferencePolicy クラスの具象サブクラスの1つ.
 ReferencePolicy クラスの _always_clear_soft_ref_policy フィールド (static フィールド) に(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.hpp))
       // . the "clear all" policy
       static ReferencePolicy*   _always_clear_soft_ref_policy;
@@ -151,7 +151,7 @@ ReferencePolicy クラスの _always_clear_soft_ref_policy フィールド (stat
 ReferenceProcessor::init_statics() 内で(のみ)生成されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.cpp))
       _always_clear_soft_ref_policy = new AlwaysClearPolicy();
 ```
@@ -171,7 +171,7 @@ See: [here](no28916NLN.html) for details
 その名の通り, should_clear_reference() メソッドは常に true を返す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referencePolicy.hpp))
       bool should_clear_reference(oop p) { return true; }
 ```
@@ -193,7 +193,7 @@ ReferencePolicy クラスの具象サブクラスの1つ.
 (ヒープの最大長ではなく)現在のヒープ長を基準とする点.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referencePolicy.hpp))
     class LRUCurrentHeapPolicy : public ReferencePolicy {
 ```
@@ -203,7 +203,7 @@ ReferencePolicy クラスの具象サブクラスの1つ.
 ReferencePolicy クラスの _default_soft_ref_policy フィールド (static フィールド) に(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.hpp))
       // . the default policy
       static ReferencePolicy*   _default_soft_ref_policy;
@@ -216,7 +216,7 @@ ReferenceProcessor::init_statics() 内で(のみ)生成されている.
 COMPILER2_PRESENT の場合は LRUMaxHeapPolicy が生成され, そうでない場合は LRUCurrentHeapPolicy が生成される)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.cpp))
       _default_soft_ref_policy      = new COMPILER2_PRESENT(LRUMaxHeapPolicy())
                                           NOT_COMPILER2(LRUCurrentHeapPolicy());
@@ -264,7 +264,7 @@ ReferencePolicy クラスの具象サブクラスの1つ.
 (現在のヒープ長ではなく)ヒープの最大長を基準とする点.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referencePolicy.hpp))
     class LRUMaxHeapPolicy : public ReferencePolicy {
 ```
@@ -274,7 +274,7 @@ ReferencePolicy クラスの具象サブクラスの1つ.
 ReferencePolicy クラスの _default_soft_ref_policy フィールド (static フィールド) に(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.hpp))
       // . the default policy
       static ReferencePolicy*   _default_soft_ref_policy;
@@ -287,7 +287,7 @@ ReferenceProcessor::init_statics() 内で(のみ)生成されている.
 COMPILER2_PRESENT の場合は LRUMaxHeapPolicy が生成され, そうでない場合は LRUCurrentHeapPolicy が生成される)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/referenceProcessor.cpp))
       _default_soft_ref_policy      = new COMPILER2_PRESENT(LRUMaxHeapPolicy())
                                           NOT_COMPILER2(LRUCurrentHeapPolicy());

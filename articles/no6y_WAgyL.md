@@ -20,7 +20,7 @@ C2 JIT コンパイラ内で行われる各処理は Phase クラスのサブク
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/phase.hpp))
     //------------------------------Phase------------------------------------------
     // Most optimizations are done in Phases.  Creating a phase does any long

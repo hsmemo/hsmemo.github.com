@@ -25,7 +25,7 @@ title: SpaceCounters 及びその補助クラスの定義 (SpaceCounters, Mutabl
 
 MutableSpace に関する PerfData を格納しておくためのクラス.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/spaceCounters.hpp))
     // A SpaceCounter is a holder class for performance counters
     // that track a space;
@@ -39,7 +39,7 @@ MutableSpace (やそのサブクラス) のオブジェクトを保持してい�
 
 * PSYoungGen
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psYoungGen.hpp))
     class PSYoungGen : public CHeapObj {
     ...
@@ -50,7 +50,7 @@ MutableSpace (やそのサブクラス) のオブジェクトを保持してい�
 
 * PSOldGen
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psOldGen.hpp))
     class PSOldGen : public CHeapObj {
     ...
@@ -60,20 +60,20 @@ MutableSpace (やそのサブクラス) のオブジェクトを保持してい�
 ### 内部構造(Internal structure)
 内部には, 記録対象の MutableSpace と, そのパフォーマンスカウンタとして使う PerfVariable 2 個を保持している.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/spaceCounters.hpp))
       PerfVariable*      _capacity;
       PerfVariable*      _used;
 ```
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/spaceCounters.hpp))
       MutableSpace*     _object_space;
 ```
 
 これらの PerfVariable には, (そのフィールド名の通り) 対応する MutableSpace の最大量(capacity)と現在使用量(used)が記録される.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/spaceCounters.hpp))
       inline void update_capacity() {
         _capacity->set_value(_object_space->capacity_in_bytes());
@@ -102,7 +102,7 @@ MutableSpace (やそのサブクラス) のオブジェクトを保持してい�
   * sun.gc.generation.${n}.space.${m}.used
   * sun.gc.generation.${n}.space.${m}.initCapacity
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/spaceCounters.cpp))
         const char* cns = PerfDataManager::name_space(gc->name_space(), "space",
                                                       ordinal);
@@ -147,7 +147,7 @@ See: [here](../doxygen/classSpaceCounters.html) for details
 MutableSpace を PerfLongSampleHelper (のサブクラス) として使うためのラッパークラス.
 (より具体的に言うと, MutableSpace の使用量情報(used)を PerfVariable で記録するためのクラス).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/spaceCounters.hpp))
     class MutableSpaceUsedHelper: public PerfLongSampleHelper {
 ```
@@ -155,7 +155,7 @@ MutableSpace を PerfLongSampleHelper (のサブクラス) として使うため
 ### 内部構造(Internal structure)
 やってることは, PerfLongSampleHelper::take_sample() を MutableSpace::used_in_bytes() に変換するだけ.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/spaceCounters.hpp))
         inline jlong take_sample() {
           return _m->used_in_bytes();

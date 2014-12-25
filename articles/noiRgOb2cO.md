@@ -20,7 +20,7 @@ ciObject クラス (およびそのサブクラス) 用のファクトリメソ�
 なお, 一度生成した ciObject オブジェクトはメモイズしてあり, 同じ oop に対しては同一の ci* オブジェクトを返すようになっている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciObjectFactory.hpp))
     // ciObjectFactory
     //
@@ -48,7 +48,7 @@ ciObject クラス (およびそのサブクラス) 用のファクトリメソ�
 * ciObjectFactory::_shared_ci_objects
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciObjectFactory.cpp))
     // Implementation note: the oop->ciObject mapping is represented as
     // a table stored in an array.  Even though objects are moved

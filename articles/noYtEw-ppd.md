@@ -26,7 +26,7 @@ ADLC が定義する RM_SIZE マクロ及び FORALL_BODY マクロを利用し�
 (なお, このクラスはValueObjクラスだが NEW_RESOURCE_ARRAY() で確保されることもある)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/regmask.hpp))
     //------------------------------RegMask----------------------------------------
     // The ADL file describes how to print the machine-specific registers, as well
@@ -139,7 +139,7 @@ ADLC が定義する RM_SIZE マクロ及び FORALL_BODY マクロを利用し�
 (型は int 配列だが, 実際にはこのメモリ領域全体を1つのビットマップとして扱う. レジスタ1つに付き 1bit が割り当てられている).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/regmask.hpp))
         // Array of Register Mask bits.  This array is large enough to cover
         // all the machine registers and all parameters that need to be passed

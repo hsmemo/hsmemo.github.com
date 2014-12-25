@@ -33,7 +33,7 @@ lock が必要になるのは region が一杯になったので新しい region
 とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1AllocRegion.hpp))
     // A class that holds a region that is active in satisfying allocation
     // requests, potentially issued in parallel. When the active region is
@@ -53,7 +53,7 @@ lock が必要になるのは region が一杯になったので新しい region
  初期化後 (init()が呼ばれた後) は決して NULL になることはない, 
  とのこと.)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1AllocRegion.hpp))
       // The active allocating region we are currently allocating out
       // of. The invariant is that if this object is initialized (i.e.,
@@ -88,7 +88,7 @@ G1AllocRegion 内のフィールドの値にもアクセスでき, より詳細�
 (See: G1AllocRegion::fill_in_ext_msg()).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1AllocRegion.hpp))
     class ar_ext_msg : public err_msg {
 ```

@@ -32,7 +32,7 @@ title: VMStructs クラス
      コンパイル後に情報を取り出そうとすると long とか long long みたいな情報しか取り出せない)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vmStructs.hpp))
     // This table encapsulates the debugging information required by the
     // serviceability agent in order to run. Specifically, we need to
@@ -69,7 +69,7 @@ title: VMStructs クラス
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vmStructs.hpp))
     // This class is a friend of most classes, to be able to access
     // private fields

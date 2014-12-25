@@ -54,7 +54,7 @@ G1CollectedHeap の処理で使用される補助クラス.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1OopClosures.hpp))
     // A class that scans oops in a given heap region (much as OopsInGenClosure
     // scans oops in a generation.)
@@ -78,7 +78,7 @@ G1CollectedHeap の Minor GC 処理("Evacuation Pause" 処理)で使用される
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1OopClosures.hpp))
     class G1ParClosureSuper : public OopsInHeapRegionClosure {
 ```
@@ -87,7 +87,7 @@ G1CollectedHeap の Minor GC 処理("Evacuation Pause" 処理)で使用される
 スーパークラスである OopsInHeapRegionClosure クラスのフィールドに加えて, 以下のようなフィールドを持つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1OopClosures.hpp))
       G1CollectedHeap* _g1;
       G1RemSet* _g1_rem;
@@ -111,7 +111,7 @@ G1CollectedHeap の Minor GC 処理("Evacuation Pause" 処理)で使用される
 コンストラクタに渡された G1ParScanThreadState オブジェクト内のキューに登録する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1OopClosures.hpp))
     class G1ParPushHeapRSClosure : public G1ParClosureSuper {
 ```
@@ -144,13 +144,13 @@ G1CollectedHeap の Minor GC 処理("Evacuation Pause" 処理)で使用される
  collection set 内を差していない場合の処理もあるという点が違う.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1OopClosures.inline.hpp))
     // This closure is applied to the fields of the objects that have just been copied.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1OopClosures.hpp))
     class G1ParScanClosure : public G1ParClosureSuper {
 ```
@@ -189,7 +189,7 @@ G1CollectedHeap の Minor GC 処理("Evacuation Pause" 処理)で使用される
  残りを pending 状態のポインタ配列として残す Closure).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1OopClosures.hpp))
     class G1ParScanPartialArrayClosure : public G1ParClosureSuper {
 ```
@@ -216,7 +216,7 @@ G1CollectedHeap の Minor GC 処理("Evacuation Pause" 処理)で使用される
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1OopClosures.hpp))
     class G1ParCopyHelper : public G1ParClosureSuper {
 ```
@@ -235,7 +235,7 @@ G1CollectedHeap の Minor GC 処理("Evacuation Pause" 処理)で使用される
   処理対象のオブジェクトをコピーするメソッド.
   
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1OopClosures.hpp))
       template <class T> void mark_forwardee(T* p);
       oop copy_to_survivor_space(oop obj);
@@ -258,7 +258,7 @@ G1CollectedHeap の Minor GC における実際のコピー処理を行う
 (といっても, 実際のコピー処理はスーパークラスの G1ParCopyHelper に丸投げだったりするが...).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1OopClosures.hpp))
     template<bool do_gen_barrier, G1Barrier barrier,
              bool do_mark_forwardee>
@@ -269,13 +269,13 @@ G1CollectedHeap の Minor GC における実際のコピー処理を行う
 (G1ParCopyClosure はテンプレート引数によって 2*3*2 = 12 通りのクラスが作れる. それらに対して便利な別名が定義されている).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1_specialized_oop_closures.hpp))
     typedef G1ParCopyClosure<false, G1BarrierEvac, false> G1ParScanHeapEvacClosure;
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1OopClosures.hpp))
     typedef G1ParCopyClosure<false, G1BarrierNone, false> G1ParScanExtRootClosure;
     typedef G1ParCopyClosure<true,  G1BarrierNone, false> G1ParScanPermClosure;
@@ -304,7 +304,7 @@ G1ParTask::work() 内で(のみ)使用されている (See: [here](no2935YzN.htm
 ### 内部構造(Internal structure)
 template 引数の意味は以下の通り. なお, barrier フィールドの型である G1Barrier は以下のような enum.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1_specialized_oop_closures.hpp))
     enum G1Barrier {
       G1BarrierNone, G1BarrierRS, G1BarrierEvac
@@ -353,7 +353,7 @@ template 引数の意味は以下の通り. なお, barrier フィールドの�
   G1ParTask::work() 内で生成され, G1ParCopyHelper::copy_to_survivor_space() 内で使用されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.hpp))
       template <class T> void deal_with_reference(T* ref_to_scan) {
     ...
@@ -362,7 +362,7 @@ template 引数の意味は以下の通り. なお, barrier フィールドの�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.cpp))
     oop G1ParCopyHelper::copy_to_survivor_space(oop old) {
     ...
@@ -392,7 +392,7 @@ G1CollectedHeap の処理で使用される補助クラス.
 その OopClosure の処理を実行する OopClosure オブジェクト」を生成する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1OopClosures.hpp))
     class FilterIntoCSClosure: public OopClosure {
 ```
@@ -420,7 +420,7 @@ FILTERINTOCSCLOSURE_DOHISTOGRAMCOUNT の処理はパフォーマンス上クリ�
 コンパイル時に on/off するように, とのこと (そして現状ではデフォルトは off).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1OopClosures.inline.hpp))
     // This must a ifdef'ed because the counting it controls is in a
     // perf-critical inner loop.
@@ -443,7 +443,7 @@ FilterIntoCSClosure クラスに類似したクラス.
 違いは, OopClosure ではなく OopsInHeapRegionClosure をラップする点.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1OopClosures.hpp))
     class FilterInHeapRegionAndIntoCSClosure : public OopsInHeapRegionClosure {
 ```
@@ -457,7 +457,7 @@ See: [here](no34206qD.html) for details
 #### 参考(for your information): FilterInHeapRegionAndIntoCSClosure::do_oop()
 FilterInHeapRegionAndIntoCSClosure::do_oop_nv() を呼び出すだけ.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1OopClosures.hpp))
       virtual void do_oop(oop* p) { do_oop_nv(p); }
       virtual void do_oop(narrowOop* p) { do_oop_nv(p); }
@@ -482,7 +482,7 @@ FilterInHeapRegionAndIntoCSClosure クラスに類似したクラス.
 もし差し先が young region でもなければ ConcurrentMark::grayRoot() を呼び出す点.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1OopClosures.hpp))
     class FilterAndMarkInHeapRegionAndIntoCSClosure : public OopsInHeapRegionClosure {
 ```
@@ -496,7 +496,7 @@ See: [here](no3420uTc.html) for details
 #### 参考(for your information): FilterAndMarkInHeapRegionAndIntoCSClosure::do_oop()
 FilterAndMarkInHeapRegionAndIntoCSClosure::do_oop_nv() を呼び出すだけ.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1OopClosures.hpp))
       virtual void do_oop(oop* p) { do_oop_nv(p); }
       virtual void do_oop(narrowOop* p) { do_oop_nv(p); }
@@ -522,7 +522,7 @@ G1CollectedHeap の処理で使用される補助クラス.
 その OopClosure の処理を行う OopClosure オブジェクト」を生成する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1OopClosures.hpp))
     class FilterOutOfRegionClosure: public OopClosure {
 ```
@@ -542,7 +542,7 @@ G1CollectedHeap の処理で使用される補助クラス.
 See: [here](no3420UGE.html) for details
 #### 参考(for your information): FilterOutOfRegionClosure::do_oop()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1OopClosures.hpp))
       virtual void do_oop(oop* p) { do_oop_nv(p); }
       virtual void do_oop(narrowOop* p) { do_oop_nv(p); }
@@ -556,7 +556,7 @@ See: [here](no3420hQK.html) for details
 コンパイル時に on/off するようになっている (そして現状ではデフォルトは off).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1OopClosures.inline.hpp))
     #define FILTEROUTOFREGIONCLOSURE_DOHISTOGRAMCOUNT 0
 ```

@@ -39,7 +39,7 @@ title: VM_Operation とその(基本的な)サブクラス (VM_Operation, VM_Thr
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vm_operations.hpp))
     class VM_Operation: public CHeapObj {
 ```
@@ -48,7 +48,7 @@ title: VM_Operation とその(基本的な)サブクラス (VM_Operation, VM_Thr
 使用する際には, doit() メソッドをオーバーライドしたサブクラスを作ればいい.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vm_operations.hpp))
       virtual void doit()                            = 0;
 ```
@@ -67,7 +67,7 @@ java.lang.Thread の停止処理用 (java.lang.Thread.stop() 用) の補助ク�
 (See: [here](no2114VUD.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vm_operations.hpp))
     class VM_ThreadStop: public VM_Operation {
 ```
@@ -110,7 +110,7 @@ See: [here](../doxygen/classVM__ThreadStop.html) for details
 Safepoint を発生させることで間接的に NMethodSweeper::scan_stacks() 等を実行したい, という時に使われる
 (See: SafepointSynchronize::do_cleanup_tasks()).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vm_operations.hpp))
     // dummy vm op, evaluated just to force a safepoint
     class VM_ForceSafepoint: public VM_Operation {
@@ -127,7 +127,7 @@ Safepoint を発生させることで間接的に NMethodSweeper::scan_stacks() 
 ### 内部構造(Internal structure)
 (このクラス自体は何も処理はしない)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vm_operations.hpp))
       void doit()         {}
 ```
@@ -147,7 +147,7 @@ See: [here](../doxygen/classVM__ForceSafepoint.html) for details
 Safepoint を発生させることで間接的に ObjectSynchronizer::deflate_idle_monitors() 等を実行したい, という時に使われる
 (See: SafepointSynchronize::do_cleanup_tasks()).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vm_operations.hpp))
     // dummy vm op, evaluated just to force a safepoint
     class VM_ForceAsyncSafepoint: public VM_Operation {
@@ -166,7 +166,7 @@ ObjectSynchronizer::inflate()
 ### 内部構造(Internal structure)
 (このクラス自体は何も処理はしない)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vm_operations.hpp))
       void doit()              {}
 ```
@@ -188,7 +188,7 @@ CodeCache::mark_for_deoptimization() でマークを付けられた全ての nme
 (及びそれに依存している nmethod) に対して脱最適化を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vm_operations.hpp))
     class VM_Deoptimize: public VM_Operation {
 ```
@@ -223,7 +223,7 @@ JIT 生成されたコード(nmethod)に対する脱最適化処理(Deoptimizati
 指定されたスレッドの指定されたスタックフレームを脱最適化する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vm_operations.hpp))
     // Deopt helper that can deoptimize frames in threads other than the
     // current thread.  Only used through Deoptimization::deoptimize_frame.
@@ -305,7 +305,7 @@ NMethodSweeper クラス内で使用される補助クラス(VM_Operation クラ
 CodeCache が一杯になった際に実行され, 古い nmethod を CodeCache 内から廃棄する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vm_operations.hpp))
     class VM_HandleFullCodeCache: public VM_Operation {
 ```
@@ -318,7 +318,7 @@ NMethodSweeper::speculative_disconnect_nmethods() を呼び出すだけ.
 
 #### 参考(for your information): VM_HandleFullCodeCache::doit()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vm_operations.cpp))
     void VM_HandleFullCodeCache::doit() {
       NMethodSweeper::speculative_disconnect_nmethods(_is_full);
@@ -344,13 +344,13 @@ VMEntryWrapper クラス内で使用される補助クラス(VM_Operation クラ
 全てのスタックフレーム(またはランダムで選んだスタックフレーム)を脱最適化する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vm_operations.hpp))
     #ifndef PRODUCT
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vm_operations.hpp))
     class VM_DeoptimizeAll: public VM_Operation {
 ```
@@ -406,13 +406,13 @@ VMEntryWrapper クラス内で使用される補助クラス(VM_Operation クラ
 JIT 生成されたメソッドがあれば対応する JIT 生成コード(nmethod)を破棄する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vm_operations.hpp))
     #ifndef PRODUCT
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vm_operations.hpp))
     class VM_ZombieAll: public VM_Operation {
 ```
@@ -461,7 +461,7 @@ VMEntryWrapper クラス内で使用される補助クラス(VM_Operation クラ
 SymbolTable 中の参照されていないシンボル(dead symbol)を全て破棄させる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vm_operations.hpp))
     class VM_UnlinkSymbols: public VM_Operation {
 ```
@@ -476,7 +476,7 @@ VMEntryWrapper()::~VMEntryWrapper()
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/interfaceSupport.cpp))
     void InterfaceSupport::unlinkSymbols() {
       VM_UnlinkSymbols op;
@@ -504,7 +504,7 @@ See: [here](../doxygen/classVM__UnlinkSymbols.html) for details
 デバッグ用(開発時用)のクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vm_operations.hpp))
     class VM_Verify: public VM_Operation {
 ```
@@ -530,7 +530,7 @@ HotSpot 内で稼働中の全スレッドについて,
 その実行状態(RUNNABLE, WAITING 等)とスタックトレースを出力する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vm_operations.hpp))
     class VM_PrintThreads: public VM_Operation {
 ```
@@ -578,7 +578,7 @@ See: [here](../doxygen/classVM__PrintThreads.html) for details
 現在の JNI Global References の情報を出力する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vm_operations.hpp))
     class VM_PrintJNI: public VM_Operation {
 ```
@@ -619,7 +619,7 @@ See: [here](../doxygen/classVM__PrintJNI.html) for details
 デッドロックしているスレッド群がいないか調べ, その結果を表示する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vm_operations.hpp))
     class VM_FindDeadlocks: public VM_Operation {
 ```
@@ -666,7 +666,7 @@ java.lang.Thread クラスの機能, 及び JMM の機能を実現するため�
 (スタックトレース情報, 現在ロックしているシンクロナイザの一覧, 現在ロックしているオブジェクトモニターの一覧, etc).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vm_operations.hpp))
     class VM_ThreadDump : public VM_Operation {
 ```
@@ -709,7 +709,7 @@ HotSpot の終了処理で使用される補助クラス(VM_Operation クラス)
 終了時の後始末を行う (See: [here](no28916GoL.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vm_operations.hpp))
     class VM_Exit: public VM_Operation {
 ```

@@ -16,7 +16,7 @@ title: CollectorPolicy クラス関連のクラス (CollectorPolicy, ClearedAllS
 新しい GC アルゴリズムによって必要な情報が増えれば今後も拡張されていく, とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/collectorPolicy.hpp))
     // This class (or more correctly, subtypes of this class)
     // are used to define global garbage collector attributes.
@@ -53,7 +53,7 @@ title: CollectorPolicy クラス関連のクラス (CollectorPolicy, ClearedAllS
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/collectorPolicy.hpp))
     class CollectorPolicy : public CHeapObj {
 ```
@@ -75,7 +75,7 @@ CollectorPolicy クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/collectorPolicy.hpp))
     class GenCollectorPolicy : public CollectorPolicy {
 ```
@@ -100,7 +100,7 @@ G1CollectorPolicy は違うんだが...#TODO)
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/collectorPolicy.hpp))
     // All of hotspot's current collectors are subtypes of this
     // class. Currently, these collectors all use the same gen[0],
@@ -126,7 +126,7 @@ TwoGenerationCollectorPolicy クラスの具象サブクラスの1つ.
 このクラスは Serial Old GC を用いる場合用 (= ParallelScavenge でも G1GC でも CMS でもない場合用) (See: [here](no2114hIm.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/collectorPolicy.hpp))
     class MarkSweepPolicy : public TwoGenerationCollectorPolicy {
 ```
@@ -147,7 +147,7 @@ GC によって soft reference が消去された場合に,
 CollectorPolicy オブジェクトの _all_soft_refs_clear フィールドをセットする処理を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/collectorPolicy.hpp))
     class ClearedAllSoftRefs : public StackObj {
 ```
@@ -157,7 +157,7 @@ CollectorPolicy オブジェクトの _all_soft_refs_clear フィールドをセ
 (See: CollectorPolicy::all_soft_refs_clear())
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/collectorPolicy.hpp))
       // Set to true by the GC if the just-completed gc cleared all
       // softrefs.  This is set to true whenever a gc clears all softrefs, and
@@ -176,7 +176,7 @@ GC 処理中で局所変数として生成される. なお, コンストラク�
 生成されたスコープが終わる時点で, デストラクタによってフィールドの値がセットされる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/genCollectedHeap.cpp))
     void GenCollectedHeap::do_collection(bool  full,
                                          bool   clear_all_soft_refs,
@@ -196,7 +196,7 @@ GC 処理中で局所変数として生成される. なお, コンストラク�
 デストラクタで CollectorPolicy::cleared_all_soft_refs() の呼び出しが行われる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/collectorPolicy.hpp))
       ClearedAllSoftRefs(bool clear_all_soft_refs,
                          CollectorPolicy* collector_policy) :
@@ -214,7 +214,7 @@ GC 処理中で局所変数として生成される. なお, コンストラク�
 (GC 時に soft reference が消去されると, _should_clear_all_soft_refs が満たされたことを示すために呼び出される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/collectorPolicy.hpp))
       // Called by the GC after Soft Refs have been cleared to indicate
       // that the request in _should_clear_all_soft_refs has been fulfilled.
@@ -224,7 +224,7 @@ GC 処理中で局所変数として生成される. なお, コンストラク�
 実際の CollectorPolicy::cleared_all_soft_refs() の中身は以下の通り.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/collectorPolicy.cpp))
     void CollectorPolicy::cleared_all_soft_refs() {
       // If near gc overhear limit, continue to clear SoftRefs.  SoftRefs may

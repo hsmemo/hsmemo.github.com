@@ -28,7 +28,7 @@ Java のリフレクション(Reflection)機能を実現するためのクラス
 ということだと思われる)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/reflection.hpp))
     // Class Reflection contains utility methods needed for implementing the
     // reflection api.
@@ -457,7 +457,7 @@ Java のリフレクション(Reflection)機能を実現するためのクラス
 (通常のアクセス規則を無視して) フィールドやメソッドにアクセスできるようにするため.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/reflection.hpp))
       // Boxing. Returns boxed value of appropriate type. Throws IllegalArgumentException.
       static oop box(jvalue* v, BasicType type, TRAPS);
@@ -514,7 +514,7 @@ Java のリフレクション(Reflection)機能を実現するためのクラス
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/reflection.hpp))
       //---------------------------------------------------------------------------
       //
@@ -571,7 +571,7 @@ JVM_InvokeMethod や JVM_NewInstanceFromConstructor は定義されなくなる�
 (なお, product 版以外では過去の JDK を用いたベンチマーク用途等のために残される予定)」
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/reflectionCompat.hpp))
     // During the development of the JDK 1.4 reflection implementation
     // based on dynamic bytecode generation, it was hoped that the bulk of

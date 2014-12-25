@@ -55,7 +55,7 @@ DTraceReturnProbeMark_* はソースコード上で直接定義はされてお�
   (返値が float/double なら DT_RETURN_MARK(), それ以外なら DT_VOID_RETURN_MARK() に展開される)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jni.cpp))
     // The DT_RETURN_MARK macros create a scoped object to fire the dtrace
     // '-return' probe regardless of the return path is taken out of the function.
@@ -81,7 +81,7 @@ DTraceReturnProbeMark_* はソースコード上で直接定義はされてお�
 
 #### 参考(for your information): DT_RETURN_MARK_DECL()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jni.cpp))
     #define DT_RETURN_MARK_DECL(name, type)                                    \
       HS_DTRACE_PROBE_DECL1(hotspot_jni, name##__return, type);                \
@@ -99,7 +99,7 @@ DTraceReturnProbeMark_* はソースコード上で直接定義はされてお�
 
 #### 参考(for your information): DT_VOID_RETURN_MARK_DECL()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jni.cpp))
     // Void functions are simpler since there's no return value
     #define DT_VOID_RETURN_MARK_DECL(name)                                     \
@@ -116,7 +116,7 @@ DTraceReturnProbeMark_* はソースコード上で直接定義はされてお�
 
 #### 参考(for your information): DT_RETURN_MARK(), DT_VOID_RETURN_MARK()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jni.cpp))
     // Place these macros in the function to mark the return.  Non-void
     // functions need the type and address of the return value.
@@ -128,7 +128,7 @@ DTraceReturnProbeMark_* はソースコード上で直接定義はされてお�
 
 #### 参考(for your information): DT_RETURN_MARK_DECL_FOR(), DT_RETURN_MARK_FOR()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jni.cpp))
     // Choose DT_RETURN_MARK macros  based on the type: float/double -> void
     // (dtrace doesn't do FP yet)
@@ -141,7 +141,7 @@ DTraceReturnProbeMark_* はソースコード上で直接定義はされてお�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jni.cpp))
     // Use these to select distinct code for floating-point vs. non-floating point
     // situations.  Used from within common macros where we need slightly
@@ -174,13 +174,13 @@ See: [here](../doxygen/classDTraceReturnProbeMark__* (DTraceReturnProbeMark__Def
 JNI 関数が呼び出された際に, その関数名や引数を tty に出力するための一時オブジェクト(StackObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jni.cpp))
     #ifdef ASSERT
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jni.cpp))
       class JNITraceWrapper : public StackObj {
 ```
@@ -192,7 +192,7 @@ JNIWrapper マクロ内で(のみ)使用されている.
  以下の #else 以降が #ifdef ASSERT でない場合)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jni.cpp))
       #define JNIWrapper(arg) JNICountWrapper(arg); JNITraceWrapper(arg)
     #else
@@ -203,7 +203,7 @@ JNIWrapper マクロ内で(のみ)使用されている.
 このため各 JNI 関数が呼び出されると JNITraceWrapper による出力が行われる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jni.cpp))
     JNI_ENTRY(jclass, jni_DefineClass(JNIEnv *env, const char *name, jobject loaderRef,
                                       const jbyte *buf, jsize bufLen))
@@ -216,7 +216,7 @@ JNIWrapper マクロ内で(のみ)使用されている.
 なお, このクラスは (デバッグ時であることに加えて) TraceJNICalls オプションが指定されている場合にしか働かない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jni.cpp))
         JNITraceWrapper(const char* format, ...) {
           if (TraceJNICalls) {
@@ -247,13 +247,13 @@ See: [here](../doxygen/classJNITraceWrapper.html) for details
 各 JNI 関数が呼び出された回数を記録する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jni.cpp))
     #ifdef ASSERT
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jni.cpp))
       class JNIHistogramElement : public HistogramElement {
 ```
@@ -265,7 +265,7 @@ See: [here](../doxygen/classJNITraceWrapper.html) for details
 JNIHistogram という大域変数の Histogram オブジェクト内に(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jni.cpp))
       Histogram* JNIHistogram;
 ```
@@ -274,7 +274,7 @@ JNIHistogram という大域変数の Histogram オブジェクト内に(のみ)
 JNICountWrapper マクロ内で(のみ)生成されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jni.cpp))
       #define JNICountWrapper(arg)                                     \
          static JNIHistogramElement* e = new JNIHistogramElement(arg); \
@@ -288,7 +288,7 @@ JNICountWrapper マクロ内で(のみ)生成されている.
  以下の #else 以降が #ifdef ASSERT でない場合)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jni.cpp))
       #define JNIWrapper(arg) JNICountWrapper(arg); JNITraceWrapper(arg)
     #else
@@ -299,7 +299,7 @@ JNICountWrapper マクロ内で(のみ)生成されている.
 このため各 JNI 関数が呼び出されると JNIHistogramElement による呼び出し回数の記録処理が行われる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jni.cpp))
     JNI_ENTRY(jclass, jni_DefineClass(JNIEnv *env, const char *name, jobject loaderRef,
                                       const jbyte *buf, jsize bufLen))
@@ -324,7 +324,7 @@ JNI の関数 (より具体的に言うと, Call*Method*() 関数および NewOb
 HotSpot 内部の ABI に従うように引数を詰め直す処理を行う (See: [here](no2935TLm.html) and [here](no3059-0k.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jni.cpp))
     class JNI_ArgumentPusher : public SignatureIterator {
 ```
@@ -332,7 +332,7 @@ HotSpot 内部の ABI に従うように引数を詰め直す処理を行う (Se
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jni.cpp))
       virtual void get_bool   () = 0;
       virtual void get_char   () = 0;
@@ -361,7 +361,7 @@ JNI_ArgumentPusher クラスの具象サブクラスの1つ.
 (つまり, 引数を va_list に入れて渡す関数 or 関数自体が可変長引数関数となっている関数用).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jni.cpp))
     class JNI_ArgumentPusherVaArg : public JNI_ArgumentPusher {
 ```
@@ -393,7 +393,7 @@ JNI_ArgumentPusher クラスの具象サブクラスの1つ.
 このクラスは, 関数名の最後が 'A' で終わる JNI 関数用 (つまり, 引数を jvalue の配列に入れて渡す関数用).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jni.cpp))
     class JNI_ArgumentPusherArray : public JNI_ArgumentPusher {
 ```

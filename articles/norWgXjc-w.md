@@ -34,7 +34,7 @@ HotSpot 内の処理で使用される Java オブジェクトや Java のシス
 そんなメソッドは現在のソースにはないが...)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/universe.hpp))
     // Universe is a name space holding known system classes and objects in the VM.
     //
@@ -46,7 +46,7 @@ HotSpot 内の処理で使用される Java オブジェクトや Java のシス
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/universe.hpp))
     class Universe: AllStatic {
 ```
@@ -57,7 +57,7 @@ HotSpot 内の処理で使用される Java オブジェクトや Java のシス
 * HotSpot 内で使用される Java のシステムクラスへのポインタ
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/universe.hpp))
       // Known classes in the VM
       static klassOop _boolArrayKlassObj;
@@ -89,7 +89,7 @@ HotSpot 内の処理で使用される Java オブジェクトや Java のシス
 * HotSpot 内で使用される Java オブジェクトへのポインタ
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/universe.hpp))
       // Known objects in the VM
     
@@ -140,7 +140,7 @@ HotSpot 内の処理で使用される Java オブジェクトや Java のシス
 * CollectedHeap オブジェクト (アクセサメソッドは Universe::heap())
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/universe.hpp))
       // The particular choice of collected heap.
       static CollectedHeap* heap() { return _collectedHeap; }
@@ -163,7 +163,7 @@ HotSpot 内の処理で使用される Java メソッド (methodOop) をキャ�
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/universe.hpp))
     // Common parts of a methodOop cache. This cache safely interacts with
     // the RedefineClasses API.
@@ -175,7 +175,7 @@ HotSpot 内の処理で使用される Java メソッド (methodOop) をキャ�
 このクラス自体の内部には以下の2つのフィールド(のみ)を保持する
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/universe.hpp))
       // We save the klassOop and the idnum of methodOop in order to get
       // the current cached methodOop.
@@ -202,7 +202,7 @@ ActiveMethodOopsCache::is_same_method() メソッドを提供する.
 現状では java.lang.reflect.Method.invoke() を表す methodOop をキャッシュしておくためだけに使用されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/universe.hpp))
     // A helper class for caching a methodOop when the user of the cache
     // cares about all versions of the methodOop.
@@ -211,7 +211,7 @@ ActiveMethodOopsCache::is_same_method() メソッドを提供する.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/universe.hpp))
       // This subclass adds weak references to older versions of the
       // methodOop and a query method for a methodOop.
@@ -222,7 +222,7 @@ ActiveMethodOopsCache::is_same_method() メソッドを提供する.
 そして, ActiveMethodOopsCache::is_same_method() はそれらのうちどれかに一致すれば true を返す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/universe.hpp))
       void add_previous_version(const methodOop method);
       bool is_same_method(const methodOop method) const;
@@ -233,7 +233,7 @@ ActiveMethodOopsCache::is_same_method() メソッドを提供する.
 Universe クラスの _reflect_invoke_cache フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/universe.hpp))
     class Universe: AllStatic {
     ...
@@ -289,7 +289,7 @@ CommonMethodOopCache クラスの具象サブクラスの1つ.
 * java.lang.ClassLoader.addClass()
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/universe.hpp))
     // A helper class for caching a methodOop when the user of the cache
     // only cares about the latest version of the methodOop.
@@ -298,13 +298,13 @@ CommonMethodOopCache クラスの具象サブクラスの1つ.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/universe.hpp))
       // This subclass adds a getter method for the latest methodOop.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/universe.hpp))
       methodOop get_methodOop();
 ```
@@ -315,7 +315,7 @@ Universe クラスの _finalizer_register_cache フィールドおよび
 _loader_addClass_cache フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/universe.hpp))
     class Universe: AllStatic {
     ...
@@ -349,7 +349,7 @@ See: [here](no3269WqK.html) for details
   java.lang.ClassLoader.addClass() を呼び出すために(のみ)使用されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/universe.hpp))
       static methodOop    finalizer_register_method()     { return _finalizer_register_cache->get_methodOop(); }
       static methodOop    loader_addClass_method()        { return _loader_addClass_cache->get_methodOop(); }
@@ -372,7 +372,7 @@ See: [here](../doxygen/classLatestMethodOopCache.html) for details
 ?? (このクラスは使用箇所が見当たらない...)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/universe.hpp))
     class DeferredObjAllocEvent : public CHeapObj {
 ```
@@ -396,7 +396,7 @@ Universe クラス内で使用される補助クラス
 java.lang.Class よりも先にロードされたクラスに対して mirror を生成する処理を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/universe.cpp))
     class FixupMirrorClosure: public ObjectClosure {
 ```

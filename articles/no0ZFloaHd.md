@@ -19,7 +19,7 @@ title: RuntimeService クラス
 HotSpot の Runtime の処理(特に safepoint 処理)に関する PerfData を納めた名前空間(AllStatic クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/runtimeService.hpp))
     class RuntimeService : public AllStatic {
 ```
@@ -29,7 +29,7 @@ HotSpot の Runtime の処理(特に safepoint 処理)に関する PerfData を�
  そもそも sun.management.HotspotRuntimeMXBean 自体が内部的なものであり予告なくインターフェースが変更されうる,
  とのこと.)
 
-```
+```java
     ((cite: jdk/src/share/classes/sun/management/HotspotRuntimeMBean.java))
     /**
      * Hotspot internal management interface for the runtime system.
@@ -57,7 +57,7 @@ sun.management.HotspotRuntime クラスから(のみ)使用されている.
   * 
   * 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/runtimeService.hpp))
       static PerfCounter* _sync_time_ticks;        // Accumulated time spent getting to safepoints
       static PerfCounter* _total_safepoints;
@@ -78,7 +78,7 @@ sun.management.HotspotRuntime クラスから(のみ)使用されている.
   * sun.rt.interruptedBeforeIO
   * sun.rt.interruptedDuringIO
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/runtimeService.cpp))
         _sync_time_ticks =
                   PerfDataManager::create_counter(SUN_RT, "safepointSyncTime",

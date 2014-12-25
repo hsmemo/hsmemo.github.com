@@ -21,7 +21,7 @@ Generational GC における昇格のための閾値(tenuring threshould)を計�
  ageTable は使われていない模様).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/ageTable.hpp))
     // Age table for adaptive feedback-mediated tenuring (scavenging)
     //
@@ -37,7 +37,7 @@ Generational GC における昇格のための閾値(tenuring threshould)を計�
 1. まず, GC 開始時に ageTable::clear() を呼んでおく(??)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/ageTable.hpp))
       // clear table
       void clear();
@@ -46,7 +46,7 @@ Generational GC における昇格のための閾値(tenuring threshould)を計�
 2. GC 中に, ageTable::add() を呼んで live object の情報を記録していく.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/ageTable.hpp))
       // add entry
       void add(oop p, size_t oop_size) {
@@ -55,7 +55,7 @@ Generational GC における昇格のための閾値(tenuring threshould)を計�
 2. (ParNew では, 複数の ageTable をマージする ageTable::merge() や ageTable::merge_par() も使用されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/ageTable.hpp))
       // Merge another age table with the current one.  Used
       // for parallel young generation gc.
@@ -66,7 +66,7 @@ Generational GC における昇格のための閾値(tenuring threshould)を計�
 3. そして, GC 終了後に ageTable::compute_tenuring_threshold() を呼ぶと, 次の昇格閾値が計算されて返される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/ageTable.hpp))
       // calculate new tenuring threshold based on age information
       int compute_tenuring_threshold(size_t survivor_capacity);

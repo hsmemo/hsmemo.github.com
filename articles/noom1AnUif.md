@@ -15,7 +15,7 @@ title: ciObjArray クラス
 ciObject クラスの具象サブクラスの1つ. objArrayOopDesc 用の ciObject クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciObjArray.hpp))
     // ciObjArray
     //

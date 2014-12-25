@@ -48,7 +48,7 @@ See: [here](no2114ZYf.html) for details
 java.lang.Thread.dumpThreads() は JVM_DumpThreads() で実装されている.
 
 
-```
+```cpp
     ((cite: jdk/src/share/native/java/lang/Thread.c))
     static JNINativeMethod methods[] = {
     ...

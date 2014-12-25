@@ -25,7 +25,7 @@ ParallelScavengeHeap 使用時において, Old Generation の管理を担当す
 (= GC Ergonomics を用いた動的領域サイズ調整を行わない場合用) (See: ASPSOldGen).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psOldGen.hpp))
     class PSOldGen : public CHeapObj {
 ```
@@ -39,7 +39,7 @@ ParallelScavengeHeap オブジェクトの _old_gen フィールドに格納さ�
 その場合にはこのクラスはどこからも使用されない.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/parallelScavengeHeap.hpp))
     class ParallelScavengeHeap : public CollectedHeap {
     ...
@@ -50,7 +50,7 @@ ParallelScavengeHeap オブジェクトの _old_gen フィールドに格納さ�
 正確には, こちらで生成されたものが ParallelScavengeHeap のフィールドにコピーされる)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/adjoiningGenerations.hpp))
     class AdjoiningGenerations : public CHeapObj {
     ...
@@ -64,7 +64,7 @@ AdjoiningGenerations::AdjoiningGenerations() 内で(のみ)生成されている
 UseAdaptiveGCBoundary オプションが指定されている場合は ASPSOldGen が生成され, そうでない場合は PSOldGen が生成される)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/adjoiningGenerations.cpp))
     AdjoiningGenerations::AdjoiningGenerations(ReservedSpace old_young_rs,
                                                size_t init_low_byte_size,
@@ -109,7 +109,7 @@ PSOldGen::verify_object_start_array() 内で使用される補助クラス.
 PSOldGen オブジェクト内にある ObjectStartArray のチェックを行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psOldGen.cpp))
     class VerifyObjectStartArrayClosure : public ObjectClosure {
 ```

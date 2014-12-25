@@ -17,7 +17,7 @@ ParallelScavenge 用の CollectorPolicy クラス.
 (TwoGenerationCollectorPolicy クラスの具象サブクラスの1つ (See: [here](no3718kvd.html) for details))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/generationSizer.hpp))
     // There is a nice batch of tested generation sizing code in
     // TwoGenerationCollectorPolicy. Lets reuse it!
@@ -30,7 +30,7 @@ ParallelScavenge 用の CollectorPolicy クラス.
 ParallelScavengeHeap クラスの _collector_policy フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/parallelScavengeHeap.hpp))
     class ParallelScavengeHeap : public CollectedHeap {
     ...

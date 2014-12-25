@@ -33,7 +33,7 @@ title: ClassLoadingService クラス関連のクラス (ClassLoadingService, Loa
 (PerfData に記録している内容は, クラスファイルがロード／アンロードされた回数, その際のロード／アンロードされたバイト数, 等)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/classLoadingService.hpp))
     // VM monitoring and management support for the Class Loading subsystem
     class ClassLoadingService : public AllStatic {
@@ -47,7 +47,7 @@ sun.management.ClassLoadingImpl クラス及び sun.management.HotspotClassLoadi
 ### 内部構造(Internal structure)
 内部には以下のような Perf データを格納している.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/classLoadingService.hpp))
       // Counters for classes loaded from class files
       static PerfCounter*  _classes_loaded_count;
@@ -76,7 +76,7 @@ sun.management.ClassLoadingImpl クラス及び sun.management.HotspotClassLoadi
   * sun.cls.sharedUnloadedBytes
   * sun.cls.methodBytes
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/classLoadingService.cpp))
       // These counters are for java.lang.management API support.
       // They are created even if -XX:-UsePerfData is set and in
@@ -162,7 +162,7 @@ jmm_GetLoadedClasses() 内で使用される補助クラス.
 
 (なおコメントによると, このコードは JMM と JVMTI で共通化すべき, とのこと)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/classLoadingService.hpp))
     // FIXME: make this piece of code to be shared by M&M and JVMTI
     class LoadedClassesEnumerator : public StackObj {
@@ -173,7 +173,7 @@ jmm_GetLoadedClasses() 内で使用される補助クラス.
 使用方法は次のような感じ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/management.cpp))
       LoadedClassesEnumerator lce(THREAD);  // Pass current Thread as parameter
     

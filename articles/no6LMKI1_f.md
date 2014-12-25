@@ -20,7 +20,7 @@ title: Bytecode クラス関連のクラス (Bytecode, LookupswitchPair, Bytecod
 例: lookupswitch 命令の場合 (デフォルトのオフセット, ペア数, n 番目のペア, 等の情報を取得するメソッドが用意されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecode.hpp))
       // Attributes
       int  default_offset() const                    { return get_Java_u4_at(aligned_offset(1 + 0*jintSize)); }
@@ -59,7 +59,7 @@ title: Bytecode クラス関連のクラス (Bytecode, LookupswitchPair, Bytecod
 (ただし StackObj クラスというよりは ValueObj クラスに近い使われ方をしている).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecode.hpp))
     // The base class for different kinds of bytecode abstractions.
     // Provides the primitive operations to manipulate code relative
@@ -74,7 +74,7 @@ title: Bytecode クラス関連のクラス (Bytecode, LookupswitchPair, Bytecod
 (bcp の指定には, methodOop と address を使用).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecode.hpp))
       Bytecode(methodOop method, address bcp): _bcp(bcp), _code(Bytecodes::code_at(method, addr_at(0))) {
         assert(method != NULL, "this form requires a valid methodOop");
@@ -102,7 +102,7 @@ See: [here](../doxygen/classBytecode.html) for details
 lookupswitch 命令用の Bytecode クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecode.hpp))
     class Bytecode_lookupswitch: public Bytecode {
 ```
@@ -123,7 +123,7 @@ lookupswitch 命令中の match-offset pair オペランドを表すクラス.
 (match-offset pair の情報を取得するための LookupswitchPair::match() メソッド, 及び LookupswitchPair::offset() メソッドを備える)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecode.hpp))
     // Abstractions for lookupswitch bytecode
     class LookupswitchPair VALUE_OBJ_CLASS_SPEC {
@@ -145,7 +145,7 @@ See: [here](../doxygen/classLookupswitchPair.html) for details
 tableswitch 命令用の Bytecode クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecode.hpp))
     class Bytecode_tableswitch: public Bytecode {
 ```
@@ -164,7 +164,7 @@ See: [here](../doxygen/classBytecode__tableswitch.html) for details
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecode.hpp))
     // Common code for decoding invokes and field references.
     
@@ -183,7 +183,7 @@ See: [here](../doxygen/classBytecode__member__ref.html) for details
 メソッド呼び出しに関するバイトコード命令 (invoke{virtual|static|interface|special}) 用の Bytecode クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecode.hpp))
     // Abstraction for invoke_{virtual, static, interface, special}
     
@@ -202,7 +202,7 @@ See: [here](../doxygen/classBytecode__invoke.html) for details
 フィールドアクセスに関するバイトコード命令 ((put|get}{field|static}) 用の Bytecode クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecode.hpp))
     // Abstraction for all field accesses (put/get field/static)
     class Bytecode_field: public Bytecode_member_ref {
@@ -220,7 +220,7 @@ See: [here](../doxygen/classBytecode__field.html) for details
 checkcast 命令用の Bytecode クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecode.hpp))
     // Abstraction for checkcast
     class Bytecode_checkcast: public Bytecode {
@@ -238,7 +238,7 @@ See: [here](../doxygen/classBytecode__checkcast.html) for details
 instanceof 命令用の Bytecode クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecode.hpp))
     // Abstraction for instanceof
     class Bytecode_instanceof: public Bytecode {
@@ -256,7 +256,7 @@ See: [here](../doxygen/classBytecode__instanceof.html) for details
 new 命令用の Bytecode クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecode.hpp))
     class Bytecode_new: public Bytecode {
 ```
@@ -273,7 +273,7 @@ See: [here](../doxygen/classBytecode__new.html) for details
 multianewarray 命令用の Bytecode クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecode.hpp))
     class Bytecode_multianewarray: public Bytecode {
 ```
@@ -290,7 +290,7 @@ See: [here](../doxygen/classBytecode__multianewarray.html) for details
 anewarray 命令用の Bytecode クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecode.hpp))
     class Bytecode_anewarray: public Bytecode {
 ```
@@ -307,7 +307,7 @@ See: [here](../doxygen/classBytecode__anewarray.html) for details
 ldc, ldc_w 及び ldc2_w 命令用の Bytecode クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecode.hpp))
     // Abstraction for ldc, ldc_w and ldc2_w
     class Bytecode_loadconstant: public Bytecode {

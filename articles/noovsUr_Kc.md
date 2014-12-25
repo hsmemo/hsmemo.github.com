@@ -91,7 +91,7 @@ JNI function table を指定されたものに書き換える.
 (なお, 置き換えを非同期に行うと危険なので, safepoint 停止を利用して安全に置き換えられるように VM_Operation になっている).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEnv.cpp))
     // VM operation class to copy jni function table at safepoint.
     // More than one java threads or jvmti agents may be reading/

@@ -18,7 +18,7 @@ ParallelScavenge 用の GCAdaptivePolicyCounters クラス
 (つまり, AdaptiveSizePolicy に関する PerfData を格納しておくためのクラス (See: GCAdaptivePolicyCounters)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psGCAdaptivePolicyCounters.hpp))
     // PSGCAdaptivePolicyCounters is a holder class for performance counters
     // that track the data and decisions for the ergonomics policy for the
@@ -32,7 +32,7 @@ ParallelScavenge 用の GCAdaptivePolicyCounters クラス
 ParallelScavengeHeap クラスの _gc_policy_counters フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/parallelScavengeHeap.hpp))
     class ParallelScavengeHeap : public CollectedHeap {
     ...
@@ -68,7 +68,7 @@ GCAdaptivePolicyCounters が格納している情報に加えて,
   * sun.gc.policy.fullFollowsScavenge
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psGCAdaptivePolicyCounters.cpp))
     PSGCAdaptivePolicyCounters::PSGCAdaptivePolicyCounters(const char* name_arg,
                                           int collectors,

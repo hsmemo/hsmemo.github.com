@@ -29,7 +29,7 @@ EMCP (Equivalent modulo Constant Pool) のための判定処理を納めた名�
  どこからも使われてないのでよく分からん. #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/methodComparator.hpp))
     // methodComparator provides an interface for determining if methods of
     // different versions of classes are equivalent or switchable
@@ -45,7 +45,7 @@ EMCP (Equivalent modulo Constant Pool) のための判定処理を納めた名�
   (ただしこちらは #ifdef ASSERT かつ StressMethodComparator オプションが指定されている場合にのみ使用される)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiRedefineClasses.cpp))
     void VM_RedefineClasses::check_methods_and_mark_as_obsolete(
            BitMap *emcp_methods, int * emcp_method_count_p) {
@@ -54,7 +54,7 @@ EMCP (Equivalent modulo Constant Pool) のための判定処理を納めた名�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/rewriter.cpp))
     void Rewriter::relocate_and_link(instanceKlassHandle this_oop,
                                      objArrayHandle methods, TRAPS) {
@@ -75,7 +75,7 @@ EMCP (Equivalent modulo Constant Pool) のための判定処理を納めた名�
 
 (しかも, MethodComparator::methods_switchable() の方はどこからも使用されていない)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/methodComparator.hpp))
       // Check if the new method is equivalent to the old one modulo constant pool (EMCP).
       // Intuitive definition: two versions of the same method are EMCP, if they don't differ
@@ -103,7 +103,7 @@ MethodComparator::methods_switchable() に引数として渡され, その中の
 MethodComparator::methods_switchable() 自体がよく分からないので詳細不明.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/methodComparator.hpp))
     // ByteCode Index Map. For two versions of the same method, where the new version may contain
     // fragments not found in the old version, provides a mapping from an index of a bytecode in

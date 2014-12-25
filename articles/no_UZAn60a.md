@@ -104,7 +104,7 @@ java.lang.management.ManagementFactory.getMemoryPoolMXBeans()
 なお, HotSpot 独自の MBean については以下のメソッドで取得できる.
 
 
-```
+```java
     ((cite: jdk/src/share/classes/sun/management/ManagementFactoryHelper.java))
         public static synchronized HotSpotDiagnosticMXBean getDiagnosticMXBean() {
     ...
@@ -144,7 +144,7 @@ java.lang.management.ManagementFactory.getMemoryPoolMXBeans()
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### java.lang.management.ManagementFactory の各種メソッド
 
-```
+```java
     ((cite: jdk/src/share/classes/java/lang/management/ManagementFactory.java))
     package java.lang.management;
     ...
@@ -262,7 +262,7 @@ java.lang.management.ManagementFactory.getMemoryPoolMXBeans()
 
 ### sun.management.ManagementFactoryHelper の各種メソッド
 
-```
+```java
     ((cite: jdk/src/share/classes/sun/management/ManagementFactoryHelper.java))
     package sun.management;
     ...

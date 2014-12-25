@@ -39,7 +39,7 @@ C2 JIT コンパイラが使用する中間語用のクラスの基底クラス.
 高レベル中間語および低レベル中間語用のクラスは全て Node クラスのサブクラスとして表現される (See: [here](no3867ipg.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/node.hpp))
     //------------------------------Node-------------------------------------------
     // Nodes define actions in the program.  They create values, which have types.
@@ -79,14 +79,14 @@ Node オブジェクト間の "Def-Use" 情報をたどるためのイテレー�
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/node.hpp))
     //-----------------------------------------------------------------------------
     // Iterators over DU info, and associated Node functions.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/node.hpp))
     #if OPTO_DU_ITERATOR_ASSERT
     
@@ -99,7 +99,7 @@ Node オブジェクト間の "Def-Use" 情報をたどるためのイテレー�
 (そのため #if OPTO_DU_ITERATOR_ASSERT は #ifdef ASSERT と同義).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/node.hpp))
     #ifndef OPTO_DU_ITERATOR_ASSERT
     #ifdef ASSERT
@@ -129,14 +129,14 @@ DUIterator_Common クラスの具象サブクラスの1つ.
 (ただし, その場合 Node::refresh_out_pos() を呼ぶ必要がある).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/node.hpp))
     //-----------------------------------------------------------------------------
     // Iterators over DU info, and associated Node functions.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/node.hpp))
     // Default DU iterator.  Allows appends onto the out array.
     // Allows deletion from the out array only at the current point.
@@ -159,7 +159,7 @@ DUIterator_Common クラスの具象サブクラスの1つ.
 なお, #if OPTO_DU_ITERATOR_ASSERT 時以外は uint の typedef.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/node.hpp))
     #if OPTO_DU_ITERATOR_ASSERT
     class DUIterator;
@@ -194,7 +194,7 @@ DUIterator_Common クラスの具象サブクラスの1つ.
 (そのため #if OPTO_DU_ITERATOR_ASSERT は #ifdef ASSERT と同義).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/node.hpp))
     #ifndef OPTO_DU_ITERATOR_ASSERT
     #ifdef ASSERT
@@ -223,14 +223,14 @@ DUIterator_Common クラスの具象サブクラスの1つ.
 なお DUIterator クラスと異なりイテレート処理中に要素が追加されると対応できない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/node.hpp))
     //-----------------------------------------------------------------------------
     // Iterators over DU info, and associated Node functions.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/node.hpp))
     // Faster DU iterator.  Disallows insertions into the out array.
     // Allows deletion from the out array only at the current point.
@@ -251,7 +251,7 @@ DUIterator_Common クラスの具象サブクラスの1つ.
 なお, #if OPTO_DU_ITERATOR_ASSERT 時以外は Node** の typedef.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/node.hpp))
     #if OPTO_DU_ITERATOR_ASSERT
     class DUIterator;
@@ -272,7 +272,7 @@ DUIterator_Common クラスの具象サブクラスの1つ.
 (そのため #if OPTO_DU_ITERATOR_ASSERT は #ifdef ASSERT と同義).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/node.hpp))
     #ifndef OPTO_DU_ITERATOR_ASSERT
     #ifdef ASSERT
@@ -299,14 +299,14 @@ DUIterator_Fast クラスのサブクラス.
 こちらは要素を逆順に (= 最後から) たどる場合用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/node.hpp))
     //-----------------------------------------------------------------------------
     // Iterators over DU info, and associated Node functions.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/node.hpp))
     // Faster DU iterator.  Requires each successive edge to be removed.
     // Does not allow insertion of any edges.
@@ -324,7 +324,7 @@ DUIterator_Fast クラスのサブクラス.
 なお, #if OPTO_DU_ITERATOR_ASSERT 時以外は Node** の typedef.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/node.hpp))
     #if OPTO_DU_ITERATOR_ASSERT
     class DUIterator;
@@ -345,7 +345,7 @@ DUIterator_Fast クラスのサブクラス.
 (そのため #if OPTO_DU_ITERATOR_ASSERT は #ifdef ASSERT と同義).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/node.hpp))
     #ifndef OPTO_DU_ITERATOR_ASSERT
     #ifdef ASSERT
@@ -371,7 +371,7 @@ Node クラス用の補助クラス.
 Node オブジェクト間の "Def-Use" 情報をたどるためのイテレータクラス(StackObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/node.hpp))
     // An Iterator that truly follows the iterator pattern.  Doesn't
     // support deletion but could be made to.
@@ -398,7 +398,7 @@ Node オブジェクト間の "Def-Use" 情報をたどるためのイテレー�
 内部的には, DUIterator_Fast クラスを用いて実装されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/node.hpp))
       DUIterator_Fast i;
       DUIterator_Fast imax;
@@ -420,7 +420,7 @@ Node オブジェクトの配列を表す (= 整数値から Node オブジェ�
 なお配列長は必要に応じて自動的に拡張される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/node.hpp))
     //-----------------------------------------------------------------------------
     // Map dense integer indices to Nodes.  Uses classic doubling-array trick.
@@ -445,7 +445,7 @@ Node_Array クラスのサブクラス.
 配列の最後に要素を追加／削除する push()/pop() 等のメソッドが追加されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/node.hpp))
     class Node_List : public Node_Array {
 ```
@@ -465,7 +465,7 @@ See: [here](../doxygen/classNode__List.html) for details
 既に格納済みの Node であれば push() しても何もしない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/node.hpp))
     //------------------------------Unique_Node_List-------------------------------
     class Unique_Node_List : public Node_List {
@@ -488,7 +488,7 @@ push()/pop() の他, 添字(index)で指定した位置の要素の取得／変�
 なお領域長は必要に応じて自動的に拡張される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/node.hpp))
     //------------------------------Node_Stack-------------------------------------
     class Node_Stack {
@@ -499,7 +499,7 @@ push()/pop() の他, 添字(index)で指定した位置の要素の取得／変�
 指定しない場合はカレントスレッドの ResourceArea 上に確保される. 
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/node.hpp))
       Node_Stack(int size) {
         size_t max = (size > OptoNodeListSize) ? size : OptoNodeListSize;
@@ -534,7 +534,7 @@ safepoint ではない箇所について,
 1つの Node_Notes オブジェクトが 1つの Node オブジェクトに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/node.hpp))
     //-----------------------------Node_Notes--------------------------------------
     // Debugging or profiling annotations loosely and sparsely associated
@@ -598,7 +598,7 @@ Compile::locate_node_notes()
 内部には以下のフィールド(のみ)を含む.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/node.hpp))
       JVMState* _jvms;
 ```
@@ -620,7 +620,7 @@ Node クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/node.hpp))
     //------------------------------TypeNode---------------------------------------
     // Node with a Type constant.
@@ -631,7 +631,7 @@ Node クラスのサブクラスの1つ.
 スーパークラスである Node クラスのフィールドに加えて, 以下のフィールドを持つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/node.hpp))
       const Type* const _type;
 ```

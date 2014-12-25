@@ -84,7 +84,7 @@ vframeArrayElement::free_monitors() 内で(のみ)削除されている.
  また, 配列用の領域はコンストラクタ中で確保している)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/monitorChunk.hpp))
       int              _number_of_monitors;
       BasicObjectLock* _monitors;

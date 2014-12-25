@@ -20,7 +20,7 @@ title: jniCheck クラス
 (See: checked_jni_NativeInterface) (See: [here](no5248dl2.html) and [here](no3059pIA.html) for details))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jniCheck.hpp))
     //
     // Checked JNI routines that are useful for outside of checked JNI
@@ -33,7 +33,7 @@ title: jniCheck クラス
 内部には, 以下のメソッド(のみ)が定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jniCheck.hpp))
       static oop validate_handle(JavaThread* thr, jobject obj);
       static oop validate_object(JavaThread* thr, jobject obj);

@@ -38,7 +38,7 @@ OopMap 内には OopMapValue というエントリが格納されており, OopM
  RegisterSaver::save_live_registers() 中の set_callee_saved() の利用箇所を参照)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/oopMap.hpp))
     // Interface for generating the frame map for compiled code.  A frame map
     // describes for a specific pc whether each register and frame stack slot is:
@@ -54,7 +54,7 @@ OopMap 内には OopMapValue というエントリが格納されており, OopM
 なお, 上のコメントでは 5種類と書かれているが, 実際には narrow_oop という種別もあるため 6種類.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/oopMap.hpp))
       enum oop_types {              // must fit in type_bits
              unused_value =0,       // powers of 2, for masking OopMapStream
@@ -90,7 +90,7 @@ OopMap 情報を作成する処理で使用される一時オブジェクト(Res
 Safepoint に指定された実行地点毎に 1つの OopMap オブジェクトが存在する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/oopMap.hpp))
     class OopMap: public ResourceObj {
 ```
@@ -115,7 +115,7 @@ OopMap オブジェクト内に格納されるエントリ.
 1つの OopMapValue オブジェクトが「レジスタと種別のペア」1つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/oopMap.hpp))
     class OopMapValue: public StackObj {
 ```
@@ -136,13 +136,13 @@ _content_reg フィールドに callee saved や derived pointer 用の補足情
 (関連する VMReg 番号を格納している模様).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/oopMap.hpp))
       short _value;
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/oopMap.hpp))
       short _content_reg;
 ```
@@ -162,7 +162,7 @@ OopMap クラス用のユーティリティ・クラス.
 OopMap オブジェクト内にある OopMapValue オブジェクトをたどるためのイテレータクラス(StackObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/oopMap.hpp))
     class OopMapStream : public StackObj {
 ```
@@ -182,7 +182,7 @@ OopMap クラス用のユーティリティ・クラス.
 複数の OopMap オブジェクトを格納できるコンテナクラス. (一つのメソッド内の全部の OopMap をまとめるために使われている? #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/oopMap.hpp))
     class OopMapSet : public ResourceObj {
 ```
@@ -211,7 +211,7 @@ derived pointer 情報を入れるテーブルを納めた名前空間(AllStatic
 GC 中に見つかった derived pointer 情報をこの中に溜めていき, GC 後に base pointer のアドレスに基づいて値を更新するために使う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/oopMap.hpp))
     // Derived pointer support. This table keeps track of all derived points on a
     // stack.  It is cleared before each scavenge/GC.  During the traversal of all
@@ -229,7 +229,7 @@ GC 中に見つかった derived pointer 情報をこの中に溜めていき, G
 3. GC が終わった時に DerivedPointerTable::update_pointers() を呼ぶと, 登録しておいた derived pointer の値が書き換わる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/oopMap.hpp))
       static void clear();                       // Called before scavenge/GC
       static void add(oop *derived, oop *base);  // Called during scavenge/GC
@@ -251,7 +251,7 @@ C2 JIT Compiler 用の補助クラス (#ifdef COMPILER2 時にしか定義され
 ソースコード中のあるスコープの間だけ, DerivedPointerTable を "deactivate" するための一時オブジェクト(StackObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/oopMap.hpp))
     // A utility class to temporarily "deactivate" the DerivedPointerTable.
     // (Note: clients are responsible for any MT-safety issues)

@@ -26,7 +26,7 @@ title: JavaAssertions およびその補助クラス (JavaAssertions, JavaAssert
 Assertion の設定値管理に関する関数を納めた名前空間(AllStatic クラス)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/javaAssertions.hpp))
     class JavaAssertions: AllStatic {
 ```
@@ -39,7 +39,7 @@ Assertion の設定値管理に関する関数を納めた名前空間(AllStatic
   (これらは java.lang.Class.desiredAssertionStatus() から呼び出される補助関数).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvm.cpp))
     JVM_ENTRY(jboolean, JVM_DesiredAssertionStatus(JNIEnv *env, jclass unused, jclass cls))
     ...
@@ -72,7 +72,7 @@ JavaAssertions クラス内で使用される補助クラス.
 指定されたオプション値を格納しておくための線形リスト.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/javaAssertions.hpp))
     class JavaAssertions::OptionList: public CHeapObj {
 ```
@@ -82,7 +82,7 @@ JavaAssertions クラス内で使用される補助クラス.
 (そして, メソッドはこれらのフィールドへの getter メソッド(アクセサメソッド)のみ).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/javaAssertions.hpp))
       const char*   _name;
       OptionList*   _next;

@@ -27,7 +27,7 @@ interp_only_mode の間は HotSpot の挙動が以下のように変わる.
   * FramePop (関数のリターン毎に通知)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEventController.cpp))
     static const jlong  INTERP_EVENT_BITS =  SINGLE_STEP_BIT | METHOD_ENTRY_BIT | METHOD_EXIT_BIT |
                                     FRAME_POP_BIT | FIELD_ACCESS_BIT | FIELD_MODIFICATION_BIT;
@@ -38,7 +38,7 @@ interp_only_mode の間は HotSpot の挙動が以下のように変わる.
 * interp_only_mode になっているかどうかは, JavaThread 内の _interp_only_mode フィールドで管理している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.hpp))
       // Used by the interpreter in fullspeed mode for frame pop, method
       // entry, method exit and single stepping support. This field is
@@ -64,7 +64,7 @@ interp_only_mode の間は HotSpot の挙動が以下のように変わる.
   (See: JvmtiManageCapabilities::update()).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiManageCapabilities.cpp))
         // Disable these when tracking the bytecodes
         UseFastEmptyMethods = false;
@@ -93,7 +93,7 @@ interp_only_mode の有無により挙動が変わる箇所は以下の通り.
 interp_only_mode であれば methodOopDesc::interpreter_entry_offset() の値をロードしなおす)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/javaCalls.cpp))
       // Since the call stub sets up like the interpreter we call the from_interpreted_entry
       // so we can go compiled via a i2c. Otherwise initial entry method will always
@@ -109,7 +109,7 @@ interp_only_mode であれば methodOopDesc::interpreter_entry_offset() の値�
 interp_only_mode であれば methodOopDesc::interpreter_entry_offset() の値をロードしなおす)
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/sparc/vm/interp_masm_sparc.cpp))
       // Assume we want to go compiled if available
     
@@ -136,7 +136,7 @@ interp_only_mode であれば methodOopDesc::interpreter_entry_offset() の値�
 そうでなければ, methodOopDesc::from_interpreted_offset() にジャンプする)
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/interp_masm_x86_64.cpp))
       prepare_to_jump_from_interpreted();
     
@@ -160,7 +160,7 @@ interp_only_mode であれば methodOopDesc::interpreter_entry_offset() の値�
 ### CompilationPolicy も計測処理(& CompilerBroker の呼び出し)を行わなくなる
 #### NonTieredCompPolicy::event()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/compilationPolicy.cpp))
       if (JvmtiExport::can_post_interpreter_events()) {
         assert(THREAD->is_Java_thread(), "Wrong type of thread");
@@ -181,7 +181,7 @@ interp_only_mode であれば methodOopDesc::interpreter_entry_offset() の値�
 
 #### SimpleThresholdPolicy::event()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/simpleThresholdPolicy.cpp))
       if (comp_level == CompLevel_none &&
           JvmtiExport::can_post_interpreter_events()) {

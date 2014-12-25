@@ -25,7 +25,7 @@ title: CodeCache クラス (CodeCache, 及びその補助クラス(CodeBlob_size
 生成された CodeBlob オブジェクトは全てこのクラスが管理している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/codeCache.hpp))
     // The CodeCache implements the code cache for various pieces of generated
     // code, e.g., compiled java methods, runtime stubs, transition frames, etc.
@@ -55,7 +55,7 @@ See: [here](../doxygen/classCodeCache.html) for details
 (デバッグ用の機能である CodeCache::print() 内で使用される補助クラス)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/codeCache.cpp))
     // Helper class for printing in CodeCache
     

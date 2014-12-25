@@ -26,7 +26,7 @@ sun.tracing.dtrace.JVM クラスのネイティブメソッドからは,
 この大域変数経由で間接的に CVMI 関数を呼び出している.
 
 
-```
+```cpp
     ((cite: jdk/src/share/native/sun/tracing/dtrace/JVM.c))
     static JvmSymbols* jvm_symbols = NULL;
 ```

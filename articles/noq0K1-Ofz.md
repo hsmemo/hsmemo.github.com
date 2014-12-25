@@ -24,7 +24,7 @@ JVMTI/JMM のいくつかの種類のイベントについて, 対応するコ�
   * JMM の sun.management.GarbageCollectorImpl における通知機能 (See: [here](no2114KPr.html) for details)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/serviceThread.hpp))
     // A JavaThread for low memory detection support and JVMTI
     // compiled-method-load events.

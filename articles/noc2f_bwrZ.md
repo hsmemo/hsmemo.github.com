@@ -33,7 +33,7 @@ JVMTI 接続毎の状態の管理は, このクラスだけでなく, JvmtiEnvBa
   * 現在有効化されているイベント通知の種別(をスレッド単位で集計したもの)  (See: [here](no2935C7Z.html) for details)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiThreadState.hpp))
     ///////////////////////////////////////////////////////////////
     //
@@ -101,7 +101,7 @@ JVMTI の機能を実装するために使われている補助クラス(StackOb
 
 JvmtiThreadState 内に格納されている全ての JvmtiEnvThreadState オブジェクトをたどるためのイテレータクラス.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiThreadState.hpp))
     ///////////////////////////////////////////////////////////////
     //
@@ -134,13 +134,13 @@ Redefine 処理中でクラスファイルの verify (Verifier::verify()) を行
 その verify 処理の間だけ JvmtiThreadState オブジェクト内にクラス情報を入れておくために使用される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiThreadState.hpp))
     class RedefineVerifyMark : public StackObj {
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiThreadState.hpp))
       // RedefineClasses support
       // The bug 6214132 caused the verification to fail.
@@ -183,7 +183,7 @@ VM_RedefineClasses::load_new_class_versions() 内で(のみ)使用されてい�
 デストラクタで JvmtiThreadState::clear_class_versions_map() を呼んで元に戻している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiThreadState.hpp))
       RedefineVerifyMark(KlassHandle *the_class, KlassHandle *scratch_class,
                          JvmtiThreadState *state) : _state(state)

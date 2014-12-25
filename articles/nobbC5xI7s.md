@@ -16,7 +16,7 @@ JIT Compiler からクラスのフィールド情報にアクセスするため�
 1つの ciField オブジェクトが 1つのフィールドに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciField.hpp))
     // ciField
     //

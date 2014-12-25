@@ -18,7 +18,7 @@ Perm Generation を管理するクラスは使用する GC アルゴリズムに
 (ところで, このコメントは permGen.hpp に書かれている内容と全く同じ...??)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/compactingPermGenGen.hpp))
     // All heaps contains a "permanent generation," containing permanent
     // (reflective) objects.  This is like a regular generation in some ways,
@@ -48,7 +48,7 @@ Perm 領域を表す Generation クラスの1つ. (See: [here](no3718kvd.html) f
 なお, CDS に関する扱い方は少しトリッキーなので注意, とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/compactingPermGenGen.hpp))
     // This is the "generation" view of a CompactingPermGen.
     // NOTE: the shared spaces used for CDS are here handled in
@@ -62,7 +62,7 @@ Perm 領域を表す Generation クラスの1つ. (See: [here](no3718kvd.html) f
 各 CompactingPermGen オブジェクトの _gen フィールド内に(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/compactPermGen.hpp))
       // The "generation" view.
       OneContigSpaceCardGeneration* _gen;
@@ -92,7 +92,7 @@ CompactingPermGenGen の GC 処理で使用される補助クラス.
 というか, recursive な処理は RecursiveAdjustSharedObjectClosure の担当のような気もするが... #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/compactingPermGenGen.cpp))
     // An ObjectClosure helper: Recursively adjust all pointers in an object
     // and all objects by referenced it. Clear marks on objects in order to
@@ -123,7 +123,7 @@ CompactingPermGenGen の GC 処理で使用される補助クラス.
 コンパクション処理時に Perm 領域にある live object 内のポインタを再帰的に新しいアドレスに修正するための Closure.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/compactingPermGenGen.cpp))
     // An OopClosure helper: Recursively adjust all pointers in an object
     // and all objects by referenced it. Clear marks on objects in order
@@ -156,7 +156,7 @@ CompactingPermGenGen の GC 処理で使用される補助クラス.
 コンパクション処理時に SystemDictionary の PlaceholderTable 内にあるポインタを再帰的に新しいアドレスに修正するための Closure.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/compactingPermGenGen.cpp))
     // We need to go through all placeholders in the system dictionary and
     // try to resolve them into shared classes. Other threads might be in
@@ -189,7 +189,7 @@ See: [here](../doxygen/classTraversePlaceholdersClosure.html) for details
 CDS 使用時に, GC 終了後には shared space 内のオブジェクトに mark が付いていないことをチェックする Closure.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/compactingPermGenGen.cpp))
     #ifdef ASSERT
     class VerifyMarksClearedClosure : public ObjectClosure {

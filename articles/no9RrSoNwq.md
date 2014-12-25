@@ -18,13 +18,13 @@ title: AccessFlags クラス
 (なおアクセスフラグ(access flag)とは, "public" や "synchronized" といった情報を表現するビットマップのこと).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/accessFlags.hpp))
     // AccessFlags is an abstraction over Java access flags.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/accessFlags.hpp))
     class AccessFlags VALUE_OBJ_CLASS_SPEC {
 ```
@@ -33,7 +33,7 @@ title: AccessFlags クラス
 アクセスフラグのうち, JVM 標準のフラグについては jvm.h で定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvm.h))
     #define JVM_ACC_PUBLIC        0x0001  /* visible to everyone */
     #define JVM_ACC_PRIVATE       0x0002  /* visible only to the defining class */
@@ -58,7 +58,7 @@ title: AccessFlags クラス
 代わりに, このクラスでは HotSpot に特有なフラグの定義が行われている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/accessFlags.hpp))
       // See jvm.h for shared JVM_ACC_XXX access flags
     
@@ -117,7 +117,7 @@ title: AccessFlags クラス
 (このメソッドについては標準的なフラグ用のものも含めて提供されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/accessFlags.hpp))
       // Java access flags
       bool is_public      () const         { return (_flags & JVM_ACC_PUBLIC      ) != 0; }
@@ -173,7 +173,7 @@ title: AccessFlags クラス
 その他に, アクセスフラグ情報を変更する (ビットマップ中のビットを立てたり消したりする) ためのメソッドも提供されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/accessFlags.hpp))
       // Atomic update of flags
       void atomic_set_bits(jint bits);

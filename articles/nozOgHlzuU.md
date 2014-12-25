@@ -28,7 +28,7 @@ Abstract_VM_Version クラスの具象サブクラス (なお, 現在は (x86 �
 取得できる情報は, 例えば, ベンダー(Intel/AMD), プロセッサのモデル(386/486/Pentium/...), コア数, キャッシュラインサイズ, 各拡張命令への対応の有無, 等.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/vm_version_x86.hpp))
     class VM_Version : public Abstract_VM_Version {
 ```
@@ -48,7 +48,7 @@ VM_Version クラス内で使用される補助クラス(StubCodeGenerator ク�
 「CPUID 情報を取得する」ためのコードを実行時に生成する.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/vm_version_x86.cpp))
     class VM_Version_StubGenerator: public StubCodeGenerator {
 ```

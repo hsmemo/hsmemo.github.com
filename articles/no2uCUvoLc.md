@@ -25,7 +25,7 @@ title: CardTableExtension クラス (CardTableExtension, 及びその補助ク�
 ParallelScavengeHeap 用の BarrierSet クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/cardTableExtension.hpp))
     class CardTableExtension : public CardTableModRefBS {
 ```
@@ -34,7 +34,7 @@ ParallelScavengeHeap 用の BarrierSet クラス.
 card table には, ポインタの有無に応じて以下のような値が書き込まれる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/cardTableExtension.hpp))
       enum ExtendedCardValue {
         youngergen_card   = CardTableModRefBS::CT_MR_BS_last_reserved + 1,
@@ -46,7 +46,7 @@ card table には, ポインタの有無に応じて以下のような値が書�
 card table の対応する箇所を youngergen_card に変更できる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/cardTableExtension.hpp))
       // Card marking
       void inline_write_ref_field_gc(void* field, oop new_val) {
@@ -58,7 +58,7 @@ card table の対応する箇所を youngergen_card に変更できる.
 また, card table の値は以下のメソッドで調べることが可能.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/cardTableExtension.hpp))
       // Testers for entries
       static bool card_is_dirty(int value)      { return value == dirty_card; }
@@ -83,7 +83,7 @@ See: [here](../doxygen/classCardTableExtension.html) for details
 Remembered Set がおかしな状態になっていない(old->young のポインタの見落としがない)ことを確認する Closure.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/cardTableExtension.cpp))
     // Checks all objects for the existance of some type of mark,
     // precise or imprecise, dirty or newgen.
@@ -115,7 +115,7 @@ See: [here](../doxygen/classCheckForUnmarkedObjects.html) for details
 (See: CheckForUnmarkedObjects).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/cardTableExtension.cpp))
     // Checks an individual oop for missing precise marks. Mark
     // may be either dirty or newgen.
@@ -139,7 +139,7 @@ See: [here](../doxygen/classCheckForUnmarkedOops.html) for details
 (See: VerifyRememberedSets).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/cardTableExtension.cpp))
     // Checks for precise marking of oops as newgen.
     class CheckForPreciseMarks : public OopClosure {

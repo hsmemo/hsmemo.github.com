@@ -27,7 +27,7 @@ Ideal によるグラフ構造の頂点を表す (どのグラフも RootNode �
 また, コンパイル対象のメソッドから exit しようとする Node を示す役割もある (そういった Node は全て RootNode を出力先とする).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/rootnode.hpp))
     // The one-and-only before-all-else and after-all-else RootNode.  The RootNode
     // represents what happens if the user runs the whole program repeatedly.  The
@@ -44,7 +44,7 @@ Ideal によるグラフ構造の頂点を表す (どのグラフも RootNode �
 Compile::Init() 内で(のみ)生成されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/compile.cpp))
     void Compile::Init(int aliaslevel) {
     ...
@@ -57,7 +57,7 @@ LoopNode のサブクラスなので生成直後は (control input も含めて)
 初期状態では入力ノードは1つだけ(自分自身のみ)になる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/rootnode.hpp))
       RootNode( ) : LoopNode(0,0) {
         init_class_id(Class_Root);
@@ -91,7 +91,7 @@ Node クラスの具象サブクラスの1つ.
 このクラスは決して到達しえないパスを示す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/rootnode.hpp))
     // Throw an exception & die
     class HaltNode : public Node {
@@ -123,7 +123,7 @@ Node クラスの具象サブクラスの1つ.
 * 5番目の入力Node : TypeFunc::ReturnAdr (#TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/rootnode.cpp))
     HaltNode::HaltNode( Node *ctrl, Node *frameptr ) : Node(TypeFunc::Parms) {
       Node* top = Compile::current()->top();

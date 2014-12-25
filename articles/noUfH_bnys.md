@@ -18,7 +18,7 @@ ParallelScavengeHeap の Minor GC 処理
 オブジェクトのコピー処理やポインタの再配置処理, 及びそれらを並列化するための機能を提供している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psPromotionManager.hpp))
     class PSPromotionManager : public CHeapObj {
 ```
@@ -28,7 +28,7 @@ ParallelScavengeHeap の Minor GC 処理
 
 (誰かデストラクタを書いてくれ, みたいなことが書いてあったりもするが...)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psPromotionManager.hpp))
     // psPromotionManager is used by a single thread to manage object survival
     // during a scavenge. The promotion manager contains thread local data only.
@@ -48,7 +48,7 @@ PSPromotionManager オブジェクトの _manager_array フィールドに(の�
 この中に, 全 GCTaskThread 用の PSPromotionManager オブジェクトが格納されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psPromotionManager.hpp))
     class PSPromotionManager : public CHeapObj {
     ...

@@ -32,7 +32,7 @@ Phase クラスの具象サブクラスの1つ.
 無用命令の削除(dead code elimination)を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/phaseX.hpp))
     //------------------------------PhaseRemoveUseless-----------------------------
     // Remove useless nodes from GVN hash-table, worklist, and graph
@@ -58,7 +58,7 @@ Phase クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/phaseX.hpp))
     //------------------------------PhaseTransform---------------------------------
     // Phases that analyze, then transform.  Constructing the Phase object does any
@@ -72,7 +72,7 @@ Phase クラスのサブクラスの1つ.
 使用する際には, transform() メソッドをオーバーライドしたサブクラスを作ればいい.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/phaseX.hpp))
       // Return a node which computes the same function as this node, but
       // in a faster or cheaper fashion.
@@ -96,7 +96,7 @@ Value Numbering を行う.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/phaseX.hpp))
     //------------------------------PhaseValues------------------------------------
     // Phase infrastructure to support values
@@ -118,7 +118,7 @@ PhaseValues クラスの具象サブクラス.
 Global Value Numbering を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/phaseX.hpp))
     //------------------------------PhaseGVN---------------------------------------
     // Phase for performing local, pessimistic GVN-style optimizations.
@@ -146,7 +146,7 @@ PhaseValues クラスのサブクラス.
 Global Value Numbering を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/phaseX.hpp))
     //------------------------------PhaseIterGVN-----------------------------------
     // Phase for iteratively performing local, pessimistic GVN-style optimizations.
@@ -175,7 +175,7 @@ PhaseIterGVN クラスのサブクラス.
 定数伝播 (Conditional Constant Propagation) を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/phaseX.hpp))
     //------------------------------PhaseCCP---------------------------------------
     // Phase for performing global Conditional Constant Propagation.
@@ -201,7 +201,7 @@ PhaseTransform クラスの具象サブクラスの1つ.
 のぞき穴式最適化 (peephole optimization) を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/phaseX.hpp))
     //------------------------------PhasePeephole----------------------------------
     // Phase for performing peephole optimizations on register allocated basic blocks.
@@ -229,7 +229,7 @@ Node をキーとし Node を値とするハッシュテーブル.
 Value Numbering 時に同じ値を持つ Node を探すために使用される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/phaseX.hpp))
     //-----------------------------------------------------------------------------
     // Expandable closed hash-table of nodes, initialized to NULL.
@@ -263,7 +263,7 @@ Type オブジェクトの配列を表す (= 整数値から Type オブジェ�
 なお配列長は必要に応じて自動的に拡張される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/phaseX.hpp))
     //-----------------------------------------------------------------------------
     // Map dense integer indices to Types.  Uses classic doubling-array trick.

@@ -31,7 +31,7 @@ GenCollectedHeap 内の New 領域および Old 領域について, それらを
 Generation クラスの virtual method では実現できない, とのこと).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/generationSpec.hpp))
     // The specification of a generation.  This class also encapsulates
     // some generation-specific behavior.  This is done here rather than as a
@@ -57,7 +57,7 @@ SharedHeap 内の Perm 領域を管理する Generation クラスを決定する
 PermGen が Generation クラスになっていないので GenerationSpec とは別のクラスにしている, とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/generationSpec.hpp))
     // The specification of a permanent generation. This class is very
     // similar to GenerationSpec in use. Due to PermGen's not being a

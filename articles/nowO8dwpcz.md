@@ -19,7 +19,7 @@ ciObject クラスの具象サブクラスの1つ. constantPoolCacheOopDesc 用�
 とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciCPCache.hpp))
     // ciCPCache
     //

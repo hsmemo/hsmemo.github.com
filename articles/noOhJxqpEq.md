@@ -10,7 +10,7 @@ title: UnhandledOops クラスおよびその補助クラス (UnhandledOopEntry,
 oop が適切に Handle 化されているかどうかを実行時にチェックするためのクラス (See: [here](no2935rfO.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/unhandledOops.hpp))
     #ifdef CHECK_UNHANDLED_OOPS
     
@@ -49,7 +49,7 @@ oop が適切に Handle 化されているかどうかを実行時にチェッ�
 あるスレッドが現在 Unhandled Oops Check の検査対象としている oop 全体を管理するためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/unhandledOops.hpp))
     class UnhandledOops {
 ```
@@ -80,7 +80,7 @@ Unhandled Oops Check の検査対象になっている oop を記憶しておく
 1つの UnhandledOopEntry オブジェクトが検査対象の oop 1個に対応する (See: [here](no2935rfO.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/unhandledOops.hpp))
     class UnhandledOopEntry {
 ```
@@ -105,7 +105,7 @@ GrowableArray 用のメモリ領域は UnhandledOops::UnhandledOops() 内で(の
 (破壊対象の oop を示す).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/unhandledOops.hpp))
      private:
       oop* _oop_ptr;

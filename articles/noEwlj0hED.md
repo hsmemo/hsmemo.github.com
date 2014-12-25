@@ -26,7 +26,7 @@ G1GC 使用時に, Garbage Collection 処理に関する情報を格納してお
  また, G1GC の concurrent および stop-the-world 方式の GC が起こった回数を計測したカウンタ値も格納されている.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1MonitoringSupport.hpp))
     // Class for monitoring logical spaces in G1.
     // G1 defines a set of regions as a young
@@ -139,7 +139,7 @@ G1CollectedHeap::initialize() 内で(のみ)生成されている.
 (See: CollectorCounters, GenerationCounters, HSpaceCounters).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1MonitoringSupport.hpp))
       // jstat performance counters
       //  incremental collections both fully and partially young

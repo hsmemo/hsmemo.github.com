@@ -26,14 +26,14 @@ Java ヒープの動的なサイズ変更処理で使用されるクラス.
 これらのクラスは GC アルゴリズムが Serial Old の場合に使用される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/adaptiveSizePolicy.hpp))
     // This class keeps statistical information and computes the
     // size of the heap.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/adaptiveSizePolicy.hpp))
     class AdaptiveSizePolicy : public CHeapObj {
 ```
@@ -57,7 +57,7 @@ See: [here](../doxygen/classAdaptiveSizePolicy.html) for details
 
 AdaptiveSizePolicy に関する情報を出力するための一時オブジェクト(StackObjクラス).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/adaptiveSizePolicy.hpp))
     // Class that can be used to print information about the
     // adaptive size policy at intervals specified by
@@ -76,7 +76,7 @@ UseAdaptiveSizePolicy オプションや AdaptiveSizePolicyOutputInterval オプ
 デストラクタ内で AdaptiveSizePolicy::print_adaptive_size_policy_on() を呼び出すことで出力を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/adaptiveSizePolicy.hpp))
       ~AdaptiveSizePolicyOutput() {
         if (_do_print) {
@@ -88,7 +88,7 @@ UseAdaptiveSizePolicy オプションや AdaptiveSizePolicyOutputInterval オプ
 
 なお, コンストラクタに引き渡すカウンタ値(後述)には total_collections() が用いられることが多い模様 (See: total_collections()).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psScavenge.cpp))
     bool PSScavenge::invoke_no_policy() {
     ...
@@ -103,7 +103,7 @@ UseAdaptiveSizePolicy オプションや AdaptiveSizePolicyOutputInterval オプ
 通常の使われ方だと GC を AdaptiveSizePolicyOutputInterval 回実行したら1回出力されるようになる模様.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/adaptiveSizePolicy.hpp))
       AdaptiveSizePolicyOutput(uint count) {
         if (UseAdaptiveSizePolicy && (AdaptiveSizePolicyOutputInterval > 0)) {

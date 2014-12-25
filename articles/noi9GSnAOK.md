@@ -18,7 +18,7 @@ JVMTI の関数を実装するために使われているクラス.
 のための関数を納めた名前空間(AllStatic クラス) (See: [here](no2935nLg.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExtensions.hpp))
     // JvmtiExtensions
     //
@@ -39,7 +39,7 @@ JvmtiEnv クラスの JVMTI 拡張機能用のメソッド内で(のみ)使用�
 定義されているメソッドは以下の通り.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExtensions.hpp))
       // register extensions function
       static void register_extensions();
@@ -61,7 +61,7 @@ JvmtiEnv クラスの JVMTI 拡張機能用のメソッド内で(のみ)使用�
 (これらは, 拡張機能用の関数／イベントの一覧を格納している配列).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExtensions.hpp))
       static GrowableArray<jvmtiExtensionFunctionInfo*>* _ext_functions;
       static GrowableArray<jvmtiExtensionEventInfo*>* _ext_events;

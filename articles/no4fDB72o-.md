@@ -27,7 +27,7 @@ Phase クラスの具象サブクラスの1つ.
 バイトコードから高レベル中間語(Ideal)への変換を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/parse.hpp))
     //-----------------------------------------------------------------------------
     //------------------------------Parse------------------------------------------
@@ -54,7 +54,7 @@ Parse クラス及び Compile クラス用の補助クラス(ResourceObjクラ�
 1つの InlineTree オブジェクトが 1つのメソッドに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/parse.hpp))
     //------------------------------InlineTree-------------------------------------
     class InlineTree : public ResourceObj {
@@ -121,7 +121,7 @@ Parse クラス内で使用される補助クラス.
 1つの Parse::Block オブジェクトが 1つの基本ブロックに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/parse.hpp))
       // Per-block information needed by the parser:
       class Block {
@@ -154,7 +154,7 @@ Parse クラス内で使用される補助クラス.
 パース処理に関する統計情報を記録するためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/parse.hpp))
     #ifndef PRODUCT
       // BytecodeParseHistogram collects number of bytecodes parsed, nodes constructed, and transformations.

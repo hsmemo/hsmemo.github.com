@@ -213,7 +213,7 @@ Monitor や Mutex クラスは HotSpot 内部で使用されるロック(Native 
       * jvm_raw_lock() and _unlock()
       * JVMTI raw monitors -- distinct from (5) despite having a confusingly similar name.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/mutex.cpp))
     // o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o
     //
@@ -446,7 +446,7 @@ Mutex を廃止して Monitor だけにしてもいい,
 とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/mutex.hpp))
     // Normally we'd expect Monitor to extend Mutex in the sense that a monitor
     // constructed from pthreads primitives might extend a mutex by adding
@@ -492,7 +492,7 @@ Mutex クラスとの違いは, wait/notify/notifyAll() の機能が使用可能
 Monitor や Mutex は長い critical section にも使用可能なクラス (See: [here](no2114cio.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/mutex.hpp))
     class Monitor : public CHeapObj {
 ```
@@ -559,7 +559,7 @@ Monitor や Mutex は長い critical section にも使用可能なクラス (See
  といっても, これらは使われていないので特に問題は無いが.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/mutexLocker.hpp))
     // Mutexes used in the VM.
     
@@ -605,7 +605,7 @@ Monitor や Mutex は長い critical section にも使用可能なクラス (See
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/mutexLocker.cpp))
     // Mutexes used in the VM (see comment in mutexLocker.hpp):
     //
@@ -732,7 +732,7 @@ Monitor や Mutex は長い critical section にも使用可能なクラス (See
     なお, SplitWord は以下のような union 型 (#TODO)
     
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/mutex.hpp))
     // The SplitWord construct allows us to colocate the contention queue
     // (cxq) with the lock-byte.  The queue elements are ParkEvents, which are
@@ -843,7 +843,7 @@ Monitor や Mutex は長い critical section にも使用可能なクラス (See
   * ... #TODO
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/mutex.hpp))
       SplitWord _LockWord ;                  // Contention queue (cxq) colocated with Lock-byte
       enum LockWordBits { _LBIT=1 } ;
@@ -888,7 +888,7 @@ Monitor クラスとの違いは, wait/notify/notifyAll() の機能が使用不�
 Monitor や Mutex は長い critical section にも使用可能なクラス (See: [here](no2114cio.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/mutex.hpp))
     class Mutex : public Monitor {      // degenerate Monitor
 ```
@@ -987,7 +987,7 @@ Monitor や Mutex は長い critical section にも使用可能なクラス (See
  tty_lock については実際の使用箇所に extern 宣言が書かれている.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/mutexLocker.hpp))
     // Mutexes used in the VM.
     
@@ -1070,7 +1070,7 @@ Monitor や Mutex は長い critical section にも使用可能なクラス (See
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/mutexLocker.cpp))
     // Mutexes used in the VM (see comment in mutexLocker.hpp):
     //

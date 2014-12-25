@@ -17,7 +17,7 @@ ElfFile クラス内で使用される補助クラス (See: ElfFile).
 Elf ファイル中の string table セクションを扱うためのもの.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/elfStringTable.hpp))
     // The string table represents a string table section in an elf file.
     // Whenever there is enough memory, it will load whole string table as
@@ -25,7 +25,7 @@ Elf ファイル中の string table セクションを扱うためのもの.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/elfStringTable.hpp))
     class ElfStringTable: CHeapObj {
 ```

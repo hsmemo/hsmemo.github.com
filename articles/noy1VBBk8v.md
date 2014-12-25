@@ -12,7 +12,7 @@ title: G1GC で使用する VM_Operation クラス (VM_G1OperationWithAllocReque
 なお, これらのクラスは以下のような継承関係を持つ
 (と, コメントには書いてあるが VM_CGC_Operation は VM_Operation のサブクラスでは??)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/vm_operations_g1.hpp))
     // VM_operations for the G1 collector.
     // VM_GC_Operation:
@@ -43,7 +43,7 @@ VM_GC_Operation クラスのサブクラスの1つ (See: [here](no2480EWm.html) 
 このクラスは, G1CollectedHeap 用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/vm_operations_g1.hpp))
     class VM_G1OperationWithAllocRequest: public VM_GC_Operation {
 ```
@@ -67,7 +67,7 @@ VM_GC_Operation クラスの具象サブクラスの1つ (See: [here](no2480EWm.
 GC アルゴリズムとしては G1 MarkSweep がここから呼び出される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/vm_operations_g1.hpp))
     class VM_G1CollectFull: public VM_GC_Operation {
 ```
@@ -93,7 +93,7 @@ VM_GC_Operation クラスの具象サブクラスの1つ (See: [here](no2480EWm.
 GC アルゴリズムとしては G1 MarkSweep がここから呼び出される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/vm_operations_g1.hpp))
     class VM_G1CollectForAllocation: public VM_G1OperationWithAllocRequest {
 ```
@@ -119,7 +119,7 @@ VM_GC_Operation クラスの具象サブクラスの1つ (See: [here](no2480EWm.
 GC アルゴリズムとしては Evacuation Pause がここから呼び出される)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/vm_operations_g1.hpp))
     class VM_G1IncCollectionPause: public VM_G1OperationWithAllocRequest {
 ```
@@ -147,7 +147,7 @@ Concurrent marking 処理中で必要となる Stop-the-World 処理
 
 (コメントでは, CMS とコードを共有してみては? と書かれていたりする)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/vm_operations_g1.hpp))
     // Concurrent GC stop-the-world operations such as initial and final mark;
     // consider sharing these with CMS's counterparts.

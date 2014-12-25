@@ -122,7 +122,7 @@ Node クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------VectorNode--------------------------------------
     // Vector Operation
@@ -140,7 +140,7 @@ Node クラスのサブクラスの1つ.
 (なお, vlen 引数はベクトル内の要素の「個数」を表す (合計のバイト数ではない))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       VectorNode(Node* n1, uint vlen) : Node(NULL, n1), _length(vlen) {
         init_flags(Flag_is_Vector);
@@ -164,7 +164,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは byte 値同士の SIMD 加算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------AddVBNode---------------------------------------
     // Vector add byte
@@ -189,7 +189,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       AddVBNode(Node* in1, Node* in2, uint vlen) : VectorNode(in1,in2,vlen) {}
 ```
@@ -208,7 +208,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは char 値同士の SIMD 加算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------AddVCNode---------------------------------------
     // Vector add char
@@ -233,7 +233,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       AddVCNode(Node* in1, Node* in2, uint vlen) : VectorNode(in1,in2,vlen) {}
 ```
@@ -252,7 +252,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは short 値同士の SIMD 加算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------AddVSNode---------------------------------------
     // Vector add short
@@ -277,7 +277,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       AddVSNode(Node* in1, Node* in2, uint vlen) : VectorNode(in1,in2,vlen) {}
 ```
@@ -296,7 +296,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは int 値同士の SIMD 加算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------AddVINode---------------------------------------
     // Vector add int
@@ -321,7 +321,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       AddVINode(Node* in1, Node* in2, uint vlen) : VectorNode(in1,in2,vlen) {}
 ```
@@ -340,7 +340,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは long 値同士の SIMD 加算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------AddVLNode---------------------------------------
     // Vector add long
@@ -365,7 +365,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       AddVLNode(Node* in1, Node* in2, uint vlen) : VectorNode(in1,in2,vlen) {}
 ```
@@ -384,7 +384,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは float 値同士の SIMD 加算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------AddVFNode---------------------------------------
     // Vector add float
@@ -409,7 +409,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       AddVFNode(Node* in1, Node* in2, uint vlen) : VectorNode(in1,in2,vlen) {}
 ```
@@ -428,7 +428,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは double 値同士の SIMD 加算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------AddVDNode---------------------------------------
     // Vector add double
@@ -453,7 +453,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       AddVDNode(Node* in1, Node* in2, uint vlen) : VectorNode(in1,in2,vlen) {}
 ```
@@ -472,7 +472,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは byte 値同士の SIMD 減算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------SubVBNode---------------------------------------
     // Vector subtract byte
@@ -497,7 +497,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       SubVBNode(Node* in1, Node* in2, uint vlen) : VectorNode(in1,in2,vlen) {}
 ```
@@ -516,7 +516,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは char 値同士の SIMD 減算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------SubVCNode---------------------------------------
     // Vector subtract char
@@ -541,7 +541,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       SubVCNode(Node* in1, Node* in2, uint vlen) : VectorNode(in1,in2,vlen) {}
 ```
@@ -560,7 +560,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは short 値同士の SIMD 減算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------SubVSNode---------------------------------------
     // Vector subtract short
@@ -585,7 +585,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       SubVSNode(Node* in1, Node* in2, uint vlen) : VectorNode(in1,in2,vlen) {}
 ```
@@ -604,7 +604,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは int 値同士の SIMD 減算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------SubVINode---------------------------------------
     // Vector subtract int
@@ -629,7 +629,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       SubVINode(Node* in1, Node* in2, uint vlen) : VectorNode(in1,in2,vlen) {}
 ```
@@ -648,7 +648,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは long 値同士の SIMD 減算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------SubVLNode---------------------------------------
     // Vector subtract long
@@ -673,7 +673,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       SubVLNode(Node* in1, Node* in2, uint vlen) : VectorNode(in1,in2,vlen) {}
 ```
@@ -692,7 +692,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは float 値同士の SIMD 減算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------SubVFNode---------------------------------------
     // Vector subtract float
@@ -717,7 +717,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       SubVFNode(Node* in1, Node* in2, uint vlen) : VectorNode(in1,in2,vlen) {}
 ```
@@ -736,7 +736,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは double 値同士の SIMD 減算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------SubVDNode---------------------------------------
     // Vector subtract double
@@ -761,7 +761,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       SubVDNode(Node* in1, Node* in2, uint vlen) : VectorNode(in1,in2,vlen) {}
 ```
@@ -780,7 +780,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは float 値同士の SIMD 乗算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------MulVFNode---------------------------------------
     // Vector multiply float
@@ -805,7 +805,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       MulVFNode(Node* in1, Node* in2, uint vlen) : VectorNode(in1,in2,vlen) {}
 ```
@@ -824,7 +824,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは double 値同士の SIMD 乗算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------MulVDNode---------------------------------------
     // Vector multiply double
@@ -849,7 +849,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       MulVDNode(Node* in1, Node* in2, uint vlen) : VectorNode(in1,in2,vlen) {}
 ```
@@ -868,7 +868,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは float 値同士の SIMD 除算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------DivVFNode---------------------------------------
     // Vector divide float
@@ -893,7 +893,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       DivVFNode(Node* in1, Node* in2, uint vlen) : VectorNode(in1,in2,vlen) {}
 ```
@@ -912,7 +912,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは double 値同士の SIMD 除算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------DivVDNode---------------------------------------
     // Vector Divide double
@@ -937,7 +937,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       DivVDNode(Node* in1, Node* in2, uint vlen) : VectorNode(in1,in2,vlen) {}
 ```
@@ -956,7 +956,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは byte 値同士の SIMD 左シフト演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------LShiftVBNode---------------------------------------
     // Vector lshift byte
@@ -981,7 +981,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       LShiftVBNode(Node* in1, Node* in2, uint vlen) : VectorNode(in1,in2,vlen) {}
 ```
@@ -1000,7 +1000,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは char 値同士の SIMD 左シフト演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------LShiftVCNode---------------------------------------
     // Vector lshift chars
@@ -1025,7 +1025,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       LShiftVCNode(Node* in1, Node* in2, uint vlen) : VectorNode(in1,in2,vlen) {}
 ```
@@ -1044,7 +1044,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは short 値同士の SIMD 左シフト演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------LShiftVSNode---------------------------------------
     // Vector lshift shorts
@@ -1069,7 +1069,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       LShiftVSNode(Node* in1, Node* in2, uint vlen) : VectorNode(in1,in2,vlen) {}
 ```
@@ -1088,7 +1088,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは int 値同士の SIMD 左シフト演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------LShiftVINode---------------------------------------
     // Vector lshift ints
@@ -1113,7 +1113,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       LShiftVINode(Node* in1, Node* in2, uint vlen) : VectorNode(in1,in2,vlen) {}
 ```
@@ -1132,7 +1132,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは byte 値同士の SIMD 論理右シフト演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------URShiftVBNode---------------------------------------
     // Vector urshift bytes
@@ -1157,7 +1157,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       URShiftVBNode(Node* in1, Node* in2, uint vlen) : VectorNode(in1,in2,vlen) {}
 ```
@@ -1176,7 +1176,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは char 値同士の SIMD 論理右シフト演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------URShiftVCNode---------------------------------------
     // Vector urshift char
@@ -1201,7 +1201,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       URShiftVCNode(Node* in1, Node* in2, uint vlen) : VectorNode(in1,in2,vlen) {}
 ```
@@ -1220,7 +1220,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは short 値同士の SIMD 論理右シフト演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------URShiftVSNode---------------------------------------
     // Vector urshift shorts
@@ -1245,7 +1245,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       URShiftVSNode(Node* in1, Node* in2, uint vlen) : VectorNode(in1,in2,vlen) {}
 ```
@@ -1264,7 +1264,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは int 値同士の SIMD 論理右シフト演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------URShiftVINode---------------------------------------
     // Vector urshift ints
@@ -1289,7 +1289,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       URShiftVINode(Node* in1, Node* in2, uint vlen) : VectorNode(in1,in2,vlen) {}
 ```
@@ -1308,7 +1308,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスはベクトル値同士の SIMD 論理積(ビットAND)演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------AndVNode---------------------------------------
     // Vector and
@@ -1333,7 +1333,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       AndVNode(Node* in1, Node* in2, uint vlen, BasicType bt) : VectorNode(in1,in2,vlen), _bt(bt) {}
 ```
@@ -1352,7 +1352,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスはベクトル値同士の SIMD 論理和(ビットOR)演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------OrVNode---------------------------------------
     // Vector or
@@ -1377,7 +1377,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       OrVNode(Node* in1, Node* in2, uint vlen, BasicType bt) : VectorNode(in1,in2,vlen), _bt(bt) {}
 ```
@@ -1396,7 +1396,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスはベクトル値同士の SIMD 排他的論理和(ビットXOR)演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------XorVNode---------------------------------------
     // Vector xor
@@ -1421,7 +1421,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       XorVNode(Node* in1, Node* in2, uint vlen, BasicType bt) : VectorNode(in1,in2,vlen), _bt(bt) {}
 ```
@@ -1442,7 +1442,7 @@ SIMD 用の値のロードを表す全ての Node クラスの基底クラス.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------VectorLoadNode--------------------------------------
     // Vector Load from memory
@@ -1454,7 +1454,7 @@ SIMD 用の値のロードを表す全ての Node クラスの基底クラス.
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       VectorLoadNode(Node* c, Node* mem, Node* adr, const TypePtr* at, const Type *rt)
         : LoadNode(c,mem,adr,at,rt) {
@@ -1476,7 +1476,7 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 このクラスは byte 値 16 個のロード用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Load16BNode--------------------------------------
     // Vector load of 16 bytes (8bits signed) from memory
@@ -1501,7 +1501,7 @@ PhaseIdealLoop::build_and_optimize()
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Load16BNode(Node* c, Node* mem, Node* adr, const TypePtr* at, const TypeInt *ti = TypeInt::BYTE)
         : VectorLoadNode(c,mem,adr,at,vect_type(ti,16)) {}
@@ -1521,7 +1521,7 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 このクラスは byte 値 8 個のロード用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Load8BNode--------------------------------------
     // Vector load of 8 bytes (8bits signed) from memory
@@ -1546,7 +1546,7 @@ PhaseIdealLoop::build_and_optimize()
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Load8BNode(Node* c, Node* mem, Node* adr, const TypePtr* at, const TypeInt *ti = TypeInt::BYTE)
         : VectorLoadNode(c,mem,adr,at,vect_type(ti,8)) {}
@@ -1566,7 +1566,7 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 このクラスは byte 値 4 個のロード用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Load4BNode--------------------------------------
     // Vector load of 4 bytes (8bits signed) from memory
@@ -1591,7 +1591,7 @@ PhaseIdealLoop::build_and_optimize()
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Load4BNode(Node* c, Node* mem, Node* adr, const TypePtr* at, const TypeInt *ti = TypeInt::BYTE)
         : VectorLoadNode(c,mem,adr,at,vect_type(ti,4)) {}
@@ -1611,7 +1611,7 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 このクラスは char 値 8 個のロード用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Load8CNode--------------------------------------
     // Vector load of 8 chars (16bits unsigned) from memory
@@ -1636,7 +1636,7 @@ PhaseIdealLoop::build_and_optimize()
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Load8CNode(Node* c, Node* mem, Node* adr, const TypePtr* at, const TypeInt *ti = TypeInt::CHAR)
         : VectorLoadNode(c,mem,adr,at,vect_type(ti,8)) {}
@@ -1656,7 +1656,7 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 このクラスは char 値 4 個のロード用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Load4CNode--------------------------------------
     // Vector load of 4 chars (16bits unsigned) from memory
@@ -1681,7 +1681,7 @@ PhaseIdealLoop::build_and_optimize()
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Load4CNode(Node* c, Node* mem, Node* adr, const TypePtr* at, const TypeInt *ti = TypeInt::CHAR)
         : VectorLoadNode(c,mem,adr,at,vect_type(ti,4)) {}
@@ -1701,7 +1701,7 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 このクラスは char 値 2 個のロード用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Load2CNode--------------------------------------
     // Vector load of 2 chars (16bits unsigned) from memory
@@ -1726,7 +1726,7 @@ PhaseIdealLoop::build_and_optimize()
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Load2CNode(Node* c, Node* mem, Node* adr, const TypePtr* at, const TypeInt *ti = TypeInt::CHAR)
         : VectorLoadNode(c,mem,adr,at,vect_type(ti,2)) {}
@@ -1746,7 +1746,7 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 このクラスは short 値 8 個のロード用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Load8SNode--------------------------------------
     // Vector load of 8 shorts (16bits signed) from memory
@@ -1771,7 +1771,7 @@ PhaseIdealLoop::build_and_optimize()
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Load8SNode(Node* c, Node* mem, Node* adr, const TypePtr* at, const TypeInt *ti = TypeInt::SHORT)
         : VectorLoadNode(c,mem,adr,at,vect_type(ti,8)) {}
@@ -1791,7 +1791,7 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 このクラスは short 値 4 個のロード用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Load4SNode--------------------------------------
     // Vector load of 4 shorts (16bits signed) from memory
@@ -1816,7 +1816,7 @@ PhaseIdealLoop::build_and_optimize()
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Load4SNode(Node* c, Node* mem, Node* adr, const TypePtr* at, const TypeInt *ti = TypeInt::SHORT)
         : VectorLoadNode(c,mem,adr,at,vect_type(ti,4)) {}
@@ -1836,7 +1836,7 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 このクラスは short 値 2 個のロード用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Load2SNode--------------------------------------
     // Vector load of 2 shorts (16bits signed) from memory
@@ -1861,7 +1861,7 @@ PhaseIdealLoop::build_and_optimize()
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Load2SNode(Node* c, Node* mem, Node* adr, const TypePtr* at, const TypeInt *ti = TypeInt::SHORT)
         : VectorLoadNode(c,mem,adr,at,vect_type(ti,2)) {}
@@ -1881,7 +1881,7 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 このクラスは int 値 4 個のロード用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Load4INode--------------------------------------
     // Vector load of 4 integers (32bits signed) from memory
@@ -1906,7 +1906,7 @@ PhaseIdealLoop::build_and_optimize()
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Load4INode(Node* c, Node* mem, Node* adr, const TypePtr* at, const TypeInt *ti = TypeInt::INT)
         : VectorLoadNode(c,mem,adr,at,vect_type(ti,4)) {}
@@ -1926,7 +1926,7 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 このクラスは int 値 2 個のロード用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Load2INode--------------------------------------
     // Vector load of 2 integers (32bits signed) from memory
@@ -1951,7 +1951,7 @@ PhaseIdealLoop::build_and_optimize()
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Load2INode(Node* c, Node* mem, Node* adr, const TypePtr* at, const TypeInt *ti = TypeInt::INT)
         : VectorLoadNode(c,mem,adr,at,vect_type(ti,2)) {}
@@ -1971,7 +1971,7 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 このクラスは long 値 2 個のロード用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Load2LNode--------------------------------------
     // Vector load of 2 longs (64bits signed) from memory
@@ -1996,7 +1996,7 @@ PhaseIdealLoop::build_and_optimize()
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Load2LNode(Node* c, Node* mem, Node* adr, const TypePtr* at, const TypeLong *tl = TypeLong::LONG)
         : VectorLoadNode(c,mem,adr,at,vect_type(tl,2)) {}
@@ -2016,7 +2016,7 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 このクラスは float 値 4 個のロード用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Load4FNode--------------------------------------
     // Vector load of 4 floats (32bits) from memory
@@ -2041,7 +2041,7 @@ PhaseIdealLoop::build_and_optimize()
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Load4FNode(Node* c, Node* mem, Node* adr, const TypePtr* at, const Type *t = Type::FLOAT)
         : VectorLoadNode(c,mem,adr,at,vect_type(t,4)) {}
@@ -2061,7 +2061,7 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 このクラスは float 値 2 個のロード用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Load2FNode--------------------------------------
     // Vector load of 2 floats (32bits) from memory
@@ -2086,7 +2086,7 @@ PhaseIdealLoop::build_and_optimize()
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Load2FNode(Node* c, Node* mem, Node* adr, const TypePtr* at, const Type *t = Type::FLOAT)
         : VectorLoadNode(c,mem,adr,at,vect_type(t,2)) {}
@@ -2106,7 +2106,7 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 このクラスは double 値 2 個のロード用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Load2DNode--------------------------------------
     // Vector load of 2 doubles (64bits) from memory
@@ -2131,7 +2131,7 @@ PhaseIdealLoop::build_and_optimize()
 これはスーパークラスである MemNode の入力ノードの先頭 3つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Load2DNode(Node* c, Node* mem, Node* adr, const TypePtr* at, const Type *t = Type::DOUBLE)
         : VectorLoadNode(c,mem,adr,at,vect_type(t,2)) {}
@@ -2153,7 +2153,7 @@ SIMD 用の値のストアを表す全ての Node クラスの基底クラス.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------VectorStoreNode--------------------------------------
     // Vector Store to memory
@@ -2165,7 +2165,7 @@ SIMD 用の値のストアを表す全ての Node クラスの基底クラス.
 これはスーパークラスである MemNode の入力ノードの先頭 4つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       VectorStoreNode(Node* c, Node* mem, Node* adr, const TypePtr* at, Node* val)
         : StoreNode(c,mem,adr,at,val) {
@@ -2187,7 +2187,7 @@ VectorStoredNode クラスの具象サブクラスの1つ.
 このクラスは byte 値 16 個のストア用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Store16BNode--------------------------------------
     // Vector store of 16 bytes (8bits signed) to memory
@@ -2212,7 +2212,7 @@ PhaseIdealLoop::build_and_optimize()
 これはスーパークラスである MemNode の入力ノードの先頭 4つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Store16BNode(Node* c, Node* mem, Node* adr, const TypePtr* at, Node* val)
         : VectorStoreNode(c,mem,adr,at,val) {}
@@ -2232,7 +2232,7 @@ VectorStoredNode クラスの具象サブクラスの1つ.
 このクラスは byte 値 8 個のストア用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Store8BNode--------------------------------------
     // Vector store of 8 bytes (8bits signed) to memory
@@ -2257,7 +2257,7 @@ PhaseIdealLoop::build_and_optimize()
 これはスーパークラスである MemNode の入力ノードの先頭 4つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Store8BNode(Node* c, Node* mem, Node* adr, const TypePtr* at, Node* val)
         : VectorStoreNode(c,mem,adr,at,val) {}
@@ -2277,7 +2277,7 @@ VectorStoredNode クラスの具象サブクラスの1つ.
 このクラスは byte 値 4 個のストア用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Store4BNode--------------------------------------
     // Vector store of 4 bytes (8bits signed) to memory
@@ -2302,7 +2302,7 @@ PhaseIdealLoop::build_and_optimize()
 これはスーパークラスである MemNode の入力ノードの先頭 4つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Store4BNode(Node* c, Node* mem, Node* adr, const TypePtr* at, Node* val)
         : VectorStoreNode(c,mem,adr,at,val) {}
@@ -2322,7 +2322,7 @@ VectorStoredNode クラスの具象サブクラスの1つ.
 このクラスは char 値 8 個のストア用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Store8CNode--------------------------------------
     // Vector store of 8 chars (16bits signed/unsigned) to memory
@@ -2347,7 +2347,7 @@ PhaseIdealLoop::build_and_optimize()
 これはスーパークラスである MemNode の入力ノードの先頭 4つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Store8CNode(Node* c, Node* mem, Node* adr, const TypePtr* at, Node* val)
         : VectorStoreNode(c,mem,adr,at,val) {}
@@ -2367,7 +2367,7 @@ VectorStoredNode クラスの具象サブクラスの1つ.
 このクラスは char 値 4 個のストア用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Store4CNode--------------------------------------
     // Vector store of 4 chars (16bits signed/unsigned) to memory
@@ -2392,7 +2392,7 @@ PhaseIdealLoop::build_and_optimize()
 これはスーパークラスである MemNode の入力ノードの先頭 4つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Store4CNode(Node* c, Node* mem, Node* adr, const TypePtr* at, Node* val)
         : VectorStoreNode(c,mem,adr,at,val) {}
@@ -2412,7 +2412,7 @@ VectorStoredNode クラスの具象サブクラスの1つ.
 このクラスは char 値 2 個のストア用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Store2CNode--------------------------------------
     // Vector store of 2 chars (16bits signed/unsigned) to memory
@@ -2437,7 +2437,7 @@ PhaseIdealLoop::build_and_optimize()
 これはスーパークラスである MemNode の入力ノードの先頭 4つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Store2CNode(Node* c, Node* mem, Node* adr, const TypePtr* at, Node* val)
         : VectorStoreNode(c,mem,adr,at,val) {}
@@ -2457,7 +2457,7 @@ VectorStoredNode クラスの具象サブクラスの1つ.
 このクラスは int 値 4 個のストア用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Store4INode--------------------------------------
     // Vector store of 4 integers (32bits signed) to memory
@@ -2482,7 +2482,7 @@ PhaseIdealLoop::build_and_optimize()
 これはスーパークラスである MemNode の入力ノードの先頭 4つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Store4INode(Node* c, Node* mem, Node* adr, const TypePtr* at, Node* val)
         : VectorStoreNode(c,mem,adr,at,val) {}
@@ -2502,7 +2502,7 @@ VectorStoredNode クラスの具象サブクラスの1つ.
 このクラスは int 値 2 個のストア用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Store2INode--------------------------------------
     // Vector store of 2 integers (32bits signed) to memory
@@ -2527,7 +2527,7 @@ PhaseIdealLoop::build_and_optimize()
 これはスーパークラスである MemNode の入力ノードの先頭 4つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Store2INode(Node* c, Node* mem, Node* adr, const TypePtr* at, Node* val)
         : VectorStoreNode(c,mem,adr,at,val) {}
@@ -2547,7 +2547,7 @@ VectorStoredNode クラスの具象サブクラスの1つ.
 このクラスは long 値 2 個のストア用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Store2LNode--------------------------------------
     // Vector store of 2 longs (64bits signed) to memory
@@ -2572,7 +2572,7 @@ PhaseIdealLoop::build_and_optimize()
 これはスーパークラスである MemNode の入力ノードの先頭 4つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Store2LNode(Node* c, Node* mem, Node* adr, const TypePtr* at, Node* val)
         : VectorStoreNode(c,mem,adr,at,val) {}
@@ -2592,7 +2592,7 @@ VectorStoredNode クラスの具象サブクラスの1つ.
 このクラスは float 値 4 個のストア用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Store4FNode--------------------------------------
     // Vector store of 4 floats (32bits) to memory
@@ -2617,7 +2617,7 @@ PhaseIdealLoop::build_and_optimize()
 これはスーパークラスである MemNode の入力ノードの先頭 4つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Store4FNode(Node* c, Node* mem, Node* adr, const TypePtr* at, Node* val)
         : VectorStoreNode(c,mem,adr,at,val) {}
@@ -2637,7 +2637,7 @@ VectorStoredNode クラスの具象サブクラスの1つ.
 このクラスは float 値 2 個のストア用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Store2FNode--------------------------------------
     // Vector store of 2 floats (32bits) to memory
@@ -2662,7 +2662,7 @@ PhaseIdealLoop::build_and_optimize()
 これはスーパークラスである MemNode の入力ノードの先頭 4つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Store2FNode(Node* c, Node* mem, Node* adr, const TypePtr* at, Node* val)
         : VectorStoreNode(c,mem,adr,at,val) {}
@@ -2682,7 +2682,7 @@ VectorStoredNode クラスの具象サブクラスの1つ.
 このクラスは double 値 2 個のストア用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Store2DNode--------------------------------------
     // Vector store of 2 doubles (64bits) to memory
@@ -2707,7 +2707,7 @@ PhaseIdealLoop::build_and_optimize()
 これはスーパークラスである MemNode の入力ノードの先頭 4つに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Store2DNode(Node* c, Node* mem, Node* adr, const TypePtr* at, Node* val)
         : VectorStoreNode(c,mem,adr,at,val) {}
@@ -2728,7 +2728,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは, 1つの byte 値を 16個複製し, byte 値 16 個からなるベクトル値を作成する処理用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Replicate16BNode---------------------------------------
     // Replicate byte scalar to be vector of 16 bytes
@@ -2754,7 +2754,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Replicate16BNode(Node* in1) : VectorNode(in1, 16) {}
 ```
@@ -2774,7 +2774,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは, 1つの byte 値を 8個複製し, byte 値 8 個からなるベクトル値を作成する処理用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Replicate8BNode---------------------------------------
     // Replicate byte scalar to be vector of 8 bytes
@@ -2800,7 +2800,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Replicate8BNode(Node* in1) : VectorNode(in1, 8) {}
 ```
@@ -2820,7 +2820,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは, 1つの byte 値を 4個複製し, byte 値 4 個からなるベクトル値を作成する処理用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Replicate4BNode---------------------------------------
     // Replicate byte scalar to be vector of 4 bytes
@@ -2846,7 +2846,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Replicate4BNode(Node* in1) : VectorNode(in1, 4) {}
 ```
@@ -2866,7 +2866,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは, 1つの char 値を 8個複製し, char 値 8 個からなるベクトル値を作成する処理用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Replicate8CNode---------------------------------------
     // Replicate char scalar to be vector of 8 chars
@@ -2892,7 +2892,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Replicate8CNode(Node* in1) : VectorNode(in1, 8) {}
 ```
@@ -2912,7 +2912,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは, 1つの char 値を 4個複製し, char 値 4 個からなるベクトル値を作成する処理用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Replicate4CNode---------------------------------------
     // Replicate char scalar to be vector of 4 chars
@@ -2938,7 +2938,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Replicate4CNode(Node* in1) : VectorNode(in1, 4) {}
 ```
@@ -2958,7 +2958,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは, 1つの char 値を 2個複製し, char 値 2 個からなるベクトル値を作成する処理用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Replicate2CNode---------------------------------------
     // Replicate char scalar to be vector of 2 chars
@@ -2984,7 +2984,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Replicate2CNode(Node* in1) : VectorNode(in1, 2) {}
 ```
@@ -3004,7 +3004,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは, 1つの short 値を 8個複製し, short 値 8 個からなるベクトル値を作成する処理用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Replicate8SNode---------------------------------------
     // Replicate short scalar to be vector of 8 shorts
@@ -3030,7 +3030,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Replicate8SNode(Node* in1) : VectorNode(in1, 8) {}
 ```
@@ -3050,7 +3050,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは, 1つの short 値を 4個複製し, short 値 4 個からなるベクトル値を作成する処理用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Replicate4SNode---------------------------------------
     // Replicate short scalar to be vector of 4 shorts
@@ -3076,7 +3076,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Replicate4SNode(Node* in1) : VectorNode(in1, 4) {}
 ```
@@ -3096,7 +3096,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは, 1つの short 値を 2個複製し, short 値 2 個からなるベクトル値を作成する処理用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Replicate2SNode---------------------------------------
     // Replicate short scalar to be vector of 2 shorts
@@ -3122,7 +3122,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Replicate2SNode(Node* in1) : VectorNode(in1, 2) {}
 ```
@@ -3142,7 +3142,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは, 1つの int 値を 4個複製し, int 値 4 個からなるベクトル値を作成する処理用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Replicate4INode---------------------------------------
     // Replicate int scalar to be vector of 4 ints
@@ -3168,7 +3168,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Replicate4INode(Node* in1) : VectorNode(in1, 4) {}
 ```
@@ -3188,7 +3188,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは, 1つの int 値を 2個複製し, int 値 2 個からなるベクトル値を作成する処理用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Replicate2INode---------------------------------------
     // Replicate int scalar to be vector of 2 ints
@@ -3214,7 +3214,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Replicate2INode(Node* in1) : VectorNode(in1, 2) {}
 ```
@@ -3234,7 +3234,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは, 1つの long 値を 2個複製し, long 値 2 個からなるベクトル値を作成する処理用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Replicate2LNode---------------------------------------
     // Replicate long scalar to be vector of 2 longs
@@ -3260,7 +3260,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Replicate2LNode(Node* in1) : VectorNode(in1, 2) {}
 ```
@@ -3280,7 +3280,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは, 1つの float 値を 4個複製し, float 値 4 個からなるベクトル値を作成する処理用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Replicate4FNode---------------------------------------
     // Replicate float scalar to be vector of 4 floats
@@ -3306,7 +3306,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Replicate4FNode(Node* in1) : VectorNode(in1, 4) {}
 ```
@@ -3326,7 +3326,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは, 1つの float 値を 2個複製し, float 値 2 個からなるベクトル値を作成する処理用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Replicate2FNode---------------------------------------
     // Replicate float scalar to be vector of 2 floats
@@ -3352,7 +3352,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Replicate2FNode(Node* in1) : VectorNode(in1, 2) {}
 ```
@@ -3372,7 +3372,7 @@ VectorNode クラスの具象サブクラスの1つ.
 このクラスは, 1つの double 値を 2個複製し, double 値 2 個からなるベクトル値を作成する処理用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Replicate2DNode---------------------------------------
     // Replicate double scalar to be vector of 2 doubles
@@ -3398,7 +3398,7 @@ PhaseIdealLoop::build_and_optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Replicate2DNode(Node* in1) : VectorNode(in1, 2) {}
 ```
@@ -3419,7 +3419,7 @@ VectorNode クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------PackNode---------------------------------------
     // Pack parent class (not for code generation).
@@ -3435,7 +3435,7 @@ VectorNode クラスのサブクラスの1つ.
 ただし, どちらの場合も control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       PackNode(Node* in1)  : VectorNode(in1, 1) {}
       PackNode(Node* in1, Node* n2)  : VectorNode(in1, n2, 2) {}
@@ -3455,7 +3455,7 @@ PackNode クラスの具象サブクラスの1つ.
 このクラスは, 複数の byte 値を 1つのベクトル値にまとめる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------PackBNode---------------------------------------
     // Pack byte scalars into vector
@@ -3480,7 +3480,7 @@ PhaseIdealLoop::build_and_optimize()
 (control input も含めて) 2つの入力ノードを持つ. ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       PackBNode(Node* in1)  : PackNode(in1) {}
 ```
@@ -3499,7 +3499,7 @@ PackNode クラスの具象サブクラスの1つ.
 このクラスは, 複数の char 値を 1つのベクトル値にまとめる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------PackCNode---------------------------------------
     // Pack char scalars into vector
@@ -3524,7 +3524,7 @@ PhaseIdealLoop::build_and_optimize()
 (control input も含めて) 2つの入力ノードを持つ. ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       PackCNode(Node* in1)  : PackNode(in1) {}
 ```
@@ -3543,7 +3543,7 @@ PackNode クラスの具象サブクラスの1つ.
 このクラスは, 複数の short 値を 1つのベクトル値にまとめる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------PackSNode---------------------------------------
     // Pack short scalars into a vector
@@ -3568,7 +3568,7 @@ PhaseIdealLoop::build_and_optimize()
 (control input も含めて) 2つの入力ノードを持つ. ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       PackSNode(Node* in1)  : PackNode(in1) {}
 ```
@@ -3587,7 +3587,7 @@ PackNode クラスの具象サブクラスの1つ.
 このクラスは, 複数の int 値を 1つのベクトル値にまとめる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------PackINode---------------------------------------
     // Pack integer scalars into a vector
@@ -3626,7 +3626,7 @@ Compile::Optimize()
 どちらの場合も control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       PackINode(Node* in1)  : PackNode(in1) {}
       PackINode(Node* in1, Node* in2) : PackNode(in1, in2) {}
@@ -3646,7 +3646,7 @@ PackNode クラスの具象サブクラスの1つ.
 このクラスは, 複数の long 値を 1つのベクトル値にまとめる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------PackLNode---------------------------------------
     // Pack long scalars into a vector
@@ -3685,7 +3685,7 @@ Compile::Optimize()
 どちらの場合も control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       PackLNode(Node* in1)  : PackNode(in1) {}
       PackLNode(Node* in1, Node* in2) : PackNode(in1, in2) {}
@@ -3705,7 +3705,7 @@ PackNode クラスの具象サブクラスの1つ.
 このクラスは, 複数の float 値を 1つのベクトル値にまとめる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------PackFNode---------------------------------------
     // Pack float scalars into vector
@@ -3744,7 +3744,7 @@ Compile::Optimize()
 どちらの場合も control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       PackFNode(Node* in1)  : PackNode(in1) {}
       PackFNode(Node* in1, Node* in2) : PackNode(in1, in2) {}
@@ -3764,7 +3764,7 @@ PackNode クラスの具象サブクラスの1つ.
 このクラスは, 複数の double 値を 1つのベクトル値にまとめる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------PackDNode---------------------------------------
     // Pack double scalars into a vector
@@ -3803,7 +3803,7 @@ Compile::Optimize()
 どちらの場合も control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       PackDNode(Node* in1)  : PackNode(in1) {}
       PackDNode(Node* in1, Node* in2) : PackNode(in1, in2) {}
@@ -3823,7 +3823,7 @@ PackNode クラスの具象サブクラスの1つ.
 このクラスは, 2つの byte 値を 1つのベクトル値にまとめる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     // The Pack2xN nodes assist code generation.  They are created from
     // Pack4C, etc. nodes in final_graph_reshape in the form of a
@@ -3831,7 +3831,7 @@ PackNode クラスの具象サブクラスの1つ.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Pack2x1BNode-----------------------------------------
     // Pack 2 1-byte integers into vector of 2 bytes
@@ -3854,7 +3854,7 @@ Compile::Optimize()
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ. ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Pack2x1BNode(Node *in1, Node* in2) : PackNode(in1, in2) {}
 ```
@@ -3873,7 +3873,7 @@ PackNode クラスの具象サブクラスの1つ.
 このクラスは, 2つの 2Byte 値 (short/char/Pack2x1B) を 1つのベクトル値にまとめる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     // The Pack2xN nodes assist code generation.  They are created from
     // Pack4C, etc. nodes in final_graph_reshape in the form of a
@@ -3881,7 +3881,7 @@ PackNode クラスの具象サブクラスの1つ.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------Pack2x2BNode---------------------------------------
     // Pack 2 2-byte integers into vector of 4 bytes
@@ -3904,7 +3904,7 @@ Compile::Optimize()
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ. ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       Pack2x2BNode(Node *in1, Node* in2) : PackNode(in1, in2) {}
 ```
@@ -3925,7 +3925,7 @@ VectorNode クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------ExtractNode---------------------------------------
     // Extract a scalar from a vector at position "pos"
@@ -3934,7 +3934,7 @@ VectorNode クラスのサブクラスの1つ.
 
 ### 内部構造(Internal structure)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       ExtractNode(Node* src, ConINode* pos) : Node(NULL, src, (Node*)pos) {
         assert(in(2)->get_int() >= 0, "positive constants");
@@ -3955,7 +3955,7 @@ ExtractNode クラスの具象サブクラスの1つ.
 このクラスは, ベクトル値の中から byte 値を取り出す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------ExtractBNode---------------------------------------
     // Extract a byte from a vector at position "pos"
@@ -3985,7 +3985,7 @@ PhaseIdealLoop::build_and_optimize()
 * 3番目の入力Node : 取り出したい要素の位置
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       ExtractBNode(Node* src, ConINode* pos) : ExtractNode(src, pos) {}
 ```
@@ -4004,7 +4004,7 @@ ExtractNode クラスの具象サブクラスの1つ.
 このクラスは, ベクトル値の中から char 値を取り出す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------ExtractCNode---------------------------------------
     // Extract a char from a vector at position "pos"
@@ -4034,7 +4034,7 @@ PhaseIdealLoop::build_and_optimize()
 * 3番目の入力Node : 取り出したい要素の位置
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       ExtractCNode(Node* src, ConINode* pos) : ExtractNode(src, pos) {}
 ```
@@ -4053,7 +4053,7 @@ ExtractNode クラスの具象サブクラスの1つ.
 このクラスは, ベクトル値の中から short 値を取り出す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------ExtractSNode---------------------------------------
     // Extract a short from a vector at position "pos"
@@ -4083,7 +4083,7 @@ PhaseIdealLoop::build_and_optimize()
 * 3番目の入力Node : 取り出したい要素の位置
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       ExtractSNode(Node* src, ConINode* pos) : ExtractNode(src, pos) {}
 ```
@@ -4102,7 +4102,7 @@ ExtractNode クラスの具象サブクラスの1つ.
 このクラスは, ベクトル値の中から int 値を取り出す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------ExtractINode---------------------------------------
     // Extract an int from a vector at position "pos"
@@ -4132,7 +4132,7 @@ PhaseIdealLoop::build_and_optimize()
 * 3番目の入力Node : 取り出したい要素の位置
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       ExtractINode(Node* src, ConINode* pos) : ExtractNode(src, pos) {}
 ```
@@ -4151,7 +4151,7 @@ ExtractNode クラスの具象サブクラスの1つ.
 このクラスは, ベクトル値の中から long 値を取り出す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------ExtractLNode---------------------------------------
     // Extract a long from a vector at position "pos"
@@ -4181,7 +4181,7 @@ PhaseIdealLoop::build_and_optimize()
 * 3番目の入力Node : 取り出したい要素の位置
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       ExtractLNode(Node* src, ConINode* pos) : ExtractNode(src, pos) {}
 ```
@@ -4200,7 +4200,7 @@ ExtractNode クラスの具象サブクラスの1つ.
 このクラスは, ベクトル値の中から float 値を取り出す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------ExtractFNode---------------------------------------
     // Extract a float from a vector at position "pos"
@@ -4230,7 +4230,7 @@ PhaseIdealLoop::build_and_optimize()
 * 3番目の入力Node : 取り出したい要素の位置
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       ExtractFNode(Node* src, ConINode* pos) : ExtractNode(src, pos) {}
 ```
@@ -4249,7 +4249,7 @@ ExtractNode クラスの具象サブクラスの1つ.
 このクラスは, ベクトル値の中から double 値を取り出す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
     //------------------------------ExtractDNode---------------------------------------
     // Extract a double from a vector at position "pos"
@@ -4279,7 +4279,7 @@ PhaseIdealLoop::build_and_optimize()
 * 3番目の入力Node : 取り出したい要素の位置
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/vectornode.hpp))
       ExtractDNode(Node* src, ConINode* pos) : ExtractNode(src, pos) {}
 ```

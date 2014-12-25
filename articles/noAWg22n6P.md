@@ -19,7 +19,7 @@ JIT コンパイルを開始するための閾値を管理する (See: [here](no
 InvocationCounter クラスはそのための閾値と実行回数を管理し, 実行回数が閾値に達したかどうかを判定する)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/invocationCounter.hpp))
     // InvocationCounters are used to trigger actions when a limit (threshold) is reached.
     // For different states, different limits and actions can be defined in the initialization
@@ -41,7 +41,7 @@ InvocationCounter クラスはそのための閾値と実行回数を管理し, 
 * 各 methodOopDesc オブジェクトの _backedge_counter フィールド
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodOop.hpp))
       InvocationCounter _invocation_counter;         // Incremented before each activation of the method - used to trigger frequency-based optimizations
       InvocationCounter _backedge_counter;           // Incremented before each backedge taken - used to trigger frequencey-based optimizations
@@ -51,7 +51,7 @@ InvocationCounter クラスはそのための閾値と実行回数を管理し, 
 * 各 methodDataOopDesc オブジェクトの _backedge_counter フィールド
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
       // How many invocations has this MDO seen?
       // These counters are used to determine the exact age of MDO.
@@ -66,7 +66,7 @@ InvocationCounter クラスはそのための閾値と実行回数を管理し, 
 内部には実行回数をカウントする unsigned int フィールドを保持している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/invocationCounter.hpp))
      private:                             // bit no: |31  3|  2  | 1 0 |
       unsigned int _counter;              // format: [count|carry|state]
@@ -79,7 +79,7 @@ InvocationCounter クラスはそのための閾値と実行回数を管理し, 
 * InterpreterProfileLimit (プロファイリング用)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/invocationCounter.hpp))
       static int InterpreterInvocationLimit;        // CompileThreshold scaled for interpreter use
       static int InterpreterBackwardBranchLimit;    // A separate threshold for on stack replacement
@@ -102,7 +102,7 @@ InvocationCounter クラスはそのための閾値と実行回数を管理し, 
     `((CompileThreshold * OnStackReplacePercentage) / 100) << number_of_noncount_bits`
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/invocationCounter.cpp))
       InterpreterInvocationLimit = CompileThreshold << number_of_noncount_bits;
       InterpreterProfileLimit = ((CompileThreshold * InterpreterProfilePercentage) / 100)<< number_of_noncount_bits;
@@ -122,7 +122,7 @@ InvocationCounter クラスはそのための閾値と実行回数を管理し, 
 なお, OSR に関連しそうな BackEdgeThreshold というオプションもあるが, どこからも使われていない...
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/globals.hpp))
       product_pd(intx, BackEdgeThreshold,                                       \
               "Interpreter Back edge threshold at which an OSR compilation is invoked")\

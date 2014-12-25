@@ -21,7 +21,7 @@ title: ciInstanceKlass クラス (ciInstanceKlass, 及びその補助クラス(N
 ciKlass クラスの具象サブクラスの1つ. instanceKlass 用の ciKlass クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciInstanceKlass.hpp))
     // ciInstanceKlass
     //
@@ -82,7 +82,7 @@ _non_static_fields フィールドの遅延初期化を行うための Closure �
 (ただし, 肝心の ciInstanceKlass::_non_static_fields フィールド自体が使われていないような... #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciInstanceKlass.cpp))
     class NonStaticFieldFiller: public FieldClosure {
 ```

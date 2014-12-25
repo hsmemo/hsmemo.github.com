@@ -20,7 +20,7 @@ Assembler クラス用の補助クラス.
 (See: hotspot/src/cpu/${cpu}/vm/register_${cpu}.hpp).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/asm/register.hpp))
     // The super class for platform specific registers. Instead of using value objects,
     // registers are implemented as pointers. Subclassing is used so all registers can
@@ -34,7 +34,7 @@ Assembler クラス用の補助クラス.
 なお AbstractRegister という型も使われるが, これは AbstractRegisterImpl* のこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/asm/register.hpp))
     typedef AbstractRegisterImpl* AbstractRegister;
 ```

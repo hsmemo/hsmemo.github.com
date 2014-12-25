@@ -18,7 +18,7 @@ AdjoiningGenerations が管理する generation オブジェクト (ASPSYoungGen
 それらの間にまたがった領域長変更を可能にするためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/adjoiningVirtualSpaces.hpp))
     class AdjoiningVirtualSpaces {
 ```
@@ -27,7 +27,7 @@ AdjoiningGenerations が管理する generation オブジェクト (ASPSYoungGen
 #### インスタンスの格納場所(where its instances are stored)
 AdjoiningGenerations クラスの _virtual_spaces インスタンスフィールドに(のみ)格納されている.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/adjoiningGenerations.hpp))
     class AdjoiningGenerations : public CHeapObj {
     ...
@@ -52,7 +52,7 @@ ASPSOldGen は (先頭から埋めていくため後方は空になっており)
 また ASPSYoungGen は (Minor GC 時に空になるのでこのタイミングでなら) 前方の境界を移動しても問題ない)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/adjoiningVirtualSpaces.hpp))
     // Contains two virtual spaces that each can individually span
     // most of the reserved region but committed parts of which

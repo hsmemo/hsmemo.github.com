@@ -18,7 +18,7 @@ ParallelScavengeHeap 内で使用する generation オブジェクトを管理�
 具体的には, これらのオブジェクトの確保処理や, これらのオブジェクト間にまたがった領域長の変更処理を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/adjoiningGenerations.hpp))
     // Contains two generations that both use an AdjoiningVirtualSpaces.
     // The two generations are adjacent in the reserved space for the
@@ -37,7 +37,7 @@ ParallelScavengeHeap 内で使用する generation オブジェクトを管理�
 ParallelScavengeHeap クラスの _gens フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/parallelScavengeHeap.hpp))
     class ParallelScavengeHeap : public CollectedHeap {
     ...

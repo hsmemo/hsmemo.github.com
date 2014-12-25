@@ -59,7 +59,7 @@ bitmask の長さが 2words に収まる場合は InterpreterOopMap オブジェ
 bitmask は 2bit ずつ使われる (増えた 1bit は dead かどうかを示すために使われる)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/oopMapCache.hpp))
     // A Cache for storing (method, bci) -> oopMap.
     // The memory management system uses the cache when locating object
@@ -95,7 +95,7 @@ bitmask は 2bit ずつ使われる (増えた 1bit は dead かどうかを示�
 その中でもいったんキャッシュを介して計算しすぐにキャッシュを捨てるという実装になっている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/oopMapCache.cpp))
     void OopMapCache::compute_one_oop_map(methodHandle method, int bci, InterpreterOopMap* entry) {
       // Due to the invariants above it's tricky to allocate a temporary OopMapCacheEntry on the stack
@@ -134,7 +134,7 @@ InterpreterOopMap 内の bitmap に対して iterate 処理を行うための Cl
   * VerifyClosure : デバッグ用に oopmap の verify 処理を行うクラス
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/oopMapCache.hpp))
     class OffsetClosure  {
 ```
@@ -143,7 +143,7 @@ InterpreterOopMap 内の bitmap に対して iterate 処理を行うための Cl
 InterpreterOopMap::iterate_oop() および InterpreterOopMap::iterate_all() が, 引数として OffsetClosure 型の値を受け取る.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/oopMapCache.hpp))
       void iterate_oop(OffsetClosure* oop_closure);
     ...
@@ -167,7 +167,7 @@ GC 処理中に使用される一時オブジェクト(ResourceObjクラス).
 Interpreter が実行しているコード地点における OopMap 情報を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/oopMapCache.hpp))
     class InterpreterOopMap: ResourceObj {
 ```
@@ -182,14 +182,14 @@ bitmask の大きさが 2 words 以下であれば, この配列内に直接 bit
 それより大きい場合は, C heap 上に取った領域へのポインタをここに格納する)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/oopMapCache.hpp))
         N                = 2,                // the number of words reserved
                                              // for inlined mask storage
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/oopMapCache.hpp))
       intptr_t       _bit_mask[N];    // the bit mask if
                                       // mask_size <= small_mask_limit,
@@ -214,7 +214,7 @@ See: [here](../doxygen/classInterpreterOopMap.html) for details
 (method, bci) というペアをキーとして, キャッシュしている InterpreterOopMap オブジェクトを引くことができる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/oopMapCache.hpp))
     class OopMapCache : public CHeapObj {
 ```
@@ -224,7 +224,7 @@ See: [here](../doxygen/classInterpreterOopMap.html) for details
 各 instanceKlass オブジェクトの _oop_map_cache フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/instanceKlass.hpp))
       OopMapCache*    volatile _oop_map_cache;   // OopMapCache for all methods in the klass (allocated lazily)
 ```
@@ -235,7 +235,7 @@ See: [here](../doxygen/classInterpreterOopMap.html) for details
 (なお, 現状ではハッシュのバケット数は 32. また collision 時の re-hash は 3回まで)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/oopMapCache.hpp))
       enum { _size        = 32,     // Use fixed size for now
              _probe_depth = 3       // probe depth in case of collisions
@@ -260,7 +260,7 @@ OopMapCache オブジェクト内に格納されるハッシュテーブル・�
 1つの OopMapCacheEntry オブジェクトが 1つの InterpreterOopMap オブジェクトに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/oopMapCache.cpp))
     class OopMapCacheEntry: private InterpreterOopMap {
 ```
@@ -287,7 +287,7 @@ OopMapCacheEntry を作成する処理で使用されるクラス.
 (なお, こちらは非 native メソッド用. MaskFillerForNative も参照)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/oopMapCache.cpp))
     // Implementation of OopMapForCacheEntry
     // (subclass of GenerateOopMap, initializes an OopMapCacheEntry for a given method and bci)
@@ -316,7 +316,7 @@ See: [here](../doxygen/classOopMapForCacheEntry.html) for details
 OopMapCacheEntry の中身の verify 処理を行う Closure.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/oopMapCache.cpp))
     // Implementation of InterpreterOopMap and OopMapCacheEntry
     
@@ -329,7 +329,7 @@ OopMapCacheEntry::verify_mask() 内で(のみ)使用されている.
 (なお, この関数自体も assert() 内でしか呼び出されない)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/oopMapCache.cpp))
       // verify bit mask
       assert(verify_mask(vars, stack, max_locals, stack_top), "mask could not be verified");
@@ -353,7 +353,7 @@ OopMapCacheEntry を作成する処理で使用されるクラス.
 (なお, こちらは native メソッド用. OopMapForCacheEntry も参照)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/oopMapCache.cpp))
     class MaskFillerForNative: public NativeSignatureIterator {
 ```

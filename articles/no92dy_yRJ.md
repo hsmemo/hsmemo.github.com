@@ -16,7 +16,7 @@ title: JvmtiTrace クラス
 
 JVMTI に関するトレース出力用の関数や定数を納めた名前空間(AllStatic クラス).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiTrace.cpp))
     // class JvmtiTrace
     //
@@ -53,7 +53,7 @@ JVMTI に関するトレース出力用の関数や定数を納めた名前空�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiTrace.hpp))
     #ifdef JVMTI_TRACE
     

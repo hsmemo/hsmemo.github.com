@@ -25,13 +25,13 @@ Java の型を表す文字列(Signature String)を扱うためのユーティリ
 (より正確に言うと, Signature String をパースしてフィールドの型情報を返す関数を納めた名前空間(AllStatic クラス)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/fieldType.hpp))
     // A FieldType is used to determine the type of a field from a signature string.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/fieldType.hpp))
     class FieldType: public AllStatic {
 ```
@@ -47,7 +47,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 (Signature String を表す Symbol オブジェクトを受け取って何らかの情報を返すメソッドばかり)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/fieldType.hpp))
       // Return basic type
       static BasicType basic_type(Symbol* signature);
@@ -74,7 +74,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/fieldType.hpp))
     // Note: FieldType should be based on the SignatureIterator (or vice versa).
     //       In any case, this structure should be re-thought at some point.
@@ -96,7 +96,7 @@ FieldType クラス用の補助クラス
 配列型を表す Signature String から型情報を取得する作業中に使われる一時オブジェクト(StackObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/fieldType.hpp))
     // Information returned by get_array_info, which is scoped to decrement
     // reference count if a Symbol is created in the case of T_OBJECT
@@ -126,7 +126,7 @@ FieldType クラス用の補助クラス
 (配列の次元数, 及び配列の要素の型).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/fieldType.hpp))
       int       _dimension;
       Symbol*   _object_key;

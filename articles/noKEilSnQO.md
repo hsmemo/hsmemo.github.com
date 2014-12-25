@@ -32,7 +32,7 @@ StackWalkCompPolicy が (処理対象のメソッドを決めるために)
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/rframe.hpp))
     // rframes ("recompiler frames") decorate stack frames with some extra information
     // needed by the recompiler.  The recompiler views the stack (at the time of recompilation)
@@ -63,7 +63,7 @@ CompiledRFrame は Java レベルのメソッドと 1対1対応するような�
 (つまり, 実際のスタックフレームとは1対1対応しないことがある).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/rframe.hpp))
     class CompiledRFrame : public RFrame {    // frame containing a compiled method
 ```
@@ -102,7 +102,7 @@ RFrame クラスの具象サブクラスの1つ
 1つの InterpretedRFrame オブジェクトが 1つのスタックフレームに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/rframe.hpp))
     class InterpretedRFrame : public RFrame {    // interpreter frame
 ```
@@ -140,7 +140,7 @@ See: [here](../doxygen/classInterpretedRFrame.html) for details
 ?? (このクラスは使用箇所が見当たらない...)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/rframe.hpp))
     // treat deoptimized frames as interpreted
     class DeoptimizedRFrame : public InterpretedRFrame {

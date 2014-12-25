@@ -27,7 +27,7 @@ title: MemRegion クラス関連のクラス (MemRegion, MemRegionClosure, MemRe
 
 (なお, このオブジェクト自体はものすごく小さいので VALUE_OBJ クラスになっている)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/memRegion.hpp))
     // A very simple data structure representing a contigous region
     // region of address space.
@@ -45,7 +45,7 @@ HotSpot 内の様々な箇所で使用されている. (#TODO)
 ### 内部構造(Internal structure)
 内部には2つのフィールド(のみ)を保持する (領域の開始アドレスと領域長).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/memRegion.hpp))
       HeapWord* _start;
       size_t    _word_size;
@@ -54,7 +54,7 @@ HotSpot 内の様々な箇所で使用されている. (#TODO)
 メソッドとしては,
 指定のポインタが領域内に入っているかどうかを判定する contains() メソッドなどを備える.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/memRegion.hpp))
       bool contains(const void* addr) const {
         return addr >= (void*)_start && addr < (void*)end();
@@ -63,7 +63,7 @@ HotSpot 内の様々な箇所で使用されている. (#TODO)
 
 領域同士の集合演算を行うメソッド等も用意されている.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/memRegion.hpp))
       MemRegion intersection(const MemRegion mr2) const;
       // regions must overlap or be adjacent
@@ -88,7 +88,7 @@ MemRegion に対して何らかの処理を行う Closure クラスの基底ク�
 (なお, このクラスは Closure クラスのサブクラスではなく, StackObj のサブクラスになっている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/memRegion.hpp))
     // For iteration over MemRegion's.
     
@@ -100,7 +100,7 @@ MemRegion を処理する do_MemRegion() メソッドを備えている.
 
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/memRegion.hpp))
       virtual void do_MemRegion(MemRegion mr) = 0;
 ```
@@ -120,7 +120,7 @@ MemRegionClosure の類似品.
 スタック上に確保される MemRegionClosure と異なり, こちらのクラスは ResourceArea 内に確保される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/memRegion.hpp))
     // A ResourceObj version of MemRegionClosure
     
@@ -133,7 +133,7 @@ new が ResourceObj として確保するように変更されている (そし�
 
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/memRegion.hpp))
       void* operator new(size_t size, ResourceObj::allocation_type type) {
             return ResourceObj::operator new(size, type);

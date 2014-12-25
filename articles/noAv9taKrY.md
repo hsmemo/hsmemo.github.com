@@ -18,7 +18,7 @@ title: PerfMemory クラス
 PerfData 用の shared memory file ("hsperfdata" ファイル) を管理する機能を納めた名前空間(AllStatic クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/perfMemory.hpp))
     /* the PerfMemory class manages creation, destruction,
      * and allocation of the PerfData region.

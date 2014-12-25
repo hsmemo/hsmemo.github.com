@@ -39,7 +39,7 @@ Remembered Set 機能を提供するクラスは使用する GC アルゴリズ�
 (<= 残りの RS は remembered set の略(だと思われる))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/cardTableRS.hpp))
     // This kind of "GenRemSet" uses a card table both as shared data structure
     // for a mod ref barrier set and for the rem set information.
@@ -74,7 +74,7 @@ CollectorPolicy::create_rem_set() 内で(のみ)生成されている.
 内部的には, barrier set (CardTableModRefBSForCTRS オブジェクト) を用いて remembered set を実現している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/cardTableRS.hpp))
       CardTableModRefBSForCTRS* _ct_bs;
 ```
@@ -82,7 +82,7 @@ CollectorPolicy::create_rem_set() 内で(のみ)生成されている.
 使用する CardTableModRefBSForCTRS オブジェクト内の card table には, ポインタの有無に応じて以下の値が書き込まれる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/cardTableRS.hpp))
       enum ExtendedCardValue {
         youngergen_card   = CardTableModRefBS::CT_MR_BS_last_reserved + 1,
@@ -105,7 +105,7 @@ CardTableRS::inline_write_ref_field_gc() を呼べばこのクラス経由で di
 (card table の対応する箇所を youngergen_card に変更する処理が行われる).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/cardTableRS.hpp))
       void inline_write_ref_field_gc(void* field, oop new_val) {
         jbyte* byte = _ct_bs->byte_for(field);
@@ -129,7 +129,7 @@ DirtyCardToOopClosure クラスとセットで使用するクラス.
 指定したメモリ範囲内の dirty 箇所について指定の DirtyCardToOopClosure オブジェクトを適用する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/cardTableRS.hpp))
     class ClearNoncleanCardWrapper: public MemRegionClosure {
 ```
@@ -141,7 +141,7 @@ DirtyCardToOopClosure クラスとセットで使用するクラス.
 * CardTableModRefBS::process_stride()
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/cardTableModRefBS.cpp))
     void CardTableModRefBS::non_clean_card_iterate_possibly_parallel(Space* sp,
                                                                      MemRegion mr,
@@ -180,7 +180,7 @@ See: [here](../doxygen/classClearNoncleanCardWrapper.html) for details
 デバッグ用(開発時用)のクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/cardTableRS.cpp))
     class VerifyCleanCardClosure: public OopClosure {
 ```
@@ -203,7 +203,7 @@ See: [here](../doxygen/classVerifyCleanCardClosure.html) for details
 デバッグ用(開発時用)のクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/cardTableRS.cpp))
     class VerifyCTSpaceClosure: public SpaceClosure {
 ```
@@ -226,7 +226,7 @@ See: [here](../doxygen/classVerifyCTSpaceClosure.html) for details
 デバッグ用(開発時用)のクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/cardTableRS.cpp))
     class VerifyCTGenClosure: public GenCollectedHeap::GenClosure {
 ```

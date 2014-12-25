@@ -12,7 +12,7 @@ title: クラスファイル中の StackMap attribute のデータ構造を表�
 (クラス名も JVMS での名称に合わせている模様 (JVMS 4.7.4 参照). そのため, 他のクラスとは命名規則が異なる)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/stackMapTableFormat.hpp))
     // These classes represent the stack-map substructures described in the JVMS
     // (hence the non-conforming naming scheme).
@@ -46,7 +46,7 @@ Relocator クラス内で使用される補助クラス.
 StackMap attribute の verification_type_info 情報を表すクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/stackMapTableFormat.hpp))
     class verification_type_info {
 ```
@@ -66,7 +66,7 @@ Relocator クラス内で使用される補助クラス.
 StackMap attribute の stack_map_frame 情報を表すクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/stackMapTableFormat.hpp))
     class stack_map_frame {
 ```
@@ -86,7 +86,7 @@ Relocator クラス内で使用される補助クラス.
 StackMap attribute の same_frame 情報を表すクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/stackMapTableFormat.hpp))
     class same_frame : public stack_map_frame {
 ```
@@ -105,7 +105,7 @@ Relocator クラス内で使用される補助クラス.
 StackMap attribute の same_frame_extended 情報を表すクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/stackMapTableFormat.hpp))
     class same_frame_extended : public stack_map_frame {
 ```
@@ -124,7 +124,7 @@ Relocator クラス内で使用される補助クラス.
 StackMap attribute の same_frame_1_stack_item_frame 情報を表すクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/stackMapTableFormat.hpp))
     class same_frame_1_stack_item_frame : public stack_map_frame {
 ```
@@ -143,7 +143,7 @@ Relocator クラス内で使用される補助クラス.
 StackMap attribute の same_frame_1_stack_item_extended 情報を表すクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/stackMapTableFormat.hpp))
     class same_frame_1_stack_item_extended : public stack_map_frame {
 ```
@@ -162,7 +162,7 @@ Relocator クラス内で使用される補助クラス.
 StackMap attribute の chop_frame 情報を表すクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/stackMapTableFormat.hpp))
     class chop_frame : public stack_map_frame {
 ```
@@ -181,7 +181,7 @@ Relocator クラス内で使用される補助クラス.
 StackMap attribute の append_frame 情報を表すクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/stackMapTableFormat.hpp))
     class append_frame : public stack_map_frame {
 ```
@@ -200,7 +200,7 @@ Relocator クラス内で使用される補助クラス.
 StackMap attribute の full_frame 情報を表すクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/stackMapTableFormat.hpp))
     class full_frame : public stack_map_frame {
 ```
@@ -219,7 +219,7 @@ Relocator クラス内で使用される補助クラス.
 StackMap attribute のヘッダの情報を表すクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/stackMapTableFormat.hpp))
     class stack_map_table_attribute {
 ```

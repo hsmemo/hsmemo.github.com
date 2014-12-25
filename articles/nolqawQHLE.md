@@ -18,7 +18,7 @@ title: Prefetch クラス
 プリフェッチ処理を実行する関数を提供している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/prefetch.hpp))
     // If calls to prefetch methods are in a loop, the loop should be cloned
     // such that if Prefetch{Scan,Copy}Interval and/or PrefetchFieldInterval
@@ -37,7 +37,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 ただし具体的な処理は os や cpu に依存するため, これらは os_cpu/ 以下で定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/prefetch.hpp))
       // Prefetch anticipating read; must not fault, semantically a no-op
       static void read(void* loc, intx interval);

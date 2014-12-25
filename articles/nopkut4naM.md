@@ -17,7 +17,7 @@ ciObject クラスの具象サブクラスの1つ.
 NULL 用の ciObject クラス. 変換元の oop が NULL だった場合, このオブジェクトが返される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciNullObject.hpp))
     // ciNullObject
     //

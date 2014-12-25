@@ -32,7 +32,7 @@ title: WorkGang に関するクラス (AbstractGangTask, AbstractGangTaskWOopQue
 全ての GangTask クラスの基底クラス (See: [here](no28916ecK.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/workgroup.hpp))
     // An abstract task to be worked on by a gang.
     // You subclass this to supply your own work() method
@@ -42,7 +42,7 @@ title: WorkGang に関するクラス (AbstractGangTask, AbstractGangTaskWOopQue
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/workgroup.hpp))
       // The abstract work method.
       // The argument tells you which member of the gang you are.
@@ -66,7 +66,7 @@ OopTaskQueueSet と ParallelTaskTerminator を内部に格納している.
 (何のため?? #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/workgroup.hpp))
     class AbstractGangTaskWOopQueues : public AbstractGangTask {
 ```
@@ -91,7 +91,7 @@ See: [here](../doxygen/classAbstractGangTaskWOopQueues.html) for details
 GangWorker スレッド全体を管理するクラスの基底クラス (See: [here](no28916ecK.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/workgroup.hpp))
     // Class AbstractWorkGang:
     // An abstract class representing a gang of workers.
@@ -102,7 +102,7 @@ GangWorker スレッド全体を管理するクラスの基底クラス (See: [h
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/workgroup.hpp))
       // Run a task, returns when the task is done (or terminated).
       virtual void run_task(AbstractGangTask* task) = 0;
@@ -125,7 +125,7 @@ GangTask 情報を受け渡す際に使用される補助クラス.
  各 GangWorker スレッドが取りまとめ役である WorkGang から次の GangTask を取得する際に使用される.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/workgroup.hpp))
     class WorkData: public StackObj {
 ```
@@ -139,7 +139,7 @@ GangTask 情報を受け渡す際に使用される補助クラス.
 (コメントにも「struct でもよかったけどアクセサメソッドが欲しかったのでクラスにした」と書かれるほどシンプル)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/workgroup.hpp))
       // This would be a struct, but I want accessor methods.
     private:
@@ -161,7 +161,7 @@ See: [here](../doxygen/classWorkData.html) for details
 AbstractWorkGang クラスのサブクラス (See: [here](no28916ecK.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/workgroup.hpp))
     // Class WorkGang:
     class WorkGang: public AbstractWorkGang {
@@ -182,7 +182,7 @@ See: [here](../doxygen/classWorkGang.html) for details
 WorkGang を用いた並列 GC において, 実際の GC 処理を行う WorkerThread クラス (See: [here](no28916ecK.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/workgroup.hpp))
     // Class GangWorker:
     //   Several instances of this class run in parallel as workers for a gang.
@@ -230,7 +230,7 @@ See: [here](../doxygen/classGangWorker.html) for details
 WorkGang クラスの具象サブクラス (See: [here](no28916ecK.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/workgroup.hpp))
     class FlexibleWorkGang: public WorkGang {
 ```
@@ -261,7 +261,7 @@ See: [here](../doxygen/classFlexibleWorkGang.html) for details
 GangWorker スレッド間でバリア同期を取るためのクラス (See: [here](no28916ecK.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/workgroup.hpp))
     // A class that acts as a synchronisation barrier. Workers enter
     // the barrier and must wait until all other workers have entered
@@ -296,7 +296,7 @@ See: [here](../doxygen/classWorkGangBarrierSync.html) for details
 複数の GangWorker スレッド間で, (ある程度大きな単位で) 負荷分散を行うためのクラス (See: [here](no28916ecK.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/workgroup.hpp))
     // A class to manage claiming of subtasks within a group of tasks.  The
     // subtasks will be identified by integer indices, usually elements of an
@@ -345,7 +345,7 @@ SubTasksDone クラスと異なり, GangWorker スレッドは自分が取得す
 (なお, SubTasksDone と違ってこちらは StackObject だが SubTasksDone もそうしては?? とのコメントも...)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/workgroup.hpp))
     // As above, but for sequential tasks, i.e. instead of claiming
     // sub-tasks from a set (possibly an enumeration), claim sub-tasks
@@ -365,7 +365,7 @@ SequentialSubTasksDone::is_task_claimed() では引数が参照渡しになっ�
 (処理は番号の小さいものから順に割り振られていく. 処理が全部割り振られてしまうと返値として true が返される.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/workgroup.hpp))
       // Returns false if the next task in the sequence is unclaimed,
       // and ensures that it is claimed. Will set t to be the index
@@ -389,7 +389,7 @@ See: [here](../doxygen/classSequentialSubTasksDone.html) for details
 (?? 現状では G1GC の DirtyCardQueueSet 内でしか使われていない模様... #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/workgroup.hpp))
     // Represents a set of free small integer ids.
     class FreeIdSet {
@@ -421,7 +421,7 @@ _hd フィールドがフリーリストの先頭 index を保持しており,
 ids フィールドの配列要素はそれぞれリストの次の要素の index を格納している)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/workgroup.hpp))
       int* _ids;
       int _hd;

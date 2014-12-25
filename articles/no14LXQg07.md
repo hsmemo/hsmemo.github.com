@@ -29,7 +29,7 @@ title: nmethod クラス関連のクラス (ExceptionCache, PcDescCache, nmethod
 JIT コンパイルされた Java メソッドを表す CodeBlob クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/nmethod.hpp))
     class nmethod : public CodeBlob {
 ```
@@ -41,7 +41,7 @@ JIT コンパイルされた Java メソッドを表す CodeBlob クラス.
 * pcs と書かれた領域には, PcDesc が詰まった配列がある模様. (See: PcDesc)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/nmethod.hpp))
     // nmethods (native methods) are the compiled code versions of Java methods.
     //
@@ -81,7 +81,7 @@ nmethod クラス用のユーティリティ・クラス.
 指定した nmethod を remove や made not entrant (made zombie) から保護するための一時オブジェクト(StackObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/nmethod.hpp))
     // Locks an nmethod so its code will not get removed and it will not
     // be made into a zombie, even if it is a not_entrant method. After the
@@ -97,7 +97,7 @@ nmethod クラス用のユーティリティ・クラス.
 (コンストラクタ内で _lock_count を増加させ, デストラクタ内で減少させている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/nmethod.hpp))
       nmethodLocker(nmethod *nm) { _nm = nm; lock_nmethod(_nm); }
     ...
@@ -105,7 +105,7 @@ nmethod クラス用のユーティリティ・クラス.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/nmethod.cpp))
     // Only JvmtiDeferredEvent::compiled_method_unload_event()
     // should pass zombie_ok == true.
@@ -138,7 +138,7 @@ exception handler の情報をキャッシュしておき,
 同じ箇所で同じ例外が発生した際に例外ハンドラの lookup 処理を高速化する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/nmethod.hpp))
     // This class is used internally by nmethods, to cache
     // exception/pc/handler information.
@@ -150,7 +150,7 @@ exception handler の情報をキャッシュしておき,
 nmethod::handler_for_exception_and_pc() 内で使用されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/nmethod.cpp))
     // public method for accessing the exception cache
     // These are the public access methods.
@@ -183,7 +183,7 @@ nmethod クラス内で使用される補助クラス.
 同じ PcDesc が必要になった際の lookup 処理を高速化する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/nmethod.hpp))
     // cache pc descs found in earlier inquiries
     class PcDescCache VALUE_OBJ_CLASS_SPEC {
@@ -193,14 +193,14 @@ nmethod クラス内で使用される補助クラス.
 nmethod::find_pc_desc() や nmethod::find_pc_desc_internal() 内で使われている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/nmethod.hpp))
       PcDesc* find_pc_desc(address pc, bool approximate) {
         PcDesc* desc = _pc_desc_cache.last_pc_desc();
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/nmethod.cpp))
     PcDesc* nmethod::find_pc_desc_internal(address pc, bool approximate) {
     ...
@@ -225,7 +225,7 @@ nmethod::detect_scavenge_root_oops() 内で使用されている補助クラス.
 Minor GC の root となるもの (= New 領域を指しているもの) があるかどうかを判定する Closure.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/nmethod.cpp))
     class DetectScavengeRoot: public OopClosure {
 ```
@@ -235,7 +235,7 @@ Minor GC の root となるものが存在すれば,
 DetectScavengeRoot::detected_scavenge_root() メソッドが true を返す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/nmethod.cpp))
     bool nmethod::detect_scavenge_root_oops() {
       DetectScavengeRoot detect_scavenge_root;
@@ -259,7 +259,7 @@ See: [here](../doxygen/classDetectScavengeRoot.html) for details
 nmethod::verify() 内で使用される補助クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/nmethod.cpp))
     // Verification
     
@@ -268,7 +268,7 @@ nmethod::verify() 内で使用される補助クラス.
 
 ### 使われ方(Usage)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/nmethod.cpp))
     void nmethod::verify() {
     ...
@@ -292,7 +292,7 @@ See: [here](../doxygen/classVerifyOopsClosure.html) for details
 nmethod::verify_scavenge_root_oops() 内で使用される補助クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/nmethod.cpp))
     #ifndef PRODUCT
     
@@ -301,7 +301,7 @@ nmethod::verify_scavenge_root_oops() 内で使用される補助クラス.
 
 ### 使われ方(Usage)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/nmethod.cpp))
     void nmethod::verify_scavenge_root_oops() {
     ...

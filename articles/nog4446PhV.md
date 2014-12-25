@@ -26,13 +26,13 @@ Java レベルでの「メソッド」を表すためのクラス.
 1つの methodOopDesc オブジェクトが 1つのメソッドに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodOop.hpp))
     // A methodOop represents a Java method.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodOop.hpp))
     class methodOopDesc : public oopDesc {
 ```
@@ -111,7 +111,7 @@ methodKlass::allocate() というファクトリメソッドが用意されて�
   なお負値が入っている場合は index ではなく以下のような別の意味を持つ (See: VtableIndexFlag).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodOop.hpp))
       // vtable index
       enum VtableIndexFlag {
@@ -254,7 +254,7 @@ methodKlass::allocate() というファクトリメソッドが用意されて�
     * local variable table(local_variable_table)情報
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodOop.hpp))
     // Memory layout (each line represents a word). Note that most applications load thousands of methods,
     // so keeping the size of this structure small has a big impact on footprint.
@@ -341,7 +341,7 @@ methodOopDesc クラス用の補助クラス.
 methodOopDesc 内では line_number_tables 情報は大きいので圧縮して保持している. その圧縮処理を行うためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodOop.hpp))
     // Utility class for compressing line number tables
     
@@ -364,7 +364,7 @@ methodOopDesc 内では line_number_tables 情報は大きいので圧縮して�
 その圧縮された情報を解凍するためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodOop.hpp))
     // Utility class for decompressing line number tables
     
@@ -393,7 +393,7 @@ JVMTI の処理についてならとりあえずこれで問題ない.
 とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodOop.hpp))
     /// Fast Breakpoints.
     
@@ -434,7 +434,7 @@ See: [here](../doxygen/classBreakpointInfo.html) for details
 指定されたメソッドの引数や返値の型を outputStream に出力する機能を提供する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodOop.cpp))
     #ifndef PRODUCT
     class SignatureTypePrinter : public SignatureTypeNames {
@@ -448,7 +448,7 @@ methodOopDesc::print_name 内で(のみ)使用されている.
 それぞれ, 引数の型, 返値の型を出力する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodOop.cpp))
       void print_parameters()              { _use_separator = false; iterate_parameters(); }
       void print_returntype()              { _use_separator = false; iterate_returntype(); }

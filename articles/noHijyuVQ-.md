@@ -28,7 +28,7 @@ VM_GC_Operation クラスの具象サブクラスの1つ (See: [here](no2480EWm.
 GC アルゴリズムとしては Parallel Scavenge, Parallel Compaction, PS MarkSweep がここから呼び出される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/vmPSOperations.hpp))
     class VM_ParallelGCFailedAllocation: public VM_GC_Operation {
 ```
@@ -52,7 +52,7 @@ VM_GC_Operation クラスの具象サブクラスの1つ (See: [here](no2480EWm.
 GC アルゴリズムとしては Parallel Compaction, PS MarkSweep がここから呼び出される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/vmPSOperations.hpp))
     class VM_ParallelGCFailedPermanentAllocation: public VM_GC_Operation {
 ```
@@ -76,7 +76,7 @@ VM_GC_Operation クラスの具象サブクラスの1つ (See: [here](no2480EWm.
 GC アルゴリズムとしては Parallel Compaction, PS MarkSweep がここから呼び出される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/vmPSOperations.hpp))
     class VM_ParallelGCSystemGC: public VM_GC_Operation {
 ```

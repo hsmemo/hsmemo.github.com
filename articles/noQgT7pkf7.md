@@ -36,7 +36,7 @@ GCTaskThread に対する処理要求を表すクラスの基底クラス (See: 
 GCTaskThread に対する処理要求は GCTask クラス(のサブクラス)のオブジェクトとして表現される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskManager.hpp))
     // The abstract base GCTask.
     class GCTask : public ResourceObj {
@@ -58,7 +58,7 @@ GCTask 用の補助クラス (See: [here](no24805iK.html) for details).
 
 GCTask の種別を表す定数値を納めた名前空間(AllStatic クラス)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskManager.hpp))
       // Known kinds of GCTasks, for predicates.
       class Kind : AllStatic {
@@ -69,7 +69,7 @@ GCTask の種別を表す定数値を納めた名前空間(AllStatic クラス)
 
 (正確には, この定数値を文字列化する to_string() メソッドも定義されている)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskManager.hpp))
         enum kind {
           unknown_task,
@@ -98,7 +98,7 @@ GCTaskThread はここから GCTask を取り出して処理を行う
 排他的に処理したい場合は SynchronizedGCTaskQueue でラップして使うこと, とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskManager.hpp))
     // A doubly-linked list of GCTasks.
     // The list is not synchronized, because sometimes we want to
@@ -156,7 +156,7 @@ See: [here](../doxygen/classGCTaskQueue.html) for details
 (といっても, 現在は GCTaskManager クラス内でしか使われていないので, GCTaskManager 用の補助クラスといった感じ)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskManager.hpp))
     // A GCTaskQueue that can be synchronized.
     // This "has-a" GCTaskQueue and a mutex to do the exclusion.
@@ -168,7 +168,7 @@ See: [here](../doxygen/classGCTaskQueue.html) for details
 GCTaskManager クラスの _queue フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskManager.hpp))
     class GCTaskManager : public CHeapObj {
     ...
@@ -190,7 +190,7 @@ See: [here](no7882Qar.html) for details
 その代わりに, private フィールドに GCTaskQueue オブジェクトを保持して明示的に delegate している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskManager.hpp))
     private:
       // Instance state.
@@ -212,7 +212,7 @@ GCTaskManager からのコールバックを表すクラスの基底クラス.
 
 (GCTaskManager 内の GCTask が全て完了すると呼び出される模様)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskManager.hpp))
     // This is an abstract base class for getting notifications
     // when a GCTaskManager is done.
@@ -249,14 +249,14 @@ GCTaskThread はここから自分が実行する GCTask を取得する)
 
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskManager.hpp))
     // The GCTaskManager is a queue of GCTasks, and accessors
     // to allow the queue to be accessed from many threads.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskManager.hpp))
     class GCTaskManager : public CHeapObj {
 ```
@@ -266,7 +266,7 @@ GCTaskThread はここから自分が実行する GCTask を取得する)
 ParallelScavengeHeap オブジェクトの  _gc_task_manager フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/parallelScavengeHeap.hpp))
     class ParallelScavengeHeap : public CollectedHeap {
     ...
@@ -306,7 +306,7 @@ GCTask クラスのサブクラスの1つ.
 このクラスは「何も行わない処理(NOOP)」を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskManager.hpp))
     // A noop task that does nothing,
     // except take us around the GCTaskThread loop.
@@ -318,7 +318,7 @@ GCTask クラスのサブクラスの1つ.
 GCTaskThread が確保しているリソースを解放したいときなど, とりあえず GCTaskThread の処理ループを1回まわしたい, という時に使われる模様(?)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskManager.cpp))
         // The queue is empty, but we were woken up.
         // Just hand back a Noop task,
@@ -330,7 +330,7 @@ GCTaskThread が確保しているリソースを解放したいときなど, �
 GCTaskManager オブジェクトの _noop_task フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskManager.hpp))
     class GCTaskManager : public CHeapObj {
     ...
@@ -370,7 +370,7 @@ GCTask クラスのサブクラスの1つ.
 このクラスはバリア同期として働く (先行するタスクが全部完了するまで後続のタスクを開始させない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskManager.hpp))
     // A BarrierGCTask blocks other tasks from starting,
     // and waits until it is the only task running.
@@ -395,7 +395,7 @@ BarrierGCTask クラスのサブクラスの1つ.
 resource area を解放するよう要求を出す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskManager.hpp))
     // A ReleasingBarrierGCTask is a BarrierGCTask
     // that tells all the tasks to release their resource areas.
@@ -418,7 +418,7 @@ BarrierGCTask クラスのサブクラスの1つ.
 NotifyDoneClosure での通知も行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskManager.hpp))
     // A NotifyingBarrierGCTask is a BarrierGCTask
     // that calls a notification method when it is the only task running.
@@ -444,7 +444,7 @@ BarrierGCTask クラスのサブクラスの1つ.
 (NotifyingBarrierGCTask の多くのユースケースはこれでカバーできる, とのこと)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskManager.hpp))
     // A WaitForBarrierGCTask is a BarrierGCTask
     // with a method you can call to wait until
@@ -456,7 +456,7 @@ BarrierGCTask クラスのサブクラスの1つ.
 ### 内部構造(Internal structure)
 WaitForBarrierGCTask::wait_for() メソッドで待機を行う.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskManager.hpp))
       void     wait_for();
 ```
@@ -476,14 +476,14 @@ WaitForBarrierGCTask クラス内で使用される補助クラス.
 バリア同期を待つための Monitor (およびそれを操作するメソッド) を納めた名前空間(AllStatic クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskManager.hpp))
     class MonitorSupply : public AllStatic {
 ```
 
 メソッドとしては以下の2種類が定義されている.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskManager.hpp))
     public:
       // Reserve a Monitor*.
@@ -495,7 +495,7 @@ WaitForBarrierGCTask クラス内で使用される補助クラス.
 ### 使われ方(Usage)
 WaitForBarrierGCTask のコンストラクタで Monitor が取得される.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskManager.cpp))
     WaitForBarrierGCTask::WaitForBarrierGCTask(bool on_c_heap) :
     ...
@@ -504,7 +504,7 @@ WaitForBarrierGCTask のコンストラクタで Monitor が取得される.
 
 そして WaitForBarrierGCTask::wait_for() 内で, その Monitor に対して wait() が呼び出される.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskManager.cpp))
     void WaitForBarrierGCTask::wait_for() {
     ...
@@ -513,7 +513,7 @@ WaitForBarrierGCTask のコンストラクタで Monitor が取得される.
 
 そして WaitForBarrierGCTask::do_it() 内で notify_all() が呼び出される.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskManager.cpp))
     void WaitForBarrierGCTask::do_it(GCTaskManager* manager, uint which) {
     ...

@@ -16,7 +16,7 @@ JIT Compiler 内で定数を扱うためのユーティリティ・クラス(Val
 1つの ciConstant オブジェクトが 1つの定数値に対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciConstant.hpp))
     // ciConstant
     //
@@ -49,7 +49,7 @@ JIT Compiler 内で定数を扱うためのユーティリティ・クラス(Val
 (定数値の型と値を格納しているだけ).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciConstant.hpp))
       BasicType _type;
       union {

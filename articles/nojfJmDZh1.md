@@ -17,7 +17,7 @@ Java のクラスのフィールド情報にアクセスするためのユーテ
 1つの fieldDescriptor オブジェクトが 1つのフィールドに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/fieldDescriptor.hpp))
     // A fieldDescriptor describes the attributes of a single field (instance or class variable).
     // It needs the class constant pool to work (because it only holds indices into the pool
@@ -52,7 +52,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 (_access_flags, _offset, _index 以外のものは, 情報そのものではなく Constant Pool 内を指す index)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/fieldDescriptor.hpp))
       AccessFlags         _access_flags;
       int                 _name_index;

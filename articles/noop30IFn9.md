@@ -9,7 +9,7 @@ title: SymbolTable クラス関連のクラス (TempNewSymbol, SymbolTable, Stri
 これらは, Symbol オブジェクトやインターンされた文字列(Interned Strings) を管理するためのクラス (See: Symbol).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/symbolTable.hpp))
     // The symbol table holds all Symbol*s and corresponding interned strings.
     // Symbol*s and literal strings should be canonicalized.
@@ -42,7 +42,7 @@ title: SymbolTable クラス関連のクラス (TempNewSymbol, SymbolTable, Stri
 新しい Symbol を生成するファクトリメソッドや文字列から対応する Symbol を取得するメソッド等を提供している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/symbolTable.hpp))
     class SymbolTable : public Hashtable<Symbol*> {
 ```
@@ -81,7 +81,7 @@ See: [here](../doxygen/classSymbolTable.html) for details
  (See: JVM_GetClassName()))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/symbolTable.hpp))
     class StringTable : public Hashtable<oop> {
 ```
@@ -113,7 +113,7 @@ Symbol クラス用のユーティリティ・クラス.
 という場合に使われる一時オブジェクト(StackObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/symbolTable.hpp))
     // Class to hold a newly created or referenced Symbol* temporarily in scope.
     // new_symbol() and lookup() will create a Symbol* if not already in the
@@ -136,7 +136,7 @@ Symbol クラス用のユーティリティ・クラス.
 * 最終的には, このスコープが終わって左辺の変数が死んだときにデストラクタで -1 される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jni.cpp))
       TempNewSymbol class_name = SymbolTable::new_symbol(name, THREAD);
 ```
@@ -160,7 +160,7 @@ See: [here](../doxygen/classTempNewSymbol.html) for details
 デバッグ用(開発時用)のクラス (#ifdef ASSERT 時にしか定義されない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/symbolTable.cpp))
     #ifdef ASSERT
     class StableMemoryChecker : public StackObj {

@@ -11,7 +11,7 @@ title: Memory allocation (& GC 処理) ： メモリの確保処理 (GC 処理) 
 GC 処理は CollectedHeap::mem_allocate() メソッドで行われる (See: [here](no28916Q0G.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_interface/collectedHeap.hpp))
       // Raw memory allocation facilities
       // The obj and array allocate methods are covers for these methods.
@@ -59,7 +59,7 @@ GC 処理は CollectedHeap::mem_allocate() メソッドで行われる (See: [he
     CollectedHeap::mem_allocate() 内での確保処理が adaptive size policy で指定された時間制約が満たせなかった場合に true にセットされる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/collectorPolicy.hpp))
       // This method controls how a collector satisfies a request
       // for a block of memory.  "gc_time_limit_was_exceeded" will

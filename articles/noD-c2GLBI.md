@@ -33,7 +33,7 @@ HeapWord* 型が 「word-aligned なアドレスを指す汎用的なポイン�
             hw += oop(hw)->foo();
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/globalDefinitions.hpp))
     // An opaque struct of heap-word width, so that HeapWord* can be a generic
     // pointer into the heap.  We require that object sizes be measured in
@@ -51,7 +51,7 @@ HeapWord* 型が 「word-aligned なアドレスを指す汎用的なポイン�
 (このフィールドも特に使われるわけではなく, 単に HeapWord オブジェクトのアドレスを word-aligned させるためだけのもの)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/globalDefinitions.hpp))
       char* i;
 ```
@@ -69,14 +69,14 @@ See: [here](../doxygen/classHeapWord.html) for details
 既存のクラスを基に, (cache line の競合を避けるためのパディングを入れた) 新しいクラスを生成するユーティリティ・クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/globalDefinitions.hpp))
     // Templates to create a subclass padded to avoid cache line sharing.  These are
     // effective only when applied to derived-most (leaf) classes.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/globalDefinitions.hpp))
     // When no args are passed to the base ctor.
     template <class T, size_t alignment = DEFAULT_CACHE_LINE_SIZE>
@@ -94,19 +94,19 @@ See: [here](../doxygen/classHeapWord.html) for details
 (このクラスは ParNew GC や CMS GC で使用されている).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parNew/parNewGeneration.hpp))
     typedef Padded<OopTaskQueue> ObjToScanQueue;
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parNew/parOopClosures.hpp))
     typedef Padded<OopTaskQueue> ObjToScanQueue;
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/concurrentMarkSweep/concurrentMarkSweepGeneration.cpp))
           typedef Padded<OopTaskQueue> PaddedOopTaskQueue;
 ```
@@ -120,7 +120,7 @@ See: [here](../doxygen/classHeapWord.html) for details
 * alignment 値
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/globalDefinitions.hpp))
     private:
       char _pad_buf_[PADDING_SIZE(T, alignment)];
@@ -141,14 +141,14 @@ See: [here](../doxygen/classPadded.html) for details
 ?? (Padded と異なり, こっちは使用箇所が見当たらないが...)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/globalDefinitions.hpp))
     // Templates to create a subclass padded to avoid cache line sharing.  These are
     // effective only when applied to derived-most (leaf) classes.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/globalDefinitions.hpp))
     // When either 0 or 1 args may be passed to the base ctor.
     template <class T, typename Arg1T, size_t alignment = DEFAULT_CACHE_LINE_SIZE>
@@ -158,7 +158,7 @@ See: [here](../doxygen/classPadded.html) for details
 (Padded との違いは, パディング対象のクラス(T)のベースコンストラクタに指定の引数を渡せる点)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/globalDefinitions.hpp))
       Padded01(): T() { }
       Padded01(Arg1T arg1): T(arg1) { }
@@ -181,7 +181,7 @@ JVM 仕様で定められている任意の値を格納できるクラス
 (全部の型の tagged union のようなクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/globalDefinitions.hpp))
     // JavaValue serves as a container for arbitrary Java values.
     
@@ -195,7 +195,7 @@ JVM 仕様で定められている任意の値を格納できるクラス
 * _value フィールド : 値そのものを格納するフィールド
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/globalDefinitions.hpp))
       BasicType _type;
       JavaCallValue _value;
@@ -204,7 +204,7 @@ JVM 仕様で定められている任意の値を格納できるクラス
 なお, JavaCallValue は以下のような union 型になっている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/globalDefinitions.hpp))
       typedef union JavaCallValue {
         jfloat   f;

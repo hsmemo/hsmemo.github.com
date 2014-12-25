@@ -48,7 +48,7 @@ See: [here](no2114_u2.html) for details
 java.lang.Thread.stop0() は JVM_StopThread() で実装されている.
 
 
-```
+```cpp
     ((cite: jdk/src/share/native/java/lang/Thread.c))
     static JNINativeMethod methods[] = {
     ...

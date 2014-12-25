@@ -48,7 +48,7 @@ JVMTI 関係の関数を納めた名前空間(AllStatic クラス).
 (See: [here](no3718uqQ.html) and [here](no2935C7Z.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.hpp))
     // This class contains the JVMTI interface for the rest of hotspot.
     //
@@ -64,7 +64,7 @@ JVMTI 関連の様々な処理で使用されている (#TODO).
 (例: JVMTI のバージョンを確認するメソッド, JVMTI environment を取得するためのメソッド)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.hpp))
       static bool is_jvmti_version(jint version)                      { return (version & JVMTI_VERSION_MASK) == JVMTI_VERSION_VALUE; }
       static bool is_jvmdi_version(jint version)                      { return (version & JVMTI_VERSION_MASK) == JVMDI_VERSION_VALUE; }
@@ -76,7 +76,7 @@ JVMTI 関連の様々な処理で使用されている (#TODO).
 以下のように JVMTI_SUPPORT_FLAG というマクロを使って間接的に定義されている(後述))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.hpp))
       JVMTI_SUPPORT_FLAG(can_get_source_debug_extension)
       JVMTI_SUPPORT_FLAG(can_maintain_original_method_order)
@@ -96,7 +96,7 @@ JVMTI 関連の様々な処理で使用されている (#TODO).
 以下のように JVMTI_SUPPORT_FLAG というマクロを使って間接的に定義されている(後述))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.hpp))
       JVMTI_SUPPORT_FLAG(should_post_single_step)
       JVMTI_SUPPORT_FLAG(should_post_field_access)
@@ -134,7 +134,7 @@ JVMTI 関連の様々な処理で使用されている (#TODO).
 (JvmtiExport::should_*() で調べて JvmtiExport::post_*(), というパターンが基本)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.hpp))
       static void post_field_modification(JavaThread *thread, methodOop method, address location,
                                           KlassHandle field_klass, Handle object, jfieldID field,
@@ -148,7 +148,7 @@ JVMTI 関連の様々な処理で使用されている (#TODO).
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.hpp))
       // Methods that notify the debugger that something interesting has happened in the VM.
       static void post_vm_start              ();
@@ -163,7 +163,7 @@ JVMTI 関連の様々な処理で使用されている (#TODO).
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.hpp))
       static void post_method_entry          (JavaThread *thread, methodOop method, frame current_frame) KERNEL_RETURN;
       static void post_method_exit           (JavaThread *thread, methodOop method, frame current_frame) KERNEL_RETURN;
@@ -181,7 +181,7 @@ JVMTI_SUPPORT_FLAG マクロは以下のように定義されている
 (フィールド, 及びそのフィールドに対するアクセサメソッドをまとめて定義する).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.hpp))
     #ifndef JVMTI_KERNEL
     #define JVMTI_SUPPORT_FLAG(key)                                         \
@@ -215,7 +215,7 @@ JVMTI 関係の処理で使用されているユーティリティ・クラス.
 処理対象の CodeBlob の情報(名前およびコードのアドレス)を格納しておくためのクラス (See: [here](no29359Bq.html) and [here](no2935lCe.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.hpp))
     // Support class used by JvmtiDynamicCodeEventCollector and others. It
     // describes a single code blob by name and address range.
@@ -250,7 +250,7 @@ JVMTI 関係の処理で使用されているユーティリティ・クラス.
 (そして, メソッドはこれらのフィールドへの getter メソッド(アクセサメソッド)のみ)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.hpp))
       char _name[64];
       address _code_begin;
@@ -275,7 +275,7 @@ JVMTI のイベント通知機能を実装するためのクラス (の基底ク
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.hpp))
     // JvmtiEventCollector is a helper class to setup thread for
     // event collection.
@@ -305,7 +305,7 @@ JvmtiEventCollector クラスの具象サブクラスの1つ.
 溜めていたイベントが JvmtiExport::post_dynamic_code_generated() で通知される.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.hpp))
     // A JvmtiDynamicCodeEventCollector is a helper class for the JvmtiExport
     // interface. It collects "dynamic code generated" events that are posted
@@ -328,7 +328,7 @@ JvmtiEventCollector クラスの具象サブクラスの1つ.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.hpp))
       // similiar to post_dynamic_code_generated except that it can be used to
       // post a DynamicCodeGenerated event while holding locks in the VM. Any event
@@ -369,7 +369,7 @@ JvmtiEventCollector クラスの具象サブクラスの1つ.
 このクラスは VMObjectAlloc イベントの通知処理に使用される (See: [here](no2935wwv.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.hpp))
     // Used to record vm internally allocated object oops and post
     // vm object alloc event for objects visible to java world.
@@ -415,7 +415,7 @@ See: [here](../doxygen/classJvmtiVMObjectAllocEventCollector.html) for details
 (ソースコード中のあるスコープの間だけ, VMObjectAlloc イベントの通知処理を無効にするクラスのようだが... #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.hpp))
     // Marker class to disable the posting of VMObjectAlloc events
     // within its scope.
@@ -449,7 +449,7 @@ JVMTI のフック点の生成処理を簡単に行うための補助クラス(S
 ソースコード上のスコープに連動して自動的にフック点を生成する (See: [here](no2935WqL.html) and [here](no2935j0R.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.hpp))
     // Base class for reporting GC events to JVMTI.
     class JvmtiGCMarker : public StackObj {
@@ -472,7 +472,7 @@ JVMTI のフック点の生成処理を簡単に行うための補助クラス(S
 不要になった JvmtiEnvBase や JvmtiEnvThreadState を削除する役割も担っている.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.cpp))
     JvmtiGCMarker::JvmtiGCMarker() {
       // if there aren't any JVMTI environments then nothing to do
@@ -523,7 +523,7 @@ JVMTI のイベント通知機能を実装するためのクラス.
 という用途で使われている模様)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.hpp))
     // JvmtiHideSingleStepping is a helper class for hiding
     // internal single step events.
@@ -542,7 +542,7 @@ JVMTI のイベント通知機能を実装するためのクラス.
 デストラクタで JvmtiExport::expose_single_stepping() を呼んで元に戻している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.hpp))
       JvmtiHideSingleStepping(JavaThread * thread) {
         assert(thread != NULL, "sanity check");
@@ -603,7 +603,7 @@ Dynamic Attach の Agent_OnAttach() 関数の呼び出し処理の記述を簡�
 それ以外の場合用には JvmtiThreadEventTransition が用意されている (See: JvmtiThreadEventTransition).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.cpp))
     ///////////////////////////////////////////////////////////////
     //
@@ -643,7 +643,7 @@ See: [here](../doxygen/classJvmtiJavaThreadEventTransition.html) for details
 このクラスは, _thread_in_vm 状態ではない JavaThread や JavaThread 以外のスレッド用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.cpp))
     // For JavaThreads which are not in _thread_in_vm state
     // and other system threads use this.
@@ -683,7 +683,7 @@ JVMTI のイベント通知機能を実装するためのクラス.
   を自動的に待避/復帰する.
 * スタックフレームを辿れる状態にする.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.cpp))
     ///////////////////////////////////////////////////////////////
     //
@@ -710,7 +710,7 @@ JVMTI のイベント通知機能を実装するためのクラス.
 
 (なお, 本当は #if 0 の中のように書きたかったけど今のところ上手く動かないのでとりあえずの実装にしている, とのこと)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.cpp))
     #if 0
       jobject to_jobject(oop obj) { return obj == NULL? NULL : _hblock->allocate_handle_fast(obj); }
@@ -740,7 +740,7 @@ JvmtiEventMark クラスのサブクラス.
 JvmtiEventMark が JNI Handle 化して保護する範囲に加えて, jthread 型の値を1つ保護対象に加えている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.cpp))
     class JvmtiThreadEventMark : public JvmtiEventMark {
 ```
@@ -770,7 +770,7 @@ JvmtiThreadEventMark クラスのサブクラス.
 JvmtiThreadEventMark が JNI Handle 化して保護する範囲に加えて, jclass 型の値を1つ保護対象に加えている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.cpp))
     class JvmtiClassEventMark : public JvmtiThreadEventMark {
 ```
@@ -796,7 +796,7 @@ JvmtiThreadEventMark クラスのサブクラス.
 JvmtiThreadEventMark が JNI Handle 化して保護する範囲に加えて, jmethodID 型の値を1つ保護対象に加えている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.cpp))
     class JvmtiMethodEventMark : public JvmtiThreadEventMark {
 ```
@@ -823,7 +823,7 @@ JvmtiMethodEventMark クラスのサブクラス.
 JvmtiMethodEventMark が JNI Handle 化して保護する範囲に加えて, jlocation 型の値を1つ保護対象に加えている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.cpp))
     class JvmtiLocationEventMark : public JvmtiMethodEventMark {
 ```
@@ -851,7 +851,7 @@ JvmtiLocationEventMark クラスのサブクラス.
 JvmtiLocationEventMark が JNI Handle 化して保護する範囲に加えて, jobject 型の値(例外オブジェクト)を1つ保護対象に加えている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.cpp))
     class JvmtiExceptionEventMark : public JvmtiLocationEventMark {
 ```
@@ -878,7 +878,7 @@ JvmtiThreadEventMark が JNI Handle 化して保護する範囲に加えて,
 クラスファイルのロードに関連するいくつかの値を保護対象に加えている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.cpp))
     class JvmtiClassFileLoadEventMark : public JvmtiThreadEventMark {
 ```
@@ -913,7 +913,7 @@ JVMTI のイベント通知機能を実装するための補助クラス(StackOb
 (See: [here](no2935WjX.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.cpp))
     class JvmtiClassFileLoadHookPoster : public StackObj {
 ```
@@ -938,7 +938,7 @@ JvmtiClassEventMark クラスのサブクラス.
 JvmtiClassEventMark が JNI Handle 化して保護する範囲に加えて, jobject 型の値(確保したオブジェクト)を1つ保護対象に加えている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.cpp))
     class JvmtiVMObjectAllocEventMark : public JvmtiClassEventMark  {
 ```
@@ -964,7 +964,7 @@ JvmtiMethodEventMark が JNI Handle 化して保護する範囲に加えて,
 CompiledMethodLoad イベントに関する幾つかの情報を保持している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.cpp))
     class JvmtiCompiledMethodLoadEventMark : public JvmtiMethodEventMark {
 ```
@@ -989,7 +989,7 @@ JvmtiThreadEventMark クラスのサブクラス.
 JvmtiThreadEventMark が JNI Handle 化して保護する範囲に加えて, jobject 型の値(ロック対象のオブジェクト)を1つ保護対象に加えている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiExport.cpp))
     class JvmtiMonitorEventMark : public JvmtiThreadEventMark {
 ```

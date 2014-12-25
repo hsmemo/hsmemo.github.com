@@ -23,13 +23,13 @@ Tiered Compilation 用の CompilationPolicy クラス(= メソッドをコンパ
 
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/advancedThresholdPolicy.hpp))
     #ifdef TIERED
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/advancedThresholdPolicy.hpp))
     /*
      *  The system supports 5 execution levels:
@@ -81,7 +81,7 @@ Tiered Compilation 用の CompilationPolicy クラス(= メソッドをコンパ
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/advancedThresholdPolicy.hpp))
     class AdvancedThresholdPolicy : public SimpleThresholdPolicy {
 ```
@@ -105,7 +105,7 @@ compilationPolicy_init() 内で(のみ)生成されている.
 関連するコマンドラインオプションには以下のようなものがある.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/advancedThresholdPolicy.hpp))
     /* Command line options:
      * - Tier?InvokeNotifyFreqLog and Tier?BackedgeNotifyFreqLog control the frequency of method

@@ -30,7 +30,7 @@ PSVirtualSpace オブジェクトと(そのサブクラスである) PSVirtualSp
 VirtualSpace クラスやそのサブクラスでは _ValueObj クラスになってしまうので(= ポインタ経由で扱えないので)こうしたテクニックが使えない.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psVirtualspace.hpp))
     // VirtualSpace for the parallel scavenge collector.
     //
@@ -56,7 +56,7 @@ See: [here](../doxygen/classPSVirtualSpace.html) for details
 (なぜ下方に伸びないといけないかは AdjoiningVirtualSpaces を参照)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psVirtualspace.hpp))
     // A virtual space that grows from high addresses to low addresses.
     class PSVirtualSpaceHighToLow : public PSVirtualSpace {
@@ -77,7 +77,7 @@ See: [here](../doxygen/classPSVirtualSpaceHighToLow.html) for details
 ### 概要(Summary)
 デバッグ用(開発時用)のクラス (#ifndef PRODUCT 時にしか定義されない).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psVirtualspace.hpp))
     #ifndef PRODUCT
     ...
@@ -89,7 +89,7 @@ See: [here](../doxygen/classPSVirtualSpaceHighToLow.html) for details
 (コンストラクタとデストラクタで PSVirtualSpace::verify() を呼び出している).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psVirtualspace.hpp))
         PSVirtualSpaceVerifier(PSVirtualSpace* space): _space(space) {
           _space->verify();
@@ -111,14 +111,14 @@ PSVirtualSpace クラス (や PSVirtualSpaceHighToLow クラス) の以下のメ
 (ただし, DEBUG_ONLY で囲われているので, 使われるのはデバッグ時のみ).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psVirtualspace.cpp))
     void PSVirtualSpace::release() {
       DEBUG_ONLY(PSVirtualSpaceVerifier this_verifier(this));
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psVirtualspace.cpp))
     bool PSVirtualSpace::expand_by(size_t bytes) {
     ...
@@ -126,7 +126,7 @@ PSVirtualSpace クラス (や PSVirtualSpaceHighToLow クラス) の以下のメ
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psVirtualspace.cpp))
     bool PSVirtualSpace::shrink_by(size_t bytes) {
     ...

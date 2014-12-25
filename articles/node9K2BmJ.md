@@ -20,7 +20,7 @@ GC 処理を高速化するための補助クラス. phase 2 から phase 4 の�
 これにより毎回領域全体を見る必要がなくなり処理が高速化される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/liveRange.hpp))
     // This is a shared helper class used during phase 3 and 4 to move all the objects
     // Dead regions in a Space are linked together to keep track of the live regions

@@ -35,7 +35,7 @@ Java の型を表す文字列(Signature String)に対して iterate 処理する
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/signature.hpp))
     class SignatureIterator: public ResourceObj {
 ```
@@ -45,7 +45,7 @@ Java の型を表す文字列(Signature String)に対して iterate 処理する
 do_array() メソッド等をオーバーライドしたサブクラスを作ればいい.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/signature.hpp))
     // SignatureIterators iterate over a Java signature (or parts of it).
     // (Syntax according to: "The Java Virtual Machine Specification" by
@@ -81,7 +81,7 @@ SignatureIterator クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/signature.hpp))
     // Specialized SignatureIterators: Used to compute signature specific values.
     
@@ -92,7 +92,7 @@ SignatureIterator クラスのサブクラスの1つ.
 使用する際には, type_name() メソッドをオーバーライドしたサブクラスを作ればいい.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/signature.hpp))
       virtual void type_name(const char* name)   = 0;
 ```
@@ -101,7 +101,7 @@ SignatureIterator クラスのサブクラスの1つ.
 各 do_*() メソッドでは, その型名を表す文字列を引数として type_name() が呼び出される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/signature.hpp))
       void do_bool()                       { type_name("jboolean"); }
       void do_char()                       { type_name("jchar"   ); }
@@ -121,7 +121,7 @@ SignatureIterator クラスのサブクラスの1つ.
 (しかもこいつは #ifndef PRODUCT でないと定義されないデバッグ用(開発時用)のクラス...).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodOop.cpp))
     #ifndef PRODUCT
     class SignatureTypePrinter : public SignatureTypeNames {
@@ -145,7 +145,7 @@ SignatureIterator クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/signature.hpp))
     class SignatureInfo: public SignatureIterator {
 ```
@@ -154,7 +154,7 @@ SignatureIterator クラスのサブクラスの1つ.
 使用する際には, set() メソッドをオーバーライドしたサブクラスを作ればいい.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/signature.hpp))
       virtual void set(int size, BasicType type) = 0;
 ```
@@ -163,7 +163,7 @@ SignatureIterator クラスのサブクラスの1つ.
 各 do_*() メソッドでは, その型を表す定数と型の大きさを引数として set() が呼び出される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/signature.hpp))
       void do_bool  ()                     { set(T_BOOLEAN_size, T_BOOLEAN); }
       void do_char  ()                     { set(T_CHAR_size   , T_CHAR   ); }
@@ -193,7 +193,7 @@ SignatureInfo クラスの具象サブクラスの1つ.
 メソッド型を表す Signature String を渡すと, 引数の合計サイズを計算してくれる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/signature.hpp))
     // Specialized SignatureIterator: Used to compute the argument size.
     
@@ -225,7 +225,7 @@ SignatureInfo クラスの具象サブクラスの1つ.
 メソッド型を表す Signature String を渡すと, 引数の個数を計算してくれる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/signature.hpp))
     class ArgumentCount: public SignatureInfo {
 ```
@@ -256,7 +256,7 @@ SignatureInfo クラスの具象サブクラスの1つ.
 メソッド型を表す Signature String を渡すと, 返値の型を取得してくれる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/signature.hpp))
     // Specialized SignatureIterator: Used to compute the result type.
     
@@ -295,7 +295,7 @@ SignatureIterator クラスの具象サブクラスの1つ.
 メソッド型を表す Signature String を渡すと, それに対するハッシュ値(finger print)を計算してくれる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/signature.hpp))
     // Fingerprinter computes a unique ID for a given method. The ID
     // is a bitvector characterizing the methods signature (incl. the receiver).
@@ -316,7 +316,7 @@ SignatureIterator クラスの具象サブクラスの1つ.
 * SignatureHandlerLibrary::add()
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/interpreterRuntime.cpp))
     void SignatureHandlerLibrary::add(methodHandle method) {
     ...
@@ -333,7 +333,7 @@ SignatureIterator クラスの具象サブクラスの1つ.
 * jni_invoke_static()
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jni.cpp))
     static void jni_invoke_static(JNIEnv *env, JavaValue* result, jobject receiver, JNICallType call_type, jmethodID method_id, JNI_ArgumentPusher *args, TRAPS) {
     ...
@@ -344,7 +344,7 @@ SignatureIterator クラスの具象サブクラスの1つ.
 * jni_invoke_nonstatic()
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jni.cpp))
     static void jni_invoke_nonstatic(JNIEnv *env, JavaValue* result, jobject receiver, JNICallType call_type, jmethodID method_id, JNI_ArgumentPusher *args, TRAPS) {
     ...
@@ -359,7 +359,7 @@ SignatureIterator クラスの具象サブクラスの1つ.
 ハッシュ値の大きさは 64bit (uint64_t) なので, 内部に含まれる型が 16 個以下であれば一意な finger print になることが保証される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/signature.hpp))
       void do_bool()    { _fingerprint |= (((uint64_t)bool_parm) << _shift_count); _shift_count += parameter_feature_size; }
       void do_char()    { _fingerprint |= (((uint64_t)char_parm) << _shift_count); _shift_count += parameter_feature_size; }
@@ -397,7 +397,7 @@ SignatureIterator クラスのサブクラスの1つ.
 bool や char が pass_int() に引き渡されたり, long や double の場合は _offset が２つ増えたりする.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/signature.hpp))
     // Specialized SignatureIterator: Used for native call purposes
     
@@ -408,7 +408,7 @@ bool や char が pass_int() に引き渡されたり, long や double の場合
 使用する際には, pass_*() メソッドをオーバーライドしたサブクラスを作ればいい.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/signature.hpp))
       virtual void pass_int()              = 0;
       virtual void pass_long()             = 0;
@@ -426,7 +426,7 @@ bool や char が pass_int() に引き渡されたり, long や double の場合
 _offset フィールドと _jni_offset フィールドを適切に増加させる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/signature.hpp))
       void do_bool  ()                     { pass_int();    _jni_offset++; _offset++;       }
       void do_char  ()                     { pass_int();    _jni_offset++; _offset++;       }
@@ -452,7 +452,7 @@ _offset フィールドと _jni_offset フィールドを適切に増加させ�
 なお, _offset フィールドと _jni_offset フィールドは, それぞれ以下のような値を格納するフィールド.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/signature.hpp))
     // We need separate JNI and Java offset values because in 64 bit mode,
     // the argument offsets are not in sync with the Java stack.
@@ -479,7 +479,7 @@ SignatureIterator のようにサブクラスを作ってメソッドをオー�
 next() メソッドで次の要素を追っていく.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/signature.hpp))
     // Handy stream for iterating over signature
     
@@ -491,7 +491,7 @@ next() メソッドで次の要素を追っていく.
 実際に使用する際にはこんな感じになる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/nmethod.cpp))
             for (SignatureStream ss(m->signature()); !ss.at_return_type(); ss.next()) {
               BasicType t = ss.type();
@@ -518,7 +518,7 @@ ClassVerifier クラス内で使用される補助クラス.
 (このクラスは AllStatic ではないが (というか何故か StackObj になっているが) static な定義しか持たない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/signature.hpp))
     class SignatureVerifier : public StackObj {
 ```
@@ -536,7 +536,7 @@ ClassVerifier クラス内で使用される補助クラス.
 (なお, is_valid_signature() は現状どこからも使用されていない)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/signature.hpp))
       public:
         // Returns true if the symbol is valid method or type signature

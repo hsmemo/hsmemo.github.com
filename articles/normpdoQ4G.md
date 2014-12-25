@@ -24,7 +24,7 @@ TemplateInterpreterGenerator クラスもしくは CppInterpreterGenerator ク�
 InterpreterGenerator クラスとして使用されている模様 (See: [here](no7882AgC.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/interpreterGenerator.hpp))
     // This file contains the platform-independent parts
     // of the interpreter generator.
@@ -45,7 +45,7 @@ InterpreterGenerator の機能はほとんどが cpu 依存なので, share/ 以
 (cpu/ 以下のファイルを #include しているだけ).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/interpreterGenerator.hpp))
     InterpreterGenerator(StubQueue* _code);
     

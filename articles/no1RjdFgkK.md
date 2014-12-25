@@ -36,7 +36,7 @@ OopsInGenClosure::do_barrier() を呼び出すようにしないといけない,
 
 また, do_oop() がオーバーライドできていないためこのクラス自体は abstract class, とのこと.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/genOopClosures.hpp))
     // Closure for iterating roots from a particular generation
     // Note: all classes deriving from this MUST call this do_barrier
@@ -64,7 +64,7 @@ GenCollectedHeap に対する Minor GC 処理で使用される Closure クラ�
 さらに元の場所にフォワーディングポインタを埋める処理を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/genOopClosures.hpp))
     // Closure for scanning DefNewGeneration.
     //
@@ -104,7 +104,7 @@ DefNewGeneration 用の Minor GC 処理で使われるクロージャークラ�
 さらに元の場所にフォワーディングポインタを埋める処理を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/genOopClosures.hpp))
     // Closure for scanning DefNewGeneration.
     //
@@ -141,7 +141,7 @@ Filtering_DCTOC クラス(とそのサブクラス)の処理で使用される�
 「指定した OopClosure の効果をあるアドレス以下の範囲のみに限定したい」という場合に使用される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/genOopClosures.hpp))
     class FilteringClosure: public OopClosure {
 ```
@@ -173,7 +173,7 @@ Filtering_DCTOC::walk_mem_region_with_cl() が引数として FilteringClosure �
 ただし, 処理対象のアドレスが (同じくコンストラクタ引数で渡された) boundary を超えていれば呼び出さない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/genOopClosures.hpp))
       FilteringClosure(HeapWord* boundary, OopClosure* cl) :
 ```
@@ -196,7 +196,7 @@ weak reference を処理する為に使われる.
 なお, 行う処理の内容は ScanClosure によく似ているが, 
 こちらは OopsInGenClosure ではなく OopClosure のサブクラスになっている.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/genOopClosures.hpp))
     // Closure for scanning DefNewGeneration's weak references.
     // NOTE: very much like ScanClosure but not derived from
@@ -215,7 +215,7 @@ DefNewGeneration::collect(), 及び ParNewGeneration::collect() 内で(のみ)�
 ただし, このクラスの場合は do_oop() の最後に OopsInGenClosure::do_barrier() を呼び出さない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/genOopClosures.inline.hpp))
     // Note similarity to ScanClosure; the difference is that
     // the barrier set is taken care of outside this closure.
@@ -236,7 +236,7 @@ See: [here](../doxygen/classScanWeakRefClosure.html) for details
 指定のメモリ領域中に invalid な oop が無いことを確かめるための Closure.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/genOopClosures.hpp))
     class VerifyOopClosure: public OopClosure {
 ```
@@ -255,7 +255,7 @@ oopDesc::is_oop_or_null() を呼んで invalid かどうかを確認している
 (false を返す場合は invalid oop).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/genOopClosures.hpp))
       template <class T> inline void do_oop_work(T* p) {
         oop obj = oopDesc::load_decode_heap_oop(p);

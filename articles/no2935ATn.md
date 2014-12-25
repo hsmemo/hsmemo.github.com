@@ -233,7 +233,7 @@ See: [here](no28916koC.html) for details
   * SO_CodeCache
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/sharedHeap.hpp))
       // Invoke the "do_oop" method the closure "roots" on all root locations.
       // If "collecting_perm_gen" is false, then roots that may only contain

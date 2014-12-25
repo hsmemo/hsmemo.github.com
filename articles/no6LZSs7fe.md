@@ -10,7 +10,7 @@ title: HeapRegion クラス関連のクラス (HeapRegionDCTOC, G1OffsetTableCon
 G1GC では, メモリ領域は HeapRegion という部分領域に分けて管理される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegion.hpp))
     // A HeapRegion is the smallest piece of a G1CollectedHeap that
     // can be collected independently.
@@ -19,7 +19,7 @@ G1GC では, メモリ領域は HeapRegion という部分領域に分けて管�
 なお, HeapRegion は Space のサブクラスなのだが Space::initDirtyCardClosure() は呼び出すな, とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegion.hpp))
     // NOTE: Although a HeapRegion is a Space, its
     // Space::initDirtyCardClosure method must not be called.
@@ -59,7 +59,7 @@ G1GC ではこの部分領域単位で Garbage Collection 処理 (evacuation 処
 1つの HeapRegion オブジェクトが 1つの部分領域に対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegion.hpp))
     class HeapRegion: public G1OffsetTableContigSpace {
 ```
@@ -101,7 +101,7 @@ G1CollectedHeap の Minor GC 処理("Evacuation Pause" 処理)で使用される
 HeapRegion 用の DirtyCardToOopClosure クラス (See: DirtyCardToOopClosure).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegion.hpp))
     // A dirty card to oop closure for heap regions. It
     // knows how to get the G1 heap and how to use the bitmap
@@ -154,7 +154,7 @@ OffsetTableContigSpace とは違って time stamp 情報も持っているが (_
 とのこと (詳細は以下のコメント参照).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegion.hpp))
     // The complicating factor is that BlockOffsetTable diverged
     // significantly, and we need functionality that is only in the G1 version.
@@ -201,7 +201,7 @@ HeapRegion に対して何らかの処理を行う Closure クラスの基底ク
 (そして, サブクラスは大量にある...).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegion.hpp))
     // HeapRegionClosure is used for iterating over regions.
     // Terminates the iteration when the "doHeapRegion" method returns "true".
@@ -212,7 +212,7 @@ HeapRegion に対して何らかの処理を行う Closure クラスの基底ク
 HeapRegion を処理する doHeapRegion() メソッドを備えている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegion.hpp))
       // Typically called on each region until it returns true.
       virtual bool doHeapRegion(HeapRegion* r) = 0;
@@ -231,7 +231,7 @@ See: [here](../doxygen/classHeapRegionClosure.html) for details
 デバッグ用(開発時用)のクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegion.cpp))
     class VerifyLiveClosure: public OopClosure {
 ```
@@ -256,7 +256,7 @@ G1CollectedHeap の Major GC 処理で使用される Closure クラス (See: [h
 初めに選んだ HeapRegion が Humongous でしかも生きていた場合に, HeapRegion を選び直す処理で使用される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegion.cpp))
     class NextCompactionHeapRegionClosure: public HeapRegionClosure {
 ```

@@ -8,7 +8,7 @@ title: GC に関係した諸々のユーティリティ・クラス (AdaptiveWei
 
 これらは, Garbage Collection 処理用の諸々のユーティリティ・クラス (See: [here](no3718kvd.html) for details).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gcUtil.hpp))
     // Catch-all file for utility classes
 ```
@@ -35,7 +35,7 @@ Garbage Collection 処理用のユーティリティ・クラス.
 (例えば「これまでの GC で掛かった処理時間の平均を出したい」といった際に使用されている).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gcUtil.hpp))
     // A weighted average maintains a running, weighted average
     // of some float value (templates would be handy here if we
@@ -57,14 +57,14 @@ Garbage Collection 処理用のユーティリティ・クラス.
 3. それまでの重み付き平均が知りたくなったら, AdaptiveWeightedAverage::average() で取得する
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gcUtil.hpp))
       // Update data with a new sample.
       void sample(float new_sample);
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gcUtil.hpp))
       float    average() const       { return _average;       }
 ```
@@ -80,7 +80,7 @@ AdaptiveWeightedAverage が計算する重み付き平均は以下のように�
   * sample は, 直近の値
   * avg は, それまでの値に基づく重み付き平均
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gcUtil.hpp))
       static inline float exp_avg(float avg, float sample,
                                    unsigned int weight) {
@@ -94,7 +94,7 @@ AdaptiveWeightedAverage が計算する重み付き平均は以下のように�
 
 (サンプル数が 100/weight に達するまでは, 代わりに 100/サンプル数 を重みとして用いる. つまり全てのサンプルを同じ重みで扱う)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gcUtil.cpp))
     float AdaptiveWeightedAverage::compute_adaptive_average(float new_sample,
                                                             float average) {
@@ -129,7 +129,7 @@ AdaptiveWeightedAverage のサブクラス.
 
 将来の値に対する予測の上限値を出すために使われる.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gcUtil.hpp))
     // A weighted average that includes a deviation from the average,
     // some multiple of which is added to the average.
@@ -147,7 +147,7 @@ AdaptiveWeightedAverage のサブクラス.
    水増しした平均値が知りたくなったら, AdaptivePaddedAverage::padded_average() で取得する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gcUtil.hpp))
       float padded_average() const         { return _padded_avg; }
 ```
@@ -164,7 +164,7 @@ AdaptivePaddedAverage が計算する水増し平均は以下のようになる
   * deviation は, 「サンプル点と重み付き平均の差(の絶対値)」を
     全てのサンプル点に対して (AdaptiveWeightedAverage の重み付き平均計算と同じやり方で) 平均化したもの.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gcUtil.cpp))
     void AdaptivePaddedAverage::sample(float new_sample) {
       // Compute new adaptive weighted average based on new sample.
@@ -198,7 +198,7 @@ AdaptivePaddedAverage とほぼ同じだが水増しの計算方法が異なり,
 
 (コメントによると, 0 を計算に入れると水増しした平均値が急激に変化することがあるのでそれを防ぐため, とのこと)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gcUtil.hpp))
     // A weighted average that includes a deviation from the average,
     // some multiple of which is added to the average.
@@ -223,7 +223,7 @@ AdaptivePaddedAverage とほぼ同じだが水増しの計算方法が異なり,
 AdaptivePaddedAverage::sample() とほぼ同様.
 ただし, 「サンプル点と重み付き平均の差(の絶対値)」は, サンプル点の値が 0 でないものについてのみ計算する.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gcUtil.cpp))
     void AdaptivePaddedNoZeroDevAverage::sample(float new_sample) {
       // Compute our parent classes sample information
@@ -259,7 +259,7 @@ Garbage Collection 処理用のユーティリティ・クラス.
 (つまり「切片(intercept)」と「傾き(slope)」の値を推定するクラス. `y = intercept + slope * x` という形の式の当てはめを行う)
         
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gcUtil.hpp))
     // Use a least squares fit to a set of data to generate a linear
     // equation.
@@ -282,7 +282,7 @@ Garbage Collection 処理用のユーティリティ・クラス.
    それぞれ傾きが正/負の時に true を, 逆の時に false を返す.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gcUtil.hpp))
       void update(double x, double y);
       double y(double x);
@@ -308,7 +308,7 @@ Garbage Collection 処理用のユーティリティ・クラス.
 
 elapsedTimer を作業途中のあるスコープの中でだけ止めておきたい, という場合に使われる補助クラス(StackObjクラス).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gcUtil.hpp))
     class GCPauseTimer : StackObj {
 ```
@@ -317,7 +317,7 @@ elapsedTimer を作業途中のあるスコープの中でだけ止めておき�
 指定された elapsedTimer オブジェクトに対して, 
 コンストラクタで elapsedTimer::stop() を, デストラクタで elapsedTimer::start() を呼び出すだけ.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gcUtil.hpp))
       GCPauseTimer(elapsedTimer* timer) {
         _timer = timer;

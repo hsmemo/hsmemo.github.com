@@ -12,7 +12,7 @@ title: 制御構造(Control Flow Graph)に関する高レベル中間語(Ideal)�
 なお, これらのクラスは以下のような継承関係を持つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
     class Node;
     class   RegionNode;
@@ -78,7 +78,7 @@ Node クラスの具象サブクラスの1つ.
 結果として RegionNode は主に If の合流点 (IfTrue や IfFalse の下) と loop の先頭箇所くらいにしか出てこない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
     // The class of RegionNodes, which can be mapped to basic blocks in the
     // program.  Their inputs point to Control sources.  PhiNodes (described
@@ -97,7 +97,7 @@ Node クラスの具象サブクラスの1つ.
 * 2番目以降の入力Node : predecessor blocks にあたる Node
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
       // Node layout (parallels PhiNode):
       enum { Region,                // Generally points to self.
@@ -106,7 +106,7 @@ Node クラスの具象サブクラスの1つ.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
       RegionNode( uint required ) : Node(required) {
         init_class_id(Class_Region);
@@ -140,7 +140,7 @@ SSA(静的単一代入形式) の φ 関数を表す Node.
  それぞれの入力ノードが RegionNode の対応する predecessor blocks からの値を示す)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
     // PhiNodes merge values from different Control paths.  Slot 0 points to the
     // controlling RegionNode.  Other slots map 1-for-1 with incoming control flow
@@ -158,7 +158,7 @@ SSA(静的単一代入形式) の φ 関数を表す Node.
 PhiNode にもそのパスに対応する値がセットされている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/library_call.cpp))
         // Make the merge point
         RegionNode* result_rgn = new (C, 4) RegionNode(4);
@@ -183,7 +183,7 @@ PhiNode にもそのパスに対応する値がセットされている)
 * 2番目以降の入力Node : merge 対象のデータ (= φ 関数の引数)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
       // Node layout (parallels RegionNode):
       enum { Region,                // Control input is the Phi's region.
@@ -192,7 +192,7 @@ PhiNode にもそのパスに対応する値がセットされている)
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
       PhiNode( Node *r, const Type *t, const TypePtr* at = NULL,
                const int iid = TypeOopPtr::InstanceTop,
@@ -233,7 +233,7 @@ goto (無条件分岐) を表す.
 なので, 実際には GotoNode 自体が使われることはない (使われるのは GotoNode に対応する MachNode だけ).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
     // GotoNodes perform direct branches.
     class GotoNode : public Node {
@@ -245,7 +245,7 @@ goto (無条件分岐) を表す.
 basic block の間に挿入されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/block.cpp))
     uint PhaseCFG::build_cfg() {
     ...
@@ -267,7 +267,7 @@ PhaseCFG::PhaseCFG() 内で(のみ)生成されている.
  これは実際に使う段階で正しい飛び先に設定し直される.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/block.cpp))
     PhaseCFG::PhaseCFG( Arena *a, RootNode *r, Matcher &m ) :
     ...
@@ -282,7 +282,7 @@ PhaseCFG::PhaseCFG() 内で(のみ)生成されている.
 入力ノードは control input のみ. control input は GotoNode の飛び元を示す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
       GotoNode( Node *control ) : Node(control) {
         init_flags(Flag_is_Goto);
@@ -307,7 +307,7 @@ MultiNode クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
     // This class defines a MultiBranchNode, a MultiNode which yields multiple
     // control values. These are distinguished from other types of MultiNodes
@@ -319,7 +319,7 @@ MultiNode クラスのサブクラスの1つ.
 このクラス自体は入力ノードを規定しない (= 入力ノードはない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
       MultiBranchNode( uint required ) : MultiNode(required) {
         init_class_id(Class_MultiBranch);
@@ -350,7 +350,7 @@ boolean 値に基づく 2分岐を表す Node.
 (なお, どちらに分岐しやすいかといった情報も保持している)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
     // Output selected Control, based on a boolean test
     class IfNode : public MultiBranchNode {
@@ -363,7 +363,7 @@ boolean 値に基づく 2分岐を表す Node.
 * 2番目の入力Node : 分岐判断に使用する bool 値
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
       IfNode( Node *control, Node *b, float p, float fcnt )
         : MultiBranchNode(2), _prob(p), _fcnt(fcnt) {
@@ -381,7 +381,7 @@ IfNode はコンストラクタで 2種類の分岐予測のヒント情報を�
 * float _fcnt
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
       float _prob;                  // Probability of true path being taken.
       float _fcnt;                  // Frequency counter
@@ -390,7 +390,7 @@ IfNode はコンストラクタで 2種類の分岐予測のヒント情報を�
 これらは ...(#TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
       // Degrees of branch prediction probability by order of magnitude:
       // PROB_UNLIKELY_1e(N) is a 1 in 1eN chance.
@@ -479,7 +479,7 @@ ProjNode クラスの具象サブクラスの1つ.
 (ところで JProjNode との違いは?? こちらは abstract class ではないが... #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
     // control projection for node that produces multiple control-flow paths
     class CProjNode : public ProjNode {
@@ -502,7 +502,7 @@ PhaseIdealLoop::build_and_optimize()
 入力ノードは control input のみ. control input は処理対象の MultiNode を指す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
       CProjNode( Node *ctrl, uint idx ) : ProjNode(ctrl,idx) {}
 ```
@@ -523,7 +523,7 @@ CProjNode クラスのサブクラスの1つ.
 IfNode から条件が true だった場合の control flow を取り出す Node.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
     class IfTrueNode : public CProjNode {
 ```
@@ -532,7 +532,7 @@ IfNode から条件が true だった場合の control flow を取り出す Node
 入力ノードは control input のみ. control input は対応する IfNode を示す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
       IfTrueNode( IfNode *ifnode ) : CProjNode(ifnode,1) {
         init_class_id(Class_IfTrue);
@@ -554,7 +554,7 @@ CProjNode クラスのサブクラスの1つ.
 IfNode から条件が false だった場合の control flow を取り出す Node.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
     class IfFalseNode : public CProjNode {
 ```
@@ -563,7 +563,7 @@ IfNode から条件が false だった場合の control flow を取り出す Nod
 入力ノードは control input のみ. control input は対応する IfNode を示す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
       IfFalseNode( IfNode *ifnode ) : CProjNode(ifnode,0) {
         init_class_id(Class_IfFalse);
@@ -590,7 +590,7 @@ index を受け取り, 対応する飛び先に分岐する. index が範囲外�
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
     // Build an indirect branch table.  Given a control and a table index,
     // control is passed to the Projection matching the table index.  Used to
@@ -606,7 +606,7 @@ index を受け取り, 対応する飛び先に分岐する. index が範囲外�
 * 2番目の入力Node : 分岐判断に使用する int 値 (index)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
       PCTableNode( Node *ctrl, Node *idx, uint size ) : MultiBranchNode(2), _size(size) {
         init_class_id(Class_PCTable);
@@ -630,7 +630,7 @@ PCTableNode クラスの具象サブクラスの1つ.
 lookupswitch/tableswitch バイトコードを表現するための Node.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
     // Indirect branch.  Uses PCTable above to implement a switch statement.
     // It emits as a table load and local branch.
@@ -658,7 +658,7 @@ Parse::do_lookupswitch()
 * 2番目の入力Node : 分岐判断に使用する int 値 (index)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
       JumpNode( Node* control, Node* switch_val, uint size) : PCTableNode(control, switch_val, size) {
         init_class_id(Class_Jump);
@@ -685,7 +685,7 @@ ProjNode クラスのサブクラスの1つ.
 (ところで CProjNode との違いは?? こちらは lookupswitch/tableswitch 用に当たるようだが...?? #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
     // jump projection for node that produces multiple control-flow paths
     class JProjNode : public ProjNode {
@@ -695,7 +695,7 @@ ProjNode クラスのサブクラスの1つ.
 入力ノードは control input のみ. control input は処理対象の MultiNode を指す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
       JProjNode( Node* ctrl, uint idx ) : ProjNode(ctrl,idx) {}
 ```
@@ -716,7 +716,7 @@ JProjNode クラスの具象サブクラスの1つ.
 JumpNode から control flow を 1つ取り出す Node.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
     class JumpProjNode : public JProjNode {
 ```
@@ -740,7 +740,7 @@ Parse::do_lookupswitch()
 (正確には, control input は型の上ではどんな Node も設定可能になっているが, 実際には JumpNode しか設定されない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
       JumpProjNode(Node* jumpnode, uint proj_no, int dest_bci, int switch_val)
         : JProjNode(jumpnode, proj_no), _dest_bci(dest_bci), _proj_no(proj_no), _switch_val(switch_val) {
@@ -768,7 +768,7 @@ PCTableNode クラスの具象サブクラスの1つ.
 (なおこのクラスはテーブルを作るだけ. テーブルのルックアップと分岐は RethrowNode が行う).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
     // Helper node to fork exceptions.  "Catch" catches any exceptions thrown by
     // a just-prior call.  Looks like a PCTableNode but emits no code - just the
@@ -790,7 +790,7 @@ PCTableNode クラスの具象サブクラスの1つ.
 * 2番目の入力Node : I/O state (#TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
       CatchNode( Node *ctrl, Node *idx, uint size ) : PCTableNode(ctrl,idx,size){
         init_class_id(Class_Catch);
@@ -812,7 +812,7 @@ CProjNode クラスのサブクラスの1つ.
 CatchNode 中の飛び先を 1つ取り出す Node (= 例外ハンドラでのキャッチを表す Node).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
     // CatchProjNode controls which exception handler is targetted after a call.
     // It is passed in the bci of the target handler, or no_handler_bci in case
@@ -831,7 +831,7 @@ CatchNode 中の飛び先を 1つ取り出す Node (= 例外ハンドラでの�
 (正確には, control input は型の上ではどんな Node も設定可能になっているが, 実際には CatchNode しか設定されない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
       CatchProjNode(Node* catchnode, uint proj_no, int handler_bci)
         : CProjNode(catchnode, proj_no), _handler_bci(handler_bci) {
@@ -856,7 +856,7 @@ TypeNode クラスの具象サブクラスの1つ.
 CatchProjNode とセットで使用される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
     // Helper node to create the exception coming back from a call
     class CreateExNode : public TypeNode {
@@ -876,7 +876,7 @@ CatchProjNode とセットで使用される.
 * 2番目の入力Node : I/O state (#TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
       CreateExNode(const Type* t, Node* control, Node* i_o) : TypeNode(t, 2) {
         init_req(0, control);
@@ -902,7 +902,7 @@ MultiBranchNode クラスの具象サブクラスの1つ.
 CFG をとりあえず構築するための Node, である模様 (#TODO).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
     // The never-taken branch.  Used to give the appearance of exiting infinite
     // loops to those algorithms that like all paths to be reachable.  Encodes
@@ -924,7 +924,7 @@ PhaseIdealLoop::build_and_optimize()
 入力ノードは control input のみ. control input は NeverBranchNode の飛び元を示す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/cfgnode.hpp))
       NeverBranchNode( Node *ctrl ) : MultiBranchNode(1) { init_req(0,ctrl); }
 ```

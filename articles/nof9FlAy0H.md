@@ -9,7 +9,7 @@ title: 処理時間計測用のユーティリティ・クラス (elapsedTimer, 
 これらは, 処理時間を計測するためのユーティリティ・クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/timer.hpp))
     // Timers for simple measurement.
 ```
@@ -30,7 +30,7 @@ title: 処理時間計測用のユーティリティ・クラス (elapsedTimer, 
 処理時間の簡単な計測処理を行うためのユーティリティ・クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/timer.hpp))
     class elapsedTimer VALUE_OBJ_CLASS_SPEC {
 ```
@@ -51,7 +51,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 現状の実装では os::elapsed_counter() で時間を取得している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/timer.cpp))
     void elapsedTimer::start() {
       if (!_active) {
@@ -69,12 +69,12 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/timer.hpp))
       jlong ticks() const        { return _counter; }
 ```
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/timer.cpp))
     double elapsedTimer::seconds() const {
       double count = (double) _counter;
@@ -89,7 +89,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/timer.cpp))
     jlong elapsedTimer::active_ticks() const {
       if (!_active) {
@@ -113,7 +113,7 @@ See: [here](../doxygen/classelapsedTimer.html) for details
 処理時間の簡単な計測処理を行うためのユーティリティ・クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/timer.hpp))
     // TimeStamp is used for recording when an event took place.
     class TimeStamp VALUE_OBJ_CLASS_SPEC {
@@ -137,7 +137,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 現状の実装では os::elapsed_counter() で時間を取得している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/timer.cpp))
     void TimeStamp::update_to(jlong ticks) {
       _counter = ticks;
@@ -151,7 +151,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/timer.cpp))
     double TimeStamp::seconds() const {
       assert(is_updated(), "must not be clear");
@@ -195,7 +195,7 @@ See: [here](../doxygen/classTimeStamp.html) for details
 指定のログファイル(デフォルトでは tty)に出力される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/timer.hpp))
     // TraceTime is used for tracing the execution time of a block
     // Usage:
@@ -220,7 +220,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 (現状の実装では elapsedTimer を用いて時間を取得している).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/timer.hpp))
       elapsedTimer  _t;         // timer
 ```
@@ -238,7 +238,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
  このオブジェクトによる処理(計測処理／出力処理)は全て省略される)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/timer.cpp))
     TraceTime::TraceTime(const char* title,
                          bool doit,
@@ -304,7 +304,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 なお, 一時的にタイマーを止めたり再会させたりすることもできる模様.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/timer.hpp))
       // Activation
       void suspend()  { if (_active) _t.stop();  }
@@ -329,7 +329,7 @@ See: [here](../doxygen/classTraceTime.html) for details
 計測結果は, 指定されたログファイル(デフォルトでは tty)に出力される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/timer.hpp))
     class TraceCPUTime: public StackObj {
 ```
@@ -354,7 +354,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
  このオブジェクトによる処理(計測処理／出力処理)は全て省略される)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/timer.cpp))
     TraceCPUTime::TraceCPUTime(bool doit,
                    bool print_cr,

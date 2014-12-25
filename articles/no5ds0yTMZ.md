@@ -23,7 +23,7 @@ title: MutableNUMASpace およびその補助クラス (MutableNUMASpace, Mutabl
 NUMA 上での配置を考慮した MutableSpace クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/mutableNUMASpace.hpp))
     class MutableNUMASpace : public MutableSpace {
 ```
@@ -43,7 +43,7 @@ PSYoungGen::initialize_work() 内で(のみ)生成されている.
 UseNUMA オプションが指定されている場合は MutableNUMASpace が生成され, そうでない場合は MutableSpace が生成される)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psYoungGen.cpp))
     void PSYoungGen::initialize_work() {
     ...
@@ -85,7 +85,7 @@ UseNUMA オプションが指定されている場合は MutableNUMASpace が生
   (この方式は, 負荷が高くてたくさんのプロセスがメモリを奪い合うような状況で特に有効だと判明している)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/mutableNUMASpace.hpp))
     /*
      *    The NUMA-aware allocator (MutableNUMASpace) is basically a modification
@@ -131,7 +131,7 @@ MutableNUMASpace クラス内で使用される補助クラス.
 
 それぞれの Locality Group を表すクラス.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/mutableNUMASpace.hpp))
       class LGRPSpace : public CHeapObj {
 ```

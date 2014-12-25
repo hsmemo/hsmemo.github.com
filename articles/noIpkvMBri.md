@@ -34,7 +34,7 @@ java.util.concurrent.locks.LockSupport.park(),
 とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/park.hpp))
     /*
      * Per-thread blocking support for JSR166. See the Java-level
@@ -56,7 +56,7 @@ java.util.concurrent.locks.LockSupport.park(),
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/park.hpp))
     class Parker : public os::PlatformParker {
 ```

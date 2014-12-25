@@ -31,7 +31,7 @@ title: NMethodSweeper クラス (NMethodSweeper, 及びその補助クラス(Swe
 zombie 化された nmethod, 及びそれらを指している Inline cache, 等.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sweeper.hpp))
     // An NmethodSweeper is an incremental cleaner for:
     //    - cleanup inline caches
@@ -112,13 +112,13 @@ NMethodSweeper クラス内で使用される補助クラス.
 NMethodSweeper クラスに関するログ情報の記録／出力を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sweeper.cpp))
     #ifdef ASSERT
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sweeper.cpp))
     // Sweeper logging code
     class SweeperRecord {
@@ -146,7 +146,7 @@ SWEEP() マクロ
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sweeper.cpp))
     #define SWEEP(nm) record_sweep(nm, __LINE__)
 ```
@@ -174,7 +174,7 @@ NMethodSweeper クラス内で使用される補助クラス.
 を見つけたら印を入れる Closure クラス
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sweeper.cpp))
     class MarkActivationClosure: public CodeBlobClosure {
 ```
@@ -211,7 +211,7 @@ NMethodSweeper クラス内で使用される補助クラス.
 処理中の nmethod がアンロードされないようにしておくためのクラス(StackObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sweeper.cpp))
     class NMethodMarker: public StackObj {
 ```
@@ -224,7 +224,7 @@ NMethodSweeper::process_nmethod() 内で(のみ)使用されている.
 デストラクタで NULL に戻しているだけ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sweeper.cpp))
       NMethodMarker(nmethod* nm) {
         _thread = CompilerThread::current();

@@ -9,7 +9,7 @@ title: デバッグ情報関連のクラス (ScopeValue, LocationValue, ObjectVa
 #Under Construction
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/debugInfo.hpp))
     // Classes used for serializing debugging information.
     // These abstractions are introducted to provide symmetric
@@ -44,7 +44,7 @@ title: デバッグ情報関連のクラス (ScopeValue, LocationValue, ObjectVa
 (#Under Construction)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/debugInfo.hpp))
     class ScopeValue: public ResourceObj {
 ```
@@ -60,7 +60,7 @@ See: [here](../doxygen/classScopeValue.html) for details
 (#Under Construction)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/debugInfo.hpp))
     // A Location value describes a value in a given location; i.e. the corresponding
     // logical entity (e.g., a method temporary) lives in this location.
@@ -79,7 +79,7 @@ See: [here](../doxygen/classLocationValue.html) for details
 (#Under Construction)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/debugInfo.hpp))
     // An ObjectValue describes an object eliminated by escape analysis.
     
@@ -97,7 +97,7 @@ See: [here](../doxygen/classObjectValue.html) for details
 (#Under Construction)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/debugInfo.hpp))
     // A ConstantIntValue describes a constant int; i.e., the corresponding logical entity
     // is either a source constant or its computation has been constant-folded.
@@ -116,7 +116,7 @@ See: [here](../doxygen/classConstantIntValue.html) for details
 (#Under Construction)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/debugInfo.hpp))
     class ConstantLongValue: public ScopeValue {
 ```
@@ -132,7 +132,7 @@ See: [here](../doxygen/classConstantLongValue.html) for details
 (#Under Construction)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/debugInfo.hpp))
     class ConstantDoubleValue: public ScopeValue {
 ```
@@ -148,7 +148,7 @@ See: [here](../doxygen/classConstantDoubleValue.html) for details
 (#Under Construction)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/debugInfo.hpp))
     // A ConstantOopWriteValue is created by the compiler to
     // be written as debugging information.
@@ -167,7 +167,7 @@ See: [here](../doxygen/classConstantOopWriteValue.html) for details
 (#Under Construction)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/debugInfo.hpp))
     // A ConstantOopReadValue is created by the VM when reading
     // debug information
@@ -186,7 +186,7 @@ See: [here](../doxygen/classConstantOopReadValue.html) for details
 (#Under Construction)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/debugInfo.hpp))
     // MonitorValue describes the pair used for monitor_enter and monitor_exit.
     
@@ -204,7 +204,7 @@ See: [here](../doxygen/classMonitorValue.html) for details
 (#Under Construction)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/debugInfo.hpp))
     // DebugInfoReadStream specializes CompressedReadStream for reading
     // debugging information. Used by ScopeDesc.
@@ -223,7 +223,7 @@ See: [here](../doxygen/classDebugInfoReadStream.html) for details
 (#Under Construction)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/debugInfo.hpp))
     // DebugInfoWriteStream specializes CompressedWriteStream for
     // writing debugging information. Used by ScopeDescRecorder.

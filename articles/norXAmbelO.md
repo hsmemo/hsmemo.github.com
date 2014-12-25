@@ -25,14 +25,14 @@ title: OSThread クラス関連のクラス (OSThread, OSThreadWaitState, OSThre
 1つの OSThread オブジェクトが 1つのスレッドに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/osThread.hpp))
     // The OSThread class holds OS-specific thread information.  It is equivalent
     // to the sys_thread_t structure of the classic JVM implementation.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/osThread.hpp))
     // I'd make OSThread a ValueObj embedded in Thread to avoid an indirection, but
     // the assembler test in java.cpp expects that it can install the OSThread of
@@ -40,7 +40,7 @@ title: OSThread クラス関連のクラス (OSThread, OSThreadWaitState, OSThre
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/osThread.hpp))
     class OSThread: public CHeapObj {
 ```
@@ -121,7 +121,7 @@ legacy code なので JavaThread の state で書き換えたい,
 とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/osThread.hpp))
     // The thread states represented by the ThreadState values are platform-specific
     // and are likely to be only approximate, because most OSes don't give you access
@@ -159,7 +159,7 @@ OSThread の状態(OSThread::_state)を作業途中のあるスコープの中�
 OBJECT_WAIT や CONDVAR_WAIT にしておきたい, という場合に使われる補助クラス(StackObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/osThread.hpp))
     // Utility class for use with condition variables:
     class OSThreadWaitState : public StackObj {
@@ -186,7 +186,7 @@ OBJECT_WAIT や CONDVAR_WAIT にしておきたい, という場合に使われ�
 デストラクタで (同じく OSThread::set_state() を呼んで) 元に戻している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/osThread.hpp))
       OSThreadWaitState(OSThread* osthread, bool is_object_wait) {
         _osthread  = osthread;
@@ -218,7 +218,7 @@ OSThread の状態(OSThread::_state)を作業途中のあるスコープの中�
 MONITOR_WAIT にしておきたい, という場合に使われる補助クラス(StackObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/osThread.hpp))
     // Utility class for use with contended monitors:
     class OSThreadContendState : public StackObj {
@@ -235,7 +235,7 @@ MONITOR_WAIT にしておきたい, という場合に使われる補助クラ�
 デストラクタで (同じく OSThread::set_state() を呼んで) 元に戻している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/osThread.hpp))
       OSThreadContendState(OSThread* osthread) {
         _osthread  = osthread;

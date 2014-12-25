@@ -43,7 +43,7 @@ Java レベルのメソッドと 1対1対応するような(論理的な)スタ�
 このクラスの代わりに vframe クラスを使用すればいい.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/frame.hpp))
     // A frame represents a physical stack frame (an activation).  Frames
     // can be C or Java frames, and the Java frames can be interpreted or
@@ -126,13 +126,13 @@ See: [here](../doxygen/classframe.html) for details
 warning を出力する Closure クラス)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/frame.hpp))
     # ifdef ENABLE_ZAP_DEAD_LOCALS
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/frame.hpp))
       class CheckValueClosure: public OopClosure {
 ```
@@ -151,7 +151,7 @@ frame クラスの _check_value フィールド (static フィールド) に(の
 現状では, ENABLE_ZAP_DEAD_LOCALS は #ifdef ASSERT 時かつ #ifdef COMPILER2 時にしか定義されない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/globalDefinitions.hpp))
     // Enable zap-a-lot if in debug version.
     
@@ -178,13 +178,13 @@ See: [here](../doxygen/classframe_1_1CheckValueClosure.html) for details
 誤って oop ではない値が格納されていないかどうかをチェックする Closure クラス
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/frame.hpp))
     # ifdef ENABLE_ZAP_DEAD_LOCALS
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/frame.hpp))
       class CheckOopClosure: public OopClosure {
 ```
@@ -204,7 +204,7 @@ frame クラスの _check_oop フィールド (static フィールド) に(の�
 現状では, ENABLE_ZAP_DEAD_LOCALS は #ifdef ASSERT 時かつ #ifdef COMPILER2 時にしか定義されない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/globalDefinitions.hpp))
     // Enable zap-a-lot if in debug version.
     
@@ -231,13 +231,13 @@ See: [here](../doxygen/classframe_1_1CheckOopClosure.html) for details
 zap 処理 (= 明示的に壊れた値を書き込むことで間違って使用した場合の検出を容易にする処理) を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/frame.hpp))
     # ifdef ENABLE_ZAP_DEAD_LOCALS
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/frame.hpp))
       class ZapDeadClosure: public OopClosure {
 ```
@@ -257,7 +257,7 @@ See: [here](no1904wHW.html) for details
 現状では, ENABLE_ZAP_DEAD_LOCALS は #ifdef ASSERT 時かつ #ifdef COMPILER2 時にしか定義されない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/globalDefinitions.hpp))
     // Enable zap-a-lot if in debug version.
     
@@ -284,13 +284,13 @@ See: [here](../doxygen/classframe_1_1ZapDeadClosure.html) for details
 レイアウトが正しいかどうかの確認, またはレイアウト情報の出力を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/frame.hpp))
     #ifdef ASSERT
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/frame.hpp))
     // A collection of described stack values that can print a symbolic
     // description of the stack memory.  Interpreter frame values can be
@@ -320,13 +320,13 @@ FrameValues クラス内で使用される補助クラス.
 1つの FrameValue オブジェクトが 1つの値に対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/frame.hpp))
     #ifdef ASSERT
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/frame.hpp))
     // A simple class to describe a location on the stack
     class FrameValue VALUE_OBJ_CLASS_SPEC {
@@ -349,7 +349,7 @@ GrowableArray 用のメモリ領域は FrameValues オブジェクトの生成�
 内部には以下の 4つの public フィールドのみを持つ (そしてメソッドはない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/frame.hpp))
       intptr_t* location;
       char* description;
@@ -370,7 +370,7 @@ See: [here](../doxygen/classFrameValue.html) for details
 指定したスレッドのスタックフレームをたどるためのイテレータクラス(StackObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/frame.hpp))
     // StackFrameStream iterates through the frames of a thread starting from
     // top most frame. It automatically takes care of updating the location of
@@ -434,7 +434,7 @@ Interpreter フレーム内(局所変数領域内／オペランドスタック�
 指定された OopClosure を適用する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/frame.cpp))
     /*
       The interpreter_frame_expression_stack_at method in the case of SPARC needs the
@@ -474,7 +474,7 @@ Safepoint 処理で停止した地点がメソッドの呼び出し点(invoke* �
  このクラスは Interpreter のフレーム用 (See: EntryFrameOopFinder, CompiledArgumentOopFinder))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/frame.cpp))
     class InterpretedArgumentOopFinder: public SignatureInfo {
 ```
@@ -504,7 +504,7 @@ Safepoint 処理で停止した地点がメソッドの呼び出し点(invoke* �
  (See: InterpretedArgumentOopFinder, CompiledArgumentOopFinder))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/frame.cpp))
     // Entry frame has following form (n arguments)
     //         +-----------+
@@ -517,7 +517,7 @@ Safepoint 処理で停止した地点がメソッドの呼び出し点(invoke* �
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/frame.cpp))
     // visits and GC's all the arguments in entry frame
     class EntryFrameOopFinder: public SignatureInfo {
@@ -547,7 +547,7 @@ Safepoint 処理で停止した地点がメソッドの呼び出し点(invoke* �
  このクラスは JIT 生成コードのフレーム用 (See: InterpretedArgumentOopFinder, EntryFrameOopFinder))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/frame.cpp))
     class CompiledArgumentOopFinder: public SignatureInfo {
 ```

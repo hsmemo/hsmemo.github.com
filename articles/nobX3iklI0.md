@@ -26,7 +26,7 @@ JavaThread (Mutator) と並行して GC 処理を行うための並行スレッ�
 concurrent な GC 処理を行うスレッドは ConcurrentGCThread のサブクラスとして実装される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/concurrentGCThread.hpp))
     class ConcurrentGCThread: public NamedThread {
 ```
@@ -58,7 +58,7 @@ See: [here](../doxygen/classConcurrentGCThread.html) for details
 複数の ConcurrentGCThread 間で同期を取るためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/concurrentGCThread.hpp))
     // A SuspendibleThreadSet is (obviously) a set of threads that can be
     // suspended.  A thread can join and later leave the set, and periodically
@@ -97,7 +97,7 @@ See: [here](../doxygen/classConcurrentGCThread.html) for details
    (SuspendibleThreadSet::resume_all() は, yield() でブロックしているスレッドを Monitor::notify_all() でたたき起こす)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/concurrentGCThread.hpp))
       // Add the current thread to the set.  May block if a suspension
       // is in progress.
@@ -119,7 +119,7 @@ See: [here](../doxygen/classConcurrentGCThread.html) for details
 #### インスタンスの格納場所(where its instances are stored)
 ConcurrentGCThread クラスの _sts フィールド (static フィールド) に(のみ)格納されている.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/concurrentGCThread.hpp))
       // All instances share this one set.
       static SuspendibleThreadSet _sts;
@@ -143,7 +143,7 @@ ConcurrentGCThread から Java のモニタを操作するための Thread ク�
 java.lang.ref の pending_list_lock を取得して ReferenceHandler の処理と排他する役割を担っている) (See: [here](no7882OK1.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/concurrentGCThread.hpp))
     // The SurrogateLockerThread is used by concurrent GC threads for
     // manipulating Java monitors, in particular, currently for
@@ -164,7 +164,7 @@ SurrogateLockerThread::make() 内で(のみ)生成されている (See: [here](n
   どちらに格納されるかは, 使用する GC アルゴリズムによって決まる (CMS なら ConcurrentMarkSweepThread, G1GC なら ConcurrentMarkThread).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/concurrentMarkSweep/concurrentMarkSweepThread.hpp))
     class ConcurrentMarkSweepThread: public ConcurrentGCThread {
     ...
@@ -172,7 +172,7 @@ SurrogateLockerThread::make() 内で(のみ)生成されている (See: [here](n
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMarkThread.hpp))
     class ConcurrentMarkThread: public ConcurrentGCThread {
     ...

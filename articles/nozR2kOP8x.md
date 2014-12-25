@@ -17,7 +17,7 @@ java.lang.ref.Reference (のサブクラス)のクラスオブジェクト用の
 これらは GC 時の扱いが通常の instanceKlass と異なるので特別扱いしている, とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/instanceRefKlass.hpp))
     // An instanceRefKlass is a specialized instanceKlass for Java
     // classes that are subclasses of java/lang/ref/Reference.

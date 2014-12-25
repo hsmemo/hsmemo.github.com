@@ -20,7 +20,7 @@ ELF ファイルの中身をパースするクラス.
 (なおコメントによると, エラー時に使用されるクラスなので上手く動かないことも想定して実装している, とのこと)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/elfFile.hpp))
     // On Solaris/Linux platforms, libjvm.so does contain all private symbols.
     // ElfFile is basically an elf file parser, which can lookup the symbol

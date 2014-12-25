@@ -15,7 +15,7 @@ title: GCCause クラス
 HotSpot 内部で起こりうる GC の発生原因に対して, それを一意に示す定数値を定義した名前空間(AllStatic クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_interface/gcCause.hpp))
     //
     // This class exposes implementation details of the various
@@ -31,7 +31,7 @@ HotSpot 内部で起こりうる GC の発生原因に対して, それを一意
 定義されている「GC 発生原因」の一覧は以下の通り.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_interface/gcCause.hpp))
       enum Cause {
         /* public */

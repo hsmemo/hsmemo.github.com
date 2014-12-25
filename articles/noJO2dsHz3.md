@@ -23,7 +23,7 @@ title: GCTaskThread クラス及びその補助クラス (GCTaskThread, GCTaskTi
 ParallelScavenge GC において, 実際の GC 処理を行う WorkerThread クラス (See: [here](no24805iK.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskThread.hpp))
     class GCTaskThread : public WorkerThread {
 ```
@@ -35,7 +35,7 @@ GCTaskManager クラスの _thread フィールドに(のみ)格納されてい�
 この中に, 使用される全ての GCTaskManager オブジェクトが格納されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskManager.hpp))
     class GCTaskManager : public CHeapObj {
     ...
@@ -67,7 +67,7 @@ GCTaskThread クラス内で使用される補助クラス.
 ParallelScavenge 関連の統計情報を格納するために使用される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskThread.hpp))
     class GCTaskTimeStamp : public CHeapObj
 ```
@@ -79,7 +79,7 @@ GCTaskThread クラスの _time_stamps インスタンスフィールドに(の�
 (正確には, このフィールドは GCTaskThread の配列を格納するフィールド. 
 この中に GCTaskTimeStampEntries 個数分の GCTaskTimeStamp オブジェクトが格納されている)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskThread.hpp))
       GCTaskTimeStamp* _time_stamps;
 ```
@@ -102,7 +102,7 @@ GCTack 実行の前後で TimeStamp オブジェクトを使って時間を記�
 次に使用する GCTaskTimeStamp オブジェクトは _time_stamp_index フィールドで管理している)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskThread.cpp))
     void GCTaskThread::run() {
     ...
@@ -154,7 +154,7 @@ See: [here](no7882q1r.html) for details
 内部には以下の3つのフィールド(のみ)を含む.
 それぞれ, GC 処理が行われた時間(開始時間, 終了時間), 実行した GCTask 名, を記録する.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/gcTaskThread.hpp))
       jlong  _entry_time;
       jlong  _exit_time;

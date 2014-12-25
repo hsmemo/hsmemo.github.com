@@ -17,7 +17,7 @@ title: VerificationType クラス
 JVM 上での「型」を表す.
   
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/verificationType.hpp))
     class VerificationType VALUE_OBJ_CLASS_SPEC {
 ```
@@ -34,7 +34,7 @@ ClassVerifier クラス, 及び StackMapTable/StackMapFrame/StackMapReader ク�
 reference か primitive かは最下位1bitの0/1で判断できるようにしている模様 (Symbol* なら 0).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/verificationType.hpp))
         // Least significant bits of _handle are always 0, so we use these as
         // the indicator that the _handle is valid.  Otherwise, the _data field
@@ -51,7 +51,7 @@ reference か primitive かは最下位1bitの0/1で判断できるようにし�
 (なお, primitive 型の場合に _data フィールドに格納される定数値は, 以下のように定義されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/verificationType.hpp))
     enum {
       // As specifed in the JVM spec
@@ -69,7 +69,7 @@ reference か primitive かは最下位1bitの0/1で判断できるようにし�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/verificationType.hpp))
         enum {
           // These rest are not found in classfiles, but used by the verifier

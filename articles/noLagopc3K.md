@@ -82,7 +82,7 @@ hotspot/src/share/vm/utilities/yieldingWorkgroup.hpp		  |  同上
 * ※1:
   #include 以外は何も書いていない
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/top.hpp))
     // THIS FILE IS INTESIONALLY LEFT EMPTY
     // IT IS USED TO MINIMIZE THE NUMBER OF DEPENDENCIES IN includeDB

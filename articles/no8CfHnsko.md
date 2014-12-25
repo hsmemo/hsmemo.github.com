@@ -15,7 +15,7 @@ title: ciInstanceKlassKlass クラス
 ciKlassKlass クラスの具象サブクラスの1つ. instanceKlassKlass 用の ciKlass クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciInstanceKlassKlass.hpp))
     // ciInstanceKlassKlass
     //

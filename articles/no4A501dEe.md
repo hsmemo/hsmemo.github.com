@@ -31,7 +31,7 @@ Java のメソッドの開始する際には基本的にこのクラスが使用
 * etc
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/javaCalls.hpp))
     // All calls to Java have to go via JavaCalls. Sets up the stack frame
     // and makes sure that the last_Java_frame pointers are chained correctly.
@@ -65,7 +65,7 @@ JavaCalls による Java コード呼び出しの前準備と後始末を行う 
 * 「呼び出し先のメソッド」や「レシーバー」のポインタが GC 時に調査対象になるようにする.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/javaCalls.hpp))
     // A JavaCallWrapper is constructed before each JavaCall and destructed after the call.
     // Its purpose is to allocate/deallocate a new handle block and to save/restore the last
@@ -103,7 +103,7 @@ JavaCalls による Java コード呼び出し時に「引数」を格納して�
  コメントによると, var-args より速くて安全で便利, とのこと.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/javaCalls.hpp))
     // Encapsulates arguments to a JavaCall (faster, safer, and more convenient than using var-args)
     class JavaCallArguments : public StackObj {
@@ -133,7 +133,7 @@ See: [here](../doxygen/classJavaCallArguments.html) for details
 (ところでこのクラス名は typo?? #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/javaCalls.cpp))
     class SignatureChekker : public SignatureIterator {
 ```

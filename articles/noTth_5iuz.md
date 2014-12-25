@@ -27,7 +27,7 @@ Insert, Delete, Member, Sort といった処理が O(1) でできる.
 メモリ量としては  (max_element)/8 byte  を消費する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/libadt/vectset.hpp))
     // Vector Sets - An Abstract Data Type
     //INTERFACE
@@ -64,7 +64,7 @@ VectorSet 内の要素を処理するためのイテレータクラス.
   `for( VectorSetI i(s); i.test(); i++ ) { body = i.elem; }`
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/libadt/vectset.hpp))
     //------------------------------Iteration--------------------------------------
     // Loop thru all elements of the set, setting "elem" to the element numbers

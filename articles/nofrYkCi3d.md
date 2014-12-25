@@ -18,13 +18,13 @@ x86 プラットフォームに特化したスタブを納めた名前空間(こ
 (なお, 32bit か 64bit かによってクラス定義が別になっている.)
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/stubRoutines_x86_32.hpp))
     class x86 {
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/stubRoutines_x86_64.hpp))
     class x86 {
 ```
@@ -37,7 +37,7 @@ x86 プラットフォームに特化したスタブを納めた名前空間(こ
 
 * 32bit の場合:
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/stubRoutines_x86_32.hpp))
       static address _verify_mxcsr_entry;
       static address _verify_fpu_cntrl_wrd_entry;
@@ -45,7 +45,7 @@ x86 プラットフォームに特化したスタブを納めた名前空間(こ
 
 * 64bit の場合:
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/stubRoutines_x86_64.hpp))
       static address _get_previous_fp_entry;
       static address _verify_mxcsr_entry;

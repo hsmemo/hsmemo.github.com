@@ -26,7 +26,7 @@ title: Dict クラス関連のクラス (Dict, DictI, 及びそれらの補助�
 (#Under Construction)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/adlc/dict2.hpp))
     class Dict { // Dictionary structure
 ```
@@ -43,7 +43,7 @@ See: [here](../doxygen/classDict.html) for details
 (#Under Construction)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/adlc/dict2.hpp))
     //------------------------------Iteration--------------------------------------
     // The class of dictionary iterators.  Fails in the presences of modifications
@@ -64,7 +64,7 @@ See: [here](../doxygen/classDictI.html) for details
 (#Under Construction)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/adlc/dict2.cpp))
     class bucket {
 ```

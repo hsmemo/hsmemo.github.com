@@ -19,7 +19,7 @@ Java ヒープ用のメモリ領域を管理するクラスは使用する GC �
 (ParallelScavenge 用の ContiguousSpace クラス, といった感じ) (See: ContiguousSpace).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/mutableSpace.hpp))
     class MutableSpace: public ImmutableSpace {
 ```
@@ -30,7 +30,7 @@ ParallelScavenge 用の Java ヒープを管理するオブジェクト内 (PSYo
 
 * PSYoungGen
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psYoungGen.hpp))
     class PSYoungGen : public CHeapObj {
     ...
@@ -42,7 +42,7 @@ ParallelScavenge 用の Java ヒープを管理するオブジェクト内 (PSYo
 
 * PSOldGen
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psOldGen.hpp))
     class PSOldGen : public CHeapObj {
     ...
@@ -51,7 +51,7 @@ ParallelScavenge 用の Java ヒープを管理するオブジェクト内 (PSYo
 
 * MutableNUMASpace::LGRPSpace
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/mutableNUMASpace.hpp))
       class LGRPSpace : public CHeapObj {
     ...
@@ -63,7 +63,7 @@ ParallelScavenge 用の Java ヒープを管理するオブジェクト内 (PSYo
 
 * PSYoungGen::initialize_work()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psYoungGen.cpp))
     void PSYoungGen::initialize_work() {
     ...
@@ -78,7 +78,7 @@ ParallelScavenge 用の Java ヒープを管理するオブジェクト内 (PSYo
 
 * PSOldGen::initialize_work()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psOldGen.cpp))
     void PSOldGen::initialize_work(const char* perf_data_name, int level) {
     ...
@@ -87,7 +87,7 @@ ParallelScavenge 用の Java ヒープを管理するオブジェクト内 (PSYo
 
 * MutableNUMASpace::LGRPSpace::LGRPSpace()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/mutableNUMASpace.hpp))
         LGRPSpace(int l, size_t alignment) : _lgrp_id(l), _last_page_scanned(NULL), _allocation_failed(false) {
           _space = new MutableSpace(alignment);
@@ -103,7 +103,7 @@ ImmutableSpace クラスの機能に加えて, 対象の領域内からメモリ
 NUMA 上での効率を考えてページの配置を最適化する機能 (See: UseNUMA) 等も備えている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/mutableSpace.hpp))
     // A MutableSpace is a subtype of ImmutableSpace that supports the
     // concept of allocation. This includes the concepts that a space may

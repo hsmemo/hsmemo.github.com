@@ -33,7 +33,7 @@ JIT コンパイル要求に対する broker(仲介役) 的なクラス (より�
 また, CompileBroker クラスはコンパイラスレッドを作成する機能も提供している (make_compiler_thread, init_compiler_threads).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/compileBroker.hpp))
     // Compilation
     //
@@ -46,7 +46,7 @@ JIT コンパイル要求に対する broker(仲介役) 的なクラス (より�
 様々な処理からこのメソッドが呼び出されることで JIT コンパイルが開始される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/compileBroker.hpp))
       static nmethod* compile_method(methodHandle method,
                                      int osr_bci,
@@ -71,7 +71,7 @@ See: [here](../doxygen/classCompileBroker.html) for details
 CompilerBroker に届けられたコンパイル要求は, CompileTask オブジェクトとして CompilerThread に送られる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/compileBroker.hpp))
     // CompileTask
     //
@@ -95,7 +95,7 @@ CompileTask オブジェクトを詰めるためのキュー.
 CompilerBroker に届けられたコンパイル要求は, このキューを介して CompilerThread に伝えられる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/compileBroker.hpp))
     // CompileQueue
     //
@@ -120,7 +120,7 @@ CompilerBroker に届けられたコンパイル要求は, このキューを介
 (なお CompilerThread 側には, CompilerThread の生成時に使用する CompilerQueue が引数として渡されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/compileBroker.hpp))
       static CompileQueue* _c2_method_queue;
       static CompileQueue* _c1_method_queue;
@@ -148,7 +148,7 @@ CompilerThread に CompileTask をセットするための一時オブジェク�
  デストラクタ内では CompileTask へのロック待ちがいた場合, 完了したことを notifyAll() で通知したりもしている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/compileBroker.hpp))
     // CompileTaskWrapper
     //
@@ -167,7 +167,7 @@ CompilerThread に CompileTask をセットするための一時オブジェク�
 (コンストラクタでカレントスレッドに指定の CompileTask がセットされ, デストラクタで終了アドレスが記録される)
  
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/compileBroker.cpp))
     CompileTaskWrapper::CompileTaskWrapper(CompileTask* task) {
       CompilerThread* thread = CompilerThread::current();
@@ -213,7 +213,7 @@ JIT コンパイル処理に関する統計情報を溜めていくためのパ�
 内部的には PerfData を用いた記録を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/compileBroker.hpp))
     // CompilerCounters
     //
@@ -230,7 +230,7 @@ JIT コンパイル処理に関する統計情報を溜めていくためのパ�
 CompileBroker::init_compiler_threads() 内で(のみ)生成されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/compileBroker.cpp))
     void CompileBroker::init_compiler_threads(int c1_compiler_count, int c2_compiler_count) {
     ...
@@ -258,7 +258,7 @@ CompileBroker::compiler_thread_loop() 内で参照されている (#TODO 他の�
 内部には, 以下の PerfCounter を備えている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/compileBroker.hpp))
         char _current_method[cmname_buffer_length];
         PerfStringVariable* _perf_current_method;

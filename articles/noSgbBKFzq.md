@@ -10,7 +10,7 @@ title: G1MMUTracker クラス関連のクラス (G1MMUTracker, G1MMUTrackerQueue
 ユーザーから指定されたソフトリアルタイム制約を満たすために, GC 処理の時間を追跡して「いつからなら GC 処理を行っていいか」を判断する (See: G1CollectorPolicy).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1MMUTracker.hpp))
     // Keeps track of the GC work and decides when it is OK to do GC work
     // and for how long so that the MMU invariants are maintained.
@@ -19,7 +19,7 @@ title: G1MMUTracker クラス関連のクラス (G1MMUTracker, G1MMUTrackerQueue
 なお, 数値の単位は全部「秒」, とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1MMUTracker.hpp))
     /***** ALL TIMES ARE IN SECS!!!!!!! *****/
 ```
@@ -48,7 +48,7 @@ GC 処理の時間を追跡して「いつからなら GC 処理を行ってい�
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1MMUTracker.hpp))
     // this is the "interface"
     class G1MMUTracker: public CHeapObj {
@@ -69,7 +69,7 @@ G1MMUTrackerQueue クラス内で使用される補助クラス(ValueObjクラ�
 GC 処理による停止時間の情報を記録しておくためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1MMUTracker.hpp))
     class G1MMUTrackerQueueElem VALUE_OBJ_CLASS_SPEC {
 ```
@@ -101,7 +101,7 @@ GC 処理による停止時間の情報を記録しておくためのクラス.
 (メソッドもこれらのフィールドへのアクセサメソッドのみ).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1MMUTracker.hpp))
       double _start_time;
       double _end_time;
@@ -122,7 +122,7 @@ G1MMUTracker クラスの具象サブクラス.
 固定長のキューに直近の GC 処理による停止時間を記録しておくことで処理を実現している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1MMUTracker.hpp))
     // this is an implementation of the MMUTracker using a (fixed-size) queue
     // that keeps track of all the recent pause times
@@ -141,7 +141,7 @@ G1CollectorPolicy::G1CollectorPolicy() 内で(のみ)生成されている.
 (この配列をリングバッファとして使用している).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1MMUTracker.hpp))
       // The array keeps track of all the pauses that fall within a time
       // slice (the last time slice during which pauses took place).
@@ -163,7 +163,7 @@ G1CollectorPolicy::G1CollectorPolicy() 内で(のみ)生成されている.
 なお現状の実装では, 配列の長さは 64 で固定.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1MMUTracker.hpp))
       enum PrivateConstants {
         QueueLength = 64

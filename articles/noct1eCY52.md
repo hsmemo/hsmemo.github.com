@@ -22,7 +22,7 @@ title: Type クラス(とそのサブクラス) (Type, TypeF, TypeD, TypeInt, Ty
  と書かれているが実際の整数型は lower bound と upper bound しか持っていない)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     // This class defines a Type lattice.  The lattice is used in the constant
     // propagation algorithms, and for some type-checking of the iloc code.
@@ -88,7 +88,7 @@ C2 JIT Compiler 内で扱う「型」情報を表すクラス.
 なお, このクラスは abstract class ではない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     //------------------------------Type-------------------------------------------
     // Basic Type object, represents a set of primitive Values.
@@ -124,7 +124,7 @@ C2 JIT Compiler 内で扱う「型」情報を表すクラス.
   なお TYPES 型は以下のように定義された enum 値.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
       enum TYPES {
         Bad=0,                      // Type check
@@ -166,14 +166,14 @@ C2 JIT Compiler 内で扱う「型」情報を表すクラス.
   lattice 上でこの Type オブジェクトの dual になる Type を指す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
       // Each class of type is also identified by its base.
       const TYPES _base;            // Enum of Types type
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
       // DUAL operation: reflect around lattice centerline.  Used instead of
       // join to ensure my lattice is symmetric up and down.  Dual is computed
@@ -186,7 +186,7 @@ operator new がオーバーライドされており,
 このクラスのオブジェクトは Compile::_type_arena フィールドの Arena 内に確保される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
       inline void* operator new( size_t x ) {
         Compile* compile = Compile::current();
@@ -216,7 +216,7 @@ Type クラスのサブクラスの1つ.
 (なお, 単なる float 型ではなく JIT コンパイル時に値が一意に定まっているもの).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     //------------------------------TypeF------------------------------------------
     // Class of Float-Constant Types.
@@ -243,7 +243,7 @@ TypeF::make() 内で(のみ)生成されている.
 スーパークラスである Type クラスのフィールドに加えて, 以下のフィールドを持つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
       const float _f;               // Float constant
 ```
@@ -251,7 +251,7 @@ TypeF::make() 内で(のみ)生成されている.
 なお, _base は FloatCon.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
       TypeF( float f ) : Type(FloatCon), _f(f) {};
 ```
@@ -271,7 +271,7 @@ Type クラスのサブクラスの1つ.
 (なお, 単なる double 型ではなく JIT コンパイル時に値が一意に定まっているもの).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     //------------------------------TypeD------------------------------------------
     // Class of Double-Constant Types.
@@ -296,7 +296,7 @@ TypeD::make() 内で(のみ)生成されている.
 スーパークラスである Type クラスのフィールドに加えて, 以下のフィールドを持つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
       const double _d;              // Double constant
 ```
@@ -304,7 +304,7 @@ TypeD::make() 内で(のみ)生成されている.
 なお, _base は DoubleCon.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
       TypeD( double d ) : Type(DoubleCon), _d(d) {};
 ```
@@ -323,7 +323,7 @@ Type クラスのサブクラスの1つ.
 このクラスは int 値を表す型. 加えてその値が取り得る範囲(下限/上限)も指定できる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     //------------------------------TypeInt----------------------------------------
     // Class of integer ranges, the set of integers between a lower bound and an
@@ -355,7 +355,7 @@ Type クラスのサブクラスの1つ.
 (なお _widen は定数伝播時の widen の残り回数を示す (See: TypeInt::widen()))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
       const jint _lo, _hi;          // Lower bound, upper bound
       const short _widen;           // Limit on times we widen this sucker
@@ -364,7 +364,7 @@ Type クラスのサブクラスの1つ.
 なお, _base は Int.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.cpp))
     TypeInt::TypeInt( jint lo, jint hi, int w ) : Type(Int), _lo(lo), _hi(hi), _widen(w) {
     }
@@ -384,7 +384,7 @@ Type クラスのサブクラスの1つ.
 このクラスは long 値を表す型. 加えてその値が取り得る範囲(下限/上限)も指定できる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     //------------------------------TypeLong---------------------------------------
     // Class of long integer ranges, the set of integers between a lower bound and
@@ -416,7 +416,7 @@ Type クラスのサブクラスの1つ.
 (なお _widen は定数伝播時の widen の残り回数を示す (See: TypeLong::widen()))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
       const jlong _lo, _hi;         // Lower bound, upper bound
       const short _widen;           // Limit on times we widen this sucker
@@ -425,7 +425,7 @@ Type クラスのサブクラスの1つ.
 なお, _base は Long.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.cpp))
     TypeLong::TypeLong( jlong lo, jlong hi, int w ) : Type(Long), _lo(lo), _hi(hi), _widen(w) {
     }
@@ -445,7 +445,7 @@ Type クラスのサブクラスの1つ.
 このクラスは複数の値からなる組(tuple)を表す型.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     //------------------------------TypeTuple--------------------------------------
     // Class of Tuple Types, essentially type collections for function signatures
@@ -457,7 +457,7 @@ Type クラスのサブクラスの1つ.
 なお, 現状では MultiNode (及びそのサブクラス) からしか生成されない模様(? #TODO).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/multnode.hpp))
     //------------------------------ProjNode---------------------------------------
     // This class defines a Projection node.  Projections project a single element
@@ -488,7 +488,7 @@ Type クラスのサブクラスの1つ.
 スーパークラスである Type クラスのフィールドに加えて, 以下のフィールドを持つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
       const uint          _cnt;              // Count of fields
       const Type ** const _fields;           // Array of field types
@@ -497,7 +497,7 @@ Type クラスのサブクラスの1つ.
 なお, _base は Tuple.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
       TypeTuple( uint cnt, const Type **fields ) : Type(Tuple), _cnt(cnt), _fields(fields) { }
 ```
@@ -518,7 +518,7 @@ Type クラスのサブクラスの1つ.
 (なお, 「配列を指すポインタ」の型は TypeAryPtr が表す. このクラスは配列自体の情報(中身の型,長さ)を表す).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     //------------------------------TypeAry----------------------------------------
     // Class of Array Types
@@ -546,7 +546,7 @@ Type クラスのサブクラスの1つ.
 スーパークラスである Type クラスのフィールドに加えて, 以下のフィールドを持つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
       const Type *_elem;            // Element type of array
       const TypeInt *_size;         // Elements in array
@@ -555,7 +555,7 @@ Type クラスのサブクラスの1つ.
 なお, _base は Array.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
       TypeAry( const Type *elem, const TypeInt *size) : Type(Array),
         _elem(elem), _size(size) {}
@@ -579,7 +579,7 @@ Type クラスのサブクラスの1つ.
 そうでない場合 (= 何を指すかが確定しない場合) は TypePtr クラスが利用される)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     //------------------------------TypePtr----------------------------------------
     // Class of machine Pointer Types: raw data, instances or arrays.
@@ -610,7 +610,7 @@ Type クラスのサブクラスの1つ.
 スーパークラスである Type クラスのフィールドに加えて, 以下のフィールドを持つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
       const int _offset;            // Offset into oop, with TOP & BOT
       const PTR _ptr;               // Pointer equivalence class
@@ -619,7 +619,7 @@ Type クラスのサブクラスの1つ.
 (なお, PTR 型は以下のように定義された enum 値)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
       enum PTR { TopPTR, AnyNull, Constant, Null, NotNull, BotPTR, lastPTR };
 ```
@@ -629,7 +629,7 @@ Type クラスのサブクラスの1つ.
 ただし TypePtr クラスの場合は現状では AnyPtr しか指定されていない. AnyPtr 以外が指定されるのは TypePtr のサブクラスの場合).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
       TypePtr( TYPES t, PTR ptr, int offset ) : Type(t), _ptr(ptr), _offset(offset) {}
 ```
@@ -648,7 +648,7 @@ TypePtr クラスのサブクラスの1つ.
 このクラスは oop 以外を指すポインタを表す型.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     //------------------------------TypeRawPtr-------------------------------------
     // Class of raw pointers, pointers to things other than Oops.  Examples
@@ -678,7 +678,7 @@ TypePtr クラスのサブクラスの1つ.
 スーパークラスである TypePtr クラスのフィールドに加えて, 以下のフィールドを持つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
       const address _bits;          // Constant value, if applicable
 ```
@@ -686,7 +686,7 @@ TypePtr クラスのサブクラスの1つ.
 なお, _base は RawPtr.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
       TypeRawPtr( PTR ptr, address bits ) : TypePtr(RawPtr,ptr,0), _bits(bits){}
 ```
@@ -705,7 +705,7 @@ TypePtr クラスのサブクラスの1つ.
 このクラスは何らかの oop を指すポインタを表す型.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     //------------------------------TypeOopPtr-------------------------------------
     // Some kind of oop (Java pointer), either klass or instance or array.
@@ -733,7 +733,7 @@ TypePtr クラスのサブクラスの1つ.
 スーパークラスである TypePtr クラスのフィールドに加えて, 以下のフィールドを持つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
       // Oop is NULL, unless this is a constant oop.
       ciObject*     _const_oop;   // Constant oop
@@ -752,7 +752,7 @@ TypePtr クラスのサブクラスの1つ.
 (なお, InstanceTop や InstanceBot は以下のように定義された enum 値)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
       enum {
        InstanceTop = -1,   // undefined instance
@@ -763,7 +763,7 @@ TypePtr クラスのサブクラスの1つ.
 なお, _base はコンストラクタで指定された値になる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
       TypeOopPtr( TYPES t, PTR ptr, ciKlass* k, bool xk, ciObject* o, int offset, int instance_id );
 ```
@@ -782,7 +782,7 @@ TypeOopPtr クラスのサブクラスの1つ.
 このクラスは配列ではない Java のインスタンスオブジェクトもしくは klassOopを指すポインタを表す型.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     //------------------------------TypeInstPtr------------------------------------
     // Class of Java object pointers, pointing either to non-array Java instances
@@ -811,7 +811,7 @@ TypeOopPtr クラスのサブクラスの1つ.
 スーパークラスである TypeOopPtr クラスのフィールドに加えて, 以下のフィールドを持つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
       ciSymbol*  _name;        // class name
 ```
@@ -819,7 +819,7 @@ TypeOopPtr クラスのサブクラスの1つ.
 なお, _base は InstPtr.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.cpp))
     TypeInstPtr::TypeInstPtr(PTR ptr, ciKlass* k, bool xk, ciObject* o, int off, int instance_id)
      : TypeOopPtr(InstPtr, ptr, k, xk, o, off, instance_id), _name(k->name()) {
@@ -843,7 +843,7 @@ TypeOopPtr クラスのサブクラスの1つ.
 このクラスは配列オブジェクトを指すポインタを表す型.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     //------------------------------TypeAryPtr-------------------------------------
     // Class of Java array pointers
@@ -872,7 +872,7 @@ TypeOopPtr クラスのサブクラスの1つ.
 スーパークラスである TypeOopPtr クラスのフィールドに加えて, 以下のフィールドを持つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
       const TypeAry *_ary;          // Array we point into
 ```
@@ -880,7 +880,7 @@ TypeOopPtr クラスのサブクラスの1つ.
 なお, _base は AryPtr.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
       TypeAryPtr( PTR ptr, ciObject* o, const TypeAry *ary, ciKlass* k, bool xk, int offset, int instance_id ) : TypeOopPtr(AryPtr,ptr,k,xk,o,offset, instance_id), _ary(ary) {
     #ifdef ASSERT
@@ -916,7 +916,7 @@ TypeOopPtr クラスのサブクラスの1つ.
 このクラスは klassOop を指すポインタを表す型.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     //------------------------------TypeKlassPtr-----------------------------------
     // Class of Java Klass pointers
@@ -946,7 +946,7 @@ TypeOopPtr クラスのサブクラスの1つ.
 なお, _base は KlassPtr.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.cpp))
     TypeKlassPtr::TypeKlassPtr( PTR ptr, ciKlass* klass, int offset )
       : TypeOopPtr(KlassPtr, ptr, klass, (ptr==Constant), (ptr==Constant ? klass : NULL), offset, 0) {
@@ -967,7 +967,7 @@ Type クラスのサブクラスの1つ.
 このクラスは narrow oop 値を表す型.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     //------------------------------TypeNarrowOop----------------------------------
     // A compressed reference to some kind of Oop.  This type wraps around
@@ -999,7 +999,7 @@ Type クラスのサブクラスの1つ.
 スーパークラスである Type クラスのフィールドに加えて, 以下のフィールドを持つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
       const TypePtr* _ptrtype; // Could be TypePtr::NULL_PTR
 ```
@@ -1007,7 +1007,7 @@ Type クラスのサブクラスの1つ.
 なお, _base は NarrowOop.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
       TypeNarrowOop( const TypePtr* ptrtype): Type(NarrowOop),
         _ptrtype(ptrtype) {
@@ -1031,7 +1031,7 @@ Type クラスのサブクラスの1つ.
 このクラスはメソッド(methodOopDesc)を表す型.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     //------------------------------TypeFunc---------------------------------------
     // Class of Array Types
@@ -1056,7 +1056,7 @@ TypeFunc::make() 内で(のみ)生成されている.
 スーパークラスである Type クラスのフィールドに加えて, 以下のフィールドを持つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
       const TypeTuple* const _domain;     // Domain of inputs
       const TypeTuple* const _range;      // Range of results
@@ -1065,7 +1065,7 @@ TypeFunc::make() 内で(のみ)生成されている.
 なお, _base は Function.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
       TypeFunc( const TypeTuple *domain, const TypeTuple *range ) : Type(Function),  _domain(domain), _range(range) {}
 ```

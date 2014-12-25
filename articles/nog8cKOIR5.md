@@ -24,7 +24,7 @@ title: Serviceability 機能 ： Forte との連携
 collector_func_load() が存在しない環境では呼び出しが NOP になるよう, マクロが定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/forte.cpp))
     #ifndef _WINDOWS
     // Support for the Forte(TM) Peformance Tools collector.

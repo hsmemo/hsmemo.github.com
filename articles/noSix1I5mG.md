@@ -63,7 +63,7 @@ Concurrent Marking 処理を取りまとめるクラス. 以下のような役�
   (ConcurrentMarkThread によるマルチスレッド処理時のスレッド数, etc)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.hpp))
     class ConcurrentMark: public CHeapObj {
 ```
@@ -93,7 +93,7 @@ Concurrent Marking の処理結果 (= どのオブジェクトが生きている
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.hpp))
     // A generic CM bit map.  This is essentially a wrapper around the BitMap
     // class, with one bit per (1<<_shifter) HeapWords.
@@ -105,7 +105,7 @@ Concurrent Marking の処理結果 (= どのオブジェクトが生きている
 実際の情報は _bm フィールドの BitMap オブジェクトに格納される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.hpp))
       BitMap    _bm;               // the bit map itself
 ```
@@ -115,7 +115,7 @@ _shifter フィールドの値はコンストラクタ引数によって決ま�
 このクラス自体は abstract class なので, サブクラスである CMBitMap の生成箇所も参照.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.hpp))
       const int _shifter;          // map to char or bit
 ```
@@ -144,7 +144,7 @@ ConcurrentMark クラス内で使用される補助クラス.
 CMBitMapRO クラスの具象サブクラス. このオブジェクト内に実際の Concurrent Marking 処理結果が格納される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.hpp))
     class CMBitMap : public CMBitMapRO {
 ```
@@ -176,7 +176,7 @@ Gray なオブジェクト (= Concurrent Marking 処理で発見したが, ま�
 (論文中では "mark stack").
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.hpp))
     // Represents a marking stack used by the CM collector.
     // Ideally this should be GrowableArray<> just like MSC's marking stack(s).
@@ -252,7 +252,7 @@ Concurrent Marking 処理中に発生した Minor GC でコピー先として使
  このため, どこにコピーされたかを記録しておく必要がある).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.hpp))
     class CMRegionStack VALUE_OBJ_CLASS_SPEC {
 ```
@@ -315,7 +315,7 @@ See: [here](../doxygen/classCMRegionStack.html) for details
 (スタックが溢れたとは, ConcurrentMark::has_overflown() が true を返す状態).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.hpp))
     class ForceOverflowSettings VALUE_OBJ_CLASS_SPEC {
 ```
@@ -359,7 +359,7 @@ ConcurrentMark クラス内で使用される補助クラス.
 なお, CMTask オブジェクトは各 ConcurrentMarkThread に対して 1つ用意される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.hpp))
     // A class representing a marking task.
     class CMTask : public TerminatorTerminator {
@@ -402,7 +402,7 @@ G1CMIsAliveClosure::do_object_b() メソッドが呼ばれると,
 (Concurrent Marking による mark 結果に基づいて)処理対象のオブジェクトが生きているかどうかを返す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.hpp))
     // Closure used by CM during concurrent reference discovery
     // and reference processing (during remarking) to determine
@@ -459,7 +459,7 @@ See: [here](../doxygen/classG1CMIsAliveClosure.html) for details
 (例えば, その HeapRegion 内の live オブジェクトの量, 等).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.hpp))
     // Class that's used to to print out per-region liveness
     // information. It's currently used at the end of marking and also
@@ -490,7 +490,7 @@ Concurrent Marking 処理を補佐するためのクラス.
 各 HeapRegion の現在の top 位置を next TAMS に記録する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     class NoteStartOfMarkHRClosure: public HeapRegionClosure {
 ```
@@ -514,7 +514,7 @@ G1GC の ConcurrentMarkThread (の Initial Marking Pause 処理) で使用され
 (= CMBitMap の該当箇所が立っていなければ, そのビットを立てる).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     class CMMarkRootsClosure: public OopsInGenClosure {
 ```
@@ -537,7 +537,7 @@ G1GC の ConcurrentMarkThread (の Concurrent Marking 処理) で使用される
 (SATBMarkQueueSet や CMMarkStack, CMRegionStack に入っているポインタに対して) マーキング処理を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     class CMConcurrentMarkingTask: public AbstractGangTask {
 ```
@@ -563,7 +563,7 @@ G1GC の ConcurrentMarkThread (の Live Data Counting 処理) で使用される
 処理対象の HeapRegion 内で生きているオブジェクトの量を計算する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     class CalcLiveObjectsClosure: public HeapRegionClosure {
 ```
@@ -589,7 +589,7 @@ G1GC の ConcurrentMarkThread (の Live Data Counting 処理) で使用される
 処理対象の HeapRegion 内で生きているオブジェクトの量を計算する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     class G1ParFinalCountTask: public AbstractGangTask {
 ```
@@ -619,7 +619,7 @@ Concurrent Marking 処理の後片付けを行う. 具体的には以下の通�
 * expand された SparsePRT オブジェクトの情報を収集する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     class G1NoteEndOfConcMarkClosure : public HeapRegionClosure {
 ```
@@ -646,7 +646,7 @@ Concurrent Marking 処理の後片付けを行う. 具体的には以下の通�
 * expand された SparsePRT オブジェクトの情報を収集する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     class G1ParNoteEndTask: public AbstractGangTask {
 ```
@@ -673,7 +673,7 @@ G1GC の ConcurrentMarkThread (の Cleanup 処理) で使用される補助ク�
 そこに付いている Remembered Set 用のデータ構造を解放する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     class G1ParScrubRemSetTask: public AbstractGangTask {
 ```
@@ -701,7 +701,7 @@ G1GC の ConcurrentMarkThread (の Final Marking Pause 処理) で使用され�
 処理をマルチスレッドで行う場合は, 代わりに G1CMParKeepAliveAndDrainClosure が使用される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     class G1CMKeepAliveClosure: public OopClosure {
 ```
@@ -729,7 +729,7 @@ Concurrent Marking 処理中に見つかった参照オブジェクト(java.lang
 処理をマルチスレッドで行う場合は, 代わりに G1CMParDrainMarkingStackClosure が使用される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     class G1CMDrainMarkingStackClosure: public VoidClosure {
 ```
@@ -757,7 +757,7 @@ Concurrent Marking 処理中に見つかった参照オブジェクト(java.lang
 処理をシングルスレッドで行う場合は, 代わりに G1CMKeepAliveClosure が使用される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     // 'Keep Alive' closure used by parallel reference processing.
     // An instance of this closure is used in the parallel reference processing
@@ -798,7 +798,7 @@ Concurrent Marking 処理中に見つかった参照オブジェクト(java.lang
 処理をシングルスレッドで行う場合は, 代わりに G1CMDrainMarkingStackClosure が使用される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     class G1CMParDrainMarkingStackClosure: public VoidClosure {
 ```
@@ -823,7 +823,7 @@ Concurrent Marking 処理で使用される AbstractRefProcTaskExecutor クラ�
  (See: AbstractRefProcTaskExecutor)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     // Implementation of AbstractRefProcTaskExecutor for G1
     class G1RefProcTaskExecutor: public AbstractRefProcTaskExecutor {
@@ -850,7 +850,7 @@ AbstractRefProcTaskExecutor::ProcessTask オブジェクトを実行するため
 (See: AbstractRefProcTaskExecutor::ProcessTask))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     class G1RefProcTaskProxy: public AbstractGangTask {
 ```
@@ -884,7 +884,7 @@ AbstractRefProcTaskExecutor::EnqueueTask オブジェクトを実行するため
 (See: AbstractRefProcTaskExecutor::EnqueueTask))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     class G1RefEnqueueTaskProxy: public AbstractGangTask {
 ```
@@ -915,7 +915,7 @@ G1GC の ConcurrentMarkThread (の Final Marking Pause 処理) で使用され�
 Final Marking 処理を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     class CMRemarkTask: public AbstractGangTask {
 ```
@@ -940,13 +940,13 @@ PrintReachableObjectClosure クラス内で使用される補助クラス.
 (mark されているかどうか, アドレスが TAMS よりも前かどうか, 等).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     #ifndef PRODUCT
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     class PrintReachableOopClosure: public OopClosure {
 ```
@@ -971,13 +971,13 @@ PrintReachableRegionClosure クラス内で使用される補助クラス.
 (mark されているかどうか, アドレスが TAMS よりも前かどうか, 等).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     #ifndef PRODUCT
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     class PrintReachableObjectClosure : public ObjectClosure {
 ```
@@ -1005,13 +1005,13 @@ See: [here](../doxygen/classPrintReachableObjectClosure.html) for details
 (mark されているかどうか, アドレスが TAMS よりも前かどうか, 等).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     #ifndef PRODUCT
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     class PrintReachableRegionClosure : public HeapRegionClosure {
 ```
@@ -1037,7 +1037,7 @@ G1CollectedHeap の Minor GC 処理("Evacuation Pause" 処理)で使用される
 Minor GC 時に, 残っている Concurrent Marking 処理を完了させるための Closure クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     class CMGlobalObjectClosure : public ObjectClosure {
 ```
@@ -1056,7 +1056,7 @@ See: [here](../doxygen/classCMGlobalObjectClosure.html) for details
 
 ### 概要(Summary)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     class CSMarkOopClosure: public OopClosure {
 ```
@@ -1079,7 +1079,7 @@ See: [here](../doxygen/classCSMarkOopClosure.html) for details
 
 ### 概要(Summary)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     class CSMarkBitMapClosure: public BitMapClosure {
 ```
@@ -1102,7 +1102,7 @@ See: [here](../doxygen/classCSMarkBitMapClosure.html) for details
 
 ### 概要(Summary)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     class CompleteMarkingInCSHRClosure: public HeapRegionClosure {
 ```
@@ -1128,7 +1128,7 @@ See: [here](../doxygen/classCompleteMarkingInCSHRClosure.html) for details
 
 ### 概要(Summary)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     class ClearMarksInHRClosure: public HeapRegionClosure {
 ```
@@ -1152,7 +1152,7 @@ G1GC の ConcurrentMarkThread (の Concurrent Marking 処理と Final Marking Pa
 マークされているオブジェクト (= CMBitMap の該当箇所が立っているオブジェクト) から再帰的に辿れる範囲をマークするための Closure クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     // Closure for iteration over bitmaps
     class CMBitMapClosure : public BitMapClosure {
@@ -1184,7 +1184,7 @@ G1GC の ConcurrentMarkThread (の Concurrent Marking 処理と Final Marking Pa
 (SATB 方式の write barrier で記録された(変更前の)ポインタフィールドの値に対して, その差し先にマークを付ける処理).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     // Closure for iterating over objects, currently only used for
     // processing SATB buffers.
@@ -1214,7 +1214,7 @@ G1GC の ConcurrentMarkThread (の Concurrent Marking 処理と Final Marking Pa
 処理対象が oop の場合には CMObjectClosure が使用される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMark.cpp))
     // Closure for iterating over object fields
     class CMOopClosure : public OopClosure {

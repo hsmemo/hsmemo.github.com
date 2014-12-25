@@ -11,7 +11,7 @@ title: TemplateInterpreter クラス関連のクラス (EntryPoint, DispatchTabl
 より具体的に言うと, 実際の Template Interpreter として働く Interpreter クラス. (See: [here](no7882AgC.html) for details)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/templateInterpreter.hpp))
     // This file contains the platform-independent parts
     // of the template interpreter and the template interpreter generator.
@@ -37,7 +37,7 @@ Template Interpreter において Interpreter の初期化や生成されたコ�
 (= Template Interpreter 用の Interpreter クラス). (See: [here](no7882AgC.html) for details)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/templateInterpreter.hpp))
     class TemplateInterpreter: public AbstractInterpreter {
 ```
@@ -59,7 +59,7 @@ TemplateInterpreter 用のコードレットのエントリポイントの管理
 これら number_of_states 個のエントリーポイントを管理するためのクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/templateInterpreter.hpp))
     //------------------------------------------------------------------------------------------------------------------------
     // A little wrapper class to group tosca-specific entry points into a unit.
@@ -72,7 +72,7 @@ TemplateInterpreter 用のコードレットのエントリポイントの管理
 内部的には本当に number_of_states 個分の address 配列を持っているだけ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/templateInterpreter.hpp))
       address _entry[number_of_states];
 ```
@@ -96,7 +96,7 @@ Template Interpreter の dispatch table を管理するためのクラス.
  各バイトコードを各 TOS 状態で実行する際にどこにジャンプすればいいか, という情報を表す)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/templateInterpreter.hpp))
     //------------------------------------------------------------------------------------------------------------------------
     // A little wrapper class to group tosca-specific dispatch tables into a unit.
@@ -113,7 +113,7 @@ Template Interpreter の dispatch table を管理するためのクラス.
 * TemplateInterpreter クラスの _safept_table フィールド (static フィールド)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/templateInterpreter.hpp))
       static DispatchTable _active_table;                           // the active    dispatch table (used by the interpreter for dispatch)
       static DispatchTable _normal_table;                           // the normal    dispatch table (used to set the active table in normal mode)

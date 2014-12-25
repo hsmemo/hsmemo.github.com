@@ -22,13 +22,13 @@ oopDesc クラス用のユーティリティ・クラス.
 (See: [here](no2114rPX.html) for details) (See: [here](no30267vB.html), [here](no28916Q0G.html), [here](no28916qPH.html) and [here](no289163ZN.html) for details)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/oopFactory.hpp))
     // oopFactory is a class used for creating new objects.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/oopFactory.hpp))
     class oopFactory: AllStatic {
 ```
@@ -37,7 +37,7 @@ oopDesc クラス用のユーティリティ・クラス.
 各 oopDesc クラスに対応する以下のようなファクトリメソッド (new_*() メソッド) を提供している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/oopFactory.hpp))
       // Basic type leaf array allocation
       static typeArrayOop    new_boolArray  (int length, TRAPS) { return typeArrayKlass::cast(Universe::boolArrayKlassObj  ())->allocate(length, CHECK_NULL); }

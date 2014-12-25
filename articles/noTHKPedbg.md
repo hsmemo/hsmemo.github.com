@@ -24,7 +24,7 @@ Klass 用の C++ の vtable を保持するためのクラス.
 Klass オブジェクト中での vtable の位置を制限したいためこの基底クラスが存在する, とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/klass.hpp))
     // Holder (or cage) for the C++ vtable of each kind of Klass.
     // We want to tightly constrain the location of the C++ vtable in the overall layout.
@@ -37,7 +37,7 @@ Klass オブジェクト中での vtable の位置を制限したいためこの
 内部では, vtable の位置を確定させるため, 空の virtual メソッドが定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/klass.hpp))
       // The following virtual exists only to force creation of a C++ vtable,
       // so that this class truly is the location of the vtable of all Klasses.
@@ -47,7 +47,7 @@ Klass オブジェクト中での vtable の位置を制限したいためこの
 また, Klass オブジェクトを生成するためのファクトリメソッドも用意されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/klass.hpp))
       // The following virtual makes Klass_vtbl play a second role as a
       // factory protocol for subclasses of Klass ("sub-Klasses").
@@ -130,7 +130,7 @@ See: [here](../doxygen/classKlass__vtbl.html) for details
 (正確に言うと全ての基底クラスは Klass_vtbl だが, Klass_vtbl にはあまり中身がないので実質的な基底クラスは Klass).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/klass.hpp))
     // A Klass is the part of the klassOop that provides:
     //  1: language level class object (method dictionary etc.)
@@ -141,7 +141,7 @@ See: [here](../doxygen/classKlass__vtbl.html) for details
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/klass.hpp))
     class Klass : public Klass_vtbl {
 ```
@@ -150,7 +150,7 @@ See: [here](../doxygen/classKlass__vtbl.html) for details
 そのため, 現在は oop は virtual method を持たず, 必要な場合は Klass の方に持たせている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/klass.hpp))
     // One reason for the oop/klass dichotomy in the implementation is
     // that we don't want a C++ vtbl pointer in every object.  Thus,
@@ -167,7 +167,7 @@ See: [here](../doxygen/classKlass__vtbl.html) for details
 メモリ上でのレイアウトは以下の通り.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/klass.hpp))
     //  Klass layout:
     //    [header        ] klassOop

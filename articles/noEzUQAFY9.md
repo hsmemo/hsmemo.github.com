@@ -22,7 +22,7 @@ ciInstanceKlass クラス用の補助クラス.
 (なお, 現状では ciBytecodeStream クラスの処理からのみ利用されている模様)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciConstantPoolCache.hpp))
     // ciConstantPoolCache
     //

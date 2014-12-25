@@ -19,7 +19,7 @@ Inline Caching 機能において飛び先が interpreter 実行の場合に使�
 (飛び先の c2i_unverified_entry_point に渡す引数(token)として使用されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/compiledICHolderOop.hpp))
     // A compiledICHolderOop is a helper object for the inline cache implementation.
     // It holds an intermediate value (method+klass pair) used when converting from
@@ -46,7 +46,7 @@ Inline Caching 機能において飛び先が interpreter 実行の場合に使�
     type check が通った後で実際にコードを実行するために使用する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/compiledICHolderOop.hpp))
       methodOop _holder_method;
       klassOop  _holder_klass;    // to avoid name conflict with oopDesc::_klass

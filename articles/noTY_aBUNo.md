@@ -15,7 +15,7 @@ title: ADLParser クラス
 ADL ファイルのパース処理を行うクラス (See: [here](nop0Yyr-jc.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/adlc/adlparse.hpp))
     class ADLParser {
 ```
@@ -25,7 +25,7 @@ adlc の main() 関数の中で作成され,
 parse() メソッドの呼び出しが終われば破棄される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/adlc/main.cpp))
     int main(int argc, char *argv[])
     {

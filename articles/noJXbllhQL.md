@@ -17,7 +17,7 @@ ciObject クラスのサブクラスの1つ. arrayOopDesc 用の ciObject クラ
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciArray.hpp))
     // ciArray
     //

@@ -16,7 +16,7 @@ HotSpot 内でのメモリオーダリング制御(メモリバリア処理)用�
 (より正確には, そのための機能を納めた名前空間(AllStatic クラス)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/orderAccess.hpp))
     class OrderAccess : AllStatic {
 ```
@@ -31,7 +31,7 @@ share/ 以下で定義されているメソッドは以下の1つだけ
 (しかも, これも内部では StubRoutines::fence_entry() を呼んでいるだけ).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/orderAccess.cpp))
     void OrderAccess::StubRoutines_fence() {
 ```
@@ -41,7 +41,7 @@ share/ 以下で定義されているメソッドは以下の1つだけ
 (また "JSR-133 Cookbook for Compiler Writers" も参照のこと).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/orderAccess.hpp))
     //                Memory Access Ordering Model
     //

@@ -41,7 +41,7 @@ ClassVerifier クラス内で使用される補助クラス.
 クラスファイル中の StackMapTable attrible を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/stackMapTable.hpp))
     // StackMapTable class is the StackMap table used by type checker
     class StackMapTable : public StackObj {
@@ -66,7 +66,7 @@ ClassVerifier クラス内で使用される補助クラス.
 クラスファイル中の StackMapTable attrible 情報の読み出しを行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/stackMapTable.hpp))
     class StackMapReader : StackObj {
 ```
@@ -90,7 +90,7 @@ StackMapReader クラス用の補助クラス.
 実際の読み出し処理を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/stackMapTable.hpp))
     class StackMapStream : StackObj {
 ```

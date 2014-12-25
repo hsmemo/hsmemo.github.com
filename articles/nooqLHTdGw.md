@@ -31,7 +31,7 @@ title: PSScavenge クラス関連のクラス (PSScavenge, PSScavengeRootsClosur
 ParallelScavengeHeap の Minor GC 処理を行うクラス (より正確には, そのための機能を納めた名前空間(AllStatic クラス)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psScavenge.hpp))
     class PSScavenge: AllStatic {
 ```
@@ -55,7 +55,7 @@ ParallelScavengeHeap に対する Minor GC 処理で使用される補助クラ�
 さらに元の場所にフォワーディングポインタを埋める処理を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psScavenge.inline.hpp))
     class PSScavengeRootsClosure: public OopClosure {
 ```
@@ -82,7 +82,7 @@ PSIsAliveClosure::do_object_b() メソッドが呼ばれると,
 処理対象のオブジェクトが生きているかどうかを返す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psScavenge.cpp))
     class PSIsAliveClosure: public BoolObjectClosure {
 ```
@@ -93,7 +93,7 @@ PSScavenge クラスの _is_alive_closure フィールドに格納されてい�
 PSRefProcTaskProxy::do_it() 内で局所変数として生成されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psScavenge.hpp))
     class PSScavenge: AllStatic {
     ...
@@ -123,7 +123,7 @@ GC 時の参照オブジェクト(java.lang.ref オブジェクト)の処理に�
 さらに元の場所にフォワーディングポインタを埋める処理を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psScavenge.cpp))
     class PSKeepAliveClosure: public OopClosure {
 ```
@@ -153,7 +153,7 @@ ParallelScavengeHeap に対する Minor GC 処理で使用される補助クラ�
 処理したオブジェクトから辿れる範囲全てについて再帰的に処理を行うための Closure.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psScavenge.cpp))
     class PSEvacuateFollowersClosure: public VoidClosure {
 ```
@@ -182,7 +182,7 @@ GC 処理が失敗した際に, 各オブジェクトの mark フィールドを
 (GC 処理後には mark フィールドには forwarding pointer が埋められているため, それをクリアする).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psScavenge.cpp))
     class PSPromotionFailedClosure : public ObjectClosure {
 ```
@@ -208,7 +208,7 @@ AbstractRefProcTaskExecutor::ProcessTask オブジェクトを実行するため
 (See: AbstractRefProcTaskExecutor::ProcessTask))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psScavenge.cpp))
     class PSRefProcTaskProxy: public GCTask {
 ```
@@ -243,7 +243,7 @@ AbstractRefProcTaskExecutor::EnqueueTask オブジェクトを実行するため
 (See: AbstractRefProcTaskExecutor::EnqueueTask))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psScavenge.cpp))
     class PSRefEnqueueTaskProxy: public GCTask {
 ```
@@ -277,7 +277,7 @@ ParallelScavengeHeap に対する Minor GC 処理 ("Parallel Scavenge" 処理) �
  (See: AbstractRefProcTaskExecutor)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psScavenge.cpp))
     class PSRefProcTaskExecutor: public AbstractRefProcTaskExecutor {
 ```

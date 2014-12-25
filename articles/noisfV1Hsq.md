@@ -19,7 +19,7 @@ JIT Compiler から AccessFlags オブジェクトの情報にアクセスする
 (See: AccessFlags)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciFlags.hpp))
     // ciFlags
     //
@@ -59,7 +59,7 @@ JIT Compiler から AccessFlags オブジェクトの情報にアクセスする
 定義されているフィールドはこれだけ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciFlags.hpp))
       jint _flags;
 ```

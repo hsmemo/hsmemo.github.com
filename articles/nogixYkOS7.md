@@ -13,7 +13,7 @@ title: oop (oop, instanceOop, methodOop, constMethodOop, methodDataOop, arrayOop
 これらは通常のビルド時には単なる別名(typedef)に過ぎない (対応する oopDesc クラスへのポインタ型).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/oopsHierarchy.hpp))
     #ifndef CHECK_UNHANDLED_OOPS
     
@@ -58,7 +58,7 @@ title: oop (oop, instanceOop, methodOop, constMethodOop, methodDataOop, arrayOop
 (そのために各種の演算子がオーバーライドされている).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/oopsHierarchy.hpp))
     class oop {
 ```
@@ -80,7 +80,7 @@ oop クラスと同じく, これらも対応する oopDesc クラスへのポ�
 DEF_OOP というマクロを使って間接的に定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/oopsHierarchy.hpp))
     DEF_OOP(instance);
     DEF_OOP(method);
@@ -99,7 +99,7 @@ DEF_OOP というマクロを使って間接的に定義されている.
 DEF_OOP() マクロの定義は以下の通り.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/oopsHierarchy.hpp))
     #define DEF_OOP(type)                                                      \
        class type##OopDesc;                                                    \
@@ -130,7 +130,7 @@ markOop については, (ラッパークラス化は難しいので(?))
 CHECK_UNHANDLED_OOPS に関わらず単なる別名として定義される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/oopsHierarchy.hpp))
     typedef class   markOopDesc*                markOop;
 ```

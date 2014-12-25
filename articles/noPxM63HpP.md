@@ -30,7 +30,7 @@ G1CollectedHeap クラス用の補助クラス.
  作業後に回収結果を SecondaryFreeRegionList や MasterFreeRegionList に追加する, という使われ方をする).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionSets.hpp))
     //////////////////// FreeRegionList ////////////////////
     
@@ -75,7 +75,7 @@ G1CollectedHeap クラス内で使用される補助クラス.
 新しい HeapRegion が必要になるとここから確保が行われる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionSets.hpp))
     //////////////////// MasterFreeRegionList ////////////////////
     
@@ -87,7 +87,7 @@ G1CollectedHeap クラス内で使用される補助クラス.
 各 G1CollectedHeap オブジェクトの _free_list フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.hpp))
       // The master free list. It will satisfy all new region allocations.
       MasterFreeRegionList      _free_list;
@@ -133,7 +133,7 @@ Concurrent Marking の Cleanup 処理で回収された HeapRegion がつなが�
 このリストの中身は適当なタイミングで MasterFreeRegionList に移動される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionSets.hpp))
     //////////////////// SecondaryFreeRegionList ////////////////////
     
@@ -145,7 +145,7 @@ Concurrent Marking の Cleanup 処理で回収された HeapRegion がつなが�
 各 G1CollectedHeap オブジェクトの _secondary_free_list フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.hpp))
       // The secondary free list which contains regions that have been
       // freed up during the cleanup process. This will be appended to the
@@ -183,7 +183,7 @@ GC 処理によって解放された Humongous 用の HeapRegion の情報を Ma
  作業後に結果を MasterHumongousRegionSet に反映する, という使われ方をする).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionSets.hpp))
     //////////////////// HumongousRegionSet ////////////////////
     
@@ -218,7 +218,7 @@ G1CollectedHeap クラス内で使用される補助クラス.
 (Humongous オブジェクトの先頭に当たる HeapRegion を格納している).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionSets.hpp))
     //////////////////// MasterHumongousRegionSet ////////////////////
     
@@ -230,7 +230,7 @@ G1CollectedHeap クラス内で使用される補助クラス.
 各 G1CollectedHeap オブジェクトの _humongous_set フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1CollectedHeap.hpp))
       // It keeps track of the humongous regions.
       MasterHumongousRegionSet  _humongous_set;

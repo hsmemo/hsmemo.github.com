@@ -27,7 +27,7 @@ AbstractRegisterImpl クラスの具象サブクラスの1つ.
 1つの RegisterImpl オブジェクトが 1本の汎用レジスタに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/register_x86.hpp))
     class RegisterImpl: public AbstractRegisterImpl {
 ```
@@ -35,7 +35,7 @@ AbstractRegisterImpl クラスの具象サブクラスの1つ.
 なお Register という型も使われるが, これは RegisterImpl* の別名.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/register_x86.hpp))
     typedef RegisterImpl* Register;
 ```
@@ -76,7 +76,7 @@ AbstractRegisterImpl クラスの具象サブクラスの1つ.
 1つの FloatRegisterImpl オブジェクトが 1本の浮動小数レジスタに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/register_x86.hpp))
     // The implementation of floating point registers for the ia32 architecture
     class FloatRegisterImpl: public AbstractRegisterImpl {
@@ -85,7 +85,7 @@ AbstractRegisterImpl クラスの具象サブクラスの1つ.
 なお FloatRegister という型も使われるが, これは FloatRegisterImpl* の別名.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/register_x86.hpp))
     typedef FloatRegisterImpl* FloatRegister;
 ```
@@ -126,7 +126,7 @@ AbstractRegisterImpl クラスの具象サブクラスの1つ.
 1つの XMMRegisterImpl オブジェクトが 1本の XMM レジスタに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/register_x86.hpp))
     // The implementation of XMM registers for the IA32 architecture
     class XMMRegisterImpl: public AbstractRegisterImpl {
@@ -135,7 +135,7 @@ AbstractRegisterImpl クラスの具象サブクラスの1つ.
 なお XMMRegister という型も使われるが, これは XMMRegisterImpl* の別名.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/register_x86.hpp))
     typedef XMMRegisterImpl* XMMRegister;
 ```
@@ -176,7 +176,7 @@ See: [here](../doxygen/classXMMRegisterImpl.html) for details
 汎用レジスタ, 浮動小数レジスタ, XMM レジスタの個数を記録している.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/register_x86.hpp))
     // Need to know the total number of registers of all sorts for SharedInfo.
     // Define a class that exports it.
@@ -187,7 +187,7 @@ See: [here](../doxygen/classXMMRegisterImpl.html) for details
 内部には以下の定数定義およびフィールド定義(のみ)を含む.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/register_x86.hpp))
       enum {
       // A big enough number for C2: all the registers plus flags
@@ -206,7 +206,7 @@ See: [here](../doxygen/classXMMRegisterImpl.html) for details
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/register_x86.hpp))
       static const int max_gpr;
       static const int max_fpr;

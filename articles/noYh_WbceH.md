@@ -9,7 +9,7 @@ title: Generation クラス関連のクラス (Generation, CardGeneration, OneCo
 これらは, 世代別 GC における各「世代領域 (Generation)」を管理するためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/generation.hpp))
     // A Generation models a heap area for similarly-aged objects.
     // It will contain one ore more spaces holding the actual objects.
@@ -23,7 +23,7 @@ title: Generation クラス関連のクラス (Generation, CardGeneration, OneCo
 なお, これらのクラスは以下のような継承関係を持つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/generation.hpp))
     // The Generation class hierarchy:
     //
@@ -53,7 +53,7 @@ title: Generation クラス関連のクラス (Generation, CardGeneration, OneCo
 * AdjustPointersClosure
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/generation.cpp))
     // Some of these are mediocre general implementations.  Should be
     // overridden to get better performance.
@@ -91,7 +91,7 @@ title: Generation クラス関連のクラス (Generation, CardGeneration, OneCo
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/generation.hpp))
     class Generation: public CHeapObj {
 ```
@@ -115,7 +115,7 @@ card table を使用しているため効率的な write barrier 処理が行え
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/generation.hpp))
     // Class CardGeneration is a generation that is covered by a card table,
     // and uses a card-size block-offset array to implement block_start.
@@ -144,7 +144,7 @@ Garbage Collection 処理は mark-sweep-compact 方式で行う.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/generation.hpp))
     // OneContigSpaceCardGeneration models a heap of old objects contained in a single
     // contiguous space.
@@ -169,7 +169,7 @@ Generation クラス内で使用される補助クラス (Closure クラス).
 指定された Space オブジェクトが「コンストラクタ引数で渡されたアドレスを含むかどうか」を調べる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/generation.cpp))
     class GenerationIsInReservedClosure : public SpaceClosure {
 ```
@@ -198,7 +198,7 @@ Generation クラス内で使用される補助クラス (Closure クラス).
 指定された Space オブジェクトが「コンストラクタ引数で渡されたアドレスを含むかどうか」を調べる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/generation.cpp))
     class GenerationIsInClosure : public SpaceClosure {
 ```
@@ -228,7 +228,7 @@ Generation クラス内で使用される補助クラス (Closure クラス).
 (かつ, もし含む場合はそのアドレスに対応する block_start アドレスを記録する).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/generation.cpp))
     class GenerationBlockStartClosure : public SpaceClosure {
 ```
@@ -260,7 +260,7 @@ Generation クラス内で使用される補助クラス (Closure クラス).
 (かつ, もし含む場合はそのアドレスに対応する block_size を記録する).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/generation.cpp))
     class GenerationBlockSizeClosure : public SpaceClosure {
 ```
@@ -292,7 +292,7 @@ Generation クラス内で使用される補助クラス (Closure クラス).
 (かつ, もし含む場合はそのアドレス位置にオブジェクトがあるかどうかを記録する).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/generation.cpp))
     class GenerationBlockIsObjClosure : public SpaceClosure {
 ```
@@ -325,7 +325,7 @@ Generation クラス内で使用される補助クラス (Closure クラス).
 コンストラクタ引数で渡された OopClosure を実行する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/generation.cpp))
     class GenerationOopIterateClosure : public SpaceClosure {
 ```
@@ -351,7 +351,7 @@ Generation クラス内で使用される補助クラス (Closure クラス).
 コンストラクタ引数で渡された ObjectClosure を実行する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/generation.cpp))
     class GenerationObjIterateClosure : public SpaceClosure {
 ```
@@ -376,7 +376,7 @@ Generation クラス内で使用される補助クラス (Closure クラス).
 コンストラクタ引数で渡された ObjectClosure を実行する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/generation.cpp))
     class GenerationSafeObjIterateClosure : public SpaceClosure {
 ```
@@ -401,7 +401,7 @@ Garbage Collection 処理で使用される Closure クラス.
 その Space 内にある live object 中のポインタを新しいアドレスに修正する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/generation.cpp))
     class AdjustPointersClosure: public SpaceClosure {
 ```

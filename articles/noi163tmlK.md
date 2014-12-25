@@ -9,7 +9,7 @@ title: Histogram クラス関連のクラス (HistogramElement, Histogram)
 これらは, デバッグ用(開発時用)のクラス (#ifdef ASSERT 時にしか定義されない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/histogram.hpp))
     #ifdef ASSERT
 ```
@@ -56,7 +56,7 @@ title: Histogram クラス関連のクラス (HistogramElement, Histogram)
         }
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/histogram.hpp))
     // This class provides a framework for collecting various statistics.
     // The current implementation is oriented towards counting invocations
@@ -113,7 +113,7 @@ Histogram クラス内で使用される補助クラス
 1つの HistogramElement オブジェクトが 1つの統計情報に対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/histogram.hpp))
     class HistogramElement : public CHeapObj {
 ```
@@ -135,7 +135,7 @@ See: [here](../doxygen/classHistogramElement.html) for details
 様々な統計データの収集/出力を行うためのユーティリティ・クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/histogram.hpp))
     class Histogram : public CHeapObj {
 ```

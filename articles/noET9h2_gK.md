@@ -22,7 +22,7 @@ reads/iterations は lock を取らずに実行してよい」とのこと
 (ただし, 挿入時に拡張が起きた場合は古いものを delete 対象として予約するだけに止めておかないといけない. 実際に消しちゃったらダメ).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/sparsePRT.hpp))
     // Sparse remembered set for a heap region (the "owning" region).  Maps
     // indices of other regions to short sequences of cards in the other region
@@ -44,7 +44,7 @@ reads/iterations は lock を取らずに実行してよい」とのこと
  G1HRRSUseSparseTable オプションが指定されてない場合には意味は無いんだろう)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1_globals.hpp))
       develop(bool, G1HRRSUseSparseTable, true,                                 \
               "When true, use sparse table to save space.")                     \
@@ -76,7 +76,7 @@ OtherRegionsTable クラス内で使用される補助クラス.
 「各 HeapRegion 内のどの card から指されているか」という情報を格納している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/sparsePRT.hpp))
     class SparsePRT VALUE_OBJ_CLASS_SPEC {
 ```
@@ -141,7 +141,7 @@ G1RemSet::prepare_for_verify()
   _head_expanded_list 大域変数につなぎ直される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/sparsePRT.hpp))
       // The purpose of these three methods is to help the GC workers
       // during the cleanup pause to recreate the expanded list, purging
@@ -186,7 +186,7 @@ SparsePRTEntry オブジェクトを束ねておくためのコンテナクラ�
  RSHashTable オブジェクトが HeapRegion の集合に対応する).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/sparsePRT.hpp))
     class RSHashTable : public CHeapObj {
 ```
@@ -199,7 +199,7 @@ SparsePRTEntry オブジェクトを束ねておくためのコンテナクラ�
 * 各 SparsePRT オブジェクトの _next フィールド
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/sparsePRT.hpp))
       //  Iterations are done on the _cur hash table, since they only need to
       //  see entries visible at the start of a collection pause.
@@ -239,7 +239,7 @@ SparsePRT クラス内で使用される補助クラス.
 (= 「その HeapRegion 内のどの card から指されているか」という情報を記録している).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/sparsePRT.hpp))
     class SparsePRTEntry: public CHeapObj {
 ```
@@ -263,7 +263,7 @@ SparsePRT クラス内で使用される補助クラス.
 ここに, 「その HeapRegion 内のどの card から指されているか」という情報を記録している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/sparsePRT.hpp))
       CardIdx_t   _cards[1];
 ```
@@ -299,7 +299,7 @@ SparsePRT 内の要素を辿るためのイテレータクラスの基底クラ�
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/sparsePRT.hpp))
     // ValueObj because will be embedded in HRRS iterator.
     class RSHashTableIter VALUE_OBJ_CLASS_SPEC {
@@ -320,7 +320,7 @@ HeapRegionRemSetIterator クラス内で使用される補助クラス.
 RSHashTableIter クラスの具象サブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/sparsePRT.hpp))
     class SparsePRTIter: public RSHashTableIter {
 ```
@@ -365,7 +365,7 @@ Cleanup 処理の終了時に全スレッド分の内容が 1つにまとめら�
 (See: SparsePRT::_head_expanded_list, HeapRegionRemSet::finish_cleanup_task()).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/sparsePRT.hpp))
     // This allows each worker during a cleanup pause to create a
     // thread-local list of sparse tables that have been expanded and need

@@ -17,7 +17,7 @@ title: PeriodicTask クラス
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/task.hpp))
     // A PeriodicTask has the sole purpose of executing its task
     // function with regular intervals.
@@ -34,7 +34,7 @@ title: PeriodicTask クラス
 使用する際には, task() メソッドをオーバーライドしたサブクラスを作ればいい.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/task.hpp))
       // The task to perform at each period
       virtual void task() = 0;

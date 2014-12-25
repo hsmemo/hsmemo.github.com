@@ -14,7 +14,7 @@ bytecode 命令にループを表す命令はないが, ループを検出する
 そこでパースが終わった後, C2 はループの検出を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/loopnode.hpp))
     //
     //                  I D E A L I Z E D   L O O P S
@@ -40,7 +40,7 @@ C2 は regular loops の loop header となっている RegionNode を検出し,
   (終値ぴったりで終わるとは限らず, 初期値と増分によっては終値を微妙に超えることがある. LoopLimitNode は正確な終了時の値を計算する).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/loopnode.hpp))
     //------------------------------Counted Loops----------------------------------
     // Counted loops are all trip-counted loops, with exactly 1 trip-counter exit
@@ -86,7 +86,7 @@ RegionNode クラスのサブクラス.
 ループになっている制御構造を表す Node.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/loopnode.hpp))
     // Simple loop header.  Fall in path on left, loop-back path on right.
     class LoopNode : public RegionNode {
@@ -120,14 +120,14 @@ PhaseIdealLoop::build_and_optimize()
 * 3番目の入力Node : ループのバックエッジを示す control input
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/loopnode.hpp))
       // Names for edge indices
       enum { Self=0, EntryControl, LoopBackControl };
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/loopnode.hpp))
       LoopNode( Node *entry, Node *backedge ) : RegionNode(3), _loop_flags(0), _unswitch_count(0) {
         init_class_id(Class_Loop);
@@ -151,7 +151,7 @@ See: [here](../doxygen/classLoopNode.html) for details
 制御変数が固定の初期値から始まり固定の増分幅で変化していくループを表す Node.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/loopnode.hpp))
     // CountedLoopNodes head simple counted loops.  CountedLoopNodes have as
     // inputs the incoming loop-start control and the loop-back control, so they
@@ -182,7 +182,7 @@ PhaseIdealLoop::build_and_optimize()
 * 3番目の入力Node : ループのバックエッジを示す control input
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/loopnode.hpp))
       CountedLoopNode( Node *entry, Node *backedge )
         : LoopNode(entry, backedge), _main_idx(0), _trip_count(max_juint),
@@ -209,7 +209,7 @@ CountedLoopNode クラスと併用される Node.
 CountedLoopNode が表すループの終了判定を示す特殊な IfNode.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/loopnode.hpp))
     // CountedLoopEndNodes end simple trip counted loops.  They act much like
     // IfNodes.
@@ -236,7 +236,7 @@ PhaseIdealLoop::build_and_optimize()
  というか PhaseIdealLoop::is_counted_loop() 内で IfNode を置き換えて作成するので, 入力はそのまま引き継ぐ).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/loopnode.hpp))
       CountedLoopEndNode( Node *control, Node *test, float prob, float cnt )
         : IfNode( control, test, prob, cnt) {
@@ -261,7 +261,7 @@ CountedLoopNode の終了時の制御変数の値を表す
 LoopLimitNode は正確な終了時の値を計算する).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/loopnode.hpp))
     // Counted Loop limit node which represents exact final iterator value:
     // trip_count = (limit - init_trip + stride - 1)/stride
@@ -285,7 +285,7 @@ PhaseIdealLoop::exact_limit() 内で(のみ)生成されている.
 * 4番目の入力Node : 制御変数の増分幅
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/loopnode.hpp))
       LoopLimitNode( Compile* C, Node *init, Node *limit, Node *stride ) : Node(0,init,limit,stride) {
         // Put it on the Macro nodes list to optimize during macro nodes expansion.
@@ -309,7 +309,7 @@ Phase クラスの具象サブクラスの1つ.
 ループの最適化を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/loopnode.hpp))
     // Computes the mapping from Nodes to IdealLoopTrees.  Organizes IdealLoopTrees into a
     // loop tree.  Drives the loop-based transformations on the ideal graph.
@@ -338,7 +338,7 @@ PhaseIdealLoop クラス内で使用される補助クラス(ResourceObjクラ�
 1つの IdealLoopTree オブジェクトが 1つのループに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/loopnode.hpp))
     class IdealLoopTree : public ResourceObj {
 ```
@@ -397,7 +397,7 @@ PhaseIdealLoop クラス内で使用される補助クラス.
 なお, 辿る順番は preorder で left-to-right.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/loopnode.hpp))
     // Iterate over the loop tree using a preorder, left-to-right traversal.
     //

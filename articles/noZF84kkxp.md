@@ -36,7 +36,7 @@ ciBytecodeStream の内部で元々の bytecode に戻している
 (そのため, これらについても JIT コンパイラは知る必要はない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciStreams.hpp))
     // The class is used to iterate over the bytecodes of a method.
     // It hides the details of constant pool structure/access by
@@ -61,7 +61,7 @@ JIT Compiler の作業中に使われる一時オブジェクト(StackObjクラ�
 メソッドの型を表す文字列(Signature String)に対して iterate 処理するためのイテレータクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciStreams.hpp))
     // ciSignatureStream
     //
@@ -90,7 +90,7 @@ JIT Compiler の作業中に使われる一時オブジェクト(StackObjクラ�
 メソッドの例外ハンドラ(Exception Handler)情報に対して iterate 処理するためのイテレータクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciStreams.hpp))
     // ciExceptionHandlerStream
     //

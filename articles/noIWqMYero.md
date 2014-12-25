@@ -47,7 +47,7 @@ Node クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/mulnode.hpp))
     // Classic MULTIPLY functionality.  This covers all the usual 'multiply'
     // behaviors for an algebraic ring.  Multiply-integer, multiply-float,
@@ -61,7 +61,7 @@ Node クラスのサブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/mulnode.hpp))
       MulNode( Node *in1, Node *in2 ): Node(0,in1,in2) {
         init_class_id(Class_Mul);
@@ -88,7 +88,7 @@ MulNode クラスの具象サブクラスの1つ.
 このクラスは int 値同士の乗算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/mulnode.hpp))
     // Multiply 2 integers
     class MulINode : public MulNode {
@@ -98,7 +98,7 @@ MulNode クラスの具象サブクラスの1つ.
 `#ifdef _LP64` でない場合は, これは MulINode の別名.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     #define MulXNode     MulINode
 ```
@@ -108,7 +108,7 @@ MulNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/mulnode.hpp))
       MulINode( Node *in1, Node *in2 ) : MulNode(in1,in2) {}
 ```
@@ -127,7 +127,7 @@ MulNode クラスの具象サブクラスの1つ.
 このクラスは long 値同士の乗算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/mulnode.hpp))
     // Multiply 2 longs
     class MulLNode : public MulNode {
@@ -137,7 +137,7 @@ MulNode クラスの具象サブクラスの1つ.
 `#ifdef _LP64` の場合は, これは MulLNode の別名.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     #define MulXNode     MulLNode
 ```
@@ -147,7 +147,7 @@ MulNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/mulnode.hpp))
       MulLNode( Node *in1, Node *in2 ) : MulNode(in1,in2) {}
 ```
@@ -166,7 +166,7 @@ MulNode クラスの具象サブクラスの1つ.
 このクラスは float 値同士の乗算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/mulnode.hpp))
     // Multiply 2 floats
     class MulFNode : public MulNode {
@@ -177,7 +177,7 @@ MulNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/mulnode.hpp))
       MulFNode( Node *in1, Node *in2 ) : MulNode(in1,in2) {}
 ```
@@ -196,7 +196,7 @@ MulNode クラスの具象サブクラスの1つ.
 このクラスは double 値同士の乗算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/mulnode.hpp))
     // Multiply 2 doubles
     class MulDNode : public MulNode {
@@ -207,7 +207,7 @@ MulNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/mulnode.hpp))
       MulDNode( Node *in1, Node *in2 ) : MulNode(in1,in2) {}
 ```
@@ -228,7 +228,7 @@ MulNode クラスの具象サブクラスの1つ.
 このクラスは 64bit 同士の乗算結果の上位64bitを表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/mulnode.hpp))
     // Upper 64 bits of a 64 bit by 64 bit multiply
     class MulHiLNode : public Node {
@@ -254,7 +254,7 @@ ModLNode::Ideal()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/mulnode.hpp))
       MulHiLNode( Node *in1, Node *in2 ) : Node(0,in1,in2) {}
 ```
@@ -273,7 +273,7 @@ MulINode クラスのサブクラス.
 このクラスは int 値同士の論理積(ビットAND)演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/mulnode.hpp))
     // Logically AND 2 integers.  Included with the MUL nodes because it inherits
     // all the behavior of multiplication on a ring.
@@ -284,7 +284,7 @@ MulINode クラスのサブクラス.
 `#ifdef _LP64` でない場合は, これは AndINode の別名.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     #define AndXNode     AndINode
 ```
@@ -294,7 +294,7 @@ MulINode クラスのサブクラス.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/mulnode.hpp))
       AndINode( Node *in1, Node *in2 ) : MulINode(in1,in2) {}
 ```
@@ -313,7 +313,7 @@ MulLNode クラスのサブクラス.
 このクラスは long 値同士の論理積(ビットAND)演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/mulnode.hpp))
     // Logically AND 2 longs.  Included with the MUL nodes because it inherits
     // all the behavior of multiplication on a ring.
@@ -324,7 +324,7 @@ MulLNode クラスのサブクラス.
 `#ifdef _LP64` の場合は, これは AndLNode の別名.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     #define AndXNode     AndLNode
 ```
@@ -334,7 +334,7 @@ MulLNode クラスのサブクラス.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/mulnode.hpp))
       AndLNode( Node *in1, Node *in2 ) : MulLNode(in1,in2) {}
 ```
@@ -353,7 +353,7 @@ Node クラスの具象サブクラスの1つ.
 このクラスは int 値に対する左シフト演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/mulnode.hpp))
     // Logical shift left
     class LShiftINode : public Node {
@@ -362,7 +362,7 @@ Node クラスの具象サブクラスの1つ.
 なお LShiftXNode という型も使われるが, `#ifdef _LP64` でない場合は, これは LShiftINode の別名.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     #define LShiftXNode  LShiftINode
 ```
@@ -372,7 +372,7 @@ Node クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/mulnode.hpp))
       LShiftINode( Node *in1, Node *in2 ) : Node(0,in1,in2) {}
 ```
@@ -391,7 +391,7 @@ Node クラスの具象サブクラスの1つ.
 このクラスは long 値に対する左シフト演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/mulnode.hpp))
     // Logical shift left
     class LShiftLNode : public Node {
@@ -400,7 +400,7 @@ Node クラスの具象サブクラスの1つ.
 なお LShiftXNode という型も使われるが, `#ifdef _LP64` の場合は, これは LShiftLNode の別名.   
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     #define LShiftXNode  LShiftLNode
 ```
@@ -410,7 +410,7 @@ Node クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/mulnode.hpp))
       LShiftLNode( Node *in1, Node *in2 ) : Node(0,in1,in2) {}
 ```
@@ -429,7 +429,7 @@ Node クラスの具象サブクラスの1つ.
 このクラスは int 値に対する算術右シフト演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/mulnode.hpp))
     // Signed shift right
     class RShiftINode : public Node {
@@ -438,7 +438,7 @@ Node クラスの具象サブクラスの1つ.
 なお RShiftXNode という型も使われるが, `#ifdef _LP64` でない場合は, これは RShiftINode の別名.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     #define RShiftXNode  RShiftINode
 ```
@@ -448,7 +448,7 @@ Node クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/mulnode.hpp))
       RShiftINode( Node *in1, Node *in2 ) : Node(0,in1,in2) {}
 ```
@@ -467,7 +467,7 @@ Node クラスの具象サブクラスの1つ.
 このクラスは long 値に対する算術右シフト演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/mulnode.hpp))
     // Signed shift right
     class RShiftLNode : public Node {
@@ -476,7 +476,7 @@ Node クラスの具象サブクラスの1つ.
 なお RShiftXNode という型も使われるが, `#ifdef _LP64` の場合は, これは RShiftLNode の別名.   
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     #define RShiftXNode  RShiftLNode
 ```
@@ -486,7 +486,7 @@ Node クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/mulnode.hpp))
       RShiftLNode( Node *in1, Node *in2 ) : Node(0,in1,in2) {}
 ```
@@ -505,7 +505,7 @@ Node クラスの具象サブクラスの1つ.
 このクラスは int 値に対する論理右シフト演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/mulnode.hpp))
     // Logical shift right
     class URShiftINode : public Node {
@@ -514,7 +514,7 @@ Node クラスの具象サブクラスの1つ.
 なお URShiftXNode という型も使われるが, `#ifdef _LP64` でない場合は, これは URShiftINode の別名.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     #define URShiftXNode URShiftINode
 ```
@@ -524,7 +524,7 @@ Node クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/mulnode.hpp))
       URShiftINode( Node *in1, Node *in2 ) : Node(0,in1,in2) {}
 ```
@@ -543,7 +543,7 @@ Node クラスの具象サブクラスの1つ.
 このクラスは long 値に対する論理右シフト演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/mulnode.hpp))
     // Logical shift right
     class URShiftLNode : public Node {
@@ -552,7 +552,7 @@ Node クラスの具象サブクラスの1つ.
 なお URShiftXNode という型も使われるが, `#ifdef _LP64` の場合は, これは URShiftLNode の別名.   
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     #define URShiftXNode URShiftLNode
 ```
@@ -562,7 +562,7 @@ Node クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/mulnode.hpp))
       URShiftLNode( Node *in1, Node *in2 ) : Node(0,in1,in2) {}
 ```

@@ -26,7 +26,7 @@ title: AbstractInterpreter クラスおよび AbstractInterpreterGenerator ク�
 (というか AllStatic なので関係ない. 実際このクラスのメソッドは使用されている).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/abstractInterpreter.hpp))
     // This file contains the platform-independent parts
     // of the abstract interpreter and the abstract interpreter generator.
@@ -72,7 +72,7 @@ Interpreter の構築処理で使用される一時オブジェクト(StackObj�
 このクラスのサブクラスによって, 各 Interpreter クラス用のマシン語コード片が生成される (See: [here](no7882AgC.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/abstractInterpreter.hpp))
     //------------------------------------------------------------------------------------------------------------------------
     // The interpreter generator.

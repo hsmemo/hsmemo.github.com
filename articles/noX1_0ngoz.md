@@ -51,7 +51,7 @@ HeapRegionSet は, 複数の HeapRegion からなる集合 (の統計情報) を
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionSet.hpp))
     // Base class for all the classes that represent heap region sets. It
     // contains the basic attributes that each set needs to maintain
@@ -60,7 +60,7 @@ HeapRegionSet は, 複数の HeapRegion からなる集合 (の統計情報) を
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionSet.hpp))
     class HeapRegionSetBase VALUE_OBJ_CLASS_SPEC {
 ```
@@ -82,7 +82,7 @@ HeapRegionSetBase クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionSet.hpp))
     // This class represents heap region sets whose members are not
     // explicitly tracked. It's helpful to group regions using such sets
@@ -102,7 +102,7 @@ thread local なコピーを作る HeapRegionSet::remove_with_proxy() と,
 コピーの結果を本体に反映させるための HeapRegionSet::update_from_proxy() も備えている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionSet.hpp))
       // It adds hr to the set. The region should not be a member of
       // another set.
@@ -150,7 +150,7 @@ HeapRegionSetBase クラスのサブクラスの1つ.
  これらであれば(linked list なので)定数時間だから問題ない, とのこと).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionSet.hpp))
     //////////////////// HeapRegionLinkedList ////////////////////
     
@@ -162,7 +162,7 @@ HeapRegionSetBase クラスのサブクラスの1つ.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionSet.hpp))
     class HeapRegionLinkedList : public HeapRegionSetBase {
 ```
@@ -172,7 +172,7 @@ HeapRegionSetBase クラスのサブクラスの1つ.
 (リスト自体は HeapRegion オブジェクトの _next フィールドを用いて構築).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionSet.hpp))
       HeapRegion* _head;
       HeapRegion* _tail;
@@ -200,7 +200,7 @@ HeapRegionSet 内のフィールドの値にもアクセスでき, より詳細�
 (See: HeapRegionSetBase::fill_in_ext_msg()).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionSet.hpp))
     // Customized err_msg for heap region sets. Apart from a
     // assert/guarantee-specific message it also prints out the values of
@@ -228,7 +228,7 @@ See: [here](../doxygen/classhrs__ext__msg.html) for details
 HeapRegionLinkedList 内の要素をたどるためのイテレータクラス(StackObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionSet.hpp))
     //////////////////// HeapRegionLinkedListIterator ////////////////////
     

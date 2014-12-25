@@ -45,7 +45,7 @@ JVMTI 接続毎の状態の管理は, このクラスだけでなく, JvmtiEnvBa
      (See: JvmtiEnvThreadEventEnable) (See: [here](no2935C7Z.html) for details))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEnvThreadState.hpp))
     ///////////////////////////////////////////////////////////////
     //
@@ -96,7 +96,7 @@ JvmtiGCMarker::JvmtiGCMarker()
 ### 内部構造(Internal structure)
 SetThreadLocalStorage() でセットされたデータは以下のフィールドに格納される. (See: [here](no2935cPm.html) for details)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEnvThreadState.hpp))
       void              *_agent_thread_local_storage_data; // per env and per thread agent allocated data.
 ```
@@ -117,7 +117,7 @@ JvmtiEnvThreadState クラス内で使用される補助クラス
 JVMTI の NotifyFramePop() で予約された frame を記録しておくためのクラス (See: [here](no2935pZs.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEnvThreadState.hpp))
     ///////////////////////////////////////////////////////////////
     //
@@ -139,7 +139,7 @@ JVMTI の NotifyFramePop() で予約された frame を記録しておくため�
 (ただし, オブジェクトの生成は実際に必要になるまで遅延されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEnvThreadState.hpp))
       // Class used to store pending framepops.
       // lazily initialized by get_frame_pops();
@@ -170,7 +170,7 @@ JvmtiEventControllerPrivate::clear_to_frame_pop()
 (この GrowableArray<int> を使って指定された frame の番号を記録している).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEnvThreadState.hpp))
       GrowableArray<int>* _pops;
 ```
@@ -193,7 +193,7 @@ JvmtiFramePops と他のクラスの間で
 (なおコメントによると, 多少問題があるので rewrite したい, とのこと)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEnvThreadState.hpp))
     ///////////////////////////////////////////////////////////////
     //
@@ -216,7 +216,7 @@ JvmtiFramePops と他のクラスの間で
 (このフィールドが frame の番号を示す. 最も古い frame が 0 で新しくなる毎に 1つずつ増えていく.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEnvThreadState.hpp))
      private:
       // Frame number counting from BOTTOM (oldest) frame;
@@ -241,7 +241,7 @@ JvmtiEnvThreadState クラス内で使用される補助クラス(VM_Operation�
 (これらの情報は stack が walkable でないと取得しにくいので VM_Operation になっている).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEnvThreadState.cpp))
     class VM_GetCurrentLocation : public VM_Operation {
 ```

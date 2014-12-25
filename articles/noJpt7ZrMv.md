@@ -19,7 +19,7 @@ Phase クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/regalloc.hpp))
     //------------------------------PhaseRegAlloc------------------------------------
     // Abstract register allocator

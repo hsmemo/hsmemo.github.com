@@ -12,7 +12,7 @@ title: JNI の処理 ： Invocation API の処理 ： GetEnv() の処理 ： (�
 
 ### jni_NativeInterface
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jni.cpp))
     // Structure containing all jni functions
     struct JNINativeInterface_ jni_NativeInterface = {
@@ -299,7 +299,7 @@ title: JNI の処理 ： Invocation API の処理 ： GetEnv() の処理 ： (�
 
 ### checked_jni_NativeInterface
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jniCheck.cpp))
     /*
      * Structure containing all checked jni functions

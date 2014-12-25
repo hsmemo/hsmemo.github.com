@@ -53,7 +53,7 @@ See: [here](no2114_1q.html) for details
 java.lang.Thread.yield() は JVM_Yield() で実装されている.
 
 
-```
+```cpp
     ((cite: jdk/src/share/native/java/lang/Thread.c))
     static JNINativeMethod methods[] = {
     ...

@@ -40,7 +40,7 @@ title: NativeInstruction クラス関連のクラス (NativeInstruction, NativeC
 (コメントには存在しないクラスの名前も書かれていたりするが...)
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/nativeInst_x86.hpp))
     // We have interfaces for the following instructions:
     // - NativeInstruction
@@ -85,7 +85,7 @@ title: NativeInstruction クラス関連のクラス (NativeInstruction, NativeC
 一度生成したマシン語を修正するためのクラス (の基底クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/nativeInst_x86.hpp))
     // The base class for different kinds of native instruction abstractions.
     // Provides the primitive operations to manipulate code relative to this.
@@ -103,7 +103,7 @@ nativeInstruction_at() 関数で,
 NativeInstruction::is_*() メソッドでそのマシン語の種別を取得できる.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/nativeInst_x86.hpp))
       bool is_nop()                        { return ubyte_at(0) == nop_instruction_code; }
       bool is_dtrace_trap();
@@ -142,7 +142,7 @@ NativeInstruction クラスのサブクラスの1つ.
 このクラスは call 命令(関数呼び出し命令)を処理する.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/nativeInst_x86.hpp))
     // The NativeCall is an abstraction for accessing/manipulating native call imm32/rel32off
     // instructions (used to manipulate inline caches, primitive & dll calls, etc.).
@@ -161,7 +161,7 @@ NativeCall::destination() メソッドでジャンプ先のアドレスが取得
 また, NativeCall::set_destination() でジャンプ先のアドレスを書き換えることもできる.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/nativeInst_x86.hpp))
       bool is_nop()                        { return ubyte_at(0) == nop_instruction_code; }
       bool is_dtrace_trap();
@@ -193,7 +193,7 @@ NativeInstruction クラスのサブクラスの1つ.
 このクラスは "mov reg, imm32" 命令(レジスタに32bit即値をセットする命令)を処理する.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/nativeInst_x86.hpp))
     // An interface for accessing/manipulating native mov reg, imm32 instructions.
     // (used to manipulate inlined 32bit data dll calls, etc.)
@@ -211,7 +211,7 @@ NativeMovConstReg::data() メソッドで即値部分のデータが取得でき
 また, NativeMovConstReg::set_data() で即値部分を書き換えることもできる.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/nativeInst_x86.hpp))
       bool is_nop()                        { return ubyte_at(0) == nop_instruction_code; }
       bool is_dtrace_trap();
@@ -242,7 +242,7 @@ See: [here](../doxygen/classNativeMovConstReg.html) for details
 ?? (このクラスは使用箇所が見当たらない...)
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/nativeInst_x86.hpp))
     class NativeMovConstRegPatching: public NativeMovConstReg {
 ```
@@ -261,7 +261,7 @@ NativeInstruction クラスのサブクラスの1つ.
 このクラスは, メモリの load/store 命令を処理する.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/nativeInst_x86.hpp))
     // An interface for accessing/manipulating native moves of the form:
     //      mov[b/w/l/q] [reg + offset], reg   (instruction_code_reg2mem)
@@ -293,7 +293,7 @@ NativeMovRegMem::offset() メソッドでアクセスする際のオフセット
 また, NativeMovRegMem::set_offset() や NativeMovRegMem::add_offset_in_bytes() でオフセット値を変更することもできる.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/nativeInst_x86.hpp))
       bool is_nop()                        { return ubyte_at(0) == nop_instruction_code; }
       bool is_dtrace_trap();
@@ -324,7 +324,7 @@ See: [here](../doxygen/classNativeMovRegMem.html) for details
 ?? (このクラスは使用箇所が見当たらない...)
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/nativeInst_x86.hpp))
     class NativeMovRegMemPatching: public NativeMovRegMem {
 ```
@@ -342,7 +342,7 @@ See: [here](../doxygen/classNativeMovRegMemPatching.html) for details
 ?? (このクラスは使用箇所が見当たらない...)
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/nativeInst_x86.hpp))
     // An interface for accessing/manipulating native leal instruction of form:
     //        leal reg, [reg + offset]
@@ -364,7 +364,7 @@ NativeInstruction クラスのサブクラスの1つ.
 このクラスは, 32bit 相対オフセットのジャンプ命令を処理する.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/nativeInst_x86.hpp))
     // jump rel32off
     
@@ -382,7 +382,7 @@ NativeJump::jump_destination() メソッドでジャンプ先のアドレスが�
 また, NativeJump::set_jump_destination() でオフセット値を変更することもできる.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/nativeInst_x86.hpp))
       bool is_nop()                        { return ubyte_at(0) == nop_instruction_code; }
       bool is_dtrace_trap();
@@ -415,7 +415,7 @@ NativeInstruction クラスのサブクラスの1つ.
 このクラスは, ジャンプ命令一般を処理する.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/nativeInst_x86.hpp))
     // Handles all kinds of jump on Intel. Long/far, conditional/unconditional
     class NativeGeneralJump: public NativeInstruction {
@@ -431,7 +431,7 @@ nativeGeneralJump_at() 関数で,
 NativeGeneralJump::jump_destination() メソッドでジャンプ先のアドレスが取得できる.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/nativeInst_x86.hpp))
       bool is_nop()                        { return ubyte_at(0) == nop_instruction_code; }
       bool is_dtrace_trap();
@@ -462,7 +462,7 @@ See: [here](../doxygen/classNativeGeneralJump.html) for details
 ?? (このクラスは使用箇所が見当たらない...)
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/nativeInst_x86.hpp))
     class NativePopReg : public NativeInstruction {
 ```
@@ -482,7 +482,7 @@ NativeInstruction クラスのサブクラスの1つ.
 (このクラスは AllStatic ではないが, static なフィールド／メソッドしか持たない).
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/nativeInst_x86.hpp))
     class NativeIllegalInstruction: public NativeInstruction {
 ```
@@ -496,7 +496,7 @@ NativeIllegalInstruction::insert() で,
 内部には以下の定数定義およびメソッド定義(のみ)を含む.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/nativeInst_x86.hpp))
       enum Intel_specific_constants {
         instruction_code            = 0x0B0F,    // Real byte order is: 0x0F, 0x0B
@@ -507,7 +507,7 @@ NativeIllegalInstruction::insert() で,
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/nativeInst_x86.hpp))
       // Insert illegal opcode as specific address
       static void insert(address code_pos);
@@ -530,7 +530,7 @@ NativeInstruction クラスのサブクラスの1つ.
 (このクラスは AllStatic ではないが, static な定義しか持たない).
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/nativeInst_x86.hpp))
     // return instruction that does not pop values of the stack
     class NativeReturn: public NativeInstruction {
@@ -544,7 +544,7 @@ NativeInstruction::is_return() 内で(のみ)使用されている
 内部には以下の定数定義(のみ)を含む.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/nativeInst_x86.hpp))
       enum Intel_specific_constants {
         instruction_code            = 0xC3,
@@ -571,7 +571,7 @@ NativeInstruction クラスのサブクラスの1つ.
 (このクラスは AllStatic ではないが, static な定義しか持たない).
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/nativeInst_x86.hpp))
     // return instruction that does pop values of the stack
     class NativeReturnX: public NativeInstruction {
@@ -585,7 +585,7 @@ NativeInstruction::is_return() 内で(のみ)使用されている
 内部には以下の定数定義(のみ)を含む.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/nativeInst_x86.hpp))
       enum Intel_specific_constants {
         instruction_code            = 0xC2,
@@ -612,7 +612,7 @@ NativeInstruction クラスのサブクラスの1つ.
 (このクラスは AllStatic ではないが, static な定義しか持たない).
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/nativeInst_x86.hpp))
     // Simple test vs memory
     class NativeTstRegMem: public NativeInstruction {
@@ -626,7 +626,7 @@ NativeInstruction::is_safepoint_poll() 内で(のみ)使用されている.
 内部には以下の定数定義(のみ)を含む.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/nativeInst_x86.hpp))
       enum Intel_specific_constants {
         instruction_rex_prefix_mask = 0xF0,

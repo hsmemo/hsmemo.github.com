@@ -42,7 +42,7 @@ JIT コンパイラが生成した virtual call 箇所を動的に書き換え�
 Inline Caching を実現するためのもので, 名前も "compiled inline cache" の略らしい (See: [here](no7882oxz.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/compiledIC.hpp))
     class CompiledIC: public ResourceObj {
 ```
@@ -54,7 +54,7 @@ CompiledIC_at() や CompiledIC_before() などがファクトリメソッド
 call site の program counter を指定すると, そこから情報を抽出して CompiledIC オブジェクトが作られる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/compiledIC.hpp))
       // conversion (machine PC to CompiledIC*)
       friend CompiledIC* CompiledIC_before(address return_addr);
@@ -71,7 +71,7 @@ call site の program counter を指定すると, そこから情報を抽出し
 * その後, ICmiss が起きると(=ディスパッチ先のクラスが複数ある可能性が出てきたら), megamorphic モードになって methodOop を渡すようになる
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/compiledIC.hpp))
     //-----------------------------------------------------------------------------
     // The CompiledIC represents a compiled inline cache.
@@ -119,7 +119,7 @@ CompiledIC から使用される補助クラス.
 (CompiledIC は, ここに格納された情報に基づいて書き換えを行う).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/compiledIC.hpp))
     class CompiledICInfo {
 ```
@@ -128,7 +128,7 @@ CompiledIC から使用される補助クラス.
 以下のように使われる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntime.cpp))
     methodHandle SharedRuntime::resolve_sub_helper(JavaThread *thread,
                                                bool is_virtual,
@@ -153,7 +153,7 @@ CompiledIC から使用される補助クラス.
 また, SharedRuntime::handle_ic_miss_helper() 内でも同様にして使われている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntime.cpp))
     methodHandle SharedRuntime::handle_ic_miss_helper(JavaThread *thread, TRAPS) {
 ```
@@ -175,7 +175,7 @@ JIT コンパイラが生成した static call 箇所を動的に書き換える
 static call site に対する relocation 処理をまとめたユーティリティ・クラスという感じ)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/compiledIC.hpp))
     class CompiledStaticCall: public NativeCall {
 ```
@@ -188,7 +188,7 @@ static call site に対する relocation 処理をまとめたユーティリテ
   (なお interpreter の場合は, methodOop 引数をセットするために, static_stub というスタブを介してのジャンプにする)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/compiledIC.hpp))
     //-----------------------------------------------------------------------------
     // The CompiledStaticCall represents a call to a static method in the compiled
@@ -223,7 +223,7 @@ CompiledStaticCall から使用される補助クラス.
 (CompiledStaticCall は, ここに格納された情報に基づいて書き換えを行う).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/compiledIC.hpp))
     class StaticCallInfo {
 ```
@@ -232,7 +232,7 @@ CompiledStaticCall から使用される補助クラス.
 以下のように使われる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntime.cpp))
     methodHandle SharedRuntime::resolve_sub_helper(JavaThread *thread,
                                                bool is_virtual,

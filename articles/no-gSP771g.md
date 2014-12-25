@@ -9,7 +9,7 @@ title: NumberSeq クラス関連のクラス (AbsSeq, NumberSeq, TruncatedSeq)
 これらは, 収集した数値データを基に, それらの最大値, 平均値, 分散といった統計情報を計算するためのユーティリティ・クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/numberSeq.hpp))
     /**
      **  This file contains a few classes that represent number sequence,
@@ -39,7 +39,7 @@ title: NumberSeq クラス関連のクラス (AbsSeq, NumberSeq, TruncatedSeq)
 全ての NumberSeq クラスの基底クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/numberSeq.hpp))
     class AbsSeq {
 ```
@@ -51,7 +51,7 @@ title: NumberSeq クラス関連のクラス (AbsSeq, NumberSeq, TruncatedSeq)
 1. 収集した数値データを add() メソッドでどんどん追加していけばよい.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/numberSeq.hpp))
       virtual void add(double val); // adds a new element to the sequence
 ```
@@ -59,7 +59,7 @@ title: NumberSeq クラス関連のクラス (AbsSeq, NumberSeq, TruncatedSeq)
 2. 統計情報が知りたくなったら以下のメソッドを呼ぶ. (返値として最大値, 平均値, 分散といった統計情報が返される)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/numberSeq.hpp))
       virtual double maximum() const = 0; // maximum element in the sequence
       virtual double last() const = 0; // last element added in the sequence
@@ -91,7 +91,7 @@ See: [here](../doxygen/classAbsSeq.html) for details
 AbsSeq クラスの具象サブクラスの1つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/numberSeq.hpp))
     class NumberSeq: public AbsSeq {
 ```
@@ -116,7 +116,7 @@ See: [here](../doxygen/classNumberSeq.html) for details
 add() したデータのうち, 最後の L 個以外を無視した統計情報を返す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/numberSeq.hpp))
     class TruncatedSeq: public AbsSeq {
 ```
@@ -124,7 +124,7 @@ add() したデータのうち, 最後の L 個以外を無視した統計情報
 (デフォルトでは最後の 10 個分だけを使用)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/numberSeq.hpp))
       enum PrivateConstants {
         DefaultSeqLength = 10

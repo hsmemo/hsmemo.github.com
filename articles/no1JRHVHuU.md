@@ -31,7 +31,7 @@ Biased Locking 機能に関する処理を納めた名前空間(AllStatic クラ
 (なお, fast-path の処理はアセンブリで組まれたルーチンが使われるので, ここにはない)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/biasedLocking.hpp))
     class BiasedLocking : AllStatic {
 ```
@@ -51,7 +51,7 @@ BiasedLocking クラス内で使用される補助クラス(VM_Operationクラ�
 Biased Locking 機能の初期化を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/biasedLocking.cpp))
     class VM_EnableBiasedLocking: public VM_Operation {
 ```
@@ -81,7 +81,7 @@ HotSpot の起動から BiasedLockingStartupDelay ミリ秒経過した時点で
  (See: BiasedLocking::init()))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/biasedLocking.cpp))
     // One-shot PeriodicTask subclass for enabling biased locking
     class EnableBiasedLockingTask : public PeriodicTask {
@@ -109,7 +109,7 @@ BiasedLocking クラス内で使用される補助クラス(VM_Operationクラ�
 Safepoint 停止を使って安全に Bias を解除する(= revoke する).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/biasedLocking.cpp))
     class VM_RevokeBias : public VM_Operation {
 ```
@@ -135,7 +135,7 @@ BiasedLocking クラス内で使用される補助クラス(VM_Operationクラ�
 Bulk Rebias 処理, 及び Bulk Revoke 処理を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/biasedLocking.cpp))
     class VM_BulkRevokeBias : public VM_RevokeBias {
 ```
@@ -159,7 +159,7 @@ See: [here](../doxygen/classVM__BulkRevokeBias.html) for details
 Biased Locking 機能に関するプロファイル情報を溜めていくためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/biasedLocking.hpp))
     // Biased locking counters
     class BiasedLockingCounters VALUE_OBJ_CLASS_SPEC {

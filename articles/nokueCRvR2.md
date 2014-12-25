@@ -17,7 +17,7 @@ JVMTI の関数 (より具体的に言うと, RunAgentThread() 関数) を実装
 RunAgentThread() 関数によって生成されるスレッドを表す (See: [here](no29357ZC.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiAgentThread.hpp))
     //
     // class JvmtiAgentThread

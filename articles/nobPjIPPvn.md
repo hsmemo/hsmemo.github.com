@@ -16,7 +16,7 @@ title: JNI の処理 ： native method の処理 ： native method の dynamic l
 JNI_OnLoad のシンボル名は, プラットフォームによっては (より具体的に言うと Windows の場合には) 複数の候補が存在することがある.
 
 
-```
+```cpp
     ((cite: hotspot/src/os/windows/vm/jvm_windows.h))
     #define JNI_ONLOAD_SYMBOLS      {"_JNI_OnLoad@8", "JNI_OnLoad"}
 ```

@@ -38,7 +38,7 @@ VM 内での処理で確保した Handle をまとめて解放する.
 (なお, HandleMark より用途が限定されているので, それに合わせた軽量化も行われている, とのこと)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/interfaceSupport.hpp))
     // Wrapper for all entry points to the virtual machine.
     // The HandleMarkCleaner is a faster version of HandleMark.
@@ -79,7 +79,7 @@ VM 内での処理で確保した Handle をまとめて解放する.
 デストラクタで HandleMark::pop_and_restore() を呼んでその値まで HandleArea を戻すだけ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/interfaceSupport.hpp))
       HandleMarkCleaner(Thread* thread) {
         _thread = thread;
@@ -112,7 +112,7 @@ HandleMarkCleaner は単に, この HandleMark が記録した値まで HandleAr
 (本当に呼び出し直前に置かれている).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/javaCalls.cpp))
     void JavaCalls::call_helper(JavaValue* result, methodHandle* m, JavaCallArguments* args, TRAPS) {
     ...
@@ -150,7 +150,7 @@ VM 内の処理(= ランタイムの処理)に遷移する際,
  __ENTRY マクロ (これらは VM 内へのエントリポイントを示すマクロ) 内で使用されるクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/interfaceSupport.hpp))
     // InterfaceSupport provides functionality used by the __LEAF and __ENTRY
     // macros. These macros are used to guard entry points into the VM and
@@ -188,7 +188,7 @@ VM 内の処理(= ランタイムの処理)に遷移する際,
 share/ 部で定義されている内容 ("// OS dependent stuff" より前の内容) は全て #ifdef ASSERT 時にしか定義されない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/interfaceSupport.hpp))
     # ifdef ASSERT
      public:
@@ -250,7 +250,7 @@ Safepoint 停止処理で使用される一時オブジェクト(StackObjクラ�
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/interfaceSupport.hpp))
     // Basic class for all thread transition classes.
     
@@ -272,7 +272,7 @@ ThreadStateTransition クラスの具象サブクラスの1つ.
 このクラスは, Java プログラムを実行している状態 (_thread_in_Java) からランタイム内 (_thread_in_vm) への遷移時用 (See: [here](noadKcOM5n.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/interfaceSupport.hpp))
     class ThreadInVMfromJava : public ThreadStateTransition {
 ```
@@ -292,7 +292,7 @@ ThreadStateTransition クラスに類似したクラス.
 このクラスは, 不定な状態からランタイム内 (_thread_in_vm) への遷移時用 (See: [here](noadKcOM5n.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/interfaceSupport.hpp))
     class ThreadInVMfromUnknown {
 ```
@@ -318,7 +318,7 @@ ThreadStateTransition クラスの具象サブクラスの1つ.
 このクラスは, ネイティブコードを実行している状態 (_thread_in_native) からランタイム内 (_thread_in_vm) への遷移時用 (See: [here](noadKcOM5n.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/interfaceSupport.hpp))
     class ThreadInVMfromNative : public ThreadStateTransition {
 ```
@@ -338,7 +338,7 @@ ThreadStateTransition クラスの具象サブクラスの1つ.
 このクラスは, ランタイム内 (_thread_in_vm) からネイティブコード実行状態 (_thread_in_native) への遷移時用 (See: [here](noadKcOM5n.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/interfaceSupport.hpp))
     class ThreadToNativeFromVM : public ThreadStateTransition {
 ```
@@ -358,7 +358,7 @@ ThreadStateTransition クラスの具象サブクラスの1つ.
 このクラスは, ランタイム内 (_thread_in_vm) からブロックされている状態/待機状態 (_thread_blocked) への遷移時用 (See: [here](noadKcOM5n.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/interfaceSupport.hpp))
     class ThreadBlockInVM : public ThreadStateTransition {
 ```
@@ -384,7 +384,7 @@ ThreadStateTransition クラスの具象サブクラスの1つ.
  その際の引数が false になっており asynchrounous exception 用の処理がスキップされる, という点) (See: [here](noadKcOM5n.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/interfaceSupport.hpp))
     // This special transition class is only used to prevent asynchronous exceptions
     // from being installed on vm exit in situations where we can't tolerate them.
@@ -407,7 +407,7 @@ See: [here](../doxygen/classThreadInVMfromJavaNoAsyncException.html) for details
 VM 内(ランタイム内)に入る際と出る際のチェック処理を行う一時オブジェクト.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/interfaceSupport.hpp))
     // Debug class instantiated in JRT_ENTRY and ITR_ENTRY macro.
     // Can be used to verify properties on enter/exit of the VM.
@@ -444,7 +444,7 @@ VM 内(ランタイム内)に入る際と出る際のチェック処理を行う
   * VerifyStack
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/interfaceSupport.hpp))
       VMEntryWrapper() {
         if (VerifyLastFrame) {
@@ -501,7 +501,7 @@ VM 内(ランタイム内)に入る際と出る際のチェック処理を行う
 特にこのクラスは「ネイティブコードを実行している状態 (_thread_in_native) からランタイム内 (_thread_in_vm)」への遷移時にチェックを行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/interfaceSupport.hpp))
     class VMNativeEntryWrapper {
 ```
@@ -531,7 +531,7 @@ VM 内(ランタイム内)に入る際と出る際のチェック処理を行う
   * GCALotAtAllSafepoints
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/interfaceSupport.hpp))
       VMNativeEntryWrapper() {
         if (GCALotAtAllSafepoints) InterfaceSupport::check_gc_alot();
@@ -560,7 +560,7 @@ VM 内(ランタイム内)へのエントリポイントとなる各関数につ
 それぞれが何回呼び出されたかを記録する HistogramElement クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/interfaceSupport.hpp))
     // VM-internal runtime interface support
     
@@ -594,7 +594,7 @@ TRACE_CALL() マクロ 内で(のみ)記録されている.
 現在は, print_statistics() 内で(のみ)出力されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/java.cpp))
     void print_statistics() {
     
@@ -608,7 +608,7 @@ TRACE_CALL() マクロ 内で(のみ)記録されている.
 
 #### 参考(for your information): TRACE_CALL() マクロ  (#ifdef ASSERT の場合)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/interfaceSupport.hpp))
     #define TRACE_CALL(result_type, header)                            \
       InterfaceSupport::_number_of_calls++;                            \

@@ -9,7 +9,7 @@ title: Safepoint クラス関連のクラス (SafepointSynchronize, ThreadSafepo
 これらは, Safepoint 停止処理のためのクラス (See: [here](no7882dWU.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/safepoint.hpp))
     //
     // Safepoint synchronization
@@ -42,7 +42,7 @@ Safepoint 停止処理に関する機能を納めた名前空間(AllStatic ク�
 Safepoint 処理を開始／終了するメソッドや, その他の Safepoint 停止に関する雑多な処理が納められている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/safepoint.hpp))
     //
     // Implements roll-forward to safepoint (safepoint synchronization)
@@ -69,7 +69,7 @@ SafepointSynchronize クラス用の補助クラス.
 各 JavaThread の Safepoint 状態 (e.g. 活動中, Safepoint 停止中, etc) を記録しているクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/safepoint.hpp))
     // State class for a thread suspended at a safepoint
     class ThreadSafepointState: public CHeapObj {
@@ -80,7 +80,7 @@ SafepointSynchronize クラス用の補助クラス.
 各 JavaThread オブジェクトの _safepoint_state フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.hpp))
     class JavaThread: public Thread {
     ...

@@ -21,7 +21,7 @@ JITコンパイル処理を行うクラス(Compilerクラス)の基底クラス.
   * SharkCompiler (Shark 用)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/abstractCompiler.hpp))
     class AbstractCompiler : public CHeapObj {
 ```

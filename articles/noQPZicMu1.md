@@ -17,7 +17,7 @@ title: GCAdaptivePolicyCounters クラス
 AdaptiveSizePolicy に関する PerfData を格納しておくためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gcAdaptivePolicyCounters.hpp))
     // This class keeps statistical information and computes the
     // size of the heap.
@@ -59,7 +59,7 @@ AdaptiveSizePolicy に関する PerfData を格納しておくためのクラス
   * sun.gc.policy.majorCollectionSlope
   * sun.gc.policy.minorCollectionSlope
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/gcAdaptivePolicyCounters.cpp))
         const char* cname = PerfDataManager::counter_name(name_space(), "edenSize");
         _eden_size_counter = PerfDataManager::create_variable(SUN_GC, cname,

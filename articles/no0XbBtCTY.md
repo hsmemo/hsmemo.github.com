@@ -10,7 +10,7 @@ title: Dict クラス関連のクラス (Dict, DictI, 及びそれらの補助�
 key と value の対応を記録する (See: [here](nop0Yyr-jc.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/libadt/dict.hpp))
     // These dictionaries define a key-value mapping.  They can be inserted to,
     // searched or deleted from.  They grow and shrink as needed.  The key is a
@@ -35,7 +35,7 @@ key と value の対応を記録する (See: [here](nop0Yyr-jc.html) for details
 key と value の対応を記録する写像クラス(Dictionary クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/libadt/dict.hpp))
     class Dict : public ResourceObj { // Dictionary structure
 ```
@@ -56,7 +56,7 @@ Dict クラスの中身を処理するためのイテレータクラス.
   `for( DictI i(dict); i.test(); ++i ) { body = i.key; body = i.value;}`
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/libadt/dict.hpp))
     //------------------------------Iteration--------------------------------------
     // The class of dictionary iterators.  Fails in the presences of modifications
@@ -78,7 +78,7 @@ Dict クラス内で使用される補助クラス.
 このクラスを用いてハッシュが実装されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/libadt/dict.cpp))
     //------------------------------bucket---------------------------------------
     class bucket : public ResourceObj {

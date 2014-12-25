@@ -17,7 +17,7 @@ arrayKlass 用の Klass クラスの基底クラス.
 (なお, このクラスは abstract class ではない)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/arrayKlassKlass.hpp))
     // arrayKlassKlass is the abstract baseclass for all array class classes
     

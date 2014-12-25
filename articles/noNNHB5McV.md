@@ -15,7 +15,7 @@ title: BytecodeInterpreter クラス(interpreterState)
 C++ Interpreter 用のクラス (#ifdef CC_INTERP 時にしか定義されない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeInterpreter.hpp))
     #ifdef CC_INTERP
 ```
@@ -24,7 +24,7 @@ C++ Interpreter 用のクラス (#ifdef CC_INTERP 時にしか定義されない
 (Template Interpreter における TemplateTable クラスに相当). (See: [here](no7882AgC.html) for details)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/abstractInterpreter.hpp))
     // Template Interpreter          C++ Interpreter        Functionality
     //
@@ -37,7 +37,7 @@ C++ Interpreter 用のクラス (#ifdef CC_INTERP 時にしか定義されない
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeInterpreter.hpp))
     class BytecodeInterpreter : StackObj {
 ```
@@ -46,7 +46,7 @@ C++ Interpreter 用のクラス (#ifdef CC_INTERP 時にしか定義されない
 なお, interpreterState という型も使われるが, これは BytecodeInterpreter* のこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeInterpreter.hpp))
     typedef class BytecodeInterpreter* interpreterState;
 ```
@@ -60,7 +60,7 @@ C++ Interpreter 用のクラス (#ifdef CC_INTERP 時にしか定義されない
 逆に有効でなければ run() が呼ばれている模様)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeInterpreter.cpp))
     /*
      * BytecodeInterpreter::run(interpreterState istate)

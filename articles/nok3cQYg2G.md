@@ -15,7 +15,7 @@ vtable および itable と呼ばれており, それぞれ invokevirtual およ
 (See: instanceKlass).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/instanceKlass.hpp))
     class instanceKlass: public Klass {
     ...
@@ -42,7 +42,7 @@ vtable および itable と呼ばれており, それぞれ invokevirtual およ
   (なお, 一番先頭の itableOffsetEntry だけは offset table の長さ情報が入っている ?? #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/klassVtable.hpp))
     // Format of an itable
     //
@@ -119,7 +119,7 @@ vtable は vtableEntry の配列として構成され, instanceKlass 内に埋�
 このため vtable 自体は methodOopDesc へのポインタを並べた配列になっている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/klassVtable.hpp))
     // private helper class for klassVtable
     // description of entry points:
@@ -136,7 +136,7 @@ vtable は vtableEntry の配列として構成され, instanceKlass 内に埋�
 内部には以下のフィールド(のみ)を保持する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/klassVtable.hpp))
       methodOop _method;
 ```
@@ -164,7 +164,7 @@ offset table は itableOffsetEntry の配列として構成され, instanceKlass
 (また, itable に関連した定数値もこのクラスに定義されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/klassVtable.hpp))
     class itableOffsetEntry VALUE_OBJ_CLASS_SPEC {
 ```
@@ -195,7 +195,7 @@ itableMethodEntry はそれぞれの interface 用の vtable 内の要素を表�
 (また, itable に関連した定数値もこのクラスに定義されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/klassVtable.hpp))
     class itableMethodEntry VALUE_OBJ_CLASS_SPEC {
 ```
@@ -215,7 +215,7 @@ invokevirtual 用の vtable の処理で使用される一時オブジェクト(
 instanceKlass オブジェクト内に埋め込まれている vtable 情報にアクセスするためのクラス (See: [here](no3059kgY.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/klassVtable.hpp))
     // A klassVtable abstracts the variable-length vtable that is embedded in instanceKlass
     // and arrayKlass.  klassVtable objects are used just as convenient transient accessors to the vtable,
@@ -228,7 +228,7 @@ instanceKlass オブジェクト内に埋め込まれている vtable 情報に�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/klassVtable.hpp))
     class klassVtable : public ResourceObj {
 ```
@@ -259,7 +259,7 @@ invokeinterface 用の vtable (= itable) の処理で使用される一時オブ
 instanceKlass オブジェクト内に埋め込まれている itable 情報にアクセスするためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/klassVtable.hpp))
     class klassItable : public ResourceObj {
 ```
@@ -290,7 +290,7 @@ itable 内のエントリに対して何らかの処理を行う Closure クラ�
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/klassVtable.cpp))
     // Setup
     class InterfaceVisiterClosure : public StackObj {
@@ -300,7 +300,7 @@ itable 内のエントリに対して何らかの処理を行う Closure クラ�
 itable 内のエントリを処理する doit() メソッドを備えている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/klassVtable.cpp))
       virtual void doit(klassOop intf, int method_count) = 0;
 ```
@@ -320,7 +320,7 @@ klassItable クラス内で使用される補助クラス.
 必要な itableMethodEntry 及び itableOffsetEntry の個数を数える Closure.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/klassVtable.cpp))
     class CountInterfacesClosure : public InterfaceVisiterClosure {
 ```
@@ -344,7 +344,7 @@ klassItable クラス内で使用される補助クラス.
 各 itableOffsetEntry に対して itableOffsetEntry::initialize() による初期化を行う Closure.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/klassVtable.cpp))
     class SetupItableClosure : public InterfaceVisiterClosure  {
 ```
@@ -367,7 +367,7 @@ See: [here](../doxygen/classSetupItableClosure.html) for details
 vtable の統計情報収集用の関数を納めた名前空間(AllStatic クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/klassVtable.cpp))
     class VtableStats : AllStatic {
 ```
@@ -379,7 +379,7 @@ klassVtable::print_statistics() 内で(のみ)使用されている.
 (ただし, このクラスは (デバッグ時であることに加えて) PrintVtableStats オプションが指定されている場合にしか使用されない)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/java.cpp))
     #ifndef PRODUCT
     ...

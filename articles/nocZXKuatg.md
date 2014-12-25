@@ -25,7 +25,7 @@ InlineCallGenerator クラスの具象サブクラスの1つ.
 標準ライブラリ内の特定のメソッドについて, その中身を呼び出し点に展開する (= メソッドに特化したインライン展開処理を行う) クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/library_call.cpp))
     class LibraryIntrinsic : public InlineCallGenerator {
 ```
@@ -49,7 +49,7 @@ Compile::Compile( ciEnv* ci_env, C2Compiler* compiler, ciMethod* target, int osr
 現在このクラスのインライン展開対象になっているメソッドは以下の通り.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/vmSymbols.hpp))
     // Here are all the intrinsics known to the runtime and the CI.
     // Each intrinsic consists of a public enum name (like _hashCode),
@@ -488,7 +488,7 @@ LibraryIntrinsic クラス内で使用される補助クラス.
 LibraryIntrinsic 用の Ideal 生成処理を行う GraphKit クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/library_call.cpp))
     // Local helper class for LibraryIntrinsic:
     class LibraryCallKit : public GraphKit {

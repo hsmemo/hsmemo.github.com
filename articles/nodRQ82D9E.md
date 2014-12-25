@@ -27,13 +27,13 @@ Ideal を構築する作業用の一時オブジェクト(StackObjクラス).
 その構築を簡単にするメソッドを提供している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/idealKit.hpp))
     class IdealKit: public StackObj {
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/idealKit.hpp))
     //-----------------------------------------------------------------------------
     //----------------------------IdealKit-----------------------------------------
@@ -85,7 +85,7 @@ Ideal を構築する作業用の一時オブジェクト(StackObjクラス).
 以下のように "__ loop()" や "__ if_then()" と書くだけで Ideal が構築できる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/library_call.cpp))
       IdealKit kit(this, false, true);
     #define __ kit.
@@ -163,7 +163,7 @@ IdealKit クラス用の補助クラス(StackObjクラス).
 IdealKit クラスによる Ideal 構築時に「変数」として利用できる補助クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/idealKit.hpp))
     // Variable definition for IdealKit
     class IdealVariable: public StackObj {
@@ -175,7 +175,7 @@ IdealKit::set()/IdealKit::value() で値を設定／参照できる他,
 IdealKit::loop() の制御変数等としても利用できる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/library_call.cpp))
       IdealKit kit(this, false, true);
     #define __ kit.

@@ -19,7 +19,7 @@ Java ヒープ用のメモリ領域を管理するクラスは使用する GC �
 (<= なので, ここで定義されているクラスを直接的に使っているのは GenCollectedHeap だけ)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/space.hpp))
     // A space is an abstraction for the "storage units" backing
     // up the generation abstraction. It includes specific
@@ -30,7 +30,7 @@ Java ヒープ用のメモリ領域を管理するクラスは使用する GC �
 なお, これらのクラスは以下のような継承関係を持つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/space.hpp))
     // Here's the Space hierarchy:
     //
@@ -94,7 +94,7 @@ Java ヒープ用のメモリ領域を管理するクラスは使用する GC �
 * "`bottom() <= top() <= end()`" という不等式が成り立つ
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/space.hpp))
     // A Space describes a heap area. Class Space is an abstract
     // base class.
@@ -115,7 +115,7 @@ Java ヒープ用のメモリ領域を管理するクラスは使用する GC �
 _bottom は領域の下端のアドレスを, _end は領域の上端のアドレスを格納する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/space.hpp))
       HeapWord* _bottom;
       HeapWord* _end;
@@ -139,7 +139,7 @@ GC によるコンパクション処理をサポートした Space クラス (�
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/space.hpp))
     // A space that supports compaction operations.  This is usually, but not
     // necessarily, a space that is normally contiguous.  But, for example, a
@@ -154,7 +154,7 @@ GC によるコンパクション処理をサポートした Space クラス (�
 以下のようなコンパクション処理を補佐するメソッドが定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/space.hpp))
       // MarkSweep support phase2
     
@@ -191,7 +191,7 @@ CompactibleSpace クラスの具象サブクラスの1つ.
 (なお, 不連続に管理する場合の具象サブクラスは CompactibleFreeListSpace).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/space.hpp))
     // A space in which the free area is contiguous.  It therefore supports
     // faster allocation, and compaction.
@@ -211,7 +211,7 @@ CompactibleSpace クラスの具象サブクラスの1つ.
   (DefNewGeneration 使用時の To 領域を表す)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/defNewGeneration.cpp))
     DefNewGeneration::DefNewGeneration(ReservedSpace rs,
                                        size_t initial_size,
@@ -233,7 +233,7 @@ DefNewGeneration::DefNewGeneration() 内で(のみ)生成されている.
 (_bottom から _top までが使用済みの範囲, _top から _end までが未使用の範囲).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/space.hpp))
       HeapWord* _top;
 ```
@@ -262,7 +262,7 @@ DefNewGeneration 使用時の Eden 領域を表すためのクラスの 1つ.
 つまり "Serial GC && Serial Old GC 時" か "Serial GC && CMS GC (非 incremental mode) 時" のためのクラス)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/space.hpp))
     // Class EdenSpace describes eden-space in new generation.
     ...
@@ -282,7 +282,7 @@ GC アルゴリズムが CMS でかつ CMSIncrementalMode オプションが tru
 そうでない場合には EdenSpace が生成される)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/defNewGeneration.cpp))
     DefNewGeneration::DefNewGeneration(ReservedSpace rs,
                                        size_t initial_size,
@@ -322,7 +322,7 @@ DefNewGeneration 使用時の Eden 領域を表すためのクラスの 1つ.
 つまり "Serial GC && CMS (incremental mode) 時" のためのクラス)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/space.hpp))
     // Class ConcEdenSpace extends EdenSpace for the sake of safe
     // allocation while soft-end is being modified concurrently
@@ -343,7 +343,7 @@ GC アルゴリズムが CMS でかつ CMSIncrementalMode オプションが tru
 そうでない場合には EdenSpace が生成される)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/defNewGeneration.cpp))
     DefNewGeneration::DefNewGeneration(ReservedSpace rs,
                                        size_t initial_size,
@@ -368,7 +368,7 @@ CMSIncrementalMode オプションは "-Xincgc" というオプション名で�
 (-Xincgc は CMSIncrementalMode のエイリアス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/arguments.cpp))
         // -Xincgc: i-CMS
         } else if (match_option(option, "-Xincgc", &tail)) {
@@ -396,7 +396,7 @@ BlockOffsetArray を用いることで block_start() メソッドを効率的に
 CDS 機能使用時に CompactingPermGenGen 内の ro_space 及び rw_space の管理に用いられている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/space.hpp))
     // A ContigSpace that Supports an efficient "block_start" operation via
     // a BlockOffsetArray (whose BlockOffsetSharedArray may be shared with
@@ -417,7 +417,7 @@ CDS 機能使用時に CompactingPermGenGen 内の ro_space 及び rw_space の�
 CompactingPermGenGen::CompactingPermGenGen() 内で(のみ)生成されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/compactingPermGenGen.cpp))
     CompactingPermGenGen::CompactingPermGenGen(ReservedSpace rs,
                                                ReservedSpace shared_rs,
@@ -452,7 +452,7 @@ TenuredGeneration 使用時の Old Generation を表すためのクラス
 (= TenuredGeneration クラス内で実際のメモリ領域の管理を担当するクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/space.hpp))
     // Class TenuredSpace is used by TenuredGeneration
     
@@ -467,7 +467,7 @@ TenuredGeneration 使用時の Old Generation を表すためのクラス
 TenuredGeneration::TenuredGeneration() 内で(のみ)生成されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/tenuredGeneration.cpp))
     TenuredGeneration::TenuredGeneration(ReservedSpace rs,
                                          size_t initial_byte_size, int level,
@@ -494,7 +494,7 @@ CompactingPermGenGen 使用時の Perm Generation を表すためのクラス.
 (= CompactingPermGenGen クラス内で実際のメモリ領域の管理を担当するクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/space.hpp))
     // Class ContigPermSpace is used by CompactingPermGen
     
@@ -509,7 +509,7 @@ CompactingPermGenGen 使用時の Perm Generation を表すためのクラス.
 CompactingPermGenGen::CompactingPermGenGen() 内で(のみ)生成されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/compactingPermGenGen.cpp))
     CompactingPermGenGen::CompactingPermGenGen(ReservedSpace rs,
                                                ReservedSpace shared_rs,
@@ -539,7 +539,7 @@ Space クラス(とそのサブクラス)の処理で使用される補助クラ
 「指定した OopClosure の効果をあるアドレス範囲のみに限定したい」という場合に使用される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/space.hpp))
     // An oop closure that is circumscribed by a filtering memory region.
     class SpaceMemRegionOopsIterClosure: public OopClosure {
@@ -555,7 +555,7 @@ Space クラス(とそのサブクラス)の処理で使用される補助クラ
 コンストラクタ引数として, OopClosure オブジェクト及びその適用範囲を示す MemRegion を受け取る.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/space.hpp))
       SpaceMemRegionOopsIterClosure(OopClosure* cl, MemRegion mr):
 ```
@@ -566,7 +566,7 @@ Space クラス(とそのサブクラス)の処理で使用される補助クラ
 
 #### 参考(for your information): SpaceMemRegionOopsIterClosure::do_oop()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/space.cpp))
     void SpaceMemRegionOopsIterClosure::do_oop(oop* p)       { SpaceMemRegionOopsIterClosure::do_oop_work(p); }
     void SpaceMemRegionOopsIterClosure::do_oop(narrowOop* p) { SpaceMemRegionOopsIterClosure::do_oop_work(p); }
@@ -595,7 +595,7 @@ write barrier によって dirty 化されているメモリ範囲に対して�
 (連続的な領域の場合は ContiguousDCTOC, 境界付きの場合は Filtering_DCTOC, etc).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/space.hpp))
     // A MemRegionClosure (ResourceObj) whose "do_MemRegion" function applies an
     // OopClosure to (the addresses of) all the ref-containing fields that could
@@ -679,7 +679,7 @@ Generation::prepare_for_compaction() 内で使用される補助クラス(StackO
 Garbage Collection におけるコンパクション処理時に, コンパクション先領域の情報を管理するために使われる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/space.hpp))
     // A structure to represent a point at which objects are being copied
     // during compaction.
@@ -706,7 +706,7 @@ Generation::prepare_for_compaction() 内(およびそこから呼び出される
 内部には以下の3つの public フィールドのみを持つ (そしてメソッドはない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/space.hpp))
     public:
       Generation* gen;
@@ -728,7 +728,7 @@ See: [here](../doxygen/classCompactPoint.html) for details
 「指定した OopClosure を dirty 化された領域でかつ指定のアドレス以下の範囲のみに適用したい」という場合に使用される
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/space.hpp))
     // A dirty card to oop closure that does filtering.
     // It knows how to filter out objects that are outside of the _boundary.
@@ -738,7 +738,7 @@ See: [here](../doxygen/classCompactPoint.html) for details
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/space.hpp))
       virtual void walk_mem_region_with_cl(MemRegion mr,
                                            HeapWord* bottom, HeapWord* top,
@@ -775,7 +775,7 @@ Filtering_DCTOC クラスの具象サブクラスの1つ.
 このクラスは ContiguousSpace 用 (= メモリ領域が連続している場合用).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/space.hpp))
     // A dirty card to oop closure for contiguous spaces
     // (ContiguousSpace and sub-classes).
@@ -837,7 +837,7 @@ See: [here](../doxygen/classContiguousSpaceDCTOC.html) for details
 デバッグ用(開発時用)のクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/space.cpp))
     class VerifyOldOopClosure : public OopClosure {
 ```
@@ -846,7 +846,7 @@ See: [here](../doxygen/classContiguousSpaceDCTOC.html) for details
 OffsetTableContigSpace::verify() 内で(のみ)使用されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/space.cpp))
     void OffsetTableContigSpace::verify(bool allow_dirty) const {
     ...

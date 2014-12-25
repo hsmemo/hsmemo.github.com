@@ -18,7 +18,7 @@ Phase クラスの具象サブクラスの1つ.
 対応するランタイム呼び出し(CallNode)を使った形式に展開する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/macro.hpp))
     class PhaseMacroExpand : public Phase {
 ```

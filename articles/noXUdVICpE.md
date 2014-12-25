@@ -22,7 +22,7 @@ GC 中に以下のメソッドが何度実行されたかを計測し, 結果を
   * oopDesc の oop_iterate_*() メソッド
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/specialized_oop_closures.hpp))
     class SpecializationStats {
 ```
@@ -42,7 +42,7 @@ GC 中に以下のメソッドが何度実行されたかを計測し, 結果を
 (PRODUCT_RETURN は #ifdef PRODUCT 時には '{}' に展開される. (See: PRODUCT_RETURN)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/specialized_oop_closures.hpp))
       static void clear()  PRODUCT_RETURN;
     
@@ -58,7 +58,7 @@ GC 中に以下のメソッドが何度実行されたかを計測し, 結果を
 さらに, 開発時であっても ENABLE_SPECIALIZATION_STATS が 0 だとやっぱり空になる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/specialized_oop_closures.hpp))
     #ifndef PRODUCT
     #if ENABLE_SPECIALIZATION_STATS
@@ -82,7 +82,7 @@ GC 中に以下のメソッドが何度実行されたかを計測し, 結果を
 つまり, このクラスは基本的には使われない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/specialized_oop_closures.hpp))
     // For keeping stats on effectiveness.
     #define ENABLE_SPECIALIZATION_STATS 0
@@ -93,7 +93,7 @@ GC 中に以下のメソッドが何度実行されたかを計測し, 結果を
 (ただし, これらも #if ENABLE_SPECIALIZATION_STATS 時でないと定義さえされない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/specialized_oop_closures.hpp))
     #if ENABLE_SPECIALIZATION_STATS
     private:

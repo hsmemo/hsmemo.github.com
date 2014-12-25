@@ -21,7 +21,7 @@ CppInterpreter を生成するための InterpreterGenerator クラス
 (なお, コメントでは "template interpreter" と書かれているが typo のような...)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/cppInterpreterGenerator.hpp))
     // This file contains the platform-independent parts
     // of the template interpreter generator.

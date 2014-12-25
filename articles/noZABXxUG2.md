@@ -54,7 +54,7 @@ title: ResourceArray クラス及び CHeapArray クラス  (ResourceArray, CHeap
   ベースとなる型と配列クラスの名前, 及び配列要素の型を指定すると, 以下のようなクラス定義を展開してくれる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/array.hpp))
     #define define_generic_array(array_name,element_type, base_class)                        \
       class array_name: public base_class {                                                  \
@@ -104,7 +104,7 @@ title: ResourceArray クラス及び CHeapArray クラス  (ResourceArray, CHeap
   配列クラスの名前と配列要素の型を指定すると, 以下のようなクラス定義を展開してくれる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/array.hpp))
     #define define_array(array_name,element_type)                                            \
       define_generic_array(array_name, element_type, ResourceArray)
@@ -115,7 +115,7 @@ title: ResourceArray クラス及び CHeapArray クラス  (ResourceArray, CHeap
   ベースとなる配列クラスとスタッククラスの名前を指定すると, 以下のようなクラス定義を展開してくれる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/array.hpp))
     #define define_stack(stack_name,array_name)                                              \
       class stack_name: public array_name {                                                  \
@@ -233,7 +233,7 @@ title: ResourceArray クラス及び CHeapArray クラス  (ResourceArray, CHeap
   以下のように, generic_array と stack を同時に定義できる.
   
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/array.hpp))
     #define define_resource_list(element_type)                                               \
       define_generic_array(element_type##Array, element_type, ResourceArray)                 \
@@ -271,7 +271,7 @@ title: ResourceArray クラス及び CHeapArray クラス  (ResourceArray, CHeap
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/array.hpp))
     class ResourceArray: public ResourceObj {
 ```
@@ -292,7 +292,7 @@ See: [here](../doxygen/classResourceArray.html) for details
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/array.hpp))
     class CHeapArray: public CHeapObj {
 ```

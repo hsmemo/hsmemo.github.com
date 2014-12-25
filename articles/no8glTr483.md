@@ -15,7 +15,7 @@ title: ciMethod クラス
 ciObject クラスの具象サブクラスの1つ. methodOopDesc 用の ciObject クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciMethod.hpp))
     // ciMethod
     //

@@ -20,7 +20,7 @@ CollectedHeap 内で変更されたポインタ(参照)フィールドを検出�
 
 (なお, 内部的には card table を使用する)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/modRefBarrierSet.hpp))
     // This kind of "BarrierSet" allows a "CollectedHeap" to detect and
     // enumerate ref fields that have been modified (since the last
@@ -28,7 +28,7 @@ CollectedHeap 内で変更されたポインタ(参照)フィールドを検出�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/modRefBarrierSet.hpp))
     class ModRefBarrierSet: public BarrierSet {
 ```
@@ -36,7 +36,7 @@ CollectedHeap 内で変更されたポインタ(参照)フィールドを検出�
 
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/modRefBarrierSet.hpp))
       virtual bool write_ref_needs_barrier(void* field, oop new_val) = 0;
 ```

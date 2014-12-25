@@ -21,7 +21,7 @@ title: instanceKlassKlass クラス (instanceKlassKlass, 及びその補助ク�
 instanceKlass (及びそのサブクラス) 用の Klass クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/instanceKlassKlass.hpp))
     // An instanceKlassKlass is the klass of an instanceKlass
     
@@ -54,7 +54,7 @@ instanceKlassKlass 内で使用される補助クラス.
 かつ差し先が妥当な oop または NULL であることをチェックする.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/instanceKlassKlass.cpp))
     // Verification
     

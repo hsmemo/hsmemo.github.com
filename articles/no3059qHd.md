@@ -13,7 +13,7 @@ HotSpot 内部での処理中に例外送出条件が満たされた場合,
 このため, JNI での例外管理に類似した独自のやり方が用いられる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/exceptions.hpp))
     // This file provides the basic support for exception handling in the VM.
     // Note: We do not use C++ exceptions to avoid compiler dependencies and

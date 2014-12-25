@@ -20,7 +20,7 @@ title: oopDesc クラス
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/oop.hpp))
     // oopDesc is the top baseclass for objects classes.  The {name}Desc classes describe
     // the format of Java objects so the fields can be accessed from C++.
@@ -31,7 +31,7 @@ title: oopDesc クラス
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/oop.hpp))
     class oopDesc {
 ```
@@ -46,7 +46,7 @@ oopDesc は以下の様な構造をしている (サブクラスではさらに�
   (See: klassOopDesc)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/oop.hpp))
       volatile markOop  _mark;
       union _metadata {

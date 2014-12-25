@@ -86,7 +86,7 @@ See: [here](no2114YlA.html) for details
 java.lang.Thread.sleep(long millis) は JVM_Sleep() で実装されている.
 
 
-```
+```cpp
     ((cite: jdk/src/share/native/java/lang/Thread.c))
     static JNINativeMethod methods[] = {
     ...

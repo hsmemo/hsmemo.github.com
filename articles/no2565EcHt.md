@@ -27,7 +27,7 @@ JIT コンパイラは, インタープリタ実行時のプロファイル情�
 とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
     // The MethodData object collects counts and other profile information
     // during zeroth-tier (interpretive) and first-tier execution.
@@ -124,7 +124,7 @@ DataLayout オブジェクトにアクセスする際には, バイトコード�
     分岐命令の場合(= 次の DataLayout が複数個先のものになる場合) の「どれだけ進めればいいか」という情報.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
     // The data entry area is a heterogeneous array of DataLayouts. Each
     // DataLayout in the array corresponds to a specific bytecode in the
@@ -175,7 +175,7 @@ JIT コンパイラのためのクラス.
 より具体的に言うと, インタープリタ実行時のプロファイル情報を記録しておくためのクラス (See: [here](no2935fdD.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
     class methodDataOopDesc : public oopDesc {
 ```
@@ -235,7 +235,7 @@ MethodHandleCompiler::get_method_oop()
   自分自身(= この methodDataOopDesc オブジェクト) の大きさ
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
       // Size of this oop in bytes
       int _size;
@@ -248,7 +248,7 @@ MethodHandleCompiler::get_method_oop()
   自分自身の大きさから, ヘッダ長および Extra Data 分の大きさを除いたサイズ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
       // Size of _data array in bytes.  (Excludes header and extra_data fields.)
       int _data_size;
@@ -262,14 +262,14 @@ MethodHandleCompiler::get_method_oop()
   Extra Data 部分は, ProfileTraps 用に任意個(?)の BitData が続いた後, 最後に ArgInfoData が入っている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
       // Beginning of the data entries
       intptr_t _data[1];
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
     // A methodDataOop holds information which has been collected about
     // a method.  Its layout looks like this:
@@ -313,7 +313,7 @@ methodDataOopDesc クラス用の補助クラス.
 そのため DataLayout オブジェクトの大きさも対応するバイトコード種別に応じて異なる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
     // DataLayout
     //
@@ -332,7 +332,7 @@ methodDataOopDesc クラス用の補助クラス.
 実際には DataLayout オブジェクトが格納されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
       // Beginning of the data entries
       intptr_t _data[1];
@@ -348,7 +348,7 @@ methodDataOopDesc::_data フィールド用の領域 (= DataLayout オブジェ�
 定義されているフィールドは以下の通り.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
       // Every data layout begins with a header.  This header
       // contains a tag, which is used to indicate the size/layout
@@ -377,7 +377,7 @@ methodDataOopDesc::_data フィールド用の領域 (= DataLayout オブジェ�
   (なお, _header._struct._tag には以下の定数値のどれかが格納される)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
       // Tag values
       enum {
@@ -409,7 +409,7 @@ methodDataOopDesc::_data フィールド用の領域 (= DataLayout オブジェ�
   なお, trap_state は ProfileTraps オプションが指定されている場合にのみ使用される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
       enum {
         // The _struct._flags word is formatted as [trap_state:4 | flags:4].
@@ -451,7 +451,7 @@ DataLayout オブジェクトへのアクセス時には (そのバイトコー�
 (See: [here](no2935fdD.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
     // ProfileData
     //
@@ -465,7 +465,7 @@ DataLayout オブジェクトへのアクセス時には (そのバイトコー�
 このクラスのサブクラスは以下のような継承関係を持つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
     // ProfileData class hierarchy
     class ProfileData;
@@ -486,7 +486,7 @@ DataLayout オブジェクトへのアクセス時には (そのバイトコー�
 このメソッドは ProfileData クラスの各サブクラスによって適切にオーバーライドされている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
       // How many cells are in this?
       virtual int cell_count() {
@@ -517,7 +517,7 @@ ProfileData クラスの具象サブクラスの1つ (See: [here](no2935fdD.html
 (なお, そのほかに Extra Data 用の DataLayout を操作する役割もある(主に trap_state 情報のため). ... #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
     // BitData
     //
@@ -530,7 +530,7 @@ ProfileData クラスの具象サブクラスの1つ (See: [here](no2935fdD.html
 代わりに情報は flag 部分に格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
       enum {
         // null_seen:
@@ -542,13 +542,13 @@ ProfileData クラスの具象サブクラスの1つ (See: [here](no2935fdD.html
 そのため, この DataLayout オブジェクトには追加で必要なフィールドはない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
       enum { bit_cell_count = 0 };  // no additional data fields needed.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
       static int static_cell_count() {
         return bit_cell_count;
@@ -578,7 +578,7 @@ ProfileData クラスの具象サブクラスの1つ (See: [here](no2935fdD.html
 これらのバイトコードが実行された回数(count)が記録される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
     // CounterData
     //
@@ -591,7 +591,7 @@ ProfileData クラスの具象サブクラスの1つ (See: [here](no2935fdD.html
 このセルに実行回数が記録される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
       enum {
         count_off,
@@ -600,7 +600,7 @@ ProfileData クラスの具象サブクラスの1つ (See: [here](no2935fdD.html
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
       static int static_cell_count() {
         return counter_cell_count;
@@ -630,7 +630,7 @@ ProfileData クラスの具象サブクラスの1つ (See: [here](no2935fdD.html
 これらのバイトコードによってジャンプが実行された回数(taken)が記録される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
     // JumpData
     //
@@ -655,7 +655,7 @@ ProfileData クラスの具象サブクラスの1つ (See: [here](no2935fdD.html
   (displacement_off_set というオフセットでアクセス可能).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
       enum {
         taken_off_set,
@@ -665,7 +665,7 @@ ProfileData クラスの具象サブクラスの1つ (See: [here](no2935fdD.html
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
       static int static_cell_count() {
         return jump_cell_count;
@@ -704,7 +704,7 @@ ProfileData クラスの具象サブクラスの1つ (See: [here](no2935fdD.html
  (See: BitData))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
     // ReceiverTypeData
     //
@@ -739,7 +739,7 @@ ProfileData クラスの具象サブクラスの1つ (See: [here](no2935fdD.html
 この情報の格納場所についてはスーパークラスである BitData 参照.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
       enum {
         receiver0_offset = counter_cell_count,
@@ -749,7 +749,7 @@ ProfileData クラスの具象サブクラスの1つ (See: [here](no2935fdD.html
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
       static int static_cell_count() {
         return counter_cell_count + (uint) TypeProfileWidth * receiver_type_row_cell_count;
@@ -778,7 +778,7 @@ ProfileData クラスの具象サブクラスの1つ (See: [here](no2935fdD.html
 (なおコメントによると, 現状では ReceiverTypeData クラスと全く同じとのこと)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
     // VirtualCallData
     //
@@ -815,7 +815,7 @@ ProfileData クラスの具象サブクラスの1つ (See: [here](no2935fdD.html
   対応する型が何度観測されたか(回数)を格納するセル
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
       static int static_cell_count() {
         // At this point we could add more profile state, e.g., for arguments.
@@ -851,7 +851,7 @@ ret バイトコードの実行時に「どのリターンアドレスに何回�
 また, 「対応する ret バイトコードが何回実行されたか(回数)」も記録される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
     // RetData
     //
@@ -888,7 +888,7 @@ ret バイトコードの実行時に「どのリターンアドレスに何回�
 この情報の格納場所についてはスーパークラスである CounterData の count セルを参照.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
       enum {
         bci0_offset = counter_cell_count,
@@ -899,7 +899,7 @@ ret バイトコードの実行時に「どのリターンアドレスに何回�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
       static int static_cell_count() {
         return counter_cell_count + (uint) BciProfileWidth * ret_row_cell_count;
@@ -929,7 +929,7 @@ ProfileData クラスの具象サブクラスの1つ (See: [here](no2935fdD.html
 これらのバイトコードによってジャンプした回数(taken), ジャンプしなかった回数(not_taken)が記録される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
     // BranchData
     //
@@ -950,7 +950,7 @@ ProfileData クラスの具象サブクラスの1つ (See: [here](no2935fdD.html
   (not_taken_off_set というオフセットでアクセス可能).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
       enum {
         not_taken_off_set = jump_cell_count,
@@ -959,7 +959,7 @@ ProfileData クラスの具象サブクラスの1つ (See: [here](no2935fdD.html
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
       static int static_cell_count() {
         return branch_cell_count;
@@ -987,7 +987,7 @@ ProfileData クラスのサブクラスの1つ (See: [here](no2935fdD.html) for 
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
     // ArrayData
     //
@@ -1008,7 +1008,7 @@ ProfileData クラスのサブクラスの1つ (See: [here](no2935fdD.html) for 
 つまり, 先頭に array_len セルがあり, それ以降のセルに実際の情報が格納される.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
       enum {
         array_len_off_set,
@@ -1017,7 +1017,7 @@ ProfileData クラスのサブクラスの1つ (See: [here](no2935fdD.html) for 
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
       int array_len() {
         return int_at_unchecked(array_len_off_set);
@@ -1047,7 +1047,7 @@ ArrayData クラスの具象サブクラスの1つ (See: [here](no2935fdD.html) 
 これらのバイトコード実行時にどのジャンプ先に何回ジャンプしたか(default_count, relative_count)が記録される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
     // MultiBranchData
     //
@@ -1083,7 +1083,7 @@ ArrayData クラスの具象サブクラスの1つ (See: [here](no2935fdD.html) 
   対応する分岐先に分岐した場合の次の DataLayout の位置(正確にはその位置と現在地との差分)を格納するセル
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
       enum {
         default_count_off_set,
@@ -1113,7 +1113,7 @@ ArrayData クラスの具象サブクラスの1つ (See: [here](no2935fdD.html) 
 (現状では Escape Analysis の結果を蓄えるためにのみ使用されている?? #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataOop.hpp))
     class ArgInfoData : public ArrayData {
 ```

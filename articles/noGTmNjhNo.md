@@ -11,7 +11,7 @@ title: Exception の処理 ： 処理の詳細 (1) ： 例外送出条件の検�
 C++ Interpreter の場合, Signal Handler による例外検出は行われない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntime.cpp))
     #ifdef CC_INTERP
         // C++ interpreter doesn't throw implicit exceptions

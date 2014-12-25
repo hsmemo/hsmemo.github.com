@@ -33,7 +33,7 @@ deopt 処理または suspend 状態から通常状態に復帰するパスの�
     (ほとんどの PopFrame() の処理はこちらのフィールドを参照して行われる)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.hpp))
       // JVMTI PopFrame support
       // This is set to popframe_pending to signal that top Java frame should be popped immediately
@@ -45,7 +45,7 @@ deopt 処理または suspend 状態から通常状態に復帰するパスの�
     (こちらは SingleStep モードにおける追加処理用. (See: [here](no7882EDP.html) for details))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiThreadState.hpp))
       bool              _pending_step_for_popframe;
 ```

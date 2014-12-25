@@ -36,7 +36,7 @@ JIT 生成コード内での例外ハンドラを表すクラス.
   そして, その後にその個数分だけのグループ要素が並ぶ.
  
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/exceptionHandlerTable.hpp))
     // An ExceptionHandlerTable is an abstraction over a list of subtables
     // of exception handlers for CatchNodes. Each subtable has a one-entry
@@ -68,7 +68,7 @@ Compile::FillExceptionTables() の中で要素が詰められている.
 (なお, _handler_table というのが Compile クラスのオブジェクトが持つ ExceptionHandlerTable 型のフィールド)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/output.cpp))
     void Compile::FillExceptionTables(uint cnt, uint *call_returns, uint *inct_starts, Label *blk_labels) {
     ...
@@ -85,7 +85,7 @@ Compile::FillExceptionTables() の中で要素が詰められている.
 実際に例外が発生した際に, SharedRuntime::compute_compiled_exc_handler() 内で対応する例外ハンドラが探索されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntime.cpp))
     address SharedRuntime::compute_compiled_exc_handler(nmethod* nm, address ret_pc, Handle& exception,
                                                         bool force_unwind, bool top_frame_only) {
@@ -116,7 +116,7 @@ Compile::FillExceptionTables() の中で要素が詰められている.
    (長さ分だけ調べて見つからなければ, 存在しないということになる).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/exceptionHandlerTable.cpp))
     HandlerTableEntry* ExceptionHandlerTable::entry_for(int catch_pco, int handler_bci, int scope_depth) const {
       HandlerTableEntry* t = subtable_for(catch_pco);
@@ -145,7 +145,7 @@ ExceptionHandlerTable 内に格納されるエントリ.
 nmethod 中での pc offset と元々の java コードにおける例外ハンドラ(の bytecode index) の対応を示している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/exceptionHandlerTable.hpp))
     // A HandlerTableEntry describes an individual entry of a subtable
     // of ExceptionHandlerTable. An entry consists of a pair(bci, pco),
@@ -164,7 +164,7 @@ nmethod 中での pc offset と元々の java コードにおける例外ハン�
 (なお, 正確に言うと (bci, pco) というペアではなく (bci, pco, scope_depth) というタプル)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/exceptionHandlerTable.hpp))
       int _bci;
       int _pco;
@@ -190,7 +190,7 @@ nmethod 内部に格納された後は, 「先頭に table の要素数を示す
 (ただし要素がゼロの場合は, 先頭の要素数のフィールドも含めて, 一切領域は取られない)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/exceptionHandlerTable.hpp))
     // ----------------------------------------------------------------------------
     // Implicit null exception tables.  Maps an exception PC offset to a
@@ -209,7 +209,7 @@ nmethod 内部に格納された後は, 「先頭に table の要素数を示す
 コンパイル中に, Compile::Fill_buffer() の中で implicit null check の情報が収集される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/output.cpp))
     void Compile::Fill_buffer() {
     ...
@@ -223,7 +223,7 @@ nmethod 内部に格納された後は, 「先頭に table の要素数を示す
 (なお, _inc_table というのが Compile クラスのオブジェクトが持つ ImplicitExceptionTable 型のフィールド).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/output.cpp))
     void Compile::FillExceptionTables(uint cnt, uint *call_returns, uint *inct_starts, Label *blk_labels) {
       _inc_table.set_size(cnt);
@@ -242,7 +242,7 @@ nmethod::continuation_for_implicit_exception() の中で使用されている.
 それをコードのアドレスに直してリターンしている (対応するものがなければ NULL を返す).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/nmethod.cpp))
     address nmethod::continuation_for_implicit_exception(address pc) {
       // Exception happened outside inline-cache check code => we are inside

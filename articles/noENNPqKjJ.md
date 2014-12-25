@@ -28,7 +28,7 @@ G1GC アルゴリズムを補佐するスレッドクラス(ConcurrentGCThread�
 (なおコメントには, CMS からコピーしてきたものでまだ作成中(under construction), みたいなことが書いてあるが...)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMarkThread.hpp))
     // The Concurrent Mark GC Thread (could be several in the future).
     // This is copied from the Concurrent Mark Sweep GC Thread
@@ -36,7 +36,7 @@ G1GC アルゴリズムを補佐するスレッドクラス(ConcurrentGCThread�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMarkThread.hpp))
     class ConcurrentMarkThread: public ConcurrentGCThread {
 ```
@@ -68,7 +68,7 @@ ConcurrentMarkThread クラス内で使用される補助クラス.
 Initial marking pause 処理を行うための Closure クラス (See: [here](no2935d4w.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMarkThread.cpp))
     class CMCheckpointRootsInitialClosure: public VoidClosure {
 ```
@@ -93,7 +93,7 @@ ConcurrentMarkThread クラス内で使用される補助クラス.
 Final marking pause 処理を行うための Closure クラス (See: [here](no2935d4w.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMarkThread.cpp))
     class CMCheckpointRootsFinalClosure: public VoidClosure {
 ```
@@ -118,7 +118,7 @@ ConcurrentMarkThread クラス内で使用される補助クラス.
 Live Data Counting & Cleanup 処理を行うための Closure クラス (See: [here](no2935d4w.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentMarkThread.cpp))
     class CMCleanUp: public VoidClosure {
 ```

@@ -27,7 +27,7 @@ Constant Pool 内の「フィールド情報」及び「メソッド情報」を
 実際のキャッシュ情報は ConstantPoolCacheEntry オブジェクト内に格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/cpCacheOop.hpp))
     // A constant pool cache is a runtime data structure set aside to a constant pool. The cache
     // holds interpreter runtime information for all field access and invoke bytecodes. The cache
@@ -89,7 +89,7 @@ constantPoolCacheKlass::allocate() というファクトリメソッドが用意
 (この部分の大きさは _length フィールドで把握可能).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/cpCacheOop.hpp))
       int             _length;
       constantPoolOop _constant_pool;                // the corresponding constant pool
@@ -114,7 +114,7 @@ Constant Pool 内の「フィールド情報」及び「メソッド情報」を
 1つの ConstantPoolCacheEntry オブジェクトが 1つの Constant Pool エントリに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/cpCacheOop.hpp))
     class ConstantPoolCacheEntry VALUE_OBJ_CLASS_SPEC {
 ```
@@ -129,7 +129,7 @@ constantPoolCacheOopDesc オブジェクト内に格納されている.
 アクセスするには constantPoolCacheOopDesc::entry_at() メソッドを用いる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/cpCacheOop.hpp))
       // Fetches the entry at the given index.
       // The entry may be either primary or secondary.
@@ -143,7 +143,7 @@ constantPoolCacheOopDesc オブジェクト内に格納されている.
 (なお, constantPoolCacheOopDesc::base() は以下のように定義されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/cpCacheOop.hpp))
       ConstantPoolCacheEntry* base() const           { return (ConstantPoolCacheEntry*)((address)this + in_bytes(base_offset())); }
 ```
@@ -161,7 +161,7 @@ ConstantPoolCacheEntry 内の各フィールドの使われ方は以下の通り
 * フィールドアクセス ({put|get}{field|static}) の場合は, 全てのフィールド(_f1,_f2,_flags,_indices)を使う模様.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/cpCacheOop.hpp))
     // A ConstantPoolCacheEntry describes an individual entry of the constant
     // pool cache. There's 2 principal kinds of entries: field entries for in-
@@ -264,7 +264,7 @@ ConstantPoolCacheEntry 内で使用される補助クラス(Closureクラス).
 oop を引数とする関数を OopClosure として使うためのラッパークラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/cpCacheOop.cpp))
     class LocalOopClosure: public OopClosure {
 ```
@@ -276,7 +276,7 @@ ConstantPoolCacheEntry::oops_do() 内で(のみ)使用されている.
 コンストラクタで oop を引数とする関数を受け取る. do_oop() ではその関数を処理対象に適用するだけ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/cpCacheOop.cpp))
       LocalOopClosure(void f(oop*))        { _f = f; }
       virtual void do_oop(oop* o)          { _f(o); }

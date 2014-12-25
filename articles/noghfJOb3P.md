@@ -14,7 +14,7 @@ title: JNI の処理 ： JNI Functions の処理 ： JNI によるJavaVMイン�
 main_vm という変数に JNIInvokeInterface_ 型の値へのポインタが格納されているため, それをリターンするだけ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jni.cpp))
     struct JavaVM_ main_vm = {&jni_InvokeInterface};
 ```
@@ -23,7 +23,7 @@ main_vm という変数に JNIInvokeInterface_ 型の値へのポインタが格
 jni_InvokeInterface は以下のように定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jni.cpp))
     const struct JNIInvokeInterface_ jni_InvokeInterface = {
         NULL,

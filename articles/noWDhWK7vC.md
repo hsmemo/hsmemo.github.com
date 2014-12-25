@@ -20,7 +20,7 @@ title: Decoder クラス
 (また関連する定数値もこのクラス内に定義されている).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/decoder.hpp))
     class Decoder: public StackObj {
 ```

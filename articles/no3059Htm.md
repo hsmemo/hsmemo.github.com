@@ -47,9 +47,27 @@ void InterpreterGenerator::generate_counter_incr(
 
 	  // Note: In tiered we increment either counters in methodOop or in MDO depending if we're profiling or not.
 	  if (TieredCompilation) {
+
+    {- -------------------------------------------
+  (1.1) (変数宣言など)
+        ---------------------------------------- -}
+
 	    int increment = InvocationCounter::count_increment;
 	    int mask = ((1 << Tier0InvokeNotifyFreqLog)  - 1) << InvocationCounter::count_shift;
 	    Label no_mdo, done;
+
+    {- -------------------------------------------
+  (1.1) コード生成: (ただし, ProfileInterpreter オプションが指定されていない場合には生成しない)
+        「もし methodDataOopDesc(mdo) が付いていれば, 
+          InterpreterMacroAssembler::increment_mask_and_jump() が生成するコードによって
+          mdo の _invocation_counter フィールドのカウンタ値をインクリメントし, 閾値チェックを行う.
+          閾値に達していた場合は, 引数で指定された overflow ラベルにジャンプする.
+          そうでなければ, done ラベルまでジャンプする (= 今回のカウンタ値の処理は終了).
+  
+          もし methodDataOopDesc が付いていなければ, 
+          no_mdo ラベルまでジャンプする」
+        ---------------------------------------- -}
+
 	    if (ProfileInterpreter) {
 	      // Are we profiling?
 	      __ movptr(rax, Address(rbx, methodOopDesc::method_data_offset()));
@@ -61,9 +79,31 @@ void InterpreterGenerator::generate_counter_incr(
 	      __ increment_mask_and_jump(mdo_invocation_counter, increment, mask, rcx, false, Assembler::zero, overflow);
 	      __ jmpb(done);
 	    }
+
+    {- -------------------------------------------
+  (1.1) コード生成:
+        「(ここが no_mdo ラベルの位置)」
+        ---------------------------------------- -}
+
 	    __ bind(no_mdo);
+
+    {- -------------------------------------------
+  (1.1) コード生成:
+        「InterpreterMacroAssembler::increment_mask_and_jump() が生成するコードによって
+          実行中のメソッドに対応する methodOopDesc の 
+          _invocation_counter フィールドのカウンタ値をインクリメントし, 閾値チェックを行う.
+          閾値に達していた場合は, 引数で指定された overflow ラベルにジャンプする.
+          そうでなければ, このままフォールスルーして, 今回のカウンタ値の処理は終了」
+        ---------------------------------------- -}
+
 	    // Increment counter in methodOop (we don't need to load it, it's in ecx).
 	    __ increment_mask_and_jump(invocation_counter, increment, mask, rcx, true, Assembler::zero, overflow);
+
+    {- -------------------------------------------
+  (1.1) コード生成:
+        「(ここが done ラベルの位置)」
+        ---------------------------------------- -}
+
 	    __ bind(done);
 
   {- -------------------------------------------
@@ -81,14 +121,30 @@ void InterpreterGenerator::generate_counter_incr(
 	                                   InvocationCounter::counter_offset());
 	
     {- -------------------------------------------
-  (1.1) コード生成:
-        「カウンタの値をインクリメントする」#TODO
+  (1.1) コード生成: (ただし, ProfileInterpreter オプションが指定されていない場合には生成しない)
+        「(プロファイル情報を取得する場合には)
+          実行中のメソッドに対応する methodOopDesc の 
+          _interpreter_invocation_count フィールドの値をインクリメントしておく」
         ---------------------------------------- -}
 
 	    if (ProfileInterpreter) { // %%% Merge this into methodDataOop
 	      __ incrementl(Address(rbx,
 	                            methodOopDesc::interpreter_invocation_counter_offset()));
 	    }
+
+    {- -------------------------------------------
+  (1.1) コード生成:
+        「実行中のメソッドに対応する methodOopDesc の 
+          _invocation_counter フィールドのカウンタ値をインクリメントする.
+  
+          (なおついでに, rcx レジスタに 
+          _backedge_counter と _invocation_counter を足した値をセットしている)」
+  
+         (なお, このコードでは
+         rcx に予め _invocation_counter フィールドのアドレスが入っていると想定している.
+         この関数の先頭にあるコメントも参照)
+        ---------------------------------------- -}
+
 	    // Update standard invocation counters
 	    __ movl(rax, backedge_counter);   // load backedge counter
 	
@@ -100,12 +156,15 @@ void InterpreterGenerator::generate_counter_incr(
 	
     {- -------------------------------------------
   (1.1) コード生成: (ただし, ProfileInterpreter オプションが指定されていない場合や, 引数の profile_method が NULL の場合には生成しない)
-        「カウンタの値を閾値(InvocationCounter::InterpreterProfileLimitの値)と比較する.
+        「(プロファイル情報を取得する場合, ある程度実行回数が多いコードには methodDataOopDesc(mdo) を付ける.
+          ここでカウンタ値をチェックし, カウンタ値が大きいのに mdo がまだ付いてなければ, 付けるコードにジャンプする)
+  
+         カウンタの値を閾値(InvocationCounter::InterpreterProfileLimitの値)と比較する.
          もしカウンタ値が閾値未満であれば, 引数で指定された profile_method_continue ラベルにジャンプする.
   
          そうでなければ, InterpreterMacroAssembler::test_method_data_pointer() が生成するコードによって
          ImethodDataPtr レジスタの値を調べる.
-         まだ mdp が生成されてなければ, 引数で指定された profile_method ラベルにジャンプする」
+         まだ mdo が生成されてなければ, 引数で指定された profile_method ラベルにジャンプする」
     
   
          (なお, 引数の profile_method が NULL 以外の値を取るのは

@@ -28,7 +28,7 @@ Forte::register_stub() というユーティリティ・メソッド(のみ)を�
 (これ以外にメソッドやフィールドはない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/forte.hpp))
     // Interface to Forte support.
     
@@ -43,7 +43,7 @@ Forte::register_stub() は, 動的に生成したコードをパフォーマン�
 See: [here](no52482Gk.html) for details
 #### 参考(for your information): collector_func_load()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/forte.cpp))
     #ifndef _WINDOWS
     // Support for the Forte(TM) Peformance Tools collector.
@@ -82,7 +82,7 @@ See: [here](../doxygen/classForte.html) for details
 スタックフレーム中のフレームをたどるためのイテレータクラス(StackObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/forte.cpp))
     #ifndef IA64
     

@@ -54,7 +54,7 @@ title: outputStream クラス関連のクラス (outputStream, ttyLocker, ttyUnl
 jio_fprintf(defaultStream::output_stream(), "...") で出力すればいいらしい.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/ostream.hpp))
     // Output streams for printing
     //
@@ -72,7 +72,7 @@ jio_fprintf(defaultStream::output_stream(), "...") で出力すればいいら�
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/ostream.hpp))
        virtual void write(const char* str, size_t len) = 0;
 ```
@@ -81,7 +81,7 @@ jio_fprintf(defaultStream::output_stream(), "...") で出力すればいいら�
 tty 以外に gclog_or_tty という大域変数も用意されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/ostream.hpp))
     // standard output
                                     // ANSI C++ name collision
@@ -106,7 +106,7 @@ defaultStream オブジェクトを使用する際にはスレッド間で排他
 (See: defaultStream).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/ostream.hpp))
     // advisory locking for the shared tty stream:
     class ttyLocker: StackObj {
@@ -116,7 +116,7 @@ defaultStream オブジェクトを使用する際にはスレッド間で排他
 コンストラクタで hold_tty() を呼んでロックを取り, デストラクタで release_tty() を呼んでアンロックするだけ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/ostream.hpp))
       ttyLocker()  { _holder = hold_tty(); }
       ~ttyLocker() { release_tty(_holder); }
@@ -139,7 +139,7 @@ ttyLocker で取得したロックを, ソースコード中のあるスコー�
 コメントによると, ロックの取得順序にまつわる問題を回避するために使用される, とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/ostream.hpp))
     // Release the tty lock if it's held and reacquire it if it was
     // locked.  Used to avoid lock ordering problems.
@@ -151,7 +151,7 @@ ttyLocker で取得したロックを, ソースコード中のあるスコー�
 デストラクタでは, もしロックを取得していたのであれば hold_tty() を呼んで再取得する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/ostream.hpp))
       ttyUnlocker()  {
         _was_locked = ttyLocker::release_tty_if_locked();
@@ -179,7 +179,7 @@ See: [here](../doxygen/classttyUnlocker.html) for details
 なお, バッファ長は必要に応じて自動的に拡張される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/ostream.hpp))
     // for writing to strings; buffer will expand automatically
     class stringStream : public outputStream {
@@ -198,7 +198,7 @@ See: [here](../doxygen/classstringStream.html) for details
 ファイルに書き出すタイプの outputStream.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/ostream.hpp))
     class fileStream : public outputStream {
 ```
@@ -219,7 +219,7 @@ fileStream との違いは fdStream はバッファリングしないという�
 コメントによると, このクラスは致命的なエラー時の出力用, とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/ostream.hpp))
     // unlike fileStream, fdStream does unbuffered I/O by calling
     // open() and write() directly. It is async-safe, but output
@@ -233,14 +233,14 @@ fileStream が FILE* を使用して fopen() と fwrite() で書き出すのに�
 fdStream は file descriptor を使って open() と write() で書き出す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/ostream.cpp))
     fileStream::fileStream(const char* file_name) {
       _file = fopen(file_name, "w");
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/ostream.cpp))
     void fileStream::write(const char* s, size_t len) {
       if (_file != NULL)  {
@@ -249,14 +249,14 @@ fdStream は file descriptor を使って open() と write() で書き出す.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/ostream.cpp))
     fdStream::fdStream(const char* file_name) {
       _fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/ostream.cpp))
     void fdStream::write(const char* s, size_t len) {
       if (_fd != -1) {
@@ -280,7 +280,7 @@ See: [here](../doxygen/classfdStream.html) for details
 また, MT safe ではないので出力用のバッファを複数スレッドで共有するとまずい, とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/ostream.hpp))
     // staticBufferStream uses a user-supplied buffer for all formatting.
     // Used for safe formatting during fatal error handling.  Not MT safe.
@@ -303,7 +303,7 @@ See: [here](../doxygen/classstaticBufferStream.html) for details
 (stringStream との違いは?? 最大バッファ長を明示的に指定できる点?? #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/ostream.hpp))
     // In the non-fixed buffer case an underlying buffer will be created and
     // managed in C heap. Not MT-safe.
@@ -325,7 +325,7 @@ See: [here](../doxygen/classbufferedStream.html) for details
 ネットワーク(ソケット)に対して出力するタイプの outputStream.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/ostream.hpp))
     #ifndef PRODUCT
     
@@ -339,7 +339,7 @@ IdealGraphPrinter との通信処理に(のみ)使用されている (See: Ideal
 出力機能だけでなく, ネットワークからデータを読み取る機能も備えていたりする.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/ostream.hpp))
         int read(char *buf, size_t len);
 ```

@@ -11,7 +11,7 @@ title: TemplateTable クラス関連のクラス (Template, TemplateTable)
 Template Interpreter が使用するコードレットの生成を担当する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/templateTable.hpp))
     #ifndef CC_INTERP
     // All the necessary definitions used for (bytecode) template generation. Instead of
@@ -39,7 +39,7 @@ Template Interpreter 用のクラス (#ifndef CC_INTERP 時にしか定義され
 Template Interpreter 用のコードレットの生成処理を行うクラス (より正確には, そのための機能を納めた名前空間(AllStatic クラス))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/templateTable.hpp))
     // The TemplateTable defines all Templates and provides accessor functions
     // to get the template for a given bytecode.
@@ -70,7 +70,7 @@ TemplateTable クラス内で使用される補助クラス.
 1つの Template オブジェクトが 1つのコードレットに担当する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/templateTable.hpp))
     // A Template describes the properties of a code template for a given bytecode
     // and provides a generator to generate the code template.
@@ -106,7 +106,7 @@ TemplateTable クラス内で使用される補助クラス.
 対応するマシン語列を生成する生成関数の情報, 等)を格納している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/templateTable.hpp))
       int       _flags;                              // describes interpreter template properties (bcp unknown)
       TosState  _tos_in;                             // tos cache state before template execution

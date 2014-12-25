@@ -19,7 +19,7 @@ AbstractCompiler クラスの具象サブクラスの1つ.
  C2 JIT コンパイル処理が開始される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/c2compiler.hpp))
     class C2Compiler : public AbstractCompiler {
 ```

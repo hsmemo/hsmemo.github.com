@@ -21,7 +21,7 @@ title: Events クラス関連のクラス (Events, EventMark, 及びそれらの
        EventMark m("GarbageCollecting %d", (intptr_t)gc_number);
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/events.hpp))
     // Events and EventMark provide interfaces to log events taking place in the vm.
     // This facility is extremly useful for post-mortem debugging. The eventlog
@@ -62,7 +62,7 @@ title: Events クラス関連のクラス (Events, EventMark, 及びそれらの
 (より正確には, そのための機能を納めた名前空間(AllStatic クラス)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/events.hpp))
     class Events : AllStatic {
 ```
@@ -81,7 +81,7 @@ Events::log() でログを記録し, Events::print_all() または Events::print
 (PRODUCT_RETURN は #ifdef PRODUCT 時には '{}' に展開される. (See: PRODUCT_RETURN))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/events.hpp))
       // Logs an event, format as printf
       static void log(const char* format, ...) PRODUCT_RETURN;
@@ -108,7 +108,7 @@ See: [here](../doxygen/classEvents.html) for details
 ログの記録処理をソースコード上のスコープに合わせて行うための補助クラス(StackObjクラス)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/events.hpp))
     class EventMark : public StackObj {
 ```
@@ -120,7 +120,7 @@ See: [here](../doxygen/classEvents.html) for details
 さらに, 開発時用のクラスであるため, #ifdef PRODUCT 時には全ての中身が空になる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/events.hpp))
       // log a begin event, format as printf
       EventMark(const char* format, ...) PRODUCT_RETURN;
@@ -138,7 +138,7 @@ See: [here](../doxygen/classEvents.html) for details
 ただし, このクラスは (デバッグ時であることに加えて) LogEvents オプションが指定されている場合にしか働かない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/events.cpp))
     EventMark::EventMark(const char* format, ...) {
       if (LogEvents) {
@@ -177,7 +177,7 @@ EventBuffer クラス内で使用される補助クラス.
 1つの Event オブジェクトが 1つのログの内容に対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/events.cpp))
     class Event VALUE_OBJ_CLASS_SPEC  {
 ```
@@ -210,7 +210,7 @@ Events クラスおよび EventMark クラス内で使用される補助クラ�
 (Events クラスや EventMark クラスはこのクラスのラッパーといった感じ).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/events.cpp))
     ////////////////////////////////////////////////////////////////////////////
     // EventBuffer

@@ -41,7 +41,7 @@ JvmtiManageCapabilities は,
     JvmtiManageCapabilities::onload_solo_capabilities フィールド
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiManageCapabilities.hpp))
       // these four capabilities sets represent all potentially
       // available capabilities.  They are disjoint, covering
@@ -70,7 +70,7 @@ JvmtiManageCapabilities は,
     JvmtiManageCapabilities::acquired_capabilities フィールド
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiManageCapabilities.hpp))
       // solo capabilities that have not been grabbed
       static jvmtiCapabilities always_solo_remaining_capabilities;

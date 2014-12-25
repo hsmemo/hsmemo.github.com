@@ -19,7 +19,7 @@ doPrivileged() されたという情報を記録しておくためのクラス.
 1つの PrivilegedElement オブジェクトが 1回の java.security.AccessController.doPrivileged() に対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/privilegedStack.hpp))
     class PrivilegedElement VALUE_OBJ_CLASS_SPEC {
 ```

@@ -22,7 +22,7 @@ UTF8 文字列を扱うためのユーティリティ・クラス
 (より正確には, そのための機能を納めた名前空間(AllStatic クラス)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/utf8.hpp))
     // Low-level interface for UTF8 strings
     
@@ -35,7 +35,7 @@ UTF8 文字列を扱うためのユーティリティ・クラス
 (長さを測ったり, 次の文字の頭出しをしたりする)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/utf8.hpp))
       // returns the unicode length of a 0-terminated uft8 string
       static int unicode_length(const char* uft8_str);
@@ -77,7 +77,7 @@ Unicode (UTF-16) 文字列を扱うためのユーティリティ・クラス
 
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/utf8.hpp))
     // Low-level interface for UNICODE strings
     
@@ -94,7 +94,7 @@ Unicode (UTF-16) 文字列を扱うためのユーティリティ・クラス
 (なお, 5つとも UTF8 関係のメソッド. 例えば「UTF8 にした場合の長さを調べる」, 「UTF8 に変換する」, 等)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/utf8.hpp))
       // returns the utf8 size of a unicode character
       static int utf8_size(jchar c);

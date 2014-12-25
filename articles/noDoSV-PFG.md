@@ -19,7 +19,7 @@ ByteSize は byte 単位での大きさ, WordSize はプロセッサの machine 
 (machine word は環境依存なので 32bit だったり 64bit だったりする).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/sizes.hpp))
     // The following two classes are used to represent 'sizes' and 'offsets' in the VM;
     // they serve as 'unit' types. ByteSize is used for sizes measured in bytes, while
@@ -56,7 +56,7 @@ ByteSize は byte 単位での大きさ, WordSize はプロセッサの machine 
 (コメントによると, int の typedef で動かなくなるような変更はしないように, とのこと).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/sizes.hpp))
     #ifdef ASSERT
     ...
@@ -97,7 +97,7 @@ ByteSize は byte 単位での大きさ, WordSize はプロセッサの machine 
 「byte 単位」でのメモリ量を表す数値型.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/sizes.hpp))
     class ByteSize VALUE_OBJ_CLASS_SPEC {
 ```
@@ -106,14 +106,14 @@ ByteSize は byte 単位での大きさ, WordSize はプロセッサの machine 
 内部には以下のフィールド(のみ)を含む.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/sizes.hpp))
       int _size;
 ```
 
 (このフィールドへのアクセサは in_bytes() 関数)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/sizes.hpp))
       // accessors
       inline friend int in_bytes(ByteSize x);
@@ -122,7 +122,7 @@ ByteSize は byte 単位での大きさ, WordSize はプロセッサの machine 
 また, 四則演算用に以下の friend function が定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/sizes.hpp))
       // operators
       friend ByteSize operator + (ByteSize x, ByteSize y) { return ByteSize(in_bytes(x) + in_bytes(y)); }
@@ -152,7 +152,7 @@ See: [here](../doxygen/classByteSize.html) for details
 「word 単位」でのメモリ量を表す数値型 (なお word は環境依存の単位であり 32bit のこともあれば 64bit のこともある).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/sizes.hpp))
     class WordSize VALUE_OBJ_CLASS_SPEC {
 ```
@@ -161,14 +161,14 @@ See: [here](../doxygen/classByteSize.html) for details
 内部には以下のフィールド(のみ)を含む.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/sizes.hpp))
       int _size;
 ```
 
 (このフィールドへのアクセサは in_words() 関数)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/sizes.hpp))
       // accessors
       inline friend int in_words(WordSize x);
@@ -177,7 +177,7 @@ See: [here](../doxygen/classByteSize.html) for details
 また, 四則演算用に以下の friend function が定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/sizes.hpp))
       // operators
       friend WordSize operator + (WordSize x, WordSize y) { return WordSize(in_words(x) + in_words(y)); }

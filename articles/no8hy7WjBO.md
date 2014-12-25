@@ -31,7 +31,7 @@ JNI の機能(より具体的に言うと, ネイティブメソッドの呼び�
 (See: [here](no3059asZ.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/interpreterRT_x86.hpp))
     // native method calls
     
@@ -68,13 +68,13 @@ JNI の機能(より具体的に言うと, ネイティブメソッドの呼び�
 さらに, 64bit 版は #ifdef _WIN64 かどうかで 2種類のクラス定義が用意されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/interpreterRT_x86_32.cpp))
     class SlowSignatureHandler: public NativeSignatureIterator {
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/interpreterRT_x86_64.cpp))
     #ifdef _WIN64
     class SlowSignatureHandler
@@ -82,7 +82,7 @@ JNI の機能(より具体的に言うと, ネイティブメソッドの呼び�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/interpreterRT_x86_64.cpp))
     #else
     class SlowSignatureHandler

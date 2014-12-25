@@ -45,7 +45,7 @@ Java のオブジェクト(oop) は GC 時に移動されることがある.
       klassOop      instanceKlass   instanceKlassHandle
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     //------------------------------------------------------------------------------------------------------------------------
     // In order to preserve oops during garbage collection, they should be
@@ -91,7 +91,7 @@ Java のオブジェクト(oop) は GC 時に移動されることがある.
 (Handle オブジェクト自体はその領域を指すポインタだけを保持する. ポインタ1つなので ValueObj として扱われている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.inline.hpp))
     inline Handle::Handle(oop obj) {
       if (obj == NULL) {
@@ -108,7 +108,7 @@ Java のオブジェクト(oop) は GC 時に移動されることがある.
 (以下は使用例: スコープを抜けて HandleMark のデストラクタが呼ばれた段階で, そのスコープ内で確保した Handle が全て解放される)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/javaCalls.cpp))
 
 
@@ -161,7 +161,7 @@ HotSpot 内で Java のオブジェクト (oop) を操作する場合は Handle 
 なお Handle 自体は ValueObj であり, メソッドの引数や返り値として使うこともできる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     //------------------------------------------------------------------------------------------------------------------------
     // Base class for all handles. Provides overloading of frequently
@@ -190,7 +190,7 @@ See: [here](../doxygen/classHandle.html) for details
 klassOopDesc 用の Handle クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     //------------------------------------------------------------------------------------------------------------------------
     // Base class for Handles containing klassOops. Provides overloading of frequently
@@ -217,7 +217,7 @@ See: [here](../doxygen/classKlassHandle.html) for details
 instanceOopDesc 用の Handle クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     DEF_HANDLE(instance         , is_instance         )
 ```
@@ -225,7 +225,7 @@ instanceOopDesc 用の Handle クラス.
 なお, このクラスはソースコード上で直接定義はされておらず, 以下のマクロを使って間接的に定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     // Specific Handles for different oop types
     #define DEF_HANDLE(type, is_a)                   \
@@ -249,7 +249,7 @@ See: [here](../doxygen/classinstanceHandle.html) for details
 methodOopDesc 用の Handle クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     DEF_HANDLE(method           , is_method           )
 ```
@@ -257,7 +257,7 @@ methodOopDesc 用の Handle クラス.
 なお, このクラスはソースコード上で直接定義はされておらず, 以下のマクロを使って間接的に定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     // Specific Handles for different oop types
     #define DEF_HANDLE(type, is_a)                   \
@@ -284,7 +284,7 @@ See: [here](../doxygen/classmethodHandle.html) for details
 constMethodOopDesc 用の Handle クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     DEF_HANDLE(constMethod      , is_constMethod      )
 ```
@@ -292,7 +292,7 @@ constMethodOopDesc 用の Handle クラス.
 なお, このクラスはソースコード上で直接定義はされておらず, 以下のマクロを使って間接的に定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     // Specific Handles for different oop types
     #define DEF_HANDLE(type, is_a)                   \
@@ -316,7 +316,7 @@ See: [here](../doxygen/classconstMethodHandle.html) for details
 methodDataOopDesc 用の Handle クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     DEF_HANDLE(methodData       , is_methodData       )
 ```
@@ -324,7 +324,7 @@ methodDataOopDesc 用の Handle クラス.
 なお, このクラスはソースコード上で直接定義はされておらず, 以下のマクロを使って間接的に定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     // Specific Handles for different oop types
     #define DEF_HANDLE(type, is_a)                   \
@@ -348,7 +348,7 @@ See: [here](../doxygen/classmethodDataHandle.html) for details
 arrayOopDesc 用の Handle クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     DEF_HANDLE(array            , is_array            )
 ```
@@ -356,7 +356,7 @@ arrayOopDesc 用の Handle クラス.
 なお, このクラスはソースコード上で直接定義はされておらず, 以下のマクロを使って間接的に定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     // Specific Handles for different oop types
     #define DEF_HANDLE(type, is_a)                   \
@@ -380,7 +380,7 @@ See: [here](../doxygen/classarrayHandle.html) for details
 constantPoolOopDesc 用の Handle クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     DEF_HANDLE(constantPool     , is_constantPool     )
 ```
@@ -388,7 +388,7 @@ constantPoolOopDesc 用の Handle クラス.
 なお, このクラスはソースコード上で直接定義はされておらず, 以下のマクロを使って間接的に定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     // Specific Handles for different oop types
     #define DEF_HANDLE(type, is_a)                   \
@@ -412,7 +412,7 @@ See: [here](../doxygen/classconstantPoolHandle.html) for details
 constantPoolCacheOopDesc 用の Handle クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     DEF_HANDLE(constantPoolCache, is_constantPoolCache)
 ```
@@ -420,7 +420,7 @@ constantPoolCacheOopDesc 用の Handle クラス.
 なお, このクラスはソースコード上で直接定義はされておらず, 以下のマクロを使って間接的に定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     // Specific Handles for different oop types
     #define DEF_HANDLE(type, is_a)                   \
@@ -444,7 +444,7 @@ See: [here](../doxygen/classconstantPoolCacheHandle.html) for details
 objArrayOopDesc 用の Handle クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     DEF_HANDLE(objArray         , is_objArray         )
 ```
@@ -452,7 +452,7 @@ objArrayOopDesc 用の Handle クラス.
 なお, このクラスはソースコード上で直接定義はされておらず, 以下のマクロを使って間接的に定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     // Specific Handles for different oop types
     #define DEF_HANDLE(type, is_a)                   \
@@ -476,7 +476,7 @@ See: [here](../doxygen/classobjArrayHandle.html) for details
 typeArrayOopDesc 用の Handle クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     DEF_HANDLE(typeArray        , is_typeArray        )
 ```
@@ -484,7 +484,7 @@ typeArrayOopDesc 用の Handle クラス.
 なお, このクラスはソースコード上で直接定義はされておらず, 以下のマクロを使って間接的に定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     // Specific Handles for different oop types
     #define DEF_HANDLE(type, is_a)                   \
@@ -509,7 +509,7 @@ KlassHandle クラスのサブクラス.
 このクラスは Klass 種別が instanceKlass の場合用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     DEF_KLASS_HANDLE(instanceKlass         , oop_is_instance_slow )
 ```
@@ -517,7 +517,7 @@ KlassHandle クラスのサブクラス.
 なお, このクラスはソースコード上で直接定義はされておらず, 以下のマクロを使って間接的に定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     // Specific KlassHandles for different Klass types
     
@@ -541,7 +541,7 @@ KlassHandle クラスのサブクラス.
 このクラスは Klass 種別が methodKlass の場合用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     DEF_KLASS_HANDLE(methodKlass           , oop_is_method        )
 ```
@@ -549,7 +549,7 @@ KlassHandle クラスのサブクラス.
 なお, このクラスはソースコード上で直接定義はされておらず, 以下のマクロを使って間接的に定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     // Specific KlassHandles for different Klass types
     
@@ -573,7 +573,7 @@ KlassHandle クラスのサブクラス.
 このクラスは Klass 種別が constMethodKlass の場合用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     DEF_KLASS_HANDLE(constMethodKlass      , oop_is_constMethod   )
 ```
@@ -581,7 +581,7 @@ KlassHandle クラスのサブクラス.
 なお, このクラスはソースコード上で直接定義はされておらず, 以下のマクロを使って間接的に定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     // Specific KlassHandles for different Klass types
     
@@ -605,7 +605,7 @@ KlassHandle クラスのサブクラス.
 このクラスは Klass 種別が klassKlass の場合用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     DEF_KLASS_HANDLE(klassKlass            , oop_is_klass         )
 ```
@@ -613,7 +613,7 @@ KlassHandle クラスのサブクラス.
 なお, このクラスはソースコード上で直接定義はされておらず, 以下のマクロを使って間接的に定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     // Specific KlassHandles for different Klass types
     
@@ -637,7 +637,7 @@ KlassHandle クラスのサブクラス.
 このクラスは Klass 種別が arrayKlassKlass の場合用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     DEF_KLASS_HANDLE(arrayKlassKlass       , oop_is_arrayKlass    )
 ```
@@ -645,7 +645,7 @@ KlassHandle クラスのサブクラス.
 なお, このクラスはソースコード上で直接定義はされておらず, 以下のマクロを使って間接的に定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     // Specific KlassHandles for different Klass types
     
@@ -669,7 +669,7 @@ KlassHandle クラスのサブクラス.
 このクラスは Klass 種別が objArrayKlassKlass の場合用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     DEF_KLASS_HANDLE(objArrayKlassKlass    , oop_is_objArrayKlass )
 ```
@@ -677,7 +677,7 @@ KlassHandle クラスのサブクラス.
 なお, このクラスはソースコード上で直接定義はされておらず, 以下のマクロを使って間接的に定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     // Specific KlassHandles for different Klass types
     
@@ -701,7 +701,7 @@ KlassHandle クラスのサブクラス.
 このクラスは Klass 種別が typeArrayKlassKlass の場合用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     DEF_KLASS_HANDLE(typeArrayKlassKlass   , oop_is_typeArrayKlass)
 ```
@@ -709,7 +709,7 @@ KlassHandle クラスのサブクラス.
 なお, このクラスはソースコード上で直接定義はされておらず, 以下のマクロを使って間接的に定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     // Specific KlassHandles for different Klass types
     
@@ -733,7 +733,7 @@ KlassHandle クラスのサブクラス.
 このクラスは Klass 種別が arrayKlass の場合用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     DEF_KLASS_HANDLE(arrayKlass            , oop_is_array         )
 ```
@@ -741,7 +741,7 @@ KlassHandle クラスのサブクラス.
 なお, このクラスはソースコード上で直接定義はされておらず, 以下のマクロを使って間接的に定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     // Specific KlassHandles for different Klass types
     
@@ -765,7 +765,7 @@ KlassHandle クラスのサブクラス.
 このクラスは Klass 種別が typeArrayKlass の場合用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     DEF_KLASS_HANDLE(typeArrayKlass        , oop_is_typeArray_slow)
 ```
@@ -773,7 +773,7 @@ KlassHandle クラスのサブクラス.
 なお, このクラスはソースコード上で直接定義はされておらず, 以下のマクロを使って間接的に定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     // Specific KlassHandles for different Klass types
     
@@ -797,7 +797,7 @@ KlassHandle クラスのサブクラス.
 このクラスは Klass 種別が objArrayKlass の場合用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     DEF_KLASS_HANDLE(objArrayKlass         , oop_is_objArray_slow )
 ```
@@ -805,7 +805,7 @@ KlassHandle クラスのサブクラス.
 なお, このクラスはソースコード上で直接定義はされておらず, 以下のマクロを使って間接的に定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     // Specific KlassHandles for different Klass types
     
@@ -829,7 +829,7 @@ KlassHandle クラスのサブクラス.
 このクラスは Klass 種別が constantPoolKlass の場合用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     DEF_KLASS_HANDLE(constantPoolKlass     , oop_is_constantPool  )
 ```
@@ -837,7 +837,7 @@ KlassHandle クラスのサブクラス.
 なお, このクラスはソースコード上で直接定義はされておらず, 以下のマクロを使って間接的に定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     // Specific KlassHandles for different Klass types
     
@@ -861,7 +861,7 @@ KlassHandle クラスのサブクラス.
 このクラスは Klass 種別が constantPoolCacheKlass の場合用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     DEF_KLASS_HANDLE(constantPoolCacheKlass, oop_is_constantPool  )
 ```
@@ -869,7 +869,7 @@ KlassHandle クラスのサブクラス.
 なお, このクラスはソースコード上で直接定義はされておらず, 以下のマクロを使って間接的に定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     // Specific KlassHandles for different Klass types
     
@@ -897,7 +897,7 @@ Handle が必要とするデータを確保するための Arena クラス
 (なお, Arena クラスなのでこの領域はスレッドローカル).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     // Thread local handle area
     
@@ -909,7 +909,7 @@ Handle が必要とするデータを確保するための Arena クラス
 各 Thread オブジェクトの _handle_area フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.hpp))
     class Thread: public ThreadShadow {
     ...
@@ -941,7 +941,7 @@ Handle の確保/開放をソースコード上のスコープに合わせて自
 デストラクタで記録した位置まで戻す (= その時点までに確保したハンドル領域を解放する).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     //------------------------------------------------------------------------------------------------------------------------
     // Handles are allocated in a (growable) thread local handle area. Deallocation
@@ -986,7 +986,7 @@ See: [here](../doxygen/classHandleMark.html) for details
 「あるコード範囲で Handle の確保操作が起きない」ということをコード上に明示したい場合に使用される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     // A NoHandleMark stack object will verify that no handles are allocated
     // in its scope. Enabled in debug mode only.
@@ -1005,7 +1005,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 `#ifdef ASSERT` でなければ, 中身のないクラスとして定義される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     #ifdef ASSERT
       NoHandleMark();
@@ -1032,7 +1032,7 @@ NoHandleMark の働きを一時的に無効化したい場合に使用する
 (ResetNoHandleMark のコンストラクタが呼ばれてからデストラクタが呼ばれるまでの間は NoHandleMark の効果がキャンセルされる).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     class ResetNoHandleMark: public StackObj {
 ```
@@ -1048,7 +1048,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 `#ifdef ASSERT` でなければ, 中身のないクラスとして定義される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/handles.hpp))
     #ifdef ASSERT
       ResetNoHandleMark();

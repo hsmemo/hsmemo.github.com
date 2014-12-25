@@ -23,7 +23,7 @@ StackValueCollection クラス用の補助クラス.
 * あるスタックフレーム上のオペランドスタック内にある 1つの値
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/stackValue.hpp))
     class StackValue : public ResourceObj {
 ```
@@ -89,7 +89,7 @@ StackValueCollection::StackValueCollection() 内で(のみ)確保されている
 定義されているフィールドは以下の通り.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/stackValue.hpp))
       BasicType _type;
       intptr_t  _i; // Blank java stack slot value

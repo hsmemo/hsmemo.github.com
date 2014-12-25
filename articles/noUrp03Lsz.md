@@ -17,7 +17,7 @@ G1GC アルゴリズムを補佐するスレッドクラス(ConcurrentGCThread�
 (論文中では "concurrent remembered set thread"). (See: [here](no2935dGZ.html) for details)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentG1RefineThread.hpp))
     // The G1 Concurrent Refinement Thread (could be several in the future).
     
@@ -47,7 +47,7 @@ ConcurrentG1RefineThread は, 最初に最大数分だけ生成された後, 仕
 (0 版目の ConcurrentG1RefineThread だけは, write barrier 処理から起床される). (See: [here](no2935dGZ.html) for details)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentG1RefineThread.cpp))
       // Each thread has its own monitor. The i-th thread is responsible for signalling
       // to thread i+1 if the number of buffers in the queue exceeds a threashold for this
@@ -64,7 +64,7 @@ ConcurrentG1RefineThread は, 最初に最大数分だけ生成された後, 仕
 * _thread_threshold_step, _deactivation_threshold : 稼働数を増減させる契機を決定するための閾値
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentG1RefineThread.hpp))
       double _vtime_start;  // Initial virtual time.
       double _vtime_accum;  // Initial virtual time.

@@ -24,7 +24,7 @@ title: CodeHeap クラス及びその補助クラス (HeapBlock, FreeBlock, Code
 (つまり, CodeCache 用のメモリ領域を管理するクラス) (See: CodeCache).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/heap.hpp))
     class CodeHeap : public CHeapObj {
 ```
@@ -34,7 +34,7 @@ title: CodeHeap クラス及びその補助クラス (HeapBlock, FreeBlock, Code
 CodeCache クラスの _heap フィールド (static フィールド) に(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/codeCache.hpp))
     class CodeCache : AllStatic {
     ...
@@ -49,7 +49,7 @@ CodeCache クラスの _heap フィールド (static フィールド) に(のみ
 起動時に(のみ)生成されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/codeCache.cpp))
     CodeHeap * CodeCache::_heap = new CodeHeap();
 ```
@@ -70,7 +70,7 @@ CodeHeap が管理している各メモリ領域のメタ情報を記録して�
 (現状で記録しているのは, 「その領域の領域長」および「その領域が使用中かどうか」).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/heap.hpp))
     class HeapBlock VALUE_OBJ_CLASS_SPEC {
 ```
@@ -85,7 +85,7 @@ CodeHeap からメモリが確保される際には, 要求サイズより HeapB
 (<= 要は malloc() が使用するメタ情報のようなもの)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/heap.cpp))
     void* CodeHeap::allocate(size_t size) {
       size_t length = number_of_segments(size + sizeof(HeapBlock));
@@ -100,7 +100,7 @@ CodeHeap からメモリが確保される際には, 要求サイズより HeapB
 (なお, 実際には padding も入れた分の大きさが HeapBlock オブジェクトの大きさになる)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/heap.hpp))
      public:
       struct Header {
@@ -131,7 +131,7 @@ CodeHeap クラス内で使用される補助クラス.
 CodeHeap 内の空き領域を管理するためのフリーリスト.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/heap.hpp))
     class FreeBlock: public HeapBlock {
 ```
@@ -141,7 +141,7 @@ CodeHeap 内の空き領域を管理するためのフリーリスト.
 各 CodeHeap オブジェクトの _freelist フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/heap.hpp))
       FreeBlock*   _freelist;
 ```
@@ -153,7 +153,7 @@ HeapBlock のフィールドに加えて, リストを構成するための _lin
 さらにその直後の 1 word をリンクに使ってフリーリストを構成する).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/heap.hpp))
       FreeBlock* _link;
 ```

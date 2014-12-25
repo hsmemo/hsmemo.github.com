@@ -31,7 +31,7 @@ HeapRegion 毎に1つ存在しており,
 「その HeapRegion を指すポインタ (を含んでいる Card/HeapRegion) の集合」を記録している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionRemSet.hpp))
     // Remembered set for a heap region.  Represent a set of "cards" that
     // contain pointers into the owner heap region.  Cards are defined somewhat
@@ -39,7 +39,7 @@ HeapRegion 毎に1つ存在しており,
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionRemSet.hpp))
     class HeapRegionRemSet : public CHeapObj {
 ```
@@ -93,7 +93,7 @@ HeapRegionRemSet クラス内で使用される補助クラス.
  とのこと.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionRemSet.hpp))
     // The "_coarse_map" is a bitmap with one bit for each region, where set
     // bits indicate that the corresponding region may contain some pointer
@@ -179,7 +179,7 @@ HeapRegionRemSet クラス内で使用される補助クラス.
   細かい粒度(Card 単位)での情報を蓄えておくフィールド (See: SparsePRT).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionRemSet.hpp))
       G1CollectedHeap* _g1h;
       Mutex            _m;
@@ -218,7 +218,7 @@ PosParPRT クラス用の補助クラス.
 指定の HeapRegion が「どの Card から指されているか」という情報を記録しておくためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionRemSet.cpp))
     class PerRegionTable: public CHeapObj {
 ```
@@ -274,7 +274,7 @@ PerRegionTable::alloc() というファクトリメソッドが用意されて�
 (「担当する HeapRegion 内のどの card から指されているか」という情報がビットマップとして記録されている).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionRemSet.cpp))
       BitMap          _bm;
 ```
@@ -298,7 +298,7 @@ OtherRegionsTable クラス内で使用される補助クラス
  ある HeapRegion を指している全ての Card 情報は複数の PosParPRT オブジェクトを用いることで表現される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionRemSet.cpp))
     class PosParPRT: public PerRegionTable {
 ```
@@ -306,7 +306,7 @@ OtherRegionsTable クラス内で使用される補助クラス
 なお PosParPRTPtr という型も使われるが, これは PosParPRT* の別名.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionRemSet.cpp))
       typedef PosParPRT* PosParPRTPtr;
 ```
@@ -361,7 +361,7 @@ HeapRegionRemSet オブジェクト内の card 情報をたどるためのイテ
 (なお, このクラスはイテレータなのに CHeapObj).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionRemSet.hpp))
     class HeapRegionRemSetIterator : public CHeapObj {
 ```
@@ -421,7 +421,7 @@ See: [here](../doxygen/classHeapRegionRemSetIterator.html) for details
 SparsePRTCleanupTask クラスの具象サブクラス (コメントによると, SparsePRTCleanupTask のラッパーのようなクラス, とのこと).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionRemSet.hpp))
     // Essentially a wrapper around SparsePRTCleanupTask. See
     // sparsePRT.hpp for more details.
@@ -448,7 +448,7 @@ See: [here](../doxygen/classHRRSCleanupTask.html) for details
 ?? (使われていないクラス. #if 0 で消されていて詳細不明)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionRemSet.hpp))
     #if 0
     class CardClosure: public Closure {

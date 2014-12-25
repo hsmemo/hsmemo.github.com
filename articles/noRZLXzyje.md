@@ -19,7 +19,7 @@ title: Stack クラス関連のクラス (StackBase, Stack, ResourceStack, Stack
   * Stack クラスでは C Heap からメモリを確保するが, この挙動は alloc()/free() を上書きすれば変えられる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/stack.hpp))
     // Class Stack (below) grows and shrinks by linking together "segments" which
     // are allocated on demand.  Segments are arrays of the element type (E) plus an
@@ -63,7 +63,7 @@ title: Stack クラス関連のクラス (StackBase, Stack, ResourceStack, Stack
 スタックとして働くクラスの基底クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/stack.hpp))
     // StackBase holds common data/methods that don't depend on the element type,
     // factored out to reduce template code duplication.
@@ -88,7 +88,7 @@ StackBase クラスの具象サブクラス.
 なお要素の型は template でパラメタライズされている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/stack.hpp))
     template <class E>
     class Stack:  public StackBase
@@ -114,7 +114,7 @@ ResourceObj クラスとの多重継承になっている.
 (ResourceObj なので一時的に使いたい場合用??)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/stack.hpp))
     template <class E> class ResourceStack:  public Stack<E>, public ResourceObj
 ```
@@ -135,7 +135,7 @@ See: [here](../doxygen/classResourceStack.html) for details
 Stack オブジェクト内の要素をたどるためのイテレータクラス(StackObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/stack.hpp))
     template <class E>
     class StackIterator: public StackObj

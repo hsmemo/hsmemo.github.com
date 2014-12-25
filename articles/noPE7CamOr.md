@@ -17,7 +17,7 @@ arrayOopDesc クラスの具象サブクラスの1つ.
 このクラスは「ポインタ型(オブジェクト or 配列)の配列」を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/objArrayOop.hpp))
     // An objArrayOop is an array containing oops.
     // Evaluating "String arg[10]" will create an objArrayOop.

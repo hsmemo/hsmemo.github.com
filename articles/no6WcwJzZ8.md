@@ -18,7 +18,7 @@ GCMemoryManager クラスには各 GC アルゴリズム用のサブクラスが
 (ただし, 現状では name() と kind() の返値が違う程度の差しかない...
  コメントでは, TODO 事項として各 GC に特化した情報を入れるように, と書かれているが...)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryManager.hpp))
     // These subclasses of GCMemoryManager are defined to include
     // GC-specific information.
@@ -54,7 +54,7 @@ GCMemoryManager クラスには各 GC アルゴリズム用のサブクラスが
 全ての MemoryManager クラスの基底クラス 
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryManager.hpp))
     class MemoryManager : public CHeapObj {
 ```
@@ -62,7 +62,7 @@ GCMemoryManager クラスには各 GC アルゴリズム用のサブクラスが
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryManager.hpp))
       virtual const char* name() = 0;
 ```
@@ -82,7 +82,7 @@ MemoryManager クラスの具象サブクラスの1つ.
 このクラスは, CodeCache が使用するメモリ領域用 (See: [here](no2114twV.html) and [here](no211477i.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryManager.hpp))
     class CodeCacheMemoryManager : public MemoryManager {
 ```
@@ -102,7 +102,7 @@ See: [here](../doxygen/classCodeCacheMemoryManager.html) for details
 com.sun.management.GcInfo を実現するためのクラス (See: [here](no2114twV.html) and [here](no211477i.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryManager.hpp))
     class GCStatInfo : public CHeapObj {
 ```
@@ -121,7 +121,7 @@ MemoryManager クラスのサブクラスの1つ.
 GC 処理に関する MemoryManager クラス (See: [here](no2114twV.html) and [here](no211477i.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryManager.hpp))
     class GCMemoryManager : public MemoryManager {
 ```
@@ -129,7 +129,7 @@ GC 処理に関する MemoryManager クラス (See: [here](no2114twV.html) and [
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryManager.hpp))
       virtual MemoryManager::Name kind() = 0;
 ```
@@ -149,7 +149,7 @@ GCMemoryManager クラスの具象サブクラスの1つ.
 このクラスは, GenCollectedHeap 上での Copy GC (= Serial GC) 用 (See: [here](no2114twV.html) and [here](no211477i.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryManager.hpp))
     class CopyMemoryManager : public GCMemoryManager {
 ```
@@ -169,7 +169,7 @@ GCMemoryManager クラスの具象サブクラスの1つ.
 このクラスは, GenCollectedHeap 上での MarkSweepCompact GC (= Serial Old GC) 用 (See: [here](no2114twV.html) and [here](no211477i.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryManager.hpp))
     class MSCMemoryManager : public GCMemoryManager {
 ```
@@ -189,7 +189,7 @@ GCMemoryManager クラスの具象サブクラスの1つ.
 このクラスは, GenCollectedHeap 上での ParNew GC 用 (See: [here](no2114twV.html) and [here](no211477i.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryManager.hpp))
     class ParNewMemoryManager : public GCMemoryManager {
 ```
@@ -209,7 +209,7 @@ GCMemoryManager クラスの具象サブクラスの1つ.
 このクラスは, GenCollectedHeap 上での CMS GC 用 (See: [here](no2114twV.html) and [here](no211477i.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryManager.hpp))
     class CMSMemoryManager : public GCMemoryManager {
 ```
@@ -229,7 +229,7 @@ GCMemoryManager クラスの具象サブクラスの1つ.
 このクラスは, ParallelScavengeHeap 上での Minor GC (Scavenge GC) 用 (See: [here](no2114twV.html) and [here](no211477i.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryManager.hpp))
     class PSScavengeMemoryManager : public GCMemoryManager {
 ```
@@ -249,7 +249,7 @@ GCMemoryManager クラスの具象サブクラスの1つ.
 このクラスは, ParallelScavengeHeap 上での Major GC (MarkSweep GC) 用 (See: [here](no2114twV.html) and [here](no211477i.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryManager.hpp))
     class PSMarkSweepMemoryManager : public GCMemoryManager {
 ```
@@ -269,7 +269,7 @@ GCMemoryManager クラスの具象サブクラスの1つ.
 このクラスは, G1CollectedHeap 上での Minor GC (Evacuation Pause) 用 (See: [here](no2114twV.html) and [here](no211477i.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryManager.hpp))
     class G1YoungGenMemoryManager : public GCMemoryManager {
 ```
@@ -289,7 +289,7 @@ GCMemoryManager クラスの具象サブクラスの1つ.
 このクラスは, G1CollectedHeap 上での Major GC 用 (See: [here](no2114twV.html) and [here](no211477i.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryManager.hpp))
     class G1OldGenMemoryManager : public GCMemoryManager {
 ```

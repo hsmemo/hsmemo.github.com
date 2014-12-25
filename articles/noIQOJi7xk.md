@@ -38,7 +38,7 @@ Mark Sweep Compact 用の関数や Closure 等を納めたクラスは使用す�
 処理は 4つのフェーズからなる.
 なお, クラスのアンロードは Full GC の際にのみ行われる.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/markSweep.hpp))
     // MarkSweep takes care of global mark-compact garbage collection for a
     // GenCollectedHeap using a four-phase pointer forwarding algorithm.  All
@@ -49,7 +49,7 @@ Mark Sweep Compact 用の関数や Closure 等を納めたクラスは使用す�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/markSweep.hpp))
     class MarkSweep : AllStatic {
 ```
@@ -70,7 +70,7 @@ Mark Sweep Compact 処理の phase 1 で使われる Closure クラス.
 まだマークが付いていないオブジェクトに対して, 
 マークを付け, さらにそこから辿れるものについても再帰的に処理を行う.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/markSweep.hpp))
       class FollowRootClosure: public OopsInGenClosure {
 ```
@@ -81,7 +81,7 @@ MarkSweep クラスの MarkSweep::follow_root_closure フィールドに(のみ)
 
 (なお, MarkSweep クラスを継承したサブクラスの同名のフィールドにも存在する)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/markSweep.cpp))
     MarkSweep::FollowRootClosure  MarkSweep::follow_root_closure;
 ```
@@ -101,7 +101,7 @@ Mark Sweep Compact 処理の phase 1 で使われる Closure クラス.
 マークを付け, そこから辿れるものを marking stack にプッシュする.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/markSweep.hpp))
       class MarkAndPushClosure: public OopClosure {
 ```
@@ -110,7 +110,7 @@ Mark Sweep Compact 処理の phase 1 で使われる Closure クラス.
 #### インスタンスの格納場所(where its instances are stored)
 MarkSweep クラスの MarkSweep::mark_and_push_closure フィールドに(のみ)格納されている.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/markSweep.cpp))
     MarkSweep::MarkAndPushClosure MarkSweep::mark_and_push_closure;
 ```
@@ -140,7 +140,7 @@ marking stack に溜まっているポインタに対して,
 (現状では, 参照オブジェクト(java.lang.ref オブジェクト)に対する処理にしか用いられていないが...)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/markSweep.hpp))
       class FollowStackClosure: public VoidClosure {
 ```
@@ -149,7 +149,7 @@ marking stack に溜まっているポインタに対して,
 #### インスタンスの格納場所(where its instances are stored)
 MarkSweep クラスの MarkSweep::follow_stack_closure フィールドに(のみ)格納されている.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/markSweep.cpp))
     MarkSweep::FollowStackClosure MarkSweep::follow_stack_closure;
 ```
@@ -174,7 +174,7 @@ Mark Sweep Compact 型の Garbage Collection 内で使用される補助クラ�
 Mark Sweep Compact 処理の phase 3 で使われる Closure クラス.
 ポインタの値をコンパクション先の新しいアドレスへと書き換える処理を行う.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/markSweep.hpp))
       class AdjustPointerClosure: public OopsInGenClosure {
 ```
@@ -186,7 +186,7 @@ MarkSweep クラス内の以下の static フィールドに(のみ)格納され
   * MarkSweep::adjust_root_pointer_closure フィールド
   * MarkSweep::adjust_pointer_closure フィールド
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/markSweep.cpp))
     MarkSweep::AdjustPointerClosure MarkSweep::adjust_root_pointer_closure(true);
     MarkSweep::AdjustPointerClosure MarkSweep::adjust_pointer_closure(false);
@@ -208,7 +208,7 @@ Mark Sweep Compact 型の Garbage Collection 内で使用される補助クラ�
 IsAliveClosure::do_object_b() メソッドが呼ばれると, 
 処理対象のオブジェクトが生きているかどうか(mark されているかどうか)を返す.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/markSweep.hpp))
       // Used for java/lang/ref handling
       class IsAliveClosure: public BoolObjectClosure {
@@ -218,7 +218,7 @@ IsAliveClosure::do_object_b() メソッドが呼ばれると,
 #### インスタンスの格納場所(where its instances are stored)
 MarkSweep クラスの MarkSweep::is_alive フィールドに(のみ)格納されている.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/markSweep.cpp))
     MarkSweep::IsAliveClosure   MarkSweep::is_alive;
 ```
@@ -241,7 +241,7 @@ Mark Sweep Compact 型の Garbage Collection 内で使用される補助クラ�
 
 (処理自体は MarkAndPushClosure と同じように見えるが... 何が違う?? #TODO)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/markSweep.hpp))
       class KeepAliveClosure: public OopClosure {
 ```
@@ -250,7 +250,7 @@ Mark Sweep Compact 型の Garbage Collection 内で使用される補助クラ�
 #### インスタンスの格納場所(where its instances are stored)
 MarkSweep クラスの MarkSweep::keep_alive フィールドに(のみ)格納されている.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/markSweep.cpp))
     MarkSweep::KeepAliveClosure MarkSweep::keep_alive;
 ```
@@ -270,7 +270,7 @@ Mark Sweep Compact 型の Garbage Collection 内で使用される補助クラ�
 Mark Sweep Compact 処理中に, 元の mark 値を保存しておくためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/markSweep.hpp))
     class PreservedMark VALUE_OBJ_CLASS_SPEC {
 ```
@@ -293,7 +293,7 @@ Mark Sweep Compact 処理中に, 元の mark 値を保存しておくための�
     配列の最大長は _preserved_count_max に格納される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/markSweep.hpp))
       // Space for storing/restoring mark word
       static Stack<markOop>                  _preserved_mark_stack;
@@ -335,7 +335,7 @@ See: [here](../doxygen/classPreservedMark.html) for details
 oopDesc::adjust_pointers() でのポインタの修正処理が正しく行われているかどうかを検証する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/markSweep.cpp))
     #ifdef VALIDATE_MARK_SWEEP
     ...
@@ -357,7 +357,7 @@ oopDesc::adjust_pointers() でのポインタの修正処理が正しく行わ�
    (処理対象が正しければ空になっているはず)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/space.cpp))
     void Space::adjust_pointers() {
     ...
@@ -374,7 +374,7 @@ MarkSweep::track_interior_pointers() 内で(のみ)使用されている.
 ValidateMarkSweep オプションが指定されている場合にしか使用されない)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/markSweep.cpp))
     void MarkSweep::track_interior_pointers(oop obj) {
       if (ValidateMarkSweep) {
@@ -391,13 +391,13 @@ ValidateMarkSweep オプションが指定されている場合にしか使用�
 行う処理は, MarkSweep::check_adjust_pointer() を呼び出して, 
 対象のポインタを _adjusted_pointers 内にプッシュするだけ.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/markSweep.cpp))
       void do_oop(oop* o)       { MarkSweep::check_adjust_pointer(o); }
       void do_oop(narrowOop* o) { MarkSweep::check_adjust_pointer(o); }
 ```
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/markSweep.cpp))
     void MarkSweep::check_adjust_pointer(void* p) {
       _adjusted_pointers->push(p);
@@ -408,7 +408,7 @@ ValidateMarkSweep オプションが指定されている場合にしか使用�
 VALIDATE_MARK_SWEEP マクロ定数は以下のように #define される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/markSweep.hpp))
     // If VALIDATE_MARK_SWEEP is defined, the -XX:+ValidateMarkSweep flag will
     // be operational, and will provide slow but comprehensive self-checks within

@@ -28,7 +28,7 @@ HotSpot のシステムプロパティ (= java.lang.System.getProperty() メソ�
 1つの SystemProperty オブジェクトが 1つのシステムプロパティに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/arguments.hpp))
     // Element describing System and User (-Dkey=value flags) defined property.
     
@@ -62,7 +62,7 @@ HotSpot がロードした JVMTI エージェントの情報を表す.
 1つの AgentLibrary オブジェクトが 1つの JVMTI エージェントに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/arguments.hpp))
     // For use by -agentlib, -agentpath and -Xrun
     class AgentLibrary : public CHeapObj {
@@ -108,7 +108,7 @@ See: [here](../doxygen/classAgentLibrary.html) for details
 AgentLibrary オブジェクトを束ねておくためのコンテナクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/arguments.hpp))
     // maintain an order of entry list of AgentLibrary
     class AgentLibraryList VALUE_OBJ_CLASS_SPEC {
@@ -146,7 +146,7 @@ See: [here](../doxygen/classAgentLibraryList.html) for details
 コマンドラインオプションをパースするメソッドや, パースした各オプション値へのアクセサメソッド等を提供している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/arguments.hpp))
     class Arguments : AllStatic {
 ```
@@ -180,7 +180,7 @@ HotSpot の system class path 情報 (boot class path 情報) を作成するた
 (なおコメントによると, AllStatic クラスにしてもいいがコマンドラインオプションのパースが終わった後は使われない, とのこと)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/arguments.cpp))
     // Constructs the system class path (aka boot class path) from the following
     // components, in order:

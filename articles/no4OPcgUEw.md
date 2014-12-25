@@ -19,13 +19,13 @@ constant pool 中のタグ情報を表すためのユーティリティ・クラ
  (e.g. CONSTANT_Class, CONSTANT_NameAndType, etc))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/constantTag.hpp))
     // constant tags in Java .class files
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/constantTag.hpp))
     class constantTag VALUE_OBJ_CLASS_SPEC {
 ```
@@ -34,7 +34,7 @@ constant pool 中のタグ情報を表すためのユーティリティ・クラ
 タグのうち, JVM 標準のタグについては jvm.h で定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvm.h))
         JVM_CONSTANT_Utf8 = 1,
         JVM_CONSTANT_Unicode,               /* unused */
@@ -58,7 +58,7 @@ constant pool 中のタグ情報を表すためのユーティリティ・クラ
 代わりに, このクラスでは HotSpot に特有なタグの定義が行われている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/constantTag.hpp))
       // See jvm.h for shared JVM_CONSTANT_XXX tags
       // NOTE: replicated in SA in vm/agent/sun/jvm/hotspot/utilities/ConstantTag.java
@@ -79,7 +79,7 @@ constant pool 中のタグ情報を表すためのユーティリティ・クラ
 (このメソッドについては標準的なタグ用のものも含めて提供されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/constantTag.hpp))
       bool is_klass() const             { return _tag == JVM_CONSTANT_Class; }
       bool is_field () const            { return _tag == JVM_CONSTANT_Fieldref; }

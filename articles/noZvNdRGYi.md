@@ -37,7 +37,7 @@ card 方式の BarrierSet では Java ヒープ (CollectedHeap) 中の変更を 
           * BlockOffsetArrayContigSpace      (CMS 以外用)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/blockOffsetTable.hpp))
     // The CollectedHeap type requires subtypes to implement a method
     // "block_start".  For some subtypes, notably generational
@@ -47,7 +47,7 @@ card 方式の BarrierSet では Java ヒープ (CollectedHeap) 中の変更を 
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/blockOffsetTable.hpp))
     // BlockOffsetTable (abstract)
     //   - BlockOffsetArray (abstract)
@@ -78,7 +78,7 @@ card 内のオブジェクトの頭出しを高速化するために使用され
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/blockOffsetTable.hpp))
     //////////////////////////////////////////////////////////////////////////
     // The BlockOffsetTable "interface"
@@ -87,7 +87,7 @@ card 内のオブジェクトの頭出しを高速化するために使用され
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/blockOffsetTable.hpp))
       virtual HeapWord* block_start_unsafe(const void* addr) const = 0;
 ```
@@ -111,7 +111,7 @@ BlockOffsetArray オブジェクト自体は Space オブジェクトと １対�
 そのため内部で使う配列だけを別クラスとしている, とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/blockOffsetTable.hpp))
     //////////////////////////////////////////////////////////////////////////
     // BlockOffsetSharedArray
@@ -120,7 +120,7 @@ BlockOffsetArray オブジェクト自体は Space オブジェクトと １対�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/blockOffsetTable.hpp))
     //////////////////////////////////////////////////////////////////////////
     // One implementation of "BlockOffsetTable," the BlockOffsetArray,
@@ -144,7 +144,7 @@ BlockOffsetArray オブジェクト自体は Space オブジェクトと １対�
 (そして, BlockOffsetArray オブジェクトを作る際のコンストラクタ引数として用いられる)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/generation.cpp))
     CardGeneration::CardGeneration(ReservedSpace rs, size_t initial_byte_size,
                                    int level,
@@ -171,7 +171,7 @@ See: [here](../doxygen/classBlockOffsetSharedArray.html) for details
 (<= そのため, 対象の領域を 2^N の大きさの部分領域に分割して管理している, という違いもある).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/blockOffsetTable.hpp))
     //////////////////////////////////////////////////////////////////////////
     // The BlockOffsetArray whose subtypes use the BlockOffsetSharedArray.
@@ -181,7 +181,7 @@ See: [here](../doxygen/classBlockOffsetSharedArray.html) for details
 
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/blockOffsetTable.hpp))
       virtual size_t last_active_index() const = 0;
 ```
@@ -200,7 +200,7 @@ BlockOffsetArray クラスの具象サブクラスの1つ.
 このクラスは不連続な領域用 (もっと具体的に言うと CMS 用).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/blockOffsetTable.hpp))
     ////////////////////////////////////////////////////////////////////////////
     // A subtype of BlockOffsetArray that takes advantage of the fact
@@ -229,7 +229,7 @@ BlockOffsetArray クラスの具象サブクラスの1つ.
 連続しているという仮定により, BlockOffsetArrayNonContigSpace よりも効率的にメモリ管理ができる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/blockOffsetTable.hpp))
     ////////////////////////////////////////////////////////////////////////////
     // A subtype of BlockOffsetArray that takes advantage of the fact

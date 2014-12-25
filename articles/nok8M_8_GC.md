@@ -25,7 +25,7 @@ title: AttachListener クラス関連のクラス (AttachListener, AttachOperati
 Dynamic Attach に関する機能を納めた名前空間(AllStatic クラス) (See: [here](no3026gMG.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/attachListener.hpp))
     class AttachListener: AllStatic {
 ```
@@ -49,7 +49,7 @@ Dynamic Attach 機能の client による HotSpot への要求内容を表すク
 1つの AttachOperation オブジェクトが client から送られてきたリクエスト1個に対応する. 
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/attachListener.hpp))
     class AttachOperation: public CHeapObj {
 ```
@@ -60,7 +60,7 @@ Dynamic Attach 機能の client による HotSpot への要求内容を表すク
 client からの要求は AttachListener::dequeue() メソッドで取り出される.
 この返値が AttachOperation オブジェクトとなっている.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/attachListener.hpp))
       // dequeue the next operation
       static AttachOperation* dequeue();

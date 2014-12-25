@@ -25,7 +25,7 @@ title: CollectorCounters クラス関連のクラス (CollectorCounters, TraceCo
 
 GC 処理に関する PerfData を格納しておくためのクラス.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/collectorCounters.hpp))
     // CollectorCounters is a holder class for performance counters
     // that track a collector
@@ -39,7 +39,7 @@ GC 処理に関する PerfData を格納しておくためのクラス.
 
 * Generation 及びそのサブクラス (DefNewGeneration, ParNewGeneration, ASParNewGeneration, TenuredGeneration)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/generation.hpp))
     class Generation: public CHeapObj {
     ...
@@ -49,7 +49,7 @@ GC 処理に関する PerfData を格納しておくためのクラス.
 
 * CMSCollector
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/concurrentMarkSweep/concurrentMarkSweepGeneration.hpp))
     class CMSCollector: public CHeapObj {
     ...
@@ -59,7 +59,7 @@ GC 処理に関する PerfData を格納しておくためのクラス.
 
 * PSScavenge
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psScavenge.hpp))
     class PSScavenge: AllStatic {
     ...
@@ -68,7 +68,7 @@ GC 処理に関する PerfData を格納しておくためのクラス.
 
 * PSMarkSweep
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psMarkSweep.hpp))
     class PSMarkSweep : public MarkSweep {
     ...
@@ -77,7 +77,7 @@ GC 処理に関する PerfData を格納しておくためのクラス.
 
 * PSParallelCompact
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
     class PSParallelCompact : AllStatic {
     ...
@@ -86,7 +86,7 @@ GC 処理に関する PerfData を格納しておくためのクラス.
 
 * G1MonitoringSupport
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1MonitoringSupport.hpp))
     class G1MonitoringSupport : public CHeapObj {
     ...
@@ -103,7 +103,7 @@ GC 処理に関する PerfData を格納しておくためのクラス.
 
 * DefNewGeneration 及びそのサブクラス (ParNewGeneration, ASParNewGeneration)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/defNewGeneration.cpp))
     DefNewGeneration::DefNewGeneration(ReservedSpace rs,
                                        size_t initial_size,
@@ -117,7 +117,7 @@ GC 処理に関する PerfData を格納しておくためのクラス.
 
 * TenuredGeneration
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/tenuredGeneration.cpp))
     TenuredGeneration::TenuredGeneration(ReservedSpace rs,
                                          size_t initial_byte_size, int level,
@@ -130,7 +130,7 @@ GC 処理に関する PerfData を格納しておくためのクラス.
 
 * CMSCollector
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/concurrentMarkSweep/concurrentMarkSweepGeneration.cpp))
     CMSCollector::CMSCollector(ConcurrentMarkSweepGeneration* cmsGen,
                                ConcurrentMarkSweepGeneration* permGen,
@@ -144,7 +144,7 @@ GC 処理に関する PerfData を格納しておくためのクラス.
 
 * G1MonitoringSupport
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1MonitoringSupport.cpp))
     G1MonitoringSupport::G1MonitoringSupport(G1CollectedHeap* g1h,
                                              VirtualSpace* g1_storage_addr) :
@@ -164,7 +164,7 @@ GC 処理に関する PerfData を格納しておくためのクラス.
 
 * PSScavenge
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psScavenge.cpp))
     void PSScavenge::initialize() {
     ...
@@ -173,7 +173,7 @@ GC 処理に関する PerfData を格納しておくためのクラス.
 
 * PSMarkSweep
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psMarkSweep.cpp))
     void PSMarkSweep::initialize() {
     ...
@@ -182,7 +182,7 @@ GC 処理に関する PerfData を格納しておくためのクラス.
 
 * PSParallelCompact
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.cpp))
     void PSParallelCompact::post_initialize() {
     ...
@@ -195,7 +195,7 @@ GC 処理に関する PerfData を格納しておくためのクラス.
 
 内部には以下の Perf データを格納している.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/collectorCounters.hpp))
         PerfCounter*      _invocations;
         PerfCounter*      _time;
@@ -209,7 +209,7 @@ GC 処理に関する PerfData を格納しておくためのクラス.
 
 提供しているメソッドは, 内部の Perf データへのアクセサのみ.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/collectorCounters.hpp))
         inline PerfCounter* invocation_counter() const  { return _invocations; }
     
@@ -232,7 +232,7 @@ GC 処理に関する PerfData を格納しておくためのクラス.
 #### 参考(for your information): コンストラクタの処理
 (なお, 見ての通り, このクラスは UsePerfData オプションが指定されている場合にしか動作しない).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/collectorCounters.cpp))
     CollectorCounters::CollectorCounters(const char* name, int ordinal) {
     
@@ -284,7 +284,7 @@ CollectorCounters の記録処理を簡単に行うための補助クラス(Stac
 CollectorCounters の記録処理をソースコード上のスコープに合わせて自動で行うことができる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/collectorCounters.hpp))
     class TraceCollectorStats: public PerfTraceTimedEvent {
 ```
@@ -306,7 +306,7 @@ CollectorCounters の記録処理をソースコード上のスコープに合�
 (なお, 時刻の取得には os::elapsed_counter() が用いられている).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/collectorCounters.hpp))
         inline TraceCollectorStats(CollectorCounters* c) :
                PerfTraceTimedEvent(c->time_counter(), c->invocation_counter()),

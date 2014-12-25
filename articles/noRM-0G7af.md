@@ -16,7 +16,7 @@ HotSpot 内のデータにアクセスする必要がある.
 この "JMM Interface" (及びそこで使われる構造体/定数など) の宣言は jmm.h に書かれている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/jmm.h))
     /*
      * This is a private interface used by JDK for JVM monitoring
@@ -66,7 +66,7 @@ jmm.h ファイルは hotspot/ 下と jdk/ 下の両方に存在しているが�
 ## 備考(Notes)
 JMM interface の関数一覧:
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/jmm.h))
     typedef struct jmmInterface_1_ {
       void*        reserved1;

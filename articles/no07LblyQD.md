@@ -12,7 +12,7 @@ title: Thread クラス関連のクラス (Thread, NamedThread, WorkerThread, Wa
 なお, これらのクラスは以下のような継承関係を持つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.hpp))
     // Class hierarchy
     // - Thread
@@ -52,7 +52,7 @@ HotSpot 内で使用されるスレッドを表すクラス (の基底クラス)
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.hpp))
     class Thread: public ThreadShadow {
 ```
@@ -75,7 +75,7 @@ HotSpot 内で特殊な用途に使用されるスレッドの基底クラス
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.hpp))
     // Name support for threads.  non-JavaThread subclasses with multiple
     // uniquely named instances should derive from this.
@@ -99,7 +99,7 @@ HotSpot 内の何らかの処理をマルチスレッド化するためのスレ
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.hpp))
     // Worker threads are named and have an id of an assigned work.
     class WorkerThread: public NamedThread {
@@ -121,7 +121,7 @@ HotSpot 内で定期的に実行しなければならない処理を実現する
 (See: PeriodicTask).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.cpp))
     // The watcher thread exists to simulate timer interrupts.  It should
     // be replaced by an abstraction over whatever native support for
@@ -129,7 +129,7 @@ HotSpot 内で定期的に実行しなければならない処理を実現する
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.hpp))
     // A single WatcherThread is used for simulating timer interrupts.
     class WatcherThread: public Thread {
@@ -166,13 +166,13 @@ See: [here](../doxygen/classWatcherThread.html) for details
 1つの JavaThread オブジェクトが 1つの java.lang.Thread オブジェクトに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.cpp))
     // A JavaThread is a normal Java thread
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.hpp))
     class JavaThread: public Thread {
 ```
@@ -240,7 +240,7 @@ JIT Compiler 用のクラス.
 実際に JIT コンパイル処理を行うスレッドを表すスレッドクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.hpp))
     // A thread used for Compilation.
     class CompilerThread : public JavaThread {
@@ -284,7 +284,7 @@ HotSpot 内でのスレッド管理用の機能を納めた名前空間(AllStati
 生成された JavaThread の一覧を管理するためのメソッドを提供している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.hpp))
     // The active thread queue. It also keeps track of the current used
     // thread priorities.
@@ -304,7 +304,7 @@ See: [here](../doxygen/classThreads.html) for details
 Thread に対して何らかの処理を行う Closure クラスの基底クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.hpp))
     // Thread iterator
     class ThreadClosure: public StackObj {
@@ -316,7 +316,7 @@ Thread に対して何らかの処理を行う Closure クラスの基底クラ�
 Thread* を処理する do_thread() メソッドを備えている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.hpp))
       virtual void do_thread(Thread* thread) = 0;
 ```
@@ -340,7 +340,7 @@ See: [here](../doxygen/classThreadClosure.html) for details
  See: Thread::is_inside_signal_handler())
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.hpp))
     class SignalHandlerMark: public StackObj {
 ```
@@ -356,7 +356,7 @@ See: [here](../doxygen/classThreadClosure.html) for details
 デストラクタでは Thread::leave_signal_handler() を呼んで元に戻している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.hpp))
       SignalHandlerMark(Thread* t) {
         _thread = t;
@@ -384,7 +384,7 @@ See: [here](../doxygen/classSignalHandlerMark.html) for details
 JavaThread の suspend 処理が失敗していないことを確認する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.cpp))
     // Helper class for tracing suspend wait debug bits.
     //
@@ -395,7 +395,7 @@ JavaThread の suspend 処理が失敗していないことを確認する.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.cpp))
     class TraceSuspendDebugBits : public StackObj {
 ```
@@ -416,7 +416,7 @@ JavaThread の suspend 処理が失敗していないことを確認する.
 「コンストラクタで指定されたポインタ内の値(*bits)について, DEBUG_FALSE_BITS に対応するビットが立っていないかどうか」.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.cpp))
       TraceSuspendDebugBits(JavaThread *_jt, bool _is_wait, bool _called_by_wait,
                             uint32_t *_bits) {
@@ -462,7 +462,7 @@ JavaThread の suspend 処理が失敗していないことを確認する.
 0x00200000 は, JavaThread::wait_for_ext_suspend_completion() のエラー時の返値.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.cpp))
     #define DEBUG_FALSE_BITS (0x00000010 | 0x00200000)
 ```
@@ -486,7 +486,7 @@ JavaThread クラス内で使用される補助クラス.
 (なお, NamedThread::_processed_thread フィールドは VMError::report() 内で(のみ)参照されている. (See: VMError))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.cpp))
     // If the caller is a NamedThread, then remember, in the current scope,
     // the given JavaThread in its _processed_thread field.
@@ -503,7 +503,7 @@ JavaThread::oops_do() 内で(のみ)使用されている.
 (なお, カレントスレッドが NamedThread (のサブクラス) でなければ何もしない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.cpp))
       RememberProcessedThread(JavaThread* jthr) {
         Thread* thread = Thread::current();

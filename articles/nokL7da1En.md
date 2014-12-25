@@ -82,7 +82,7 @@ Node クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // Class SUBTRACTION functionality.  This covers all the usual 'subtract'
     // behaviors.  Subtract-integer, -float, -double, binary xor, compare-integer,
@@ -97,7 +97,7 @@ Node クラスのサブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       SubNode( Node *in1, Node *in2 ) : Node(0,in1,in2) {
         init_class_id(Class_Sub);
@@ -124,13 +124,13 @@ SubNode クラスの具象サブクラスの1つ.
 このクラスは int 値同士の減算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // NOTE: SubINode should be taken away and replaced by add and negate
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // Subtract 2 integers
     class SubINode : public SubNode {
@@ -139,7 +139,7 @@ SubNode クラスの具象サブクラスの1つ.
 なお SubXNode という型も使われるが, `#ifdef _LP64` でない場合は, これは SubINode の別名.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     #define SubXNode     SubINode
 ```
@@ -149,7 +149,7 @@ SubNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       SubINode( Node *in1, Node *in2 ) : SubNode(in1,in2) {}
 ```
@@ -168,7 +168,7 @@ SubNode クラスの具象サブクラスの1つ.
 このクラスは long 値同士の減算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // Subtract 2 integers
     class SubLNode : public SubNode {
@@ -177,7 +177,7 @@ SubNode クラスの具象サブクラスの1つ.
 なお SubXNode という型も使われるが, `#ifdef _LP64` の場合は, これは SubLNode の別名.   
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     #define SubXNode     SubLNode
 ```
@@ -187,7 +187,7 @@ SubNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       SubLNode( Node *in1, Node *in2 ) : SubNode(in1,in2) {}
 ```
@@ -208,13 +208,13 @@ SubNode クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // NOTE: SubFPNode should be taken away and replaced by add and negate
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // Subtract 2 floats or doubles
     class SubFPNode : public SubNode {
@@ -225,7 +225,7 @@ SubNode クラスのサブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       SubFPNode( Node *in1, Node *in2 ) : SubNode(in1,in2) {}
 ```
@@ -250,13 +250,13 @@ SubFPNode クラスの具象サブクラスの1つ.
 このクラスは float 値同士の減算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // NOTE: SubFNode should be taken away and replaced by add and negate
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // Subtract 2 doubles
     class SubFNode : public SubFPNode {
@@ -267,7 +267,7 @@ SubFPNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       SubFNode( Node *in1, Node *in2 ) : SubFPNode(in1,in2) {}
 ```
@@ -286,13 +286,13 @@ SubFPNode クラスの具象サブクラスの1つ.
 このクラスは double 値同士の減算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // NOTE: SubDNode should be taken away and replaced by add and negate
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // Subtract 2 doubles
     class SubDNode : public SubFPNode {
@@ -303,7 +303,7 @@ SubFPNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       SubDNode( Node *in1, Node *in2 ) : SubFPNode(in1,in2) {}
 ```
@@ -325,7 +325,7 @@ SubNode クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // Compare 2 values, returning condition codes (-1, 0 or 1).
     class CmpNode : public SubNode {
@@ -336,7 +336,7 @@ SubNode クラスのサブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       CmpNode( Node *in1, Node *in2 ) : SubNode(in1,in2) {
         init_class_id(Class_Cmp);
@@ -365,7 +365,7 @@ CmpNode クラスの具象サブクラスの1つ.
 結果としては {-1, 0, 1} のどれかを示す condition code を返す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // Compare 2 signed values, returning condition codes (-1, 0 or 1).
     class CmpINode : public CmpNode {
@@ -374,7 +374,7 @@ CmpNode クラスの具象サブクラスの1つ.
 なお CmpXNode という型も使われるが, `#ifdef _LP64` でない場合は, これは CmpINode の別名.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     #define CmpXNode     CmpINode
 ```
@@ -384,7 +384,7 @@ CmpNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       CmpINode( Node *in1, Node *in2 ) : CmpNode(in1,in2) {}
 ```
@@ -405,7 +405,7 @@ CmpNode クラスの具象サブクラスの1つ.
 結果としては {-1, 0, 1} のどれかを示す condition code を返す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // Compare 2 unsigned values (integer or pointer), returning condition codes (-1, 0 or 1).
     class CmpUNode : public CmpNode {
@@ -416,7 +416,7 @@ CmpNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       CmpUNode( Node *in1, Node *in2 ) : CmpNode(in1,in2) {}
 ```
@@ -438,7 +438,7 @@ CmpNode クラスの具象サブクラスの1つ.
 (といってもポインタ比較なので -1 と 1 の区別は要らない気もするが...#TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // Compare 2 pointer values, returning condition codes (-1, 0 or 1).
     class CmpPNode : public CmpNode {
@@ -449,7 +449,7 @@ CmpNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       CmpPNode( Node *in1, Node *in2 ) : CmpNode(in1,in2) {}
 ```
@@ -471,7 +471,7 @@ CmpNode クラスの具象サブクラスの1つ.
 (といってもポインタ比較なので -1 と 1 の区別は要らない気もするが...#TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // Compare 2 narrow oop values, returning condition codes (-1, 0 or 1).
     class CmpNNode : public CmpNode {
@@ -494,7 +494,7 @@ Compile::Optimize()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       CmpNNode( Node *in1, Node *in2 ) : CmpNode(in1,in2) {}
 ```
@@ -515,7 +515,7 @@ CmpNode クラスの具象サブクラスの1つ.
 結果としては {-1, 0, 1} のどれかを示す condition code を返す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // Compare 2 long values, returning condition codes (-1, 0 or 1).
     class CmpLNode : public CmpNode {
@@ -524,7 +524,7 @@ CmpNode クラスの具象サブクラスの1つ.
 なお CmpXNode という型も使われるが, `#ifdef _LP64` の場合は, これは CmpLNode の別名.   
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     #define CmpXNode     CmpLNode
 ```
@@ -534,7 +534,7 @@ CmpNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       CmpLNode( Node *in1, Node *in2 ) : CmpNode(in1,in2) {}
 ```
@@ -555,7 +555,7 @@ CmpLNode クラスのサブクラス.
 このクラスは結果として {-1, 0, 1} の int 値を返す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // Compare 2 long values, returning integer value (-1, 0 or 1).
     class CmpL3Node : public CmpLNode {
@@ -569,7 +569,7 @@ CmpLNode クラスのサブクラス.
 そのため _class_id フィールドには Class_Cmp ではなく Class_Sub を持つようにしている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       CmpL3Node( Node *in1, Node *in2 ) : CmpLNode(in1,in2) {
         // Since it is not consumed by Bools, it is not really a Cmp.
@@ -596,7 +596,7 @@ CmpNode クラスの具象サブクラスの1つ.
 そのためどちらかが NaN 値であれば -1 が返される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // Compare 2 float values, returning condition codes (-1, 0 or 1).
     // This implements the Java bytecode fcmpl, so unordered returns -1.
@@ -609,7 +609,7 @@ CmpNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       CmpFNode( Node *in1, Node *in2 ) : CmpNode(in1,in2) {}
 ```
@@ -633,7 +633,7 @@ CmpFNode クラスのサブクラス.
 そのためどちらかが NaN 値であれば -1 が返される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // Compare 2 float values, returning integer value (-1, 0 or 1).
     // This implements the Java bytecode fcmpl, so unordered returns -1.
@@ -649,7 +649,7 @@ CmpFNode クラスのサブクラス.
 そのため _class_id フィールドには Class_Cmp ではなく Class_Sub を持つようにしている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       CmpF3Node( Node *in1, Node *in2 ) : CmpFNode(in1,in2) {
         // Since it is not consumed by Bools, it is not really a Cmp.
@@ -676,7 +676,7 @@ CmpNode クラスの具象サブクラスの1つ.
 そのためどちらかが NaN 値であれば -1 が返される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // Compare 2 double values, returning condition codes (-1, 0 or 1).
     // This implements the Java bytecode dcmpl, so unordered returns -1.
@@ -689,7 +689,7 @@ CmpNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       CmpDNode( Node *in1, Node *in2 ) : CmpNode(in1,in2) {}
 ```
@@ -713,7 +713,7 @@ CmpDNode クラスのサブクラス.
 そのためどちらかが NaN 値であれば -1 が返される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // Compare 2 double values, returning integer value (-1, 0 or 1).
     // This implements the Java bytecode dcmpl, so unordered returns -1.
@@ -729,7 +729,7 @@ CmpDNode クラスのサブクラス.
 そのため _class_id フィールドには Class_Cmp ではなく Class_Sub を持つようにしている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       CmpD3Node( Node *in1, Node *in2 ) : CmpDNode(in1,in2) {
         // Since it is not consumed by Bools, it is not really a Cmp.
@@ -754,7 +754,7 @@ Cmp*Node が出力する condition code から bool 値への変換を表す Nod
 BoolNode で bool へ変換する際に指定する).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // A Node to convert a Condition Codes to a Logical result.
     class BoolNode : public Node {
@@ -763,7 +763,7 @@ BoolNode で bool へ変換する際に指定する).
 ### 使われ方(Usage)
 #### 使用例(usage examples)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/graphKit.cpp))
         Node* chk = _gvn.transform( new (C, 3) CmpINode(should_post_flag, intcon(0)) );
         Node* tst = _gvn.transform( new (C, 2) BoolNode(chk, BoolTest::eq) );
@@ -775,7 +775,7 @@ BoolNode で bool へ変換する際に指定する).
 control input 以外の入力ノードは, 変換対象の condition code を示す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       BoolNode( Node *cc, BoolTest::mask t): _test(t), Node(0,cc) {
         init_class_id(Class_Bool);
@@ -798,7 +798,7 @@ Node クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // Abstract class for absolute value.  Mostly used to get a handy wrapper
     // for finding this pattern in the graph.
@@ -810,7 +810,7 @@ Node クラスのサブクラスの1つ.
 ただし control input は常に空 (0 が設定される). 
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       AbsNode( Node *value ) : Node(0,value) {}
 ```
@@ -837,7 +837,7 @@ AbsNode クラスの具象サブクラスの1つ.
 このクラスは int 値を対象とした絶対値演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // Absolute value an integer.  Since a naive graph involves control flow, we
     // "match" it in the ideal world (so the control flow can be removed).
@@ -849,7 +849,7 @@ AbsNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される). 
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       AbsINode( Node *in1 ) : AbsNode(in1) {}
 ```
@@ -868,7 +868,7 @@ AbsNode クラスの具象サブクラスの1つ.
 このクラスは float 値を対象とした絶対値演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // Absolute value a float, a common float-point idiom with a cheap hardware
     // implemention on most chips.  Since a naive graph involves control flow, we
@@ -881,7 +881,7 @@ AbsNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される). 
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       AbsFNode( Node *in1 ) : AbsNode(in1) {}
 ```
@@ -900,7 +900,7 @@ AbsNode クラスの具象サブクラスの1つ.
 このクラスは double 値を対象とした絶対値演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // Absolute value a double, a common float-point idiom with a cheap hardware
     // implemention on most chips.  Since a naive graph involves control flow, we
@@ -913,7 +913,7 @@ AbsNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される). 
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       AbsDNode( Node *in1 ) : AbsNode(in1) {}
 ```
@@ -937,7 +937,7 @@ PhiNode の最適化のための Node クラス.
 (なお, このノードは (名前に反して) CmpNode のサブクラスではなく Node のサブクラス)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // If p < q, return -1 else return 0.  Nice for flow-free idioms.
     class CmpLTMaskNode : public Node {
@@ -958,7 +958,7 @@ PhiNode::Ideal()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       CmpLTMaskNode( Node *p, Node *q ) : Node(0, p, q) {}
 ```
@@ -979,7 +979,7 @@ Node クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     class NegNode : public Node {
 ```
@@ -989,7 +989,7 @@ Node クラスのサブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       NegNode( Node *in1 ) : Node(0,in1) {}
 ```
@@ -1020,7 +1020,7 @@ NegNode クラスの具象サブクラスの1つ.
 とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // Negate value a float.  Negating 0.0 returns -0.0, but subtracting from
     // zero returns +0.0 (per JVM spec on 'fneg' bytecode).  As subtraction
@@ -1034,7 +1034,7 @@ NegNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       NegFNode( Node *in1 ) : NegNode(in1) {}
 ```
@@ -1059,7 +1059,7 @@ NegNode クラスの具象サブクラスの1つ.
 とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // Negate value a double.  Negating 0.0 returns -0.0, but subtracting from
     // zero returns +0.0 (per JVM spec on 'dneg' bytecode).  As subtraction
@@ -1073,7 +1073,7 @@ NegNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       NegDNode( Node *in1 ) : NegNode(in1) {}
 ```
@@ -1092,7 +1092,7 @@ LibraryIntrinsic による最適化用の Node クラス.
 double 値に対する cos (コサイン) 演算を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // Cosinus of a double
     class CosDNode : public Node {
@@ -1115,7 +1115,7 @@ LibraryIntrinsic::generate()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       CosDNode( Node *in1  ) : Node(0, in1) {}
 ```
@@ -1134,7 +1134,7 @@ LibraryIntrinsic による最適化用の Node クラス.
 double 値に対する sin (サイン) 演算を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // Sinus of a double
     class SinDNode : public Node {
@@ -1157,7 +1157,7 @@ LibraryIntrinsic::generate()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       SinDNode( Node *in1  ) : Node(0, in1) {}
 ```
@@ -1176,7 +1176,7 @@ LibraryIntrinsic による最適化用の Node クラス.
 double 値に対する tan (タンジェント) 演算を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // tangens of a double
     class TanDNode : public Node {
@@ -1199,7 +1199,7 @@ LibraryIntrinsic::generate()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       TanDNode(Node *in1  ) : Node(0, in1) {}
 ```
@@ -1220,7 +1220,7 @@ See: [here](../doxygen/classTanDNode.html) for details
 (LibraryCallKit::inline_math_native() 内に該当する case 節だけはあるが, まだ未実装とのこと)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // arcus tangens of a double
     class AtanDNode : public Node {
@@ -1230,7 +1230,7 @@ See: [here](../doxygen/classTanDNode.html) for details
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       AtanDNode(Node *c, Node *in1, Node *in2  ) : Node(c, in1, in2) {}
 ```
@@ -1249,7 +1249,7 @@ LibraryIntrinsic による最適化用の Node クラス.
 double 値に対する sqrt (平方根) 演算を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // square root a double
     class SqrtDNode : public Node {
@@ -1275,7 +1275,7 @@ LibraryIntrinsic::generate()
 (control input が指定できるのは, 境界値での挙動が java.lang.Math.sqrt() とは異なるアーキテクチャ向けだと思われる).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       SqrtDNode(Node *c, Node *in1  ) : Node(c, in1) {}
 ```
@@ -1297,7 +1297,7 @@ double 値に対する exp (指数) 演算を表す模様
 x86 用の AD ファイルのバグで一時的に無効化されており現在は使われていない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     //  Exponentiate a double
     class ExpDNode : public Node {
@@ -1315,7 +1315,7 @@ LibraryCallKit::inline_exp() 内で(のみ)生成されている.
 (control input が指定できるのは, 境界値での挙動が java.lang.Math.exp() とは異なるアーキテクチャ向けだと思われる).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       ExpDNode( Node *c, Node *in1 ) : Node(c, in1) {}
 ```
@@ -1334,7 +1334,7 @@ LibraryIntrinsic による最適化用の Node クラス.
 double 値に対する log_e (自然対数) 演算を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // Log_e of a double
     class LogDNode : public Node {
@@ -1357,7 +1357,7 @@ LibraryIntrinsic::generate()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       LogDNode( Node *in1 ) : Node(0, in1) {}
 ```
@@ -1376,7 +1376,7 @@ LibraryIntrinsic による最適化用の Node クラス.
 double 値に対する log_10 (常用対数) 演算を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // Log_10 of a double
     class Log10DNode : public Node {
@@ -1399,7 +1399,7 @@ LibraryIntrinsic::generate()
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       Log10DNode( Node *in1 ) : Node(0, in1) {}
 ```
@@ -1421,7 +1421,7 @@ double 値に対する power (累乗) 演算を表す模様
 x86 用の AD ファイルのバグで一時的に無効化されており現在は使われていない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // Raise a double to a double power
     class PowDNode : public Node {
@@ -1439,7 +1439,7 @@ LibraryCallKit::inline_pow() 内で(のみ)生成されている.
 (control input が指定できるのは, 境界値での挙動が java.lang.Math.pow() とは異なるアーキテクチャ向けだと思われる).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       PowDNode(Node *c, Node *in1, Node *in2  ) : Node(c, in1, in2) {}
 ```
@@ -1458,7 +1458,7 @@ LibraryIntrinsic による最適化用の Node クラス.
 int 値に対するバイト順の反転演算(java.lang.Integer.reverseBytes())を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // reverse bytes of an integer
     class ReverseBytesINode : public Node {
@@ -1482,7 +1482,7 @@ LibraryIntrinsic::generate()
 ただし現状では 0 しか指定されていない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       ReverseBytesINode(Node *c, Node *in1) : Node(c, in1) {}
 ```
@@ -1501,7 +1501,7 @@ LibraryIntrinsic による最適化用の Node クラス.
 long 値に対するバイト順の反転演算(java.lang.Long.reverseBytes())を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // reverse bytes of a long
     class ReverseBytesLNode : public Node {
@@ -1525,7 +1525,7 @@ LibraryIntrinsic::generate()
 ただし現状では 0 しか指定されていない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       ReverseBytesLNode(Node *c, Node *in1) : Node(c, in1) {}
 ```
@@ -1544,7 +1544,7 @@ LibraryIntrinsic による最適化用の Node クラス.
 unsigned short (= char) 値に対するバイト順の反転演算(java.lang.Character.reverseBytes())を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // reverse bytes of an unsigned short / char
     class ReverseBytesUSNode : public Node {
@@ -1568,7 +1568,7 @@ LibraryIntrinsic::generate()
 ただし現状では 0 しか指定されていない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       ReverseBytesUSNode(Node *c, Node *in1) : Node(c, in1) {}
 ```
@@ -1587,7 +1587,7 @@ LibraryIntrinsic による最適化用の Node クラス.
 short 値に対するバイト順の反転演算(java.lang.Short.reverseBytes())を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
     // reverse bytes of a short
     class ReverseBytesSNode : public Node {
@@ -1611,7 +1611,7 @@ LibraryIntrinsic::generate()
 ただし現状では 0 しか指定されていない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/subnode.hpp))
       ReverseBytesSNode(Node *c, Node *in1) : Node(c, in1) {}
 ```

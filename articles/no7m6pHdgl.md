@@ -27,7 +27,7 @@ See: [here](no2114XWR.html) for details
 java.lang.Thread.currentThread() は JVM_CurrentThread() で実装されている.
 
 
-```
+```cpp
     ((cite: jdk/src/share/native/java/lang/Thread.c))
     static JNINativeMethod methods[] = {
     ...

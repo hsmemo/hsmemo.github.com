@@ -11,7 +11,7 @@ title: LinkResolver クラス関連のクラス (LinkInfo, FieldAccessInfo, Call
 (HotSpot 内では, クラス, フィールド, メソッドなどのシンボル名は最初参照された際にダイナミックリンク(resolve)される)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/linkResolver.hpp))
     // All the necessary definitions for run-time link resolution.
 ```
@@ -34,7 +34,7 @@ ConstantPool の解決処理 (resolve 処理) を行うクラス
 (より正確には, そのための機能を納めた名前空間(AllStatic クラス)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/linkResolver.hpp))
     // The LinkResolver is used to resolve constant-pool references at run-time.
     // It does all necessary link-time checks & throws exceptions if necessary.
@@ -60,7 +60,7 @@ resolve 処理で使用されるリンク情報を入れておくためのクラ
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/linkResolver.hpp))
     // LinkInfo & its subclasses provide all the information gathered
     // for a particular link after resolving it. A link is any reference
@@ -70,7 +70,7 @@ resolve 処理で使用されるリンク情報を入れておくためのクラ
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/linkResolver.hpp))
     class LinkInfo VALUE_OBJ_CLASS_SPEC {
     };
@@ -94,7 +94,7 @@ LinkInfo クラスの具象サブクラスの1つ.
 フィールドアクセス (getfield/putfield & getstatic/putstatic) に関するリンク情報を格納するクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/linkResolver.hpp))
     // Link information for getfield/putfield & getstatic/putstatic bytecodes.
     
@@ -116,7 +116,7 @@ LinkInfo クラスの具象サブクラスの1つ.
 メソッド呼び出し (invoke*) に関するリンク情報を格納するクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/linkResolver.hpp))
     // Link information for all calls.
     

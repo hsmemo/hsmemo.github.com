@@ -16,7 +16,7 @@ HotSpot 内から OS が提供する機能にアクセスするためのユー�
 (より正確には, そのための機能を納めた名前空間(AllStatic クラス)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/os.hpp))
     // os defines the interface to operating system; this includes traditional
     // OS services (time, I/O) as well as other functionality with system-
@@ -24,7 +24,7 @@ HotSpot 内から OS が提供する機能にアクセスするためのユー�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/os.hpp))
     class os: AllStatic {
 ```

@@ -15,7 +15,7 @@ title: typeArrayKlass クラス
 typeArrayOopDesc 用の Klass クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/typeArrayKlass.hpp))
     // A typeArrayKlass is the klass of a typeArray
     // It contains the type and size of the elements

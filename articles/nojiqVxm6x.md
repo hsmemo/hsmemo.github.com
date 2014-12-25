@@ -44,7 +44,7 @@ title: Thread の一時停止処理の枠組み (Safepoint 処理) ： 停止さ
     (ThreadInVMfromJava, ThreadInVMfromJava, 等, thread state 変更用のクラスが何種類かこのファイル内で定義されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/interfaceSupport.hpp))
     // ENTRY routines may lock, GC and throw exceptions
 ```
@@ -56,7 +56,7 @@ title: Thread の一時停止処理の枠組み (Safepoint 処理) ： 停止さ
     (<= その中で safepoint になる処理がなければ call 点も safepoint にしなくてよい, ということだと思われる)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/interfaceSupport.hpp))
     // LEAF routines do not lock, GC or throw exceptions
 ```
@@ -66,7 +66,7 @@ title: Thread の一時停止処理の枠組み (Safepoint 処理) ： 停止さ
     (#Under Construction)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/interfaceSupport.hpp))
     // QUICK_ENTRY routines behave like ENTRY but without a handle mark
 ```

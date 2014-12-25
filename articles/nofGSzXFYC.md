@@ -35,7 +35,7 @@ Interpreter のスタックフレーム用の OopMap を計算するクラス (�
 (実際のサブクラスとしては OopMapForCacheEntry クラス等を参照)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.hpp))
     //
     //  GenerateOopMap
@@ -88,7 +88,7 @@ Interpreter のスタックフレーム用の OopMap を計算するクラス (�
   * ... (#TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.hpp))
       // Main variables
       methodHandle _method;                     // The method we are examine
@@ -106,7 +106,7 @@ Interpreter のスタックフレーム用の OopMap を計算するクラス (�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.hpp))
       // Working Cell type state
       int            _state_len;                // Size of states
@@ -117,7 +117,7 @@ Interpreter のスタックフレーム用の OopMap を計算するクラス (�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.hpp))
       // Basicblock info
       BasicBlock *    _basic_blocks;             // Array of basicblock info
@@ -127,7 +127,7 @@ Interpreter のスタックフレーム用の OopMap を計算するクラス (�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.hpp))
       // Create result set
       bool  _report_result;
@@ -136,14 +136,14 @@ Interpreter のスタックフレーム用の OopMap を計算するクラス (�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.hpp))
       // Initvars
       GrowableArray<intptr_t> * _init_vars;
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.hpp))
       // Conflicts rewrite logic
       bool      _conflict;                      // True, if a conflict occurred during interpretation
@@ -152,7 +152,7 @@ Interpreter のスタックフレーム用の OopMap を計算するクラス (�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.hpp))
       // List of bci's where a return address is on top of the stack
       GrowableArray<intptr_t> *_ret_adr_tos;
@@ -175,7 +175,7 @@ GenerateOopMap クラス内で使用される補助クラス.
 (See: [here](no2114GzS.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.hpp))
     //  RetTable
     //
@@ -184,7 +184,7 @@ GenerateOopMap クラス内で使用される補助クラス.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.hpp))
     class RetTable VALUE_OBJ_CLASS_SPEC {
 ```
@@ -220,7 +220,7 @@ RetTable クラス内で使用される補助クラス.
 (See: [here](no2114GzS.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.hpp))
     class RetTableEntry : public ResourceObj {
 ```
@@ -246,7 +246,7 @@ RetTable::add_jsr() 内で(のみ)生成されている.
 1つの RetTableEntry オブジェクトに対応する jsr 命令は, 
 jsrs フィールド内に記録されている.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.hpp))
       GrowableArray<intptr_t> * _jsrs;                     // List of return addresses  (bytecode index)
 ```
@@ -272,7 +272,7 @@ GenerateOopMap クラス内で使用される補助クラス.
 (See: [here](no2114GzS.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.hpp))
     //
     // CellTypeState
@@ -318,7 +318,7 @@ GenerateOopMap クラス内で使用される補助クラス.
 * CellTypeState::make_lock_ref()
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.hpp))
       // Since some C++ constructors generate poor code for declarations of the
       // form...
@@ -382,7 +382,7 @@ GenerateOopMap クラス内で使用される補助クラス.
   GenerateOopMap::do_monitorenter() 内
   
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.cpp))
     CellTypeState CellTypeState::bottom      = CellTypeState::make_bottom();
     CellTypeState CellTypeState::uninit      = CellTypeState::make_any(uninit_value);
@@ -397,14 +397,14 @@ GenerateOopMap クラス内で使用される補助クラス.
 定義されているフィールドはこれだけ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.hpp))
       unsigned int _state;
 ```
 
 なお, この _state フィールド(32ビット)は, 「上位4ビット(BITS)」と「下位28ビット(INFO)」に分けて使用されている
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.hpp))
       // Masks for separating the BITS and INFO portions of a CellTypeState
       enum { info_mask            = right_n_bits(28),
@@ -421,7 +421,7 @@ GenerateOopMap クラス内で使用される補助クラス.
 (なお, live_bits_mask はこの3つのどれかが立っていることを調べるためのビットマスク)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.hpp))
       // These constant are used for manipulating the BITS portion of a
       // CellTypeState
@@ -453,7 +453,7 @@ GenerateOopMap クラス内で使用される補助クラス.
   逆に言うと, このビットが 0 であれば何か付属情報を持っている, ということを意味する (See: CellTypeState::is_valid_state()))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.hpp))
       // These constants are used for manipulating the INFO portion of a
       // CellTypeState
@@ -483,7 +483,7 @@ GenerateOopMap クラス内で使用される補助クラス.
   * "line" reference の場合: 対応する BCI       (See: CellTypeState::make_line_ref())
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.hpp))
       // Within the INFO data, these values are used to distinguish different
       // kinds of references.
@@ -502,7 +502,7 @@ GenerateOopMap クラス内で使用される補助クラス.
 これは (配列長を伝える方法がないので) 代わりに bottom を終端の目印としているため (GenerateOopMap::ppload() 等を参照).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.cpp))
     // Commonly used constants
     static CellTypeState epsilonCTS[1] = { CellTypeState::bottom };
@@ -537,7 +537,7 @@ GenerateOopMap クラス内で使用される補助クラス.
 (See: [here](no2114GzS.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.hpp))
     //
     // BasicBlockStruct
@@ -609,13 +609,13 @@ GenerateOopMap クラス内で使用される補助クラス.
 
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.hpp))
       bool            _changed;                 // Reached a fixpoint or not
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.hpp))
       int             _bci;                     // Start of basic block
       int             _end_bci;                 // Bci of last instruction in basicblock
@@ -627,7 +627,7 @@ GenerateOopMap クラス内で使用される補助クラス.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.hpp))
       enum Constants {
         _dead_basic_block = -2,
@@ -637,7 +637,7 @@ GenerateOopMap クラス内で使用される補助クラス.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.hpp))
       // _monitor_top is set to this constant to indicate that a monitor matching
       // problem was encountered prior to this point in control flow.
@@ -660,7 +660,7 @@ GenerateOopMap クラス内で使用される補助クラス.
 そのメソッドの引数や返値(に対応する値)を抽象オペランドスタックにセットする (See: [here](no2114GzS.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.cpp))
     // ComputeCallStack
     //
@@ -704,7 +704,7 @@ GenerateOopMap クラス内で使用される補助クラス.
 そのメソッドの引数を抽象オペランドスタックにセットする (See: [here](no2114GzS.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.cpp))
     //=========================================================================================
     // ComputeEntryStack
@@ -747,7 +747,7 @@ GenerateOopMap クラス内で使用される補助クラス.
 それに合わせて basic block の位置や jsr/ret の対応関係等を修正する処理で使われる一時オブジェクト(StackObjクラス)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.cpp))
     class RelocCallback : public RelocatorListener {
 ```
@@ -781,7 +781,7 @@ GenerateOopMap クラスの具象サブクラスの1つ.
 Rewriter クラス内で使用される補助クラス. #TODO
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.hpp))
     //
     // Subclass of the GenerateOopMap Class that just do rewrites of the method, if needed.
@@ -830,7 +830,7 @@ JIT コンパイラ用の補助クラス.
 「monitor 命令が balance した使われ方をしているかどうか」を調べるためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/generateOopMap.hpp))
     //
     // Subclass used by the compiler to generate pairing infomation

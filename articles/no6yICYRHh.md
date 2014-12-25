@@ -26,7 +26,7 @@ title: constantPoolOopDesc クラス関連のクラス (CPSlot, constantPoolOopD
 1つの constantPoolOopDesc オブジェクトが 1つのクラスに対応する (See: [here](no2935KOa.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/constantPoolOop.hpp))
     // A constantPool is an array containing class constants as described in the
     // class file.
@@ -40,7 +40,7 @@ title: constantPoolOopDesc クラス関連のクラス (CPSlot, constantPoolOopD
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/constantPoolOop.hpp))
     class constantPoolOopDesc : public oopDesc {
 ```
@@ -151,7 +151,7 @@ constantPoolKlass::allocate() というファクトリメソッドが用意さ�
 (この部分の大きさは _length フィールドで把握可能).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/constantPoolOop.hpp))
       typeArrayOop         _tags; // the tag array describing the constant pool's contents
       constantPoolCacheOop _cache;         // the cache holding interpreter runtime information
@@ -189,7 +189,7 @@ Symbol* と「最下位1bitが立ったポインタ」の変換, 及び oop と�
 どちらが格納されているかを区別できるようにしている (See: [here](no2935KOa.html) for details))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/constantPoolOop.hpp))
     class CPSlot VALUE_OBJ_CLASS_SPEC {
 ```
@@ -227,7 +227,7 @@ Symbol* と「最下位1bitが立ったポインタ」の変換, 及び oop と�
 定義されているフィールドは以下の 1つのみ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/constantPoolOop.hpp))
       intptr_t _ptr;
 ```
@@ -235,7 +235,7 @@ Symbol* と「最下位1bitが立ったポインタ」の変換, 及び oop と�
 (Symbol* の場合にのみ, コンストラクタ内で最下位ビットを立てている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/constantPoolOop.hpp))
       CPSlot(intptr_t ptr): _ptr(ptr) {}
       CPSlot(void* ptr): _ptr((intptr_t)ptr) {}
@@ -250,7 +250,7 @@ Symbol* と「最下位1bitが立ったポインタ」の変換, 及び oop と�
 (逆に CPSlot::get_symbol() で Symbol* を取り出す際には, 最下位ビットをクリアしている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/constantPoolOop.hpp))
       oop get_oop() {
         assert(is_oop(), "bad call");
@@ -280,7 +280,7 @@ constantPoolOopDesc 内の CONSTANT_Class_info 情報や CONSTANT_String_info �
 対応する Symbol オブジェクトから constantPoolOopDesc 内での index 番号への写像を作るために使用されている模様).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/constantPoolOop.hpp))
     class SymbolHashMap: public CHeapObj {
 ```
@@ -307,7 +307,7 @@ SymbolHashMap 内で使用される補助クラス.
 SymbolHashMap オブジェクト内に格納されるハッシュテーブル・エントリ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/constantPoolOop.hpp))
     class SymbolHashMapEntry : public CHeapObj {
 ```
@@ -317,7 +317,7 @@ SymbolHashMap オブジェクト内に格納されるハッシュテーブル・
 (そして, メソッドはこれらのフィールドへのアクセサメソッドのみ)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/constantPoolOop.hpp))
       unsigned int        _hash;   // 32-bit hash for item
       SymbolHashMapEntry* _next;   // Next element in the linked list for this bucket
@@ -341,7 +341,7 @@ SymbolHashMapEntry オブジェクトを格納するための線形リスト
 (SymbolHashMap はこのクラスを用いてハッシュテーブルを構築する).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/constantPoolOop.hpp))
     class SymbolHashMapBucket : public CHeapObj {
 ```
@@ -354,7 +354,7 @@ SymbolHashMap オブジェクトの _buckets フィールドに(のみ)格納さ
 ### 内部構造(Internal structure)
 以下の _entry フィールドに SymbolHashMapEntry オブジェクトを線形リスト状に格納している.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/constantPoolOop.hpp))
       SymbolHashMapEntry*    _entry;
 ```

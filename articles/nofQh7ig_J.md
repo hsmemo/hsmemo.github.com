@@ -35,7 +35,7 @@ OptoRuntime は C2 が前提なので「ランタイムのコード自体も Ide
  sparc で 32bit 即値ジャンプが使える, とか色々メリットがあるんだろう #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/runtime.hpp))
     //------------------------------OptoRuntime------------------------------------
     // Opto compiler runtime routines
@@ -56,7 +56,7 @@ OptoRuntime は C2 が前提なので「ランタイムのコード自体も Ide
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/runtime.hpp))
     class OptoRuntime : public AllStatic {
 ```
@@ -92,7 +92,7 @@ C2 JIT コンパイラが生成した各ロック確保操作について,
 (一度生成されると HotSpot の終了時まで永続的にメモリ上に存在する).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/runtime.hpp))
     //
     // NamedCounters are tagged counters which can be used for profiling
@@ -159,7 +159,7 @@ GraphKit::shared_lock()
     なお CounterTag は以下の用に定義された enum 値.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/runtime.hpp))
         enum CounterTag {
         NoTag,
@@ -174,7 +174,7 @@ GraphKit::shared_lock()
     線形リストを構成するためのポインタ. 次の NamedCounter を指す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/runtime.hpp))
       const char *  _name;
       int           _count;
@@ -202,7 +202,7 @@ C2 JIT コンパイラが生成した各 fast-lock 操作について,
 (一度生成されると HotSpot の終了時まで永続的にメモリ上に存在する).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/runtime.hpp))
     class BiasedLockingNamedCounter : public NamedCounter {
 ```
@@ -244,7 +244,7 @@ GraphKit::shared_lock()
 実際の蓄積機能は, BiasedLockingCounters によって実現されている (See: BiasedLockingCounters)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/runtime.hpp))
       BiasedLockingCounters _counters;
 ```

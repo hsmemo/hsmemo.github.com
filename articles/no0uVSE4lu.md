@@ -35,7 +35,7 @@ HotSpot 内にある Runtime クラスの1つ
 (ところでコメント中に出ている CompilerRuntime とは?? #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntime.hpp))
     // Runtime is the base class for various runtime interfaces
     // (InterpreterRuntime, CompilerRuntime, etc.). It provides
@@ -63,7 +63,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntimeTrans.cpp))
     // This file contains copies of the fdlibm routines used by
     // StrictMath. It turns out that it is almost always required to use
@@ -80,7 +80,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 * __ieee754_log
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntimeTrans.cpp))
     static double __ieee754_log(double x) {
 ```
@@ -88,7 +88,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 * __ieee754_log10
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntimeTrans.cpp))
     static double __ieee754_log10(double x) {
 ```
@@ -96,7 +96,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 * __ieee754_exp
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntimeTrans.cpp))
     static double __ieee754_exp(double x) {
 ```
@@ -104,7 +104,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 * __ieee754_pow
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntimeTrans.cpp))
     double __ieee754_pow(double x, double y) {
 ```
@@ -114,28 +114,28 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 * __ieee754_rem_pio2
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntimeTrig.cpp))
     static SAFEBUF int __ieee754_rem_pio2(double x, double *y) {
 ```
 
 * __kernel_sin
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntimeTrig.cpp))
     static double __kernel_sin(double x, double y, int iy)
 ```
 
 * __kernel_cos
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntimeTrig.cpp))
     static double __kernel_cos(double x, double y)
 ```
 
 * __kernel_tan
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntimeTrig.cpp))
     static double __kernel_tan(double x, double y, int iy)
 ```
@@ -170,7 +170,7 @@ JIT Compiler 用のクラス.
   (なおコメントによると, native wrapper が行う処理は adapter にかなり近いのでこのクラスで扱っている, とのこと)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntime.hpp))
     // ---------------------------------------------------------------------------
     // Implementation of AdapterHandlerLibrary
@@ -207,7 +207,7 @@ JIT Compiler 用のクラス.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntime.hpp))
     class AdapterHandlerLibrary: public AllStatic {
 ```
@@ -262,7 +262,7 @@ AdapterHandlerLibrary が生成した "i2c/c2i アダプタ" を管理するた�
 (あるメソッドに対応する "i2c アダプタ" と "c2i アダプタ" は同時に作られるため, これらはペアで管理される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntime.hpp))
     class AdapterHandlerEntry : public BasicHashtableEntry {
 ```
@@ -319,7 +319,7 @@ calling convention が同じメソッドについては同じ i2c/c2i スタブ�
 それを探すためにこのハッシュ値が用いられている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntime.cpp))
     // A simple wrapper class around the calling convention information
     // that allows sharing of adapters for the same calling convention.
@@ -353,7 +353,7 @@ AdapterHandlerLibrary クラス内で使用される補助クラス.
 一度作成した AdapterHandlerEntry をメモイズしておくためのハッシュテーブル.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntime.cpp))
     // A hashtable mapping from AdapterFingerPrints to AdapterHandlerEntries
     class AdapterHandlerTable : public BasicHashtable {
@@ -392,7 +392,7 @@ AdapterHandlerLibrary クラス内で使用される補助クラス.
 AdapterHandlerTable 内の要素をたどるためのイテレータクラス(StackObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntime.cpp))
     class AdapterHandlerTableIterator : public StackObj {
 ```
@@ -402,7 +402,7 @@ AdapterHandlerTable 内の要素をたどるためのイテレータクラス(St
 実際に使用する際にはこんな感じになる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntime.cpp))
       AdapterHandlerTableIterator iter(_adapters);
       while (iter.has_next()) {
@@ -435,13 +435,13 @@ SharedRuntime クラス内で使用される補助クラス.
 「引数の個数がいくらのメソッドが何回呼び出されたか」という統計情報を表示する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntime.cpp))
     #ifndef PRODUCT
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntime.cpp))
     class MethodArityHistogram {
 ```
@@ -453,7 +453,7 @@ SharedRuntime::print_call_statistics() 内で(のみ)使用されている.
 行う処理は以下の通り.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntime.cpp))
       MethodArityHistogram() {
         MutexLockerEx mu(CodeCache_lock, Mutex::_no_safepoint_check_flag);

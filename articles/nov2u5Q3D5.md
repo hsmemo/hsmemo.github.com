@@ -56,7 +56,7 @@ control flow (制御情報)とメソッドの引数(データ情報)からなる
 (なお個々の要素は ProjNode のサブクラスである ParmNode で取り出す).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
     // The method start node
     class StartNode : public MultiNode {
@@ -76,7 +76,7 @@ control flow (制御情報)とメソッドの引数(データ情報)からなる
 * 2番目の入力Node : RootNode を指す (正確には, 型の上ではどんな Node も設定可能になっているが, 実際には RootNode しか設定されない)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
       StartNode( Node *root, const TypeTuple *domain ) : MultiNode(2), _domain(domain) {
         init_class_id(Class_Start);
@@ -102,7 +102,7 @@ OSR (On Stack Replacement) の場合には StartNode の代わりにこのクラ
 役割は StartNode とほぼ同様.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
     // The method start node for on stack replacement code
     class StartOSRNode : public StartNode {
@@ -119,7 +119,7 @@ Compile::Compile( ciEnv* ci_env, C2Compiler* compiler, ciMethod* target, int osr
 * 2番目の入力Node : RootNode を指す (正確には, 型の上ではどんな Node も設定可能になっているが, 実際には RootNode しか設定されない)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
       StartOSRNode( Node *root, const TypeTuple *domain ) : StartNode(root, domain) {}
 ```
@@ -139,7 +139,7 @@ ProjNode クラスのサブクラスの1つ.
 StartNode/StartOSRNode から引数を取り出すためのノード. 
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
     // Incoming parameters
     class ParmNode : public ProjNode {
@@ -171,7 +171,7 @@ StartNode/StartOSRNode から引数を取り出すためのノード.
 (なお, コンストラクタには対応する StartNode/StartOSRNode と何番目の引数かを示す数字が渡される)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
       ParmNode( StartNode *src, uint con ) : ProjNode(src,con) {
         init_class_id(Class_Parm);
@@ -191,7 +191,7 @@ See: [here](../doxygen/classParmNode.html) for details
 リターン(及びそれによるメソッドの終了処理)を表す Node.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
     // Return from subroutine node
     class ReturnNode : public Node {
@@ -221,7 +221,7 @@ See: [here](../doxygen/classParmNode.html) for details
 * 6番目の入力Node : TypeFunc::Parms (返値)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.cpp))
     ReturnNode::ReturnNode(uint edges, Node *cntrl, Node *i_o, Node *memory, Node *frameptr, Node *retadr ) : Node(edges) {
       init_req(TypeFunc::Control,cntrl);
@@ -245,7 +245,7 @@ See: [here](../doxygen/classReturnNode.html) for details
 throws 宣言されている例外による大域脱出処理(及びそれによるメソッドの終了処理)を表す Node.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
     // Rethrow of exception at call site.  Ends a procedure before rethrowing;
     // ends the current basic block like a ReturnNode.  Restores registers and
@@ -269,7 +269,7 @@ Compile::rethrow_exceptions() でのみ生成されている.
 * 6番目の入力Node : TypeFunc::Parms (送出する例外オブジェクト)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.cpp))
     RethrowNode::RethrowNode(
       Node* cntrl,
@@ -299,7 +299,7 @@ See: [here](../doxygen/classRethrowNode.html) for details
 
 ### 概要(Summary)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
     // Pop stack frame and jump indirect
     class TailCallNode : public ReturnNode {
@@ -322,7 +322,7 @@ GraphKit::gen_stub() 内で(のみ)生成されている.
 * 7番目の入力Node : TypeFunc::Parms+1 (飛び先への引数)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
       TailCallNode( Node *cntrl, Node *i_o, Node *memory, Node *frameptr, Node *retadr, Node *target, Node *moop )
         : ReturnNode( TypeFunc::Parms+2, cntrl, i_o, memory, frameptr, retadr ) {
@@ -342,7 +342,7 @@ See: [here](../doxygen/classTailCallNode.html) for details
 
 ### 概要(Summary)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
     // Pop stack frame and jump indirect
     class TailJumpNode : public ReturnNode {
@@ -365,7 +365,7 @@ GraphKit::gen_stub() でのみ生成されている.
 * 7番目の入力Node : TypeFunc::Parms+1 (飛び先への引数)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
       TailJumpNode( Node *cntrl, Node *i_o, Node *memory, Node *frameptr, Node *target, Node *ex_oop)
         : ReturnNode(TypeFunc::Parms+2, cntrl, i_o, memory, frameptr, Compile::current()->top()) {
@@ -385,7 +385,7 @@ See: [here](../doxygen/classTailJumpNode.html) for details
 
 ### 概要(Summary)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
     // A linked list of JVMState nodes captures the whole interpreter state,
     // plus GC roots, for all active calls at some call site in this compilation
@@ -406,7 +406,7 @@ See: [here](../doxygen/classJVMState.html) for details
 ### 概要(Summary)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
     // A SafePointNode is a subclass of a MultiNode for convenience (and
     // potential code sharing) only - conceptually it is independent of
@@ -427,7 +427,7 @@ See: [here](../doxygen/classJVMState.html) for details
 
 ### 内部構造(Internal structure)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
       SafePointNode(uint edges, JVMState* jvms,
                     // A plain safepoint advertises no memory effects (NULL):
@@ -452,7 +452,7 @@ See: [here](../doxygen/classSafePointNode.html) for details
 
 ### 概要(Summary)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
     // A SafePointScalarObjectNode represents the state of a scalarized object
     // at a safepoint.
@@ -462,7 +462,7 @@ See: [here](../doxygen/classSafePointNode.html) for details
 
 ### 内部構造(Internal structure)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.cpp))
     SafePointScalarObjectNode::SafePointScalarObjectNode(const TypeOopPtr* tp,
     #ifdef ASSERT
@@ -492,7 +492,7 @@ See: [here](../doxygen/classSafePointScalarObjectNode.html) for details
 
 ### 概要(Summary)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
     // Simple container for the outgoing projections of a call.  Useful
     // for serious surgery on calls.
@@ -516,7 +516,7 @@ SafePointNode クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
     // Call nodes now subsume the function of debug nodes at callsites, so they
     // contain the functionality of a full scope chain of debug nodes.
@@ -525,7 +525,7 @@ SafePointNode クラスのサブクラスの1つ.
 
 ### 内部構造(Internal structure)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
       CallNode(const TypeFunc* tf, address addr, const TypePtr* adr_type)
         : SafePointNode(tf->domain()->cnt(), NULL, adr_type),
@@ -555,7 +555,7 @@ See: [here](../doxygen/classCallNode.html) for details
 
 ### 概要(Summary)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
     // Make a static or dynamic subroutine call node using Java calling
     // convention.  (The "Java" calling convention is the compiler's calling
@@ -565,7 +565,7 @@ See: [here](../doxygen/classCallNode.html) for details
 
 ### 内部構造(Internal structure)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
       CallJavaNode(const TypeFunc* tf , address addr, ciMethod* method, int bci)
         : CallNode(tf, addr, TypePtr::BOTTOM),
@@ -589,7 +589,7 @@ See: [here](../doxygen/classCallJavaNode.html) for details
 
 ### 概要(Summary)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
     // Make a direct subroutine call using Java calling convention (for static
     // calls and optimized virtual calls, plus calls to wrappers for run-time
@@ -610,7 +610,7 @@ See: [here](../doxygen/classCallJavaNode.html) for details
 
 ### 内部構造(Internal structure)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
       CallStaticJavaNode(const TypeFunc* tf, address addr, ciMethod* method, int bci)
         : CallJavaNode(tf, addr, method, bci), _name(NULL) {
@@ -641,7 +641,7 @@ CallJavaNode クラスの具象サブクラスの1つ.
 (e.g. invokevirtual, invokeinterface).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
     // Make a dispatched call using Java calling convention.
     class CallDynamicJavaNode : public CallJavaNode {
@@ -655,7 +655,7 @@ CallJavaNode クラスの具象サブクラスの1つ.
 
 ### 内部構造(Internal structure)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
       CallDynamicJavaNode( const TypeFunc *tf , address addr, ciMethod* method, int vtable_index, int bci ) : CallJavaNode(tf,addr,method,bci), _vtable_index(vtable_index) {
         init_class_id(Class_CallDynamicJava);
@@ -679,7 +679,7 @@ CallNode のサブクラス. ("a direct subroutine call node into compiled C++ c
   * CallLeafNoFPNode : #TODO
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
     // Make a direct subroutine call node into compiled C++ code.
     class CallRuntimeNode : public CallNode {
@@ -687,7 +687,7 @@ CallNode のサブクラス. ("a direct subroutine call node into compiled C++ c
 
 ### 内部構造(Internal structure)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
       CallRuntimeNode(const TypeFunc* tf, address addr, const char* name,
                       const TypePtr* adr_type)
@@ -713,7 +713,7 @@ CallRuntimeNode のサブクラス. ("a direct subroutine call node into compile
   * CallLeafNode     : safepoint が内部で発生しない場合用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
     // Make a direct subroutine call node into compiled C++ code, without
     // safepoints
@@ -723,7 +723,7 @@ CallRuntimeNode のサブクラス. ("a direct subroutine call node into compile
 
 ### 内部構造(Internal structure)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
       CallLeafNode(const TypeFunc* tf, address addr, const char* name,
                    const TypePtr* adr_type)
@@ -748,7 +748,7 @@ See: [here](../doxygen/classCallLeafNode.html) for details
 浮動小数を使わないケース用("not using floating point or using it in the same manner as the generated code").
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
     // CallLeafNode, not using floating point or using it in the same manner as
     // the generated code
@@ -757,7 +757,7 @@ See: [here](../doxygen/classCallLeafNode.html) for details
 
 ### 内部構造(Internal structure)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
       CallLeafNoFPNode(const TypeFunc* tf, address addr, const char* name,
                        const TypePtr* adr_type)
@@ -777,7 +777,7 @@ See: [here](../doxygen/classCallLeafNoFPNode.html) for details
 
 ### 概要(Summary)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
     // High-level memory allocation
     //
@@ -792,14 +792,14 @@ See: [here](../doxygen/classCallLeafNoFPNode.html) for details
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
       AllocateNode(Compile* C, const TypeFunc *atype, Node *ctrl, Node *mem, Node *abio,
                    Node *size, Node *klass_node, Node *initial_test);
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
       enum {
         // Output:
@@ -815,7 +815,7 @@ See: [here](../doxygen/classCallLeafNoFPNode.html) for details
 
 ### 内部構造(Internal structure)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.cpp))
     AllocateNode::AllocateNode(Compile* C, const TypeFunc *atype,
                                Node *ctrl, Node *mem, Node *abio,
@@ -851,7 +851,7 @@ See: [here](../doxygen/classAllocateNode.html) for details
 
 ### 概要(Summary)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
     //
     // High-level array allocation
@@ -861,7 +861,7 @@ See: [here](../doxygen/classAllocateNode.html) for details
 
 ### 内部構造(Internal structure)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
       AllocateArrayNode(Compile* C, const TypeFunc *atype, Node *ctrl, Node *mem, Node *abio,
                         Node* size, Node* klass_node, Node* initial_test,
@@ -886,7 +886,7 @@ See: [here](../doxygen/classAllocateArrayNode.html) for details
 
 ### 概要(Summary)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
     class AbstractLockNode: public CallNode {
 ```
@@ -895,7 +895,7 @@ See: [here](../doxygen/classAllocateArrayNode.html) for details
 通常の CallNode の入力ノードに加えて, 以下のような 3つの入力ノードを持つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
       Node *   obj_node() const       {return in(TypeFunc::Parms + 0); }
       Node *   box_node() const       {return in(TypeFunc::Parms + 1); }
@@ -903,7 +903,7 @@ See: [here](../doxygen/classAllocateArrayNode.html) for details
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
       AbstractLockNode(const TypeFunc *tf)
         : CallNode(tf, NULL, TypeRawPtr::BOTTOM),
@@ -927,7 +927,7 @@ See: [here](../doxygen/classAbstractLockNode.html) for details
 
 ### 概要(Summary)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
     // High-level lock operation
     //
@@ -941,7 +941,7 @@ See: [here](../doxygen/classAbstractLockNode.html) for details
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/graphKit.cpp))
     FastLockNode* GraphKit::shared_lock(Node* obj) {
     ...
@@ -960,7 +960,7 @@ See: [here](../doxygen/classAbstractLockNode.html) for details
 
 ### 内部構造(Internal structure)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
       LockNode(Compile* C, const TypeFunc *tf) : AbstractLockNode( tf ) {
         init_class_id(Class_Lock);
@@ -980,14 +980,14 @@ See: [here](../doxygen/classLockNode.html) for details
 
 ### 概要(Summary)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
     // High-level unlock operation
     class UnlockNode : public AbstractLockNode {
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/graphKit.cpp))
     void GraphKit::shared_unlock(Node* box, Node* obj) {
     ...
@@ -1005,7 +1005,7 @@ See: [here](../doxygen/classLockNode.html) for details
 
 ### 内部構造(Internal structure)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callnode.hpp))
       UnlockNode(Compile* C, const TypeFunc *tf) : AbstractLockNode( tf ) {
         init_class_id(Class_Unlock);

@@ -34,7 +34,7 @@ title: BytecodeHistogram クラス関連のクラス (BytecodeCounter, BytecodeH
 
 単に「全部で何個のバイトコードが実行されたか」を計測するだけのクラス (より正確には, そのための機能を納めた名前空間(AllStatic クラス)).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeHistogram.hpp))
     // BytecodeCounter counts the number of bytecodes executed
     
@@ -46,7 +46,7 @@ title: BytecodeHistogram クラス関連のクラス (BytecodeCounter, BytecodeH
 初期化は AbstractInterpreter::initialize() 内で行われている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/interpreter.cpp))
     void AbstractInterpreter::initialize() {
     ...
@@ -61,7 +61,7 @@ title: BytecodeHistogram クラス関連のクラス (BytecodeCounter, BytecodeH
 * TemplateInterpreterGenerator::generate_and_dispatch()  (TemplateInterpreter の場合)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/templateInterpreter.cpp))
     void TemplateInterpreterGenerator::generate_and_dispatch(Template* t, TosState tos_out) {
       if (PrintBytecodeHistogram)                                    histogram_bytecode(t);
@@ -74,7 +74,7 @@ title: BytecodeHistogram クラス関連のクラス (BytecodeCounter, BytecodeH
 * DO_UPDATE_INSTRUCTION_COUNT() マクロ内                  (CppInterpreter の場合)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeInterpreter.cpp))
     #ifdef PRODUCT
     #define DO_UPDATE_INSTRUCTION_COUNT(opcode)
@@ -98,7 +98,7 @@ title: BytecodeHistogram クラス関連のクラス (BytecodeCounter, BytecodeH
 蓄えた結果は, デバッグ用(開発時用)の統計情報として print_statistics() 内で出力される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/java.cpp))
     void print_statistics() {
     ...
@@ -116,7 +116,7 @@ print_statistics() での出力以外では, 以下の箇所で使用されて�
 * バイトコードの実行回数が閾値に達した際に実行を停止させるために, このカウンタの値が使われていたりする (StopInterpreterAt オプション). 
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/sparc/vm/templateInterpreter_sparc.cpp))
     void TemplateInterpreterGenerator::stop_interpreter_at() {
       AddressLiteral counter(&BytecodeCounter::_counter_value);
@@ -132,7 +132,7 @@ print_statistics() での出力以外では, 以下の箇所で使用されて�
   にも使われていたりする (TraceBytecodesAt オプション).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeTracer.cpp))
       if (TraceBytecodes && BytecodeCounter::counter_value() >= TraceBytecodesAt) {
 ```
@@ -141,7 +141,7 @@ print_statistics() での出力以外では, 以下の箇所で使用されて�
 * また, BytecodePrinter での実際の出力時に一緒に表示されている模様.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeTracer.cpp))
       void trace(methodHandle method, address bcp, uintptr_t tos, uintptr_t tos2, outputStream* st) {
     ...
@@ -169,7 +169,7 @@ See: [here](../doxygen/classBytecodeCounter.html) for details
 
 単に「各バイトコードが何回実行されたか」を計測するだけのクラス (より正確には, そのための機能を納めた名前空間(AllStatic クラス)).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeHistogram.hpp))
     // BytecodeHistogram collects number of executions of bytecodes
     
@@ -181,7 +181,7 @@ See: [here](../doxygen/classBytecodeCounter.html) for details
 初期化は AbstractInterpreter::initialize() 内で行われている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/interpreter.cpp))
     void AbstractInterpreter::initialize() {
     ...
@@ -196,7 +196,7 @@ See: [here](../doxygen/classBytecodeCounter.html) for details
 * TemplateInterpreterGenerator::generate_and_dispatch()  (TemplateInterpreter の場合)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/templateInterpreter.cpp))
     void TemplateInterpreterGenerator::generate_and_dispatch(Template* t, TosState tos_out) {
       if (PrintBytecodeHistogram)                                    histogram_bytecode(t);
@@ -209,7 +209,7 @@ See: [here](../doxygen/classBytecodeCounter.html) for details
 * DO_UPDATE_INSTRUCTION_COUNT() マクロ内                  (CppInterpreter の場合)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeInterpreter.cpp))
     #ifdef PRODUCT
     #define DO_UPDATE_INSTRUCTION_COUNT(opcode)
@@ -233,7 +233,7 @@ See: [here](../doxygen/classBytecodeCounter.html) for details
 蓄えた結果は before_exit() 内で出力されている模様.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/java.cpp))
     void before_exit(JavaThread * thread) {
     ...
@@ -246,7 +246,7 @@ See: [here](../doxygen/classBytecodeCounter.html) for details
 内部にはバイトコード種別分だけの大きさの配列を持っており, 各バイトコードが実行されるたびに該当するエントリをincrementしている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeHistogram.hpp))
       NOT_PRODUCT(static int _counters[Bytecodes::number_of_codes];)   // a counter for each bytecode
 ```
@@ -268,7 +268,7 @@ See: [here](../doxygen/classBytecodeHistogram.html) for details
 (より正確には, そのための機能を納めた名前空間(AllStatic クラス)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeHistogram.hpp))
     // BytecodePairHistogram collects number of executions of bytecode pairs.
     // A bytecode pair is any sequence of two consequtive bytecodes.
@@ -281,7 +281,7 @@ See: [here](../doxygen/classBytecodeHistogram.html) for details
 初期化は AbstractInterpreter::initialize() 内で行われている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/interpreter.cpp))
     void AbstractInterpreter::initialize() {
     ...
@@ -296,7 +296,7 @@ See: [here](../doxygen/classBytecodeHistogram.html) for details
 * TemplateInterpreterGenerator::generate_and_dispatch()  (TemplateInterpreter の場合)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/templateInterpreter.cpp))
     void TemplateInterpreterGenerator::generate_and_dispatch(Template* t, TosState tos_out) {
       if (PrintBytecodeHistogram)                                    histogram_bytecode(t);
@@ -309,7 +309,7 @@ See: [here](../doxygen/classBytecodeHistogram.html) for details
 * DO_UPDATE_INSTRUCTION_COUNT() マクロ内                  (CppInterpreter の場合)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeInterpreter.cpp))
     #ifdef PRODUCT
     #define DO_UPDATE_INSTRUCTION_COUNT(opcode)
@@ -333,7 +333,7 @@ See: [here](../doxygen/classBytecodeHistogram.html) for details
 蓄えた結果は, デバッグ用(開発時用)の統計情報として print_statistics() 内で出力される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/java.cpp))
     void print_statistics() {
     ...
@@ -349,7 +349,7 @@ See: [here](../doxygen/classBytecodeHistogram.html) for details
 内部には「バイトコード種別数の２乗」の大きさの配列を持っており, 各バイトコードが実行されるたびに該当するエントリをincrementしている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeHistogram.hpp))
     ...
         number_of_pairs      = number_of_codes * number_of_codes
@@ -372,7 +372,7 @@ BytecodeHistogram クラス及び BytecodePairHistogram クラス用の補助ク
 BytecodeHistogram クラスや BytecodePairHistogram クラスの中身をソートして出力する処理で使用される一時オブジェクト(ResourceObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeHistogram.cpp))
     // Helper class for sorting
     

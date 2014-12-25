@@ -21,7 +21,7 @@ G1EdenPool, G1SurvivorPool, G1OldGenPool という 3つのクラスがあり,
 
 なお, g1MonitoringSupport.hpp 内部のコメントも読むとさらに理解が進む, とのこと.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/g1MemoryPool.hpp))
     // This file contains the three classes that represent the memory
     // pools of the G1 spaces: G1EdenPool, G1SurvivorPool, and
@@ -60,7 +60,7 @@ G1GC 使用時の全ての MemoryPool クラスの基底クラス. (See: G1EdenP
 
 これらサブクラスの間で共通の処理(used bytes や committed bytes の計算, 等)がこのクラスにまとめている, とのこと.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/g1MemoryPool.hpp))
     // This class is shared by the three G1 memory pool classes
     // (G1EdenPool, G1SurvivorPool, G1OldGenPool). Given that the way we
@@ -87,7 +87,7 @@ G1MemoryPoolSuper クラスの具象サブクラスの1つ.
 G1GC 使用時の Eden を表す MemoryPool クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/g1MemoryPool.hpp))
     // Memory pool that represents the G1 eden.
     class G1EdenPool : public G1MemoryPoolSuper {
@@ -108,7 +108,7 @@ G1MemoryPoolSuper クラスの具象サブクラスの1つ.
 G1GC 使用時の Survivor を表す MemoryPool クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/g1MemoryPool.hpp))
     // Memory pool that represents the G1 survivor.
     class G1SurvivorPool : public G1MemoryPoolSuper {
@@ -129,7 +129,7 @@ G1MemoryPoolSuper クラスの具象サブクラスの1つ.
 G1GC 使用時の Old を表す MemoryPool クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/g1MemoryPool.hpp))
     // Memory pool that represents the G1 old gen.
     class G1OldGenPool : public G1MemoryPoolSuper {

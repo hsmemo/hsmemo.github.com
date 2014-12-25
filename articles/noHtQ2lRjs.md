@@ -23,7 +23,7 @@ title: BitMap クラス関連のクラス (BitMap, BitMap2D, BitMapClosure)
 ビットマップを表すユーティリティ・クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/bitMap.hpp))
     // Operations for bitmaps represented as arrays of unsigned integers.
     // Bit offsets are numbered from 0 to size-1.
@@ -50,7 +50,7 @@ See: [here](../doxygen/classBitMap.html) for details
 コメントによると, 各スロットに複数のビットを持つような BitMap, とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/bitMap.hpp))
     // Convenience class wrapping BitMap which provides multiple bits per slot.
     class BitMap2D VALUE_OBJ_CLASS_SPEC {
@@ -74,7 +74,7 @@ BitMap クラス用のユーティリティ・クラス.
 ビットマップに対する iterate 処理のための Closure クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/bitMap.hpp))
     // Closure for iterating over BitMaps
     

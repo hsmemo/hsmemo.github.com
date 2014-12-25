@@ -18,7 +18,7 @@ ConcurrentG1RefineThread オブジェクトの管理を行う
 (ConcurrentG1RefineThread オブジェクトは一般に複数存在するが, それらをこのクラスでまとめて管理する).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentG1Refine.hpp))
     class ConcurrentG1Refine: public CHeapObj {
 ```
@@ -37,7 +37,7 @@ ConcurrentG1RefineThread オブジェクトは以下の配列に格納されて�
 (その下にあるのは配列の要素数を表すフィールド).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentG1Refine.hpp))
       ConcurrentG1RefineThread** _threads;
       int _n_threads;
@@ -49,7 +49,7 @@ ConcurrentG1RefineThread (や Mutator 自身の refine 処理) を起動させ�
 以下のフィールドの値で決まる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentG1Refine.hpp))
      /*
       * The value of the update buffer queue length falls into one of 3 zones:

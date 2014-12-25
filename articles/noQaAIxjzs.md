@@ -25,7 +25,7 @@ os クラス内で使用される補助クラス (See: os).
 (このクラスが Linux に依存した機能 (システムコール等) を os クラス本体から隠蔽している)
 
 
-```
+```cpp
     ((cite: hotspot/src/os/linux/vm/os_linux.hpp))
     class Linux {
 ```
@@ -46,7 +46,7 @@ signal を用いたスレッドの suspend/resume 処理で使用されるクラ
 現在のスレッドのサスペンド状態(サスペンドされていない, サスペンド状態への移行中, サスペンド中)を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/os/linux/vm/os_linux.hpp))
       // Linux suspend/resume support - this helper is a shadow of its former
       // self now that low-level suspension is barely used, and old workarounds
@@ -59,7 +59,7 @@ signal を用いたスレッドの suspend/resume 処理で使用されるクラ
 Linux 用の OSThread オブジェクトの sr フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/os/linux/vm/osThread_linux.hpp))
       // flags that support signal based suspend/resume on Linux are in a
       // separate class to avoid confusion with many flags in OSThread that
@@ -93,7 +93,7 @@ ParkEvent クラスのスーパークラス.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/os/linux/vm/os_linux.hpp))
     class PlatformEvent : public CHeapObj {
 ```
@@ -110,7 +110,7 @@ ParkEvent クラスのスーパークラス.
 内部的には, _Event というフィールドが mutex 代わりになっている.
 
 
-```
+```cpp
     ((cite: hotspot/src/os/linux/vm/os_linux.hpp))
         volatile int _Event ;
 ```
@@ -139,7 +139,7 @@ _Event フィールドは 0 か 1 の値を取る.
  このフィールドが 0 の場合には, unpark() 内での起床処理が省略される).
 
 
-```
+```cpp
     ((cite: hotspot/src/os/linux/vm/os_linux.hpp))
         volatile int _nParked ;
 ```
@@ -161,7 +161,7 @@ Parker クラスのスーパークラス.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/os/linux/vm/os_linux.hpp))
     class PlatformParker : public CHeapObj {
 ```

@@ -18,7 +18,7 @@ JNI の `Get<Primitive>Field()` 関数用のマシン語コードを生成する
 (See: [here](no5248c5L.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jniFastGetField.hpp))
     // Basic logic of a fast version of jni_Get<Primitive>Field:
     //
@@ -52,7 +52,7 @@ JNI の `Get<Primitive>Field()` 関数用のマシン語コードを生成する
 ### 内部構造(Internal structure)
 内部には, 高速な Get<Primitive>Field() コードを生成するための以下のようなメソッドが定義されている.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jniFastGetField.hpp))
       static address generate_fast_get_boolean_field();
       static address generate_fast_get_byte_field();

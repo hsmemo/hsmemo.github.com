@@ -15,7 +15,7 @@ title: BytecodeTracer クラス関連のクラス (BytecodeTracer, BytecodeClosu
 (ただし, このクラスは (デバッグ時であることに加えて) TraceBytecodes オプションが指定されている場合にしか使用されない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeTracer.hpp))
     // class BytecodeTracer is only used by TraceBytecodes option
 ```
@@ -24,7 +24,7 @@ title: BytecodeTracer クラス関連のクラス (BytecodeTracer, BytecodeClosu
 これが指定された時には, bytecode の実行回数が TraceBytecodesAt に達してからでないと出力を開始しない)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeTracer.cpp))
       if (TraceBytecodes && BytecodeCounter::counter_value() >= TraceBytecodesAt) {
 ```
@@ -35,7 +35,7 @@ title: BytecodeTracer クラス関連のクラス (BytecodeTracer, BytecodeClosu
 (BytecodeTracer::set_closure() で登録した BytecodeClosure オブジェクトの trace() メソッドが呼ばれる)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeTracer.hpp))
     // The BytecodeTracer is a helper class used by the interpreter for run-time
     // bytecode tracing. If bytecode tracing is turned on, trace() will be called
@@ -52,7 +52,7 @@ title: BytecodeTracer クラス関連のクラス (BytecodeTracer, BytecodeClosu
 デフォルトでは BytecodePrinter というクラスのインスタンスを返すようになっている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeTracer.cpp))
     static BytecodePrinter std_closure;
     BytecodeClosure* BytecodeTracer::std_closure() {
@@ -64,7 +64,7 @@ title: BytecodeTracer クラス関連のクラス (BytecodeTracer, BytecodeClosu
 デバッグ用機能だから後回しになっているけど, クリーンナップされるかもしれない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeTracer.cpp))
     // %%% This set_closure thing seems overly general, given that
     // nobody uses it.  Also, if BytecodePrinter weren't hidden
@@ -93,13 +93,13 @@ title: BytecodeTracer クラス関連のクラス (BytecodeTracer, BytecodeClosu
 (なお, このクラスは (デバッグ時であることに加えて) TraceBytecodes オプションが指定されている場合にしか使用されない)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeTracer.hpp))
     #ifndef PRODUCT
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeTracer.hpp))
     class BytecodeTracer: AllStatic {
 ```
@@ -111,7 +111,7 @@ interpreter_init() 内で初期化されている (といっても単に set_clo
 現在のコードでは, デフォルトでは BytecodeTracer::std_closure() の返値が set_closure() される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/interpreter.cpp))
     void interpreter_init() {
     ...
@@ -126,7 +126,7 @@ TemplateInterpreterGenerator::generate_and_dispatch() が生成するディス�
 (TemplateInterpreterGenerator::trace_bytecode() 経由で) トレース処理用のコードが呼び出される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/templateInterpreter.cpp))
     void TemplateInterpreterGenerator::generate_and_dispatch(Template* t, TosState tos_out) {
     ...
@@ -140,7 +140,7 @@ TemplateInterpreterGenerator::generate_trace_code() によって生成されて�
 (生成されたコード列から (SharedRuntime::trace_bytecode() 経由で) BytecodeTracer::trace() が呼び出され, トレース処理が行われる)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/templateInterpreter.cpp))
     void TemplateInterpreterGenerator::generate_all() {
     ...
@@ -165,7 +165,7 @@ TemplateInterpreterGenerator::generate_trace_code() によって生成されて�
 CPP interpreter の場合には, 以下のマクロから SharedRuntime::trace_bytecode() 経由で呼び出されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeInterpreter.cpp))
     #ifdef PRODUCT
     #define DO_UPDATE_INSTRUCTION_COUNT(opcode)
@@ -199,13 +199,13 @@ BytecodeTracer 機能において, 実際のトレース出力処理を担当す
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeTracer.hpp))
     #ifndef PRODUCT
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeTracer.hpp))
     // For each bytecode, a BytecodeClosure's trace() routine will be called.
     
@@ -216,7 +216,7 @@ BytecodeTracer 機能において, 実際のトレース出力処理を担当す
 使用する際には, trace() メソッドをオーバーライドしたサブクラスを作ればいい.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeTracer.hpp))
       virtual void trace(methodHandle method, address bcp, uintptr_t tos, uintptr_t tos2, outputStream* st) = 0;
       virtual void trace(methodHandle method, address bcp, outputStream* st) = 0;
@@ -242,13 +242,13 @@ See: [here](../doxygen/classBytecodeClosure.html) for details
 デフォルトでは, TraceBytecodes 指定時にはこのクラスが使用される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeTracer.hpp))
     #ifndef PRODUCT
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeTracer.cpp))
     // Standard closure for BytecodeTracer: prints the current bytecode
     // and its attributes using bytecode-specific information.

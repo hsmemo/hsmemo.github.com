@@ -30,7 +30,7 @@ title: MemoryService クラス関連のクラス (MemoryService, TraceMemoryMana
 
 メモリ関係の Platform MXBean に関する機能を納めた名前空間(AllStatic クラス)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryService.hpp))
     // VM Monitoring and Management Support
     
@@ -61,7 +61,7 @@ GC の開始時/終了時には MemoryService::gc_begin()/MemoryService::gc_end(
 JMM 用の統計情報を取得したり DTrace や JMM のフック処理を呼び出すための関数)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryService.hpp))
     class TraceMemoryManagerStats : public StackObj {
 ```
@@ -105,7 +105,7 @@ MemoryService クラス内で使用される補助クラス.
 GC thread の合計数を数えるための Closure.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryService.cpp))
     class GcThreadCountClosure: public ThreadClosure {
 ```
@@ -118,7 +118,7 @@ GcThreadCountClosure::do_thread() ではカウンタをインクリメントし�
 (このメソッドが各 GC スレッドに対して一度ずつ呼び出されるので合計スレッド数が数えられる).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryService.cpp))
     void GcThreadCountClosure::do_thread(Thread* thread) {
       _count++;

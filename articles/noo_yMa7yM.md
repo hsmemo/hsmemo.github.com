@@ -10,7 +10,7 @@ title: Assembler クラス関連のクラス (Argument, Address, AddressLiteral,
 より具体的に言うと, Assembler クラス (実行時に x86 用のマシン語を出力するクラス) 関連のプラットフォーム依存な部分を定義するクラス (See: [here](no7882z5r.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.hpp))
     // Contains all the definitions needed for x86 assembly code generation.
 ```
@@ -49,7 +49,7 @@ x86 用のマシン語を実行時に生成するためのクラス (の基底�
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.hpp))
     // The Intel x86/Amd64 Assembler: Pure assembler doing NO optimizations on the instruction
     // level (e.g. mov rax, 0 is not translated into xor rax, rax!); i.e., what you write
@@ -64,7 +64,7 @@ x86 用のマシン語を実行時に生成するためのクラス (の基底�
 (これらを呼び出すと対応するマシン語が CodeBuffer 中に出力される)
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.hpp))
     ...
       void lea(Register dst, Address src);
@@ -109,7 +109,7 @@ Assembler クラスのメソッドに加えて,
 (See: [here](no7882z5r.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.hpp))
     // MacroAssembler extends Assembler by frequently used macros.
     //
@@ -127,13 +127,13 @@ Assembler クラスのメソッドに加えて,
 4. 生成し終わったら Assembler::flush() を呼び出して完了.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/vtableStubs_x86_64.cpp))
     #define __ masm->
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/vtableStubs_x86_64.cpp))
       CodeBuffer cb(s->entry_point(), amd64_code_length);
       MacroAssembler* masm = new MacroAssembler(&cb);
@@ -180,7 +180,7 @@ Assembler クラスのメソッドに加えて,
 内部には, 以下のようなメソッドが定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.hpp))
     ...
       void null_check(Register reg, int offset = -1);
@@ -224,7 +224,7 @@ x86 の calling convention に関する定数値を納めた名前空間
 (このクラスは AllStatic ではないが, static な定義しか持たない).
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.hpp))
     // Calling convention
     class Argument VALUE_OBJ_CLASS_SPEC {
@@ -245,7 +245,7 @@ x86 の calling convention に関する定数値を納めた名前空間
 内部には以下の定数定義(のみ)を含む.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.hpp))
       enum {
     #ifdef _LP64
@@ -281,7 +281,7 @@ x86 のアドレッシングモードによるメモリアドレス指定を表�
 (主に load/store 命令のオペランドを扱う際などに使用される)
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.hpp))
     // Address is an abstraction used to represent a memory location
     // using any of the amd64 addressing modes with one object.
@@ -291,7 +291,7 @@ x86 のアドレッシングモードによるメモリアドレス指定を表�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.hpp))
     class Address VALUE_OBJ_CLASS_SPEC {
 ```
@@ -301,7 +301,7 @@ x86 のアドレッシングモードによるメモリアドレス指定を表�
 (_rspec 以外は, それぞれ x86 のアドレッシングモードの要素に対応).
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.hpp))
       Register         _base;
       Register         _index;
@@ -313,7 +313,7 @@ x86 のアドレッシングモードによるメモリアドレス指定を表�
 なお, ScaleFactor 型は以下のように定義された enum 値.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.hpp))
       enum ScaleFactor {
         no_scale = -1,
@@ -347,7 +347,7 @@ Assembler クラス内で使用される補助クラス.
  とのこと)
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.hpp))
     //
     // AddressLiteral has been split out from Address because operands of this type
@@ -384,7 +384,7 @@ Assembler::reachable() メソッドが用意されている.
 #### 参考(for your information): Assembler::reachable() (x86 32bit の場合)
 32bit の場合は, 常に true をリターンするだけ.
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.hpp))
       bool reachable(AddressLiteral adr) NOT_LP64({ return true;});
 ```
@@ -418,7 +418,7 @@ See: [here](no2935-xo.html) for details
   この AddressLiteral オブジェクトが表すアドレス即値.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.hpp))
       RelocationHolder _rspec;
       // Typically we use AddressLiterals we want to use their rval
@@ -449,7 +449,7 @@ AddressLiteral クラスのサブクラスの1つ.
 このクラスは, ランタイムクラスが保持しているメソッド等のアドレス用.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.hpp))
     // Convience classes
     class RuntimeAddress: public AddressLiteral {
@@ -461,7 +461,7 @@ AddressLiteral クラスのサブクラスの1つ.
 (定義されているのはコンストラクタのみ. 再配置情報として relocInfo::runtime_call_type を指定する点が異なる)
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.hpp))
       RuntimeAddress(address target) : AddressLiteral(target, relocInfo::runtime_call_type) {}
 ```
@@ -480,7 +480,7 @@ AddressLiteral クラスのサブクラスの1つ.
 このクラスは, 何らかの oop を指すアドレス用.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.hpp))
     class OopAddress: public AddressLiteral {
 ```
@@ -491,7 +491,7 @@ AddressLiteral クラスのサブクラスの1つ.
 (定義されているのはコンストラクタのみ. 再配置情報として relocInfo::oop_type を指定する点が異なる).
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.hpp))
       OopAddress(address target) : AddressLiteral(target, relocInfo::oop_type){}
 ```
@@ -510,7 +510,7 @@ AddressLiteral クラスのサブクラスの1つ.
 このクラスは, この CodeBlob 外にある何らかの固定アドレス用.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.hpp))
     class ExternalAddress: public AddressLiteral {
 ```
@@ -522,7 +522,7 @@ AddressLiteral クラスのサブクラスの1つ.
  再配置情報として ExternalAddress::reloc_for_target() の返値を指定する点が異なる).
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.hpp))
       ExternalAddress(address target) : AddressLiteral(target, reloc_for_target(target)) {}
 ```
@@ -543,7 +543,7 @@ AddressLiteral クラスのサブクラスの1つ.
 このクラスは, この CodeBlob 内にある何らかのアドレス用.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.hpp))
     class InternalAddress: public AddressLiteral {
 ```
@@ -554,7 +554,7 @@ AddressLiteral クラスのサブクラスの1つ.
 (定義されているのはコンストラクタのみ. 再配置情報として relocInfo::internal_word_type を指定する点が異なる).
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.hpp))
       InternalAddress(address target) : AddressLiteral(target, relocInfo::internal_word_type) {}
 ```
@@ -580,7 +580,7 @@ Assembler クラス内で使用される補助クラス.
  (See: Address::make_array(), MacroAssembler::jump(), etc))
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.hpp))
     // x86 can do array addressing as a single operation since disp can be an absolute
     // address amd64 can't. We create a class that expresses the concept but does extra
@@ -600,7 +600,7 @@ MacroAssembler::as_Address() で対応する Address オブジェクトを生成
 (そして, メソッドはこれらのフィールドへの getter メソッド(アクセサメソッド)のみ).
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.hpp))
       AddressLiteral _base;
       Address        _index;
@@ -623,7 +623,7 @@ Assembler クラスによるコード生成を容易化する.
 (このクラスは StackObj のサブクラスではないが, 使い方としては実質 StackObj クラスのようなもの).
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.hpp))
     /**
      * class SkipIfEqual:
@@ -642,7 +642,7 @@ Assembler クラスによるコード生成を容易化する.
 SharedRuntime::dtrace_method_entry() を呼び出す」というコードを生成する)
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/interp_masm_x86_64.cpp))
       {
         SkipIfEqual skip(this, &DTraceMethodProbes, false);
@@ -664,7 +664,7 @@ SharedRuntime::dtrace_method_entry() を呼び出す」というコードを生�
 コンストラクタで cmp8 と jcc を生成し, デストラクタで jcc の飛び先を bind() するだけ.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.cpp))
     SkipIfEqual::SkipIfEqual(
         MacroAssembler* masm, const bool* flag_addr, bool value) {
@@ -693,7 +693,7 @@ See: [here](../doxygen/classSkipIfEqual.html) for details
 整数ユニット(IU)と浮動小数点ユニット(FPU)の現在の状態を表すクラス. 各レジスタの値などを保持している.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.cpp))
     class CPU_State {
 ```
@@ -738,7 +738,7 @@ MacroAssembler::verify_FPU() が生成するコード
 定義されているフィールドは以下の通り.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.cpp))
       FPU_State _fpu_state;
       IU_State  _iu_state;
@@ -760,7 +760,7 @@ CPU_State クラス内で使用される補助クラス.
 浮動小数点ユニット(FPU)の現在の状態を表す (各レジスタの値などを保持している).
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.cpp))
     class FPU_State {
 ```
@@ -769,7 +769,7 @@ CPU_State クラス内で使用される補助クラス.
 定義されているフィールドは以下の通り.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.cpp))
       ControlWord  _control_word;
       StatusWord   _status_word;
@@ -797,7 +797,7 @@ FPU_State 内で使用される補助クラス.
 x87 の Control Word の現在の値を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.cpp))
     class ControlWord {
 ```
@@ -806,7 +806,7 @@ x87 の Control Word の現在の値を表す.
 定義されているフィールドは以下の通り.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.cpp))
       int32_t _value;
 ```
@@ -827,7 +827,7 @@ FPU_State 内で使用される補助クラス.
 x87 の Status Word の現在の値を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.cpp))
     class StatusWord {
 ```
@@ -836,7 +836,7 @@ x87 の Status Word の現在の値を表す.
 定義されているフィールドは以下の通り.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.cpp))
       int32_t _value;
 ```
@@ -857,7 +857,7 @@ FPU_State クラス内で使用される補助クラス.
 x87 の Tag Word の現在の値を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.cpp))
     class TagWord {
 ```
@@ -866,7 +866,7 @@ x87 の Tag Word の現在の値を表す.
 定義されているフィールドは以下の通り.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.cpp))
       int32_t _value;
 ```
@@ -887,7 +887,7 @@ FPU_State クラス内で使用される補助クラス.
 各浮動小数点レジスタの現在の値を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.cpp))
     class FPU_Register {
 ```
@@ -901,7 +901,7 @@ FPU_State::print() 内でのみ使用されている.
 (それぞれ, 80bit のレジスタの, 仮数部(64bit)の上位32bits/下位32bitsと指数部16bitsに対応).
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.cpp))
       int32_t _m0;
       int32_t _m1;
@@ -924,7 +924,7 @@ CPU_State クラス内で使用される補助クラス.
 整数ユニット(IU)の現在の状態を表す (各レジスタの値などを保持している).
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.cpp))
     class IU_State {
 ```
@@ -933,7 +933,7 @@ CPU_State クラス内で使用される補助クラス.
 定義されているフィールドは以下の通り.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.cpp))
       Flag_Register _eflags;
       IU_Register   _rdi;
@@ -962,7 +962,7 @@ IU_State クラス内で使用される補助クラス.
 フラグレジスタの現在の値を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.cpp))
     class Flag_Register {
 ```
@@ -971,7 +971,7 @@ IU_State クラス内で使用される補助クラス.
 定義されているフィールドは以下の通り.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.cpp))
       int32_t _value;
 ```
@@ -992,7 +992,7 @@ IU_State クラス内で使用される補助クラス.
 各汎用レジスタの現在の値を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.cpp))
     class IU_Register {
 ```
@@ -1001,7 +1001,7 @@ IU_State クラス内で使用される補助クラス.
 定義されているフィールドは以下の通り.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.cpp))
       int32_t _value;
 ```

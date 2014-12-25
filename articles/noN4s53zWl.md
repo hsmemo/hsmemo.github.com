@@ -24,7 +24,7 @@ title: SystemDictionary クラス関連のクラス (SystemDictionary, SystemDic
 クラスのロード処理を行う関数, 及びロードしたクラスを管理するための関数を納めた名前空間(AllStatic クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/systemDictionary.hpp))
     class SystemDictionary : AllStatic {
 ```
@@ -35,7 +35,7 @@ title: SystemDictionary クラス関連のクラス (SystemDictionary, SystemDic
 (See: [here](no7882m2Z.html) and [here](no7882ALm.html) for details)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/systemDictionary.hpp))
     // The system dictionary stores all loaded classes and maps:
     //
@@ -58,7 +58,7 @@ SystemDictionary はそれを static フィールドに保持して使用して�
  * shared archive から取得したクラス用 (なお, shared archive とは Class Data Sharing (CDS) の領域のこと)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/systemDictionary.hpp))
       // Hashtable holding loaded classes.
       static Dictionary*            _dictionary;
@@ -84,7 +84,7 @@ SystemDictionary との違いは, 返り値の型が klassOop ではなく klass
 (SystemDictionaryHandles が klassOop を Handle 化してくれるので, 自分で Handle 化する手間が省ける).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/systemDictionary.hpp))
     class SystemDictionaryHandles : AllStatic {
 ```
@@ -114,7 +114,7 @@ See: [here](../doxygen/classSystemDictionaryHandles.html) for details
 (e.g. ロード済みのクラスの個数, それらが消費しているメモリ量, ロード済みのメソッド数, それらが消費しているメモリ量, etc)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/systemDictionary.cpp))
     #ifndef PRODUCT
     
@@ -135,7 +135,7 @@ print_statistics()
 なお, このクラスは (デバッグ時であることに加えて) PrintClassStatistics オプションが指定されている場合にしか使用されない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/java.cpp))
     void print_statistics() {
     ...
@@ -170,7 +170,7 @@ See: [here](../doxygen/classClassStatistics.html) for details
  全メソッド中での各bytecodeの登場比率はいくらか, etc)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/systemDictionary.cpp))
     class MethodStatistics: AllStatic {
 ```
@@ -188,7 +188,7 @@ print_statistics()
 なお, このクラスは (デバッグ時であることに加えて) PrintMethodStatistics オプションが指定されている場合にしか使用されない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/java.cpp))
       if (PrintMethodStatistics) {
         SystemDictionary::print_method_statistics();

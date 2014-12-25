@@ -16,7 +16,7 @@ JIT Compiler から例外ハンドラ情報にアクセスするための一時�
 1つの ciExceptionHandler オブジェクトが 1つの例外ハンドラに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciExceptionHandler.hpp))
     // ciExceptionHandler
     //

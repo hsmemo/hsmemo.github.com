@@ -41,7 +41,7 @@ Mutator である通常の JavaThread も処理に加わる) (See: [here](no2114
    (PtrQueueSet::process_or_enqueue_complete_buffer() 参照 (See: [here](no2114EV0.html) for details))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/concurrentG1Refine.hpp))
      /*
       * The value of the update buffer queue length falls into one of 3 zones:
@@ -196,7 +196,7 @@ See: [here](no3127G1T.html) for details
 (なお, 引数などの意味は以下を参照)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1RemSet.hpp))
       // Refine the card corresponding to "card_ptr".  If "sts" is non-NULL,
       // join and leave around parts that must be atomic wrt GC.  (NULL means
@@ -212,7 +212,7 @@ See: [here](no3127gJg.html) for details
 See: [here](no3127tTm.html) for details
 ### FilterOutOfRegionClosure::do_oop()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1OopClosures.hpp))
       virtual void do_oop(oop* p) { do_oop_nv(p); }
       virtual void do_oop(narrowOop* p) { do_oop_nv(p); }

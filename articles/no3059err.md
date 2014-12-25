@@ -41,7 +41,7 @@ NativeLookup 内では, JNI 仕様で定められた名前のネイティブ関�
 
   参考: x86 Windows 環境では JNICALL マクロが __stdcall に #define されている
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/jni_x86.h))
     #if defined(SOLARIS) || defined(LINUX)
     ...
@@ -57,7 +57,7 @@ NativeLookup 内では, JNI 仕様で定められた名前のネイティブ関�
 
   この対応づけ情報は, lookup_special_native_methods という配列に納められている.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/nativeLookup.cpp))
     static JNINativeMethod lookup_special_native_methods[] = {
       // Next two functions only exist for compatibility with 1.3.1 and earlier.

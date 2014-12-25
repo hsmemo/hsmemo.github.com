@@ -24,7 +24,7 @@ G1BlockOffsetTable の場合は block_start*() メソッドが non-const なの�
 とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1BlockOffsetTable.hpp))
     // The CollectedHeap type requires subtypes to implement a method
     // "block_start".  For some subtypes, notably generational
@@ -77,7 +77,7 @@ G1GC 用の BlockOffsetTable クラス (See: BlockOffsetTable).
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1BlockOffsetTable.hpp))
     class G1BlockOffsetTable VALUE_OBJ_CLASS_SPEC {
 ```
@@ -95,7 +95,7 @@ See: [here](../doxygen/classG1BlockOffsetTable.html) for details
 G1GC 用の BlockOffsetSharedArray クラス (See: BlockOffsetSharedArray).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1BlockOffsetTable.hpp))
     // This implementation of "G1BlockOffsetTable" divides the covered region
     // into "N"-word subregions (where "N" = 2^"LogN".  An array with an entry
@@ -138,7 +138,7 @@ G1GC 用の BlockOffsetArray クラス (See: BlockOffsetArray).
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1BlockOffsetTable.hpp))
     // And here is the G1BlockOffsetTable subtype that uses the array.
     
@@ -158,7 +158,7 @@ See: [here](../doxygen/classG1BlockOffsetArray.html) for details
 G1GC 用の BlockOffsetArrayContigSpace クラス (See: BlockOffsetArrayContigSpace). 
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1BlockOffsetTable.hpp))
     // A subtype of BlockOffsetArray that takes advantage of the fact
     // that its underlying space is a ContiguousSpace, so that its "active"

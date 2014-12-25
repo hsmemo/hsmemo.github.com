@@ -23,7 +23,7 @@ XML 形式のログファイルに対してそのテキスト部分を出力す�
 XML のタグに当たる文字を escape する機能を提供している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/xmlstream.hpp))
     // Sub-stream for writing quoted text, as opposed to markup.
     // Characters written to this stream are subject to quoting,
@@ -45,7 +45,7 @@ XML のタグに当たる文字を escape する機能を提供している.
 (内部には, 移譲先として使用する xmlStream オブジェクトを保持している)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/xmlstream.hpp))
       xmlStream* _outer_xmlStream;
 ```
@@ -55,7 +55,7 @@ XML のタグに当たる文字を escape する機能を提供している.
 どちらも xmlStream オブジェクトの flush() メソッド, write_text() メソッドを呼び出すだけ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/xmlstream.hpp))
        virtual void flush(); // _outer.flush();
        virtual void write(const char* str, size_t len); // _outer->write_text()
@@ -74,7 +74,7 @@ See: [here](../doxygen/classxmlTextStream.html) for details
 XML 形式のログファイルに書き出すタイプの outputStream (See: outputStream).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/xmlstream.hpp))
     // Output stream for writing XML-structured logs.
     // To write markup, use special calls elem, head/tail, etc.

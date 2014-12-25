@@ -24,7 +24,7 @@ JVMS の「5.3.4 Loading Constraints」を参照.
         In Proceedings of the 13th ACM SIGPLAN conference on Object-oriented programming, systems, languages, and applications (OOPSLA '98), pages 33-44, 
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/systemDictionary.cpp))
     // Constraints on class loaders. The details of the algorithm can be
     // found in the OOPSLA'98 paper "Dynamic Class Loading in the Java
@@ -53,7 +53,7 @@ SystemDictionary クラス内で使用される補助クラス (See: SystemDicti
 SystemDictionary が管理するロード制約情報を入れておくハッシュテーブル.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/loaderConstraints.hpp))
     class LoaderConstraintTable : public Hashtable<klassOop> {
 ```
@@ -63,7 +63,7 @@ SystemDictionary が管理するロード制約情報を入れておくハッシ
 SystemDictionary クラスの _loader_constraints フィールド (static フィールド) に(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/systemDictionary.hpp))
       // Constraints on class loaders
       static LoaderConstraintTable*  _loader_constraints;
@@ -91,7 +91,7 @@ LoaderConstraintTable クラス内で使用される補助クラス.
 LoaderConstraintTable オブジェクト内に格納されるハッシュテーブル・エントリ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/loaderConstraints.hpp))
     class LoaderConstraintEntry : public HashtableEntry<klassOop> {
 ```

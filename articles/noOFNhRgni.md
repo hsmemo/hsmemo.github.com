@@ -92,7 +92,7 @@ PerfData の作成例/使用例:
 (将来的にはこのフラグは消えるかもしれないが).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/perfData.hpp))
     /*
      * Classes to support access to production performance data
@@ -274,7 +274,7 @@ PerfData の作成例/使用例:
 PerfData オブジェクトの名前空間としては, 以下のようなものが用意されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/perfData.hpp))
     /* jvmstat global and subsystem counter name space - enumeration value
      * serve as an index into the PerfDataManager::_name_space[] array
@@ -344,7 +344,7 @@ jvmstat 機能が記録する統計情報を溜めておくためのクラス (�
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/perfData.hpp))
     class PerfData : public CHeapObj {
 ```
@@ -366,7 +366,7 @@ PerfData クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/perfData.hpp))
     /*
      * PerfLong is the base class for the various Long PerfData subtypes.
@@ -391,7 +391,7 @@ PerfLong クラスの具象サブクラスの1つ.
 このクラスは, 定数の数値データ(long 値)を格納する場合用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/perfData.hpp))
     /*
      * The PerfLongConstant class, and its alias PerfConstant, implement
@@ -405,7 +405,7 @@ PerfLong クラスの具象サブクラスの1つ.
 なお PerfConstant という型も使われるが, これは PerfLongConstant の別名.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/perfData.hpp))
     typedef PerfLongConstant PerfConstant;
 ```
@@ -453,7 +453,7 @@ PerfData クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/perfData.hpp))
     /*
      * The PerfLongVariant class, and its alias PerfVariant, implement
@@ -485,7 +485,7 @@ PerfLongSampleHelper クラスは, StatSampler が書き出すタイミングで
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/perfData.hpp))
     /*
      * PerfLongSampleHelper, and its alias PerfSamplerHelper, is a base class
@@ -499,7 +499,7 @@ PerfLongSampleHelper クラスは, StatSampler が書き出すタイミングで
 なお PerfSampleHelper という型も使われるが, これは PerfLongSampleHelper の別名.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/perfData.hpp))
     typedef PerfLongSampleHelper PerfSampleHelper;
 ```
@@ -509,7 +509,7 @@ PerfLongSampleHelper クラスは, StatSampler が書き出すタイミングで
 (このメソッドの返値が shared memory に書き込まれる).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/perfData.hpp))
         virtual jlong take_sample() = 0;
 ```
@@ -529,7 +529,7 @@ PerfLongVariant クラスの具象サブクラスの1つ.
 このクラスは, 単調に増加／減少する数値データ(long 値)を格納する場合用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/perfData.hpp))
     /*
      * The PerfLongCounter class, and its alias PerfCounter, implement
@@ -546,7 +546,7 @@ PerfLongVariant クラスの具象サブクラスの1つ.
 なお PerfCounter という型も使われるが, これは PerfLongCounter の別名.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/perfData.hpp))
     typedef PerfLongCounter PerfCounter;
 ```
@@ -596,7 +596,7 @@ PerfLongVariant クラスの具象サブクラスの1つ.
 このクラスは, 単調ではない変化の仕方をする数値データ(long 値)を格納する場合用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/perfData.hpp))
     /*
      * The PerfLongVariable class, and its alias PerfVariable, implement
@@ -609,7 +609,7 @@ PerfLongVariant クラスの具象サブクラスの1つ.
 なお PerfVariable という型も使われるが, これは PerfLongVariable の別名.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/perfData.hpp))
     typedef PerfLongVariable PerfVariable;
 ```
@@ -661,7 +661,7 @@ PerfData クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/perfData.hpp))
     /*
      * The PerfByteArray provides a PerfData subtype that allows the creation
@@ -689,7 +689,7 @@ PerfByteArray クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/perfData.hpp))
     class PerfString : public PerfByteArray {
 ```
@@ -709,7 +709,7 @@ PerfString クラスの具象サブクラスの1つ.
 このクラスは, 定数の文字列データ(string 値)を格納する場合用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/perfData.hpp))
     /*
      * The PerfStringConstant class provides a PerfData sub class that
@@ -755,7 +755,7 @@ PerfString クラスの具象サブクラスの1つ.
 このクラスは, 変更可能な文字列データ(string 値)を格納する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/perfData.hpp))
     /*
      * The PerfStringVariable class provides a PerfData sub class that
@@ -797,7 +797,7 @@ See: [here](../doxygen/classPerfStringVariable.html) for details
 PerfData オブジェクトを束ねておくためのコンテナクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/perfData.hpp))
     /*
      * The PerfDataList class is a container class for managing lists
@@ -918,7 +918,7 @@ PerfData を管理するための機能を納めた名前空間(AllStatic クラ
 * 生成された全ての PerfData オブジェクトを管理する機能
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/perfData.hpp))
     /*
      * The PerfDataManager class is responsible for creating PerfData
@@ -953,7 +953,7 @@ See: [here](../doxygen/classPerfDataManager.html) for details
 (なお, このクラス内で UsePerfData を確認しているので, 使用点では UsePerfData を確認する必要は無い)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/perfData.hpp))
     /*
      * this class will administer a PerfCounter used as a time accumulator
@@ -985,7 +985,7 @@ See: [here](../doxygen/classPerfDataManager.html) for details
 処理時間の計測には elapsedTimer を用いている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/perfData.hpp))
         elapsedTimer _t;
         PerfLongCounter* _timerp;
@@ -1012,7 +1012,7 @@ PerfTraceTime の機能 (= あるスコープ内の処理にかかった時間�
 (なお, PerfTraceTime と同じくこのクラス内で UsePerfData を確認しているので, 使用点では UsePerfData を確認する必要は無い)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/perfData.hpp))
     /* The PerfTraceTimedEvent class is responsible for counting the
      * occurrence of some event and measuring the the elapsed time of
@@ -1045,7 +1045,7 @@ PerfTraceTime() のコンストラクタを実行するだけでなく,
 PerfLongCounter::inc() でカウンタ値のインクリメントも行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/perfData.hpp))
       public:
         inline PerfTraceTimedEvent(PerfLongCounter* timerp, PerfLongCounter* eventp): PerfTraceTime(timerp), _eventp(eventp) {

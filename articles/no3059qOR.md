@@ -27,7 +27,7 @@ HotSpot 内には, 例外オブジェクトの生成と送出処理を行うた�
   * 例外送出用のマクロ: (<= 送出というか, Exceptions::_throw で pending_exception をセットしてから return するだけだけど...)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/exceptions.hpp))
     // The THROW... macros should be used to throw an exception. They require a THREAD variable to be
     // visible within the scope containing the THROW. Usually this is achieved by declaring the function

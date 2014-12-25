@@ -17,7 +17,7 @@ title: IdealGraphPrinter クラス
 デバッグ用(開発時用)のツールである IdealGraphVisualizer への出力を生成するクラス (See: IdealGraphVisualizer).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/idealGraphPrinter.hpp))
     #ifndef PRODUCT
     ...

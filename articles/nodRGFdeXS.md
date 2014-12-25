@@ -17,7 +17,7 @@ G1CollectorPolicy クラス内で使用される補助クラス.
 G1CollectorPolicy やその中で使用される CollectionSetChooser 内で使用されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/survRateGroup.hpp))
     class SurvRateGroup : public CHeapObj {
 ```

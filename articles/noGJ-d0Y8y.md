@@ -15,7 +15,7 @@ title: methodKlass クラス
 methodOopDesc 用の Klass クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodKlass.hpp))
     // a methodKlass is the klass of a methodOop
     

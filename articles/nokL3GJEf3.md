@@ -39,7 +39,7 @@ Class Data Sharing (CDS) 機能に関する統計情報出力用の補助クラ�
  (See: ClassifyInstanceKlassClosure))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/classify.hpp))
     // Classify objects by type and keep counts.
     // Print the count and space taken for each type.
@@ -55,7 +55,7 @@ print_contents() 内で(のみ)使用されている.
 分類分けに使用する種別は以下の通り.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/classify.hpp))
     typedef enum oop_type {
       unknown_type,
@@ -93,7 +93,7 @@ Class Data Sharing (CDS) 機能に関する統計情報出力用の補助クラ�
 Perm 領域内を辿って, それぞれのクラス毎にインスタンスがどれだけあるかを出力する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/classify.hpp))
     // Count objects using the alloc_count field in the object's klass
     // object.
@@ -121,7 +121,7 @@ Class Data Sharing (CDS) 機能に関する統計情報出力用の補助クラ�
 ClassifyObjectClosure が記録したクラス毎のインスタンス量の情報を消去する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/classify.hpp))
     // Clear the alloc_count fields in all classes so that the count can be
     // restarted.

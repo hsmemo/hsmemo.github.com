@@ -30,7 +30,7 @@ GenCollectedHeap ヒープに対する Major GC 処理を行うクラス
 このクラスは Serial Old 用 (「CMS ではない場合用」とも言う)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/genMarkSweep.hpp))
     class GenMarkSweep : public MarkSweep {
 ```
@@ -55,7 +55,7 @@ GenMarkSweep クラス内で使用される補助クラス.
 コンパクション処理時に, Java ヒープ内にある live object 内のポインタを新しいアドレスに修正するための Closure.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/genMarkSweep.cpp))
     class GenAdjustPointersClosure: public GenCollectedHeap::GenClosure {
 ```
@@ -78,7 +78,7 @@ GenMarkSweep クラス内で使用される補助クラス.
 コンパクション処理時に, Java ヒープ内の live object を新しいアドレスに移動させるための Closure.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/genMarkSweep.cpp))
     class GenCompactClosure: public GenCollectedHeap::GenClosure {
 ```

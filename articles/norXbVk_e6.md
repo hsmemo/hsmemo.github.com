@@ -14,7 +14,7 @@ title: BytecodeStream クラス関連のクラス (BaseBytecodeStream, RawByteco
 利用する際には, 以下のコメント中の "Usage:" のように使う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeStream.hpp))
     // A BytecodeStream is used for fast iteration over the bytecodes
     // of a methodOop.
@@ -35,7 +35,7 @@ RawBytecodeStream の方が (rewrite の影響を考えない分だけ) 速い�
   * BytecodeStream : 一般の場合用
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeStream.hpp))
     // A RawBytecodeStream is a simple version of BytecodeStream.
     // It is used ONLY when we know the bytecodes haven't been rewritten
@@ -59,7 +59,7 @@ RawBytecodeStream の方が (rewrite の影響を考えない分だけ) 速い�
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeStream.hpp))
     // Here is the common base class for both RawBytecodeStream and BytecodeStream:
     class BaseBytecodeStream: StackObj {
@@ -78,7 +78,7 @@ BaseBytecodeStream クラスの具象サブクラスの1つ.
 こちらは rewrite 処理について考慮せずにイテレートする.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeStream.hpp))
     class RawBytecodeStream: public BaseBytecodeStream {
 ```
@@ -96,7 +96,7 @@ BaseBytecodeStream クラスの具象サブクラスの1つ.
 こちらは rewrite 処理についても考慮してイテレートする.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/bytecodeStream.hpp))
     // In BytecodeStream, non-java bytecodes will be translated into the
     // corresponding java bytecodes.

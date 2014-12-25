@@ -9,14 +9,14 @@ title: HeapDumper クラス (HeapDumper, 及びその補助クラス(DumpWriter,
 これらは, 保守運用機能のためのクラス.
 より具体的に言うと, Java ヒープの中身を (hprof フォーマットで) ファイルにダンプするためのクラス (See: [here](no2114JQO.html) for details).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/heapDumper.hpp))
     // HeapDumper is used to dump the java heap to file in HPROF binary format:
 ```
 
 #### 参考(for your information): hprof フォーマット
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/heapDumper.cpp))
     /*
      * HPROF binary format - description copied from:
@@ -311,7 +311,7 @@ Java ヒープの中身を (hprof フォーマットで) ファイルにダン�
 (See: [here](no2114JQO.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/heapDumper.hpp))
     class HeapDumper : public StackObj {
 ```
@@ -321,7 +321,7 @@ Java ヒープの中身を (hprof フォーマットで) ファイルにダン�
 HeapDumper 型の局所変数を作り, HeapDumper::dump() メソッドを呼び出すだけ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/heapDumper.hpp))
     //  { HeapDumper dumper(true /* full GC before heap dump */);
     //    if (dumper.dump("/export/java.hprof")) {
@@ -374,7 +374,7 @@ HeapDumper クラス内で使用される補助クラス.
 
 ダンプの出力先ファイルを管理する (See: [here](no2114JQO.html) for details).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/heapDumper.cpp))
     // Supports I/O operations on a dump file
     
@@ -395,7 +395,7 @@ HeapDumper クラス内で使用される補助クラス.
 
 ダンプ用のユーティリティ関数を納めた名前空間(AllStatic クラス) (See: [here](no2114JQO.html) for details).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/heapDumper.cpp))
     // Support class with a collection of functions used when dumping the heap
     
@@ -416,7 +416,7 @@ HeapDumper クラス内で使用される補助クラス.
 
 SymbolTable 内の情報を元に HPROF_UTF8 record を出力する (See: [here](no2114JQO.html) for details).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/heapDumper.cpp))
     // Support class used to generate HPROF_UTF8 records from the entries in the
     // SymbolTable.
@@ -438,7 +438,7 @@ HeapDumper クラス内で使用される補助クラス.
 
 HPROF_GC_ROOT_JNI_LOCAL レコードの出力を行う (See: [here](no2114JQO.html) for details).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/heapDumper.cpp))
     // Support class used to generate HPROF_GC_ROOT_JNI_LOCAL records
     
@@ -459,7 +459,7 @@ HeapDumper クラス内で使用される補助クラス.
 
 HPROF_GC_ROOT_JNI_GLOBAL レコードの出力を行う (See: [here](no2114JQO.html) for details).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/heapDumper.cpp))
     // Support class used to generate HPROF_GC_ROOT_JNI_GLOBAL records
     
@@ -480,7 +480,7 @@ HeapDumper クラス内で使用される補助クラス.
 
 HPROF_GC_ROOT_MONITOR_USED レコードの出力を行う (See: [here](no2114JQO.html) for details).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/heapDumper.cpp))
     // Support class used to generate HPROF_GC_ROOT_MONITOR_USED records
     
@@ -501,7 +501,7 @@ HeapDumper クラス内で使用される補助クラス.
 
 HPROF_GC_ROOT_STICKY_CLASS レコードの出力を行う (See: [here](no2114JQO.html) for details).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/heapDumper.cpp))
     // Support class used to generate HPROF_GC_ROOT_STICKY_CLASS records
     
@@ -524,7 +524,7 @@ HPROF_GC_INSTANCE_DUMP レコードや HPROF_GC_OBJ_ARRAY_DUMPレコード,
 HPROF_GC_PRIM_ARRAY_DUMP レコードの出力を行う (See: [here](no2114JQO.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/heapDumper.cpp))
     // Support class using when iterating over the heap.
     
@@ -548,7 +548,7 @@ HeapDumper クラス内で使用される補助クラス.
 (See: [here](no2114JQO.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/heapDumper.cpp))
     // The VM operation that performs the heap dump
     class VM_HeapDumper : public VM_GC_Operation {

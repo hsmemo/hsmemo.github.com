@@ -19,7 +19,7 @@ JIT コンパイラが必要とするオブジェクト／メソッドを提供�
 JIT コンパイル中に得られたメタ情報(デバッグ情報, OopMap, 等)の格納場所を提供したりしている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciEnv.hpp))
     // ciEnv
     //

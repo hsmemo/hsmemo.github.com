@@ -15,7 +15,7 @@ title: methodDataKlass クラス
 methodDataOopDesc 用の Klass クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/methodDataKlass.hpp))
     // a methodDataKlass is the klass of a methodDataOop
     

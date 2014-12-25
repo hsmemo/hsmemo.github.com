@@ -30,7 +30,7 @@ Java ヒープ内に存在する Java オブジェクト(インスタンス)の�
 (より正確には, そのための機能を納めた名前空間(AllStatic クラス)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/heapInspection.hpp))
     class HeapInspection : public AllStatic {
 ```
@@ -45,7 +45,7 @@ Java ヒープ内に存在する Java オブジェクト(インスタンス)の�
   (結果は GrowableArray に格納されて返される)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/heapInspection.hpp))
       static void heap_inspection(outputStream* st, bool need_prologue) KERNEL_RETURN;
       static void find_instances_at_safepoint(klassOop k, GrowableArray<oop>* result) KERNEL_RETURN;
@@ -103,7 +103,7 @@ HeapInspection::heap_inspection() 内で使用される補助クラス.
 「あるクラスのインスタンスがどれだけ(何個および何バイト)存在しているか」という情報を格納する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/heapInspection.hpp))
     class KlassInfoEntry: public CHeapObj {
 ```
@@ -116,7 +116,7 @@ HeapInspection::heap_inspection() 内で使用される補助クラス.
 * _instance_count : そのクラスのインスタンスが何個存在しているか
 * _instance_words : そのクラスのインスタンスが何バイト存在しているか
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/heapInspection.hpp))
       KlassInfoEntry* _next;
       klassOop        _klass;
@@ -141,7 +141,7 @@ KlassInfoEntry へのポインタに対して何らかの処理を行う Closure
 (なお, このクラスは Closure クラスのサブクラスではなく, StackObj のサブクラスになっている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/heapInspection.hpp))
     class KlassInfoClosure: public StackObj {
 ```
@@ -151,7 +151,7 @@ KlassInfoEntry* を処理する do_cinfo() メソッドを備えている.
 
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/heapInspection.hpp))
       // Called for each KlassInfoEntry.
       virtual void do_cinfo(KlassInfoEntry* cie) = 0;
@@ -173,13 +173,13 @@ KlassInfoEntry オブジェクトを格納するための線形リスト
 (KlassInfoTable はこのクラスを用いてハッシュテーブルを構築する).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/heapInspection.hpp))
     class KlassInfoBucket: public CHeapObj {
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/heapInspection.hpp))
     // A KlassInfoBucket is the head of a link list
     // of KlassInfoEntry's
@@ -189,7 +189,7 @@ KlassInfoEntry オブジェクトを格納するための線形リスト
 #### インスタンスの格納場所(where its instances are stored)
 KlassInfoTable オブジェクトの _buckets フィールド内に(のみ)格納されている.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/heapInspection.hpp))
       KlassInfoBucket* _buckets;
 ```
@@ -198,7 +198,7 @@ KlassInfoTable オブジェクトの _buckets フィールド内に(のみ)格�
 以下の _list フィールドに KlassInfoEntry オブジェクトを線形リスト状に格納している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/heapInspection.hpp))
       KlassInfoEntry* _list;
 ```
@@ -218,13 +218,13 @@ HeapInspection::heap_inspection() 内で使用される補助クラス.
 ヒープ中を辿ってインスタンスの情報を集めていく際に, 集めた情報を格納しておくために使われる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/heapInspection.hpp))
     class KlassInfoTable: public StackObj {
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/heapInspection.hpp))
     // KlassInfoTable is a bucket hash table that
     // maps klassOops to extra information:
@@ -256,13 +256,13 @@ HeapInspection::heap_inspection() 内で使用される補助クラス.
 ヒープ中を辿って集めた情報を, ソートして出力する際に使用される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/heapInspection.hpp))
     class KlassInfoHisto : public StackObj {
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/heapInspection.hpp))
     // KlassInfoHisto is a growable array of pointers
     // to KlassInfoEntry's and is used to sort
@@ -291,7 +291,7 @@ HeapInspection::heap_inspection() 内で使用される補助クラス.
 KlassInfoHisto に移し替える作業で使われる Closure.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/heapInspection.cpp))
     class HistoClosure : public KlassInfoClosure {
 ```
@@ -311,7 +311,7 @@ HeapInspection::heap_inspection() 内で使用される補助クラス.
 ヒープ中を辿ってインスタンスの情報を KlassInfoTable 内に収集する Closure.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/heapInspection.cpp))
     class RecordInstanceClosure : public ObjectClosure {
 ```
@@ -331,7 +331,7 @@ HeapInspection::find_instances_at_safepoint() 内で使用される補助クラ�
 ヒープ中を辿って指定されたクラスのインスタンス(やそのサブクラスのインスタンス)を収集する Closure.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/heapInspection.cpp))
     class FindInstanceClosure : public ObjectClosure {
 ```

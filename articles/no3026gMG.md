@@ -103,7 +103,7 @@ AttachListener スレッドが認識可能なコマンド, 及びそのコマン
 -->
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/attachListener.cpp))
     // Table to map operation names to functions.
     
@@ -127,7 +127,7 @@ AttachListener スレッドが認識可能なコマンド, 及びそのコマン
 ### Linux 環境限定のコマンド 
 (無し)
 
-```
+```cpp
     ((cite: hotspot/src/os/linux/vm/attachListener_linux.cpp))
     AttachOperationFunctionInfo* AttachListener::pd_find_operation(const char* n) {
       return NULL;
@@ -150,7 +150,7 @@ AttachListener スレッドが認識可能なコマンド, 及びそのコマン
 -->
 
 
-```
+```cpp
     ((cite: hotspot/src/os/solaris/vm/attachListener_solaris.cpp))
     // platform specific operations table
     static AttachOperationFunctionInfo funcs[] = {
@@ -162,7 +162,7 @@ AttachListener スレッドが認識可能なコマンド, 及びそのコマン
 ### Windows 環境限定のコマンド 
 (無し)
 
-```
+```cpp
     ((cite: hotspot/src/os/windows/vm/attachListener_windows.cpp))
     AttachOperationFunctionInfo* AttachListener::pd_find_operation(const char* n) {
       return NULL;

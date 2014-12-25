@@ -9,7 +9,7 @@ title: GrowableArray クラス関連のクラス (GenericGrowableArray, Growable
 これらは, 「可変長の配列」として働くユーティリティ・クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/growableArray.hpp))
     // A growable array.
 ```
@@ -29,7 +29,7 @@ title: GrowableArray クラス関連のクラス (GenericGrowableArray, Growable
 可変長の配列として働くユーティリティ・クラス (の基底クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/growableArray.hpp))
     class GenericGrowableArray : public ResourceObj {
 ```
@@ -51,7 +51,7 @@ GenericGrowableArray クラスの具象サブクラス.
 なお要素の型は template でパラメタライズされている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/growableArray.hpp))
     template<class E> class GrowableArray : public GenericGrowableArray {
 ```
@@ -66,7 +66,7 @@ GrowableArray の中に Handle を入れる場合は Handle の有効範囲に�
 HandleMark のスコープ外に出てしまうとダングリングポインタになる).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/growableArray.hpp))
     /*************************************************************************/
     /*                                                                       */

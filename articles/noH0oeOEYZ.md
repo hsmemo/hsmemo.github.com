@@ -15,14 +15,14 @@ title: PcDesc クラス
 JIT コンパイラが生成したコードについて, そのマシン語のアドレスから元の bytecode を逆引きするためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/pcDesc.hpp))
     // PcDescs map a physical PC (given as offset from start of nmethod) to
     // the corresponding source scope and byte code index.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/pcDesc.hpp))
     class PcDesc VALUE_OBJ_CLASS_SPEC {
 ```
@@ -36,7 +36,7 @@ nmethod から取り出すには nmethod::pc_desc_at() を使う
 (他にも取得している箇所はある?? #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/nmethod.hpp))
       // ScopeDesc retrieval operation
       PcDesc* pc_desc_at(address pc)   { return find_pc_desc(pc, false); }

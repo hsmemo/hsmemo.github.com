@@ -22,7 +22,7 @@ title: Verifier クラス関連のクラス (Verifier, ClassVerifier)
 クラスファイルの verify 処理に関する機能を納めた名前空間(AllStatic クラス). (See: [here](no7882amm.html) for details)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/verifier.hpp))
     // The verifier class
     class Verifier : AllStatic {
@@ -47,7 +47,7 @@ type checking verifier (= Java SE 6 以降の新しい verifier. StackMapTable a
 の処理で使用される一時オブジェクト(StackObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/verifier.hpp))
     // A new instance of this class is created for each class being verified
     class ClassVerifier : public StackObj {

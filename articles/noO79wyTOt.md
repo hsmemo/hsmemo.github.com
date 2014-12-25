@@ -15,7 +15,7 @@ title: ciMethodKlass クラス
 ciKlass クラスの具象サブクラスの1つ. methodKlass 用の ciKlass クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciMethodKlass.hpp))
     // ciMethodKlass
     //

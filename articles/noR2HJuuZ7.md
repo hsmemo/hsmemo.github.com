@@ -34,7 +34,7 @@ OptoReg と OptoRegPair を使用することにして, あまりマシン依存
 (このクラスは AllStatic ではないが (というか何故か ValueObj になっているが) static な定義しか持たない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/optoreg.hpp))
     //------------------------------OptoReg----------------------------------------
     // We eventually need Registers for the Real World.  Registers are essentially
@@ -73,7 +73,7 @@ C++ の enum 型は定義時に列挙した項目以外を書き込むと undefi
 spill-slot を扱うには不便だったから」とのこと)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/optoreg.hpp))
       typedef int Name;
 ```
@@ -94,7 +94,7 @@ VMRegPair と同様, OptoReg 1つが 32bit 長なので, 64bit 長の割り当�
 また, 値が32bitである場合は「片方が不正(Badという定数値を入れる)」という値で表現できるのも VMRegPair と同様.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/optoreg.hpp))
     //---------------------------OptoRegPair-------------------------------------------
     // Pairs of 32-bit registers for the allocator.

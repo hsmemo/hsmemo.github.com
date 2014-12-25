@@ -44,7 +44,7 @@ Node クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/addnode.hpp))
     //------------------------------AddNode----------------------------------------
     // Classic Add functionality.  This covers all the usual 'add' behaviors for
@@ -59,7 +59,7 @@ Node クラスのサブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/addnode.hpp))
       AddNode( Node *in1, Node *in2 ) : Node(0,in1,in2) {
         init_class_id(Class_Add);
@@ -86,7 +86,7 @@ AddNode クラスの具象サブクラスの1つ.
 このクラスは int 値同士の加算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/addnode.hpp))
     // Add 2 integers
     class AddINode : public AddNode {
@@ -95,7 +95,7 @@ AddNode クラスの具象サブクラスの1つ.
 なお AddXNode という型も使われるが, `#ifdef _LP64` でない場合は, これは AddINode の別名
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     #define AddXNode     AddINode
 ```
@@ -105,7 +105,7 @@ AddNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/addnode.hpp))
       AddINode( Node *in1, Node *in2 ) : AddNode(in1,in2) {}
 ```
@@ -124,7 +124,7 @@ AddNode クラスの具象サブクラスの1つ.
 このクラスは long 値同士の加算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/addnode.hpp))
     // Add 2 longs
     class AddLNode : public AddNode {
@@ -133,7 +133,7 @@ AddNode クラスの具象サブクラスの1つ.
 なお AddXNode という型も使われるが, `#ifdef _LP64` の場合は, これは AddLNode の別名.   
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     #define AddXNode     AddLNode
 ```
@@ -143,7 +143,7 @@ AddNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/addnode.hpp))
       AddLNode( Node *in1, Node *in2 ) : AddNode(in1,in2) {}
 ```
@@ -162,7 +162,7 @@ AddNode クラスの具象サブクラスの1つ.
 このクラスは float 値同士の加算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/addnode.hpp))
     // Add 2 floats
     class AddFNode : public AddNode {
@@ -173,7 +173,7 @@ AddNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/addnode.hpp))
       AddFNode( Node *in1, Node *in2 ) : AddNode(in1,in2) {}
 ```
@@ -192,7 +192,7 @@ AddNode クラスの具象サブクラスの1つ.
 このクラスは double 値同士の加算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/addnode.hpp))
     // Add 2 doubles
     class AddDNode : public AddNode {
@@ -203,7 +203,7 @@ AddNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/addnode.hpp))
       AddDNode( Node *in1, Node *in2 ) : AddNode(in1,in2) {}
 ```
@@ -227,7 +227,7 @@ Node クラスのサブクラスの1つ.
 とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/addnode.hpp))
     // Add pointer plus integer to get pointer.  NOT commutative, really.
     // So not really an AddNode.  Lives here, because people associate it with
@@ -247,7 +247,7 @@ Node クラスのサブクラスの1つ.
 * Offset  : 演算の対象になる int 値
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/addnode.hpp))
       AddPNode( Node *base, Node *ptr, Node *off ) : Node(0,base,ptr,off) {
         init_class_id(Class_AddP);
@@ -255,7 +255,7 @@ Node クラスのサブクラスの1つ.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/addnode.hpp))
       enum { Control,               // When is it safe to do this add?
              Base,                  // Base oop, for GC purposes
@@ -277,7 +277,7 @@ AddNode クラスの具象サブクラスの1つ.
 このクラスは int 値同士の論理和(ビットOR)演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/addnode.hpp))
     // Logically OR 2 integers.  Included with the ADD nodes because it inherits
     // all the behavior of addition on a ring.
@@ -287,7 +287,7 @@ AddNode クラスの具象サブクラスの1つ.
 なお OrXNode という型も使われるが, `#ifdef _LP64` でない場合は, これは OrINode の別名.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     #define OrXNode      OrINode
 ```
@@ -297,7 +297,7 @@ AddNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/addnode.hpp))
       OrINode( Node *in1, Node *in2 ) : AddNode(in1,in2) {}
 ```
@@ -316,7 +316,7 @@ AddNode クラスの具象サブクラスの1つ.
 このクラスは long 値同士の論理和(ビットOR)演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/addnode.hpp))
     // Logically OR 2 longs.  Included with the ADD nodes because it inherits
     // all the behavior of addition on a ring.
@@ -326,7 +326,7 @@ AddNode クラスの具象サブクラスの1つ.
 なお OrXNode という型も使われるが, `#ifdef _LP64` の場合は, これは OrLNode の別名.   
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     #define OrXNode      OrLNode
 ```
@@ -336,7 +336,7 @@ AddNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/addnode.hpp))
       OrLNode( Node *in1, Node *in2 ) : AddNode(in1,in2) {}
 ```
@@ -355,7 +355,7 @@ AddNode クラスの具象サブクラスの1つ.
 このクラスは int 値同士の排他的論理和(ビットXOR)演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/addnode.hpp))
     // XOR'ing 2 integers
     class XorINode : public AddNode {
@@ -364,7 +364,7 @@ AddNode クラスの具象サブクラスの1つ.
 なお XorXNode という型も使われるが, `#ifdef _LP64` でない場合は, これは XorINode の別名.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     #define XorXNode     XorINode
 ```
@@ -374,7 +374,7 @@ AddNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/addnode.hpp))
       XorINode( Node *in1, Node *in2 ) : AddNode(in1,in2) {}
 ```
@@ -393,7 +393,7 @@ AddNode クラスの具象サブクラスの1つ.
 このクラスは long 値同士の排他的論理和(ビットXOR)演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/addnode.hpp))
     // XOR'ing 2 longs
     class XorLNode : public AddNode {
@@ -402,7 +402,7 @@ AddNode クラスの具象サブクラスの1つ.
 なお XorXNode という型も使われるが, `#ifdef _LP64` の場合は, これは XorLNode の別名.   
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/type.hpp))
     #define XorXNode     XorLNode
 ```
@@ -412,7 +412,7 @@ AddNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/addnode.hpp))
       XorLNode( Node *in1, Node *in2 ) : AddNode(in1,in2) {}
 ```
@@ -434,7 +434,7 @@ AddNode クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/addnode.hpp))
     // Max (or min) of 2 values.  Included with the ADD nodes because it inherits
     // all the behavior of addition on a ring.  Only new thing is that we allow
@@ -447,7 +447,7 @@ AddNode クラスのサブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/addnode.hpp))
       MaxNode( Node *in1, Node *in2 ) : AddNode(in1,in2) {}
 ```
@@ -472,7 +472,7 @@ MaxNode クラスの具象サブクラスの1つ.
 このクラスは int 値同士の Max 演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/addnode.hpp))
     // Maximum of 2 integers.  Included with the ADD nodes because it inherits
     // all the behavior of addition on a ring.
@@ -484,7 +484,7 @@ MaxNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/addnode.hpp))
       MaxINode( Node *in1, Node *in2 ) : MaxNode(in1,in2) {}
 ```
@@ -503,7 +503,7 @@ MaxNode クラスの具象サブクラスの1つ.
 このクラスは int 値同士の Min 演算用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/addnode.hpp))
     // MINimum of 2 integers.  Included with the ADD nodes because it inherits
     // all the behavior of addition on a ring.
@@ -515,7 +515,7 @@ MaxNode クラスの具象サブクラスの1つ.
 ただし control input は常に空 (0 が設定される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/addnode.hpp))
       MinINode( Node *in1, Node *in2 ) : MaxNode(in1,in2) {}
 ```

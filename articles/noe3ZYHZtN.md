@@ -20,7 +20,7 @@ lookupswitch バイトコード及び tableswitch バイトコードの飛び先
 (なお, このクラスは StackObj クラスだが局所変数としては生成されていない (NEW_RESOURCE_ARRAY() でのみ確保されている))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/parse2.cpp))
     class SwitchRange : public StackObj {
 ```
@@ -47,7 +47,7 @@ lookupswitch バイトコード及び tableswitch バイトコードの飛び先
   lookupswitch/tableswitch バイトコード中での順番
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/parse2.cpp))
       // a range of integers coupled with a bci destination
       jint _lo;                     // inclusive lower limit

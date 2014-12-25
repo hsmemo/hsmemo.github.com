@@ -21,7 +21,7 @@ Tiered Compilation 用の CompilationPolicy クラス(= メソッドをコンパ
 (See: compilationPolicy_init(), Arguments::set_tiered_flags()).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/simpleThresholdPolicy.hpp))
     class SimpleThresholdPolicy : public CompilationPolicy {
 ```

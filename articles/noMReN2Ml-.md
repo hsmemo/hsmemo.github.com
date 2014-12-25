@@ -19,7 +19,7 @@ JavaCalls クラスを用いて Java メソッドを呼び出す際に,
 (より正確には, そのための機能を納めた名前空間(AllStatic クラス)).
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/jniTypes_x86.hpp))
     // This file holds platform-dependent routines used to write primitive jni
     // types to the array of arguments passed into JavaCalls::call
@@ -41,7 +41,7 @@ JavaCalls クラスを用いて Java メソッドを呼び出す際に,
 (大抵は普通に書き込むだけだが, long と double は endian を反転させることもある).
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/jniTypes_x86.hpp))
       // These functions write a java primitive type (in native format)
       // to a java stack slot array to be passed as an argument to JavaCalls:calls.
@@ -54,7 +54,7 @@ JavaCalls クラスを用いて Java メソッドを呼び出す際に,
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/jniTypes_x86.hpp))
     #ifndef AMD64
       // 32bit Helper routines.

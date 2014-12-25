@@ -10,7 +10,7 @@ title: G1RemSet クラス関連のクラス (G1RemSet, CountNonCleanMemRegionClo
 より具体的に言うと, Remembered Set の処理を補佐するためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1RemSet.hpp))
     // A G1RemSet provides ways of iterating over pointers into a selected
     // collection set.
@@ -50,7 +50,7 @@ G1CollectedHeap の Remembered Set 情報 (HeapRegionRemSet オブジェクト) 
 Remembered Set 処理用のメソッドを提供している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1RemSet.hpp))
     // A G1RemSet in which each heap region has a rem set that records the
     // external heap references into it.  Uses a mod ref bs to track updates,
@@ -90,14 +90,14 @@ G1CollectedHeap::initialize() 内で(のみ)生成されている.
 * OopsInHeapRegionClosure ** 	_cset_rs_update_cl
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1RemSet.hpp))
       G1CollectedHeap* _g1;
       unsigned _conc_refine_cards;
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1RemSet.hpp))
       CardTableModRefBS*             _ct_bs;
       SubTasksDone*                  _seq_task;
@@ -129,7 +129,7 @@ See: [here](../doxygen/classG1RemSet.html) for details
 Barrier Set (CardTableModRefBS) 中にある dirty なカードの数を数えるための Closure クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1RemSet.hpp))
     class CountNonCleanMemRegionClosure: public MemRegionClosure {
 ```
@@ -174,7 +174,7 @@ RebuildRSOutOfRegionClosure クラス内で使用される補助クラス.
 (Major GC の処理後に) 全ての HeapRegion の Remembered Set 情報を作成し直すための Closure クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1RemSet.hpp))
     class UpdateRSOopClosure: public OopClosure {
 ```
@@ -206,7 +206,7 @@ Minor GC がメモリ不足で失敗した場合に,
 コピーできなかったオブジェクトについて, Remembered Set 情報を作成し直す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1RemSet.hpp))
     class UpdateRSetImmediate: public OopsInHeapRegionClosure {
 ```
@@ -235,7 +235,7 @@ G1RemSet の処理で使用される補助クラス.
 Remembered Set の修正処理を行うための Closure クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1RemSet.hpp))
     class UpdateRSOrPushRefOopClosure: public OopClosure {
 ```
@@ -256,7 +256,7 @@ See: [here](../doxygen/classUpdateRSOrPushRefOopClosure.html) for details
 ?? (このクラスは使用箇所が見当たらない...)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1RemSet.cpp))
     class IntoCSOopClosure: public OopsInHeapRegionClosure {
 ```
@@ -273,7 +273,7 @@ See: [here](../doxygen/classIntoCSOopClosure.html) for details
 ?? (このクラスは使用箇所が見当たらない...)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1RemSet.cpp))
     class VerifyRSCleanCardOopClosure: public OopClosure {
 ```
@@ -293,7 +293,7 @@ G1CollectedHeap の Minor GC 処理("Evacuation Pause" 処理)で使用される
 Collection Set 外から Collection Set 内を指しているポインタを処理する Closure.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1RemSet.cpp))
     class ScanRSClosure : public HeapRegionClosure {
 ```
@@ -316,7 +316,7 @@ G1CollectedHeap の Minor GC 処理("Evacuation Pause" 処理)で使用される
 Collection Set 外から Collection Set 内を指しているポインタを発見し, Remembered Set を更新するための Closure.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1RemSet.cpp))
     // Closure used for updating RSets and recording references that
     // point into the collection set. Only called during an
@@ -343,7 +343,7 @@ See: [here](../doxygen/classRefineRecordRefsIntoCSCardTableEntryClosure.html) fo
 処理対象の HeapRegion の Remembered Set に関する情報を出力する Closure クラス
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1RemSet.cpp))
     #ifndef PRODUCT
     class PrintRSClosure : public HeapRegionClosure {
@@ -373,7 +373,7 @@ See: [here](../doxygen/classPrintRSClosure.html) for details
  最もメモリを使用している Remembered Set に対応する HeapRegion, 等).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1RemSet.cpp))
     class CountRSSizeClosure: public HeapRegionClosure {
 ```
@@ -399,7 +399,7 @@ Collection Set に入っている HeapRegion の
 Remembered Set の状態 (HeapRegionRemSet::_iter_state) をリセットするための Closure クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1RemSet.cpp))
     class cleanUpIteratorsClosure : public HeapRegionClosure {
 ```
@@ -429,7 +429,7 @@ Minor GC がメモリ不足で失敗した場合に,
 Collection Set 内を指している HeapRegion の Remembered Set を修正するための Closure クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1RemSet.cpp))
     // This closure, applied to a DirtyCardQueueSet, is used to immediately
     // update the RSets for the regions in the CSet. For each card it iterates
@@ -464,7 +464,7 @@ G1ParScrubRemSetTask クラス内で使用される補助クラス.
 そこに付いている Remembered Set 用のデータ構造を解放する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1RemSet.cpp))
     class ScrubRSClosure: public HeapRegionClosure {
 ```
@@ -501,7 +501,7 @@ InvokeIfNotTriggeredClosure と組み合わせて使用される Closure クラ�
 (See: InvokeIfNotTriggeredClosure).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1RemSet.cpp))
     class TriggerClosure : public OopClosure {
 ```
@@ -515,7 +515,7 @@ TriggerClosure::value() というメソッドを備えている.
 
 #### 参考(for your information): TriggerClosure::TriggerClosure()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1RemSet.cpp))
       TriggerClosure() : _trigger(false) { }
 ```
@@ -542,7 +542,7 @@ G1RemSet の処理で使用される補助クラス.
 「指定した TriggerClosure が false を返す場合にのみ OopClosure を適用したい」という場合に使用される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1RemSet.cpp))
     class InvokeIfNotTriggeredClosure: public OopClosure {
 ```
@@ -577,7 +577,7 @@ G1RemSet の処理で使用される補助クラス.
 (といっても関数合成ではなく同じ引数に対して2つを逐次的に適用するだけだけど).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1RemSet.cpp))
     class Mux2Closure : public OopClosure {
 ```
@@ -591,7 +591,7 @@ G1RemSet::concurrentRefineOneCard_impl() 内で(のみ)使用されている (Se
 
 #### 参考(for your information): Mux2Closure::Mux2Closure()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1RemSet.cpp))
       Mux2Closure(OopClosure *c1, OopClosure *c2) : _c1(c1), _c2(c2) { }
 ```
@@ -616,7 +616,7 @@ See: [here](../doxygen/classMux2Closure.html) for details
 (Remembered Set として使用しているメモリ量(合計値,最大値), 最もメモリを使用している Remembered Set に対応する HeapRegion, 等).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1RemSet.cpp))
     class HRRSStatsIter: public HeapRegionClosure {
 ```
@@ -650,7 +650,7 @@ See: [here](../doxygen/classHRRSStatsIter.html) for details
 (See: ConcurrentG1RefineThread::vtime_accum(), ConcurrentG1RefineThread::run()).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1RemSet.cpp))
     class PrintRSThreadVTimeClosure : public ThreadClosure {
 ```

@@ -95,7 +95,7 @@ com.sun.management 以下の HotSpot 独自のインターフェースの一覧:
 
 * com.sun.management.HotSpotDiagnosticMXBean
 
-```
+```java
     ((cite: jdk/src/share/classes/com/sun/management/HotSpotDiagnosticMXBean.java))
     package com.sun.management;
     ...
@@ -120,7 +120,7 @@ com.sun.management 以下の HotSpot 独自のインターフェースの一覧:
 
 * com.sun.management.GarbageCollectorMXBean
 
-```
+```java
     ((cite: jdk/src/share/classes/com/sun/management/GarbageCollectorMXBean.java))
     package com.sun.management;
     ...
@@ -140,7 +140,7 @@ com.sun.management 以下の HotSpot 独自のインターフェースの一覧:
 
 * com.sun.management.OperatingSystemMXBean
 
-```
+```java
     ((cite: jdk/src/share/classes/com/sun/management/OperatingSystemMXBean.java))
     package com.sun.management;
     ...
@@ -164,7 +164,7 @@ com.sun.management 以下の HotSpot 独自のインターフェースの一覧:
 
 * com.sun.management.UnixOperatingSystemMXBean
 
-```
+```java
     ((cite: jdk/src/share/classes/com/sun/management/UnixOperatingSystemMXBean.java))
     package com.sun.management;
     ...
@@ -181,7 +181,7 @@ com.sun.management 以下の HotSpot 独自のインターフェースの一覧:
 
 * com.sun.management.ThreadMXBean
 
-```
+```java
     ((cite: jdk/src/share/classes/com/sun/management/ThreadMXBean.java))
     package com.sun.management;
     ...
@@ -202,7 +202,7 @@ com.sun.management 以下の HotSpot 独自のインターフェースの一覧:
 
 * com.sun.management.UnixOperatingSystem  (extends sun.management.OperatingSystemImpl)
 
-```
+```java
     ((cite: jdk/src/solaris/classes/com/sun/management/UnixOperatingSystem.java))
     /**
      * Implementation class for the operating system.
@@ -218,7 +218,7 @@ com.sun.management 以下の HotSpot 独自のインターフェースの一覧:
 
 * com.sun.management.OperatingSystem      (extends sun.management.OperatingSystemImpl)
 
-```
+```java
     ((cite: jdk/src/windows/classes/com/sun/management/OperatingSystem.java))
     /**
      * Implementation class for the operating system.

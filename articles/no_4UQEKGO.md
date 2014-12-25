@@ -26,7 +26,7 @@ title: VMReg クラス関連のクラス (VMRegImpl, VMRegPair)
 (なお, "Reg" という名前だが, レジスタだけでなくスタック上のスロットも含めて統一的に扱っている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/vmreg.hpp))
     class VMRegImpl {
 ```
@@ -54,14 +54,14 @@ See: [here](no42307cB.html) for details
 stack0 の値は, 以下のように 全レジスタ数+1 と設定されている。
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/vmreg.cpp))
     // First VMReg value that could refer to a stack slot
     VMReg VMRegImpl::stack0 = (VMReg)(intptr_t)((ConcreteRegisterImpl::number_of_registers + 1) & ~1);
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/sharedRuntime_x86_64.cpp))
     // VMRegImpl::stack0 refers to the first slot 0(sp).
     // and VMRegImpl::stack0+1 refers to the memory word 4-byes higher.  Register
@@ -73,7 +73,7 @@ stack0 の値は, 以下のように 全レジスタ数+1 と設定されてい�
 なお VMReg という型も使われるが, これは VMRegImpl* のこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/vmreg.hpp))
     typedef VMRegImpl* VMReg;
 ```
@@ -86,7 +86,7 @@ VMRegImpl::stack0 よりも上の部分は compiled code では warped してい
  大きさがきちんと分からないから, 番号を隙間なく詰めるのが難しい(途中で warp する番号が出る)ということ?? #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/vmreg.hpp))
     //------------------------------VMReg------------------------------------------
     // The VM uses 'unwarped' stack slots; the compiler uses 'warped' stack slots.
@@ -115,7 +115,7 @@ calling convention を表現するために使われている模様. (その他�
 また, void(等?)の場合用に, 両方不正値(両方Bad)という状態も可能な模様.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/vmreg.hpp))
     //---------------------------VMRegPair-------------------------------------------
     // Pairs of 32-bit registers for arguments.
@@ -144,7 +144,7 @@ SharedRuntime::generate_native_wrapper() で使用されている)
 
 #### 生成箇所(where its instances are created)
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/sharedRuntime_x86_64.cpp))
     int SharedRuntime::java_calling_convention(const BasicType *sig_bt,
                                                VMRegPair *regs,
@@ -168,7 +168,7 @@ SharedRuntime::generate_native_wrapper() で使用されている)
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/sharedRuntime_x86_64.cpp))
     int SharedRuntime::c_calling_convention(const BasicType *sig_bt,
                                              VMRegPair *regs,
@@ -192,7 +192,7 @@ SharedRuntime::generate_native_wrapper() で使用されている)
 
 #### 使用箇所(where its instances are used)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntime.cpp))
     AdapterHandlerEntry* AdapterHandlerLibrary::get_adapter(methodHandle method) {
     ...
@@ -208,7 +208,7 @@ SharedRuntime::generate_native_wrapper() で使用されている)
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntime.cpp))
     nmethod *AdapterHandlerLibrary::create_native_wrapper(methodHandle method, int compile_id) {
     ...

@@ -28,7 +28,7 @@ title: YieldingFlexibleWorkGang に関するクラス (YieldingFlexibleGangWorke
 (通常の GangWorker クラスとの違いは...#TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/yieldingWorkgroup.hpp))
     // Class YieldingFlexibleGangWorker:
     //   Several instances of this class run in parallel as workers for a gang.
@@ -70,7 +70,7 @@ See: [here](../doxygen/classYieldingFlexibleGangWorker.html) for details
 AbstractGangTask クラスのサブクラスの1つ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/yieldingWorkgroup.hpp))
     class FlexibleGangTask: public AbstractGangTask {
 ```
@@ -78,7 +78,7 @@ AbstractGangTask クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/yieldingWorkgroup.hpp))
       // The abstract work method.
       // The argument tells you which member of the gang you are.
@@ -90,7 +90,7 @@ AbstractGangTask と比べると, 以下の2つのフィールドが増えてい
 (ついでに, このフィールドへのアクセサメソッドも追加されている).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/yieldingWorkgroup.hpp))
       int _actual_size;                      // size of gang obtained
     protected:
@@ -112,7 +112,7 @@ FlexibleGangTask クラスのサブクラス (なお, 現在はこのクラス�
 途中で yield() したり abort() したりできる GangTask, らしい (#TODO).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/yieldingWorkgroup.hpp))
     // An abstract task to be worked on by a flexible work gang,
     // and where the workers will periodically yield, usually
@@ -151,7 +151,7 @@ Worker Thread として YieldingGangWorkers クラスを使用しており,
 途中で yield する機能を提供する, らしい (#TODO).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/yieldingWorkgroup.hpp))
     // Class YieldingWorkGang: A subclass of WorkGang.
     // In particular, a YieldingWorkGang is made up of

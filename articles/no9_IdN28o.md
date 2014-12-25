@@ -27,7 +27,7 @@ Node クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/multnode.hpp))
     //------------------------------MultiNode--------------------------------------
     // This class defines a MultiNode, a Node which produces many values.  The
@@ -39,7 +39,7 @@ Node クラスのサブクラスの1つ.
 このクラス自体は入力ノードを規定しない (= 入力ノードはない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/multnode.hpp))
       MultiNode( uint required ) : Node(required) {
         init_class_id(Class_Multi);
@@ -64,7 +64,7 @@ Node クラスの具象サブクラスの1つ.
 MultiNode (やそのサブクラス) が表すタプルから要素を1つ取り出すための Node.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/multnode.hpp))
     //------------------------------ProjNode---------------------------------------
     // This class defines a Projection node.  Projections project a single element
@@ -90,7 +90,7 @@ MultiNode (やそのサブクラス) が表すタプルから要素を1つ取り
 control input は持たない. 入力ノードは 1つで, 処理対象の MultiNode を指す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/multnode.hpp))
       ProjNode( Node *src, uint con, bool io_use = false )
         : Node( src ), _con(con), _is_io_use(io_use)

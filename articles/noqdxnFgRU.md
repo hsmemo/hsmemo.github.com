@@ -16,7 +16,7 @@ JVMTI の機能を実現するためのクラス.
 より具体的に言うと, JVMTI の capability(権限)管理用の関数を納めた名前空間(AllStatic クラス) (See: [here](no2935trw.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiManageCapabilities.hpp))
     class JvmtiManageCapabilities : public AllStatic {
 ```

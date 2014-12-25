@@ -283,7 +283,7 @@ See: [here](no3059FYm.html) for details
 See: [here](no3059fsy.html) for details
 ### NativeSignatureIterator::do_<type>()  (NativeSignatureIterator::do_bool(), NativeSignatureIterator::do_char(), NativeSignatureIterator::do_float(), NativeSignatureIterator::do_double(), ...)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/signature.hpp))
       void do_bool  ()                     { pass_int();    _jni_offset++; _offset++;       }
       void do_char  ()                     { pass_int();    _jni_offset++; _offset++;       }

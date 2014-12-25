@@ -19,7 +19,7 @@ title: Rewriter クラス
 bytecode 中の constant pool index を constant pool cache index へと書き換える処理).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/rewriter.hpp))
     // The Rewriter adds caches to the constant pool and rewrites bytecode indices
     // pointing into the constant pool for better interpreter performance.

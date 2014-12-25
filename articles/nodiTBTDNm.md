@@ -21,20 +21,20 @@ Perm Generation を管理するクラスは使用する GC アルゴリズムに
 (See: PSPermGen) (See: [here](no3718kvd.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/permGen.hpp))
     // PermGen models the part of the heap used to allocate class meta-data.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/permGen.hpp))
     class PermGen : public CHeapObj {
 ```
 
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/permGen.hpp))
       virtual HeapWord* mem_allocate(size_t size) = 0;
 ```

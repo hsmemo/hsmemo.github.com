@@ -23,13 +23,13 @@ title: MemProfiler クラス (MemProfiler, 及びその補助クラス(MemProfil
 定期的にメモリ使用量をログファイル(mprofile.log)に出力するための機能を納めた名前空間(AllStatic クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/memprofiler.hpp))
     // Prints periodic memory usage trace of HotSpot VM
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/memprofiler.hpp))
     class MemProfiler : AllStatic {
 ```
@@ -66,7 +66,7 @@ MemProfiler クラス内で使用される補助クラス.
 定期間隔でメモリ使用量をログファイル(mprofile.log)に出力するためのクラス(PeriodicTaskクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/memprofiler.cpp))
     #ifndef PRODUCT
     

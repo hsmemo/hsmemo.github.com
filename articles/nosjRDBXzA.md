@@ -48,7 +48,7 @@ HotSpot を構成するクラスのほとんどは, 以下の5つのうちのど
     基本的には名前空間代わりに使用される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/allocation.hpp))
     // All classes in the virtual machine must be subclassed
     // by one of the following allocation classes:
@@ -93,7 +93,7 @@ HotSpot を構成するクラスのほとんどは, 以下の5つのうちのど
 C ヒープ上に確保されるオブジェクト用の基底クラス (See: [here](no28916gIW.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/allocation.hpp))
     class CHeapObj ALLOCATION_SUPER_CLASS_SPEC {
 ```
@@ -110,7 +110,7 @@ See: [here](../doxygen/classCHeapObj.html) for details
 スタック上に確保されるオブジェクト用の基底クラス (See: [here](no28916gIW.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/allocation.hpp))
     // Base class for objects allocated on the stack only.
     // Calling new or delete will result in fatal error.
@@ -130,7 +130,7 @@ See: [here](../doxygen/classStackObj.html) for details
 常に値渡しで使われるオブジェクト用の基底クラス (See: [here](no28916gIW.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/allocation.hpp))
     // Base class for objects used as value objects.
     // Calling new or delete will result in fatal error.
@@ -151,7 +151,7 @@ See: [here](../doxygen/class__ValueObj.html) for details
 静的にメモリを確保するオブジェクト用の基底クラス (See: [here](no28916gIW.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/allocation.hpp))
     // Base class for classes that constitute name spaces.
     
@@ -172,7 +172,7 @@ Arena クラス内で使用される補助クラス (See: [here](no28916iKk.html
 開放されたメモリ領域を管理し, 次回の確保要求に備える.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/allocation.hpp))
     //------------------------------Chunk------------------------------------------
     // Linked list of raw memory chunks
@@ -191,7 +191,7 @@ See: [here](../doxygen/classChunk.html) for details
 C ヒープ内でのメモリ確保を効率的に行うためのクラス (See: [here](no28916iKk.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/allocation.hpp))
     //------------------------------Arena------------------------------------------
     // Fast allocation of memory
@@ -210,7 +210,7 @@ See: [here](../doxygen/classArena.html) for details
 ResourceArea に確保されるオブジェクト(= スレッドローカルで一時的なオブジェクト)用の基底クラス (See: [here](no28916gIW.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/allocation.hpp))
     //----------------------------------------------------------------------
     // Base class for objects allocated in the resource area per default.
@@ -247,7 +247,7 @@ See: [here](../doxygen/classResourceObj.html) for details
 CHeapObj, StackObj, ResourceObj はスーパークラスを持たないクラスになる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/allocation.hpp))
     // Base class for objects allocated in the C-heap.
     
@@ -280,7 +280,7 @@ C ヒープ内でのメモリ確保処理に関する統計情報を表示する
 (例えば, malloc() や free() の呼び出し回数, 確保した量(バイト数), 開放した量(バイト数), etc)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/allocation.hpp))
     // for statistics
     #ifndef PRODUCT
@@ -293,7 +293,7 @@ C ヒープ内でのメモリ確保処理に関する統計情報を表示する
 AllocStats::print() が呼ばれると, 記録していた値とその時点での値の差分を表示する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/allocation.cpp))
     AllocStats::AllocStats() {
       start_mallocs      = os::num_mallocs;
@@ -319,7 +319,7 @@ AllocStats::print() が呼ばれると, 記録していた値とその時点で�
 インスタンスは alloc_stats という大域変数に格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/java.cpp))
     AllocStats alloc_stats;
 ```
@@ -330,7 +330,7 @@ print_statistics() 関数の中で呼び出されている.
 (ただし, PrintMallocStatistics オプションが指定されている場合にのみ, 出力が行われる)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/java.cpp))
     void print_statistics() {
     ...
@@ -356,7 +356,7 @@ ResourceArea 内に確保した配列を REALLOC_RESOURCE_ARRAY() で伸ばす�
 その配列が ResourceMark によって既に解放されていないかどうかをチェックする.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/allocation.hpp))
     //------------------------------ReallocMark---------------------------------
     // Code which uses REALLOC_RESOURCE_ARRAY should check an associated
@@ -372,7 +372,7 @@ ResourceArea の nest レベル (以下の nesting) をチェックし, もし�
 (なお開発時用の機能であるため, #ifdef ASSERT 時以外はコードは全て空になる).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/allocation.cpp))
     ReallocMark::ReallocMark() {
     #ifdef ASSERT
@@ -396,7 +396,7 @@ ResourceArea の nest レベル (以下の nesting) をチェックし, もし�
  ResourceMark のデストラクタが呼ばれるとデクリメントされる.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/resourceArea.hpp))
       ResourceMark( ResourceArea *r ) :
     ...
@@ -428,7 +428,7 @@ Chunk クラス内で使用される補助クラス (See: [here](no28916iKk.html
 (なお, thread の初期化が終わる前から使用されるため, 内部で mutex は使わないように, とのこと.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/allocation.cpp))
     //--------------------------------------------------------------------------------------
     // ChunkPool implementation
@@ -453,7 +453,7 @@ ChunkPool 内の Chunk 数が多くなりすぎないように,
 定期間隔で ChunkPool 内の Chunk を解放するためのクラス(PeriodicTaskクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/allocation.cpp))
     //--------------------------------------------------------------------------------------
     // ChunkPoolCleaner implementation
@@ -466,7 +466,7 @@ ChunkPool 内の Chunk 数が多くなりすぎないように,
 定期間隔で ChunkPool::clean() を呼び出しているだけ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/allocation.cpp))
        void task() {
          ChunkPool::clean();
@@ -477,7 +477,7 @@ ChunkPool 内の Chunk 数が多くなりすぎないように,
 なお, 現在の処理間隔は 5 秒.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/allocation.cpp))
       enum { CleaningInterval = 5000 };      // cleaning interval in ms
 ```
@@ -485,7 +485,7 @@ ChunkPool 内の Chunk 数が多くなりすぎないように,
 呼び出される ChunkPool::clean() の中では, 各 ChunkPool の要素を最大 5 個を残して解放する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/allocation.cpp))
       static void clean() {
         enum { BlocksToKeep = 5 };
@@ -499,7 +499,7 @@ ChunkPool::free_all_but() の処理は以下の通り
 (ChunkPool 内に指定された個数以上に Chunk が入っていれば, 指定個数まで解放する).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/allocation.cpp))
       // Prune the pool
       void free_all_but(size_t n) {

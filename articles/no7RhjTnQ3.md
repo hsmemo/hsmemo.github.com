@@ -14,7 +14,7 @@ title: PtrQueue クラス関連のクラス (PtrQueue, BufferNode, PtrQueueSet)
 例えば, SATB 方式の write barrier では変更前のポインタ値をどこかに記録しておく必要があるのでそういう用途で使う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/ptrQueue.hpp))
     // There are various techniques that require threads to be able to log
     // addresses.  For example, a generational write barrier might log
@@ -52,7 +52,7 @@ write barrier 処理で何らかのポインタ値を記録するためのクラ
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/ptrQueue.hpp))
     class PtrQueue VALUE_OBJ_CLASS_SPEC {
 ```
@@ -66,14 +66,14 @@ _index は最大値(_sz)から始まり, ポインタを入れる度にデクリ
 (See: MacroAssembler::g1_write_barrier_pre(), generate_satb_log_enqueue()).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/ptrQueue.hpp))
       // The buffer.
       void** _buf;
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/ptrQueue.hpp))
       // The index at which an object was last enqueued.  Starts at "_sz"
       // (indicating an empty buffer) and goes towards zero.
@@ -81,7 +81,7 @@ _index は最大値(_sz)から始まり, ポインタを入れる度にデクリ
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/ptrQueue.hpp))
       // The size of the buffer.
       size_t _sz;
@@ -93,7 +93,7 @@ _index は最大値(_sz)から始まり, ポインタを入れる度にデクリ
  See: MacroAssembler::g1_write_barrier_pre())
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/ptrQueue.hpp))
       // Whether updates should be logged.
       bool _active;
@@ -114,7 +114,7 @@ PtrQueue 用のバッファ(メモリ領域)を管理するクラス (の基底�
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/ptrQueue.hpp))
     // A PtrQueueSet represents resources common to a set of pointer queues.
     // In particular, the individual queues allocate buffers from this shared
@@ -128,7 +128,7 @@ PtrQueue 用のバッファ(メモリ領域)を管理するクラス (の基底�
 このため, PtrQueue オブジェクトは生成時に所属する PtrQueueSet を指定する必要がある.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/ptrQueue.hpp))
       // Initialize this queue to contain a null buffer, and be part of the
       // given PtrQueueSet.
@@ -151,7 +151,7 @@ PtrQueueSet クラス内でバッファを管理するために使用される�
 (BufferNode クラスを使うとバッファを linked list 状にして管理できる).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/ptrQueue.hpp))
     class BufferNode {
 ```
@@ -161,7 +161,7 @@ PtrQueueSet クラス内でバッファを管理するために使用される�
  より正確に言うと, 「バッファとして使用される領域よりも前の部分に BufferNode オブジェクトが埋め込まれている」)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/ptrQueue.hpp))
       // BufferNode is allocated before the buffer.
       // The chunk of memory that holds both of them is a block.

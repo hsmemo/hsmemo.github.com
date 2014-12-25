@@ -26,7 +26,7 @@ BasicObjectLock クラス用の補助クラス.
 (ロック処理では mark フィールドを書き換えてしまうため, 元の値を記録しておく必要がある).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/basicLock.hpp))
     class BasicLock VALUE_OBJ_CLASS_SPEC {
 ```
@@ -49,7 +49,7 @@ BasicObjectLock クラス用の補助クラス.
 内部には以下のフィールドが1つあるだけ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/basicLock.hpp))
       volatile markOop _displaced_header;
 ```
@@ -76,7 +76,7 @@ See: [here](../doxygen/classBasicLock.html) for details
  JIT コンパイルされたメソッドの場合もスタックフレーム内に埋め込まれている).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/basicLock.hpp))
     // A BasicObjectLock associates a specific Java object with a BasicLock.
     // It is currently embedded in an interpreter frame.
@@ -106,7 +106,7 @@ JIT コンパイルされたメソッドの場合は, スタックフレーム�
 及びそのオブジェクトの mark フィールドを待避した BasicLock オブジェクトを保持している
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/basicLock.hpp))
       BasicLock _lock;                                    // the lock, must be double word aligned
       oop       _obj;                                     // object holds the lock;

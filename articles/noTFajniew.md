@@ -18,7 +18,7 @@ PermGen クラスの具象サブクラスの1つ (See: [here](no3718kvd.html) fo
 (なお, 連続領域になっていない場合の具象サブクラスは CMSPermGen (See: CMSPermGen)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/compactPermGen.hpp))
     // A PermGen implemented with a contiguous space.
     class CompactingPermGen:  public PermGen {

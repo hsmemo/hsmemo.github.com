@@ -34,7 +34,7 @@ title: Relocator クラス関連のクラス (RelocatorListener, Relocator, 及�
  それも行ってくれる)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/relocator.hpp))
     class Relocator : public ResourceObj {
 ```
@@ -107,7 +107,7 @@ Relocator がコードを変更した際に,
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/relocator.hpp))
     // Callback object for code relocations
     class RelocatorListener : public StackObj {
@@ -117,7 +117,7 @@ Relocator がコードを変更した際に,
 使用する際には, relocated() メソッドをオーバーライドしたサブクラスを作ればいい.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/relocator.hpp))
       virtual void relocated(int bci, int delta, int new_method_size) = 0;
 ```
@@ -142,7 +142,7 @@ Relocator の処理において, 変更が必要なバイトコード箇所を�
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/relocator.cpp))
     // Encapsulates a code change request. There are 3 types.
     // General instruction, jump instruction, and table/lookup switches
@@ -164,7 +164,7 @@ ChangeItem クラスの具象サブクラスの1つ.
 このクラスは, Relocator::insert_space_at() で指定されたバイトコードを表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/relocator.cpp))
     class ChangeWiden : public ChangeItem {
 ```
@@ -195,7 +195,7 @@ ChangeItem クラスの具象サブクラスの1つ.
 このクラスは, 連鎖的に修正が必要になった分岐命令(if*,goto,jsr)を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/relocator.cpp))
     class ChangeJumpWiden : public ChangeItem {
 ```
@@ -226,7 +226,7 @@ ChangeItem クラスの具象サブクラスの1つ.
 このクラスは, 連鎖的に修正が必要になった分岐命令(*switch)を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/relocator.cpp))
     class ChangeSwitchPad : public ChangeItem {
 ```

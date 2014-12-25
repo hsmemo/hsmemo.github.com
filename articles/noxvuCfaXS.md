@@ -29,7 +29,7 @@ jfieldID 値のエンコード方式は以下の通り.
 ...(#TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/jfieldIDWorkaround.hpp))
       // This workaround is because JVMTI doesn't have distinct entry points
       // for methods that use static jfieldIDs and instance jfieldIDs.

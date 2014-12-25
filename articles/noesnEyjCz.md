@@ -17,7 +17,7 @@ title: AllocationStats クラス
 (なお現状では CMS 専用のクラスである模様)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/allocationStats.hpp))
     class AllocationStats VALUE_OBJ_CLASS_SPEC {
 ```

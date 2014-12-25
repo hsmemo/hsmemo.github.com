@@ -15,7 +15,7 @@ title: arrayKlass クラス
 arrayOopDesc 用の Klass クラスの基底クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/arrayKlass.hpp))
     // arrayKlass is the abstract baseclass for all array classes
     

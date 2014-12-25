@@ -15,7 +15,7 @@ title: compiledICHolderKlass クラス
 compiledICHolderOopDesc 用の Klass クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/compiledICHolderKlass.hpp))
     // a compiledICHolderKlass is the klass of a compiledICHolderOop
     

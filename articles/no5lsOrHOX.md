@@ -11,7 +11,7 @@ title: OopRecorder およびその補助クラス (OopRecorder, OopRecorder::Ind
 (この情報は, constant table を作ったり, relocation 情報を作ったりする際に使われているもの?? #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/oopRecorder.hpp))
     // Recording and retrieval of oop relocations in compiled code.
 ```
@@ -34,7 +34,7 @@ JIT コンパイル作業中に使用される一時オブジェクト(ResourceO
 なお, 0 は常に NULL と対応付けられている.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/oopRecorder.hpp))
     class OopRecorder : public ResourceObj {
 ```
@@ -43,7 +43,7 @@ JIT コンパイル作業中に使用される一時オブジェクト(ResourceO
 OopRecorder オブジェクトは, JIT コンパイルの開始時に作成される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/compile.cpp))
     void Compile::Init(int aliaslevel) {
     ...
@@ -56,7 +56,7 @@ JIT コンパイル中に, allocate_index() または find_index() で oop 定�
 登録後は, find_index() で oop->int を, handle_at() で int->oop を引ける模様.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/oopRecorder.hpp))
       // Generate a new index on which CodeBlob::oop_addr_at will work.
       // allocate_index and find_index never return the same index,
@@ -79,7 +79,7 @@ JIT コンパイル中に, allocate_index() または find_index() で oop 定�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/oopRecorder.hpp))
       // Retrieve the oop handle at a given index.
       jobject handle_at(int index);
@@ -88,7 +88,7 @@ JIT コンパイル中に, allocate_index() または find_index() で oop 定�
 蓄えた情報は, コンパイル完了時に Compile::Fill_buffer() で CodeBuffer にコピーされる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/output.cpp))
     void Compile::Fill_buffer() {
     ...
@@ -98,7 +98,7 @@ JIT コンパイル中に, allocate_index() または find_index() で oop 定�
 なお, この情報は最終的には OopRecorder::copy_to() で CodeBuffer から nmethod にコピーされている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/asm/codeBuffer.hpp))
       void copy_oops_to(nmethod* nm) {
         if (!oop_recorder()->is_unused()) {
@@ -121,7 +121,7 @@ OopRecorder クラス内で使用される補助クラス.
 OopRecorder::find_index() を高速化するためのキャッシュ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/oopRecorder.hpp))
       // leaky hash table of handle => index, to help detect duplicate insertion
       class IndexCache: public ResourceObj {
@@ -134,7 +134,7 @@ OopRecorder オブジェクトの _indexes フィールドに格納されてお�
 jobject から index への(やや不正確な)対応を記録している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/oopRecorder.hpp))
       IndexCache*               _indexes;  // map: jobject -> its probable index
 ```

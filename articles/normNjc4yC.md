@@ -28,7 +28,7 @@ title: Placeholder クラス関連のクラス (PlaceholderTable, SeenThread, Pl
    (例えば, superclass のロード前にこれに登録しておくことで, circularity なのか他のスレッドがロード作業中なのかが区別できる).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/placeholders.hpp))
     // Placeholder objects. These represent classes currently
     // being loaded, as well as arrays of primitives.
@@ -53,7 +53,7 @@ SystemDictionary クラス内で使用される補助クラス (See: SystemDicti
 SystemDictionary が現在ロード中のクラス情報を入れておくハッシュテーブル.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/placeholders.hpp))
     class PlaceholderTable : public TwoOopHashtable<Symbol*> {
 ```
@@ -63,7 +63,7 @@ SystemDictionary が現在ロード中のクラス情報を入れておくハッ
 SystemDictionary クラスの _placeholders フィールド (static フィールド) に(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/systemDictionary.hpp))
       // Hashtable holding placeholders for classes being loaded.
       static PlaceholderTable*       _placeholders;
@@ -84,7 +84,7 @@ PlaceholderTable クラス内で使用される補助クラス.
 PlaceholderTable オブジェクト内に格納されるハッシュテーブル・エントリ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/placeholders.hpp))
     // Placeholder objects represent classes currently being loaded.
     // All threads examining the placeholder table must hold the
@@ -110,7 +110,7 @@ PlaceholderEntry クラス用の補助クラス.
 ある特定のクラスに対して, 現在ロードを行っているスレッド全員を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/placeholders.hpp))
     // SeenThread objects represent list of threads that are
     // currently performing a load action on a class.

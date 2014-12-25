@@ -26,7 +26,7 @@ title: Disassembler クラス (Disassembler, 及びその補助クラス(decode_
 (このクラスは AllStatic ではないが, static なフィールド／メソッドしか持たない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/disassembler.hpp))
     // The disassembler prints out assembly code annotated
     // with Java specific information.
@@ -41,7 +41,7 @@ Disassembler::decode() を呼び出すと, 逆アセンブル結果が出力さ�
 なお, Disassembler::decode() は 3種類存在している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/disassembler.hpp))
       static void decode(CodeBlob *cb,               outputStream* st = NULL);
       static void decode(nmethod* nm,                outputStream* st = NULL);
@@ -79,7 +79,7 @@ Disassembler::decode() を呼び出すと, 逆アセンブル結果が出力さ�
 このライブラリは hotspot/src/share/tools/hsdis をコンパイルすると作られる (See: [here](no7882BMt.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/disassembler.cpp))
     static const char hsdis_library_name[] = "hsdis-"HOTSPOT_LIB_ARCH;
     static const char decode_instructions_name[] = "decode_instructions";
@@ -102,7 +102,7 @@ Disassembler クラス内で使用される補助クラス.
 (というか Disassembler クラスは実際の処理はほとんどせず decode_env クラスに丸投げしているだけ).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/disassembler.cpp))
     class decode_env {
 ```
@@ -123,7 +123,7 @@ decode_env クラスのメソッドがコールバックで呼び出されてい
 (以下の this がコールバックに引数として渡される decode_env オブジェクト)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/disassembler.cpp))
     address decode_env::decode_instructions(address start, address end) {
     ...
@@ -138,7 +138,7 @@ decode_env クラスのメソッドがコールバックで呼び出されてい
 このクラスの挙動は diagnostic オプションである PrintAssemblyOptions で設定できる模様.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/disassembler.cpp))
     decode_env::decode_env(CodeBlob* code, outputStream* output) {
     ...

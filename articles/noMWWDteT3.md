@@ -15,7 +15,7 @@ title: ciCallSite クラス
 ciInstance クラスのサブクラスの1つ. java.lang.invoke.CallSite オブジェクトを表す instanceOopDesc 用の ciObject クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciCallSite.hpp))
     // ciCallSite
     //

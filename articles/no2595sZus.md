@@ -17,7 +17,7 @@ ciKlassKlass クラスのサブクラスの1つ. arrayKlassKlass 用の ciKlass 
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciArrayKlassKlass.hpp))
     // ciArrayKlassKlass
     //

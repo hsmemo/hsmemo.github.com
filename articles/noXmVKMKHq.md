@@ -29,7 +29,7 @@ ParallelScavengeHeap の Minor GC 処理で使用される "Local Allocation Buf
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psPromotionLAB.hpp))
     class PSPromotionLAB : public CHeapObj {
 ```
@@ -44,7 +44,7 @@ ParallelScavengeHeap の Minor GC 処理で使用される "Local Allocation Buf
 MutableSpace 内の assert 等が Parallel Scavenge 処理での使い方に合わないため別にクラスを作った, 
 とのこと.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psPromotionLAB.hpp))
     // PSPromotionLAB is a parallel scavenge promotion lab. This class acts very
     // much like a MutableSpace. We couldn't embed a MutableSpace, though, as
@@ -67,7 +67,7 @@ PSPromotionLAB クラスの具象サブクラスの1つ.
 (つまり各 GCTaskThread がコピー先として使用する To 領域をある程度 thread local で確保しておくためのクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psPromotionLAB.hpp))
     class PSYoungPromotionLAB : public PSPromotionLAB {
 ```
@@ -77,7 +77,7 @@ PSPromotionLAB クラスの具象サブクラスの1つ.
 PSPromotionManager オブジェクトの _young_lab フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psPromotionManager.hpp))
       PSYoungPromotionLAB                 _young_lab;
 ```
@@ -98,7 +98,7 @@ PSPromotionLAB クラスの具象サブクラスの1つ.
 (つまり各 GCTaskThread がコピー先として使用する Old 領域をある程度 thread local で確保しておくためのクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psPromotionLAB.hpp))
     class PSOldPromotionLAB : public PSPromotionLAB {
 ```
@@ -108,7 +108,7 @@ PSPromotionLAB クラスの具象サブクラスの1つ.
 PSPromotionManager オブジェクトの _old_lab フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psPromotionManager.hpp))
       PSOldPromotionLAB                   _old_lab;
 ```

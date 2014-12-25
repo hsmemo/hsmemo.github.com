@@ -35,7 +35,7 @@ Java ヒープ領域の管理を担当するクラス(CollectedHeapクラス)の
 このクラスは, GC アルゴリズムが Serial, ParNew, Serial Old, CMS の場合用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/genCollectedHeap.hpp))
     // A "GenCollectedHeap" is a SharedHeap that uses generational
     // collection.  It is represented with a sequence of Generation's.
@@ -55,7 +55,7 @@ See: [here](../doxygen/classGenCollectedHeap.html) for details
 GenCollectedHeap 内の Generation オブジェクトを処理する Closure クラス (の基底クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/genCollectedHeap.hpp))
       class GenClosure : public StackObj {
 ```
@@ -63,7 +63,7 @@ GenCollectedHeap 内の Generation オブジェクトを処理する Closure ク
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/genCollectedHeap.hpp))
         virtual void do_generation(Generation* gen) = 0;
 ```
@@ -86,7 +86,7 @@ GenCollectedHeap クラス内で使用される補助クラス (Closure クラ�
 Generation::prepare_for_verify() を呼び出すことで, 検証処理の前準備を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/genCollectedHeap.cpp))
     class GenPrepareForVerifyClosure: public GenCollectedHeap::GenClosure {
 ```
@@ -116,7 +116,7 @@ Generation::gc_prologue() を呼び出すことで, GC の前準備を行う.
 (See: [here](no28916sKh.html) for details)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/genCollectedHeap.cpp))
     class GenGCPrologueClosure: public GenCollectedHeap::GenClosure {
 ```
@@ -143,7 +143,7 @@ Generation::gc_epilogue() を呼び出すことで, GC の後始末を行う
 (See: [here](no28916sKh.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/genCollectedHeap.cpp))
     class GenGCEpilogueClosure: public GenCollectedHeap::GenClosure {
 ```
@@ -170,7 +170,7 @@ GenCollectedHeap クラス内で使用される補助クラス (Closure クラ�
 Generation::record_spaces_top() を呼び出すことで, その時点での使用量の記録を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/genCollectedHeap.cpp))
     #ifndef PRODUCT
     class GenGCSaveTopsBeforeGCClosure: public GenCollectedHeap::GenClosure {
@@ -185,7 +185,7 @@ Generation::record_gen_tops_before_GC() を呼び出す処理).
 なお, このクラスは (デバッグ時であることに加えて) ZapUnusedHeapArea オプションが指定されている場合にしか使用されない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/genCollectedHeap.cpp))
     void GenCollectedHeap::record_gen_tops_before_GC() {
       if (ZapUnusedHeapArea) {
@@ -212,7 +212,7 @@ GenCollectedHeap クラス内で使用される補助クラス (Closure クラ�
 Generation::ensure_parsability() を呼び出すことで, GC 時に内部を処理できる状態にしておく.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/genCollectedHeap.cpp))
     class GenEnsureParsabilityClosure: public GenCollectedHeap::GenClosure {
 ```
@@ -240,7 +240,7 @@ Generation::time_of_last_gc() を呼び出し,
 その値がそれまでに取得した値より小さければ記録する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/genCollectedHeap.cpp))
     class GenTimeOfLastGCClosure: public GenCollectedHeap::GenClosure {
 ```

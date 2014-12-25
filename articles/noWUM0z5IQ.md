@@ -59,7 +59,7 @@ StubRoutines クラスは, 生成されたマシン語コード片へのポイ�
    generate_all() から追加したメソッドを呼ぶ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/stubRoutines.hpp))
     // StubRoutines provides entry points to assembly routines used by
     // compiled code and the run-time system. Platform-specific entry
@@ -117,7 +117,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 (share 部で定義されているフィールドは, 以下のように address 型のものがほとんど)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/stubRoutines.hpp))
       static jint    _verify_oop_count;
       static address _verify_oop_subroutine_entry;
@@ -217,7 +217,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 (以下は Sparc 版専用のフィールド. 同じく address 型のものばかり)
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/sparc/vm/stubRoutines_sparc.hpp))
       static address _test_stop_entry;
       static address _stop_subroutine_entry;
@@ -231,7 +231,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 (以下は x86-64 版専用のフィールド. こちらも同じく address 型のものばかり)
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/stubRoutines_x86_64.hpp))
       static address _get_previous_fp_entry;
       static address _verify_mxcsr_entry;
@@ -257,7 +257,7 @@ share 部で定義されていたりする
 (といっても arraycopy 系の実際の処理は Copy クラスに丸投げだが...).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/stubRoutines.cpp))
     //
     // Default versions of arraycopy functions

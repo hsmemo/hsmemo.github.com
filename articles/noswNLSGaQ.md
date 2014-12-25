@@ -16,7 +16,7 @@ title: defaultStream クラス
 及びデフォルトのログファイル(hotspot.log)への出力を管理するクラス(outputStream クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/defaultStream.hpp))
     class defaultStream : public xmlTextStream {
 ```
@@ -27,7 +27,7 @@ title: defaultStream クラス
 (LogVMOutput オプションまたは LogCompilation オプションが指定されている場合にしか初期化されない)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/ostream.cpp))
     void defaultStream::init() {
       _inited = true;
@@ -64,7 +64,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 また, defaultStream::output_fd() や defaultStream::error_fd() で対応する file descriptor を取得できる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/defaultStream.hpp))
       static int   _output_fd;
       static int   _error_fd;
@@ -78,7 +78,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 * DisplayVMOutputToStdout オプションを指定していると, error として(標準エラー出力ではなく)標準出力が使われる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/defaultStream.hpp))
       static inline FILE* output_stream() {
         return DisplayVMOutputToStderr ? _error_stream : _output_stream;
@@ -97,7 +97,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 ログファイルは _outer_xmlStream フィールドに格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/defaultStream.hpp))
       fileStream*  _log_file;  // XML-formatted file shared by all threads
 ```
@@ -109,7 +109,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 さらに, "hotspot.log" が開けない場合は hs_pid${pid}.log というファイル名になる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/ostream.cpp))
     void defaultStream::init_log() {
       // %%% Need a MutexLocker?

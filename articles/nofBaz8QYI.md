@@ -28,7 +28,7 @@ HotSpot が異常終了する際のエラー通知作業で使われる補助ク
 (残りのスレッドは VMError::report_and_die() 内でブロックされたままアボートすることになる).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/vmError.cpp))
     // Fatal error handler for internal errors and crashes.
     //
@@ -41,7 +41,7 @@ HotSpot が異常終了する際のエラー通知作業で使われる補助ク
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/vmError.hpp))
     class VMError : public StackObj {
 ```
@@ -51,7 +51,7 @@ HotSpot 内の様々なエラー発生箇所で VMError::report_and_die() が呼
 (この関数内で端末や hs_err_pid*.log ファイルへの出力が行われる).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/vmError.hpp))
       // main error reporting function
       void report_and_die();
@@ -63,7 +63,7 @@ HotSpot 内の様々なエラー発生箇所で VMError::report_and_die() が呼
 (他のコマンドにパイプで出力をつなぐ等, 少し凝ったこともできる模様)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/vmError.cpp))
     // -XX:OnError=<string>, where <string> can be a list of commands, separated
     // by ';'. "%p" is replaced by current process id (pid); "%%" is replaced by
@@ -91,7 +91,7 @@ OnOutOfMemoryError オプションで指定されたコマンドを fork-and-exe
 (なお, OnOutOfMemoryError オプションは OutOfMemoryError が起きた際に実行するコマンドを指定するオプション).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/vmError.cpp))
     /*
      * OnOutOfMemoryError scripts/commands executed while VM is a safepoint - this

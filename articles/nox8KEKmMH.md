@@ -28,7 +28,7 @@ Phase クラスの具象サブクラスの1つ.
  これらのメソッドで文字列が作成されている場合に, まとめられる concatnate 操作を 1つにまとめて処理を高速化する)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/stringopts.hpp))
     class PhaseStringOpts : public Phase {
 ```
@@ -54,7 +54,7 @@ PhaseStringOpts が最適化対象とするメソッド呼び出しを表すク�
 1つの StringConcat オブジェクトが 1つの呼び出し箇所に対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/stringopts.cpp))
     class StringConcat : public ResourceObj {
 ```

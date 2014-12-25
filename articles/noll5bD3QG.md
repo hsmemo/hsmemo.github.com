@@ -24,7 +24,7 @@ JIT コンパイル作業中に使用される一時オブジェクト(ResourceO
 (この情報は GC やスタック辿りや deopt 処理で使用される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/debugInfoRec.hpp))
     //** The DebugInformationRecorder collects debugging information
     //   for a compiled method.
@@ -35,7 +35,7 @@ JIT コンパイル作業中に使用される一時オブジェクト(ResourceO
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/debugInfoRec.hpp))
     class DebugInformationRecorder: public ResourceObj {
 ```
@@ -70,7 +70,7 @@ JIT コンパイル作業中に使用される一時オブジェクト(ResourceO
    copy_to() メソッドでデータを nmethod 構造体に書き込んでおく.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/debugInfoRec.hpp))
     //   The implementation requires the compiler to use the recorder
     //   in the following order:
@@ -97,7 +97,7 @@ JIT 作業の開始時点である Compile::Init() 処理の中で作成され�
 その後の JIT 作業中で値が蓄えられていく模様(?) #TODO
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/compile.cpp))
     void Compile::Init(int aliaslevel) {
     ...
@@ -160,7 +160,7 @@ DebugInformationRecorder クラス内で使用される補助クラス.
 (#Under Construction)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/code/debugInfoRec.cpp))
     // Private definition.
     // There is one DIR_Chunk for each scope and values array.

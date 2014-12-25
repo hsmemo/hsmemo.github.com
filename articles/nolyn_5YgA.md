@@ -25,7 +25,7 @@ Compile クラス用の補助クラス(ResourceObjクラス).
 エスケープ解析(escape analysis)を行うためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/escape.hpp))
     class ConnectionGraph: public ResourceObj {
 ```
@@ -51,7 +51,7 @@ ConnectionGraph は, この論文のアルゴリズムで用いられる "connec
   * Return    (GlobalEscape)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/escape.hpp))
     //
     // Adaptation for C2 of the escape analysis algorithm described in:
@@ -163,7 +163,7 @@ ConnectionGraph クラス用の補助クラス.
 1つの PointsToNode オブジェクトが 1つの Ideal オブジェクト(から出る全ての edge) に対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/escape.hpp))
     class PointsToNode {
 ```
@@ -188,7 +188,7 @@ ConnectionGraph クラス用の補助クラス.
   (この 2bit が PointsToNode::NodeType 型の定数値を示す).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/escape.hpp))
       Node* _node;              // Ideal node corresponding to this PointsTo node.
       int   _offset;            // Object fields offsets.
@@ -198,7 +198,7 @@ ConnectionGraph クラス用の補助クラス.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/escape.hpp))
       NodeType             _type;
       EscapeState          _escape;

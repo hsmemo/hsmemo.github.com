@@ -19,7 +19,7 @@ MutableSpace 上での (シングルスレッドでの) Mark-Sweep-Compact 処�
 (MarkSweep 処理のエントリポイント自体は PSMarkSweep クラスだが, 処理の肝心な部分を担当しているのは PSMarkSweepDecorator クラス)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psMarkSweepDecorator.hpp))
     //
     // A PSMarkSweepDecorator is used to add "ParallelScavenge" style mark sweep operations
@@ -28,7 +28,7 @@ MutableSpace 上での (シングルスレッドでの) Mark-Sweep-Compact 処�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psMarkSweepDecorator.hpp))
     class PSMarkSweepDecorator: public CHeapObj {
 ```
@@ -39,7 +39,7 @@ MutableSpace オブジェクトを保持しているクラス内に一緒に保�
 
 * PSYoundGen
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psYoungGen.hpp))
     class PSYoungGen : public CHeapObj {
     ...
@@ -56,7 +56,7 @@ MutableSpace オブジェクトを保持しているクラス内に一緒に保�
 
 * PSOldGen
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psOldGen.hpp))
     class PSOldGen : public CHeapObj {
     ...
@@ -67,7 +67,7 @@ MutableSpace オブジェクトを保持しているクラス内に一緒に保�
 ### 内部構造(Internal structure)
 実際の Mark-Sweep-Compact 処理を行う以下の3つのメソッドを備えている.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psMarkSweepDecorator.hpp))
       // Work methods
       void adjust_pointers();
@@ -82,14 +82,14 @@ PSMarkSweepDecorator 型の _destination_decorator という static フィール
 これは, コンパクション先の領域を示すもの.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psMarkSweepDecorator.hpp))
       static PSMarkSweepDecorator* _destination_decorator;
 ```
 
 (以下のようなアクセサメソッドも用意されている)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psMarkSweepDecorator.hpp))
       // During a compacting collection, we need to collapse objects into
       // spaces in a given order. We want to fill space A, space B, and so
@@ -104,7 +104,7 @@ PSMarkSweepDecorator 型の _destination_decorator という static フィール
 コンパクション処理を開始する前にここにコンパクション先の領域を設定しておき, 
 処理中ではこのフィールドを参照してコンパクション先のアドレスを決定する, という感じになる.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psMarkSweep.cpp))
       // Begin compacting into the old gen
       PSMarkSweepDecorator::set_destination_decorator_tenured();

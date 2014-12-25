@@ -30,7 +30,7 @@ Interpreter フレーム用のフォーマットでスタックフレーム内�
 後から中身を参照できるとデバッグ時に便利なので CHeapObj となっているだけ).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vframeArray.hpp))
     // this can be a ResourceObj if we don't save the last one...
     // but it does make debugging easier even if we can't look
@@ -77,7 +77,7 @@ Deoptimization::fetch_unroll_info_helper()
 (_elements フィールドの大きさは可変長. 必要な個数の vframeArrayElement オブジェクトがここに格納されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vframeArray.hpp))
       // Here is what a vframeArray looks like in memory
     
@@ -96,7 +96,7 @@ Deoptimization::fetch_unroll_info_helper()
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vframeArray.hpp))
       JavaThread*                  _owner_thread;
       vframeArray*                 _next;
@@ -133,7 +133,7 @@ vframeArray クラス用の補助クラス.
  インライン展開された場合は実際のスタックフレームとは 1対1対応しない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vframeArray.hpp))
     // A vframeArrayElement is an element of a vframeArray. Each element
     // represent an interpreter frame which will eventually be created.

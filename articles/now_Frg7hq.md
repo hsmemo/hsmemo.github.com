@@ -36,7 +36,7 @@ title: CallGenerator 及びそのサブクラス (CallGenerator, InlineCallGener
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callGenerator.hpp))
     //---------------------------CallGenerator-------------------------------------
     // The subclasses of this class handle generation of ideal nodes for
@@ -49,7 +49,7 @@ title: CallGenerator 及びそのサブクラス (CallGenerator, InlineCallGener
 使用する際には, generate() メソッドをオーバーライドしたサブクラスを作ればいい.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callGenerator.hpp))
       // The given jvms has state and arguments for a call to my method.
       // Edges after jvms->argoff() carry all (pre-popped) argument values.
@@ -91,7 +91,7 @@ CallGenerator クラスのサブクラスの1つ.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callGenerator.hpp))
     class InlineCallGenerator : public CallGenerator {
 ```
@@ -117,7 +117,7 @@ Compile クラス及び InlineTree クラス用の補助クラス.
 ただし, develop オプションである InlineWarmCalls がセットされていない場合, 中間の温度は使用されない)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callGenerator.hpp))
     //---------------------------WarmCallInfo--------------------------------------
     // A struct to collect information about a given call site.
@@ -160,7 +160,7 @@ InlineTree::ok_to_inline() を呼ぶと,
   初期段階で自動的に生成される)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callGenerator.cpp))
     WarmCallInfo WarmCallInfo::_always_hot(WarmCallInfo::MAX_VALUE(), WarmCallInfo::MAX_VALUE(),
                                            WarmCallInfo::MIN_VALUE(), WarmCallInfo::MIN_VALUE());
@@ -170,7 +170,7 @@ InlineTree::ok_to_inline() を呼ぶと,
   初期段階で自動的に生成される)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callGenerator.cpp))
     WarmCallInfo WarmCallInfo::_always_cold(WarmCallInfo::MIN_VALUE(), WarmCallInfo::MIN_VALUE(),
                                             WarmCallInfo::MAX_VALUE(), WarmCallInfo::MAX_VALUE());
@@ -199,7 +199,7 @@ InlineCallGenerator クラスの具象サブクラスの1つ.
 (なお, メソッドの中身を全て Ideal のグラフへと変換するので, インライン展開処理にも使用されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callGenerator.cpp))
     //-----------------------------ParseGenerator---------------------------------
     // Internal class which handles all direct bytecode traversal.
@@ -254,7 +254,7 @@ CallGenerator クラスの具象サブクラスの1つ.
 このクラスはインライン展開しない場合用)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callGenerator.cpp))
     //---------------------------DirectCallGenerator------------------------------
     // Internal class which handles all out-of-line calls w/o receiver type checks.
@@ -296,7 +296,7 @@ CallGenerator クラスの具象サブクラスの1つ.
 (なお, 最適化用のクラスである PredictedDynamicCallGenerator と併用されることもある (See: PredictedDynamicCallGenerator))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callGenerator.cpp))
     //---------------------------DynamicCallGenerator-----------------------------
     // Internal class which handles all out-of-line invokedynamic calls.
@@ -331,7 +331,7 @@ CallGenerator クラスの具象サブクラスの1つ.
 (なお, 最適化用のクラスである PredictedCallGenerator と併用されることもある (See: PredictedCallGenerator))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callGenerator.cpp))
     //--------------------------VirtualCallGenerator------------------------------
     // Internal class which handles all out-of-line calls checking receiver type.
@@ -364,7 +364,7 @@ See: [here](../doxygen/classVirtualCallGenerator.html) for details
 (取りあえず DirectCallGenerator クラスとして Ideal を生成するが, 後でインライン展開される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callGenerator.cpp))
     // Allow inlining decisions to be delayed
     class LateInlineCallGenerator : public DirectCallGenerator {
@@ -406,7 +406,7 @@ CallGenerator クラスの具象サブクラスの1つ.
 (WarmCallInfo による判定で hot でも cold でもない中間の温度だった場合にこのクラスが使用される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callGenerator.cpp))
     //---------------------------WarmCallGenerator--------------------------------
     // Internal class which handles initial deferral of inlining decisions.
@@ -450,7 +450,7 @@ CallGenerator クラスの具象サブクラスの1つ.
 (ところでここに書かれているコメントは VirtualCallGenerator クラスのものでは?? #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callGenerator.cpp))
     //------------------------PredictedCallGenerator------------------------------
     // Internal class which handles all out-of-line calls checking receiver type.
@@ -473,7 +473,7 @@ Parse::do_call()
 PredictedCallGenerator が生成するコードは, type check 結果に応じてどちらかを実行する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callGenerator.cpp))
       PredictedCallGenerator(ciKlass* predicted_receiver,
                              CallGenerator* if_missed,
@@ -503,7 +503,7 @@ CallGenerator クラスの具象サブクラスの1つ.
 (ところでここに書かれているコメントは VirtualCallGenerator クラスのものでは?? #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callGenerator.cpp))
     //------------------------PredictedDynamicCallGenerator-----------------------
     // Internal class which handles all out-of-line calls checking receiver type.
@@ -531,7 +531,7 @@ Parse::do_call()
 PredictedDynamicCallGenerator が生成するコードは, チェック結果に応じてどちらかを実行する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callGenerator.cpp))
       PredictedDynamicCallGenerator(ciMethodHandle* predicted_method_handle,
                                     CallGenerator* if_missed,
@@ -559,7 +559,7 @@ Uncommon Trap を起こして JIT コンパイルのやり直しを促すため�
 (ところでここに書かれているコメントは VirtualCallGenerator クラスのものでは?? #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/callGenerator.cpp))
     //-------------------------UncommonTrapCallGenerator-----------------------------
     // Internal class which handles all out-of-line calls checking receiver type.

@@ -30,7 +30,7 @@ JNI のネイティブコードが起こしうる問題を定期的に検査す�
 例えば, signal handler が上書きされる, zero page のマッピングが上書きされる, 等の問題を検出する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/jniPeriodicChecker.hpp))
     /*
      * This gets activated under Xcheck:jni (CheckJNICalls), and is typically
@@ -40,7 +40,7 @@ JNI のネイティブコードが起こしうる問題を定期的に検査す�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/jniPeriodicChecker.hpp))
     class JniPeriodicChecker : AllStatic {
 ```
@@ -62,7 +62,7 @@ JniPeriodicChecker::disengage() というメソッドも提供しているが, �
  コメントを読むと before_exit() から呼び出されるように見えるが呼び出されていない... (バグ?? #TODO))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/jniPeriodicChecker.cpp))
     /*
      * the disengage() method is responsible for deactivating the periodic
@@ -87,7 +87,7 @@ JniPeriodicChecker クラス用の補助クラス.
 定期間隔で JNI のネイティブコードが起こしうる問題を検査するためのクラス(PeriodicTaskクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/jniPeriodicChecker.cpp))
     // --------------------------------------------------------
     // Class to aid in periodic checking under CheckJNICalls
@@ -105,7 +105,7 @@ JniPeriodicChecker::engage() 内で(のみ)生成されている.
 定期間隔で os::run_periodic_checks() を呼び出しているだけ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/jniPeriodicChecker.cpp))
          void task() { os::run_periodic_checks(); }
 ```

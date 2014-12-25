@@ -18,7 +18,7 @@ arrayOopDesc クラスの具象サブクラスの1つ.
 (e.g. boolean[], byte[], char[], short[], int[], long[], float[], double[]).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/typeArrayOop.hpp))
     // A typeArrayOop is an array containing basic types (non oop elements).
     // It is used for arrays of {characters, singles, doubles, bytes, shorts, integers, longs}

@@ -34,7 +34,7 @@ GenCollectedHeap 使用時において, New Generation の管理を担当する�
 このクラスは, GC アルゴリズムが ParNewGC ではない場合用 (つまり Serial GC 用) (See: ParNewGeneration).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/defNewGeneration.hpp))
     // DefNewGeneration is a young generation containing eden, from- and
     // to-space.
@@ -81,7 +81,7 @@ DefNewGeneration の GC 処理 (= Serial GC 処理) で使用される Closure �
 DefNewGeneration::IsAliveClosure::do_object_b() メソッドが呼ばれると, 処理対象のオブジェクトが生きているかどうかを返す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/defNewGeneration.hpp))
       class IsAliveClosure: public BoolObjectClosure {
 ```
@@ -108,7 +108,7 @@ DefNewGeneration の GC 処理 (= Serial GC 処理) で使用される Closure �
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス (See: DefNewGeneration::FastKeepAliveClosure).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/defNewGeneration.hpp))
       class KeepAliveClosure: public OopClosure {
 ```
@@ -140,7 +140,7 @@ DefNewGeneration::KeepAliveClosure クラスの具象サブクラス
 さらに元の場所にフォワーディングポインタを埋める処理を行う).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/defNewGeneration.hpp))
       class FastKeepAliveClosure: public KeepAliveClosure {
 ```
@@ -172,7 +172,7 @@ DefNewGeneration の GC 処理 (= Serial GC 処理) で使用される Closure �
 処理したオブジェクトから辿れる範囲全てについて再帰的に処理を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/defNewGeneration.hpp))
       class EvacuateFollowersClosure: public VoidClosure {
 ```
@@ -196,7 +196,7 @@ DefNewGeneration の GC 処理 (= Serial GC 処理) で使用される Closure �
 処理したオブジェクトから辿れる範囲全てについて再帰的に処理を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/defNewGeneration.hpp))
       class FastEvacuateFollowersClosure: public VoidClosure {
 ```
@@ -224,7 +224,7 @@ GC 処理が失敗した際に, 各オブジェクトの mark フィールドを
 (GC 処理後には mark フィールドには forwarding pointer が埋められているため, それをクリアする).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/defNewGeneration.cpp))
     class RemoveForwardPointerClosure: public ObjectClosure {
 ```

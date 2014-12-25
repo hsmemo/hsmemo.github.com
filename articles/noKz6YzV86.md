@@ -15,7 +15,7 @@ title: objArrayKlassKlass クラス
 objArrayKlass 用の Klass クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/objArrayKlassKlass.hpp))
     // The objArrayKlassKlass is klass for all objArrayKlass'
     

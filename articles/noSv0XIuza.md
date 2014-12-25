@@ -18,7 +18,7 @@ title: Bytes クラス
 エンディアンを考慮しながらメモリを読み書きするためのメソッドを提供している.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/bytes_x86.hpp))
     class Bytes: AllStatic {
 ```
@@ -27,7 +27,7 @@ title: Bytes クラス
 内部には, 以下のメソッド(のみ)が定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/bytes_x86.hpp))
     #ifndef AMD64
       // Helper function for swap_u8
@@ -36,7 +36,7 @@ title: Bytes クラス
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/bytes_x86.hpp))
       // Returns true if the byte ordering used by Java is different from the native byte ordering
       // of the underlying machine. For example, this is true for Intel x86, but false for Solaris

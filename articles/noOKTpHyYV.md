@@ -27,7 +27,7 @@ sprintf() のような働きをするユーティリティ・クラス.
 コンストラクタで渡された書式付き文字列に従って文字列を生成する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/debug.hpp))
     // Simple class to format the ctor arguments into a fixed-sized buffer.
     template <size_t bufsz = 256>
@@ -37,14 +37,14 @@ sprintf() のような働きをするユーティリティ・クラス.
 なお err_msg や hrs_err_msg という型も使われるが, これは FormatBuffer の別名.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/debug.hpp))
     // Used to format messages for assert(), guarantee(), fatal(), etc.
     typedef FormatBuffer<> err_msg;
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/heapRegionSet.hpp))
     // Large buffer for some cases where the output might be larger than normal.
     #define HRS_ERR_MSG_BUFSZ 512
@@ -59,7 +59,7 @@ sprintf() のような働きをするユーティリティ・クラス.
 生成された文字列は FormatBuffer オブジェクトを char* にキャストすることで取得できる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/frame.cpp))
         values.describe(-1, MAX2(sp(), fp()),
                         FormatBuffer<1024>("#%d method %s @ %d", frame_no, m->name_and_sig_as_C_string(), bci), 2);
@@ -74,7 +74,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 内部には以下のフィールド(のみ)を保持する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/debug.hpp))
       char _buf[bufsz];
 ```
@@ -82,7 +82,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 このフィールドは, char* にキャストすることで取得できる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/debug.hpp))
       operator const char *() const { return _buf; }
 ```
@@ -104,7 +104,7 @@ hotspot/src/share/vm/utilities/debug.cpp 内で定義されているデバッグ
 これらの関数の前準備と後始末を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/debug.cpp))
     #ifndef PRODUCT
     // All debug entries should be wrapped with a stack allocated
@@ -118,7 +118,7 @@ hotspot/src/share/vm/utilities/debug.cpp 内で定義されているデバッグ
 コード中で Command 型の局所変数を宣言するだけ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/debug.cpp))
     extern "C" void universe() {
       Command c("universe");
@@ -134,7 +134,7 @@ hotspot/src/share/vm/utilities/debug.cpp 内で定義されているデバッグ
  true にすると VMError::report_and_die() 等が死なずにリターンするようになる)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/debug.cpp))
       Command(const char* str) {
         debug_save = Debugging;
@@ -164,7 +164,7 @@ See: [here](../doxygen/classCommand.html) for details
 Java ヒープ中を探索し, 指定された oop(ポインタ値) と一致するものを見つけたら tty に出力する Closure.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/debug.cpp))
     #ifndef PRODUCT
     ...
@@ -188,7 +188,7 @@ See: [here](../doxygen/classLookForRefInGenClosure.html) for details
 指定されたオブジェクト中の全ての oop に対して LookForRefInGenClosure を呼び出す Closure.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/debug.cpp))
     #ifndef PRODUCT
     ...
@@ -212,7 +212,7 @@ See: [here](../doxygen/classLookForRefInObjectClosure.html) for details
 perm 領域中を探索し, 指定された名前(文字列)と一致するクラス名を持つ Klass オブジェクトを tty に出力する Closure.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/debug.cpp))
     #ifndef PRODUCT
     ...

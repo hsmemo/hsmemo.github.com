@@ -42,14 +42,14 @@ hotspot/src/os/linux/vm/vmError_linux.cpp                	  |  VMError クラス
 
 * ※3: どちらも何もしないメソッドとして定義されている.
 
-```
+```cpp
     ((cite: hotspot/src/os/linux/vm/chaitin_linux.cpp))
     void PhaseRegAlloc::pd_preallocate_hook() {
       // no action
     }
 ```
 
-```
+```cpp
     ((cite: hotspot/src/os/linux/vm/chaitin_linux.cpp))
     void PhaseRegAlloc::pd_postallocate_verify_hook() {
       // no action
@@ -58,7 +58,7 @@ hotspot/src/os/linux/vm/vmError_linux.cpp                	  |  VMError クラス
 
 * ※4: 中身は abi::__cxa_demangle() を使用しているだけ.
 
-```
+```cpp
     ((cite: hotspot/src/os/linux/vm/decoder_linux.cpp))
     bool Decoder::demangle(const char* symbol, char *buf, int buflen) {
       int   status;
@@ -82,7 +82,7 @@ hotspot/src/os/linux/vm/vmError_linux.cpp                	  |  VMError クラス
 
 * ※6: なお使う際には libc や libthread (libpthreadのtypo?) よりも先にロードする必要がある. また JVM_begin_signal_setting(), JVM_end_signal_setting(), JVM_get_signal_action() という関数も定義しているがこれらは使用箇所が見当たらない... #TODO.
 
-```
+```cpp
     ((cite: hotspot/src/os/linux/vm/jsig.c))
     /* This is a special library that should be loaded before libc &
      * libthread to interpose the signal handler installation functions:
@@ -97,7 +97,7 @@ hotspot/src/os/linux/vm/vmError_linux.cpp                	  |  VMError クラス
 
 * ※9: 中身も何もしない関数として実装してあるだけ
 
-```
+```cpp
     ((cite: hotspot/src/os/linux/vm/thread_linux.inline.hpp))
     // Contains inlined functions for class Thread and ThreadLocalStorage
     

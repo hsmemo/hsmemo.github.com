@@ -28,7 +28,7 @@ title: GCNotifier クラス及びその補助クラス (GCNotificationRequest, G
 sun.management.GarbageCollectorImpl クラスの通知機能に関する関数を納めた名前空間(AllStatic クラス)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/gcNotifier.hpp))
     class GCNotifier : public AllStatic {
 ```
@@ -55,7 +55,7 @@ VMThread が通知の必要性を検出し, ServiceThread によって実際の�
 com.sun.management.GcInfo オブジェクトが生成し, これが登録しているリスナーに通知される)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/gcNotifier.hpp))
     class GCNotificationRequest : public CHeapObj {
 ```

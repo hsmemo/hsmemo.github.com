@@ -32,7 +32,7 @@ fast path で終わらなかったオブジェクト(= inflate したオブジ�
 なおコメントによると, 非常に繊細なクラスであり変更するときはよく考えてから行うように, とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/objectMonitor.hpp))
     // WARNING:
     //   This is a very sensitive and fragile class. DO NOT make any
@@ -51,7 +51,7 @@ fast path で終わらなかったオブジェクト(= inflate したオブジ�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/objectMonitor.hpp))
     class ObjectMonitor {
 ```
@@ -149,7 +149,7 @@ Safepoint で実行される ObjectSynchronizer::deflate_idle_monitors() によ�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/synchronizer.cpp))
     // -----------------------------------------------------------------------------
     // ObjectMonitor Lifecycle
@@ -238,7 +238,7 @@ Safepoint で実行される ObjectSynchronizer::deflate_idle_monitors() によ�
    spin しているスレッドがロックを取れたのを確認したら起床処理を省略してリターンする.」)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/objectMonitor.cpp))
              // Normally the exiting thread is responsible for ensuring succession,
              // but if other successors are ready or other entering threads are spinning
@@ -336,7 +336,7 @@ Safepoint で実行される ObjectSynchronizer::deflate_idle_monitors() によ�
   (?? 使用箇所が見当たらない)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/objectMonitor.hpp))
       // WARNING: this must be the very first word of ObjectMonitor
       // This means this class can't use any virtual member functions.
@@ -354,14 +354,14 @@ Safepoint で実行される ObjectSynchronizer::deflate_idle_monitors() によ�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/objectMonitor.hpp))
       void *  volatile _owner;          // pointer to owning thread OR BasicLock
       volatile intptr_t  _recursions;   // recursion count, 0 for first entry
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/objectMonitor.hpp))
       int OwnerIsThread ;               // _owner is (Thread *) vs SP/BasicLock
       ObjectWaiter * volatile _cxq ;    // LL of recently-arrived threads blocked on entry.
@@ -370,13 +370,13 @@ Safepoint で実行される ObjectSynchronizer::deflate_idle_monitors() によ�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/objectMonitor.hpp))
       ObjectWaiter * volatile _EntryList ;     // Threads blocked on entry or reentry.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/objectMonitor.hpp))
       Thread * volatile _succ ;          // Heir presumptive thread - used for futile wakeup throttling
       Thread * volatile _Responsible ;
@@ -398,25 +398,25 @@ Safepoint で実行される ObjectSynchronizer::deflate_idle_monitors() によ�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/objectMonitor.hpp))
       volatile intptr_t  _waiters;      // number of waiting threads
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/objectMonitor.hpp))
       ObjectWaiter * volatile _WaitSet; // LL of threads wait()ing on the monitor
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/objectMonitor.hpp))
       volatile int _WaitSetLock;        // protects Wait Queue - simple spinlock
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/objectMonitor.hpp))
       int _QMix ;                       // Mixed prepend queue discipline
       ObjectMonitor * FreeNext ;        // Free list linkage
@@ -450,7 +450,7 @@ static フィールドとして, 以下のパフォーマンスカウンタ(Perf
   * PerfLongVariable * _sync_MonExtant ;
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/objectMonitor.hpp))
       static PerfCounter * _sync_ContendedLockAttempts ;
       static PerfCounter * _sync_FutileWakeups ;
@@ -493,7 +493,7 @@ ObjectMonitor 用の補助クラス.
 なおコメントによると, ObjectWaiter は廃止して ParkEvent を使うようにしたい, とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/objectMonitor.hpp))
     // ObjectWaiter serves as a "proxy" or surrogate thread.
     // TODO-FIXME: Eliminate ObjectWaiter and use the thread-specific
@@ -561,7 +561,7 @@ ObjectMonitor 用の補助クラス.
   * それ以外の値は使われていない
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/objectMonitor.hpp))
       enum TStates { TS_UNDEF, TS_READY, TS_RUN, TS_WAIT, TS_ENTER, TS_CXQ } ;
 ```
@@ -573,7 +573,7 @@ ObjectMonitor 用の補助クラス.
   なお, Sorted 型は以下のように定義された enum 値.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/objectMonitor.hpp))
       enum Sorted  { PREPEND, APPEND, SORTED } ;
 ```
@@ -586,7 +586,7 @@ ObjectMonitor 用の補助クラス.
   が有効になっているかどうかを記録している (See: [here](no21146np.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/objectMonitor.hpp))
       ObjectWaiter * volatile _next;
       ObjectWaiter * volatile _prev;

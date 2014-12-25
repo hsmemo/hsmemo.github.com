@@ -21,7 +21,7 @@ ciKlass では Klass 種別に対応したサブクラスが作られている
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciKlass.hpp))
     // ciKlass
     //

@@ -20,7 +20,7 @@ Template Interpreter がランタイム(InterpreterRuntime, SharedRuntime)を呼
     リーフ関数用    (JRT_LEAF で宣言されているもの等.   See: [here](no3059XPe.html) for details)
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/assembler_x86.hpp))
       // Support for VM calls
       //
@@ -42,7 +42,7 @@ MacroAssembler::call_VM() には, 呼び出すランタイム関数の引数の�
 なお, 現状の sparc 版では, last_java_sp を渡すバージョンは使われていないとのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/sparc/vm/assembler_sparc.hpp))
       // these overloadings are not presently used on SPARC:
 ```
@@ -52,7 +52,7 @@ MacroAssembler::call_VM() には, 呼び出すランタイム関数の引数の�
 (この場合, last_javva_sp は SP ではなく FP として渡される必要がある).
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/sparc/vm/assembler_sparc.cpp))
     // Note: The following call_VM overloadings are useful when a "save"
     // has already been performed by a stub, and the last Java frame is

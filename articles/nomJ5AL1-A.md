@@ -28,7 +28,7 @@ title: コマンドラインオプション関連のクラス (FlagSetting, Coun
 このクラスは, bool 値を取る(つまり+/-での切り替えのみの)コマンドラインオプション用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/globals.hpp))
     // use FlagSetting to temporarily change some debug flag
     // e.g. FlagSetting fs(DebugThisAndThat, true);
@@ -48,7 +48,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 コンストラクタで現在の値を記録しながら新しい値に変更し, デストラクタで元に戻している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/globals.hpp))
       FlagSetting(bool& fl, bool newValue) { flag = &fl; val = fl; fl = newValue; }
       ~FlagSetting()                       { *flag = val; }
@@ -69,7 +69,7 @@ See: [here](../doxygen/classFlagSetting.html) for details
 (指定されたカウンタ値を一時的に増加させるためのクラス??)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/globals.hpp))
     class CounterSetting {
 ```
@@ -78,7 +78,7 @@ See: [here](../doxygen/classFlagSetting.html) for details
 コンストラクタ内で値をインクリメントし, デストラクタで元に戻している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/globals.hpp))
       CounterSetting(intx* cnt) { counter = cnt; (*counter)++; }
       ~CounterSetting()         { (*counter)--; }
@@ -99,7 +99,7 @@ See: [here](../doxygen/classCounterSetting.html) for details
 このクラスは, int 値を取るコマンドラインオプション用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/globals.hpp))
     class IntFlagSetting {
 ```
@@ -114,7 +114,7 @@ See: [here](../doxygen/classCounterSetting.html) for details
 コンストラクタで現在の値を記録しながら新しい値に変更し, デストラクタで元に戻している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/globals.hpp))
       IntFlagSetting(intx& fl, intx newValue) { flag = &fl; val = fl; fl = newValue; }
       ~IntFlagSetting()                       { *flag = val; }
@@ -137,7 +137,7 @@ See: [here](../doxygen/classIntFlagSetting.html) for details
 このクラスは, double 値を取るコマンドラインオプション用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/globals.hpp))
     class DoubleFlagSetting {
 ```
@@ -146,7 +146,7 @@ See: [here](../doxygen/classIntFlagSetting.html) for details
 コンストラクタで現在の値を記録しながら新しい値に変更し, デストラクタで元に戻している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/globals.hpp))
       DoubleFlagSetting(double& fl, double newValue) { flag = &fl; val = fl; fl = newValue; }
       ~DoubleFlagSetting()                           { *flag = val; }
@@ -166,7 +166,7 @@ See: [here](../doxygen/classDoubleFlagSetting.html) for details
 (より正確には, そのための機能を納めた名前空間. このクラスは AllStatic ではないが, static なメソッドしか持たない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/globals.hpp))
     class CommandLineFlags {
 ```
@@ -187,7 +187,7 @@ See: [here](../doxygen/classDoubleFlagSetting.html) for details
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/arguments.cpp))
     static bool set_bool_flag(char* name, bool value, FlagValueOrigin origin) {
       return CommandLineFlags::boolAtPut(name, &value, origin);
@@ -237,7 +237,7 @@ See: [here](../doxygen/classDoubleFlagSetting.html) for details
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/attachListener.cpp))
     // set a boolean global flag using value from AttachOperation
     static jint set_bool_flag(const char* name, AttachOperation* op, outputStream* out) {
@@ -286,7 +286,7 @@ See: [here](../doxygen/classDoubleFlagSetting.html) for details
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/classLoadingService.cpp))
     bool ClassLoadingService::set_verbose(bool verbose) {
     ...
@@ -303,7 +303,7 @@ See: [here](../doxygen/classDoubleFlagSetting.html) for details
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/memoryService.cpp))
     bool MemoryService::set_verbose(bool verbose) {
     ...
@@ -327,7 +327,7 @@ See: [here](../doxygen/classDoubleFlagSetting.html) for details
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/management.cpp))
     JVM_ENTRY(void, jmm_SetVMGlobal(JNIEnv *env, jstring flag_name, jvalue new_value))
     ...
@@ -359,7 +359,7 @@ See: [here](../doxygen/classDoubleFlagSetting.html) for details
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/dtraceAttacher.cpp))
     static void set_bool_flag(const char* flag, bool value) {
       CommandLineFlags::boolAtPut((char*)flag, strlen(flag), &value,
@@ -378,7 +378,7 @@ See: [here](../doxygen/classDoubleFlagSetting.html) for details
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvm.cpp))
     #ifndef PRODUCT
     ...
@@ -402,7 +402,7 @@ See: [here](../doxygen/classDoubleFlagSetting.html) for details
 (ほとんどは「引数で指定されたコマンドラインオプションに対して, その値を取得/変更する」というメソッド)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/globals.hpp))
       static bool boolAt(char* name, size_t len, bool* value);
       static bool boolAt(char* name, bool* value)      { return boolAt(name, strlen(name), value); }
@@ -459,7 +459,7 @@ enum 定義の再帰定義を避けるために CommandLineFlags クラスに入
 役割としては CommandLineFlags クラスと同じ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/globals_extension.hpp))
     // Can't put the following in CommandLineFlags because
     // of a circular dependency on the enum definition.
@@ -473,7 +473,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 ソースコード上ではこのマクロの形で(のみ)使用されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/globals_extension.hpp))
     #define FLAG_IS_DEFAULT(name)         (CommandLineFlagsEx::is_default(FLAG_MEMBER(name)))
     #define FLAG_IS_ERGO(name)            (CommandLineFlagsEx::is_ergo(FLAG_MEMBER(name)))

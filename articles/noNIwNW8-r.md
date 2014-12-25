@@ -12,7 +12,7 @@ title: Interpreter クラス関連のクラス (InterpreterCodelet, CodeletMark,
  それは hotspot/src/share/vm/interpreter/interpreterGenerator.hpp の方で定義されているような... #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/interpreter.hpp))
     // This file contains the platform-independent parts
     // of the interpreter and the interpreter generator.
@@ -42,7 +42,7 @@ AbstractInterpreter クラスの具象サブクラス的なクラス
 Interpreter クラスとしてアクセスされることが多い模様 (See: [here](no7882AgC.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/interpreter.hpp))
     // Wrapper classes to produce Interpreter/InterpreterGenerator from either
     // the c++ interpreter or the template interpreter.
@@ -65,7 +65,7 @@ Stub クラスの具象サブクラスの1つ.
 このクラスは, Interpreter クラスが使用するマシン語コード片 ("codelet") 用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/interpreter.hpp))
     //------------------------------------------------------------------------------------------------------------------------
     // An InterpreterCodelet is a piece of interpreter code. All
@@ -101,7 +101,7 @@ InterpreterCodelet オブジェクトの構築処理で使用される補助ク�
 構築処理の前準備や後片付けを行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/interpreter.hpp))
     //------------------------------------------------------------------------------------------------------------------------
     // A CodeletMark serves as an automatic creator/initializer for Codelets
@@ -132,7 +132,7 @@ InterpreterCodelet オブジェクトの構築処理で使用される補助ク�
  InterpreterGenerator 内ではこの InterpreterMacroAssembler オブジェクトを用いてコード生成している)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/interpreter.hpp))
       CodeletMark(
         InterpreterMacroAssembler*& masm,
@@ -155,7 +155,7 @@ InterpreterCodelet オブジェクトの構築処理で使用される補助ク�
 そして, デストラクタ内で AbstractInterpreter::_code フィールドの StubQueue に commit() している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/interpreter/interpreter.hpp))
       ~CodeletMark() {
         // align so printing shows nop's instead of random code at the end (Codelets are aligned)

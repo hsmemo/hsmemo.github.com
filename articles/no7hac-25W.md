@@ -25,7 +25,7 @@ G1CollectorPolicy クラス内で使用される補助クラス.
 G1GC の Minor GC 時に, 処理対象となる HeapRegion を選択する (See: [here](no2935YzN.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/collectionSetChooser.hpp))
     class CollectionSetChooser: public CHeapObj {
 ```
@@ -56,7 +56,7 @@ CollectionSetChooser クラス内で使用されている補助クラス(ValueOb
 候補の HeapRegion を優先度順に sort する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/collectionSetChooser.hpp))
     // We need to sort heap regions by collection desirability.
     
@@ -91,7 +91,7 @@ CSetChooserCache::get_first() を呼ぶ.
 定義されているフィールドは以下のもののみ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/collectionSetChooser.hpp))
       HeapRegion*  _cache[CacheLength];
       int          _occupancy; // number of region in cache

@@ -35,7 +35,7 @@ deopt 処理または suspend 状態から通常状態に復帰するパスの�
   * JvmtiThreadState::_pending_step_for_earlyret フィールド
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiThreadState.hpp))
       // JVMTI ForceEarlyReturn support
     
@@ -49,7 +49,7 @@ deopt 処理または suspend 状態から通常状態に復帰するパスの�
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiThreadState.hpp))
       bool              _pending_step_for_earlyret;
 ```
@@ -96,7 +96,7 @@ See: [here](no2935oMn.html) for details
 PopFrame に似てて, 最後の処理だけ違う, とのこと.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEnvBase.cpp))
     // ForceEarlyReturn<type> follows the PopFrame approach in many aspects.
     // Main difference is on the last stage in the interpreter.

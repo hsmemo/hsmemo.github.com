@@ -15,7 +15,7 @@ title: constantPoolCacheKlass クラス
 constantPoolCacheOopDesc 用の Klass クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/cpCacheKlass.hpp))
     class constantPoolCacheKlass: public Klass {
 ```

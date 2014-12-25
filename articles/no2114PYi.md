@@ -26,7 +26,7 @@ condvar 上では 1つのスレッドしか待機できないので, 競合が�
 また spurious wakeup はしてもかまわない.
 
 
-```
+```cpp
     ((cite: hotspot/src/os/linux/vm/os_linux.cpp))
     /*
      * The solaris and linux implementations of park/unpark are fairly

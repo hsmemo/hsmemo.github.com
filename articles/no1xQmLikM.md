@@ -19,7 +19,7 @@ Mark Sweep Compact 処理の phase 1 処理 (marking 処理) の結果を格納�
 格納された情報は phase 3 や phase 4 の処理で使用される (See: [here](no28916Gft.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/parMarkBitMap.hpp))
     class ParMarkBitMap: public CHeapObj
     {
@@ -30,7 +30,7 @@ Mark Sweep Compact 処理の phase 1 処理 (marking 処理) の結果を格納�
 PSParallelCompact クラスの _mark_bitmap フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
     class PSParallelCompact : AllStatic {
     ...
@@ -45,7 +45,7 @@ PSParallelCompact クラスの _mark_bitmap フィールドに(のみ)格納さ�
 内部には, ２本の BitMap を保持している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/parMarkBitMap.hpp))
       BitMap          _beg_bits;
       BitMap          _end_bits;
@@ -62,7 +62,7 @@ marking 処理で live オブジェクトが見つかると, 該当する箇所�
 (具体的な MinObjAlignment の大きさについては, set_object_alignment() 参照).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/parMarkBitMap.hpp))
       // Each bit in the bitmap represents one unit of 'object granularity.' Objects
       // are double-word aligned in 32-bit VMs, but not in 64-bit VMs, so the 32-bit

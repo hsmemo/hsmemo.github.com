@@ -24,7 +24,7 @@ os::java_to_os_priority という配列で管理されている.
 * Linux における Java レベルの優先度と OS レベルの優先度の関係
 
 
-```
+```cpp
     ((cite: hotspot/src/os/linux/vm/os_linux.cpp))
     int os::java_to_os_priority[MaxPriority + 1] = {
       19,              // 0 Entry should never be used
@@ -48,7 +48,7 @@ os::java_to_os_priority という配列で管理されている.
 * Solaris における Java レベルの優先度と OS レベルの優先度の関係 (ThreadPriorityPolicy オプションが 0 (デフォルト値) の場合 (?))
 
 
-```
+```cpp
     ((cite: hotspot/src/os/solaris/vm/os_solaris.cpp))
     int os::java_to_os_priority[MaxPriority + 1] = {
       -99999,         // 0 Entry should never be used
@@ -72,7 +72,7 @@ os::java_to_os_priority という配列で管理されている.
 * Solaris における Java レベルの優先度と OS レベルの優先度の関係 (ThreadPriorityPolicy オプションが 1 の場合 (?))
 
 
-```
+```cpp
     ((cite: hotspot/src/os/solaris/vm/os_solaris.cpp))
     // Values for ThreadPriorityPolicy == 1
     int prio_policy1[MaxPriority+1] = { -99999, 0, 16, 32, 48, 64,
@@ -82,7 +82,7 @@ os::java_to_os_priority という配列で管理されている.
 * Windows における Java レベルの優先度と OS レベルの優先度の関係 (ThreadPriorityPolicy オプションが 0 (デフォルト値) の場合)
 
 
-```
+```cpp
     ((cite: hotspot/src/os/windows/vm/os_windows.cpp))
     int os::java_to_os_priority[MaxPriority + 1] = {
       THREAD_PRIORITY_IDLE,                         // 0  Entry should never be used
@@ -102,7 +102,7 @@ os::java_to_os_priority という配列で管理されている.
 * Windows における Java レベルの優先度と OS レベルの優先度の関係 (ThreadPriorityPolicy オプションが 1 の場合)
 
 
-```
+```cpp
     ((cite: hotspot/src/os/windows/vm/os_windows.cpp))
     int prio_policy1[MaxPriority + 1] = {
       THREAD_PRIORITY_IDLE,                         // 0  Entry should never be used
@@ -138,7 +138,7 @@ Linux 上ではデフォルトでは java.lang.Thread.setPriority() 機能はサ
 使いたい場合は, ThreadPriorityPolicy オプションを 1 にセットし, root 権限を取得して実行する必要がある.」
 
 
-```
+```cpp
     ((cite: hotspot/src/os/linux/vm/os_linux.cpp))
     ////////////////////////////////////////////////////////////////////////////////
     // thread priority support
@@ -189,7 +189,7 @@ priocntl_ptr という関数ポインタ経由で priocntl() を呼び出して�
 (Solaris 8 以前のバージョンがサポート対象外になれば, この仕組みは排除される予定, とのこと)
 
 
-```
+```cpp
     ((cite: hotspot/src/os/solaris/vm/os_solaris.cpp))
     // Call the version of priocntl suitable for all supported versions
     // of Solaris. We need to call through this wrapper so that we can
@@ -237,7 +237,7 @@ See: [here](no2114YJw.html) for details
 java.lang.Thread.setPriority0() は JVM_SetThreadPriority() で実装されている.
 
 
-```
+```cpp
     ((cite: jdk/src/share/native/java/lang/Thread.c))
     static JNINativeMethod methods[] = {
     ...

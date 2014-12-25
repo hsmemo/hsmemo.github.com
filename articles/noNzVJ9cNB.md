@@ -25,7 +25,7 @@ x86 64bit 版にのみ存在するクラス (このクラスは x86 32bit では
 (このクラスは AllStatic ではないが, static な定義しか持たない).
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/sharedRuntime_x86_64.cpp))
     class SimpleRuntimeFrame {
 ```
@@ -40,7 +40,7 @@ x86 64bit 版にのみ存在するクラス (このクラスは x86 32bit では
 内部には以下の定数定義(のみ)を含む.
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/sharedRuntime_x86_64.cpp))
       // Most of the runtime stubs have this simple frame layout.
       // This class exists to make the layout shared in one place.
@@ -75,13 +75,13 @@ callee saved register の退避復帰用のコードを生成するためのク�
 (なお, 32bit か 64bit かによってクラス定義が別になっている.)
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/sharedRuntime_x86_32.cpp))
     class RegisterSaver {
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/sharedRuntime_x86_64.cpp))
     class RegisterSaver {
 ```
@@ -103,7 +103,7 @@ callee saved register の退避復帰用のコードを生成するためのク�
 
 * 32bit の場合:
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/sharedRuntime_x86_32.cpp))
       static OopMap* save_live_registers(MacroAssembler* masm, int additional_frame_words,
                                          int* total_frame_words, bool verify_fpu = true);
@@ -131,7 +131,7 @@ callee saved register の退避復帰用のコードを生成するためのク�
 
 * 64bit の場合:
 
-```
+```cpp
     ((cite: hotspot/src/cpu/x86/vm/sharedRuntime_x86_64.cpp))
       static OopMap* save_live_registers(MacroAssembler* masm, int additional_frame_words, int* total_frame_words);
       static void restore_live_registers(MacroAssembler* masm);

@@ -27,7 +27,7 @@ fast-path の処理で使用される BasicObjectLock のアドレスを出力�
 (= そのロック処理でスタックフレーム上のどの BasicObjectLock を使用するかを表す Node).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/locknode.hpp))
     //------------------------------BoxLockNode------------------------------------
     class BoxLockNode : public Node {
@@ -44,7 +44,7 @@ fast-path の処理で使用される BasicObjectLock のアドレスを出力�
 入力ノードは control input のみ. そして control input は常に RootNode.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/locknode.cpp))
     BoxLockNode::BoxLockNode( int slot ) : Node( Compile::current()->root() ),
                                            _slot(slot), _is_eliminated(false) {
@@ -71,7 +71,7 @@ fast-path でのロック確保処理を表す
 (なお fast-path でのロック確保処理は失敗することがあるので成否を表すために CmpNode のサブクラスとなっている).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/locknode.hpp))
     //------------------------------FastLockNode-----------------------------------
     class FastLockNode: public CmpNode {
@@ -109,7 +109,7 @@ fast-path でのロック解放処理を表す
 (なお fast-path ではロックが解放できないことがあるので成否を表すために CmpNode のサブクラスとなっている).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/locknode.hpp))
     //------------------------------FastUnlockNode---------------------------------
     class FastUnlockNode: public CmpNode {

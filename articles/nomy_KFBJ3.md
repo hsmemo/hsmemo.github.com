@@ -17,7 +17,7 @@ ElfFile クラス内で使用される補助クラス (See: ElfFile).
 Elf ファイルの symbol セクションを扱うためのもの.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/elfSymbolTable.hpp))
     /*
      * symbol table object represents a symbol section in an elf file.

@@ -17,7 +17,7 @@ title: ServiceUtil クラス
 ServiceUtil::visible_oop() というユーティリティ・メソッド(のみ)を納めた名前空間(AllStatic クラス)
 (これ以外にメソッドやフィールドはない).
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/serviceUtil.hpp))
     //
     // Serviceability utility functions.
@@ -33,7 +33,7 @@ ServiceUtil::visible_oop() は,
  逆に deleted_handle や klassOop や methodOop や ... といった oop の場合は false が返される.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/serviceUtil.hpp))
       // Return true if oop represents an object that is "visible"
       // to the java world.

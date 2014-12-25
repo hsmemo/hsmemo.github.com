@@ -30,7 +30,7 @@ DEBUG_MANGLING が #define されていないと何もしないが...).
 (これらは ContiguousSpace と MutableSpace の違いを吸収するために作られたサブクラス. 中身的にはどちらもほぼ同じ)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/spaceDecorator.hpp))
     // Functionality for use with class Space and class MutableSpace.
     //   The approach taken with the mangling is to mangle all
@@ -67,7 +67,7 @@ DEBUG_MANGLING が #define されていないと何もしないが...).
 
 なおデバッグ用の機能なので, ほとんどのメソッドは #ifndef PRODUCT 時にしか定義されない.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/spaceDecorator.cpp))
     #ifndef PRODUCT
 ```
@@ -90,7 +90,7 @@ DEBUG_MANGLING が #define されていないと何もしないが...).
 
 メモリ空間の Mangle 処理を行うかどうかを示す定数値を納めた名前空間(AllStatic クラス)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/spaceDecorator.hpp))
     class SpaceDecorator: public AllStatic {
 ```
@@ -98,7 +98,7 @@ DEBUG_MANGLING が #define されていないと何もしないが...).
 ### 内部構造(Internal structure)
 以下の4つの定数値が定義されているのみ.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/spaceDecorator.hpp))
       static const bool Clear               = true;
       static const bool DontClear           = false;
@@ -121,7 +121,7 @@ See: [here](../doxygen/classSpaceDecorator.html) for details
 メモリ領域に対する mangle 処理を行うクラス (の基底クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/spaceDecorator.hpp))
     class SpaceMangler: public CHeapObj {
 ```
@@ -144,7 +144,7 @@ SpaceMangler クラスの具象サブクラスの1つ.
 このクラスは GenCollectedHeap 用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/spaceDecorator.hpp))
     // For use with GenCollectedHeap's
     class GenSpaceMangler: public SpaceMangler {
@@ -153,7 +153,7 @@ SpaceMangler クラスの具象サブクラスの1つ.
 ### 内部構造(Internal structure)
 親クラスの SpaceMangler と違うのは以下の３メソッドのみ.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/spaceDecorator.hpp))
       ContiguousSpace* sp() { return _sp; }
     
@@ -177,7 +177,7 @@ SpaceMangler クラスの具象サブクラスの1つ.
 このクラスは ParallelScavengeHeap 用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/spaceDecorator.hpp))
     // For use with ParallelScavengeHeap's.
     class MutableSpaceMangler: public SpaceMangler {
@@ -186,7 +186,7 @@ SpaceMangler クラスの具象サブクラスの1つ.
 ### 内部構造(Internal structure)
 親クラスの SpaceMangler と違うのは以下の３メソッドのみ.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/spaceDecorator.hpp))
       MutableSpace* sp() { return _sp; }
     

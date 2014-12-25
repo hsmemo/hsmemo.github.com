@@ -37,7 +37,7 @@ JVMTI の "JVMTI environment" (JVMTI 環境) を実装するクラスの基底�
 1つの JvmtiEnvEnv オブジェクトが 1つの JVMTI environment (= JVMTI エージェントが GetEnv() で取得する jvmtiEnv オブジェクト) に対応する (See: [here](no3718uqQ.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEnvBase.hpp))
     // One JvmtiEnv object is created per jvmti attachment;
     // done via JNI GetEnv() call. Multiple attachments are
@@ -68,7 +68,7 @@ JVMTI の機能を実装するために使われている補助クラス(StackOb
 生成された全ての JvmtiEnv オブジェクトをたどるためのイテレータクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEnvBase.hpp))
     // This class is the only safe means of iterating through environments.
     // Note that this iteratation includes invalid environments pending
@@ -95,7 +95,7 @@ JvmtiEnv クラス内で使用される補助クラス(VM_Operationクラス).
 指定されたスレッドが所有するモニターの情報(およびそれらのモニターをロックしているスタックフレームの深さ)を取得する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEnvBase.hpp))
     // VM operation to get monitor information with stack depth.
     class VM_GetOwnedMonitorInfo : public VM_Operation {
@@ -119,7 +119,7 @@ JvmtiEnv クラス内で使用される補助クラス(VM_Operationクラス).
 指定されたオブジェクトのモニター情報を取得する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEnvBase.hpp))
     // VM operation to get object monitor usage.
     class VM_GetObjectMonitorUsage : public VM_Operation {
@@ -145,7 +145,7 @@ JvmtiEnv クラス内で使用される補助クラス(VM_Operationクラス).
 そのモニターの情報を取得する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEnvBase.hpp))
     // VM operation to get current contended monitor.
     class VM_GetCurrentContendedMonitor : public VM_Operation {
@@ -169,7 +169,7 @@ JvmtiEnv クラス内で使用される補助クラス(VM_Operationクラス).
 指定されたスレッドのスタックトレースを取得する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEnvBase.hpp))
     // VM operation to get stack trace at safepoint.
     class VM_GetStackTrace : public VM_Operation {
@@ -193,7 +193,7 @@ JvmtiEnv クラス内で使用される補助クラスの基底クラス.
 指定された複数のスレッドのスタックトレースを取得する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEnvBase.hpp))
     // VM operation to get stack trace at safepoint.
     class VM_GetMultipleStackTraces : public VM_Operation {
@@ -217,7 +217,7 @@ VM_GetMultipleStackTraces クラスの具象サブクラスの1つ.
 全てのスレッドのスタックトレースを取得する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEnvBase.hpp))
     // VM operation to get stack trace at safepoint.
     class VM_GetAllStackTraces : public VM_GetMultipleStackTraces {
@@ -242,7 +242,7 @@ VM_GetMultipleStackTraces クラスの具象サブクラスの1つ.
 複数の指定されたスレッドのスタックトレースを取得する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEnvBase.hpp))
     // VM operation to get stack trace at safepoint.
     class VM_GetThreadListStackTraces : public VM_GetMultipleStackTraces {
@@ -266,7 +266,7 @@ JvmtiEnv クラス内で使用される補助クラス(VM_Operationクラス).
 指定されたスレッドのスタック中にあるスタックフレームの数を取得する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEnvBase.hpp))
     // VM operation to count stack frames at safepoint.
     class VM_GetFrameCount : public VM_Operation {
@@ -290,7 +290,7 @@ JvmtiEnv クラス内で使用される補助クラス(VM_Operationクラス).
 指定されたスタックフレームについて, 現在の実行地点(実行しているメソッド, および bci(bytecode index))を取得する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEnvBase.hpp))
     // VM operation to frame location at safepoint.
     class VM_GetFrameLocation : public VM_Operation {
@@ -317,7 +317,7 @@ JvmtiExtensions クラス内で使用される補助クラス (See: JvmtiExtensi
 1つでも失敗した場合はデストラクタで全て開放してくれる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEnvBase.hpp))
     // ResourceTracker
     //
@@ -356,7 +356,7 @@ JvmtiEnvBase クラス内で使用される補助クラス.
 指定されたスレッドが所有するモニターの情報(およびそれらのモニターをロックしているスタックフレームの深さ)を取得する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEnvBase.hpp))
     // Jvmti monitor closure to collect off stack monitors.
     class JvmtiMonitorClosure: public MonitorClosure {
@@ -380,7 +380,7 @@ JvmtiEnvBase::check_for_periodic_clean_up() 内で定義されているローカ
 JVMTI environment を辿る処理が現在行われているかどうかを調べる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEnvBase.cpp))
       class ThreadInsideIterationClosure: public ThreadClosure {
 ```

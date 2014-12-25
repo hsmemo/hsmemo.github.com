@@ -97,20 +97,20 @@ title: Serviceability 機能 ： JVMTI 処理の概要
       そこからつながる JvmtiEnvThreadState オブジェクトの _next フィールドによって線形リストを構成).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.hpp))
      private:
       JvmtiThreadState *_jvmti_thread_state;
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiThreadState.hpp))
       // for support of JvmtiEnvThreadState
       JvmtiEnvThreadState*   _head_env_thread_state;
 ```
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEnvThreadState.hpp))
       JvmtiEnvThreadState *_next;
 ```

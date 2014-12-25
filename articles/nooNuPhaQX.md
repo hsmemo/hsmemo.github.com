@@ -37,7 +37,7 @@ G1GC 用の Barrier Set の基底クラス.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1SATBCardTableModRefBS.hpp))
     // This barrier is specialized to use a logging barrier to support
     // snapshot-at-the-beginning marking.
@@ -71,7 +71,7 @@ G1SATBCardTableModRefBS クラスの具象サブクラス.
 実際に Barrier Set として使用されるのはこのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1SATBCardTableModRefBS.hpp))
     // Adds card-table logging to the post-barrier.
     // Usual invariant: all dirty cards are logged in the DirtyCardQueueSet.

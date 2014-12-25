@@ -27,7 +27,7 @@ javaVFrame クラスの具象サブクラスの1つ.
 このクラスは, JIT 生成コードのスタックフレーム用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vframe_hp.hpp))
     class compiledVFrame: public javaVFrame {
 ```
@@ -177,7 +177,7 @@ jvmtiDeferredLocalVariableSet クラスは, 脱最適化が完了するまで変
  インライン展開された場合は実際のスタックフレームとは 1対1対応しない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vframe_hp.hpp))
     // In order to implement set_locals for compiled vframes we must
     // store updated locals in a data structure that contains enough
@@ -186,7 +186,7 @@ jvmtiDeferredLocalVariableSet クラスは, 脱最適化が完了するまで変
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vframe_hp.hpp))
     class jvmtiDeferredLocalVariableSet : public CHeapObj {
 ```
@@ -234,7 +234,7 @@ jvmtiDeferredLocalVariableSet クラス内で使用される補助クラス.
 1つの jvmtiDeferredLocalVariableSet オブジェクトが 1つの局所変数に対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/vframe_hp.hpp))
     class jvmtiDeferredLocalVariable : public CHeapObj {
 ```

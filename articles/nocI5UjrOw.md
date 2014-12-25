@@ -29,7 +29,7 @@ Java ヒープ領域の管理を担当するクラス(CollectedHeapクラス)の
 このクラスは, GC アルゴリズムが ParallelScavenge の場合用.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/parallelScavengeHeap.hpp))
     class ParallelScavengeHeap : public CollectedHeap {
 ```
@@ -50,7 +50,7 @@ ParallelScavenge 用の MarkingCodeBlobClosure::MarkScope クラス (See: Markin
 (MarkingCodeBlobClosure::MarkScope と違ってこちらは abstract class ではないが).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/parallelScavengeHeap.hpp))
       // Call these in sequential code around the processing of strong roots.
       class ParStrongRootsScope : public MarkingCodeBlobClosure::MarkScope {
@@ -59,7 +59,7 @@ ParallelScavenge 用の MarkingCodeBlobClosure::MarkScope クラス (See: Markin
 ### 内部構造(Internal structure)
 (中身は MarkingCodeBlobClosure::MarkScope() から変更無し)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/parallelScavengeHeap.cpp))
     ParallelScavengeHeap::ParStrongRootsScope::ParStrongRootsScope() {
       // nothing particular

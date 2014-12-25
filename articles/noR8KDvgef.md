@@ -27,13 +27,13 @@ title: VM_GC_Operation クラス関連のクラス (VM_GC_Operation, VM_GC_HeapI
 Garbage Collection 処理を行う VM_Operation クラスの基底クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/vmGCOperations.hpp))
     class VM_GC_Operation: public VM_Operation {
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/vmGCOperations.hpp))
     //  VM_GC_Operation
     //   - implements methods common to all classes in the hierarchy:
@@ -57,7 +57,7 @@ See: [here](../doxygen/classVM__GC__Operation.html) for details
 Java ヒープ内のオブジェクトに関する統計情報(どのクラスのインスタンスがどれだけ(何個および何バイト)存在しているか)を出力する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/vmGCOperations.hpp))
     class VM_GC_HeapInspection: public VM_GC_Operation {
 ```
@@ -115,7 +115,7 @@ VM_GC_Operation クラスの具象サブクラスの1つ (See: [here](no2480EWm.
 GC アルゴリズムとしては Serial, ParNew, Serial Old, CMS 等がここから呼び出される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/vmGCOperations.hpp))
     class VM_GenCollectForAllocation: public VM_GC_Operation {
 ```
@@ -140,7 +140,7 @@ VM_GC_Operation クラスの具象サブクラスの1つ (See: [here](no2480EWm.
 GC アルゴリズムとしては Serial Old がここから呼び出される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/vmGCOperations.hpp))
     // VM operation to invoke a collection of the heap as a
     // GenCollectedHeap heap.
@@ -167,7 +167,7 @@ VM_GC_Operation クラスの具象サブクラスの1つ (See: [here](no2480EWm.
 GC アルゴリズムとしては Serial Old, CMS, G1GC 等がここから呼び出される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/vmGCOperations.hpp))
     class VM_GenCollectForPermanentAllocation: public VM_GC_Operation {
 ```
@@ -192,7 +192,7 @@ DTrace や JVMTI のフック点の生成処理を簡単に行うための補助
 ソースコード上のスコープに連動して自動的にフック点を生成する.
   
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/vmGCOperations.hpp))
     class SvcGCMarker : public StackObj {
 ```
@@ -202,7 +202,7 @@ DTrace や JVMTI のフック点の生成処理を簡単に行うための補助
 
 (以下の例のように GC 処理の開始前に局所変数が宣言される)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/vmPSOperations.cpp))
     void VM_ParallelGCFailedAllocation::doit() {
       SvcGCMarker sgcm(SvcGCMarker::MINOR);
@@ -219,7 +219,7 @@ DTrace や JVMTI のフック点の生成処理を簡単に行うための補助
 (この中で JVMTI のフック処理が行われる).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/vmGCOperations.hpp))
       SvcGCMarker(reason_type reason ) {
         VM_GC_Operation::notify_gc_begin(reason == FULL);
@@ -235,14 +235,14 @@ DTrace や JVMTI のフック点の生成処理を簡単に行うための補助
 この reason は以下の ３通りの値を取る enum 値.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/vmGCOperations.hpp))
       typedef enum { MINOR, FULL, OTHER } reason_type;
 ```
 
 #### 参考(for your information): VM_GC_Operation::notify_gc_begin(), VM_GC_Operation::notify_gc_end()
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/shared/vmGCOperations.cpp))
     // The same dtrace probe can't be inserted in two different files, so we
     // have to call it here, so it's only in one file.  Can't create new probes

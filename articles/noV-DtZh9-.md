@@ -38,7 +38,7 @@ JDK のバージョンを検出し, その情報を格納しておく役割が�
  (JDK 5 以前だということしか分からない) 状態になっている.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/java.hpp))
     /**
      * Discovering the JDK_Version during initialization is tricky when the
@@ -62,7 +62,7 @@ JDK のバージョンを検出し, その情報を格納しておく役割が�
 JDK_Version クラスの _current フィールド (static フィールド) に(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/java.hpp))
       static JDK_Version _current;
 ```
@@ -97,7 +97,7 @@ See: [here](no17119RGH.html) for details
 定義されているフィールドは以下の通り.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/java.hpp))
       // In this class, we promote the minor version of release to be the
       // major version for releases >= 5 in anticipation of the JDK doing the
@@ -132,7 +132,7 @@ See: [here](../doxygen/classJDK__Version.html) for details
 ?? (このクラスは使用箇所が見当たらないような...)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/java.cpp))
     class ExitProc : public CHeapObj {
 ```
@@ -141,7 +141,7 @@ See: [here](../doxygen/classJDK__Version.html) for details
  File.deleteOnExit() は java.lang.Shutdown.shutdown() から呼び出される shutdown hook で実現されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/thread.cpp))
     //      > run VM level shutdown hooks (they are registered through JVM_OnExit(),
     //        currently the only user of this mechanism is File.deleteOnExit())

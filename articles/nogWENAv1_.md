@@ -17,7 +17,7 @@ title: CompileLog クラス
 JIT コンパイル処理に関するログ出力を行うための xmlStream クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/compileLog.hpp))
     // CompileLog
     //
@@ -35,7 +35,7 @@ JIT コンパイル処理に関するログ出力を行うための xmlStream �
 CompileBroker::init_compiler_thread_log() 内で(のみ)生成されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/compileBroker.cpp))
     void CompileBroker::compiler_thread_loop() {
     ...
@@ -49,7 +49,7 @@ CompileBroker::init_compiler_thread_log() 内で(のみ)生成されている.
 実際のロギングの開始/終了処理は CompileTaskWrapper によって行われている (See: CompileTaskWrapper).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/compiler/compileBroker.cpp))
     CompileTaskWrapper::CompileTaskWrapper(CompileTask* task) {
       CompilerThread* thread = CompilerThread::current();

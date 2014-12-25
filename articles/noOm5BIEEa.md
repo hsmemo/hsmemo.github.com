@@ -40,7 +40,7 @@ JVMTI のイベント通知設定の変更処理を行うクラス
   * etc
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEventController.hpp))
     ///////////////////////////////////////////////////////////////
     //
@@ -64,7 +64,7 @@ JVMTI のイベント通知設定の変更処理を行うクラス
 定義されているメソッドは以下の通り.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEventController.hpp))
       static bool is_enabled(jvmtiEvent event_type);
     
@@ -118,7 +118,7 @@ JVMTI のイベント通知設定の変更処理を行うクラス
 これは他の箇所の JvmtiEventEnabled 設定をキャッシュしておくためのもの (See: [here](no2935C7Z.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEventController.hpp))
       // for all environments, global array indexed by jvmtiEvent
       static JvmtiEventEnabled _universal_global_event_enabled;
@@ -139,7 +139,7 @@ JVMTI のイベント通知機能を実装するためのクラス.
 現在有効化されているイベント通知の種別を表す ValueObj クラス (See: [here](no2935C7Z.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEventController.hpp))
     ///////////////////////////////////////////////////////////////
     //
@@ -217,7 +217,7 @@ env 毎およびスレッド毎(正確には スレッドと env の組み合わ
 (no2935C7Z)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEventController.hpp))
       jlong _enabled_bits;
     #ifndef PRODUCT
@@ -260,7 +260,7 @@ JvmtiEnvEventEnable クラスや JvmtiThreadEventEnable クラスと連携して
 (See: [here](no2935C7Z.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEventController.hpp))
     ///////////////////////////////////////////////////////////////
     //
@@ -282,7 +282,7 @@ JvmtiEnvEventEnable クラスや JvmtiThreadEventEnable クラスと連携して
 定義されているフィールドは以下のもののみ (See: JvmtiEventEnabled).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEventController.hpp))
       JvmtiEventEnabled _event_user_enabled;
       JvmtiEventEnabled _event_enabled;
@@ -307,7 +307,7 @@ JvmtiEnvEventEnable クラスや JvmtiEnvThreadEventEnable クラスと連携し
 (See: [here](no2935C7Z.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEventController.hpp))
     ///////////////////////////////////////////////////////////////
     //
@@ -329,7 +329,7 @@ JvmtiEnvEventEnable クラスや JvmtiEnvThreadEventEnable クラスと連携し
 定義されているフィールドは以下のもののみ (See: JvmtiEventEnabled).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEventController.hpp))
       JvmtiEventEnabled _event_enabled;
 ```
@@ -353,7 +353,7 @@ JvmtiThreadEventEnable クラスや JvmtiEnvThreadEventEnable クラスと連携
 (See: [here](no2935C7Z.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEventController.hpp))
     ///////////////////////////////////////////////////////////////
     //
@@ -375,7 +375,7 @@ JvmtiThreadEventEnable クラスや JvmtiEnvThreadEventEnable クラスと連携
 定義されているフィールドは以下のもののみ (See: JvmtiEventEnabled).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEventController.hpp))
       // user set global event enablement indexed by jvmtiEvent
       JvmtiEventEnabled _event_user_enabled;
@@ -404,7 +404,7 @@ JVMTI のイベント通知機能を実装するためのクラス.
 HotSpot の実行状態を interp_only_mode に遷移させるための VM_Operation クラス (See: [here](no3059eFS.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEventController.cpp))
     ///////////////////////////////////////////////////////////////
     //
@@ -433,7 +433,7 @@ SingleStep イベントを実現するための VM_Operation クラス.
 HotSpot の実行状態を SingleStep モードに遷移させる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEventController.cpp))
     ///////////////////////////////////////////////////////////////
     //
@@ -461,7 +461,7 @@ JvmtiEventController クラス内で使用される補助クラス.
 JvmtiEventController クラス用の補助関数を納めた名前空間(AllStatic クラス) (See: [here](no2935C7Z.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvmtiEventController.cpp))
     ///////////////////////////////////////////////////////////////
     //

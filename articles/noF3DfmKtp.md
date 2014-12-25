@@ -17,13 +17,13 @@ GenCollectedHeap 使用時において, Old Generation の管理を担当する�
 このクラスは, GC アルゴリズムが CMS ではない場合用 (つまり Serial Old GC 用) (See: ConcurrentMarkSweepGeneration).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/tenuredGeneration.hpp))
     // TenuredGeneration models the heap containing old (promoted/tenured) objects.
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/memory/tenuredGeneration.hpp))
     class TenuredGeneration: public OneContigSpaceCardGeneration {
 ```

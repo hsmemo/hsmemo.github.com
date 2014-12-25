@@ -17,7 +17,7 @@ StackMapTable クラス用の補助クラス.
 クラスファイル中の StackMapTable attrible に格納されている stack_map_frame 情報を扱うためのクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/stackMapFrame.hpp))
     // A StackMapFrame represents one frame in the stack map attribute.
     ...

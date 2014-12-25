@@ -16,7 +16,7 @@ Native Monitor(Mutex/Monitor) によるロック/アンロック処理をソー�
 用途に応じて様々な変種が存在している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/mutexLocker.hpp))
     // A MutexLocker provides mutual exclusion with respect to a given mutex
     // for the scope which contains the locker.  The lock is an OS lock, not
@@ -32,7 +32,7 @@ Native Monitor(Mutex/Monitor) によるロック/アンロック処理をソー�
 * デストラクタ(アンロック時)には 「Store-Release」
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/mutexLocker.hpp))
     //                NOTE WELL!!
     //
@@ -66,7 +66,7 @@ Mutex を用いた排他処理(ロックの確保処理/解放処理)を簡単�
 (See: [here](no2114cio.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/mutexLocker.hpp))
     class MutexLocker: StackObj {
 ```
@@ -82,7 +82,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 コンストラクタで指定された Mutex をロックし, デストラクタでアンロックする.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/mutexLocker.hpp))
       MutexLocker(Monitor * mutex) {
         assert(mutex->rank() != Mutex::special,
@@ -109,7 +109,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 Mutex でも Monitor でも受け取れるようになって(しまって?)いる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/mutexLocker.hpp))
       MutexLocker(Monitor * mutex) {
 ```
@@ -135,7 +135,7 @@ MutexLocker の処理を可能な限り高速にしたいので別クラスを�
 (しかしこの Win32 API みたいな名前は...)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/mutexLocker.hpp))
     // A MutexLockerEx behaves like a MutexLocker when its constructor is
     // called with a Mutex.  Unlike a MutexLocker, its constructor can also be
@@ -182,7 +182,7 @@ MutexLockerEx のサブクラス.
 (どうでもいいけど名前が MutexLockerExEx じゃなくてよかった...)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/mutexLocker.hpp))
     // A MonitorLockerEx is like a MutexLockerEx above, except it takes
     // a possibly null Monitor, and allows wait/notify as well which are
@@ -220,7 +220,7 @@ See: [here](../doxygen/classMonitorLockerEx.html) for details
 既に GC 処理に入っておりロックを取得済みであれば native monitor の再帰取得になってしまうので何もしない.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/mutexLocker.hpp))
     // A GCMutexLocker is usually initialized with a mutex that is
     // automatically acquired in order to do GC.  The function that
@@ -259,7 +259,7 @@ Mutex クラス用の補助クラス (See: [here](no2114cio.html) for details).
 という場面で使用される補助クラス(StackObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/mutexLocker.hpp))
     // A MutexUnlocker temporarily exits a previously
     // entered mutex for the scope which contains the unlocker.
@@ -277,7 +277,7 @@ HotSpot 内の様々な箇所で使用されている (#TODO).
 ### 内部構造(Internal structure)
 コンストラクタで unlock() し, デストラクタで lock() し直すだけ.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/mutexLocker.hpp))
       MutexUnlocker(Monitor * mutex) {
         _mutex = mutex;
@@ -305,7 +305,7 @@ no_safepoint_check コンストラクタ引数が true の場合は,
 デストラクタ内で Monitor::lock() の代わりに Monitor::lock_without_safepoint_check() を呼び出す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/mutexLocker.hpp))
     // A MutexUnlockerEx temporarily exits a previously
     // entered mutex for the scope which contains the unlocker.
@@ -339,7 +339,7 @@ See: [here](../doxygen/classMutexUnlockerEx.html) for details
 verify 時に使うためにデッドロック検出処理をゆるくしている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/mutexLocker.hpp))
     #ifndef PRODUCT
     //

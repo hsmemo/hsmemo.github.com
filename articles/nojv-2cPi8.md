@@ -15,7 +15,7 @@ title: ErrorReporter クラス
 VMError クラス内で使用される補助クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/errorReporter.hpp))
     class ErrorReporter : public StackObj {
 ```
@@ -25,7 +25,7 @@ VMError クラス内で使用される補助クラス.
 内部には, 以下のメソッド(のみ)が定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/errorReporter.hpp))
       void call(FILE* fd, char *buffer, int length);
 ```
@@ -34,7 +34,7 @@ VMError クラス内で使用される補助クラス.
 VMError::report_and_die() 内で(のみ)使用されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/vmError.cpp))
     void VMError::report_and_die() {
     ...
@@ -53,7 +53,7 @@ VMError::report_and_die() 内で(のみ)使用されている.
 が, 肝心の ErrorReporter::call() の中身がないので, 現状では何も出力されない.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/errorReporter.cpp))
     void ErrorReporter::call(FILE* fd, char* buffer, int length) {
     }

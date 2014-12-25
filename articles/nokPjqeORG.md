@@ -15,7 +15,7 @@ title: constMethodKlass クラス
 constMethodOopDesc 用の Klass クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/constMethodKlass.hpp))
     // A constMethodKlass is the klass of a constMethodOop
     

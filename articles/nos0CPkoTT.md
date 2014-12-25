@@ -33,7 +33,7 @@ PhaseIdealLoop クラス内で使用される補助クラス(ResourceObjクラ�
 (なお, このクラスは ResourceObj クラスだが局所変数としてのみ生成されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/superword.hpp))
     //
     //                  S U P E R W O R D   T R A N S F O R M
@@ -72,7 +72,7 @@ PhaseIdealLoop クラス内で使用される補助クラス(ResourceObjクラ�
         PLDI 2000
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/superword.hpp))
     // -----------------------------SuperWord---------------------------------
     // Transforms scalar operations into packed (superword) operations.
@@ -87,7 +87,7 @@ PhaseIdealLoop::build_and_optimize() 内で(のみ)(局所変数として)生成
 ただしデフォルトでは true.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/c2_globals.hpp))
       product(bool, UseSuperWord, true,                                         \
               "Transform scalar operations into superword operations")          \
@@ -108,7 +108,7 @@ SuperWord クラス内で使用される補助クラス(ValueObjクラス).
 メモリアクセス間の依存グラフ(dependency graph)を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/superword.hpp))
     //------------------------------DepGraph---------------------------
     class DepGraph VALUE_OBJ_CLASS_SPEC {
@@ -138,7 +138,7 @@ DepGraph クラス内で使用される補助クラス.
 1つの DepMem オブジェクトが 1つの node に対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/superword.hpp))
     //------------------------------DepMem---------------------------
     // A node in the dependence graph.  _in_head starts the threaded list of
@@ -181,7 +181,7 @@ DepGraph クラス内で使用される補助クラス.
 1つの DepEdge オブジェクトが 1つの edge に対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/superword.hpp))
     //------------------------------DepEdge---------------------------
     // An edge in the dependence graph.  The edges incident to a dependence
@@ -217,7 +217,7 @@ SuperWord クラス内で使用される補助クラス.
 もしくはその Node の Node::_in 配列から指されている Node をたどるためのイテレータクラス(StackObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/superword.hpp))
     //------------------------------DepPreds---------------------------
     // Iterator over predecessors in the dependence graph and
@@ -248,7 +248,7 @@ See: [here](../doxygen/classDepPreds.html) for details
 もしくはその Node の Node::_out 配列から指されている Node をたどるためのイテレータクラス(StackObjクラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/superword.hpp))
     //------------------------------DepSuccs---------------------------
     // Iterator over successors in the dependence graph and
@@ -272,7 +272,7 @@ SuperWord クラス内で使用される補助クラス.
 1つの SWNodeInfo オブジェクトが 1つの Node オブジェクトに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/superword.hpp))
     // -----------------------------SWNodeInfo---------------------------------
     // Per node info needed by SuperWord
@@ -303,7 +303,7 @@ SuperWord クラス内で使用される補助クラス.
 内部には以下の public フィールドのみを持つ (そしてメソッドはない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/superword.hpp))
       int         _alignment; // memory alignment for a node
       int         _depth;     // Max expression (DAG) depth from block start
@@ -328,7 +328,7 @@ MemNode からそのアクセス先のアドレス情報を抽出するための
 (なお, このクラスは StackObjクラスではないが現状では局所変数としてのみ生成されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/superword.hpp))
     //------------------------------SWPointer---------------------------
     // Information about an address for dependence checking and vector alignment
@@ -364,7 +364,7 @@ SuperWord クラス内で使用される補助クラス(ValueObjクラス).
 2 個の Node オブジェクトからなる組(pair)を表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/superword.hpp))
     //------------------------------OrderedPair---------------------------
     // Ordered pair of Node*.
@@ -392,7 +392,7 @@ SuperWord::dependence_graph() 内で(のみ)使用されている (ただし #if
 定義されているフィールドは以下の通り.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/superword.hpp))
       Node* _p1;
       Node* _p2;

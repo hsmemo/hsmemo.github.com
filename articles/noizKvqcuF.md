@@ -20,7 +20,7 @@ ParallelScavenge 用の AdaptiveSizePolicy クラス
 適切な tenuring threshold の値や survivor space の大きさも計算している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psAdaptiveSizePolicy.hpp))
     // This class keeps statistical information and computes the
     // optimal free space for both the young and old generation
@@ -45,7 +45,7 @@ ParallelScavenge 用の AdaptiveSizePolicy クラス
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psAdaptiveSizePolicy.hpp))
     class PSAdaptiveSizePolicy : public AdaptiveSizePolicy {
 ```
@@ -55,7 +55,7 @@ ParallelScavenge 用の AdaptiveSizePolicy クラス
 ParallelScavengeHeap クラスの _size_policy フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/parallelScavengeHeap.hpp))
     class ParallelScavengeHeap : public CollectedHeap {
     ...

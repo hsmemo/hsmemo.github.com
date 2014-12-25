@@ -17,7 +17,7 @@ instanceOopDesc 用の ciObject クラス
 (ただし java.lang.invoke.MethodHandle オブジェクトと java.lang.invoke.CallSite オブジェクトは除く. 備考参照).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/ciInstance.hpp))
     // ciInstance
     //

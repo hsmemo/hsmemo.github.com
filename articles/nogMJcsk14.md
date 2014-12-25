@@ -35,7 +35,7 @@ OS にチェックさせて signal handler (See: [here](noNmlmYDJk.html) for det
 
   * 例えば, C++ interpreter では全て明示的にチェックしている模様.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/runtime/sharedRuntime.cpp))
     #ifdef CC_INTERP
         // C++ interpreter doesn't throw implicit exceptions

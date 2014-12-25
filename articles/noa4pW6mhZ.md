@@ -23,7 +23,7 @@ title: DTrace クラス (DTrace, 及びその補助クラス(VM_DeoptimizeTheWor
 Solaris 版の AttachListener クラス内で使用されている補助クラス(AllStatic クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/dtraceAttacher.hpp))
     class DTrace : public AllStatic {
 ```
@@ -39,7 +39,7 @@ Solaris 版の AttachListener クラス内で使用されている補助クラ�
 内部には, 以下のメソッド(のみ)が定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/dtraceAttacher.hpp))
      private:
       // disable one or more probes - OR above constants
@@ -82,7 +82,7 @@ Solaris 専用のクラス (#ifdef Solaris 時にしか定義されない).
 全ての nmethod に対して deoptimize 処理を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/services/dtraceAttacher.cpp))
     #ifdef SOLARIS
     

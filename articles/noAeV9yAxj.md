@@ -18,7 +18,7 @@ title: Copy クラス
 対象のアーキテクチャに最適化されたコピー関数を定義している.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/copy.hpp))
     class Copy : AllStatic {
 ```
@@ -47,7 +47,7 @@ title: Copy クラス
     各コピー単位毎にアトミックにコピーする必要があるかどうか
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/copy.hpp))
       // Block copy methods have four attributes.  We don't define all possibilities.
       //   alignment: aligned to BytesPerLong

@@ -27,7 +27,7 @@ template で型を一般化した Histogram クラスを作れば良かったの
 とも書かれているが...)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/intHisto.hpp))
     // This class implements a simple histogram.
     
@@ -57,7 +57,7 @@ IntHistogram::add_entry() で int 値を IntHistogram に入れていく
 (こうすることで, どの値が何回 add_entry() されたか, というヒストグラム情報が内部に蓄えられていく).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/intHisto.hpp))
       // Add a measurement with the given outcome to the sequence.
       void add_entry(int outcome);
@@ -67,7 +67,7 @@ IntHistogram::add_entry() で int 値を IntHistogram に入れていく
 指定の outputStream に現在のヒストグラム情報が出力される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/utilities/intHisto.hpp))
       // Print the histogram on the given output stream.
       void print_on(outputStream* st) const;
@@ -91,13 +91,13 @@ IntHistogram::add_entry() で int 値を IntHistogram に入れていく
 なお, デフォルトではどちらのマクロ定数も 0 に #define されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1RemSet.cpp))
     #define CARD_REPEAT_HISTO 0
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1OopClosures.inline.hpp))
     #define FILTEROUTOFREGIONCLOSURE_DOHISTOGRAMCOUNT 0
 ```

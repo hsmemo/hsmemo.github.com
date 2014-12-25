@@ -48,7 +48,7 @@ hotspot/src/share/vm/classfile/vmSymbols.hpp	          | 同上
 ### 備考(Notes)
 * ※1: inlining を避けるため別ファイルにしているとのこと
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/classfile/classFileError.cpp))
     // Keep these in a separate file to prevent inlining
 ```

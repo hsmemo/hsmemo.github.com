@@ -27,7 +27,7 @@ C2 JIT Compiler 用の補助クラス (#ifdef COMPILER2 時にしか定義され
 その引数や返値についてのエスケープ解析を行うクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/bcEscapeAnalyzer.hpp))
     // This class implements a fast, conservative analysis of effect of methods
     // on the escape state of their arguments.  The analysis is at the bytecode
@@ -35,7 +35,7 @@ C2 JIT Compiler 用の補助クラス (#ifdef COMPILER2 時にしか定義され
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/bcEscapeAnalyzer.hpp))
     class BCEscapeAnalyzer : public ResourceObj {
 ```
@@ -49,7 +49,7 @@ C2 JIT Compiler 用の補助クラス (#ifdef COMPILER2 時にしか定義され
    * BCEscapeAnalyzer::is_arg_local()
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/bcEscapeAnalyzer.hpp))
       // The given argument does not escape the callee.
       bool is_arg_local(int i) const {
@@ -58,7 +58,7 @@ C2 JIT Compiler 用の補助クラス (#ifdef COMPILER2 時にしか定義され
    * BCEscapeAnalyzer::is_arg_stack()
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/bcEscapeAnalyzer.hpp))
       // The given argument escapes the callee, but does not become globally
       // reachable.
@@ -68,7 +68,7 @@ C2 JIT Compiler 用の補助クラス (#ifdef COMPILER2 時にしか定義され
    * BCEscapeAnalyzer::is_arg_returned()
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/bcEscapeAnalyzer.hpp))
       // The given argument does not escape globally, and may be returned.
       bool is_arg_returned(int i) const {
@@ -77,7 +77,7 @@ C2 JIT Compiler 用の補助クラス (#ifdef COMPILER2 時にしか定義され
    * BCEscapeAnalyzer::is_return_local()
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/bcEscapeAnalyzer.hpp))
       // True iff only input arguments are returned.
       bool is_return_local() const {
@@ -86,7 +86,7 @@ C2 JIT Compiler 用の補助クラス (#ifdef COMPILER2 時にしか定義され
    * BCEscapeAnalyzer::is_return_allocated()
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/bcEscapeAnalyzer.hpp))
       // True iff only newly allocated unescaped objects are returned.
       bool is_return_allocated() const {
@@ -97,7 +97,7 @@ C2 JIT Compiler 用の補助クラス (#ifdef COMPILER2 時にしか定義され
    * BCEscapeAnalyzer::copy_dependencies()
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/bcEscapeAnalyzer.hpp))
       // Copy dependencies from this analysis into "deps"
       void copy_dependencies(Dependencies *deps);
@@ -138,7 +138,7 @@ BCEscapeAnalyzer クラス内で使用される補助クラス.
 1つの局所変数または 1つのオペランドスタック中のスロットに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/bcEscapeAnalyzer.cpp))
     // Maintain a map of which aguments a local variable or
     // stack slot may contain.  In addition to tracking
@@ -188,7 +188,7 @@ BCEscapeAnalyzer クラス内で使用される補助クラス.
 (このため StateInfo::raw_push() した結果はコピーされることに注意).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/bcEscapeAnalyzer.cpp))
       void operator=(const ArgumentMap &am) { _bits = am._bits; }
 ```
@@ -208,7 +208,7 @@ BCEscapeAnalyzer クラス内で使用される補助クラス.
 各基本ブロックの先頭における局所変数／オペランドスタックの状態を示す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/ci/bcEscapeAnalyzer.cpp))
     class BCEscapeAnalyzer::StateInfo {
 ```

@@ -38,7 +38,7 @@ Phase クラスの具象サブクラスの1つ.
 (また, 関連する最適化として Global Code Motion 処理を行う機能も備える)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/block.hpp))
     //------------------------------PhaseCFG---------------------------------------
     // Build an array of Basic Block pointers, one per Node.
@@ -66,7 +66,7 @@ PhaseCFG が生成する CFG(Control Flow Graph) 中の要素を表す.
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/block.hpp))
     class CFGElement : public ResourceObj {
 ```
@@ -75,7 +75,7 @@ PhaseCFG が生成する CFG(Control Flow Graph) 中の要素を表す.
 定義されているフィールドはこれだけ.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/block.hpp))
       float _freq; // Execution frequency (estimate)
 ```
@@ -97,7 +97,7 @@ CFGElement クラスの具象サブクラスの1つ.
 1つの Block オブジェクトが 1つの basic block に対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/block.hpp))
     //------------------------------Block------------------------------------------
     // This class defines a Basic Block.
@@ -147,7 +147,7 @@ Block オブジェクトの配列を表す (= 整数値から Block オブジェ
 なお配列長は必要に応じて自動的に拡張される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/block.hpp))
     //------------------------------Block_Array------------------------------------
     // Map dense integer indices to Blocks.  Uses classic doubling-array trick.
@@ -172,7 +172,7 @@ Block_Array クラスのサブクラス.
 配列の最後に要素を追加／削除する push()/pop() 等のメソッドが追加されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/block.hpp))
     class Block_List : public Block_Array {
 ```
@@ -193,7 +193,7 @@ CFGElement クラスの具象サブクラスの1つ.
 1つの CFGLoop オブジェクトが 1つのループに対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/block.hpp))
     //------------------------------CFGLoop-------------------------------------------
     class CFGLoop : public CFGElement {
@@ -241,7 +241,7 @@ CFGLoop クラス内で使用される補助クラス(ValueObjクラス).
 (ところでここに書かれているコメントは OrderedPair クラスのものでは?? #TODO)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/block.hpp))
     //----------------------------BlockProbPair---------------------------
     // Ordered pair of Node*.
@@ -266,7 +266,7 @@ CFGLoop クラス内で使用される補助クラス(ValueObjクラス).
 (そして, メソッドはこれらのフィールドへの getter メソッド(アクセサメソッド)のみ).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/block.hpp))
       Block* _target;      // block target
       float  _prob;        // probability of edge to block
@@ -288,7 +288,7 @@ Phase クラスの具象サブクラスの1つ.
 basic block 間の順番を (それらの遷移関係や実行される頻度に応じて) 並び替える.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/block.hpp))
     //------------------------------PhaseBlockLayout-------------------------------
     // Rearrange blocks into some canonical order, based on edges and their frequencies
@@ -316,7 +316,7 @@ CFG(Control Flow Graph) 中での edge を表すクラス
 1つの CFGEdge オブジェクトが 1つの edge に対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/block.hpp))
     //----------------------------------CFGEdge------------------------------------
     // A edge between two basic blocks that will be embodied by a branch or a
@@ -352,7 +352,7 @@ Block オブジェクトを順番づけるための双方向リストになっ�
 1つの Trace オブジェクトが 1つの双方向リストを表す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/block.hpp))
     //-----------------------------------Trace-------------------------------------
     // An ordered list of basic blocks.
@@ -408,7 +408,7 @@ PhaseBlockLayout::find_edges() 内で(のみ)生成されている.
   双方向リストの最後の Block を指すポインタ.  
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/block.hpp))
       uint _id;             // Unique Trace id (derived from initial block)
       Block ** _next_list;  // Array mapping index to next block
@@ -437,7 +437,7 @@ Union 処理とルックアップ処理 (Find 処理) を高速に行うため,
 内部的には Tarjan (1975) の UnionFind アルゴリズム(collapsing 有り)を用いている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/opto/block.hpp))
     //------------------------------UnionFind--------------------------------------
     // Map Block indices to a block-index for a cfg-cover.

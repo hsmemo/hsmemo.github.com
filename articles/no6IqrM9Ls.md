@@ -9,7 +9,7 @@ title: G1MarkSweep クラス (G1MarkSweep, 及びその補助クラス(G1Prepare
 これらは, G1CollectedHeap の MarkSweep 処理(Major GC 処理)で使用される補助クラス (See: [here](no2935ATn.html) and [here](no28916_jv.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1MarkSweep.hpp))
     // G1MarkSweep takes care of global mark-compact garbage collection for a
     // G1CollectedHeap using a four-phase pointer forwarding algorithm.  All
@@ -40,7 +40,7 @@ G1CollectedHeap 用の MarkSweep クラス
 シングルスレッドでの Mark-Sweep-Compact 処理を実装している (See: [here](no2935ATn.html) and [here](no28916_jv.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1MarkSweep.hpp))
     class G1MarkSweep : AllStatic {
 ```
@@ -52,7 +52,7 @@ Major GC 処理はこのクラスの G1MarkSweep::invoke_at_safepoint() メソ�
 内部には, Mark-Sweep-Compact 処理のための以下のようなメソッドが定義されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1MarkSweep.hpp))
       // Mark live objects
       static void mark_sweep_phase1(bool& marked_for_deopt,
@@ -85,7 +85,7 @@ G1MarkSweep クラス内で使用される補助クラス(StackObjクラス).
 埋め込み処理中に生じた変更を本体である MasterHumongousRegionSet に反映させる機能も備えている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1MarkSweep.cpp))
     class G1PrepareCompactClosure: public HeapRegionClosure {
 ```
@@ -108,7 +108,7 @@ G1MarkSweep クラス内で使用される補助クラス(StackObjクラス).
 一番最初の HeapRegion を取得するための Closure クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1MarkSweep.cpp))
     // Finds the first HeapRegion.
     class FindFirstRegionClosure: public HeapRegionClosure {
@@ -132,7 +132,7 @@ G1MarkSweep クラス内で使用される補助クラス(StackObjクラス).
 各 live object 内のポインタを新しいアドレスに修正する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1MarkSweep.cpp))
     class G1AdjustPointersClosure: public HeapRegionClosure {
 ```
@@ -155,7 +155,7 @@ G1MarkSweep クラス内で使用される補助クラス(StackObjクラス).
 各 live object を新しいアドレスに移動させる.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/g1/g1MarkSweep.cpp))
     class G1SpaceCompactClosure: public HeapRegionClosure {
 ```

@@ -17,7 +17,7 @@ JNI 機能(より具体的に言うと, ネイティブメソッドに対する�
 (より正確には, そのための機能を納めた名前空間(AllStatic クラス)).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/nativeLookup.hpp))
     // NativeLookup provides an interface for finding DLL entry points for
     // Java native functions.
@@ -73,7 +73,7 @@ initialize_converter_functions() で初期化される関数ポインタ
 以下のフィールドに格納される.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvm.cpp))
     static IntBitsToFloatFn   int_bits_to_float_fn   = NULL;
     static LongBitsToDoubleFn long_bits_to_double_fn = NULL;
@@ -84,7 +84,7 @@ initialize_converter_functions() で初期化される関数ポインタ
 それぞれ以下のように使用されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvm.cpp))
     JVM_ENTRY(void, JVM_SetPrimitiveFieldValues(JNIEnv *env, jclass cb, jobject obj,
                                                 jlongArray fieldIDs, jcharArray typecodes, jbyteArray data))
@@ -124,7 +124,7 @@ initialize_converter_functions() で初期化される関数ポインタ
 ```
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/prims/jvm.cpp))
     JVM_ENTRY(void, JVM_GetPrimitiveFieldValues(JNIEnv *env, jclass cb, jobject obj,
                                 jlongArray fieldIDs, jcharArray typecodes, jbyteArray data))

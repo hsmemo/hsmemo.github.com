@@ -43,7 +43,7 @@ ParallelScavengeHeap の Parallel Compaction 処理
 を行うクラス (より正確には, そのための機能を納めた名前空間(AllStatic クラス)) (See: [here](no28916Gft.html) for details).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
     // The UseParallelOldGC collector is a stop-the-world garbage collector that
     // does parts of the collection using parallel threads.  The collection includes
@@ -157,7 +157,7 @@ PSParallelCompact クラス内で使用される補助クラス
 (つまり, Parallel Compaction 処理中で使用される補助クラス).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
     class SpaceInfo
     {
@@ -173,7 +173,7 @@ PSParallelCompact オブジェクトの _space_info フィールドに(のみ)�
 この中に, 使用される全ての SpaceInfo オブジェクトが格納されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
     class PSParallelCompact : AllStatic {
     ...
@@ -190,7 +190,7 @@ PSParallelCompact オブジェクトの _space_info フィールドに(のみ)�
 (そして, メソッドはこれらのフィールドへのアクセサメソッドのみ).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
       MutableSpace*     _space;
       HeapWord*         _new_top;
@@ -219,7 +219,7 @@ Eden の live オブジェクトのコンパクション先が Old と Eden に�
 SplitInfo クラスは, そういうケースでコンパクション先をうまく分けるために使用されるクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
     // The SplitInfo class holds the information needed to 'split' a source region
     // so that the live data can be copied to two destination *spaces*.  Normally,
@@ -292,7 +292,7 @@ SplitInfo クラスは, そういうケースでコンパクション先をう�
 SpaceInfo オブジェクトの _split_info フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
     class SpaceInfo
     {
@@ -320,7 +320,7 @@ PSParallelCompact クラス内で使用される補助クラス
 (See: [here](no28916Gft.html) for details))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
     class ParallelCompactData
     {
@@ -339,7 +339,7 @@ PSParallelCompact クラス内で使用される補助クラス
 PSParallelCompact オブジェクトの _summary_data フィールドに(のみ)格納されている
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
     class PSParallelCompact : AllStatic {
     ...
@@ -349,7 +349,7 @@ PSParallelCompact オブジェクトの _summary_data フィールドに(のみ)
 アクセサメソッドは PSParallelCompact::summary_data()
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
       static ParallelCompactData& summary_data() { return _summary_data; }
 ```
@@ -378,7 +378,7 @@ ParallelCompactData クラス内で使用される補助クラス.
 Region 1つにつき 1つの ParallelCompactData::RegionData オブジェクトが対応する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
       class RegionData
       {
@@ -398,7 +398,7 @@ ParallelCompactData オブジェクトの _region_data フィールドに(のみ
 この中に, 使用される全ての ParallelCompactData::RegionData オブジェクトが格納されている)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
     class ParallelCompactData
     {
@@ -453,7 +453,7 @@ See: [here](no3172vhK.html) for details
   destination count 情報と live obj size 情報.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
         // Constants for manipulating the _dc_and_los field, which holds both the
         // destination count and live obj size.  The live obj size lives at the
@@ -500,7 +500,7 @@ ParMarkBitMap::iterate() の引数として使用する (その際には do_addr
 というのは, そうしないと is_full() メソッドを virtual call にしないといけなくなり live object 1つ1つについて virtual call 呼び出しが起こってしまうので.)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
     // Abstract closure for use with ParMarkBitMap::iterate(), which will invoke the
     // do_addr() method.
@@ -522,7 +522,7 @@ ParMarkBitMap 中のデータを処理する do_addr() メソッドを備えて�
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
       virtual IterationStatus do_addr(HeapWord* addr, size_t words) = 0;
 ```
@@ -544,7 +544,7 @@ PSParallelCompact::IsAliveClosure::do_object_b() メソッドが呼ばれると,
 処理対象のオブジェクトが生きているかどうかを返す.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
       class IsAliveClosure: public BoolObjectClosure {
 ```
@@ -554,7 +554,7 @@ PSParallelCompact::IsAliveClosure::do_object_b() メソッドが呼ばれると,
 PSParallelCompact クラスの _is_alive_closure フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
     class PSParallelCompact : AllStatic {
     ...
@@ -587,7 +587,7 @@ PSParallelCompact クラス内で使用される補助クラス(Closureクラス
 マークを付け, そこから辿れるものを marking stack にプッシュする.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
       class KeepAliveClosure: public OopClosure {
 ```
@@ -611,7 +611,7 @@ See: [here](../doxygen/classPSParallelCompact_1_1KeepAliveClosure.html) for deta
 ?? (使われていないクラス)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
       // Current unused
       class FollowRootClosure: public OopsInGenClosure {
@@ -640,7 +640,7 @@ marking stack に溜まっているポインタに対して,
 (現状では, 参照オブジェクト(java.lang.ref オブジェクト)に対する処理にしか用いられていないが...)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
       class FollowStackClosure: public VoidClosure {
 ```
@@ -668,7 +668,7 @@ Mark Sweep Compact 処理の phase 3 で使われる Closure クラス.
 ポインタの値をコンパクション先の新しいアドレスへと書き換える処理を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
       class AdjustPointerClosure: public OopsInGenClosure {
 ```
@@ -679,7 +679,7 @@ PSParallelCompact クラスの _adjust_root_pointer_closure フィールド,
 及び _adjust_pointer_closure フィールドに(のみ)格納されている.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
     class PSParallelCompact : AllStatic {
     ...
@@ -692,7 +692,7 @@ PSParallelCompact::adjust_root_pointer_closure()
 及び PSParallelCompact::adjust_pointer_closure().
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
       static OopClosure* adjust_pointer_closure()      { return (OopClosure*)&_adjust_pointer_closure; }
       static OopClosure* adjust_root_pointer_closure() { return (OopClosure*)&_adjust_root_pointer_closure; }
@@ -716,7 +716,7 @@ See: [here](../doxygen/classPSParallelCompact_1_1AdjustPointerClosure.html) for 
 ポインタの修正処理が正しく行われているかどうかをチェックする.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
       // Closure for verifying update of pointers.  Does not
       // have any side effects.
@@ -743,7 +743,7 @@ See: [here](../doxygen/classPSParallelCompact_1_1VerifyUpdateClosure.html) for d
 デバッグ用途で変更したオブジェクトの mark フィールドを初期状態の値に修復する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
       // Closure for updating objects altered for debug checking
       class ResetObjectsClosure: public ParMarkBitMapClosure {
@@ -771,7 +771,7 @@ Mark Sweep Compact 処理の phase 1 で使われる Closure クラス.
 まだマークが付いていないオブジェクトに対して, 
 マークを付け, そこから辿れるものを marking stack にプッシュする.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
       class MarkAndPushClosure: public OopClosure {
 ```
@@ -799,7 +799,7 @@ Mark Sweep Compact 処理の phase 4 で使われる Closure クラス.
 各 live object を新しいアドレスに移動させ, それらの中にあるポインタを新しいアドレスに修正する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
     class MoveAndUpdateClosure: public ParMarkBitMapClosure {
 ```
@@ -809,7 +809,7 @@ Mark Sweep Compact 処理の phase 4 で使われる Closure クラス.
 * コンストラクタの時点で, コンパクション先のアドレス(destination)及びその領域の長さ(words)を指定する.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
       inline MoveAndUpdateClosure(ParMarkBitMap* bitmap, ParCompactionManager* cm,
                                   ObjectStartArray* start_array,
@@ -846,7 +846,7 @@ Mark Sweep Compact 処理の phase 4 で使われる Closure クラス.
 (dense prefix 部分なのでオブジェクトの移動は必要ない).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
     class UpdateOnlyClosure: public ParMarkBitMapClosure {
 ```
@@ -872,7 +872,7 @@ Mark Sweep Compact 処理の phase 4 で使われる Closure クラス.
 dead オブジェクトをダミーオブジェクトで上書きする処理を行う.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.hpp))
     class FillClosure: public ParMarkBitMapClosure
     {
@@ -898,7 +898,7 @@ GC 実行前の Java ヒープの使用量を記録しておくためのクラ�
 (この情報は, GC 後にトレース出力を出したり Perm 領域の領域長を変更する際に参照される).
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.cpp))
     // Simple class for storing info about the heap at the start of GC, to be used
     // after GC for comparison/printing.
@@ -912,7 +912,7 @@ PSParallelCompact::invoke_no_policy() 内で(のみ)使用されている.
 内部には4つのフィールド(のみ)を保持する.
 (そして, メソッドはこれらのフィールドへの getter メソッド(アクセサメソッド)のみ)
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.cpp))
       size_t _heap_used;
       size_t _young_gen_used;
@@ -923,7 +923,7 @@ PSParallelCompact::invoke_no_policy() 内で(のみ)使用されている.
 フィールドの値は, コンストラクタ内あるいは明示的に PreGCValues::fill() が呼ばれた際に
 ParallelScavengeHeap オブジェクトから取得している.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.cpp))
       PreGCValues() { }
       PreGCValues(ParallelScavengeHeap* heap) { fill(heap); }
@@ -956,7 +956,7 @@ PSParallelCompact 用の AlwaysTrueClosure クラス
  名前の通り, どんな場合でも常に true を返す. (See: AlwaysTrueClosure))
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.cpp))
     // This should be moved to the shared markSweep code!
     class PSAlwaysTrueClosure: public BoolObjectClosure {
@@ -966,7 +966,7 @@ PSParallelCompact 用の AlwaysTrueClosure クラス
 #### インスタンスの格納場所(where its instances are stored)
 always_true という大域変数に(のみ)格納されている.
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.cpp))
     static PSAlwaysTrueClosure always_true;
 ```
@@ -997,7 +997,7 @@ oopDesc::adjust_pointers() でのポインタの修正処理が正しく行わ�
 (というか hotspot/src/share/vm/gc_implementation/shared/markSweep.cpp の AdjusterTracker とほぼ同じ)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.cpp))
     #ifdef VALIDATE_MARK_SWEEP
     ...
@@ -1012,7 +1012,7 @@ PSParallelCompact::track_interior_pointers() 内で(のみ)使用されている
 ValidateMarkSweep オプションが指定されている場合にしか使用されない)
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/gc_implementation/parallelScavenge/psParallelCompact.cpp))
     void PSParallelCompact::track_interior_pointers(oop obj) {
       if (ValidateMarkSweep) {

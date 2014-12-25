@@ -15,7 +15,7 @@ title: constantPoolKlass クラス
 constantPoolOopDesc 用の Klass クラス.
 
 
-```
+```cpp
     ((cite: hotspot/src/share/vm/oops/constantPoolKlass.hpp))
     // A constantPoolKlass is the klass of a constantPoolOop
     

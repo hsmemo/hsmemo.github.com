@@ -1,17 +1,25 @@
 ---
 layout: default
-title: Class のロード/リンク/初期化 ： ロード処理(Loading) 
+title: Class のロード/リンク/初期化 ： ロード処理 (3) ： クラスファイルのパース処理 
 ---
-[Up](no7882ALm.html) [Top](../index.html)
+[Up](nohUsh5oi7.html) [Top](../index.html)
 
-#### Class のロード/リンク/初期化 ： ロード処理(Loading) 
+#### Class のロード/リンク/初期化 ： ロード処理 (3) ： クラスファイルのパース処理 
 
 --- 
 ## 概要(Summary)
-パース処理は, ClassFileParser::parseClassFile() で klassOop を構築し,
-それを (parseClassFile() の呼び出し元が) systemDictionary に登録することで行われる
-(ClassFileParser::parseClassFile() では
- systemDictionary への klassOop の登録はやってくれないため, 呼び出し元が行う必要がある).
+クラスファイルのパース処理は ClassFileParser::parseClassFile() に実装されている.
+
+ClassFileParser::parseClassFile() では, 
+クラスファイルの要素を先頭から読んでいき,
+各要素がクラスファイルの仕様に従っているかどうかを確認するとともに, 
+それぞれに対応するデータ構造を生成していく.
+最終的には, そのクラスを表す klassOop が返される.
+
+## 備考(Notes)
+生成された klassOop は, 
+ClassFileParser::parseClassFile() の呼び出し元が SystemDictionary に登録する必要がある
+(ClassFileParser::parseClassFile() は SystemDictionary への登録はやってくれないため).
 
 
 ```cpp
@@ -25,11 +33,6 @@ title: Class のロード/リンク/初期化 ： ロード処理(Loading)
       // while parsing the stream.
       instanceKlassHandle parseClassFile(Symbol* name,
 ```
-
-ClassFileParser::parseClassFile() によるパース処理は, 
-class ファイルの要素を先頭から読んでいき, 
-その過程で各要素がクラスファイルの仕様に従っているかどうかを確認していく.
-
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ```
@@ -188,7 +191,7 @@ ClassFileParser::parseClassFile()
        -> ClassFileParser::check_final_method_override()
        -> ClassFileParser::check_illegal_static_method()
 
-   (1) mirror を生成する.
+   (1) mirror オブジェクト (= Java レベルでのクラスオブジェクト) を生成する.
        -> java_lang_Class::create_mirror()
 ```
 

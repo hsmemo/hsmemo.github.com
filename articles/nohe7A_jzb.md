@@ -49,7 +49,7 @@ instanceMirrorKlass オブジェクトは, クラス名が java.lang.Class で�
                      -> SystemDictionary::initialize_wk_klasses_until()
                         -> SystemDictionary::initialize_wk_klass()
                            -> SystemDictionary::resolve_or_fail()
-                              -> (See: ... #TODO)
+                              -> (See: [here](noIvSV0NZj.html) for details)
 ```
 
 ### 内部構造(Internal structure)

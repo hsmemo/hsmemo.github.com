@@ -80,7 +80,7 @@ java.lang.ref.Reference の instanceKlass::reference_type() が REF_OTHER に設
                      -> SystemDictionary::initialize_wk_klasses_until()
                         -> SystemDictionary::initialize_wk_klass()
                            -> SystemDictionary::resolve_or_fail()
-                              -> (See: ... #TODO)
+                              -> (See: [here](noIvSV0NZj.html) for details)
 ```
 
 

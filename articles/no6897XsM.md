@@ -19,6 +19,7 @@ title: Memory allocation (& GC 処理)
 * [Memory allocation (& GC 処理) ： メモリの確保処理 (GC 処理) ： 参照オブジェクト (java.lang.ref オブジェクト) の GC 処理 ](no289169tf.html)
 * [Memory allocation (& GC 処理) ： Permanent 領域からの確保処理 ](no28916-pc.html)
 * [Memory allocation (& GC 処理) ： メモリ確保以外の処理パスで発生する GC 処理 (java.lang.System.gc() 等)  ](no28916_jv.html)
+* [(#TBD) Memory allocation (& GC 処理) ： Finalizer の処理](nocCkfpcQQ.html)
 * [(#TBD) Memory allocation (& GC 処理) ： メモリ不足(OutOfMemory)になった場合の処理パス ](no9662DlT.html)
 * [Memory allocation (& GC 処理) ： ヒープの動的サイズ調整/動的パラメータ調整](noArh2RrCV.html)
 

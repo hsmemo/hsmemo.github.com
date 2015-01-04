@@ -21,16 +21,18 @@ title: JNI の処理 ： JNI Functions の処理 ： クラスに関する処理
 ```
 jni_DefineClass()
 -> SystemDictionary::resolve_from_stream()
-   -> (See: [here](notXYWwprj.html) for details)
+   -> (See: [here](noIvSV0NZj.html) for details)
 ```
 
 ### FindClass() の処理
 ```
-jni_FindClass()
+jni_FindClass() (※)
 -> find_class_from_class_loader()
    -> SystemDictionary::resolve_or_fail()
-      -> (See: [here](notXYWwprj.html) for details)
+      -> (See: [here](noIvSV0NZj.html) for details)
 -> CompilationPolicy::completed_vm_startup()  (<= 初回の呼び出し時のみ)
+
+(※) なお, この関数はクラスローダーとして「呼び出し元のクラスをロードしたクラスローダ (呼び出し元のクラスが存在しなければシステムクラスローダー)」を使用.
 ```
 
 ### GetSuperclass() の処理

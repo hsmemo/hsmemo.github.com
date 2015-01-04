@@ -158,7 +158,7 @@ JavaMain()
       -> (ここで HotSpot の起動処理が行われる) (See: [here](no2114J7x.html) for details)
 -> ...#TODO
 -> LoadMainClass()
-   -> (See: [here](notXYWwprj.html) for details)
+   -> (See: [here](noSl0AuhYv.html) for details)
 -> jni_GetStaticMethodID()
 -> jni_CallStaticVoidMethod()
 -> LEAVE() マクロ

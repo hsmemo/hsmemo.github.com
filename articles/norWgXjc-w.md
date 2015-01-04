@@ -358,7 +358,7 @@ See: [here](no3269WqK.html) for details
 #### 参考(for your information): instanceKlass::register_finalizer()
 See: [here](no344nLB.html) for details
 #### 参考(for your information): SystemDictionary::define_instance_class()
-See: [here](no3269wFL.html) for details
+See: [here](no7625r3R.html) for details
 
 
 

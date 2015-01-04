@@ -48,7 +48,7 @@ JPLIS 機能は, libinstrument.so という JVMTI agent, 及び sun.instrument.I
      また, ユーザーが指定した java agent の premain() メソッドの呼び出しも行われる.
      
   5. クラスファイルがロードされると, ClassFileLoadHook 時のコールバック処理で
-     eventHandlerClassFileLoadHook() が呼び出される.
+     eventHandlerClassFileLoadHook() が呼び出される. (See: [here](no2935WjX.html) for details)
 
      この中で, ユーザーが指定した java agent の transform() メソッドの呼び出しが行われる.
   

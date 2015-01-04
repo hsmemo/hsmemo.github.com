@@ -425,22 +425,20 @@ Java のリフレクション(Reflection)機能を実現するためのクラス
      -> Reflection::resolve_field()
      -> Reflection::field_set()
 
-* 
+* バイトコードの verification 処理 (See: [here](no7882amm.html) for details)
 
-  (?? 使用箇所が見当たらない)
-  -> VerifyClassCodes()
-     -> VerifyClass()
-        -> VerifyClassForMajorVersion()
-           -> verify_method()
-              -> verify_opcode_operands()
-                 -> set_protected()
-                    -> JVM_IsSameClassPackage()
-                       -> Reflection::is_same_class_package()
-
-  (?? 使用箇所が見当たらない)
-  -> VerifyClassCodesForMajorVersion()
+  VerifyClassCodes()
+  -> VerifyClass()
      -> VerifyClassForMajorVersion()
-        -> (同上)
+        -> verify_method()
+           -> verify_opcode_operands()
+              -> set_protected()
+                 -> JVM_IsSameClassPackage()
+                    -> Reflection::is_same_class_package()
+
+  VerifyClassCodesForMajorVersion()
+  -> VerifyClassForMajorVersion()
+     -> (同上)
 ```
 
 ### 内部構造(Internal structure)

@@ -16,10 +16,16 @@ IRT_ENTRY(void, InterpreterRuntime::_new(JavaThread* thread, constantPoolOopDesc
 ### 本体部(body)
 ```
   {- -------------------------------------------
-  (1) (変数宣言など)
+  (1) constantPoolOopDesc::klass_at() を呼んで, 対象のクラス(klassOop)を取得する.
+        (この際, 対象クラスが constantPoolOopDesc 中でまだ解決されてなければ解決も行われる)
       ---------------------------------------- -}
 
 	  klassOop k_oop = pool->klass_at(index, CHECK);
+
+  {- -------------------------------------------
+  (1) (変数宣言など)
+      ---------------------------------------- -}
+
 	  instanceKlassHandle klass (THREAD, k_oop);
 	
   {- -------------------------------------------

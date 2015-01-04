@@ -12,7 +12,7 @@ title: HotSpot 内部での処理 ： 詳細(Execution Flows ： Details)
 
 ## Subcategories
 * [HotSpot の起動/終了処理(Starting/Quitting)](noj08pougn.html)
-* [(#TBD) Class 情報の処理](no38NSe1ks.html)
+* [Class 情報の処理](no38NSe1ks.html)
 * [Interpreter に関する処理](nooWY3SS9t.html)
 * [Thread の制御](noJb9iXZL-.html)
 * [Field に関する処理](noUsch6p8F.html)

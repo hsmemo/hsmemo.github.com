@@ -100,6 +100,8 @@ Rewriter::rewrite(instanceKlassHandle klass, TRAPS)
 
       (1) 収集した constant pool cache index の情報を元に constant pool cache (constantPoolCacheOop オブジェクト) を生成する.
           -> Rewriter::make_constant_pool_cache()
+             -> oopFactory::new_constantPoolCache()
+                 -> constantPoolCacheKlass::allocate()
 ```
 
 * Rewriter::relocate_and_link() の処理

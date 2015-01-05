@@ -149,9 +149,14 @@ constantPoolKlass::allocate() というファクトリメソッドが用意さ�
 
 また, これ以降のフィールド宣言されていない領域に実際の Constant Pool 情報が格納されている
 (この部分の大きさは _length フィールドで把握可能).
-この領域では各エントリに固定長(4byte. long と double の場合だけ 8byte)の大きさが割り当てられ,
+この領域では各エントリに固定長の大きさが割り当てられ,
 Constant Pool から読み取った情報のうち tag 情報を除いた部分が埋め込まれている
 (See: constantPoolOopDesc::*_at_put()).
+
+(補足: 
+ クラスファイル中では各情報は(タグ以外は)大きさがばらばらだが, constantPoolOopDesc オブジェクト内では固定長.
+ それぞれ 1byte のタグ(これは _tags フィールド内に収められる)と intptr_t サイズの情報を持つ.
+ なお, long 値と double 値の場合にだけは 2*intptr_t サイズの情報を持つ. これは JVMS と整合させるため(JVMS p98 参照))
 
 
 ```cpp

@@ -62,11 +62,11 @@ oopDesc は以下の様な構造をしている (サブクラスではさらに�
 このクラスのサブクラスは以下のような継承関係を持つ.
 
          oopDesc                    -- 全ての oopDesc の基底. abstract class
-           instanceOopDesc          -- 「Java のインスタンスオブジェクト」を表す oopDesc
+           instanceOopDesc          -- 「Java のインスタンスオブジェクト(及びクラスオブジェクト)」を表す oopDesc
            methodOopDesc            --     (Java の世界に直接は関係しない oopDesc. HotSpot の内部処理用)
            constMethodOopDesc       --     (Java の世界に直接は関係しない oopDesc. HotSpot の内部処理用)
            methodDataOopDesc        --     (Java の世界に直接は関係しない oopDesc. HotSpot の内部処理用)
-           arrayOopDesc             -- 「Java の配列」を表す oopDesc. abstract class
+           arrayOopDesc             -- 「Java の配列」を表す oopDesc の基底. abstract class
              objArrayOopDesc        -- 「Java のポインタ型の配列」を表す oopDesc. 
              typeArrayOopDesc       -- 「Java の primitive 型の配列」を表す oopDesc. 
            constantPoolOopDesc      --     (Java の世界に直接は関係しない oopDesc. HotSpot の内部処理用)

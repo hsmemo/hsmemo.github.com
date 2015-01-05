@@ -172,7 +172,6 @@ See: [here](no19018ZoT.html) for details
 ### objArrayKlassKlass::allocate_objArray_klass()
 See: [here](no19018fRC.html) for details
 ### objArrayKlassKlass::allocate_objArray_klass_impl()
-(#Under Construction)
 See: [here](no19018G3I.html) for details
 
 ### typeArrayKlass::array_klass_impl(bool or_null, int n, TRAPS)

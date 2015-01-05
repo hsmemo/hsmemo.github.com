@@ -216,6 +216,7 @@ StubCodeMark::StubCodeMark() 内で(のみ)生成されている.
 
 なお, StubCodeDesc::_list につなぐ処理はコンストラクタで行われている.
 
+#### 参考(for your information): StubCodeDesc::StubCodeDesc()
 See: [here](no19049fE.html) for details
 
 

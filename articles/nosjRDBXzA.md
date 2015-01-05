@@ -8,67 +8,6 @@ title: HotSpot を構成するクラスの基底クラス群, 及びそれらの
 
 これらは, HotSpot 内で定義されている (ほとんど) 全てのクラスの基底クラス群 (See: [here](no28916gIW.html) and [here](no28916iKk.html) for details).
 
-### 概要(Summary)
-HotSpot を構成するクラスのほとんどは, 以下の5つのうちのどれかのサブクラスとなっている.
-これら 5つの基底クラスには, オブジェクトがメモリ上のどこに確保されるかを示す役割がある.
-
-  * CHeapObj
-
-    malloc() 等で確保される通常のヒープ ("C ヒープ") 上に確保されるオブジェクト
-
-    基本的には, ある程度長期間(あるいは永続的に)存在するオブジェクト. 
-    HotSpot の中心的な部分を構成するオブジェクト群がこれに当たる.
-
-  * ResourceObj 
-
-    C ヒープに確保した一時的な領域 ("ResourceArea") に確保されるオブジェクト (See: ResourceArea).
-
-    基本的にはスレッドローカルで一時的なオブジェクト.
-    何らかの処理中でのみ使用される一時オブジェクトが多い.
-
-  * StackObj
-  
-    スタック上に確保されるオブジェクト.
-
-    基本的には, 特定の処理中に生成され処理が終わったら破棄される一時的なオブジェクト. 
-    何らかの作業を支援するユーティリティ的なクラス等が多い.
-
-  * _ValueObj
-
-    値(value)として扱いたいオブジェクト.
-
-    メモリ上に定まった位置を持たず, 常に値渡しで使用される (ポインタだけが引き渡されるのではなく毎回全ての値がコピーされる).
-    基本的には非常に小さいオブジェクト (フィールドが数個程度) がこのクラスになる模様 (たまにいっぱいあったりするけど...)
-
-  * AllStatic
-
-    static に確保される (= 大域に1つだけ存在する) オブジェクト.
-
-    このクラスのサブクラスは static なフィールド/メソッドしか持たず, インスタンスは生成されない. 
-    基本的には名前空間代わりに使用される.
-
-
-```cpp
-    ((cite: hotspot/src/share/vm/memory/allocation.hpp))
-    // All classes in the virtual machine must be subclassed
-    // by one of the following allocation classes:
-    //
-    // For objects allocated in the resource area (see resourceArea.hpp).
-    // - ResourceObj
-    //
-    // For objects allocated in the C-heap (managed by: free & malloc).
-    // - CHeapObj
-    //
-    // For objects allocated on the stack.
-    // - StackObj
-    //
-    // For embedded objects.
-    // - ValueObj
-    //
-    // For classes used as name spaces.
-    // - AllStatic
-```
-
 
 ### クラス一覧(class list)
 

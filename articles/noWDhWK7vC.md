@@ -28,31 +28,31 @@ title: Decoder クラス
 ### 使われ方(Usage)
 以下のような箇所で使われている.
 
-```
+<div class="flow-abst"><pre>
 * VMError による処理 (print_stack_trace)
 
   VMError::print_stack_trace()
-  -> frame::print_on_error()
-     -> print_C_frame()
-        -> Decoder::can_decode_C_frame_in_vm()
-        -> os::dll_address_to_function_name()
-           -> Decoder::demangle()  (<= Linux/Solaris 版の場合. Windows 版では呼ばれていない)
-           -> Decoder::decode()
+  -&gt; frame::print_on_error()
+     -&gt; print_C_frame()
+        -&gt; Decoder::can_decode_C_frame_in_vm()
+        -&gt; os::dll_address_to_function_name()
+           -&gt; Decoder::demangle()  (&lt;= Linux/Solaris 版の場合. Windows 版では呼ばれていない)
+           -&gt; Decoder::decode()
 
 * VMError による処理 (report_and_die)
 
   VMError::report_and_die()
-  -> VMError::report()
-     -> frame::print_on_error()
-        -> 同上
+  -&gt; VMError::report()
+     -&gt; frame::print_on_error()
+        -&gt; 同上
 
 * FlatProfilerTask による処理
 
   FlatProfilerTask::task()
-  -> FlatProfiler::record_vm_tick()
-     -> os::dll_address_to_function_name()
-        -> 同上
-```
+  -&gt; FlatProfiler::record_vm_tick()
+     -&gt; os::dll_address_to_function_name()
+        -&gt; 同上
+</pre></div>
 
 また, 関連する定数値が ElfFile クラスや ElfSymbolTable クラス, ElfStringTable クラス内で使用されている (See: ElfFile, ElfSymbolTable, ElfStringTable).
 

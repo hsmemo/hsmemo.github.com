@@ -55,12 +55,12 @@ JNI 機能(より具体的に言うと, ネイティブメソッドに対する�
 ### 備考(Notes)
 initialize_converter_functions() の処理は以下のパスで(のみ)行われる.
 
-```
+<div class="flow-abst"><pre>
 universe_post_init()
--> initialize_converter_functions()
-   -> NativeLookup::base_library_lookup()
-      -> NativeLookup::lookup()
-```
+-&gt; initialize_converter_functions()
+   -&gt; NativeLookup::base_library_lookup()
+      -&gt; NativeLookup::lookup()
+</pre></div>
 
 #### 参考(for your information): initialize_converter_functions()
 See: [here](no17119For.html) for details

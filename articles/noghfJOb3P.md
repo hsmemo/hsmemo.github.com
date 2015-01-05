@@ -39,9 +39,9 @@ jni_InvokeInterface は以下のように定義されている.
 ```
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 jni_GetJavaVM()
-```
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### jni_GetJavaVM()

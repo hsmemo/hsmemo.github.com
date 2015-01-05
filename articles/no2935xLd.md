@@ -11,10 +11,10 @@ title: Serviceability 機能 ： JVMTI の処理 ： JVMTI 関数の処理 ： �
 (See: JVMTI 仕様)
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 JvmtiEnv::IsModifiableClass()
--> VM_RedefineClasses::is_modifiable_class()
-```
+-&gt; VM_RedefineClasses::is_modifiable_class()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### JvmtiEnv::IsModifiableClass()

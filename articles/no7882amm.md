@@ -78,36 +78,36 @@ StackMapTable attribute を変更せずにコード部分だけ変更する古�
 * ...
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 Verifier::verify()
--> * type checking verifier を使用する場合
-     -> ClassVerifier::verify_class()
-        -> ClassVerifier::verify_method()
-           -> 
+-&gt; * type checking verifier を使用する場合
+     -&gt; ClassVerifier::verify_class()
+        -&gt; ClassVerifier::verify_method()
+           -&gt; 
 
    * type inference verifier を使用する場合
-     -> Verifier::inference_verify()
-        -> (1) verify 処理用の関数を取得する
+     -&gt; Verifier::inference_verify()
+        -&gt; (1) verify 処理用の関数を取得する
                (可能なら VerifyClassCodesForMajorVersion() を取得. だめなら VerifyClassCodes())
-               -> verify_byte_codes_fn()
-                  -> os::native_java_library()
+               -&gt; verify_byte_codes_fn()
+                  -&gt; os::native_java_library()
 
            (1) 取得した verify 処理用の関数を呼び出す
-               -> * VerifyClassCodesForMajorVersion() の場合
-                    -> VerifyClassForMajorVersion()
-                       -> verify_field()
-                       -> verify_method()
-                          -> verify_opcode_operands()
-                          -> initialize_exception_table()
-                          -> initialize_dataflow()
-                          -> run_dataflow()
-                          -> verify_constant_pool_type()
+               -&gt; * VerifyClassCodesForMajorVersion() の場合
+                    -&gt; VerifyClassForMajorVersion()
+                       -&gt; verify_field()
+                       -&gt; verify_method()
+                          -&gt; verify_opcode_operands()
+                          -&gt; initialize_exception_table()
+                          -&gt; initialize_dataflow()
+                          -&gt; run_dataflow()
+                          -&gt; verify_constant_pool_type()
 
                   * VerifyClassCodes() の場合
-                    -> VerifyClass()
-                       -> VerifyClassForMajorVersion()
-                          -> (同上)
-```
+                    -&gt; VerifyClass()
+                       -&gt; VerifyClassForMajorVersion()
+                          -&gt; (同上)
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### Verifier::verify()

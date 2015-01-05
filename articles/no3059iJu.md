@@ -163,68 +163,68 @@ StubRoutines::call_stub() が作るスタックフレームは以下のような
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### JavaCalls::call() の処理
-```
+<div class="flow-abst"><pre>
 JavaCalls::call()
--> os::os_exception_wrapper()
-   -> JavaCalls::call_helper()
-      -> (1) 必要があれば JIT コンパイルを開始させる.
-             -> CompilationPolicy::must_be_compiled()
-             -> CompileBroker::compile_method()
-                -> (See: [here](no6HzyuMVW.html) for details)
+-&gt; os::os_exception_wrapper()
+   -&gt; JavaCalls::call_helper()
+      -&gt; (1) 必要があれば JIT コンパイルを開始させる.
+             -&gt; CompilationPolicy::must_be_compiled()
+             -&gt; CompileBroker::compile_method()
+                -&gt; (See: <a href="no6HzyuMVW.html">here</a> for details)
          
          (1) メソッドのエントリポイントを取得する
-             -> methodOopDesc::from_interpreted_entry()
-             -> methodOopDesc::interpreter_entry()
+             -&gt; methodOopDesc::from_interpreted_entry()
+             -&gt; methodOopDesc::interpreter_entry()
 
          (1) スタック上の Yellow Page が無効にされていたら, 有効化しておく
-             -> JavaThread::reguard_stack()
+             -&gt; JavaThread::reguard_stack()
 
          (1) スタック上の空き領域が shadow page として十分かどうかを確認し, 十分な物理メモリも割り当てておく (空き領域が足りなければ StackOverflowError)
-             -> os::stack_shadow_pages_available()
-             -> os::bang_stack_shadow_pages()
+             -&gt; os::stack_shadow_pages_available()
+             -&gt; os::bang_stack_shadow_pages()
 
          (1) 指定された Java メソッドの呼び出しを行う
-             -> JavaCallWrapper::JavaCallWrapper()
-             -> StubRoutines::call_stub() が指しているコード (= StubGenerator::generate_call_stub() が生成するコード)
-                -> (実際の呼び出し処理)
-                   -> (実際の呼び出し処理の後, 引き続いて通常のメソッド呼び出し処理が行われる) (See: [here](nop2rLhpmY.html) for details)
-             -> JavaCallWrapper::~JavaCallWrapper()
-```
+             -&gt; JavaCallWrapper::JavaCallWrapper()
+             -&gt; StubRoutines::call_stub() が指しているコード (= StubGenerator::generate_call_stub() が生成するコード)
+                -&gt; (実際の呼び出し処理)
+                   -&gt; (実際の呼び出し処理の後, 引き続いて通常のメソッド呼び出し処理が行われる) (See: <a href="nop2rLhpmY.html">here</a> for details)
+             -&gt; JavaCallWrapper::~JavaCallWrapper()
+</pre></div>
 
 
 ### JavaCalls::call_default_constructor() の処理
-```
+<div class="flow-abst"><pre>
 JavaCalls::call_default_constructor()
--> JavaCalls::call()
-   -> (同上)
-```
+-&gt; JavaCalls::call()
+   -&gt; (同上)
+</pre></div>
 
 ### JavaCalls::call_virtual() の処理
-```
+<div class="flow-abst"><pre>
 JavaCalls::call_virtual()
--> LinkResolver::resolve_virtual_call()
-   -> (See: [here](no7882NqI.html) for details)
--> JavaCalls::call()
-   -> (同上)
-```
+-&gt; LinkResolver::resolve_virtual_call()
+   -&gt; (See: <a href="no7882NqI.html">here</a> for details)
+-&gt; JavaCalls::call()
+   -&gt; (同上)
+</pre></div>
 
 ### JavaCalls::call_special() の処理
-```
+<div class="flow-abst"><pre>
 JavaCalls::call_special()
--> LinkResolver::resolve_special_call()
-   -> (See: [here](no7882NqI.html) for details)
--> JavaCalls::call()
-   -> (同上)
-```
+-&gt; LinkResolver::resolve_special_call()
+   -&gt; (See: <a href="no7882NqI.html">here</a> for details)
+-&gt; JavaCalls::call()
+   -&gt; (同上)
+</pre></div>
 
 ### JavaCalls::call_static() の処理
-```
+<div class="flow-abst"><pre>
 JavaCalls::call_static()
--> LinkResolver::resolve_static_call()
-   -> (See: [here](no7882NqI.html) for details)
--> JavaCalls::call()
-   -> (同上)
-```
+-&gt; LinkResolver::resolve_static_call()
+   -&gt; (See: <a href="no7882NqI.html">here</a> for details)
+-&gt; JavaCalls::call()
+   -&gt; (同上)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

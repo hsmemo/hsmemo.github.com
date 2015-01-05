@@ -55,46 +55,46 @@ TemplateInterpreterGenerator::generate_and_dispatch() によるテンプレー�
   正常箇所しか設定は行われないため, 不正な状態の TOS 用のエントリポイントはそのまま残される.
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
-(See: [here](no3059SwU.html) for details)
--> TemplateInterpreterGenerator::set_entry_points_for_all_bytes()
-   -> * bytecode として無効なエントリの場合:
-        -> TemplateInterpreterGenerator::set_unimplemented()  (<= 異常終了するコードを生成)
+<div class="flow-abst"><pre>
+(See: <a href="no3059SwU.html">here</a> for details)
+-&gt; TemplateInterpreterGenerator::set_entry_points_for_all_bytes()
+   -&gt; * bytecode として無効なエントリの場合:
+        -&gt; TemplateInterpreterGenerator::set_unimplemented()  (&lt;= 異常終了するコードを生成)
       * bytecode として有効なエントリの場合:
-        -> TemplateInterpreterGenerator::set_entry_points()
-           -> * wide prefix 付きではないバイトコードの場合:
-                -> TemplateInterpreterGenerator::set_short_entry_points()
-                   -> * そのバイトコードが想定している TOS 状態が vtos の場合:
-                        -> TemplateInterpreterGenerator::set_vtos_entry_points()
-                           -> TemplateInterpreterGenerator::generate_and_dispatch()
-                              -> (1) 必要に応じてデバッグ用のコードを生成
-                                     -> TemplateInterpreterGenerator::histogram_bytecode()
-                                     -> TemplateInterpreterGenerator::count_bytecode()
-                                     -> TemplateInterpreterGenerator::histogram_bytecode_pair()
-                                     -> TemplateInterpreterGenerator::trace_bytecode()
-                                     -> TemplateInterpreterGenerator::stop_interpreter_at()
+        -&gt; TemplateInterpreterGenerator::set_entry_points()
+           -&gt; * wide prefix 付きではないバイトコードの場合:
+                -&gt; TemplateInterpreterGenerator::set_short_entry_points()
+                   -&gt; * そのバイトコードが想定している TOS 状態が vtos の場合:
+                        -&gt; TemplateInterpreterGenerator::set_vtos_entry_points()
+                           -&gt; TemplateInterpreterGenerator::generate_and_dispatch()
+                              -&gt; (1) 必要に応じてデバッグ用のコードを生成
+                                     -&gt; TemplateInterpreterGenerator::histogram_bytecode()
+                                     -&gt; TemplateInterpreterGenerator::count_bytecode()
+                                     -&gt; TemplateInterpreterGenerator::histogram_bytecode_pair()
+                                     -&gt; TemplateInterpreterGenerator::trace_bytecode()
+                                     -&gt; TemplateInterpreterGenerator::stop_interpreter_at()
                             
                                  (1) テンプレート入り口用のコードを生成.
-                                     -> InterpreterMacroAssembler::dispatch_prolog()
-                                        -> (See: [here](noEgWr8prQ.html) for details)
+                                     -&gt; InterpreterMacroAssembler::dispatch_prolog()
+                                        -&gt; (See: <a href="noEgWr8prQ.html">here</a> for details)
                             
                                  (1) バイトコード本体の処理を行うコードを生成
-                                     -> Template::generate()
-                                        -> (テンプレート毎に異なる生成関数を呼び出す)
+                                     -&gt; Template::generate()
+                                        -&gt; (テンプレート毎に異なる生成関数を呼び出す)
                                            (See: )
                             
                                  (1) テンプレート終了部用のコード(次のバイトコードに遷移する処理)を生成.
-                                     -> InterpreterMacroAssembler::dispatch_epilog()
-                                        -> (See: [here](noEgWr8prQ.html) for details)
+                                     -&gt; InterpreterMacroAssembler::dispatch_epilog()
+                                        -&gt; (See: <a href="noEgWr8prQ.html">here</a> for details)
 
                       * それ以外の場合:
-                        -> TemplateInterpreterGenerator::generate_and_dispatch()
-                           -> (同上)
+                        -&gt; TemplateInterpreterGenerator::generate_and_dispatch()
+                           -&gt; (同上)
               * wide prefix 付きのバイトコードの場合:
-                -> TemplateInterpreterGenerator::set_wide_entry_point()
-                   -> TemplateInterpreterGenerator::generate_and_dispatch()
-                      -> (同上)
-```
+                -&gt; TemplateInterpreterGenerator::set_wide_entry_point()
+                   -&gt; TemplateInterpreterGenerator::generate_and_dispatch()
+                      -&gt; (同上)
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### TemplateInterpreterGenerator::set_entry_points_for_all_bytes()

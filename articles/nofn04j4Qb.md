@@ -33,7 +33,7 @@ vframe クラス関連のクラス (具体的には interpretedVFrame, compiledV
 以下の箇所で(のみ)生成されている
 (ただし, ResourceObjクラスなので一時的なオブジェクト).
 
-```
+<div class="flow-abst"><pre>
 * 脱最適化処理 (Deoptimization 処理)
 
   * vframeArrayElement::fill_in()
@@ -44,7 +44,7 @@ vframe クラス関連のクラス (具体的には interpretedVFrame, compiledV
   * interpretedVFrame::expressions()
   * compiledVFrame::locals()
   * compiledVFrame::expressions()
-```
+</pre></div>
 
 ### 内部構造(Internal structure)
 実際の値の情報は StackValue 内に格納されている.

@@ -134,11 +134,11 @@ sun.rt.applicationTime についてはアクセス用の jmm の関数までは�
 (しかしこれらは Java のクラスからは使われていない...).
 (他の PerfData についてはアクセス用の jmm 関数も用意されていない).
 
-```
-  -> jmm_GetLongAttribute()
-     -> get_long_attribute()  (引数が JMM_TOTAL_APP_TIME_MS の場合)
-        -> RuntimeService::application_time_ms()
-```
+<div class="flow-abst"><pre>
+  -&gt; jmm_GetLongAttribute()
+     -&gt; get_long_attribute()  (引数が JMM_TOTAL_APP_TIME_MS の場合)
+        -&gt; RuntimeService::application_time_ms()
+</pre></div>
 
 
 

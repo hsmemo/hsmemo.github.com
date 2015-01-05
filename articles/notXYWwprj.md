@@ -13,29 +13,29 @@ title: (#TBD) Class のロード/リンク/初期化 ： ロード処理の開�
 (この処理は Threads::create_vm() 内で呼び出される各種の関数内で行われる模様. (<= 他にないか？#TODO))
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
-(HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
--> Threads::create_vm()
-   -> init_globals()
-      -> universe2_init()
-         -> Universe::genesis()
-            -> SystemDictionary::initialize()
-               -> SystemDictionary::initialize_preloaded_classes()
-                  -> 
-      -> universe_post_init()
-         -> 
+<div class="flow-abst"><pre>
+(HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+-&gt; Threads::create_vm()
+   -&gt; init_globals()
+      -&gt; universe2_init()
+         -&gt; Universe::genesis()
+            -&gt; SystemDictionary::initialize()
+               -&gt; SystemDictionary::initialize_preloaded_classes()
+                  -&gt; 
+      -&gt; universe_post_init()
+         -&gt; 
 
-   -> initialize_class()  (※)
-      -> (1) 対象クラスを取得する. まだロードされていなければロードも行う.
-             -> SystemDictionary::resolve_or_fail()
-                -> (See: [here](noIvSV0NZj.html) for details)
+   -&gt; initialize_class()  (※)
+      -&gt; (1) 対象クラスを取得する. まだロードされていなければロードも行う.
+             -&gt; SystemDictionary::resolve_or_fail()
+                -&gt; (See: <a href="noIvSV0NZj.html">here</a> for details)
 
          (2) 対象クラスのリンクおよび初期化を行う
-             -> instanceKlass::initialize()
-                -> (See: [here](no9AAGw84F.html) for details)
+             -&gt; instanceKlass::initialize()
+                -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
 
 (※) なお, この関数はクラスローダーとして「ブートストラップ・クラスローダ」を使用.
-```
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### Threads::create_vm()

@@ -51,26 +51,26 @@ title: AllocationProfiler クラス (AllocationProfiler, 及びその補助ク�
 #### 使用箇所(where its instances are used)
 以下の箇所で(のみ)使用されている.
 
-```
+<div class="flow-abst"><pre>
 * 初期化時に, 計測が開始される.
   
   Threads::create_vm()
-  -> AllocationProfiler::engage()
+  -&gt; AllocationProfiler::engage()
 
 * G1CollectedHeap または GenCollectedHeap 使用時にのみ, GC 前に情報が出力される.
   
   G1CollectedHeap::gc_prologue()
-  -> AllocationProfiler::iterate_since_last_gc()
+  -&gt; AllocationProfiler::iterate_since_last_gc()
   
   GenCollectedHeap::gc_prologue()
-  -> AllocationProfiler::iterate_since_last_gc()
+  -&gt; AllocationProfiler::iterate_since_last_gc()
 
 * HotSpot の終了時に, 計測を終了し, 情報が出力される.
   
   before_exit()
-  -> AllocationProfiler::disengage()
-  -> AllocationProfiler::print()
-```
+  -&gt; AllocationProfiler::disengage()
+  -&gt; AllocationProfiler::print()
+</pre></div>
 
 
 

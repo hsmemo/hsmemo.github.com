@@ -17,34 +17,34 @@ ClassLoadingService クラスまたは ClassLoader クラス内の値を取得�
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### sun.management.HotspotClassLoadingMBean.getLoadedClassSize() の処理
-```
+<div class="flow-abst"><pre>
 sun.management.HotspotClassLoading.getLoadedClassSize()
--> sun.management.VMManagementImpl.getLoadedClassSize()
-   -> Java_sun_management_VMManagementImpl_getLoadedClassSize()
-      -> jmm_GetLongAttribute()  (JMM_CLASS_LOADED_BYTES を引数として呼び出される)
-         -> get_long_attribute()
-            -> ClassLoadingService::loaded_class_bytes()
-```
+-&gt; sun.management.VMManagementImpl.getLoadedClassSize()
+   -&gt; Java_sun_management_VMManagementImpl_getLoadedClassSize()
+      -&gt; jmm_GetLongAttribute()  (JMM_CLASS_LOADED_BYTES を引数として呼び出される)
+         -&gt; get_long_attribute()
+            -&gt; ClassLoadingService::loaded_class_bytes()
+</pre></div>
 
 ### sun.management.HotspotClassLoadingMBean.getUnloadedClassSize() の処理
-```
+<div class="flow-abst"><pre>
 sun.management.HotspotClassLoading.getUnloadedClassSize()
--> sun.management.VMManagementImpl.getUnloadedClassSize()
-   -> Java_sun_management_VMManagementImpl_getUnloadedClassSize()
-      -> jmm_GetLongAttribute()  (JMM_CLASS_UNLOADED_BYTES を引数として呼び出される)
-         -> get_long_attribute()
-            -> ClassLoadingService::unloaded_class_bytes()
-```
+-&gt; sun.management.VMManagementImpl.getUnloadedClassSize()
+   -&gt; Java_sun_management_VMManagementImpl_getUnloadedClassSize()
+      -&gt; jmm_GetLongAttribute()  (JMM_CLASS_UNLOADED_BYTES を引数として呼び出される)
+         -&gt; get_long_attribute()
+            -&gt; ClassLoadingService::unloaded_class_bytes()
+</pre></div>
 
 ### sun.management.HotspotClassLoadingMBean.getMethodDataSize() の処理
-```
+<div class="flow-abst"><pre>
 sun.management.HotspotClassLoading.getMethodDataSize()
--> sun.management.VMManagementImpl.getMethodDataSize()
-   -> Java_sun_management_VMManagementImpl_getMethodDataSize()
-      -> jmm_GetLongAttribute()  (JMM_METHOD_DATA_SIZE_BYTES を引数として呼び出される)
-         -> get_long_attribute()
-            -> ClassLoadingService::class_method_data_size()
-```
+-&gt; sun.management.VMManagementImpl.getMethodDataSize()
+   -&gt; Java_sun_management_VMManagementImpl_getMethodDataSize()
+      -&gt; jmm_GetLongAttribute()  (JMM_METHOD_DATA_SIZE_BYTES を引数として呼び出される)
+         -&gt; get_long_attribute()
+            -&gt; ClassLoadingService::class_method_data_size()
+</pre></div>
 
 ### ... (#TODO)
 

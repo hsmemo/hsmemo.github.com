@@ -21,14 +21,14 @@ HotSpot の起動処理中にこのメソッドが呼び出される.
 management-agent.jar という JPLIS agent (java agent) を Dynamic Attach することでも起動可能.
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
-(HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
--> Threads::create_vm()
-   -> Management::initialize()
-      -> JavaCalls::call_static()
-         -> (See: [here](no3059iJu.html) for details)
-            -> sun.management.Agent.startAgent()
-```
+<div class="flow-abst"><pre>
+(HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+-&gt; Threads::create_vm()
+   -&gt; Management::initialize()
+      -&gt; JavaCalls::call_static()
+         -&gt; (See: <a href="no3059iJu.html">here</a> for details)
+            -&gt; sun.management.Agent.startAgent()
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

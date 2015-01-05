@@ -116,12 +116,12 @@ HeapRegion 用の DirtyCardToOopClosure クラス (See: DirtyCardToOopClosure).
 HeapRegion::new_dcto_closure() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
-(略) (See: [here](no2935YzN.html) for details)
--> ScanRSClosure::doHeapRegion()
-   -> ScanRSClosure::scanCard()
-      -> HeapRegion::new_dcto_closure()
-```
+<div class="flow-abst"><pre>
+(略) (See: <a href="no2935YzN.html">here</a> for details)
+-&gt; ScanRSClosure::doHeapRegion()
+   -&gt; ScanRSClosure::scanCard()
+      -&gt; HeapRegion::new_dcto_closure()
+</pre></div>
 
 #### 使用箇所(where its instances are used)
 ScanRSClosure::scanCard() 内で(のみ)使用されている.
@@ -265,11 +265,11 @@ G1CollectedHeap の Major GC 処理で使用される Closure クラス (See: [h
 HeapRegion::next_compaction_space() 内で(のみ)使用されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
-(略) (See: [here](no2935ATn.html) for details)
--> G1MarkSweep::mark_sweep_phase2()
-   -> HeapRegion::next_compaction_space()
-```
+<div class="flow-abst"><pre>
+(略) (See: <a href="no2935ATn.html">here</a> for details)
+-&gt; G1MarkSweep::mark_sweep_phase2()
+   -&gt; HeapRegion::next_compaction_space()
+</pre></div>
 
 
 

@@ -56,158 +56,158 @@ HotSpot 内の統計情報を出力する機能.
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### shared memory file ("hsperfdata" ファイル) の生成処理
-```
-(HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
--> Threads::create_vm()
-   -> vm_init_globals()
-      -> perfMemory_init()
-         -> PerfMemory::initialize()
-            -> PerfMemory::create_memory_region()  (<= この処理は OS 毎に異なる)
-               -> * Linux の場合:
-                    -> * shared file を作らない場合
-                         -> 
+<div class="flow-abst"><pre>
+(HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+-&gt; Threads::create_vm()
+   -&gt; vm_init_globals()
+      -&gt; perfMemory_init()
+         -&gt; PerfMemory::initialize()
+            -&gt; PerfMemory::create_memory_region()  (&lt;= この処理は OS 毎に異なる)
+               -&gt; * Linux の場合:
+                    -&gt; * shared file を作らない場合
+                         -&gt; 
                        * shared file を作る場合
-                         -> create_shared_memory()
-                            -> mmap_create_shared()
-                               -> (1) shared memory を作るディレクトリ名を計算 (/tmp/hsperfdata_${user-name})
-                                      -> get_user_tmp_dir()
+                         -&gt; create_shared_memory()
+                            -&gt; mmap_create_shared()
+                               -&gt; (1) shared memory を作るディレクトリ名を計算 (/tmp/hsperfdata_${user-name})
+                                      -&gt; get_user_tmp_dir()
       
                                   (2) shared memory file のファイル名を計算 (${vm-id})
-                                      -> get_sharedmem_filename()
+                                      -&gt; get_sharedmem_filename()
       
                                   (3) shared memory file を作成
-                                      -> create_sharedmem_resources()
+                                      -&gt; create_sharedmem_resources()
 
                   * Solaris の場合:
-                    -> 
+                    -&gt; 
 
                   * Windows の場合:
-                    -> 
-```
+                    -&gt; 
+</pre></div>
 
 ### hsperfdata ファイルの初期化完了を宣言する処理
 (PerfDataPrologue::accessible フィールドを true に変更する処理. 
  これが終わると sun.jvmstat.perfdata.monitor.v2_0.isAccessible() が true を返すようになる)
 
-```
-(HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
--> Threads::create_vm()
-   -> TraceVmCreationTime::end()
-      -> Management::record_vm_startup_time()
-         -> PerfMemory::set_accessible()
-```
+<div class="flow-abst"><pre>
+(HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+-&gt; Threads::create_vm()
+   -&gt; TraceVmCreationTime::end()
+      -&gt; Management::record_vm_startup_time()
+         -&gt; PerfMemory::set_accessible()
+</pre></div>
 
 ### PerfData の生成処理 (& hsperfdata ファイル中に PerfData を確保する処理)
-```
+<div class="flow-abst"><pre>
 PerfLong::PerfLong()
--> PerfData::create_entry()
-   -> PerfMemory::alloc()
-      -> 
+-&gt; PerfData::create_entry()
+   -&gt; PerfMemory::alloc()
+      -&gt; 
 
 PerfByteArray::PerfByteArray()
--> PerfData::create_entry()
-   -> (同上)
+-&gt; PerfData::create_entry()
+   -&gt; (同上)
 
 PerfDataManager::create_string_constant()
--> PerfString::PerfString()
-   -> PerfByteArray::PerfByteArray()
-      -> (同上)
+-&gt; PerfString::PerfString()
+   -&gt; PerfByteArray::PerfByteArray()
+      -&gt; (同上)
 
 PerfDataManager::create_long_constant()
--> PerfLongConstant::PerfLongConstant()
-   -> PerfLong::PerfLong()
-      -> (同上)
+-&gt; PerfLongConstant::PerfLongConstant()
+   -&gt; PerfLong::PerfLong()
+      -&gt; (同上)
 
 PerfDataManager::create_string_variable(CounterNS ns, const char* name, jint max_length, const char* s, TRAPS)
--> PerfStringVariable::PerfStringVariable()
-   -> PerfString::PerfString()
-      -> (同上)
+-&gt; PerfStringVariable::PerfStringVariable()
+   -&gt; PerfString::PerfString()
+      -&gt; (同上)
 
 PerfDataManager::create_string_variable(CounterNS ns, const char* name, const char *s, TRAPS)
--> PerfDataManager::create_string_variable(CounterNS ns, const char* name, jint max_length, const char* s, TRAPS)
-   -> (同上)
+-&gt; PerfDataManager::create_string_variable(CounterNS ns, const char* name, jint max_length, const char* s, TRAPS)
+   -&gt; (同上)
 
-PerfDataManager::create_long_variable()  (<= 正確には, 引数違いのものが4種類存在. ただし基本的には全て同じ)
--> PerfLongVariable::PerfLongVariable()
-   -> PerfLongVariant::PerfLongVariant()
-      -> PerfLong::PerfLong()
-         -> (同上)
+PerfDataManager::create_long_variable()  (&lt;= 正確には, 引数違いのものが4種類存在. ただし基本的には全て同じ)
+-&gt; PerfLongVariable::PerfLongVariable()
+   -&gt; PerfLongVariant::PerfLongVariant()
+      -&gt; PerfLong::PerfLong()
+         -&gt; (同上)
 
-PerfDataManager::create_long_counter()  (<= 正確には, 引数違いのものが4種類存在. ただし基本的には全て同じ)
--> PerfLongCounter::PerfLongCounter()
-   -> PerfLongVariant::PerfLongVariant()
-      -> (同上)
+PerfDataManager::create_long_counter()  (&lt;= 正確には, 引数違いのものが4種類存在. ただし基本的には全て同じ)
+-&gt; PerfLongCounter::PerfLongCounter()
+   -&gt; PerfLongVariant::PerfLongVariant()
+      -&gt; (同上)
 
 PerfDataManager::create_constant()
--> PerfDataManager::create_long_constant()
-   -> (同上)
+-&gt; PerfDataManager::create_long_constant()
+   -&gt; (同上)
 
-PerfDataManager::create_variable()  (<= 正確には, 引数違いのものが4種類存在. ただし基本的には全て同じ)
--> PerfDataManager::create_long_variable()
-   -> (同上)
+PerfDataManager::create_variable()  (&lt;= 正確には, 引数違いのものが4種類存在. ただし基本的には全て同じ)
+-&gt; PerfDataManager::create_long_variable()
+   -&gt; (同上)
 
-PerfDataManager::create_counter()  (<= 正確には, 引数違いのものが4種類存在. ただし基本的には全て同じ)
--> PerfDataManager::create_long_counter()
-   -> (同上)
-```
+PerfDataManager::create_counter()  (&lt;= 正確には, 引数違いのものが4種類存在. ただし基本的には全て同じ)
+-&gt; PerfDataManager::create_long_counter()
+   -&gt; (同上)
+</pre></div>
 
 ### PerfData への記録処理
 
 
 ### hsperfdata への値の反映処理
-```
+<div class="flow-abst"><pre>
 PerfLongVariant::PerfLongVariant()
--> PerfLongVariant::sample()
+-&gt; PerfLongVariant::sample()
 
 StatSamplerTask::task()
--> StatSampler::collect_sample()
-   -> StatSampler::sample_data()
-      -> PerfData::sample() (をサブクラスがオーバーライドしたもの)
+-&gt; StatSampler::collect_sample()
+   -&gt; StatSampler::sample_data()
+      -&gt; PerfData::sample() (をサブクラスがオーバーライドしたもの)
 
 StatSampler::disengage()
--> StatSampler::sample_data()
-   -> (同上)
-```
+-&gt; StatSampler::sample_data()
+   -&gt; (同上)
+</pre></div>
 
 
 ### hsperfdata ファイルを破棄する処理
-```
+<div class="flow-abst"><pre>
 (See: )
--> perfMemory_exit()
-   -> PerfDataManager::destroy()
-   -> PerfMemory::destroy()
-      -> PerfMemory::delete_memory_region()  (<= この処理は OS 毎に異なる)
-         -> * Linux の場合:
-              -> (1) データをファイルに保存する (<= 必要があれば行う. より具体的に言うと PerfDataSaveToFile 及び PerfDataSaveFile が指定されている場合にのみ行う)
-                     -> save_memory_to_file()
+-&gt; perfMemory_exit()
+   -&gt; PerfDataManager::destroy()
+   -&gt; PerfMemory::destroy()
+      -&gt; PerfMemory::delete_memory_region()  (&lt;= この処理は OS 毎に異なる)
+         -&gt; * Linux の場合:
+              -&gt; (1) データをファイルに保存する (&lt;= 必要があれば行う. より具体的に言うと PerfDataSaveToFile 及び PerfDataSaveFile が指定されている場合にのみ行う)
+                     -&gt; save_memory_to_file()
       
                  (2) メモリ領域を削除する
                      * shared file を作らなかった場合
-                       -> delete_standard_memory()
+                       -&gt; delete_standard_memory()
                      * shared file を作った場合
-                       -> delete_shared_memory()
+                       -&gt; delete_shared_memory()
 
             * Solaris の場合:
-              -> 
+              -&gt; 
 
             * Windows の場合:
-              -> 
-```
+              -&gt; 
+</pre></div>
 
 
 ### 他 HotSpot の hsperfdata ファイルにアタッチする処理
-```
+<div class="flow-abst"><pre>
 sun.misc.Perf.attach()
--> Perf_Attach()
-   -> PerfMemory::attach()
-```
+-&gt; Perf_Attach()
+   -&gt; PerfMemory::attach()
+</pre></div>
 
 ### 他 HotSpot の hsperfdata ファイルからデタッチする処理
-```
+<div class="flow-abst"><pre>
 sun.misc.Perf.detach()
--> Perf_Detach()
-   -> PerfMemory::detach()
-```
+-&gt; Perf_Detach()
+   -&gt; PerfMemory::detach()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 

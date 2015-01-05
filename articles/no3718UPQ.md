@@ -54,60 +54,60 @@ JvmtiDeferredEvent::post() を呼び出すことでイベント通知処理を�
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### (1) イベントの生成と ServiceThread の起床処理 (CompiledMethodLoad の場合)
-```
-(略) (See: [here](no3718SNC.html) for details)
--> ciEnv::register_method()
-   -> nmethod::post_compiled_method_load_event()
-      -> nmethod::get_and_cache_jmethod_id()
-      -> JvmtiDeferredEvent::compiled_method_load_event()
-      -> JvmtiDeferredEventQueue::enqueue()
+<div class="flow-abst"><pre>
+(略) (See: <a href="no3718SNC.html">here</a> for details)
+-&gt; ciEnv::register_method()
+   -&gt; nmethod::post_compiled_method_load_event()
+      -&gt; nmethod::get_and_cache_jmethod_id()
+      -&gt; JvmtiDeferredEvent::compiled_method_load_event()
+      -&gt; JvmtiDeferredEventQueue::enqueue()
 
-(略) (See: [here](no293548G.html) for details)
--> AdapterHandlerLibrary::create_native_wrapper()
-   -> nmethod::post_compiled_method_load_event()
-      -> (同上)
-```
+(略) (See: <a href="no293548G.html">here</a> for details)
+-&gt; AdapterHandlerLibrary::create_native_wrapper()
+   -&gt; nmethod::post_compiled_method_load_event()
+      -&gt; (同上)
+</pre></div>
 
 ### (1) イベントの生成と ServiceThread の起床処理 (CompiledMethodUnload の場合)
-```
+<div class="flow-abst"><pre>
 (略) (See: ...)
--> nmethod::make_unloaded()
-   -> nmethod::post_compiled_method_unload()
-      -> JvmtiDeferredEvent::compiled_method_unload_event()
-      -> * safepoint 中の場合
-           -> JvmtiDeferredEventQueue::add_pending_event()
+-&gt; nmethod::make_unloaded()
+   -&gt; nmethod::post_compiled_method_unload()
+      -&gt; JvmtiDeferredEvent::compiled_method_unload_event()
+      -&gt; * safepoint 中の場合
+           -&gt; JvmtiDeferredEventQueue::add_pending_event()
          * そうではない場合
-           -> JvmtiDeferredEventQueue::enqueue()
+           -&gt; JvmtiDeferredEventQueue::enqueue()
 
 (略) (See: ...)
--> nmethod::make_not_entrant_or_zombie()
-   -> nmethod::post_compiled_method_unload()
-      -> (同上)
-```
+-&gt; nmethod::make_not_entrant_or_zombie()
+   -&gt; nmethod::post_compiled_method_unload()
+      -&gt; (同上)
+</pre></div>
 
 ### (1) イベントの生成と ServiceThread の起床処理 (DynamicCodeGenerated の場合)
-```
+<div class="flow-abst"><pre>
 JvmtiExport::post_dynamic_code_generated(const char *name, const void *code_begin, const void *code_end)
--> * HotSpot の起動中の場合:
-     -> JvmtiExport::post_dynamic_code_generated_internal()
+-&gt; * HotSpot の起動中の場合:
+     -&gt; JvmtiExport::post_dynamic_code_generated_internal()
    * それ以外の場合:
-     -> JvmtiDeferredEvent::dynamic_code_generated_event()
-     -> JvmtiDeferredEventQueue::enqueue()
-```
+     -&gt; JvmtiDeferredEvent::dynamic_code_generated_event()
+     -&gt; JvmtiDeferredEventQueue::enqueue()
+</pre></div>
 
 ### (2) ServiceThread による通知機能の呼び出し
-```
+<div class="flow-abst"><pre>
 ServiceThread::service_thread_entry()
--> JvmtiDeferredEventQueue::has_events()
--> JvmtiDeferredEventQueue::dequeue()
--> JvmtiDeferredEvent::post()
-   -> * CompiledMethodLoad の場合:
-        -> JvmtiExport::post_compiled_method_load()
+-&gt; JvmtiDeferredEventQueue::has_events()
+-&gt; JvmtiDeferredEventQueue::dequeue()
+-&gt; JvmtiDeferredEvent::post()
+   -&gt; * CompiledMethodLoad の場合:
+        -&gt; JvmtiExport::post_compiled_method_load()
       * CompiledMethodUnload の場合:
-        -> JvmtiExport::post_compiled_method_unload()
+        -&gt; JvmtiExport::post_compiled_method_unload()
       * DynamicCodeGenerated の場合:
-        -> JvmtiExport::post_dynamic_code_generated_internal()
-```
+        -&gt; JvmtiExport::post_dynamic_code_generated_internal()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### nmethod::post_compiled_method_load_event()

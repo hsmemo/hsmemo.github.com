@@ -18,32 +18,32 @@ ContiguousSpace::par_allocate_impl() または ContiguousSpace::allocate_impl() 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### DefNewGeneration の場合
 #### Generation::par_allocate() の処理
-```
+<div class="flow-abst"><pre>
 DefNewGeneration::par_allocate()
--> EdenSpace::par_allocate()
-   -> ContiguousSpace::par_allocate_impl()
-```
+-&gt; EdenSpace::par_allocate()
+   -&gt; ContiguousSpace::par_allocate_impl()
+</pre></div>
 
 #### Generation::allocate() の処理
-```
+<div class="flow-abst"><pre>
 DefNewGeneration::allocate()
--> (1) Eden 領域中からの確保を試みる. 成功すれば結果をリターン
-       -> EdenSpace::par_allocate()
-          -> (同上)
+-&gt; (1) Eden 領域中からの確保を試みる. 成功すれば結果をリターン
+       -&gt; EdenSpace::par_allocate()
+          -&gt; (同上)
    (1) Eden 領域の soft limit を増加させて確保を試みる. 成功すれば結果をリターン
    (1) From 領域中からの確保を試みる
-       -> DefNewGeneration::allocate_from_space()
-          -> ContiguousSpace::allocate()
-             -> ContiguousSpace::allocate_impl()
-```
+       -&gt; DefNewGeneration::allocate_from_space()
+          -&gt; ContiguousSpace::allocate()
+             -&gt; ContiguousSpace::allocate_impl()
+</pre></div>
 
 ### TenuredGeneration の場合
 #### Generation::allocate() の処理
-```
+<div class="flow-abst"><pre>
 OneContigSpaceCardGeneration::allocate()
--> ContiguousSpace::allocate()
-   -> (同上)
-```
+-&gt; ContiguousSpace::allocate()
+   -&gt; (同上)
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### DefNewGeneration::par_allocate()

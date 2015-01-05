@@ -348,13 +348,13 @@ DivModNode クラスの具象サブクラスの1つ.
 DivModINode::make() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 Compile::Optimize()
--> Compile::final_graph_reshaping()
-   -> final_graph_reshaping_walk()
-      -> final_graph_reshaping_impl()
-         -> DivModINode::make()
-```
+-&gt; Compile::final_graph_reshaping()
+   -&gt; final_graph_reshaping_walk()
+      -&gt; final_graph_reshaping_impl()
+         -&gt; DivModINode::make()
+</pre></div>
 
 (<= final_graph_reshaping_impl() 内で引数が同じ DivINode と ModINode が見つかれば, その2つがマージされて作成される)
 
@@ -416,13 +416,13 @@ DivModNode クラスの具象サブクラスの1つ.
 DivModLNode::make() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 Compile::Optimize()
--> Compile::final_graph_reshaping()
-   -> final_graph_reshaping_walk()
-      -> final_graph_reshaping_impl()
-         -> DivModLNode::make()
-```
+-&gt; Compile::final_graph_reshaping()
+   -&gt; final_graph_reshaping_walk()
+      -&gt; final_graph_reshaping_impl()
+         -&gt; DivModLNode::make()
+</pre></div>
 
 (<= final_graph_reshaping_impl() 内で引数が同じ DivLNode と ModLNode が見つかれば, その2つがマージされて作成される)
 

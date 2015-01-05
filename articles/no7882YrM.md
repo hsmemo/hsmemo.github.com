@@ -61,56 +61,56 @@ JPLIS 機能は, libinstrument.so という JVMTI agent, 及び sun.instrument.I
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### Agent_OnLoad() での処理
-```
+<div class="flow-abst"><pre>
 Agent_OnLoad()
--> createNewJPLISAgent()
-   -> allocateJPLISAgent()
-      -> allocate()
-   -> initializeJPLISAgent()
--> parseArgumentTail()
--> readAttributes()
--> getAttribute()
--> appendClassPath()
--> ...
--> recordCommandLineData()
-```
+-&gt; createNewJPLISAgent()
+   -&gt; allocateJPLISAgent()
+      -&gt; allocate()
+   -&gt; initializeJPLISAgent()
+-&gt; parseArgumentTail()
+-&gt; readAttributes()
+-&gt; getAttribute()
+-&gt; appendClassPath()
+-&gt; ...
+-&gt; recordCommandLineData()
+</pre></div>
 
 ### VMInit コールバックでの処理
-```
+<div class="flow-abst"><pre>
 eventHandlerVMInit()
--> processJavaStart()
-   -> createInstrumentationImpl()
-   -> setLivePhaseEventHandlers()
-   -> startJavaAgent()
-      -> invokeJavaAgentMainMethod()
-         -> jni_CallVoidMethod()
-            -> (See: [here](no3059-0k.html) for details)
-               -> sun.instrument.InstrumentationImpl.loadClassAndCallPremain()
-                  -> sun.instrument.InstrumentationImpl.loadClassAndStartAgent()
-                     -> java.lang.Class.getDeclaredMethod()   (<= premain() メソッドの取得)
-                     -> java.lang.reflect.Method.invoke()
-                        -> (ユーザーが指定した java agent の premain() メソッドが呼び出される)
-   -> deallocateCommandLineData()
-```
+-&gt; processJavaStart()
+   -&gt; createInstrumentationImpl()
+   -&gt; setLivePhaseEventHandlers()
+   -&gt; startJavaAgent()
+      -&gt; invokeJavaAgentMainMethod()
+         -&gt; jni_CallVoidMethod()
+            -&gt; (See: <a href="no3059-0k.html">here</a> for details)
+               -&gt; sun.instrument.InstrumentationImpl.loadClassAndCallPremain()
+                  -&gt; sun.instrument.InstrumentationImpl.loadClassAndStartAgent()
+                     -&gt; java.lang.Class.getDeclaredMethod()   (&lt;= premain() メソッドの取得)
+                     -&gt; java.lang.reflect.Method.invoke()
+                        -&gt; (ユーザーが指定した java agent の premain() メソッドが呼び出される)
+   -&gt; deallocateCommandLineData()
+</pre></div>
 
 ### ClassFileLoadHook コールバックでの処理
-```
+<div class="flow-abst"><pre>
 eventHandlerClassFileLoadHook()
--> transformClassFile()
-   -> jni_CallObjectMethod()
-      -> (See: [here](no3059-0k.html) for details)
-         -> sun.instrument.InstrumentationImpl.transform()
-            -> sun.instrument.TransformerManager.transform()
-               -> (ユーザーが指定した java agent の transform() メソッドが呼び出される)
-```
+-&gt; transformClassFile()
+   -&gt; jni_CallObjectMethod()
+      -&gt; (See: <a href="no3059-0k.html">here</a> for details)
+         -&gt; sun.instrument.InstrumentationImpl.transform()
+            -&gt; sun.instrument.TransformerManager.transform()
+               -&gt; (ユーザーが指定した java agent の transform() メソッドが呼び出される)
+</pre></div>
 
 ### java.lang.instrument.Instrumentation クラスの処理
 #### java.lang.instrument.Instrumentation.addTransformer() の処理
-```
+<div class="flow-abst"><pre>
 sun.instrument.InstrumentationImpl.addTransformer(ClassFileTransformer transformer)
--> sun.instrument.InstrumentationImpl.addTransformer(ClassFileTransformer transformer, boolean canRetransform)
-   -> sun.instrument.TransformerManager.addTransformer()
-```
+-&gt; sun.instrument.InstrumentationImpl.addTransformer(ClassFileTransformer transformer, boolean canRetransform)
+   -&gt; sun.instrument.TransformerManager.addTransformer()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### Agent_OnLoad()

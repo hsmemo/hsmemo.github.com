@@ -890,12 +890,12 @@ JvmtiThreadEventMark が JNI Handle 化して保護する範囲に加えて,
 
 そして, この関数は現在は以下のパスで(のみ)呼び出されている (See: [here](no2935WjX.html) for details).
 
-```
+<div class="flow-abst"><pre>
 JvmtiExport::post_class_file_load_hook()
--> JvmtiClassFileLoadHookPoster::post()
-   -> JvmtiClassFileLoadHookPoster::post_all_envs()
-      -> JvmtiClassFileLoadHookPoster::post_to_env()
-```
+-&gt; JvmtiClassFileLoadHookPoster::post()
+   -&gt; JvmtiClassFileLoadHookPoster::post_all_envs()
+      -&gt; JvmtiClassFileLoadHookPoster::post_to_env()
+</pre></div>
 
 
 

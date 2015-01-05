@@ -33,13 +33,13 @@ JIT Compiler から各メソッド呼び出し箇所 (invoke*バイトコード)
 #### 使用箇所(where its instances are used)
 ciMethod::call_profile_at_bci() は以下の箇所で(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 Compile::call_generator()
--> ciMethod::call_profile_at_bci()
+-&gt; ciMethod::call_profile_at_bci()
 
 GraphKit::maybe_cast_profiled_receiver()
--> ciMethod::call_profile_at_bci()
-```
+-&gt; ciMethod::call_profile_at_bci()
+</pre></div>
 
 ### 内部構造(Internal structure)
 実際のプロファイル情報は, 

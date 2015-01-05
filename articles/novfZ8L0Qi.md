@@ -129,23 +129,23 @@ sun.management.ClassLoadingImpl クラス及び sun.management.HotspotClassLoadi
 一応アクセス用の jmm の関数までは用意されている
 (しかしこれらは Java のクラスからは使われていない...).
 
-```
-  -> jmm_GetLongAttribute()
-     -> get_long_attribute()  (引数が JMM_SHARED_CLASS_LOADED_COUNT の場合)
-        -> ClassLoadingService::loaded_shared_class_count()
+<div class="flow-abst"><pre>
+  -&gt; jmm_GetLongAttribute()
+     -&gt; get_long_attribute()  (引数が JMM_SHARED_CLASS_LOADED_COUNT の場合)
+        -&gt; ClassLoadingService::loaded_shared_class_count()
 
-  -> jmm_GetLongAttribute()
-     -> get_long_attribute()  (引数が JMM_SHARED_CLASS_UNLOADED_COUNT の場合)
-        -> ClassLoadingService::unloaded_shared_class_count()
+  -&gt; jmm_GetLongAttribute()
+     -&gt; get_long_attribute()  (引数が JMM_SHARED_CLASS_UNLOADED_COUNT の場合)
+        -&gt; ClassLoadingService::unloaded_shared_class_count()
 
-  -> jmm_GetLongAttribute()
-     -> get_long_attribute()  (引数が JMM_SHARED_CLASS_LOADED_BYTES の場合)
-        -> ClassLoadingService::loaded_shared_class_bytes()
+  -&gt; jmm_GetLongAttribute()
+     -&gt; get_long_attribute()  (引数が JMM_SHARED_CLASS_LOADED_BYTES の場合)
+        -&gt; ClassLoadingService::loaded_shared_class_bytes()
 
-  -> jmm_GetLongAttribute()
-     -> get_long_attribute()  (引数が JMM_SHARED_CLASS_UNLOADED_BYTES の場合)
-        -> ClassLoadingService::unloaded_shared_class_bytes()
-```
+  -&gt; jmm_GetLongAttribute()
+     -&gt; get_long_attribute()  (引数が JMM_SHARED_CLASS_UNLOADED_BYTES の場合)
+        -&gt; ClassLoadingService::unloaded_shared_class_bytes()
+</pre></div>
 
 
 

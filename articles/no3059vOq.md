@@ -18,15 +18,15 @@ JavaThread::exit() の処理における ensure_join() 内で行われる (See: 
 
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 java.lang.Thread.join()
--> java.lang.Thread.join(long millis)
-   -> java.lang.Object.wait()
+-&gt; java.lang.Thread.join(long millis)
+   -&gt; java.lang.Object.wait()
       (join 対象の Thread オブジェクトに対して java.lang.Object.wait() し, 終了するまで待つ.
        timeup 時間が指定されている場合は, 最大でその時間だけ待つ.
        スレッドが終了すると notify されるので wait が解ける.
-       (See: [here](no2935w3j.html) for details))
-```
+       (See: <a href="no2935w3j.html">here</a> for details))
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

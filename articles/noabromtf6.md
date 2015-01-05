@@ -44,12 +44,12 @@ title: PeriodicTask クラス
 内部的には, WatcherThread によって定期間隔での実行を実現している.
 各 PeriodicTask オブジェクトの task() メソッドは以下のパスで呼び出される (See: WatcherThread).
 
-```
+<div class="flow-abst"><pre>
 WatcherThread::run()
--> PeriodicTask::real_time_tick()
-   -> PeriodicTask::execute_if_pending()
-      -> PeriodicTask::task()
-```
+-&gt; PeriodicTask::real_time_tick()
+   -&gt; PeriodicTask::execute_if_pending()
+      -&gt; PeriodicTask::task()
+</pre></div>
 
 
 

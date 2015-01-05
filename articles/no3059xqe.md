@@ -19,28 +19,28 @@ title: Class のロード/リンク/初期化 ： リンク処理 (2) ： リン
   * クラス内の vtable, itable の作成
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 instanceKlass::link_class()
--> instanceKlass::link_class_impl()
-   -> (1) バイトコードの verification を行う
-          -> instanceKlass::verify_code()
-              -> Verifier::verify()
-                 -> (See: [here](no7882amm.html) for details)
+-&gt; instanceKlass::link_class_impl()
+   -&gt; (1) バイトコードの verification を行う
+          -&gt; instanceKlass::verify_code()
+              -&gt; Verifier::verify()
+                 -&gt; (See: <a href="no7882amm.html">here</a> for details)
 
       (1) バイトコードの rewrite 処理を行う
-          -> instanceKlass::rewrite_class()
-             -> Rewriter::rewrite()
-                -> (See: [here](no3059AfB.html) for details)
+          -&gt; instanceKlass::rewrite_class()
+             -&gt; Rewriter::rewrite()
+                -&gt; (See: <a href="no3059AfB.html">here</a> for details)
 
       (1) 
-          -> instanceKlass::relocate_and_link_methods()
-             -> Rewriter::relocate_and_link(instanceKlassHandle this_oop, TRAPS)
-                -> (See: [here](no3059AfB.html) for details)
+          -&gt; instanceKlass::relocate_and_link_methods()
+             -&gt; Rewriter::relocate_and_link(instanceKlassHandle this_oop, TRAPS)
+                -&gt; (See: <a href="no3059AfB.html">here</a> for details)
 
       (1) vtable 及び itable を生成する
-          -> klassVtable::initialize_vtable()
-          -> klassItable::initialize_itable()
-```
+          -&gt; klassVtable::initialize_vtable()
+          -&gt; klassItable::initialize_itable()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### instanceKlass::link_class()

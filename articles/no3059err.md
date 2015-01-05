@@ -72,51 +72,51 @@ NativeLookup 内では, JNI 仕様で定められた名前のネイティブ関�
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### 該当のネイティブメソッドが呼び出された時の処理
-```
-(See: [here](no3059asZ.html) for details)
--> InterpreterRuntime::prepare_native_call()
-   -> NativeLookup::lookup()
-      -> NativeLookup::lookup_base()
-         -> (1) まず, JVMTI で指定された prefix を除去しない状態で探索してみる.
-                -> NativeLookup::lookup_entry()
+<div class="flow-abst"><pre>
+(See: <a href="no3059asZ.html">here</a> for details)
+-&gt; InterpreterRuntime::prepare_native_call()
+   -&gt; NativeLookup::lookup()
+      -&gt; NativeLookup::lookup_base()
+         -&gt; (1) まず, JVMTI で指定された prefix を除去しない状態で探索してみる.
+                -&gt; NativeLookup::lookup_entry()
        
                    この中で, NativeLookup::lookup_style() を最大4回呼び出す.
-                   (1) まず "__${mangled argument signature}" 部分のない短い名前を探索.
-                   (1) 次に "__${mangled argument signature}" まで付けた長い名前で探索.
-                   (1) 次に, os 固有の prefix/suffix を付けずに, "__${mangled argument signature}" 部分のない短い名前を探索.
-                   (1) 次に, os 固有の prefix/suffix を付けずに, "__${mangled argument signature}" まで付けた長い名前で探索.
+                   (1) まず &quot;__${mangled argument signature}&quot; 部分のない短い名前を探索.
+                   (1) 次に &quot;__${mangled argument signature}&quot; まで付けた長い名前で探索.
+                   (1) 次に, os 固有の prefix/suffix を付けずに, &quot;__${mangled argument signature}&quot; 部分のない短い名前を探索.
+                   (1) 次に, os 固有の prefix/suffix を付けずに, &quot;__${mangled argument signature}&quot; まで付けた長い名前で探索.
        
-                   -> NativeLookup::lookup_style()
-                      -> (1) システムクラスの場合には, 最初に以下の関数で探索しておく
+                   -&gt; NativeLookup::lookup_style()
+                      -&gt; (1) システムクラスの場合には, 最初に以下の関数で探索しておく
                              (lookup_special_native() で調べた後, なければ libjava 内から探索する)
-                             -> lookup_special_native()
-                             -> os::dll_lookup()
+                             -&gt; lookup_special_native()
+                             -&gt; os::dll_lookup()
                          (1) Java の ClassLoader オブジェクトの findNative() メソッドで探索する.
-                             -> JavaCalls::call_static()
-                                -> (See: [here](no3059iJu.html) for details)
-                                   -> java.lang.ClassLoader.findNative()
-                                      -> java.lang.ClassLoader$NativeLibrary.find()
-                                          -> Java_java_lang_ClassLoader_00024NativeLibrary_find()
-                                             -> JVM_FindLibraryEntry()
-                                                 -> os::dll_lookup()
+                             -&gt; JavaCalls::call_static()
+                                -&gt; (See: <a href="no3059iJu.html">here</a> for details)
+                                   -&gt; java.lang.ClassLoader.findNative()
+                                      -&gt; java.lang.ClassLoader$NativeLibrary.find()
+                                          -&gt; Java_java_lang_ClassLoader_00024NativeLibrary_find()
+                                             -&gt; JVM_FindLibraryEntry()
+                                                 -&gt; os::dll_lookup()
                          (1) 見つからなければ, JVMTI agent としてロードしたライブラリ内を探索する.
-                             -> os::dll_lookup()
+                             -&gt; os::dll_lookup()
        
             (1) 見つからなければ, JVMTI で指定された prefix を除去した名前で再度探索する.
-                -> NativeLookup::lookup_entry_prefixed()
-                   -> NativeLookup::lookup_entry()
-                      -> (同上)
+                -&gt; NativeLookup::lookup_entry_prefixed()
+                   -&gt; NativeLookup::lookup_entry()
+                      -&gt; (同上)
     
-      -> methodOopDesc::set_native_function()
-```
+      -&gt; methodOopDesc::set_native_function()
+</pre></div>
 
 ### 該当のネイティブメソッドが JIT コンパイルされた時の処理
-```
-(See: [here](no293548G.html) for details)
--> CompileBroker::compile_method()
-   -> NativeLookup::lookup()
-      -> (同上)
-```
+<div class="flow-abst"><pre>
+(See: <a href="no293548G.html">here</a> for details)
+-&gt; CompileBroker::compile_method()
+   -&gt; NativeLookup::lookup()
+      -&gt; (同上)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

@@ -13,64 +13,64 @@ title: Memory allocation (& GC 処理) ： Garbage Collection を補佐する処
 (#Under Construction)
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
--> BarrierSet::write_ref_field_pre()
-   -> Barrier Set 種別や GC アルゴリズム, 変更対象等に応じて以下のどれかを行う.
+<div class="flow-abst"><pre>
+-&gt; BarrierSet::write_ref_field_pre()
+   -&gt; Barrier Set 種別や GC アルゴリズム, 変更対象等に応じて以下のどれかを行う.
 
       * Barrier Set の種別が CardTableModRef の場合: 
         * GC アルゴリズムが G1GC の場合:
 
-          -> G1SATBCardTableModRefBS::inline_write_ref_field_pre()
-             -> G1SATBCardTableModRefBS::write_ref_field_pre_static()
-                -> G1SATBCardTableModRefBS::enqueue()
-                   -> PtrQueue::enqueue()
-                      -> (同上)
+          -&gt; G1SATBCardTableModRefBS::inline_write_ref_field_pre()
+             -&gt; G1SATBCardTableModRefBS::write_ref_field_pre_static()
+                -&gt; G1SATBCardTableModRefBS::enqueue()
+                   -&gt; PtrQueue::enqueue()
+                      -&gt; (同上)
 
         * GC アルゴリズムがそれ以外の場合:
 
-          -> CardTableModRefBS::inline_write_ref_field_pre()
+          -&gt; CardTableModRefBS::inline_write_ref_field_pre()
       
       * CardTableModRef ではない場合:
         * GC アルゴリズムが G1GC の場合:
           * 変更対象が oop* の場合:
 
-            -> G1SATBCardTableModRefBS::write_ref_field_pre_work(oop* field, oop new_val)
-               -> G1SATBCardTableModRefBS::inline_write_ref_field_pre()()
-                  -> (同上)
+            -&gt; G1SATBCardTableModRefBS::write_ref_field_pre_work(oop* field, oop new_val)
+               -&gt; G1SATBCardTableModRefBS::inline_write_ref_field_pre()()
+                  -&gt; (同上)
 
           * 変更対象が narrowOop* の場合:
 
-            -> G1SATBCardTableModRefBS::write_ref_field_pre_work(narrowOop* field, oop new_val)
-               -> G1SATBCardTableModRefBS::inline_write_ref_field_pre()()
-                  -> (同上)
+            -&gt; G1SATBCardTableModRefBS::write_ref_field_pre_work(narrowOop* field, oop new_val)
+               -&gt; G1SATBCardTableModRefBS::inline_write_ref_field_pre()()
+                  -&gt; (同上)
 
         * GC アルゴリズムがそれ以外の場合:
           * 変更対象が oop* の場合:
 
-            -> BarrierSet::write_ref_field_pre_work(oop* field, oop new_val)
+            -&gt; BarrierSet::write_ref_field_pre_work(oop* field, oop new_val)
 
           * 変更対象が narrowOop* の場合:
 
-            -> BarrierSet::write_ref_field_pre_work(narrowOop* field, oop new_val)
+            -&gt; BarrierSet::write_ref_field_pre_work(narrowOop* field, oop new_val)
 
--> BarrierSet::write_ref_field()
-   -> Barrier Set 種別や GC アルゴリズム, 変更対象等に応じて以下のどれかを行う.
+-&gt; BarrierSet::write_ref_field()
+   -&gt; Barrier Set 種別や GC アルゴリズム, 変更対象等に応じて以下のどれかを行う.
 
       * Barrier Set の種別が CardTableModRef の場合: 
         
-        -> CardTableModRefBS::inline_write_ref_field()
+        -&gt; CardTableModRefBS::inline_write_ref_field()
       
       * CardTableModRef ではない場合:
         * GC アルゴリズムが G1GC の場合:
           
-          -> G1SATBCardTableLoggingModRefBS::write_ref_field_work()
-             -> PtrQueue::enqueue()
+          -&gt; G1SATBCardTableLoggingModRefBS::write_ref_field_work()
+             -&gt; PtrQueue::enqueue()
 
         * GC アルゴリズムがそれ以外の場合:
           
-          -> CardTableModRefBS::write_ref_field_work()
-             -> CardTableModRefBS::inline_write_ref_field()
-```
+          -&gt; CardTableModRefBS::write_ref_field_work()
+             -&gt; CardTableModRefBS::inline_write_ref_field()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 (#Under Construction)

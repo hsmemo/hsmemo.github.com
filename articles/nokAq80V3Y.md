@@ -118,54 +118,54 @@ java コマンドによる実行の流れは以下のようになる
         (DestroyJavaVM() は実際の HotSpot の終了処理に当たる JNI Invocation API (See: [here](no3059oro.html) for details))
 
 ### primordial thread による処理
-```
+<div class="flow-abst"><pre>
 main()
--> JLI_Launch()
-   -> ...(#TODO)
-   -> LoadJavaVM()
-      -> OS によって処理が異なる
+-&gt; JLI_Launch()
+   -&gt; ...(#TODO)
+   -&gt; LoadJavaVM()
+      -&gt; OS によって処理が異なる
          * Solaris 又は Linux の場合:
-           -> dlopen()          (← libjvm をロード)
-           -> dlsym()           (← JNI_CreateJavaVM() を取得)
-           -> dlsym()           (← JNI_GetDefaultJavaVMInitArgs() を取得)
+           -&gt; dlopen()          (← libjvm をロード)
+           -&gt; dlsym()           (← JNI_CreateJavaVM() を取得)
+           -&gt; dlsym()           (← JNI_GetDefaultJavaVMInitArgs() を取得)
          * Windows の場合:
-           -> 
-           -> LoadLibrary()     (← libjvm をロード)
-           -> GetProcAddress()  (← JNI_CreateJavaVM() を取得)
-           -> GetProcAddress()  (← JNI_GetDefaultJavaVMInitArgs() を取得)
-   -> ...(#TODO)
-   -> ContinueInNewThread()
-      -> ContinueInNewThread0()
-         -> OS によって処理が異なる.
+           -&gt; 
+           -&gt; LoadLibrary()     (← libjvm をロード)
+           -&gt; GetProcAddress()  (← JNI_CreateJavaVM() を取得)
+           -&gt; GetProcAddress()  (← JNI_GetDefaultJavaVMInitArgs() を取得)
+   -&gt; ...(#TODO)
+   -&gt; ContinueInNewThread()
+      -&gt; ContinueInNewThread0()
+         -&gt; OS によって処理が異なる.
             (どの場合も, 新しいスレッドを作成し, そのスレッドに残りの処理をやらせる.
              新規スレッドを作成した元々のメインスレッドは, 新規スレッドが終了するまでブロック)
             * Linux の場合:
-              -> pthread_create()  (← なお, エントリポイントとしては JavaMain() 関数が指定されている)
-              -> pthread_join()
+              -&gt; pthread_create()  (← なお, エントリポイントとしては JavaMain() 関数が指定されている)
+              -&gt; pthread_join()
             * Solaris の場合:
-              -> thr_create()      (← なお, エントリポイントとしては JavaMain() 関数が指定されている)
-              -> thr_join()
+              -&gt; thr_create()      (← なお, エントリポイントとしては JavaMain() 関数が指定されている)
+              -&gt; thr_join()
             * Windows の場合:
-              -> _beginthredex()   (← なお, エントリポイントとしては JavaMain() 関数が指定されている)
-              -> WaitForSingleObject()
-```
+              -&gt; _beginthredex()   (← なお, エントリポイントとしては JavaMain() 関数が指定されている)
+              -&gt; WaitForSingleObject()
+</pre></div>
 
 ### non-primordial thread による処理
-```
+<div class="flow-abst"><pre>
 JavaMain()
--> InitializeJVM()
-   -> JNI_CreateJavaVM()
-      -> (ここで HotSpot の起動処理が行われる) (See: [here](no2114J7x.html) for details)
--> ...#TODO
--> LoadMainClass()
-   -> (See: [here](noSl0AuhYv.html) for details)
--> jni_GetStaticMethodID()
--> jni_CallStaticVoidMethod()
--> LEAVE() マクロ
+-&gt; InitializeJVM()
+   -&gt; JNI_CreateJavaVM()
+      -&gt; (ここで HotSpot の起動処理が行われる) (See: <a href="no2114J7x.html">here</a> for details)
+-&gt; ...#TODO
+-&gt; LoadMainClass()
+   -&gt; (See: <a href="noSl0AuhYv.html">here</a> for details)
+-&gt; jni_GetStaticMethodID()
+-&gt; jni_CallStaticVoidMethod()
+-&gt; LEAVE() マクロ
    (最後まで特に問題が起きなければ LEAVE() に到達する)
-    -> jni_DestroyJavaVM()
-       -> (ここで HotSpot の終了処理が行われる) (See: [here](no3059oro.html) for details)
-```
+    -&gt; jni_DestroyJavaVM()
+       -&gt; (ここで HotSpot の終了処理が行われる) (See: <a href="no3059oro.html">here</a> for details)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

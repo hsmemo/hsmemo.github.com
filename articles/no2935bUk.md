@@ -24,16 +24,16 @@ JNI の GetEnv() 関数は, 引数で指定されたバージョンに応じて�
 
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 jni_GetEnv()
--> JvmtiExport::is_jvmti_version()
-   -> (See: [here](no30592Ee.html) for details)
--> JvmtiExport::get_jvmti_interface()
-   -> (See: [here](no30592Ee.html) for details)
--> Threads::is_supported_jni_version_including_1_1()
-   -> Threads::is_supported_jni_version()
--> JavaThread::jni_environment()
-```
+-&gt; JvmtiExport::is_jvmti_version()
+   -&gt; (See: <a href="no30592Ee.html">here</a> for details)
+-&gt; JvmtiExport::get_jvmti_interface()
+   -&gt; (See: <a href="no30592Ee.html">here</a> for details)
+-&gt; Threads::is_supported_jni_version_including_1_1()
+   -&gt; Threads::is_supported_jni_version()
+-&gt; JavaThread::jni_environment()
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

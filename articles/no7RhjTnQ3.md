@@ -210,33 +210,33 @@ BufferNode オブジェクトとしての生成箇所は BufferNode::new_from_bu
 (ただしこの中で使われている new は placement new なので, 上に書いたとおり, ここでメモリを確保しているわけではない).
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
-(略) (See: [here](no2935YzN.html) for details)
--> G1RemSet::prepare_for_oops_into_collection_set_do()
-   -> DirtyCardQueueSet::concatenate_logs()
-      -> PtrQueueSet::enqueue_complete_buffer()
-         -> BufferNode::new_from_buffer()
+<div class="flow-abst"><pre>
+(略) (See: <a href="no2935YzN.html">here</a> for details)
+-&gt; G1RemSet::prepare_for_oops_into_collection_set_do()
+   -&gt; DirtyCardQueueSet::concatenate_logs()
+      -&gt; PtrQueueSet::enqueue_complete_buffer()
+         -&gt; BufferNode::new_from_buffer()
 
-(略) (See: [here](no2935dGZ.html) and [here](no2935YzN.html) for details)
--> DirtyCardQueueSet::apply_closure_to_completed_buffer_helper()
-   -> PtrQueueSet::enqueue_complete_buffer()
-      -> (同上)
+(略) (See: <a href="no2935dGZ.html">here</a> and <a href="no2935YzN.html">here</a> for details)
+-&gt; DirtyCardQueueSet::apply_closure_to_completed_buffer_helper()
+   -&gt; PtrQueueSet::enqueue_complete_buffer()
+      -&gt; (同上)
 
 PtrQueue::~PtrQueue()
--> PtrQueue::flush()
-   -> PtrQueueSet::enqueue_complete_buffer()
-      -> (同上)
+-&gt; PtrQueue::flush()
+   -&gt; PtrQueueSet::enqueue_complete_buffer()
+      -&gt; (同上)
 
-(略) (See: [here](no2114EV0.html) for details)
--> PtrQueue::locking_enqueue_completed_buffer()
-   -> PtrQueueSet::enqueue_complete_buffer()
-      -> (同上)
+(略) (See: <a href="no2114EV0.html">here</a> for details)
+-&gt; PtrQueue::locking_enqueue_completed_buffer()
+   -&gt; PtrQueueSet::enqueue_complete_buffer()
+      -&gt; (同上)
 
-(略) (See: [here](no2114EV0.html) for details)
--> PtrQueueSet::process_or_enqueue_complete_buffer()
-   -> PtrQueueSet::enqueue_complete_buffer()
-      -> (同上)
-```
+(略) (See: <a href="no2114EV0.html">here</a> for details)
+-&gt; PtrQueueSet::process_or_enqueue_complete_buffer()
+   -&gt; PtrQueueSet::enqueue_complete_buffer()
+      -&gt; (同上)
+</pre></div>
 
 
 

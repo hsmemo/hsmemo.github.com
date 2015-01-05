@@ -16,19 +16,19 @@ ParallelScavengeHeap は CollectedHeap::collect() をオーバーライドして
 この中で VM_ParallelGCSystemGC によって Minor GC か Major GC のどちらかが実行される.
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 ParallelScavengeHeap::collect()
--> VMThread::execute()
-   -> (略) (See: [here](no2935qaz.html) for details)
-      -> VM_ParallelGCSystemGC::doit()
+-&gt; VMThread::execute()
+   -&gt; (略) (See: <a href="no2935qaz.html">here</a> for details)
+      -&gt; VM_ParallelGCSystemGC::doit()
          * 呼び出し元が GC_locker の場合:
-           -> ParallelScavengeHeap::invoke_scavenge()
-              -> PSScavenge::invoke()
-                 -> (See: [here](no289165Un.html) for details)
+           -&gt; ParallelScavengeHeap::invoke_scavenge()
+              -&gt; PSScavenge::invoke()
+                 -&gt; (See: <a href="no289165Un.html">here</a> for details)
          * そうでない場合:
-           -> ParallelScavengeHeap::invoke_full_gc()
-              -> (See: [here](no3718vrX.html) for details)
-```
+           -&gt; ParallelScavengeHeap::invoke_full_gc()
+              -&gt; (See: <a href="no3718vrX.html">here</a> for details)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

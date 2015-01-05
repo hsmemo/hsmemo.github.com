@@ -19,38 +19,38 @@ JvmtiVMObjectAllocEventCollector のデストラクタ内で通知処理が行�
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### JvmtiVMObjectAllocEventCollector オブジェクト用の記録処理
-```
+<div class="flow-abst"><pre>
 (略) (no28916Q0G)
--> CollectedHeap::post_allocation_setup_obj()
-   -> post_allocation_notify()
-      -> JvmtiExport::vm_object_alloc_event_collector()
-         -> JvmtiExport::record_vm_internal_object_allocation()
-            -> JvmtiVMObjectAllocEventCollector::record_allocation()
+-&gt; CollectedHeap::post_allocation_setup_obj()
+   -&gt; post_allocation_notify()
+      -&gt; JvmtiExport::vm_object_alloc_event_collector()
+         -&gt; JvmtiExport::record_vm_internal_object_allocation()
+            -&gt; JvmtiVMObjectAllocEventCollector::record_allocation()
 
 (略) (no28916Q0G)
--> CollectedHeap::post_allocation_setup_array()
-   -> post_allocation_notify()
-      -> (同上)
-```
+-&gt; CollectedHeap::post_allocation_setup_array()
+   -&gt; post_allocation_notify()
+      -&gt; (同上)
+</pre></div>
 
 ### イベントの通知処理
-```
+<div class="flow-abst"><pre>
 JVM_NewInstance()
--> JvmtiExport::post_vm_object_alloc()
-   -> (登録されているコールバックを呼び出す)
+-&gt; JvmtiExport::post_vm_object_alloc()
+   -&gt; (登録されているコールバックを呼び出す)
 
 JVM_InvokeMethod()
--> JvmtiExport::post_vm_object_alloc()
-   -> (同上)
+-&gt; JvmtiExport::post_vm_object_alloc()
+   -&gt; (同上)
 
 JVM_NewInstanceFromConstructor()
--> JvmtiExport::post_vm_object_alloc()
-   -> (同上)
+-&gt; JvmtiExport::post_vm_object_alloc()
+   -&gt; (同上)
 
 JvmtiVMObjectAllocEventCollector::~JvmtiVMObjectAllocEventCollector()
--> JvmtiExport::post_vm_object_alloc()
-   -> (同上)
-```
+-&gt; JvmtiExport::post_vm_object_alloc()
+   -&gt; (同上)
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### JvmtiVMObjectAllocEventCollector::JvmtiVMObjectAllocEventCollector()

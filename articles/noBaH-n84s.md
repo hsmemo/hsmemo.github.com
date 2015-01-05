@@ -203,19 +203,19 @@ AbstractWorkGang オブジェクトの _gang_workers フィールドに(のみ)�
 WorkGang::allocate_worker() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 * SharedHeap オブジェクトの初期化時
 
   SharedHeap::SharedHeap()
-  -> WorkGang::initialize_workers()
-     -> WorkGang::allocate_worker()
+  -&gt; WorkGang::initialize_workers()
+     -&gt; WorkGang::allocate_worker()
 
 * G1GC の ConcurrentMark の初期化時
 
   ConcurrentMark::ConcurrentMark()
-  -> WorkGang::initialize_workers()
-     -> WorkGang::allocate_worker()
-```
+  -&gt; WorkGang::initialize_workers()
+     -&gt; WorkGang::allocate_worker()
+</pre></div>
 
 
 

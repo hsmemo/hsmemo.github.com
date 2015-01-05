@@ -408,10 +408,10 @@ Remembered Set の状態 (HeapRegionRemSet::_iter_state) をリセットする�
 G1RemSet::cleanup_after_oops_into_collection_set_do() 内で(のみ)使用されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 G1CollectedHeap::evacuate_collection_set()
--> G1RemSet::cleanup_after_oops_into_collection_set_do()
-```
+-&gt; G1RemSet::cleanup_after_oops_into_collection_set_do()
+</pre></div>
 
 
 
@@ -443,10 +443,10 @@ Collection Set 内を指している HeapRegion の Remembered Set を修正す�
 G1RemSet::cleanup_after_oops_into_collection_set_do() 内で(のみ)使用されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 G1CollectedHeap::evacuate_collection_set()
--> G1RemSet::cleanup_after_oops_into_collection_set_do()
-```
+-&gt; G1RemSet::cleanup_after_oops_into_collection_set_do()
+</pre></div>
 
 
 
@@ -477,13 +477,13 @@ G1ParScrubRemSetTask クラス内で使用される補助クラス.
 
 そして, これらの関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 * G1ParScrubRemSetTask::work()
-  -> G1RemSet::scrub()
+  -&gt; G1RemSet::scrub()
 
 * G1ParScrubRemSetTask::work()
-  -> G1RemSet::scrub_par()
-```
+  -&gt; G1RemSet::scrub_par()
+</pre></div>
 
 
 
@@ -628,11 +628,11 @@ G1RemSet::print_summary_info() 内で(のみ)使用されている.
 (なお, このクラスは (ExitAfterGCNum オプションに加えて) 
  diagnostic オプションである G1SummarizeRSetStats も設定されている場合にしか使用されない)
 
-```
+<div class="flow-abst"><pre>
 G1CollectedHeap::do_collection_pause_at_safepoint()
--> G1CollectedHeap::print_tracing_info() (<= ExitAfterGCNum オプションが指定されている場合にのみ呼び出す)
-   -> G1RemSet::print_summary_info()     (<= G1SummarizeRSetStats オプションが指定されている場合にのみ呼び出す)
-```
+-&gt; G1CollectedHeap::print_tracing_info() (&lt;= ExitAfterGCNum オプションが指定されている場合にのみ呼び出す)
+   -&gt; G1RemSet::print_summary_info()     (&lt;= G1SummarizeRSetStats オプションが指定されている場合にのみ呼び出す)
+</pre></div>
 
 
 
@@ -662,11 +662,11 @@ G1RemSet::print_summary_info() 内で(のみ)使用されている.
 (なお, このクラスは (ExitAfterGCNum オプションに加えて) 
  diagnostic オプションである G1SummarizeRSetStats も設定されている場合にしか使用されない)
 
-```
+<div class="flow-abst"><pre>
 G1CollectedHeap::do_collection_pause_at_safepoint()
--> G1CollectedHeap::print_tracing_info() (<= ExitAfterGCNum オプションが指定されている場合にのみ呼び出す)
-   -> G1RemSet::print_summary_info()     (<= G1SummarizeRSetStats オプションが指定されている場合にのみ呼び出す)
-```
+-&gt; G1CollectedHeap::print_tracing_info() (&lt;= ExitAfterGCNum オプションが指定されている場合にのみ呼び出す)
+   -&gt; G1RemSet::print_summary_info()     (&lt;= G1SummarizeRSetStats オプションが指定されている場合にのみ呼び出す)
+</pre></div>
 
 
 

@@ -36,169 +36,169 @@ SPARC でも実行環境が V9 以降なら同様の箇所にしか張られな�
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### sparc の場合
 #### getfield 命令の処理
-```
+<div class="flow-abst"><pre>
 * 1 回目
   TemplateTable::getfield() が生成するコード
-  -> TemplateTable::getfield_or_static() が生成するコード
-     -> (1) CPCache entry を取得
-            -> TemplateTable::resolve_cache_and_index() が生成するコード
-               -> (1) 既に作成済みであれば, それを取得
-                      -> InterpreterMacroAssembler::get_cache_and_index_at_bcp() が生成するコード
+  -&gt; TemplateTable::getfield_or_static() が生成するコード
+     -&gt; (1) CPCache entry を取得
+            -&gt; TemplateTable::resolve_cache_and_index() が生成するコード
+               -&gt; (1) 既に作成済みであれば, それを取得
+                      -&gt; InterpreterMacroAssembler::get_cache_and_index_at_bcp() が生成するコード
                   (2) まだ作成されて無かった場合は, 作成処理を行う
-                      -> InterpreterRuntime::resolve_get_put()
-                         -> (See: [here](no7882NqI.html) for details)
+                      -&gt; InterpreterRuntime::resolve_get_put()
+                         -&gt; (See: <a href="no7882NqI.html">here</a> for details)
                   (2) まだ作成されて無かった場合は, ここで取得
-                      -> InterpreterMacroAssembler::get_cache_and_index_at_bcp() が生成するコード
+                      -&gt; InterpreterMacroAssembler::get_cache_and_index_at_bcp() が生成するコード
    
         (1) CPCache entry の中身を取り出す
-            -> TemplateTable::load_field_cp_cache_entry() が生成するコード
+            -&gt; TemplateTable::load_field_cp_cache_entry() が生成するコード
    
         (1) ロード処理 (型情報に応じて適切なロードを行う)
    
         (1) getfield 命令の場合 (= getstatic 命令ではない場合) には, 高速版に書き換える
-            -> TemplateTable::patch_bytecode() が生成するコード
+            -&gt; TemplateTable::patch_bytecode() が生成するコード
    
         (1) volatile field だった場合はメモリバリア処理を行う
-            -> TemplateTable::volatile_barrier() が生成するコード
+            -&gt; TemplateTable::volatile_barrier() が生成するコード
 
 * 2 回目 (書き換え後)
   TemplateTable::fast_accessfield() が生成するコード
-  -> (1) CPCache entry を取得
-         -> InterpreterMacroAssembler::get_cache_and_index_at_bcp() が生成するコード
+  -&gt; (1) CPCache entry を取得
+         -&gt; InterpreterMacroAssembler::get_cache_and_index_at_bcp() が生成するコード
 
      (1) CPCache entry の中身を取り出す
 
      (1) ロード処理 (型情報に応じて適切なロードを行う)
   
      (1) volatile field だった場合はメモリバリア処理を行う
-         -> TemplateTable::volatile_barrier() が生成するコード
-```
+         -&gt; TemplateTable::volatile_barrier() が生成するコード
+</pre></div>
 
 #### getstatic 命令の処理
-```
+<div class="flow-abst"><pre>
 TemplateTable::getstatic() が生成するコード
--> TemplateTable::getfield_or_static() が生成するコード
-   -> (同上)
-```
+-&gt; TemplateTable::getfield_or_static() が生成するコード
+   -&gt; (同上)
+</pre></div>
 
 #### putfield 命令の処理
-```
+<div class="flow-abst"><pre>
 * 1 回目
   TemplateTable::putfield() が生成するコード
-  -> TemplateTable::putfield_or_static() が生成するコード
-     -> (1) CPCache entry を取得
-            -> TemplateTable::resolve_cache_and_index() が生成するコード
-               -> (同上)
+  -&gt; TemplateTable::putfield_or_static() が生成するコード
+     -&gt; (1) CPCache entry を取得
+            -&gt; TemplateTable::resolve_cache_and_index() が生成するコード
+               -&gt; (同上)
    
         (1) CPCache entry の中身を取り出す
-            -> TemplateTable::load_field_cp_cache_entry() が生成するコード
+            -&gt; TemplateTable::load_field_cp_cache_entry() が生成するコード
    
         (1) volatile field だった場合は (必要に応じて) メモリバリア処理を行う
-            -> TemplateTable::volatile_barrier() が生成するコード
+            -&gt; TemplateTable::volatile_barrier() が生成するコード
    
         (1) ストア処理 (型情報に応じて適切なストアを行う)
    
         (1) putfield 命令の場合 (= putstatic 命令ではない場合) には, 高速版に書き換える
-            -> TemplateTable::patch_bytecode() が生成するコード
+            -&gt; TemplateTable::patch_bytecode() が生成するコード
 
         (1) volatile field だった場合はメモリバリア処理を行う
-            -> TemplateTable::volatile_barrier() が生成するコード
+            -&gt; TemplateTable::volatile_barrier() が生成するコード
 
 * 2 回目 (書き換え後)
   TemplateTable::fast_storefield() が生成するコード
-  -> (1) CPCache entry を取得
-         -> InterpreterMacroAssembler::get_cache_and_index_at_bcp() が生成するコード
+  -&gt; (1) CPCache entry を取得
+         -&gt; InterpreterMacroAssembler::get_cache_and_index_at_bcp() が生成するコード
 
      (1) volatile field だった場合は (必要に応じて) メモリバリア処理を行う
-         -> TemplateTable::volatile_barrier() が生成するコード
+         -&gt; TemplateTable::volatile_barrier() が生成するコード
 
      (1) CPCache entry の中身を取り出す
 
      (1) ストア処理 (型情報に応じて適切なストアを行う)
   
      (1) volatile field だった場合はメモリバリア処理を行う
-         -> TemplateTable::volatile_barrier() が生成するコード
-```
+         -&gt; TemplateTable::volatile_barrier() が生成するコード
+</pre></div>
 
 #### putstatic 命令の処理
-```
+<div class="flow-abst"><pre>
 TemplateTable::putstatic() が生成するコード
--> TemplateTable::putfield_or_static() が生成するコード
-   -> (同上)
-```
+-&gt; TemplateTable::putfield_or_static() が生成するコード
+   -&gt; (同上)
+</pre></div>
 
 
 ### x86_64 の場合
 #### getfield 命令の処理
-```
+<div class="flow-abst"><pre>
 * 1 回目
   TemplateTable::getfield() が生成するコード
-  -> TemplateTable::getfield_or_static() が生成するコード
-     -> (1) CPCache entry を取得
-            -> TemplateTable::resolve_cache_and_index() が生成するコード
-               -> (1) 既に作成済みであれば, それを取得
-                      -> InterpreterMacroAssembler::get_cache_and_index_at_bcp() が生成するコード
+  -&gt; TemplateTable::getfield_or_static() が生成するコード
+     -&gt; (1) CPCache entry を取得
+            -&gt; TemplateTable::resolve_cache_and_index() が生成するコード
+               -&gt; (1) 既に作成済みであれば, それを取得
+                      -&gt; InterpreterMacroAssembler::get_cache_and_index_at_bcp() が生成するコード
                   (2) まだ作成されて無かった場合は, 作成処理を行う
-                      -> InterpreterRuntime::resolve_get_put()
-                         -> (See: [here](no7882NqI.html) for details)
+                      -&gt; InterpreterRuntime::resolve_get_put()
+                         -&gt; (See: <a href="no7882NqI.html">here</a> for details)
                   (2) まだ作成されて無かった場合は, ここで取得
-                      -> InterpreterMacroAssembler::get_cache_and_index_at_bcp() が生成するコード
+                      -&gt; InterpreterMacroAssembler::get_cache_and_index_at_bcp() が生成するコード
    
         (1) CPCache entry の中身を取り出す
-            -> TemplateTable::load_field_cp_cache_entry() が生成するコード
+            -&gt; TemplateTable::load_field_cp_cache_entry() が生成するコード
    
         (1) ロード処理 (型情報に応じて適切なロードを行う)
    
         (1) getfield 命令の場合 (= getstatic 命令ではない場合) には, 高速版に書き換える
-            -> TemplateTable::patch_bytecode() が生成するコード
+            -&gt; TemplateTable::patch_bytecode() が生成するコード
    
         (1) (x86 ではメモリバリアは不要なので張っていない)
 
 * 2 回目 (書き換え後)
   TemplateTable::fast_accessfield() が生成するコード
-  -> (1) CPCache entry を取得
-         -> InterpreterMacroAssembler::get_cache_and_index_at_bcp() が生成するコード
+  -&gt; (1) CPCache entry を取得
+         -&gt; InterpreterMacroAssembler::get_cache_and_index_at_bcp() が生成するコード
 
      (1) CPCache entry の中身を取り出す
 
      (1) ロード処理 (型情報に応じて適切なロードを行う)
   
      (1) (x86 ではメモリバリアは不要なので張っていない)
-```
+</pre></div>
 
 #### getstatic 命令の処理
-```
+<div class="flow-abst"><pre>
 TemplateTable::getstatic() が生成するコード
--> TemplateTable::getfield_or_static() が生成するコード
-   -> (同上)
-```
+-&gt; TemplateTable::getfield_or_static() が生成するコード
+   -&gt; (同上)
+</pre></div>
 
 #### putfield 命令の処理
-```
+<div class="flow-abst"><pre>
 * 1 回目
   TemplateTable::putfield() が生成するコード
-  -> TemplateTable::putfield_or_static() が生成するコード
-     -> (1) CPCache entry を取得
-            -> TemplateTable::resolve_cache_and_index() が生成するコード
-               -> (同上)
+  -&gt; TemplateTable::putfield_or_static() が生成するコード
+     -&gt; (1) CPCache entry を取得
+            -&gt; TemplateTable::resolve_cache_and_index() が生成するコード
+               -&gt; (同上)
    
         (1) CPCache entry の中身を取り出す
-            -> TemplateTable::load_field_cp_cache_entry() が生成するコード
+            -&gt; TemplateTable::load_field_cp_cache_entry() が生成するコード
    
         (1) (x86 ではメモリバリアは不要なので張っていない)
    
         (1) ストア処理 (型情報に応じて適切なストアを行う)
    
         (1) putfield 命令の場合 (= putstatic 命令ではない場合) には, 高速版に書き換える
-            -> TemplateTable::patch_bytecode() が生成するコード
+            -&gt; TemplateTable::patch_bytecode() が生成するコード
 
         (1) volatile field だった場合はメモリバリア処理を行う
-            -> TemplateTable::volatile_barrier() が生成するコード
+            -&gt; TemplateTable::volatile_barrier() が生成するコード
 
 * 2 回目 (書き換え後)
   TemplateTable::fast_storefield() が生成するコード
-  -> (1) CPCache entry を取得
-         -> InterpreterMacroAssembler::get_cache_and_index_at_bcp() が生成するコード
+  -&gt; (1) CPCache entry を取得
+         -&gt; InterpreterMacroAssembler::get_cache_and_index_at_bcp() が生成するコード
 
      (1) (x86 ではメモリバリアは不要なので張っていない)
 
@@ -207,15 +207,15 @@ TemplateTable::getstatic() が生成するコード
      (1) ストア処理 (型情報に応じて適切なストアを行う)
   
      (1) volatile field だった場合はメモリバリア処理を行う
-         -> TemplateTable::volatile_barrier() が生成するコード
-```
+         -&gt; TemplateTable::volatile_barrier() が生成するコード
+</pre></div>
 
 #### putstatic 命令の処理
-```
+<div class="flow-abst"><pre>
 TemplateTable::putstatic() が生成するコード
--> TemplateTable::putfield_or_static() が生成するコード
-   -> (同上)
-```
+-&gt; TemplateTable::putfield_or_static() が生成するコード
+   -&gt; (同上)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

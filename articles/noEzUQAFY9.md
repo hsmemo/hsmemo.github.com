@@ -45,12 +45,12 @@ ciInstanceKlass::field_cache() 内で(のみ)生成されている (= 初めて�
 ciInstanceKlass::field_cache() 内で(のみ)使用されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 ciBytecodeStream::get_field()
--> ciEnv::get_field_by_index()
-   -> ciEnv::get_field_by_index_impl()
-      -> ciInstanceKlass::field_cache()
-```
+-&gt; ciEnv::get_field_by_index()
+   -&gt; ciEnv::get_field_by_index_impl()
+      -&gt; ciInstanceKlass::field_cache()
+</pre></div>
 
 
 

@@ -18,14 +18,14 @@ Minor GC または Major GC が実行される.
 (※) より正確な条件は GenCollectedHeap::should_do_concurrent_full_gc() 参照 (See: [here](noorGriS8G.html) for details).
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
-(See: [here](noorGriS8G.html) for details)
--> GenCollectedHeap::collect_mostly_concurrent()
-   -> VMThread::execute()
-      -> (略) (See: [here](no2935qaz.html) for details)
-         -> VM_GenCollectFullConcurrent::doit()
-            -> 
-```
+<div class="flow-abst"><pre>
+(See: <a href="noorGriS8G.html">here</a> for details)
+-&gt; GenCollectedHeap::collect_mostly_concurrent()
+   -&gt; VMThread::execute()
+      -&gt; (略) (See: <a href="no2935qaz.html">here</a> for details)
+         -&gt; VM_GenCollectFullConcurrent::doit()
+            -&gt; 
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### GenCollectedHeap::collect_mostly_concurrent()

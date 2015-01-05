@@ -41,11 +41,11 @@ JIT Compiler から Symbol オブジェクトにアクセスするための一�
   
   なお, このフィールドは現在は以下のパスで(のみ)参照されている.
 
-```
+<div class="flow-abst"><pre>
   ciEnv::get_symbol()
-  -> ciObjectFactory::get_symbol()
-     -> ciObjectFactory::vm_symbol_at()
-```
+  -&gt; ciObjectFactory::get_symbol()
+     -&gt; ciObjectFactory::vm_symbol_at()
+</pre></div>
 
 * 各 ciObjectFactory オブジェクトの _symbols フィールド
   
@@ -96,10 +96,10 @@ JIT Compiler から Symbol オブジェクトにアクセスするための一�
 
 なお, reference count を元に戻す処理は, 現在は以下のパスで(のみ)行われている.
 
-```
+<div class="flow-abst"><pre>
 ciEnv::~ciEnv()
--> ciObjectFactory::remove_symbols()
-```
+-&gt; ciObjectFactory::remove_symbols()
+</pre></div>
 
 
 

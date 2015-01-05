@@ -51,11 +51,11 @@ Matcher クラスの処理対象の Node を入れておくために使用され
 
 そして, これらの関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 Matcher::match()
--> Matcher::find_shared()
--> Matcher::xform()
-```
+-&gt; Matcher::find_shared()
+-&gt; Matcher::xform()
+</pre></div>
 
 ### 内部構造(Internal structure)
 実際のスタックとしての機能はスーパークラスである Node_Stack によって実現されている.

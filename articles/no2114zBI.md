@@ -117,28 +117,28 @@ Thread.suspend()/Thread.resume() では, その中で _external_suspend と名�
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### suspend の処理
-```
+<div class="flow-abst"><pre>
 java.lang.Thread.suspend()
--> java.lang.Thread.suspend0()
-   -> JVM_SuspendThread()
-      -> JavaThread::set_external_suspend()
-         -> Thread::set_suspend_flag()     (_external_suspend bit を立てる)
-      -> JavaThread::java_suspend()
-         -> きちんと止めるために, VM_ForceSafepoint による safepoint 停止が行われる.
+-&gt; java.lang.Thread.suspend0()
+   -&gt; JVM_SuspendThread()
+      -&gt; JavaThread::set_external_suspend()
+         -&gt; Thread::set_suspend_flag()     (_external_suspend bit を立てる)
+      -&gt; JavaThread::java_suspend()
+         -&gt; きちんと止めるために, VM_ForceSafepoint による safepoint 停止が行われる.
             (強制的にここで transition させて suspend 処理に引っ掛ける)
-```
+</pre></div>
 
 ### resume の処理
-```
+<div class="flow-abst"><pre>
 java.lang.Thread.resume()
--> java.lang.Thread.resume0()
-   -> JVM_ResumeThread()
-      -> JavaThread::java_resume()
-         -> JavaThread::clear_external_suspend()
-            -> Thread::clear_suspend_flag()  (_external_suspend bit をクリアする)
-         -> JavaThread::clear_ext_suspended()
-         -> Monitor::notify_all()     (<= SR_lock に対して notify_all し, suspend していたものを全て起こす)
-```
+-&gt; java.lang.Thread.resume0()
+   -&gt; JVM_ResumeThread()
+      -&gt; JavaThread::java_resume()
+         -&gt; JavaThread::clear_external_suspend()
+            -&gt; Thread::clear_suspend_flag()  (_external_suspend bit をクリアする)
+         -&gt; JavaThread::clear_ext_suspended()
+         -&gt; Monitor::notify_all()     (&lt;= SR_lock に対して notify_all し, suspend していたものを全て起こす)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

@@ -53,44 +53,44 @@ os::fetch_frame_from_context(void* ucVoid, intptr_t** sp, intptr_t** fp) の返�
 
 そして, これらの関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 * FlatProfiler の処理
 
   FlatProfilerTask::task()
-  -> FlatProfiler::record_vm_tick()
-     -> os::get_thread_pc()
+  -&gt; FlatProfiler::record_vm_tick()
+     -&gt; os::get_thread_pc()
 
 * Forte との連携処理
   
   (Linux sparc の場合)
   AsyncGetCallTrace()
-  -> JavaThread::pd_get_top_frame_for_signal_handler()
-     -> os::fetch_frame_from_context(void* ucVoid, intptr_t** sp, intptr_t** fp)
+  -&gt; JavaThread::pd_get_top_frame_for_signal_handler()
+     -&gt; os::fetch_frame_from_context(void* ucVoid, intptr_t** sp, intptr_t** fp)
 
   (Linux sparc の場合)
   ?? 使われていない
-  -> os::Linux::fetch_frame_from_ucontext()
-     -> os::fetch_frame_from_context(void* ucVoid, intptr_t** sp, intptr_t** fp)
+  -&gt; os::Linux::fetch_frame_from_ucontext()
+     -&gt; os::fetch_frame_from_context(void* ucVoid, intptr_t** sp, intptr_t** fp)
 
   (Linux x86 の場合)
   AsyncGetCallTrace()
-  -> JavaThread::pd_get_top_frame_for_signal_handler()
-     -> os::Linux::fetch_frame_from_ucontext()
-        -> os::fetch_frame_from_context(void* ucVoid, intptr_t** sp, intptr_t** fp)
+  -&gt; JavaThread::pd_get_top_frame_for_signal_handler()
+     -&gt; os::Linux::fetch_frame_from_ucontext()
+        -&gt; os::fetch_frame_from_context(void* ucVoid, intptr_t** sp, intptr_t** fp)
 
   (Solaris sparc の場合) (Solaris x86 の場合)
   AsyncGetCallTrace()
-  -> JavaThread::pd_get_top_frame_for_signal_handler()
-     -> os::Solaris::fetch_frame_from_ucontext()
-        -> os::fetch_frame_from_context(void* ucVoid, intptr_t** sp, intptr_t** fp)
+  -&gt; JavaThread::pd_get_top_frame_for_signal_handler()
+     -&gt; os::Solaris::fetch_frame_from_ucontext()
+        -&gt; os::fetch_frame_from_context(void* ucVoid, intptr_t** sp, intptr_t** fp)
 
 * VMError の処理 (なお Linux zero の場合は使用されていない模様)
 
   (Linux sparc の場合) (Linux x86 の場合) (Solaris sparc の場合) (Solaris x86 の場合) (Windows x86 の場合)
   VMError::report()
-  -> os::fetch_frame_from_context(void* ucVoid)
-     -> os::fetch_frame_from_context(void* ucVoid, intptr_t** sp, intptr_t** fp)
-```
+  -&gt; os::fetch_frame_from_context(void* ucVoid)
+     -&gt; os::fetch_frame_from_context(void* ucVoid, intptr_t** sp, intptr_t** fp)
+</pre></div>
   
 ### 内部構造(Internal structure)
 内部には以下のフィールド(のみ)を含む

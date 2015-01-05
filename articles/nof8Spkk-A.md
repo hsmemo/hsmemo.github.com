@@ -32,38 +32,38 @@ sun.tracing.dtrace.JVM クラスのネイティブメソッドからは,
 ```
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 sun.tracing.dtrace.JVM.activate0()
--> JVM_DTraceActivate()
-   -> DTraceJSDT::activate()
-      -> RegisteredProbes::RegisteredProbes()
-      -> ...
-      -> AdapterHandlerLibrary::create_dtrace_nmethod()
-      -> DTraceJSDT::pd_activate()
-      -> RegisteredProbes::toOpaqueProbes()
-```
+-&gt; JVM_DTraceActivate()
+   -&gt; DTraceJSDT::activate()
+      -&gt; RegisteredProbes::RegisteredProbes()
+      -&gt; ...
+      -&gt; AdapterHandlerLibrary::create_dtrace_nmethod()
+      -&gt; DTraceJSDT::pd_activate()
+      -&gt; RegisteredProbes::toOpaqueProbes()
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 sun.tracing.dtrace.JVM.dispose0()
--> JVM_DTraceDispose()
-   -> DTraceJSDT::dispose()
-      -> RegisteredProbes::toRegisteredProbes()
-      -> DTraceJSDT::pd_dispose()
-```
+-&gt; JVM_DTraceDispose()
+   -&gt; DTraceJSDT::dispose()
+      -&gt; RegisteredProbes::toRegisteredProbes()
+      -&gt; DTraceJSDT::pd_dispose()
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 sun.tracing.dtrace.JVM.isEnabled0()
--> JVM_DTraceIsProbeEnabled()
-   -> DTraceJSDT::is_probe_enabled()
-      -> NativeInstruction::is_dtrace_trap()
-```
+-&gt; JVM_DTraceIsProbeEnabled()
+   -&gt; DTraceJSDT::is_probe_enabled()
+      -&gt; NativeInstruction::is_dtrace_trap()
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 sun.tracing.dtrace.JVM.isSupported0()
--> JVM_DTraceIsSupported()
-   -> DTraceJSDT::is_supported()
-      -> DTraceJSDT::pd_is_supported()
-```
+-&gt; JVM_DTraceIsSupported()
+   -&gt; DTraceJSDT::is_supported()
+      -&gt; DTraceJSDT::pd_is_supported()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 

@@ -214,22 +214,22 @@ InlineCallGenerator クラスの具象サブクラスの1つ.
 
 そして, これらのファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 Compile::Compile( ciEnv* ci_env, C2Compiler* compiler, ciMethod* target, int osr_bci, bool subsume_loads, bool do_escape_analysis )
--> CallGenerator::for_inline()
--> CallGenerator::for_osr()
+-&gt; CallGenerator::for_inline()
+-&gt; CallGenerator::for_osr()
 
 Parse::do_call()
--> Compile::call_generator()
-   -> CallGenerator::for_method_handle_inline()
-      -> Compile::call_generator()
-         -> (同上)
-   -> Compile::call_generator() (再帰呼び出し)
-      -> (同上)
-   -> CallGenerator::for_inline()
-      -> Compile::call_generator()
-         -> (同上)
-```
+-&gt; Compile::call_generator()
+   -&gt; CallGenerator::for_method_handle_inline()
+      -&gt; Compile::call_generator()
+         -&gt; (同上)
+   -&gt; Compile::call_generator() (再帰呼び出し)
+      -&gt; (同上)
+   -&gt; CallGenerator::for_inline()
+      -&gt; Compile::call_generator()
+         -&gt; (同上)
+</pre></div>
 
 ### 内部構造(Internal structure)
 実際のパース処理のほとんどは Parse クラスに丸投げしている.
@@ -265,19 +265,19 @@ CallGenerator クラスの具象サブクラスの1つ.
 CallGenerator::for_direct_call() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 Parse::do_call()
--> Compile::call_generator()
-   -> CallGenerator::for_direct_call()
+-&gt; Compile::call_generator()
+   -&gt; CallGenerator::for_direct_call()
 
 PredictedCallGenerator::generate()
--> CallGenerator::for_direct_call()
-   -> (同上)
+-&gt; CallGenerator::for_direct_call()
+   -&gt; (同上)
 
 PredictedDynamicCallGenerator::generate()
--> CallGenerator::for_direct_call()
-   -> (同上)
-```
+-&gt; CallGenerator::for_direct_call()
+   -&gt; (同上)
+</pre></div>
 
 
 
@@ -307,11 +307,11 @@ CallGenerator クラスの具象サブクラスの1つ.
 CallGenerator::for_dynamic_call() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 Parse::do_call()
--> Compile::call_generator()
-   -> CallGenerator::for_dynamic_call()
-```
+-&gt; Compile::call_generator()
+   -&gt; CallGenerator::for_dynamic_call()
+</pre></div>
 
 
 
@@ -342,11 +342,11 @@ CallGenerator クラスの具象サブクラスの1つ.
 CallGenerator::for_virtual_call() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 Parse::do_call()
--> Compile::call_generator()
-   -> CallGenerator::for_virtual_call()
-```
+-&gt; Compile::call_generator()
+   -&gt; CallGenerator::for_virtual_call()
+</pre></div>
 
 
 
@@ -383,11 +383,11 @@ See: [here](../doxygen/classVirtualCallGenerator.html) for details
 CallGenerator::for_late_inline() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 Parse::do_call()
--> Compile::call_generator()
-   -> CallGenerator::for_late_inline()
-```
+-&gt; Compile::call_generator()
+   -&gt; CallGenerator::for_late_inline()
+</pre></div>
 
 
 
@@ -417,11 +417,11 @@ CallGenerator クラスの具象サブクラスの1つ.
 CallGenerator::for_warm_call() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 Parse::do_call()
--> Compile::call_generator()
-   -> CallGenerator::for_warm_call()
-```
+-&gt; Compile::call_generator()
+   -&gt; CallGenerator::for_warm_call()
+</pre></div>
 
 
 
@@ -461,11 +461,11 @@ CallGenerator クラスの具象サブクラスの1つ.
 CallGenerator::for_predicted_call() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 Parse::do_call()
--> Compile::call_generator()
-   -> CallGenerator::for_predicted_call()
-```
+-&gt; Compile::call_generator()
+   -&gt; CallGenerator::for_predicted_call()
+</pre></div>
 
 ### 内部構造(Internal structure)
 コンストラクタで 2種類の CallGenerator オブジェクト (if_hit, if_missed) を受け取る.
@@ -518,12 +518,12 @@ CallGenerator クラスの具象サブクラスの1つ.
 
 そして, これらの関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 Parse::do_call()
--> Compile::call_generator()
-   -> CallGenerator::for_method_handle_inline()
-   -> CallGenerator::for_predicted_dynamic_call()
-```
+-&gt; Compile::call_generator()
+   -&gt; CallGenerator::for_method_handle_inline()
+   -&gt; CallGenerator::for_predicted_dynamic_call()
+</pre></div>
 
 ### 内部構造(Internal structure)
 コンストラクタで 2種類の CallGenerator オブジェクト (if_hit, if_missed) を受け取る.
@@ -570,11 +570,11 @@ Uncommon Trap を起こして JIT コンパイルのやり直しを促すため�
 CallGenerator::for_uncommon_trap() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 Parse::do_call()
--> Compile::call_generator()
-   -> CallGenerator::for_uncommon_trap()
-```
+-&gt; Compile::call_generator()
+   -&gt; CallGenerator::for_uncommon_trap()
+</pre></div>
 
 
 

@@ -50,41 +50,41 @@ JDK 1.6 以降なら methods という配列に, JDK 1.5 なら methods_15 と�
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### java.util.concurrent.locks.LockSupport.park() 処理の流れ
-```
+<div class="flow-abst"><pre>
 java.util.concurrent.locks.LockSupport.park()
--> Unsafe_Park() (= sun.misc.Unsafe.park())
-   -> Parker::park()
-      -> OS によって処理が異なる.
+-&gt; Unsafe_Park() (= sun.misc.Unsafe.park())
+   -&gt; Parker::park()
+      -&gt; OS によって処理が異なる.
          * Linux の場合
-           -> pthread_mutex_trylock()
-           -> pthread_cond_wait() または os::Linux::safe_cond_timedwait()
-           -> pthread_mutex_unlock()
+           -&gt; pthread_mutex_trylock()
+           -&gt; pthread_cond_wait() または os::Linux::safe_cond_timedwait()
+           -&gt; pthread_mutex_unlock()
          * Solaris の場合
-           -> os::Solaris::mutex_trylock()
-           -> os::Solaris::cond_wait() または os::Solaris::cond_timedwait()
-           -> os::Solaris::mutex_unlock()
+           -&gt; os::Solaris::mutex_trylock()
+           -&gt; os::Solaris::cond_wait() または os::Solaris::cond_timedwait()
+           -&gt; os::Solaris::mutex_unlock()
          * Windows の場合
-           -> WaitForSingleObject()
-           -> ResetEvent()
-```
+           -&gt; WaitForSingleObject()
+           -&gt; ResetEvent()
+</pre></div>
 
 ### java.util.concurrent.locks.LockSupport.unpark() 処理の流れ
-```
+<div class="flow-abst"><pre>
 java.util.concurrent.locks.LockSupport.unpark()
--> Unsafe_Unpark() (= sun.misc.Unsafe.unpark())
-   -> Parker::unpark()
-      -> OS によって処理が異なる.
+-&gt; Unsafe_Unpark() (= sun.misc.Unsafe.unpark())
+   -&gt; Parker::unpark()
+      -&gt; OS によって処理が異なる.
          * Linux の場合
-           -> pthread_mutex_lock()
-           -> pthread_mutex_unlock()
-           -> pthread_cond_signal()
+           -&gt; pthread_mutex_lock()
+           -&gt; pthread_mutex_unlock()
+           -&gt; pthread_cond_signal()
          * Solaris の場合
-           -> os::Solaris::mutex_lock()
-           -> os::Solaris::mutex_unlock()
-           -> os::Solaris::cond_signal()
+           -&gt; os::Solaris::mutex_lock()
+           -&gt; os::Solaris::mutex_unlock()
+           -&gt; os::Solaris::cond_signal()
          * Windows の場合
-           -> SetEvent()
-```
+           -&gt; SetEvent()
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

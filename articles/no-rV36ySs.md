@@ -160,12 +160,12 @@ methodOop 内のブレークポイントに該当するアドレスを返すよ�
 現状では JvmtiCurrentBreakpoints::listener_fun() だけである模様.
 設定される処理パスは以下の通り.
 
-```
+<div class="flow-abst"><pre>
 JvmtiCurrentBreakpoints::get_jvmti_breakpoints()
--> JvmtiBreakpoints::JvmtiBreakpoints()
-   -> JvmtiBreakpointCache::initialize()
-      -> GrowableCache::initialize()
-```
+-&gt; JvmtiBreakpoints::JvmtiBreakpoints()
+   -&gt; JvmtiBreakpointCache::initialize()
+      -&gt; GrowableCache::initialize()
+</pre></div>
 
 
 
@@ -617,26 +617,26 @@ JvmtiDeferredEventQueue クラス内(の JvmtiDeferredEventQueue::QueueNode オ�
 
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている (See: [here](no3718UPQ.html) for details).
 
-```
+<div class="flow-abst"><pre>
 ciEnv::register_method()
--> nmethod::post_compiled_method_load_event()
-   -> JvmtiDeferredEvent::compiled_method_load_event()
+-&gt; nmethod::post_compiled_method_load_event()
+   -&gt; JvmtiDeferredEvent::compiled_method_load_event()
 
 AdapterHandlerLibrary::create_native_wrapper()
--> nmethod::post_compiled_method_load_event()
-   -> JvmtiDeferredEvent::compiled_method_load_event()
+-&gt; nmethod::post_compiled_method_load_event()
+   -&gt; JvmtiDeferredEvent::compiled_method_load_event()
 
 nmethod::make_unloaded()
--> nmethod::post_compiled_method_unload()
-   -> JvmtiDeferredEvent::compiled_method_unload_event()
+-&gt; nmethod::post_compiled_method_unload()
+   -&gt; JvmtiDeferredEvent::compiled_method_unload_event()
 
 nmethod::make_not_entrant_or_zombie()
--> nmethod::post_compiled_method_unload()
-   -> JvmtiDeferredEvent::compiled_method_unload_event()
+-&gt; nmethod::post_compiled_method_unload()
+   -&gt; JvmtiDeferredEvent::compiled_method_unload_event()
 
 JvmtiExport::post_dynamic_code_generated()
--> JvmtiDeferredEvent::dynamic_code_generated_event()
-```
+-&gt; JvmtiDeferredEvent::dynamic_code_generated_event()
+</pre></div>
 
 ### 内部構造(Internal structure)
 定義されているフィールドは以下のもののみ.

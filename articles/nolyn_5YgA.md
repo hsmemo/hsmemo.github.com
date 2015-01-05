@@ -142,10 +142,10 @@ ConnectionGraph は, この論文のアルゴリズムで用いられる "connec
 ConnectionGraph::do_analysis() 内で(のみ)生成されている
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 Compile::Optimize()
--> ConnectionGraph::do_analysis()
-```
+-&gt; ConnectionGraph::do_analysis()
+</pre></div>
 
 
 

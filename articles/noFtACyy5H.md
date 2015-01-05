@@ -46,23 +46,23 @@ ElfFile オブジェクトは m_next フィールドで次の ElfFile オブジ�
 Decoder::get_elf_file() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 * VMError による処理 (print_stack_trace)
 
   VMError::print_stack_trace()
-  -> frame::print_on_error()
-     -> print_C_frame()
-        -> os::dll_address_to_function_name()  (<= Solaris 版 or Linux 版)
-           -> Decoder::decode()
-              -> Decoder::get_elf_file()
+  -&gt; frame::print_on_error()
+     -&gt; print_C_frame()
+        -&gt; os::dll_address_to_function_name()  (&lt;= Solaris 版 or Linux 版)
+           -&gt; Decoder::decode()
+              -&gt; Decoder::get_elf_file()
 
 * FlatProfilerTask による処理
 
   FlatProfilerTask::task()
-  -> FlatProfiler::record_vm_tick()
-     -> os::dll_address_to_function_name()  (<= Solaris 版 or Linux 版)
-        -> (同上)
-```
+  -&gt; FlatProfiler::record_vm_tick()
+     -&gt; os::dll_address_to_function_name()  (&lt;= Solaris 版 or Linux 版)
+        -&gt; (同上)
+</pre></div>
 
 
 

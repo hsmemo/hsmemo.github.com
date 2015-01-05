@@ -46,17 +46,17 @@ _safept_table の中身は TemplateInterpreterGenerator::set_safepoints_for_all_
 
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 _safept_table の各エントリ
--> TemplateInterpreter::_safept_entry に格納されているコード
-   -> TemplateInterpreterGenerator::generate_safept_entry_for() が生成したコード
-      -> InterpreterRuntime::at_safepoint()
-         -> IRT_ENTRY マクロ
-            -> (See: [here](no7882haw.html) for details)
-         -> IRT_END マクロ
-            -> (See: [here](no7882haw.html) for details)
+-&gt; TemplateInterpreter::_safept_entry に格納されているコード
+   -&gt; TemplateInterpreterGenerator::generate_safept_entry_for() が生成したコード
+      -&gt; InterpreterRuntime::at_safepoint()
+         -&gt; IRT_ENTRY マクロ
+            -&gt; (See: <a href="no7882haw.html">here</a> for details)
+         -&gt; IRT_END マクロ
+            -&gt; (See: <a href="no7882haw.html">here</a> for details)
                (Safepoint 処理が開始されていれば, この中で停止する)
-```
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

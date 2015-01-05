@@ -58,17 +58,17 @@ GenCollectedHeap::_rem_set, または G1CollectedHeap::_rem_set に格納され�
 CollectorPolicy::create_rem_set() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 * G1CollectedHeap オブジェクトの生成処理
 
   G1CollectedHeap::initialize()
-  -> CollectorPolicy::create_rem_set()
+  -&gt; CollectorPolicy::create_rem_set()
 
 * GenCollectedHeap オブジェクトの生成処理
 
   GenCollectedHeap::initialize()
-  -> CollectorPolicy::create_rem_set()
-```
+  -&gt; CollectorPolicy::create_rem_set()
+</pre></div>
 
 ### 内部構造(Internal structure)
 内部的には, barrier set (CardTableModRefBSForCTRS オブジェクト) を用いて remembered set を実現している.

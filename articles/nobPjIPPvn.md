@@ -23,46 +23,46 @@ JNI_OnLoad のシンボル名は, プラットフォームによっては (よ�
 
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 java.lang.System.loadLibrary()
--> java.lang.Runtime.loadLibrary0()
-   -> java.lang.ClassLoader.loadLibrary()
-      -> java.lang.ClassLoader.findLibrary()    (<= 必要に応じて呼び出される)
-      -> java.lang.ClassLoader.loadLibrary0()
-         -> java.lang.ClassLoader$NativeLibrary.load()
-            -> Java_java_lang_ClassLoader_00024NativeLibrary_load()
-               -> (1) ライブラリをロードする.
-                      -> JVM_LoadLibrary()
-                         -> os::dll_load()
+-&gt; java.lang.Runtime.loadLibrary0()
+   -&gt; java.lang.ClassLoader.loadLibrary()
+      -&gt; java.lang.ClassLoader.findLibrary()    (&lt;= 必要に応じて呼び出される)
+      -&gt; java.lang.ClassLoader.loadLibrary0()
+         -&gt; java.lang.ClassLoader$NativeLibrary.load()
+            -&gt; Java_java_lang_ClassLoader_00024NativeLibrary_load()
+               -&gt; (1) ライブラリをロードする.
+                      -&gt; JVM_LoadLibrary()
+                         -&gt; os::dll_load()
                             * Linux の場合
-                              -> dlopen()
+                              -&gt; dlopen()
                             * Solaris の場合
-                              -> dlopen()
+                              -&gt; dlopen()
                             * Windows の場合
-                              -> LoadLibrary()
+                              -&gt; LoadLibrary()
                   (1) もし JNI_OnLoad シンボルが含まれていればそれを呼び出す.
-                      -> JVM_FindLibraryEntry()
-                         -> os::dll_lookup()
+                      -&gt; JVM_FindLibraryEntry()
+                         -&gt; os::dll_lookup()
                             * Linux の場合
-                              -> dlsym()
+                              -&gt; dlsym()
                             * Solaris の場合
-                              -> dlsym()
+                              -&gt; dlsym()
                             * Windows の場合
-                              -> GetProcAddress()
+                              -&gt; GetProcAddress()
                   (1) ロードしたライブラリの JNI version をチェックする.
-                      -> JVM_IsSupportedJNIVersion()
-                         -> Threads::is_supported_jni_version_including_1_1()
-                            -> Threads::is_supported_jni_version()
+                      -&gt; JVM_IsSupportedJNIVersion()
+                         -&gt; Threads::is_supported_jni_version_including_1_1()
+                            -&gt; Threads::is_supported_jni_version()
                   (1) もし何かエラーが発生していたり, jni version が合わなかった場合はアンロード.
-                      -> JVM_UnloadLibrary()
-                         -> os::dll_unload()
+                      -&gt; JVM_UnloadLibrary()
+                         -&gt; os::dll_unload()
                             * Linux の場合
-                              -> dlclose()
+                              -&gt; dlclose()
                             * Solaris の場合
-                              -> dlclose()
+                              -&gt; dlclose()
                             * Windows の場合
-                              -> FreeLibrary()
-```
+                              -&gt; FreeLibrary()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### java.lang.System.loadLibrary()

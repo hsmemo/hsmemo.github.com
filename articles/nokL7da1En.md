@@ -482,12 +482,12 @@ CmpNode クラスの具象サブクラスの1つ.
 final_graph_reshaping_impl() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 Compile::Optimize()
--> Compile::final_graph_reshaping()
-   -> final_graph_reshaping_walk()
-      -> final_graph_reshaping_impl()
-```
+-&gt; Compile::final_graph_reshaping()
+   -&gt; final_graph_reshaping_walk()
+      -&gt; final_graph_reshaping_impl()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -948,10 +948,10 @@ PhiNode の最適化のための Node クラス.
 is_cond_add() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhiNode::Ideal()
--> is_cond_add()
-```
+-&gt; is_cond_add()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -1103,12 +1103,12 @@ double 値に対する cos (コサイン) 演算を表す.
 LibraryCallKit::inline_trig() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 LibraryIntrinsic::generate()
--> LibraryCallKit::try_to_inline()
-   -> LibraryCallKit::inline_math_native()
-      -> LibraryCallKit::inline_trig() 
-```
+-&gt; LibraryCallKit::try_to_inline()
+   -&gt; LibraryCallKit::inline_math_native()
+      -&gt; LibraryCallKit::inline_trig() 
+</pre></div>
 
 ### 内部構造(Internal structure)
 単項演算を表すノードなので (control input も含めて) 2つの入力ノードを持つ. 
@@ -1145,12 +1145,12 @@ double 値に対する sin (サイン) 演算を表す.
 LibraryCallKit::inline_trig() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 LibraryIntrinsic::generate()
--> LibraryCallKit::try_to_inline()
-   -> LibraryCallKit::inline_math_native()
-      -> LibraryCallKit::inline_trig() 
-```
+-&gt; LibraryCallKit::try_to_inline()
+   -&gt; LibraryCallKit::inline_math_native()
+      -&gt; LibraryCallKit::inline_trig() 
+</pre></div>
 
 ### 内部構造(Internal structure)
 単項演算を表すノードなので (control input も含めて) 2つの入力ノードを持つ. 
@@ -1187,12 +1187,12 @@ double 値に対する tan (タンジェント) 演算を表す.
 LibraryCallKit::inline_trig() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 LibraryIntrinsic::generate()
--> LibraryCallKit::try_to_inline()
-   -> LibraryCallKit::inline_math_native()
-      -> LibraryCallKit::inline_trig() 
-```
+-&gt; LibraryCallKit::try_to_inline()
+   -&gt; LibraryCallKit::inline_math_native()
+      -&gt; LibraryCallKit::inline_trig() 
+</pre></div>
 
 ### 内部構造(Internal structure)
 単項演算を表すノードなので (control input も含めて) 2つの入力ノードを持つ. 
@@ -1260,12 +1260,12 @@ double 値に対する sqrt (平方根) 演算を表す.
 LibraryCallKit::inline_sqrt() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 LibraryIntrinsic::generate()
--> LibraryCallKit::try_to_inline()
-   -> LibraryCallKit::inline_math_native()
-      -> LibraryCallKit::inline_sqrt()
-```
+-&gt; LibraryCallKit::try_to_inline()
+   -&gt; LibraryCallKit::inline_math_native()
+      -&gt; LibraryCallKit::inline_sqrt()
+</pre></div>
 
 ### 内部構造(Internal structure)
 単項演算を表すノードなので (control input も含めて) 2つの入力ノードを持つ. 
@@ -1345,12 +1345,12 @@ double 値に対する log_e (自然対数) 演算を表す.
 LibraryCallKit::inline_trans() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 LibraryIntrinsic::generate()
--> LibraryCallKit::try_to_inline()
-   -> LibraryCallKit::inline_math_native()
-      -> LibraryCallKit::inline_trans()
-```
+-&gt; LibraryCallKit::try_to_inline()
+   -&gt; LibraryCallKit::inline_math_native()
+      -&gt; LibraryCallKit::inline_trans()
+</pre></div>
 
 ### 内部構造(Internal structure)
 単項演算を表すノードなので (control input も含めて) 2つの入力ノードを持つ. 
@@ -1387,12 +1387,12 @@ double 値に対する log_10 (常用対数) 演算を表す.
 LibraryCallKit::inline_trans() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 LibraryIntrinsic::generate()
--> LibraryCallKit::try_to_inline()
-   -> LibraryCallKit::inline_math_native()
-      -> LibraryCallKit::inline_trans()
-```
+-&gt; LibraryCallKit::try_to_inline()
+   -&gt; LibraryCallKit::inline_math_native()
+      -&gt; LibraryCallKit::inline_trans()
+</pre></div>
 
 ### 内部構造(Internal structure)
 単項演算を表すノードなので (control input も含めて) 2つの入力ノードを持つ. 
@@ -1469,11 +1469,11 @@ int 値に対するバイト順の反転演算(java.lang.Integer.reverseBytes())
 LibraryCallKit::inline_reverseBytes() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 LibraryIntrinsic::generate()
--> LibraryCallKit::try_to_inline()
-   -> LibraryCallKit::inline_reverseBytes()
-```
+-&gt; LibraryCallKit::try_to_inline()
+   -&gt; LibraryCallKit::inline_reverseBytes()
+</pre></div>
 
 ### 内部構造(Internal structure)
 単項演算を表すノードなので (control input も含めて) 2つの入力ノードを持つ. 
@@ -1512,11 +1512,11 @@ long 値に対するバイト順の反転演算(java.lang.Long.reverseBytes())�
 LibraryCallKit::inline_reverseBytes() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 LibraryIntrinsic::generate()
--> LibraryCallKit::try_to_inline()
-   -> LibraryCallKit::inline_reverseBytes()
-```
+-&gt; LibraryCallKit::try_to_inline()
+   -&gt; LibraryCallKit::inline_reverseBytes()
+</pre></div>
 
 ### 内部構造(Internal structure)
 単項演算を表すノードなので (control input も含めて) 2つの入力ノードを持つ. 
@@ -1555,11 +1555,11 @@ unsigned short (= char) 値に対するバイト順の反転演算(java.lang.Cha
 LibraryCallKit::inline_reverseBytes() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 LibraryIntrinsic::generate()
--> LibraryCallKit::try_to_inline()
-   -> LibraryCallKit::inline_reverseBytes()
-```
+-&gt; LibraryCallKit::try_to_inline()
+   -&gt; LibraryCallKit::inline_reverseBytes()
+</pre></div>
 
 ### 内部構造(Internal structure)
 単項演算を表すノードなので (control input も含めて) 2つの入力ノードを持つ. 
@@ -1598,11 +1598,11 @@ short 値に対するバイト順の反転演算(java.lang.Short.reverseBytes())
 LibraryCallKit::inline_reverseBytes() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 LibraryIntrinsic::generate()
--> LibraryCallKit::try_to_inline()
-   -> LibraryCallKit::inline_reverseBytes()
-```
+-&gt; LibraryCallKit::try_to_inline()
+   -&gt; LibraryCallKit::inline_reverseBytes()
+</pre></div>
 
 ### 内部構造(Internal structure)
 単項演算を表すノードなので (control input も含めて) 2つの入力ノードを持つ. 

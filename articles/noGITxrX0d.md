@@ -356,22 +356,22 @@ JNI の Weak Global Handle を辿る処理で使用される Closure.
 
 そして, これらの関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 * (?? 使用箇所が見当たらない)
 
   JNIHandles::print()
-  -> JNIHandles::print_on()
+  -&gt; JNIHandles::print_on()
 
 * 保守運用機能のための処理 (Dynamic Attach 機能及びスレッドダンプ機能用の処理)
 
   VM_PrintJNI::doit()
-  -> JNIHandles::print_on()
+  -&gt; JNIHandles::print_on()
 
 * デバッグ用(開発時用)の処理
 
    Universe::verify()
-   -> JNIHandles::verify()
-```
+   -&gt; JNIHandles::verify()
+</pre></div>
 
 ### 備考(Notes)
 同名のクラスが hotspot/src/share/vm/memory/referenceProcessor.cpp にいたりするが
@@ -402,12 +402,12 @@ JNI の Weak Global Handle を辿る処理で使用される Closure.
 JNIHandles::print_on() 内で(のみ)使用されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 * 保守運用機能のための処理 (Dynamic Attach 機能及びスレッドダンプ機能用の処理)
 
   VM_PrintJNI::doit()
-  -> JNIHandles::print_on()
-```
+  -&gt; JNIHandles::print_on()
+</pre></div>
 
 ### 備考(Notes)
 同名のクラスが hotspot/src/share/vm/memory/referenceProcessor.cpp にいたりするが
@@ -437,10 +437,10 @@ JNIHandles クラス内で使用される補助クラス.
 JNIHandles::verify() 内で(のみ)使用されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 Universe::verify()
--> JNIHandles::verify()
-```
+-&gt; JNIHandles::verify()
+</pre></div>
 
 ### 内部構造(Internal structure)
 処理としては, 単に oopDesc::verify() を呼び出すだけ.

@@ -75,14 +75,14 @@ RFrame::new_RFrame() 内で(のみ)生成されている.
 
 (ただし, ResourceObjクラスなので一時的なオブジェクト)
 
-```
-(略) (See: [here](no34200pY.html) for details)
--> StackWalkCompPolicy::method_invocation_event()
-   -> StackWalkCompPolicy::findTopInlinableFrame()
-      -> StackWalkCompPolicy::senderOf()
-         -> RFrame::caller()
-            -> RFrame::new_RFrame()
-```
+<div class="flow-abst"><pre>
+(略) (See: <a href="no34200pY.html">here</a> for details)
+-&gt; StackWalkCompPolicy::method_invocation_event()
+   -&gt; StackWalkCompPolicy::findTopInlinableFrame()
+      -&gt; StackWalkCompPolicy::senderOf()
+         -&gt; RFrame::caller()
+            -&gt; RFrame::new_RFrame()
+</pre></div>
 
 
 
@@ -118,14 +118,14 @@ RFrame クラスの具象サブクラスの1つ
 
 なお, RFrame::new_RFrame() は現在は以下のパスで(のみ)呼び出されている.
 
-```
-(略) (See: [here](no34200pY.html) for details)
--> StackWalkCompPolicy::method_invocation_event()
-   -> StackWalkCompPolicy::findTopInlinableFrame()
-      -> StackWalkCompPolicy::senderOf()
-         -> RFrame::caller()
-            -> RFrame::new_RFrame()
-```
+<div class="flow-abst"><pre>
+(略) (See: <a href="no34200pY.html">here</a> for details)
+-&gt; StackWalkCompPolicy::method_invocation_event()
+   -&gt; StackWalkCompPolicy::findTopInlinableFrame()
+      -&gt; StackWalkCompPolicy::senderOf()
+         -&gt; RFrame::caller()
+            -&gt; RFrame::new_RFrame()
+</pre></div>
 
 
 

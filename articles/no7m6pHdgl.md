@@ -14,10 +14,10 @@ JavaThread::thread_from_jni_environment() によって取得しているので,
 
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 JVM_CurrentThread() (= java.lang.Thread.currentThread())
--> JavaThread::threadObj()
-```
+-&gt; JavaThread::threadObj()
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

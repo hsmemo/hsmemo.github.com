@@ -19,20 +19,20 @@ title: Memory allocation (& GC 処理) ： メモリ関係の初期化処理の�
 (See: [here](noS8y7MAwP.html) and [here](no7882OK1.html) for details).
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
-(HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
--> Threads::create_vm()
-   -> (1) コマンドラインオプションに基づき GC アルゴリズムを決定する. 指定がなければ適当なものを選択する.
-          -> Arguments::parse()
-             -> Arguments::set_ergonomics_flags()
-                -> os::is_server_class_machine()
-                -> Arguments::should_auto_select_low_pause_collector()
+<div class="flow-abst"><pre>
+(HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+-&gt; Threads::create_vm()
+   -&gt; (1) コマンドラインオプションに基づき GC アルゴリズムを決定する. 指定がなければ適当なものを選択する.
+          -&gt; Arguments::parse()
+             -&gt; Arguments::set_ergonomics_flags()
+                -&gt; os::is_server_class_machine()
+                -&gt; Arguments::should_auto_select_low_pause_collector()
 
       (2) GC アルゴリズムに応じた CollectorPolicy オブジェクトおよび CollectedHeap オブジェクトを生成＆初期化する
-          -> init_globals()
-             -> universe_init()
-                -> Universe::initialize_heap()
-                   -> (1) コマンドラインオプションに応じて,
+          -&gt; init_globals()
+             -&gt; universe_init()
+                -&gt; Universe::initialize_heap()
+                   -&gt; (1) コマンドラインオプションに応じて,
                           適切な CollectorPolicy およびヒープ領域管理用のクラス(CollectedHeap のサブクラス)を生成する.
 
                           * UseParallelGC の場合:
@@ -45,10 +45,10 @@ title: Memory allocation (& GC 処理) ： メモリ関係の初期化処理の�
                           * UseSerialGC の場合
                             * CollectorPolicy : MarkSweepPolicy()
                             * CollectedHeap   : GenCollectedHeap()
-                          * UseConcMarkSweepGC && UseAdaptiveSizePolicy の場合
+                          * UseConcMarkSweepGC &amp;&amp; UseAdaptiveSizePolicy の場合
                             * CollectorPolicy : ASConcurrentMarkSweepPolicy()
                             * CollectedHeap   : GenCollectedHeap()
-                          * UseConcMarkSweepGC && ! UseAdaptiveSizePolicy の場合
+                          * UseConcMarkSweepGC &amp;&amp; ! UseAdaptiveSizePolicy の場合
                             * CollectorPolicy : ConcurrentMarkSweepPolicy()  
                             * CollectedHeap   : GenCollectedHeap()
                           * それ以外の場合
@@ -61,30 +61,30 @@ title: Memory allocation (& GC 処理) ： メモリ関係の初期化処理の�
 
                           * UseParallelGCParallelScavenge の場合:
 
-                            -> ParallelScavengeHeap::initialize()
-                               -> (See: [here](no2114uSs.html) for details)
+                            -&gt; ParallelScavengeHeap::initialize()
+                               -&gt; (See: <a href="no2114uSs.html">here</a> for details)
 
                           * UseG1GC の場合:
 
-                            -> G1CollectedHeap::initialize()
-                               -> (See: [here](no2114tfN.html) for details)
+                            -&gt; G1CollectedHeap::initialize()
+                               -&gt; (See: <a href="no2114tfN.html">here</a> for details)
 
                           * それ以外の場合:
 
-                            -> GenCollectedHeap::initialize()
-                               -> (See: [here](no2114gVH.html) for details)
+                            -&gt; GenCollectedHeap::initialize()
+                               -&gt; (See: <a href="no2114gVH.html">here</a> for details)
 
                       (3) UseCompressedOops 使用時には, ヒープのベースアドレスとポインタのシフト幅を設定しておく
-                          -> Universe::set_narrow_oop_base()
-                          -> Universe::set_narrow_oop_shift()
+                          -&gt; Universe::set_narrow_oop_base()
+                          -&gt; Universe::set_narrow_oop_shift()
 
                       (4) UseTLAB オプションが指定されていれば ThreadLocalAllocBuffer の初期化を行う
-                          -> ThreadLocalAllocBuffer::startup_initialization()
+                          -&gt; ThreadLocalAllocBuffer::startup_initialization()
 
       (3) GC アルゴリズムとして CMS か G1GC が指定されている場合には, SurrogateLockerThread を生成する
-          -> ConcurrentMarkSweepThread::makeSurrogateLockerThread()  or  ConcurrentMarkThread::makeSurrogateLockerThread()
-             -> (See: [here](no7882OK1.html) for details)
-```
+          -&gt; ConcurrentMarkSweepThread::makeSurrogateLockerThread()  or  ConcurrentMarkThread::makeSurrogateLockerThread()
+             -&gt; (See: <a href="no7882OK1.html">here</a> for details)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

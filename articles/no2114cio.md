@@ -36,56 +36,56 @@ title: Thread の待機処理の枠組み ： Mutex, Monitor による処理
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### Monitor::lock()  (Mutex::lock())
-```
+<div class="flow-abst"><pre>
 Monitor::lock()
--> Monitor::TryFast()           (成功すれば, ここでリターン)
--> Monitor::TrySpin()           (成功すれば, ここでリターン)
-   -> Monitor::TryLock()        (成功すれば, ここでリターン)
-   -> 適当な回数だけ CAS によるロックを試みる.
-      -> CASPTR() マクロ
-      -> SpinPause() で時間をつぶす
-      -> MarsagliaXORV() 又は Stall() で時間をつぶす
--> Monitor::ILock()
-   -> Monitor::TryFast()        (成功すれば, ここでリターン)
-   -> Monitor::TrySpin()        (成功すれば, ここでリターン)
-   -> Monitor::AcquireOrPush()  (成功すれば, ここでリターン) (失敗した場合は, 待ち行列に追加される)
-   -> ParkCommon() で待機する. この中では以下のどちらかを呼び出す
+-&gt; Monitor::TryFast()           (成功すれば, ここでリターン)
+-&gt; Monitor::TrySpin()           (成功すれば, ここでリターン)
+   -&gt; Monitor::TryLock()        (成功すれば, ここでリターン)
+   -&gt; 適当な回数だけ CAS によるロックを試みる.
+      -&gt; CASPTR() マクロ
+      -&gt; SpinPause() で時間をつぶす
+      -&gt; MarsagliaXORV() 又は Stall() で時間をつぶす
+-&gt; Monitor::ILock()
+   -&gt; Monitor::TryFast()        (成功すれば, ここでリターン)
+   -&gt; Monitor::TrySpin()        (成功すれば, ここでリターン)
+   -&gt; Monitor::AcquireOrPush()  (成功すれば, ここでリターン) (失敗した場合は, 待ち行列に追加される)
+   -&gt; ParkCommon() で待機する. この中では以下のどちらかを呼び出す
       * タイムアウト時間が指定されていない場合
-        -> os::PlatformEvent::park()
+        -&gt; os::PlatformEvent::park()
       * タイムアウト時間が指定されている場合
-        -> os::PlatformEvent::park(jlong millis)
-   -> Monitor::TrySpin()
-```
+        -&gt; os::PlatformEvent::park(jlong millis)
+   -&gt; Monitor::TrySpin()
+</pre></div>
 
 ### Monitor::unlock()  (Mutex::unlock())
-```
+<div class="flow-abst"><pre>
 Monitor::unlock()
--> Monitor::IUnlock()
-```
+-&gt; Monitor::IUnlock()
+</pre></div>
 
 ### Monitor::wait()
-```
+<div class="flow-abst"><pre>
 Monitor::wait()
--> Monitor::IWait()
-   -> カレントスレッドを _WaitSet に登録する
-   -> Monitor::IUnlock()
-   -> ParkCommon()
-   -> Monitor::ILock()
-```
+-&gt; Monitor::IWait()
+   -&gt; カレントスレッドを _WaitSet に登録する
+   -&gt; Monitor::IUnlock()
+   -&gt; ParkCommon()
+   -&gt; Monitor::ILock()
+</pre></div>
 
 ### Monitor::notify()
-```
+<div class="flow-abst"><pre>
 Monitor::notify()
--> _WaitSet の先頭のスレッドを cxq に移動させる
+-&gt; _WaitSet の先頭のスレッドを cxq に移動させる
    (これで Monitor::notify() を呼んだスレッドが unlock した際 (あるいはそれ以降の unlock() 時) に unpark() されるようになる)
-```
+</pre></div>
 
 ### Monitor::notify_all()
-```
+<div class="flow-abst"><pre>
 Monitor::notify_all()
--> Monitor::notify()  (← wait しているスレッド数分だけ呼び出す)
-   -> (上述)
-```
+-&gt; Monitor::notify()  (← wait しているスレッド数分だけ呼び出す)
+   -&gt; (上述)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

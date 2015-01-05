@@ -11,99 +11,99 @@ title: Memory allocation (& GC 処理) ： メモリ関係の初期化処理の�
 (#Under Construction)
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
-(See: [here](noYV_1Xq7P.html) for details)
--> ParallelScavengeHeap::initialize()
-   -> (1) 初期化処理の前準備を行う
-          -> CollectedHeap::pre_initialize()
+<div class="flow-abst"><pre>
+(See: <a href="noYV_1Xq7P.html">here</a> for details)
+-&gt; ParallelScavengeHeap::initialize()
+   -&gt; (1) 初期化処理の前準備を行う
+          -&gt; CollectedHeap::pre_initialize()
 
       (1) 各世代(Young/Old/Perm)の領域サイズを決定する
-          -> GenerationSizer::GenerationSizer()
-             -> (1) スーパークラスのコンストラクタの呼び出し
-                    -> CollectorPolicy::CollectorPolicy()
+          -&gt; GenerationSizer::GenerationSizer()
+             -&gt; (1) スーパークラスのコンストラクタの呼び出し
+                    -&gt; CollectorPolicy::CollectorPolicy()
 
                 (2) ヒープサイズに関するコマンドラインオプション(-Xms,-Xmx等)の値を取得する
-                    -> GenerationSizer::initialize_flags()
-                       -> TwoGenerationCollectorPolicy::initialize_flags()
-                          -> GenCollectorPolicy::initialize_flags()
-                             -> CollectorPolicy::initialize_flags()
+                    -&gt; GenerationSizer::initialize_flags()
+                       -&gt; TwoGenerationCollectorPolicy::initialize_flags()
+                          -&gt; GenCollectorPolicy::initialize_flags()
+                             -&gt; CollectorPolicy::initialize_flags()
                 (3) 各世代(Young/Old/Perm)の領域サイズを決定する
-                    -> TwoGenerationCollectorPolicy::initialize_size_info()
-                       -> GenCollectorPolicy::initialize_size_info()
-                          -> CollectorPolicy::initialize_size_info()
+                    -&gt; TwoGenerationCollectorPolicy::initialize_size_info()
+                       -&gt; GenCollectorPolicy::initialize_size_info()
+                          -&gt; CollectorPolicy::initialize_size_info()
 
       (1) ヒープ領域として確保するサイズ, および確保場所として望ましい仮想アドレスを計算する
-          -> Universe::preferred_heap_base()
+          -&gt; Universe::preferred_heap_base()
 
       (1) ヒープ領域をメモリ空間上に reserve する (まず Young, Old, Perm の全世代分をまとめて1つの連続領域として確保)
-          -> ReservedHeapSpace::ReservedHeapSpace(const size_t prefix_size, const size_t prefix_align, const size_t suffix_size, const size_t suffix_align, char* requested_address)
-             -> ReservedSpace::ReservedSpace(const size_t prefix_size, const size_t prefix_align, const size_t suffix_size, const size_t suffix_align, char* requested_address, const size_t noaccess_prefix)
-                -> ReservedSpace::initialize()
-                   -> (1) 以下のどれかでメモリ領域を reserve する.
+          -&gt; ReservedHeapSpace::ReservedHeapSpace(const size_t prefix_size, const size_t prefix_align, const size_t suffix_size, const size_t suffix_align, char* requested_address)
+             -&gt; ReservedSpace::ReservedSpace(const size_t prefix_size, const size_t prefix_align, const size_t suffix_size, const size_t suffix_align, char* requested_address, const size_t noaccess_prefix)
+                -&gt; ReservedSpace::initialize()
+                   -&gt; (1) 以下のどれかでメモリ領域を reserve する.
                           * Large Page を使用したいが, OS の制約により large page については
                             reserve と commit は同時に行わなくてはいけない場合:
-                            -> os::reserve_memory_special()
-                               -> shmat(), VirtualAlloc(), etc
+                            -&gt; os::reserve_memory_special()
+                               -&gt; shmat(), VirtualAlloc(), etc
                                   (各 OS 固有の large page なメモリ空間確保用のシステムコールを呼び出す)
                           * 確保するアドレスが指定されている場合:
-                            -> os::attempt_reserve_memory_at()
-                               -> os::reserve_memory()
-                                  -> mmap(), VirtualAlloc(), etc
+                            -&gt; os::attempt_reserve_memory_at()
+                               -&gt; os::reserve_memory()
+                                  -&gt; mmap(), VirtualAlloc(), etc
                                      (各 OS 固有の仮想メモリ空間確保用のシステムコール)
                           * それ以外の場合:
-                            -> os::reserve_memory()
-                               -> (同上)
+                            -&gt; os::reserve_memory()
+                               -&gt; (同上)
                 (1) 確保した領域のアラインメントが条件に合っていなければ確保し直す.
-                -> ReservedSpace::reserve_and_align()
-                   -> os::reserve_memory()
-                      -> (同上)
-                   -> ReservedSpace::align_reserved_region()
-             -> ReservedSpace::protect_noaccess_prefix()
-                -> os::protect_memory()               (← UseCompressedOops の場合のみ実行)
+                -&gt; ReservedSpace::reserve_and_align()
+                   -&gt; os::reserve_memory()
+                      -&gt; (同上)
+                   -&gt; ReservedSpace::align_reserved_region()
+             -&gt; ReservedSpace::protect_noaccess_prefix()
+                -&gt; os::protect_memory()               (← UseCompressedOops の場合のみ実行)
 
       (1) 確保したヒープ領域に対応する Barrier Set (CardTableExtension オブジェクト) を生成
-          -> CardTableExtension::CardTableExtension()
+          -&gt; CardTableExtension::CardTableExtension()
 
       (1) 上で1つの連続領域として確保したヒープ空間を Perm とそれ以外に分ける
       (1) さらに, Perm 以外の領域を Old と Young に分け, 対応する Generation オブジェクトを生成 (PSYoungGen, PSOldGen)
           (ついでに, ここまでは reserve しただけだった メモリ領域の commit も行う)
-          -> AdjoiningGenerations::AdjoiningGenerations()
-             -> AdjoiningVirtualSpaces::AdjoiningVirtualSpaces()
-             -> UseAdaptiveGCBoundary オプションの値に応じて処理が分岐
+          -&gt; AdjoiningGenerations::AdjoiningGenerations()
+             -&gt; AdjoiningVirtualSpaces::AdjoiningVirtualSpaces()
+             -&gt; UseAdaptiveGCBoundary オプションの値に応じて処理が分岐
                 * UseAdaptiveGCBoundary が true の場合:
-                  -> AdjoiningVirtualSpaces::initialize()
-                     -> PSVirtualSpace::expand_by()
-                        -> os::commit_memory()
-                     -> PSVirtualSpaceHighToLow::expand_by()
-                        -> os::commit_memory()
-                  -> ASPSYoungGen::ASPSYoungGen()
-                  -> ASPSOldGen::ASPSOldGen()
-                  -> PSYoungGen::initialize_work()
-                  -> PSOldGen::initialize_work()
+                  -&gt; AdjoiningVirtualSpaces::initialize()
+                     -&gt; PSVirtualSpace::expand_by()
+                        -&gt; os::commit_memory()
+                     -&gt; PSVirtualSpaceHighToLow::expand_by()
+                        -&gt; os::commit_memory()
+                  -&gt; ASPSYoungGen::ASPSYoungGen()
+                  -&gt; ASPSOldGen::ASPSOldGen()
+                  -&gt; PSYoungGen::initialize_work()
+                  -&gt; PSOldGen::initialize_work()
                 * UseAdaptiveGCBoundary が false の場合:
-                  -> PSYoungGen::PSYoungGen()
-                  -> PSOldGen::PSOldGen()
-                  -> PSYoungGen::initialize()
-                  -> PSOldGen::initialize()
+                  -&gt; PSYoungGen::PSYoungGen()
+                  -&gt; PSOldGen::PSOldGen()
+                  -&gt; PSYoungGen::initialize()
+                  -&gt; PSOldGen::initialize()
 
       (1) ParallelScavengeHeap 用の AdaptiveSizePolicy (PSAdaptiveSizePolicy オブジェクト) を作成
-          -> PSAdaptiveSizePolicy::PSAdaptiveSizePolicy()
+          -&gt; PSAdaptiveSizePolicy::PSAdaptiveSizePolicy()
 
       (1) Perm についても Generation オブジェクトを作成 (PSPermGen)
-          -> PSPermGen::PSPermGen()
+          -&gt; PSPermGen::PSPermGen()
 
       (1) ParallelScavengeHeap 用の GCAdaptivePolicyCounters (PSGCAdaptivePolicyCounters オブジェクト) を作成
-          -> PSGCAdaptivePolicyCounters::PSGCAdaptivePolicyCounters()
+          -&gt; PSGCAdaptivePolicyCounters::PSGCAdaptivePolicyCounters()
 
       (1) 並列 GC 用の作業スレッドを生成する.
-          -> GCTaskManager::create()
-             -> (See: [here](no24805iK.html) for details)
+          -&gt; GCTaskManager::create()
+             -&gt; (See: <a href="no24805iK.html">here</a> for details)
 
       (1) UseParallelOldGC オプションが指定されていれば, そのための初期化処理を行う
-          -> PSParallelCompact::initialize()
-             -> ParallelCompactData::initialize()
-                -> ParallelCompactData::initialize_region_data()
-```
+          -&gt; PSParallelCompact::initialize()
+             -&gt; ParallelCompactData::initialize()
+                -&gt; ParallelCompactData::initialize_region_data()
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

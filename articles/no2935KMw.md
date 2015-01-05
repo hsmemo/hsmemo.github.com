@@ -11,36 +11,36 @@ title: java.lang.Thread オブジェクト (= JavaThread オブジェクト) を
 (#Under Construction)
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 java.lang.Thread.start()
--> java.lang.ThreadGroup.add()
--> java.lang.ThreadGroup.start0()
-   -> JVM_StartThread()
-      -> (1) 新しい JavaThread オブジェクトを生成する
-             -> JavaThread::JavaThread()   (<= なお, エントリポイントとしては thread_entry() 関数が指定されている)
-                -> Thread::Thread()
-                -> JavaThread::initialize()
-                -> JavaThread::set_entry_point()
-                -> os::create_thread()
-                   -> (See: [here](noYHbL-pQM.html) for details)
+-&gt; java.lang.ThreadGroup.add()
+-&gt; java.lang.ThreadGroup.start0()
+   -&gt; JVM_StartThread()
+      -&gt; (1) 新しい JavaThread オブジェクトを生成する
+             -&gt; JavaThread::JavaThread()   (&lt;= なお, エントリポイントとしては thread_entry() 関数が指定されている)
+                -&gt; Thread::Thread()
+                -&gt; JavaThread::initialize()
+                -&gt; JavaThread::set_entry_point()
+                -&gt; os::create_thread()
+                   -&gt; (See: <a href="noYHbL-pQM.html">here</a> for details)
 
          (1) 生成した JavaThread オブジェクトを初期化する
-             -> JavaThread::prepare()
-                -> JavaThread::set_thread()
-                -> java_lang_Thread::set_thread()
-                -> Thread::set_priority()
-                -> Threads::add()
+             -&gt; JavaThread::prepare()
+                -&gt; JavaThread::set_thread()
+                -&gt; java_lang_Thread::set_thread()
+                -&gt; Thread::set_priority()
+                -&gt; Threads::add()
 
          (1) 生成した JavaThread の実行を開始させる.
-             -> Thread::start()
-                -> java_lang_Thread::set_thread_status()
-                -> os::start_thread()
-                   -> (See: [here](noYHbL-pQM.html) for details)
+             -&gt; Thread::start()
+                -&gt; java_lang_Thread::set_thread_status()
+                -&gt; os::start_thread()
+                   -&gt; (See: <a href="noYHbL-pQM.html">here</a> for details)
 
 (なお, java.lang.ThreadGroup.start0() での生成に失敗した場合は以下の関数が呼ばれる)
--> java.lang.ThreadGroup.threadStartFailed()
-   -> java.lang.ThreadGroup.remove()
-```
+-&gt; java.lang.ThreadGroup.threadStartFailed()
+   -&gt; java.lang.ThreadGroup.remove()
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

@@ -15,14 +15,14 @@ Interpreter はインタープリタ種別に応じて #define された定数�
 実際には TemplateInterpreter::initialize() か CppInterpreter::initialize() が呼び出されることになる (See: [here](no7882AgC.html) for details).
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
-(HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
--> Threads::create_vm()
-   -> init_globals()
-      -> interpreter_init()
-         -> Interpreter::initialize()   (<= 実際には TemplateInterpreter::initialize() か CppInterpreter::initialize() が呼び出される)
-            -> (See: [here](noGVP1OhVl.html) for details)
-```
+<div class="flow-abst"><pre>
+(HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+-&gt; Threads::create_vm()
+   -&gt; init_globals()
+      -&gt; interpreter_init()
+         -&gt; Interpreter::initialize()   (&lt;= 実際には TemplateInterpreter::initialize() か CppInterpreter::initialize() が呼び出される)
+            -&gt; (See: <a href="noGVP1OhVl.html">here</a> for details)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

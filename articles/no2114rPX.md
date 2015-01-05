@@ -35,165 +35,165 @@ ClassFileParser::parseClassFile() の呼び出し元が SystemDictionary に登�
 ```
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 ClassFileParser::parseClassFile()
--> (1) ClassFileLoadHook イベントの処理
-       -> JvmtiExport::post_class_file_load_hook()
-          -> (略) (See: [here](no2935WjX.html) for details)
+-&gt; (1) ClassFileLoadHook イベントの処理
+       -&gt; JvmtiExport::post_class_file_load_hook()
+          -&gt; (略) (See: <a href="no2935WjX.html">here</a> for details)
 
    (1) 対象のクラスに対する verify が必要かどうかを確認.
-       -> Verifier::should_verify_for()
+       -&gt; Verifier::should_verify_for()
 
    (1) クラスファイルの magic number や version number をチェックする.
-       -> ClassFileParser::is_supported_version()
+       -&gt; ClassFileParser::is_supported_version()
 
    (1) 「いくつかの broken な 1.1 API を 1.2 でも動かすために, verify を relaxed させるべきかどうか」を調べる
-       -> Verifier::relax_verify_for()
+       -&gt; Verifier::relax_verify_for()
 
    (1) コンスタントプール情報を読み込む
-       -> ClassFileParser::parse_constant_pool()
-          -> (1) constant_pool_count 情報(長さ情報) を読み込む
+       -&gt; ClassFileParser::parse_constant_pool()
+          -&gt; (1) constant_pool_count 情報(長さ情報) を読み込む
              (1) 長さ分だけの constantPoolOop を確保し, 初期化する
-                 -> oopFactory::new_constantPool()
+                 -&gt; oopFactory::new_constantPool()
              (1) constant pool 内の各エントリを読み込み, constantPoolOop オブジェクトに設定する
-                 -> ClassFileParser::parse_constant_pool_entries()
-                    -> constantPoolOopDesc::klass_index_at_put()
-                    -> constantPoolOopDesc::field_at_put()
-                    -> constantPoolOopDesc::method_at_put()
-                    -> constantPoolOopDesc::interface_method_at_put()
-                    -> constantPoolOopDesc::string_index_at_put()
-                    -> constantPoolOopDesc::method_type_index_at_put()
-                    -> constantPoolOopDesc::invoke_dynamic_at_put()
-                    -> constantPoolOopDesc::int_at_put()
-                    -> constantPoolOopDesc::float_at_put()
-                    -> constantPoolOopDesc::long_at_put()
-                    -> constantPoolOopDesc::double_at_put()
-                    -> constantPoolOopDesc::name_and_type_at_put()
-                    -> constantPoolOopDesc::symbol_at_put()
-                    -> SymbolTable::new_symbols()
+                 -&gt; ClassFileParser::parse_constant_pool_entries()
+                    -&gt; constantPoolOopDesc::klass_index_at_put()
+                    -&gt; constantPoolOopDesc::field_at_put()
+                    -&gt; constantPoolOopDesc::method_at_put()
+                    -&gt; constantPoolOopDesc::interface_method_at_put()
+                    -&gt; constantPoolOopDesc::string_index_at_put()
+                    -&gt; constantPoolOopDesc::method_type_index_at_put()
+                    -&gt; constantPoolOopDesc::invoke_dynamic_at_put()
+                    -&gt; constantPoolOopDesc::int_at_put()
+                    -&gt; constantPoolOopDesc::float_at_put()
+                    -&gt; constantPoolOopDesc::long_at_put()
+                    -&gt; constantPoolOopDesc::double_at_put()
+                    -&gt; constantPoolOopDesc::name_and_type_at_put()
+                    -&gt; constantPoolOopDesc::symbol_at_put()
+                    -&gt; SymbolTable::new_symbols()
              (1) 内容を vefify し, String 部分や Class 部分を Unresolved タグに書き換える
 
    (1) access_flags 情報を読み込み, 値をチェックする.
-       -> ClassFileParser::verify_legal_class_modifiers()
-       -> AccessFlags::set_flags()
+       -&gt; ClassFileParser::verify_legal_class_modifiers()
+       -&gt; AccessFlags::set_flags()
 
    (1) this_class 情報を読み込み, 値をチェックする. 
-       -> (1) index の値が, Constant Pool 内に収まっており, unresolved な klass を指していることをチェック.
-              -> valid_cp_range()
-              -> constantTag::is_unresolved_klass()
-              -> ClassFileParser::check_property()
+       -&gt; (1) index の値が, Constant Pool 内に収まっており, unresolved な klass を指していることをチェック.
+              -&gt; valid_cp_range()
+              -&gt; constantTag::is_unresolved_klass()
+              -&gt; ClassFileParser::check_property()
           (1) パースした constant pool から this_class のクラス名を取得.
-              -> constantPoolOopDesc::unresolved_klass_at()
+              -&gt; constantPoolOopDesc::unresolved_klass_at()
           (1) verify の必要があれば, this_class が array type になっていないことを確認.
-              -> ClassFileParser::guarantee_property()
+              -&gt; ClassFileParser::guarantee_property()
           (1) this_class のクラス名をチェック (null だったり要求されていたクラス名と違っていたら, NoClassDefFoundError)
 
    (1) super_class 情報を読み込み, 値をチェックする.
-       -> (1) super_class_index が 0 だった場合は, java_lang_Object かどうかを確認.
+       -&gt; (1) super_class_index が 0 だった場合は, java_lang_Object かどうかを確認.
           (1) super_class_index が 0 でなければ, その index 値が Constant Pool 内に収まっており class を指していること, また array ではないことを確認.
-              -> ClassFileParser::is_klass_reference()
-              -> ClassFileParser::check_property()
-              -> ClassFileParser::guarantee_property()
+              -&gt; ClassFileParser::is_klass_reference()
+              -&gt; ClassFileParser::check_property()
+              -&gt; ClassFileParser::guarantee_property()
 
    (1) 実装しているインターフェース情報を読み込む (実装したインターフェースの個数, 及びそのインターフェース情報).
-       -> ClassFileParser::parse_interfaces()
-          -> ClassFileParser::check_property()
-          -> SystemDictionary::resolve_super_or_fail()
+       -&gt; ClassFileParser::parse_interfaces()
+          -&gt; ClassFileParser::check_property()
+          -&gt; SystemDictionary::resolve_super_or_fail()
 
    (1) フィールド情報を読み込む (フィールドの個数, 及び実際のフィールド情報) (= field_info 構造体を全て読み出す)
-       -> ClassFileParser::parse_fields()
-          -> (1) フィールドの個数情報を読み込む
+       -&gt; ClassFileParser::parse_fields()
+          -&gt; (1) フィールドの個数情報を読み込む
              (1) 長さ(× u2 7個)分の typeArrayOop を確保し, 初期化する
-                 -> oopFactory::new_permanent_shortArray()
+                 -&gt; oopFactory::new_permanent_shortArray()
              (1) 各フィールド情報を読み込み, typeArrayOop 内に設定する
-                 -> (1) access_flags を読み込み, おかしな設定ではないかどうか確認する.
-                        -> ClassFileParser::verify_legal_field_modifiers()
+                 -&gt; (1) access_flags を読み込み, おかしな設定ではないかどうか確認する.
+                        -&gt; ClassFileParser::verify_legal_field_modifiers()
                     (1) name_index を読み込み, その index 値が Constant Pool 内に収まっており, utf8_info を指していることを確認する.
                     (1) フィールド名として妥当な utf8 文字列かどうかを確認する.
-                        -> ClassFileParser::verify_legal_field_name()
+                        -&gt; ClassFileParser::verify_legal_field_name()
                     (1) signature_index (JVMS では descriptor_index) を読み込み, その index 値が Constant Pool 内に収まっており, utf8_info を指していることを確認する.
                     (1) フィールドの型情報(フィールド・ディスクリプタ)として妥当な utf8 文字列かどうかを確認する.
-                        -> ClassFileParser::verify_legal_field_signature()
+                        -&gt; ClassFileParser::verify_legal_field_signature()
                     (1) フィールドのアトリビュート情報のパース
-                        -> ClassFileParser::parse_field_attributes()
-                           -> ClassFileParser::verify_constantvalue()
-                           -> 
+                        -&gt; ClassFileParser::parse_field_attributes()
+                           -&gt; ClassFileParser::verify_constantvalue()
+                           -&gt; 
                     (1) フィールド・ディスクリプタ文字列を基に, フィールドの allocation type (FieldAllocationType) を決定する.
-                        -> ConstantPoolOop::basic_type_for_signature_at()
+                        -&gt; ConstantPoolOop::basic_type_for_signature_at()
 
    (1) メソッド情報を読み込む (メソッドの個数, 及び実際のメソッド情報) (= method_info 構造体を全て読み出す)
        (最終的に読み取った情報は全て methodOop にまとめる. ただし, アノテーションは後から追加の情報として値が返される)
-       -> ClassFileParser::parse_methods()
-          -> (1) メソッドの個数情報を読み込む
+       -&gt; ClassFileParser::parse_methods()
+          -&gt; (1) メソッドの個数情報を読み込む
              (1) 個数分の objArrayOop を確保し, 初期化する
-                 -> oopFactory::new_permanent_shortArray()
+                 -&gt; oopFactory::new_permanent_shortArray()
              (1) 各メソッド情報を読み込み, objArrayOop 内に設定する
-                 -> ClassFileParser::parse_method()
-                    -> (1) access_flags を読み込む
+                 -&gt; ClassFileParser::parse_method()
+                    -&gt; (1) access_flags を読み込む
                        (1) name_index を読み込み, その index 値が Constant Pool 内に収まっており, utf8_info を指していることを確認する.
                        (1) メソッド名として妥当な utf8 文字列かどうかを確認する.
-                           -> ClassFileParser::verify_legal_method_name()
+                           -&gt; ClassFileParser::verify_legal_method_name()
                        (1) signature_index (JVMS では descriptor_index) を読み込み, その index 値が Constant Pool 内に収まっており, utf8_info を指していることを確認する.
                        (1) access_flags が, おかしな設定ではないかどうか確認する.
-                           -> ClassFileParser::verify_legal_method_modifiers()
+                           -&gt; ClassFileParser::verify_legal_method_modifiers()
                        (1) メソッドの型情報(メソッド・ディスクリプタ)として妥当な utf8 文字列かどうかを確認する.
-                           -> ClassFileParser::verify_legal_method_signature()
+                           -&gt; ClassFileParser::verify_legal_method_signature()
                        (1) メソッドのアトリビュート情報のパース
-                           -> ClassFileParser::parse_exception_table()
-                           -> ClassFileParser::parse_checked_exceptions()
-                           -> 
+                           -&gt; ClassFileParser::parse_exception_table()
+                           -&gt; ClassFileParser::parse_checked_exceptions()
+                           -&gt; 
                        (1) methodOop を生成する
-                           -> oopFactory::new_method()
+                           -&gt; oopFactory::new_method()
 
    (1) スーパークラスのチェックを行う.
        (スーパークラスを再帰的にロードする. クラスローダーが違うなどのエラーがあれば, このクラスの処理まで戻って例外発生)
-       -> (1) もしスーパークラスが存在し, かつまだロードされてなければ, ロードする.
-              -> SystemDictionary::resolve_super_or_fail()
+       -&gt; (1) もしスーパークラスが存在し, かつまだロードされてなければ, ロードする.
+              -&gt; SystemDictionary::resolve_super_or_fail()
           (1) super_klass が null でない(= java/lang/Object ではない?#TODO) 場合は,
               super_klass がインターフェースではなく, final クラスでもないことを確認.
               (もしインターフェースであれば IncompatibleClassChangeError, final クラスであれば VerifyError を出す)
 
    (1) 実装しているインターフェースの推移的平方の数を計算し, その数にあった objArrayHandle を作成する.
-       -> ClassFileParser::compute_transitive_interfaces()
+       -&gt; ClassFileParser::compute_transitive_interfaces()
 
    (1) 全メソッドを名前順でソートし, vtable 中での index を割り振る.
-       -> ClassFileParser::sort_methods()
-          -> methodOopDesc::sort_methods()
+       -&gt; ClassFileParser::sort_methods()
+          -&gt; methodOopDesc::sort_methods()
 
    (1) ClassFileParser::parse_methods() の処理中で発見した「クラスのフラグに追加した方がいいフラグ」を access_flags に追加する.
-       -> AccessFlags::add_promoted_flags()
+       -&gt; AccessFlags::add_promoted_flags()
 
    (1) vtable, itable の大きさと miranda method の個数を計算する.
-       -> klassVtable::compute_vtable_size_and_num_mirandas()
+       -&gt; klassVtable::compute_vtable_size_and_num_mirandas()
 
    (1) 各フィールドについて, オブジェクト内でのオフセットを決める. (#TODO)
-       -> 
+       -&gt; 
 
    (1) oopmap の大きさ(= OopMapBlock オブジェクトが占める大きさ)を計算する
-       -> ClassFileParser::compute_oop_map_count()
+       -&gt; ClassFileParser::compute_oop_map_count()
 
    (1) reference type (= java.lang.ref.Reference クラスのサブクラスかどうか) を調べる
 
    (1) パース結果を格納するための klassOop を確保する.
-       -> oopFactory::new_instanceKlass()
+       -&gt; oopFactory::new_instanceKlass()
 
    (1) 確保した klassOop 内にパース結果の情報を書き込んでいく.
-       -> (1) ...
+       -&gt; (1) ...
 
           (1) クラスファイルのアトリビュートをパースする
-              -> ClassFileParser::parse_classfile_attributes()
+              -&gt; ClassFileParser::parse_classfile_attributes()
           (1) oopmap 領域に OopMapBlock オブジェクトを書き込む
-              -> ClassFileParser::fill_oop_maps()
+              -&gt; ClassFileParser::fill_oop_maps()
 
    (1) 正しいクラスになっていることをチェックする.
-       -> ClassFileParser::check_super_class_access()
-       -> ClassFileParser::check_super_interface_access()
-       -> ClassFileParser::check_final_method_override()
-       -> ClassFileParser::check_illegal_static_method()
+       -&gt; ClassFileParser::check_super_class_access()
+       -&gt; ClassFileParser::check_super_interface_access()
+       -&gt; ClassFileParser::check_final_method_override()
+       -&gt; ClassFileParser::check_illegal_static_method()
 
    (1) mirror オブジェクト (= Java レベルでのクラスオブジェクト) を生成する.
-       -> java_lang_Class::create_mirror()
-```
+       -&gt; java_lang_Class::create_mirror()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### ClassFileParser::parseClassFile()

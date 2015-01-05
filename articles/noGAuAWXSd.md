@@ -16,11 +16,11 @@ fast-path が失敗すると InterpreterRuntime::monitorexit() による slow-pa
 (See: [here](noS3vRzujM.html) for details).
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 InterpreterRuntime::monitorexit()
--> ObjectSynchronizer::slow_exit()
-   -> (See: [here](noS3vRzujM.html) for details)
-```
+-&gt; ObjectSynchronizer::slow_exit()
+   -&gt; (See: <a href="noS3vRzujM.html">here</a> for details)
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### InterpreterRuntime::monitorexit()

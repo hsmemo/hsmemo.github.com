@@ -38,122 +38,122 @@ vframe::new_vframe() というファクトリメソッドが用意されてお�
 
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 * 脱最適化処理 (Deoptimization 処理)
   
   Deoptimization::fetch_unroll_info_helper()
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
   Deoptimization::revoke_biases_of_monitors(JavaThread* thread, frame fr, RegisterMap* map)
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
   Deoptimization::revoke_biases_of_monitors(CodeBlob* cb)
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
   Deoptimization::uncommon_trap_inner()
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
   Deoptimization::unpack_frames()
-  -> vframeArray::unpack_to_stack()
-     -> vframeArrayElement::unpack_on_stack()
-        -> vframe::new_vframe()
+  -&gt; vframeArray::unpack_to_stack()
+     -&gt; vframeArrayElement::unpack_on_stack()
+        -&gt; vframe::new_vframe()
 
   Deoptimization::fetch_unroll_info_helper()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
   Deoptimization::revoke_biases_of_monitors()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
   Deoptimization::revoke_biases_of_monitors()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
 * RFrame オブジェクトの生成処理
 
   InterpretedRFrame::InterpretedRFrame(frame fr, JavaThread* thread, RFrame*const callee)
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
   InterpretedRFrame::InterpretedRFrame(frame fr, JavaThread* thread, methodHandle m)
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
   CompiledRFrame::init()
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
 * (#TODO)
 
   JavaThread::last_java_vframe()
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
   JavaThread::last_java_vframe()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
 * (#TODO)
 
   vframe::top()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
   vframe::java_sender()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
 * JVMTI による「root または指定したオブジェクトから辿れる範囲を再帰的に辿る」処理
 
   VM_HeapWalkOperation::collect_stack_roots()
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
   VM_HeapWalkOperation::collect_stack_roots()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
 * JVMTI による「interp_only_mode」に遷移する処理
   
   VM_EnterInterpOnlyMode::doit()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
 * 保守運用機能によるヒープダンプ処理
 
   VM_HeapDumper::do_thread()
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
   VM_HeapDumper::do_thread()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
   ThreadStackTrace::dump_stack_at_safepoint()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
 * デバッグ用(開発時用)のチェック処理
 
   VMEntryWrapper::~VMEntryWrapper()
-  -> InterfaceSupport::walk_stack()
-     -> InterfaceSupport::walk_stack_from()
-        -> vframe::sender()
-           -> vframe::new_vframe()
+  -&gt; InterfaceSupport::walk_stack()
+     -&gt; InterfaceSupport::walk_stack_from()
+        -&gt; vframe::sender()
+           -&gt; vframe::new_vframe()
 
 * デバッグ用のトレース出力処理
 
   JavaThread::print_stack_on()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
   JavaThread::trace_stack_from()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
 * デバッグ用のユーティリティ関数 (ps)
 
   * ps()
-    -> vframe::new_vframe()
+    -&gt; vframe::new_vframe()
   * ps()
-    -> vframe::sender()
-       -> vframe::new_vframe()
-```
+    -&gt; vframe::sender()
+       -&gt; vframe::new_vframe()
+</pre></div>
 
 
 
@@ -204,10 +204,10 @@ GrowableArray 用のメモリ領域も compiledVFrame::update_local() 内で(の
 
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 VM_GetOrSetLocal::doit()
--> compiledVFrame::update_local()
-```
+-&gt; compiledVFrame::update_local()
+</pre></div>
 
 #### 使用箇所(where its instances are used)
 compiledVFrame::locals() 内で(のみ)参照されている.
@@ -254,10 +254,10 @@ compiledVFrame::update_local() 内で(のみ)生成されている.
 
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 VM_GetOrSetLocal::doit()
--> compiledVFrame::update_local()
-```
+-&gt; compiledVFrame::update_local()
+</pre></div>
 
 なお, jvmtiDeferredLocalVariableSet::_locals フィールドの
 GrowableArray 自体は jvmtiDeferredLocalVariableSet::jvmtiDeferredLocalVariableSet() 内で(のみ)確保されている. 

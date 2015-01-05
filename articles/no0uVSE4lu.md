@@ -215,35 +215,35 @@ JIT Compiler 用のクラス.
 ### 使われ方(Usage)
 以下の箇所で(のみ)使用されている.
 
-```
-* 各 methodOop に "i2c アダプタ", "c2i アダプタ" をセットする処理
+<div class="flow-abst"><pre>
+* 各 methodOop に &quot;i2c アダプタ&quot;, &quot;c2i アダプタ&quot; をセットする処理
   
   methodOopDesc::make_adapters()
-  -> AdapterHandlerLibrary::get_adapter()
-     -> SharedRuntime::generate_i2c2i_adapters()  (sparc の場合) (x86 の場合) (zero の場合)
-        -> AdapterHandlerLibrary::new_entry()
+  -&gt; AdapterHandlerLibrary::get_adapter()
+     -&gt; SharedRuntime::generate_i2c2i_adapters()  (sparc の場合) (x86 の場合) (zero の場合)
+        -&gt; AdapterHandlerLibrary::new_entry()
 
-* JIT コンパイルされた各ネイティブメソッドに "native wrapper" をセットする処理
+* JIT コンパイルされた各ネイティブメソッドに &quot;native wrapper&quot; をセットする処理
   
   CompileBroker::compile_method()
-  -> AdapterHandlerLibrary::create_native_wrapper()
+  -&gt; AdapterHandlerLibrary::create_native_wrapper()
 
 * (#TODO)
   
   DTraceJSDT::activate()
-  -> AdapterHandlerLibrary::create_dtrace_nmethod()
+  -&gt; AdapterHandlerLibrary::create_dtrace_nmethod()
 
 * トラブルシューティング用の処理
 
   os::print_location()
-  -> AdapterHandlerLibrary::contains()
-  -> AdapterHandlerLibrary::print_handler_on()
+  -&gt; AdapterHandlerLibrary::contains()
+  -&gt; AdapterHandlerLibrary::print_handler_on()
 
 * デバッグ用(開発時用)の処理
   
   SharedRuntime::print_statistics()
-  -> AdapterHandlerLibrary::print_statistics()
-```
+  -&gt; AdapterHandlerLibrary::print_statistics()
+</pre></div>
 
 
 
@@ -289,18 +289,18 @@ AdapterHandlerLibrary が生成した "i2c/c2i アダプタ" を管理するた�
 AdapterHandlerTable::new_entry() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
-* 各 methodOop に "i2c アダプタ", "c2i アダプタ" をセットする処理
+<div class="flow-abst"><pre>
+* 各 methodOop に &quot;i2c アダプタ&quot;, &quot;c2i アダプタ&quot; をセットする処理
 
   methodOopDesc::make_adapters()
-  -> AdapterHandlerLibrary::get_adapter()
-     -> AdapterHandlerLibrary::initialize()
-        -> AdapterHandlerLibrary::new_entry()
-           -> AdapterHandlerTable::new_entry()
-     -> SharedRuntime::generate_i2c2i_adapters()  (sparc の場合) (x86 の場合) (zero の場合)
-        -> AdapterHandlerLibrary::new_entry()
-           -> (同上)
-```
+  -&gt; AdapterHandlerLibrary::get_adapter()
+     -&gt; AdapterHandlerLibrary::initialize()
+        -&gt; AdapterHandlerLibrary::new_entry()
+           -&gt; AdapterHandlerTable::new_entry()
+     -&gt; SharedRuntime::generate_i2c2i_adapters()  (sparc の場合) (x86 の場合) (zero の場合)
+        -&gt; AdapterHandlerLibrary::new_entry()
+           -&gt; (同上)
+</pre></div>
 
 
 
@@ -369,13 +369,13 @@ AdapterHandlerLibrary クラスの _adapters フィールド (static フィー�
 AdapterHandlerLibrary::initialize() 内で(のみ)生成されている (= 初めて使用される時まで生成が遅延されている).
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
-* 各 methodOop に "i2c アダプタ", "c2i アダプタ" をセットする処理
+<div class="flow-abst"><pre>
+* 各 methodOop に &quot;i2c アダプタ&quot;, &quot;c2i アダプタ&quot; をセットする処理
 
   methodOopDesc::make_adapters()
-  -> AdapterHandlerLibrary::get_adapter()
-     -> AdapterHandlerLibrary::initialize()
-```
+  -&gt; AdapterHandlerLibrary::get_adapter()
+     -&gt; AdapterHandlerLibrary::initialize()
+</pre></div>
 
 
 

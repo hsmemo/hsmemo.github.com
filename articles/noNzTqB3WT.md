@@ -32,32 +32,32 @@ JNIHandleBlock 内の対応する箇所に JNIHandles::_deleted_handle の値を
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### NewGlobalRef() の処理
-```
+<div class="flow-abst"><pre>
 jni_NewGlobalRef()
--> JNIHandles::make_global()
-   -> JNIHandleBlock::allocate_handle()
-      -> JNIHandleBlock::rebuild_free_list()  (<= どうしても空きが見つからない場合に呼び出す)
-```
+-&gt; JNIHandles::make_global()
+   -&gt; JNIHandleBlock::allocate_handle()
+      -&gt; JNIHandleBlock::rebuild_free_list()  (&lt;= どうしても空きが見つからない場合に呼び出す)
+</pre></div>
 
 ### DeleteGlobalRef() の処理
-```
+<div class="flow-abst"><pre>
 jni_DeleteGlobalRef()
--> JNIHandles::destroy_global()
-```
+-&gt; JNIHandles::destroy_global()
+</pre></div>
 
 ### DeleteLocalRef() の処理
-```
+<div class="flow-abst"><pre>
 jni_DeleteLocalRef()
--> JNIHandles::destroy_local()
-```
+-&gt; JNIHandles::destroy_local()
+</pre></div>
 
 ### NewLocalRef() の処理
-```
+<div class="flow-abst"><pre>
 jni_NewLocalRef()
--> JNIHandles::make_local(JNIEnv* env, oop obj)
-   -> JNIHandleBlock::allocate_handle()
-      -> (同上)
-```
+-&gt; JNIHandles::make_local(JNIEnv* env, oop obj)
+   -&gt; JNIHandleBlock::allocate_handle()
+      -&gt; (同上)
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### jni_NewGlobalRef()

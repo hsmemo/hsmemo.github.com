@@ -427,24 +427,24 @@ G1CollectedHeap::G1CollectedHeap() 内で(のみ)生成されている.
 #### 使用箇所(where its instances are used)
 以下のパスで(のみ) HeapRegion が追加されている.
 
-```
+<div class="flow-abst"><pre>
 G1CollectedHeap::attempt_allocation()
--> G1CollectedHeap::attempt_allocation_slow()
-   -> G1AllocRegion::attempt_allocation_locked()
-      -> G1AllocRegion::new_alloc_region_and_allocate()
-         -> MutatorAllocRegion::allocate_new_region()
-            -> G1CollectedHeap::new_mutator_alloc_region()
-               -> G1CollectedHeap::set_region_short_lived_locked()
-                  -> YoungList::push_region()
-   -> G1AllocRegion::attempt_allocation_force()
-      -> G1AllocRegion::new_alloc_region_and_allocate()
-         -> (同上)
+-&gt; G1CollectedHeap::attempt_allocation_slow()
+   -&gt; G1AllocRegion::attempt_allocation_locked()
+      -&gt; G1AllocRegion::new_alloc_region_and_allocate()
+         -&gt; MutatorAllocRegion::allocate_new_region()
+            -&gt; G1CollectedHeap::new_mutator_alloc_region()
+               -&gt; G1CollectedHeap::set_region_short_lived_locked()
+                  -&gt; YoungList::push_region()
+   -&gt; G1AllocRegion::attempt_allocation_force()
+      -&gt; G1AllocRegion::new_alloc_region_and_allocate()
+         -&gt; (同上)
 
 ...
--> G1CollectedHeap::attempt_allocation_at_safepoint()
-   -> G1AllocRegion::attempt_allocation_locked()
-      -> (同上)
-```
+-&gt; G1CollectedHeap::attempt_allocation_at_safepoint()
+   -&gt; G1AllocRegion::attempt_allocation_locked()
+      -&gt; (同上)
+</pre></div>
 
 
 
@@ -1169,10 +1169,10 @@ See: [here](../doxygen/classG1ParVerifyTask.html) for details
 G1CollectedHeap::print_on_extended() 内で(のみ)使用されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 G1CollectedHeap::print_on()
--> G1CollectedHeap::print_on_extended()
-```
+-&gt; G1CollectedHeap::print_on_extended()
+</pre></div>
 
 
 
@@ -1389,10 +1389,10 @@ G1CollectedHeap の Minor GC 処理("Evacuation Pause" 処理)で使用される
 G1CollectedHeap::save_marks() 内で(のみ)使用されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 G1CollectedHeap::do_collection_pause_at_safepoint()
--> G1CollectedHeap::save_marks()
-```
+-&gt; G1CollectedHeap::save_marks()
+</pre></div>
 
 
 
@@ -1421,11 +1421,11 @@ G1CollectedHeap の Minor GC 処理("Evacuation Pause" 処理)で使用される
 G1CollectedHeap::cleanUpCardTable() 内で(のみ)使用されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 G1CollectedHeap::evacuate_collection_set()
--> G1RemSet::cleanup_after_oops_into_collection_set_do()
-   -> G1CollectedHeap::cleanUpCardTable()
-```
+-&gt; G1RemSet::cleanup_after_oops_into_collection_set_do()
+   -&gt; G1CollectedHeap::cleanUpCardTable()
+</pre></div>
 
 
 
@@ -1479,15 +1479,15 @@ G1CollectedHeap::check_young_list_empty() 内で(のみ)使用されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている
 (ただし, どちらも assert() 内でしか使用されていない).
 
-```
+<div class="flow-abst"><pre>
 * Minor GC 処理
   G1CollectedHeap::do_collection_pause_at_safepoint()
-  -> G1CollectedHeap::check_young_list_empty()
+  -&gt; G1CollectedHeap::check_young_list_empty()
 
 * Major GC 処理
   G1CollectedHeap::do_collection()
-  -> G1CollectedHeap::check_young_list_empty()
-```
+  -&gt; G1CollectedHeap::check_young_list_empty()
+</pre></div>
 
 
 
@@ -1539,15 +1539,15 @@ MasterFreeRegionList や MasterHumongousRegionSet が正しい状態になって
 G1CollectedHeap::verify_region_sets() 内で(のみ)使用されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 * 
   G1CollectedHeap::verify()
-  -> G1CollectedHeap::verify_region_sets()
+  -&gt; G1CollectedHeap::verify_region_sets()
 
 * 
   G1CollectedHeap::verify_region_sets_optional()
-  -> G1CollectedHeap::verify_region_sets()   (<= ただし #ifdef HEAP_REGION_SET_FORCE_VERIFY 時にしか呼び出されない)
-```
+  -&gt; G1CollectedHeap::verify_region_sets()   (&lt;= ただし #ifdef HEAP_REGION_SET_FORCE_VERIFY 時にしか呼び出されない)
+</pre></div>
 
 ### 備考(Notes)
 HEAP_REGION_SET_FORCE_VERIFY は, デフォルトだと #ifdef ASSERT 時にのみ定義される

@@ -57,21 +57,21 @@ jni_RegisterNatives() を呼び出す初期化用関数にハードコーディ�
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### RegisterNatives() の処理
-```
+<div class="flow-abst"><pre>
 jni_RegisterNatives()
--> register_native()
-   -> find_prefixed_native()
-   -> methodOopDesc::set_native_function() (or methodOopDesc::clear_native_function())
-```
+-&gt; register_native()
+   -&gt; find_prefixed_native()
+   -&gt; methodOopDesc::set_native_function() (or methodOopDesc::clear_native_function())
+</pre></div>
 
 ### UnregisterNatives() の処理
-```
+<div class="flow-abst"><pre>
 jni_UnregisterNatives()
--> methodOopDesc::clear_native_function()
-   -> methodOopDesc::set_native_function()
+-&gt; methodOopDesc::clear_native_function()
+   -&gt; methodOopDesc::set_native_function()
       (飛び先を SharedRuntime::native_method_throw_unsatisfied_link_error_entry() に設定)
-   -> methodOopDesc::clear_code()
-```
+   -&gt; methodOopDesc::clear_code()
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

@@ -43,32 +43,32 @@ title: JNI の処理 ： JNI Functions の処理 ： JNI によるフィール�
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### Get<type>Field() 用の処理
-```
+<div class="flow-abst"><pre>
 DEFINE_GETFIELD() マクロ  or  jni_GetObjectField()
--> jfieldIDWorkaround::from_instance_jfieldID()
--> oopDesc::<type>_field()
-```
+-&gt; jfieldIDWorkaround::from_instance_jfieldID()
+-&gt; oopDesc::&lt;type&gt;_field()
+</pre></div>
 
 ### Set<type>Field() 用の処理
-```
+<div class="flow-abst"><pre>
 DEFINE_SETFIELD() マクロの処理  or  jni_SetObjectField()
--> jfieldIDWorkaround::from_instance_jfieldID()
--> oopDesc::<type>_field_put()
-```
+-&gt; jfieldIDWorkaround::from_instance_jfieldID()
+-&gt; oopDesc::&lt;type&gt;_field_put()
+</pre></div>
 
 ### GetStatic<type>Field() 用の処理
-```
+<div class="flow-abst"><pre>
 DEFINE_GETSTATICFIELD() マクロの処理  or  jni_GetStaticObjectField()
--> jfieldIDWorkaround::from_static_jfieldID()
--> oopDesc::<type>_field()
-```
+-&gt; jfieldIDWorkaround::from_static_jfieldID()
+-&gt; oopDesc::&lt;type&gt;_field()
+</pre></div>
 
 ### SetStatic<type>Field() 用の処理
-```
+<div class="flow-abst"><pre>
 DEFINE_SETSTATICFIELD() マクロの処理  or  jni_SetStaticObjectField()
--> jfieldIDWorkaround::from_static_jfieldID()
--> oopDesc::<type>_field_put()
-```
+-&gt; jfieldIDWorkaround::from_static_jfieldID()
+-&gt; oopDesc::&lt;type&gt;_field_put()
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

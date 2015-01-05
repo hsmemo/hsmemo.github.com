@@ -76,24 +76,24 @@ java.lang.Thread の停止処理用 (java.lang.Thread.stop() 用) の補助ク�
 Thread::send_async_exception() 内で(のみ)使用されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 * java.lang.Thread.stop() の処理
 
-  (略) (See: [here](no2114VUD.html) for details)
-  -> JVM_StopThread()
-     -> Thread::send_async_exception()
+  (略) (See: <a href="no2114VUD.html">here</a> for details)
+  -&gt; JVM_StopThread()
+     -&gt; Thread::send_async_exception()
 
 * JVMTI の StopThread() の処理
 
-  (略) (See: [here](noeOxh-Gl_.html) for details)
-  -> JvmtiEnv::StopThread()
-     -> Thread::send_async_exception()
+  (略) (See: <a href="noeOxh-Gl_.html">here</a> for details)
+  -&gt; JvmtiEnv::StopThread()
+     -&gt; Thread::send_async_exception()
 
 * (?? #TODO)
   
-  -> InlineCacheBuffer::new_ic_stub()
-     -> Thread::send_async_exception()
-```
+  -&gt; InlineCacheBuffer::new_ic_stub()
+     -&gt; Thread::send_async_exception()
+</pre></div>
 
 
 
@@ -157,11 +157,11 @@ Safepoint を発生させることで間接的に ObjectSynchronizer::deflate_id
 InduceScavenge() 内で(のみ)使用されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 ObjectSynchronizer::inflate()
--> ObjectSynchronizer::omAlloc()
-   -> InduceScavenge()
-```
+-&gt; ObjectSynchronizer::omAlloc()
+   -&gt; InduceScavenge()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (このクラス自体は何も処理はしない)
@@ -196,16 +196,16 @@ CodeCache::mark_for_deoptimization() でマークを付けられた全ての nme
 ### 使われ方(Usage)
 以下の箇所で(のみ)使用されている.
 
-```
+<div class="flow-abst"><pre>
 * (ダイナミックロード等で) クラス階層に変化があった場合
 
-  -> SystemDictionary::add_to_hierarchy()
-     -> Universe::flush_dependents_on()
+  -&gt; SystemDictionary::add_to_hierarchy()
+     -&gt; Universe::flush_dependents_on()
 
-* JVMTI のイベント通知処理のために interp_only_mode になる際 (See: [here](no3059eFS.html) and [here](no2935C7Z.html) for details)
+* JVMTI のイベント通知処理のために interp_only_mode になる際 (See: <a href="no3059eFS.html">here</a> and <a href="no2935C7Z.html">here</a> for details)
 
   VM_EnterInterpOnlyMode::doit()
-```
+</pre></div>
 
 
 
@@ -234,60 +234,60 @@ JIT 生成されたコード(nmethod)に対する脱最適化処理(Deoptimizati
 Deoptimization::deoptimize_frame() 内で(のみ)使用されている.
 この関数は, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 * C1 の ...#TODO 処理
 
   Runtime1::patch_code()
-  -> Deoptimization::deoptimize_frame()
+  -&gt; Deoptimization::deoptimize_frame()
 
 * C1 の ...#TODO 処理
 
   deopt_caller()
-  -> Deoptimization::deoptimize_frame()
+  -&gt; Deoptimization::deoptimize_frame()
 
 * C1 の ...#TODO 処理
 
   Runtime1::counter_overflow()
-  -> Deoptimization::deoptimize_frame()
+  -&gt; Deoptimization::deoptimize_frame()
 
 * C1 の ...#TODO 処理
 
   exception_handler_for_pc_helper()
-  -> Deoptimization::deoptimize_frame()
+  -&gt; Deoptimization::deoptimize_frame()
 
 
 * C2 の ...#TODO 処理
 
   OptoRuntime::deoptimize_caller_frame()
-  -> Deoptimization::deoptimize_frame()
+  -&gt; Deoptimization::deoptimize_frame()
 
 * C2 生成コードでの Safepoint 処理中
 
-  (略) (See: [here](no7882Okb.html) for details)
-  -> SafepointSynchronize::handle_polling_page_exception()
-     -> ThreadSafepointState::handle_polling_page_exception()
-        -> Deoptimization::deoptimize_frame()
+  (略) (See: <a href="no7882Okb.html">here</a> for details)
+  -&gt; SafepointSynchronize::handle_polling_page_exception()
+     -&gt; ThreadSafepointState::handle_polling_page_exception()
+        -&gt; Deoptimization::deoptimize_frame()
 
 
 * JVMTI の PopFrame() 関数の処理
 
-  (略) (See: [here](no2935cDo.html) for details)
-  -> JvmtiEnv::PopFrame()
-     -> Deoptimization::deoptimize_frame()
+  (略) (See: <a href="no2935cDo.html">here</a> for details)
+  -&gt; JvmtiEnv::PopFrame()
+     -&gt; Deoptimization::deoptimize_frame()
 
 * JVMTI の ForceEarlyReturn*() 関数の処理
 
-  (略) (See: [here](no3059azN.html) for details)
-  -> JvmtiEnvBase::force_early_return()
-     -> JvmtiEnvBase::check_top_frame()
-        -> Deoptimization::deoptimize_frame()
+  (略) (See: <a href="no3059azN.html">here</a> for details)
+  -&gt; JvmtiEnvBase::force_early_return()
+     -&gt; JvmtiEnvBase::check_top_frame()
+        -&gt; Deoptimization::deoptimize_frame()
 
 * JVMTI の GetLocal*() 及び SetLocal*() 関数の処理
 
-  (略) (See: [here](no2935GIU.html) for details)
-  -> VM_GetOrSetLocal::doit()
-     -> Deoptimization::deoptimize_frame()
-```
+  (略) (See: <a href="no2935GIU.html">here</a> for details)
+  -&gt; VM_GetOrSetLocal::doit()
+     -&gt; Deoptimization::deoptimize_frame()
+</pre></div>
 
 
 
@@ -359,10 +359,10 @@ VMEntryWrapper クラス内で使用される補助クラス(VM_Operation クラ
 InterfaceSupport::deoptimizeAll() 内で(のみ)使用されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 VMEntryWrapper()::~VMEntryWrapper()
--> InterfaceSupport::deoptimizeAll()
-```
+-&gt; InterfaceSupport::deoptimizeAll()
+</pre></div>
 
 なお JRT_ENTRY や IRT_ENTRY の度に実行すると重いので, 
 InterfaceSupport::deoptimizeAll() では以下のタイミングで VM_DeoptimizeAll を実行することにしている模様
@@ -421,10 +421,10 @@ JIT 生成されたメソッドがあれば対応する JIT 生成コード(nmet
 InterfaceSupport::zombieAll() 内で(のみ)使用されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 VMEntryWrapper()::~VMEntryWrapper()
--> InterfaceSupport::zombieAll()
-```
+-&gt; InterfaceSupport::zombieAll()
+</pre></div>
 
 なお JRT_ENTRY や IRT_ENTRY の度に実行すると重いので, 
 InterfaceSupport::zombieAll() では ZombieALotInterval 回に 1回実行することにしている模様.
@@ -470,10 +470,10 @@ SymbolTable 中の参照されていないシンボル(dead symbol)を全て破�
 InterfaceSupport::unlinkSymbols() 内で(のみ)使用されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 VMEntryWrapper()::~VMEntryWrapper()
--> InterfaceSupport::unlinkSymbols()
-```
+-&gt; InterfaceSupport::unlinkSymbols()
+</pre></div>
 
 
 ```cpp
@@ -538,23 +538,23 @@ HotSpot 内で稼働中の全スレッドについて,
 ### 使われ方(Usage)
 以下の箇所で(のみ)使用されている.
 
-```
+<div class="flow-abst"><pre>
 * スレッドダンプ機能
   
-  (略) (See: [here](no28916GhX.html) for details)
-  -> signal_thread_entry()
+  (略) (See: <a href="no28916GhX.html">here</a> for details)
+  -&gt; signal_thread_entry()
 
 * Attach API の threaddump コマンド
   
-  (略) (See: [here](no3026gMG.html) for details)
-  -> attach_listener_thread_entry()
-     -> thread_dump()
+  (略) (See: <a href="no3026gMG.html">here</a> for details)
+  -&gt; attach_listener_thread_entry()
+     -&gt; thread_dump()
 
 * ?? 
   
   (略) (?? 使われていない #TODO)
-  -> JVM_DumpAllStacks()
-```
+  -&gt; JVM_DumpAllStacks()
+</pre></div>
      
 ### 内部構造(Internal structure)
 Threads::print_on() を呼び出すだけ.
@@ -586,18 +586,18 @@ See: [here](../doxygen/classVM__PrintThreads.html) for details
 ### 使われ方(Usage)
 以下の箇所で(のみ)使用されている.
 
-```
+<div class="flow-abst"><pre>
 * スレッドダンプ機能
   
-  (略) (See: [here](no28916GhX.html) for details)
-  -> signal_thread_entry()
+  (略) (See: <a href="no28916GhX.html">here</a> for details)
+  -&gt; signal_thread_entry()
 
 * Attach API の threaddump コマンド
   
-  (略) (See: [here](no3026gMG.html) for details)
-  -> attach_listener_thread_entry()
-     -> thread_dump()
-```
+  (略) (See: <a href="no3026gMG.html">here</a> for details)
+  -&gt; attach_listener_thread_entry()
+     -&gt; thread_dump()
+</pre></div>
 
 ### 内部構造(Internal structure)
 JNIHandles::print_on() を呼び出すだけ.
@@ -627,28 +627,28 @@ See: [here](../doxygen/classVM__PrintJNI.html) for details
 ### 使われ方(Usage)
 以下の箇所で(のみ)使用されている.
 
-```
+<div class="flow-abst"><pre>
 * スレッドダンプ機能
   
-  (略) (See: [here](no28916GhX.html) for details)
-  -> signal_thread_entry()
+  (略) (See: <a href="no28916GhX.html">here</a> for details)
+  -&gt; signal_thread_entry()
 
 * Attach API の threaddump コマンド
   
-  (略) (See: [here](no3026gMG.html) for details)
-  -> attach_listener_thread_entry()
-     -> thread_dump()
+  (略) (See: <a href="no3026gMG.html">here</a> for details)
+  -&gt; attach_listener_thread_entry()
+     -&gt; thread_dump()
 
 * JMM のデッドロック検出処理 (java.lang.management.ThreadMXBean.findDeadlockedThreads() および java.lang.management.ThreadMXBean.findMonitorDeadlockedThreads() の処理)
 
-  (略) (See: [here](no2114hUk.html) for details)
-  -> jmm_FindDeadlockedThreads()
-     -> find_deadlocks()
+  (略) (See: <a href="no2114hUk.html">here</a> for details)
+  -&gt; jmm_FindDeadlockedThreads()
+     -&gt; find_deadlocks()
 
-  (略) (See: [here](no2114hUk.html) for details)
-  -> jmm_FindMonitorDeadlockedThreads()
-     -> find_deadlocks()
-```
+  (略) (See: <a href="no2114hUk.html">here</a> for details)
+  -&gt; jmm_FindMonitorDeadlockedThreads()
+     -&gt; find_deadlocks()
+</pre></div>
 
 
 
@@ -674,25 +674,25 @@ java.lang.Thread クラスの機能, 及び JMM の機能を実現するため�
 ### 使われ方(Usage)
 以下の箇所で(のみ)使用されている.
 
-```
+<div class="flow-abst"><pre>
 * java.lang.Thread のスタックフレーム取得処理 (java.lang.Thread.getStackTrace(), java.lang.Thread.getAllStackTraces() の処理)
 
-  (略) (See: [here](no2114ieJ.html) for details)
-  -> ThreadService::dump_stack_traces()
+  (略) (See: <a href="no2114ieJ.html">here</a> for details)
+  -&gt; ThreadService::dump_stack_traces()
 
 * JMM の java.lang.management.ThreadInfo オブジェクト取得処理 (java.lang.management.ThreadMXBean.getThreadInfo() および java.lang.management.ThreadMXBean.dumpAllThreads() の処理)
 
-  (略) (See: [here](no2114sqE.html) for details)
-  -> jmm_GetThreadInfo()
-     -> do_thread_dump()
+  (略) (See: <a href="no2114sqE.html">here</a> for details)
+  -&gt; jmm_GetThreadInfo()
+     -&gt; do_thread_dump()
 
-  (略) (See: [here](no2114sqE.html) for details)
-  -> jmm_DumpThreads()
+  (略) (See: <a href="no2114sqE.html">here</a> for details)
+  -&gt; jmm_DumpThreads()
 
-  (略) (See: [here](no2114sqE.html) for details)
-  -> jmm_DumpThreads()
-     -> do_thread_dump()
-```
+  (略) (See: <a href="no2114sqE.html">here</a> for details)
+  -&gt; jmm_DumpThreads()
+     -&gt; do_thread_dump()
+</pre></div>
 
 
 

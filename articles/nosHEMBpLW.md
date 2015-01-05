@@ -34,25 +34,25 @@ DTrace JSDT 関係の機能は全てここに納められている.
 ### 使われ方(Usage)
 以下の箇所で(のみ)使用されている.
 
-```
+<div class="flow-abst"><pre>
 * sun.tracing.dtrace.JVM クラスの処理
   
   sun.tracing.dtrace.JVM.activate0()
-  -> JVM_DTraceActivate()
-     -> DTraceJSDT::activate()
+  -&gt; JVM_DTraceActivate()
+     -&gt; DTraceJSDT::activate()
 
   sun.tracing.dtrace.JVM.dispose0()
-  -> JVM_DTraceDispose()
-     -> DTraceJSDT::dispose()
+  -&gt; JVM_DTraceDispose()
+     -&gt; DTraceJSDT::dispose()
 
   sun.tracing.dtrace.JVM.isEnabled0()
-  -> JVM_DTraceIsProbeEnabled()
-     -> DTraceJSDT::is_probe_enabled()
+  -&gt; JVM_DTraceIsProbeEnabled()
+     -&gt; DTraceJSDT::is_probe_enabled()
 
   sun.tracing.dtrace.JVM.isSupported0()
-  -> JVM_DTraceIsSupported()
-     -> DTraceJSDT::is_supported()
-```
+  -&gt; JVM_DTraceIsSupported()
+     -&gt; DTraceJSDT::is_supported()
+</pre></div>
 
 
 

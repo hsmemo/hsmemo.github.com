@@ -36,36 +36,36 @@ JDK 1.4 以前の場合には java.lang.ThreadGroup.uncaughtException() が呼�
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### uncaughtException ハンドリング  (JDK 1.5 以降)
-```
-(See: [here](no2935w3j.html) for details)
--> JavaThread::exit()
-   -> JavaCalls::call_virtual()
-      -> (See: [here](no3059iJu.html) for details)
-         -> java.lang.Thread.dispatchUncaughtException()
-            -> java.lang.Thread.getUncaughtExceptionHandler()
-               -> * UncaughtExceptionHandler がセットされていれば, それが返される.
+<div class="flow-abst"><pre>
+(See: <a href="no2935w3j.html">here</a> for details)
+-&gt; JavaThread::exit()
+   -&gt; JavaCalls::call_virtual()
+      -&gt; (See: <a href="no3059iJu.html">here</a> for details)
+         -&gt; java.lang.Thread.dispatchUncaughtException()
+            -&gt; java.lang.Thread.getUncaughtExceptionHandler()
+               -&gt; * UncaughtExceptionHandler がセットされていれば, それが返される.
                   * そうでなければ ThreadGroup が返される.
-            -> java.lang.Thread.UncaughtExceptionHandler.uncaughtException()
-               -> * UncaughtExceptionHandler がセットされている場合には,
+            -&gt; java.lang.Thread.UncaughtExceptionHandler.uncaughtException()
+               -&gt; * UncaughtExceptionHandler がセットされている場合には,
                     このメソッドをオーバーライドしたクラスが登録されているはずなので,
                     ここでユーザー指定の挙動が行われる.
                   * UncaughtExceptionHandler をセットされておらず ThreadGroup が返された場合には,
                     java.lang.ThreadGroup.uncaughtException() にフォールバックする.
-```
+</pre></div>
 
 
 ### uncaughtException ハンドリング  (JDK 1.4 以前)
-```
-(See: [here](no2935w3j.html) for details)
--> JavaThread::exit()
-   -> JavaCalls::call_virtual()
-      -> (See: [here](no3059iJu.html) for details)
-         -> java.lang.ThreadGroup.uncaughtException()
-            -> * このメソッドをオーバーライドした ThreadGroup が登録されている場合には, それが呼び出される.
+<div class="flow-abst"><pre>
+(See: <a href="no2935w3j.html">here</a> for details)
+-&gt; JavaThread::exit()
+   -&gt; JavaCalls::call_virtual()
+      -&gt; (See: <a href="no3059iJu.html">here</a> for details)
+         -&gt; java.lang.ThreadGroup.uncaughtException()
+            -&gt; * このメソッドをオーバーライドした ThreadGroup が登録されている場合には, それが呼び出される.
                * オーバーライドされていない場合, 以下のデフォルトの java.lang.ThreadGroup.uncaughtException() の挙動にフォールバック.
-                 -> java.lang.Thread.getDefaultUncaughtExceptionHandler()
-                 -> java.lang.Thread.UncaughtExceptionHandler.uncaughtException()
-```
+                 -&gt; java.lang.Thread.getDefaultUncaughtExceptionHandler()
+                 -&gt; java.lang.Thread.UncaughtExceptionHandler.uncaughtException()
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

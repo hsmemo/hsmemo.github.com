@@ -194,45 +194,45 @@ Gray なオブジェクト (= Concurrent Marking 処理で発見したが, ま�
 #### 使用箇所(where its instances are used)
 以下の箇所で使用されている (<= 他にも oops_do() 等の中で参照されている #TODO).
 
-```
+<div class="flow-abst"><pre>
 * ConcurrentMark オブジェクトの生成時に初期化される.
 
   ConcurrentMark::ConcurrentMark()
-  -> ConcurrentMark::set_non_marking_state()
-     -> ConcurrentMark::clear_marking_state()
+  -&gt; ConcurrentMark::set_non_marking_state()
+     -&gt; ConcurrentMark::clear_marking_state()
 
 * Concurrent Marking 処理中に, 見つかったオブジェクトがスタックに追加される
 
   ConcurrentMark::mark_stack_push(oop p)
-  -> CMMarkStack::par_push()
+  -&gt; CMMarkStack::par_push()
 
 * Concurrent Marking 処理中に, 見つかった配列オブジェクトがスタックに追加される
 
   ConcurrentMark::mark_stack_push(oop* arr, int n)
-  -> CMMarkStack::par_push_arr()
+  -&gt; CMMarkStack::par_push_arr()
 
 * Concurrent Marking 処理中に, スタックに積まれた要素が取り出されて処理される
   
   CMTask::drain_global_stack()
-  -> CMTask::get_entries_from_global_stack()
-     -> ConcurrentMark::mark_stack_pop()
-        -> CMMarkStack::par_pop_arr()
+  -&gt; CMTask::get_entries_from_global_stack()
+     -&gt; ConcurrentMark::mark_stack_pop()
+        -&gt; CMMarkStack::par_pop_arr()
 
 * Concurrent Marking 処理中に見つかった参照オブジェクトについても, 生きているものは参照先がスタックに積まれるので, 
   それらがスタックから取り出されて辿れる範囲全てが処理される
 
   ConcurrentMark::weakRefsWork()
-  -> ReferenceProcessor::process_discovered_references()
-     -> ...
-        -> G1CMDrainMarkingStackClosure::do_void()
-           -> CMMarkStack::drain()
+  -&gt; ReferenceProcessor::process_discovered_references()
+     -&gt; ...
+        -&gt; G1CMDrainMarkingStackClosure::do_void()
+           -&gt; CMMarkStack::drain()
 
 * Concurrent Marking が終了した時点で, 初期状態にリセットされる
 
   ConcurrentMark::checkpointRootsFinal
-  -> ConcurrentMark::set_non_marking_state()
-     -> ConcurrentMark::clear_marking_state()
-```
+  -&gt; ConcurrentMark::set_non_marking_state()
+     -&gt; ConcurrentMark::clear_marking_state()
+</pre></div>
 
 
 
@@ -268,30 +268,30 @@ Concurrent Marking 処理中に発生した Minor GC でコピー先として使
 #### 使用箇所(where its instances are used)
 以下の箇所で(のみ)使用されている.
 
-```
+<div class="flow-abst"><pre>
 * Minor GC 中にコピー先の HeapRegion が一杯になった時点で, そのコピー先がスタックに追加される
 
   G1ParCopyHelper::copy_to_survivor_space()
-  -> G1ParScanThreadState::allocate()
-     -> G1ParScanThreadState::allocate_slow()
-        -> G1ParGCAllocBuffer::retire()
-           -> GCLabBitMap::retire()
-              -> ConcurrentMark::grayRegionIfNecessary()
-                 -> ConcurrentMark::region_stack_push_lock_free()
+  -&gt; G1ParScanThreadState::allocate()
+     -&gt; G1ParScanThreadState::allocate_slow()
+        -&gt; G1ParGCAllocBuffer::retire()
+           -&gt; GCLabBitMap::retire()
+              -&gt; ConcurrentMark::grayRegionIfNecessary()
+                 -&gt; ConcurrentMark::region_stack_push_lock_free()
 
 * Minor GC で終わった時点で, 最後にコピー先として使用していた HeapRegion がスタックに追加される.
 
   G1ParEvacuateFollowersClosure::do_void()
-  -> G1ParScanThreadState::retire_alloc_buffers()
-     -> G1ParGCAllocBuffer::retire()
-        -> (同上)
+  -&gt; G1ParScanThreadState::retire_alloc_buffers()
+     -&gt; G1ParGCAllocBuffer::retire()
+        -&gt; (同上)
 
 * Concurrent Marking 処理中に, スタックから要素が取り出され, その中のポインタが再調査される.
 
   CMTask::do_marking_step()
-  -> CMTask::drain_region_stack()
-     -> ConcurrentMark::region_stack_pop_lock_free()
-```
+  -&gt; CMTask::drain_region_stack()
+     -&gt; ConcurrentMark::region_stack_pop_lock_free()
+</pre></div>
 
 なお, ConcurrentMark::_regionStack フィールドは以下の箇所でも参照されているが, 
 これらの関数は使用箇所が見当たらない...
@@ -1111,11 +1111,11 @@ See: [here](../doxygen/classCSMarkBitMapClosure.html) for details
 ConcurrentMark::complete_marking_in_collection_set() 内で(のみ)使用されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
-(略) (See: [here](no2935YzN.html) for details)
--> G1CollectedHeap::evacuate_collection_set()
-   -> ConcurrentMark::complete_marking_in_collection_set()
-```
+<div class="flow-abst"><pre>
+(略) (See: <a href="no2935YzN.html">here</a> for details)
+-&gt; G1CollectedHeap::evacuate_collection_set()
+   -&gt; ConcurrentMark::complete_marking_in_collection_set()
+</pre></div>
 
 
 

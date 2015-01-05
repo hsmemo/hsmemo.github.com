@@ -20,36 +20,36 @@ GarbageCollectorImpl は NotificationEmitter 機能を有している.
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### リスナーの登録処理の流れ
-```
+<div class="flow-abst"><pre>
 sun.management.GarbageCollectorImpl.addNotificationListener()
--> sun.management.NotificationEmitterSupport.addNotificationListener()
--> sun.management.GarbageCollectorImpl.setNotificationEnabled()
-   -> Java_sun_management_GarbageCollectorImpl_setNotificationEnabled()
-      -> jmm_SetGCNotificationEnabled()
-         -> GCMemoryManager::set_notification_enabled()
-```
+-&gt; sun.management.NotificationEmitterSupport.addNotificationListener()
+-&gt; sun.management.GarbageCollectorImpl.setNotificationEnabled()
+   -&gt; Java_sun_management_GarbageCollectorImpl_setNotificationEnabled()
+      -&gt; jmm_SetGCNotificationEnabled()
+         -&gt; GCMemoryManager::set_notification_enabled()
+</pre></div>
 
 ### リスナーへの通知送信処理の流れ
 #### (1) 通知用のオブジェクトの作成と ServiceThread の起床処理
 (GC 終了後に TraceMemoryManagerStats のデストラクタから呼び出される)
 
-```
+<div class="flow-abst"><pre>
 TraceMemoryManagerStats::~TraceMemoryManagerStats()
--> MemoryService::gc_end()
-   -> GCMemoryManager::gc_end()
+-&gt; MemoryService::gc_end()
+   -&gt; GCMemoryManager::gc_end()
       (GCMemoryManager::is_notification_enabled() が true だと GCNotifier::pushNotification() が呼ばれる)
-      -> GCNotifier::pushNotification()
-         -> GCNotifier::addRequest()
-            -> Monitor::notify_all()   (<= ServiceThread を起床させる)
-```
+      -&gt; GCNotifier::pushNotification()
+         -&gt; GCNotifier::addRequest()
+            -&gt; Monitor::notify_all()   (&lt;= ServiceThread を起床させる)
+</pre></div>
 
 #### (2) ServiceThread による GCNotifier の通知機能の呼び出し
-```
+<div class="flow-abst"><pre>
 ServiceThread::service_thread_entry()
--> GCNotifier::sendNotification()
-   -> sun.management.GarbageCollectorImpl.createGCNotification()
-      -> sun.management.NotificationEmitterSupport.sendNotification()
-```
+-&gt; GCNotifier::sendNotification()
+   -&gt; sun.management.GarbageCollectorImpl.createGCNotification()
+      -&gt; sun.management.NotificationEmitterSupport.sendNotification()
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

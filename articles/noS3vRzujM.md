@@ -20,21 +20,21 @@ ObjectSynchronizer::slow_exit() は ObjectSynchronizer::fast_exit() にフォー
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### ObjectSynchronizer::fast_exit() の処理パス
-```
--> ObjectSynchronizer::fast_exit()
-   -> ObjectSynchronizer::inflate()
-   -> ObjectMonitor::exit()
-      -> ObjectMonitor::ExitEpilog()
-         -> os::PlatformEvent::unpark()
-            -> (See: [here](no2114COc.html) for details)
-```
+<div class="flow-abst"><pre>
+-&gt; ObjectSynchronizer::fast_exit()
+   -&gt; ObjectSynchronizer::inflate()
+   -&gt; ObjectMonitor::exit()
+      -&gt; ObjectMonitor::ExitEpilog()
+         -&gt; os::PlatformEvent::unpark()
+            -&gt; (See: <a href="no2114COc.html">here</a> for details)
+</pre></div>
 
 ### ObjectSynchronizer::slow_exit() の処理パス
-```
--> ObjectSynchronizer::slow_exit()
-   -> ObjectSynchronizer::fast_exit()
-      -> (同上)
-```
+<div class="flow-abst"><pre>
+-&gt; ObjectSynchronizer::slow_exit()
+   -&gt; ObjectSynchronizer::fast_exit()
+      -&gt; (同上)
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### ObjectSynchronizer::fast_exit()

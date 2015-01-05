@@ -37,157 +37,157 @@ safepoint 停止処理は, 多くの場合, スレッドの状態が遷移する
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### ThreadInVMfromJava の処理
 #### コンストラクタ
-```
+<div class="flow-abst"><pre>
 ThreadInVMfromJava::ThreadInVMfromJava()
--> (1) JavaThreadState を _thread_in_vm に変更 (この場合は, 中間的な状態を経ることなく直接遷移)
-       -> ThreadStateTransition::trans_from_java()
-          -> ThreadStateTransition::transition_from_java()
-```
+-&gt; (1) JavaThreadState を _thread_in_vm に変更 (この場合は, 中間的な状態を経ることなく直接遷移)
+       -&gt; ThreadStateTransition::trans_from_java()
+          -&gt; ThreadStateTransition::transition_from_java()
+</pre></div>
 
 #### デストラクタ
-```
+<div class="flow-abst"><pre>
 ThreadInVMfromJava::~ThreadInVMfromJava()
--> (1) JavaThreadState を _thread_in_Java に戻す. (Safepoint が始まっていればここでブロックする)
-       -> ThreadStateTransition::trans()
-          -> ThreadStateTransition::transition()
-             -> (1) JavaThreadState を引数で指定された値(この場合は _thread_in_vm_trans) に変更
+-&gt; (1) JavaThreadState を _thread_in_Java に戻す. (Safepoint が始まっていればここでブロックする)
+       -&gt; ThreadStateTransition::trans()
+          -&gt; ThreadStateTransition::transition()
+             -&gt; (1) JavaThreadState を引数で指定された値(この場合は _thread_in_vm_trans) に変更
                 (2) メモリアクセスの順序づけを行う
-                    -> OrderAccess::fence() or os::write_memory_serialize_page() が生成したコード
+                    -&gt; OrderAccess::fence() or os::write_memory_serialize_page() が生成したコード
                 (3) もし Safepoint が開始されていたらブロックする
-                    -> SafepointSynchronize::block()
+                    -&gt; SafepointSynchronize::block()
                 (4) JavaThreadState を引数で指定された値(この場合は _thread_in_Java) に変更
    (1) 処理対象のスレッドが例外を出していたりサスペンドされたりしていないかチェックし, もし何か起きていたら対処する.
-       -> JavaThread::has_special_runtime_exit_condition()
-       -> JavaThread::handle_special_runtime_exit_condition()
-```
+       -&gt; JavaThread::has_special_runtime_exit_condition()
+       -&gt; JavaThread::handle_special_runtime_exit_condition()
+</pre></div>
 
 
 ### ThreadInVMfromUnknown の処理
 #### コンストラクタ
-```
+<div class="flow-abst"><pre>
 ThreadInVMfromUnknown::ThreadInVMfromUnknown()
--> ThreadStateTransition::transition_from_native()    
-   (<= ただし, カレントスレッドが JavaThread であり, かつ _thread_in_native の場合にのみこの呼び出しを行う. そうでなければ何もしない)
-   -> (1) JavaThreadState を _thread_in_native_trans に変更
+-&gt; ThreadStateTransition::transition_from_native()    
+   (&lt;= ただし, カレントスレッドが JavaThread であり, かつ _thread_in_native の場合にのみこの呼び出しを行う. そうでなければ何もしない)
+   -&gt; (1) JavaThreadState を _thread_in_native_trans に変更
       (1) メモリアクセスの順序づけを行う
-          -> OrderAccess::fence() or InterfaceSupport::serialize_memory() が生成したコード
+          -&gt; OrderAccess::fence() or InterfaceSupport::serialize_memory() が生成したコード
       (1) SafepointSynchronize::_state の値を確認し, Safepoint が始まっていればブロックする
-          -> SafepointSynchronize::do_call_back()
-          -> JavaThread::check_safepoint_and_suspend_for_native_trans()
-             -> SafepointSynchronize::block()
+          -&gt; SafepointSynchronize::do_call_back()
+          -&gt; JavaThread::check_safepoint_and_suspend_for_native_trans()
+             -&gt; SafepointSynchronize::block()
       (1) JavaThreadState を引数で指定された値(この場合は _thread_in_vm) に変更
-```
+</pre></div>
 
 #### デストラクタ
-```
+<div class="flow-abst"><pre>
 ThreadInVMfromUnknown::~ThreadInVMfromUnknown()
--> ThreadStateTransition::transition_and_fence()   
-   (<= ただし, コンストラクタで状態変更を行った場合のみ, この呼び出しを行う. そうでなければ何もしない)
-   -> (1) JavaThreadState を引数で指定された値(この場合は _thread_in_vm_trans) に変更
+-&gt; ThreadStateTransition::transition_and_fence()   
+   (&lt;= ただし, コンストラクタで状態変更を行った場合のみ, この呼び出しを行う. そうでなければ何もしない)
+   -&gt; (1) JavaThreadState を引数で指定された値(この場合は _thread_in_vm_trans) に変更
       (2) メモリアクセスの順序づけを行う
-          -> OrderAccess::fence() or InterfaceSupport::serialize_memory() が生成したコード
+          -&gt; OrderAccess::fence() or InterfaceSupport::serialize_memory() が生成したコード
       (3) もし Safepoint が開始されていたらブロックする
-          -> SafepointSynchronize::block()
+          -&gt; SafepointSynchronize::block()
       (4) JavaThreadState を引数で指定された値(この場合は _thread_in_native) に変更
-```
+</pre></div>
 
 
 ### ThreadInVMfromNative の処理
 #### コンストラクタ
-```
+<div class="flow-abst"><pre>
 ThreadInVMfromNative::ThreadInVMfromNative()
--> ThreadStateTransition::trans_from_native()
-   -> (1) JavaThreadState を _thread_in_vm に変更
-          -> ThreadStateTransition::transition_from_native()
-             -> (上述)
+-&gt; ThreadStateTransition::trans_from_native()
+   -&gt; (1) JavaThreadState を _thread_in_vm に変更
+          -&gt; ThreadStateTransition::transition_from_native()
+             -&gt; (上述)
                 (この場合は, まず _thread_in_native_trans に変更した後,
                 Safepoint チェックを経て, 最終的に _thread_in_vm に変更される)
-```
+</pre></div>
 
 #### デストラクタ
-```
+<div class="flow-abst"><pre>
 ThreadInVMfromNative::~ThreadInVMfromNative()
--> ThreadStateTransition::trans_and_fence()
-   -> (1) JavaThreadState を _thread_in_native に変更
-          -> ThreadStateTransition::transition_and_fence()
-             -> (上述)
+-&gt; ThreadStateTransition::trans_and_fence()
+   -&gt; (1) JavaThreadState を _thread_in_native に変更
+          -&gt; ThreadStateTransition::transition_and_fence()
+             -&gt; (上述)
                 (この場合は, まず _thread_in_vm_trans に変更した後,
                 Safepoint チェックを経て, 最終的に _thread_in_native に変更される)
-```
+</pre></div>
 
 
 ### ThreadToNativeFromVM の処理
 #### コンストラクタ
-```
+<div class="flow-abst"><pre>
 ThreadToNativeFromVM::ThreadToNativeFromVM()
--> (1) スタックフレームを辿れるようにしておく
-       -> JavaFrameAnchor::make_walkable()
+-&gt; (1) スタックフレームを辿れるようにしておく
+       -&gt; JavaFrameAnchor::make_walkable()
    (1) JavaThreadState を _thread_in_native に変更.
-       -> ThreadStateTransition::trans_and_fence()
-          -> (上述)
+       -&gt; ThreadStateTransition::trans_and_fence()
+          -&gt; (上述)
              (この場合は, まず _thread_in_vm_trans に変更した後,
              Safepoint チェックを経て, 最終的に _thread_in_native に変更される)
    (1) 処理対象のスレッドが例外を出していたりサスペンドされたりしていないかチェックし, もし何か起きていたら対処する.
-       -> JavaThread::has_special_runtime_exit_condition()
-       -> JavaThread::handle_special_runtime_exit_condition()  (<= 引数を false で呼び出す)
-```
+       -&gt; JavaThread::has_special_runtime_exit_condition()
+       -&gt; JavaThread::handle_special_runtime_exit_condition()  (&lt;= 引数を false で呼び出す)
+</pre></div>
 
 #### デストラクタ
-```
+<div class="flow-abst"><pre>
 ThreadToNativeFromVM::~ThreadToNativeFromVM()
--> (1) JavaThreadState を _thread_in_vm に変更
-       -> ThreadStateTransition::transition_from_native()
-          -> (上述)
+-&gt; (1) JavaThreadState を _thread_in_vm に変更
+       -&gt; ThreadStateTransition::transition_from_native()
+          -&gt; (上述)
              (この場合は, まず _thread_in_native_trans に変更した後,
               Safepoint チェックを経て, 最終的に _thread_in_vm に変更される)
-```
+</pre></div>
 
 
 ### ThreadBlockInVM の処理
 #### コンストラクタ
-```
+<div class="flow-abst"><pre>
 ThreadBlockInVM::ThreadBlockInVM()
--> (1) スタックフレームを辿れるようにしておく
-       -> JavaFrameAnchor::make_walkable()
+-&gt; (1) スタックフレームを辿れるようにしておく
+       -&gt; JavaFrameAnchor::make_walkable()
    (1) JavaThreadState を _thread_blocked に変更
-       -> ThreadStateTransition::trans_and_fence()
-          -> (上述)
+       -&gt; ThreadStateTransition::trans_and_fence()
+          -&gt; (上述)
              (この場合は, まず _thread_in_vm_trans に変更した後,
              Safepoint チェックを経て, 最終的に _thread_blocked に変更される)
-```
+</pre></div>
 
 #### デストラクタ
-```
+<div class="flow-abst"><pre>
 ThreadBlockInVM::~ThreadBlockInVM()
--> (1) JavaThreadState を _thread_in_vm に変更
-       -> ThreadStateTransition::trans_and_fence()
-          -> (上述)
+-&gt; (1) JavaThreadState を _thread_in_vm に変更
+       -&gt; ThreadStateTransition::trans_and_fence()
+          -&gt; (上述)
              (この場合は, まず _thread_blocked_trans に変更した後,
              Safepoint チェックを経て, 最終的に _thread_in_vm に変更される)
-```
+</pre></div>
 
 
 ### ThreadInVMfromJavaNoAsyncException の処理
 #### コンストラクタ
-```
--> ThreadInVMfromJavaNoAsyncException::ThreadInVMfromJavaNoAsyncException()
+<div class="flow-abst"><pre>
+-&gt; ThreadInVMfromJavaNoAsyncException::ThreadInVMfromJavaNoAsyncException()
    (1) JavaThreadState を _thread_in_vm に変更 (この場合は, 中間的な状態を経ることなく直接遷移)
-       -> ThreadStateTransition::trans_from_java()
-          -> (上述)
-```
+       -&gt; ThreadStateTransition::trans_from_java()
+          -&gt; (上述)
+</pre></div>
 
 #### デストラクタ
-```
--> ThreadInVMfromJavaNoAsyncException::~ThreadInVMfromJavaNoAsyncException()
+<div class="flow-abst"><pre>
+-&gt; ThreadInVMfromJavaNoAsyncException::~ThreadInVMfromJavaNoAsyncException()
    (1) JavaThreadState を _thread_in_Java に戻す. (Safepoint が始まっていればここでブロックする)
-       -> ThreadStateTransition::trans()
-          -> (上述)
+       -&gt; ThreadStateTransition::trans()
+          -&gt; (上述)
              (この場合は, まず _thread_in_vm_trans に変更した後,
              Safepoint チェックを経て, 最終的に _thread_in_Java に変更される)
    (1) 処理対象のスレッドが例外を出していたりサスペンドされたりしていないかチェックし, もし何か起きていたら対処する.
-       -> JavaThread::has_special_runtime_exit_condition()
-       -> JavaThread::handle_special_runtime_exit_condition()  (<= 引数を false で呼び出す)
-```
+       -&gt; JavaThread::has_special_runtime_exit_condition()
+       -&gt; JavaThread::handle_special_runtime_exit_condition()  (&lt;= 引数を false で呼び出す)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

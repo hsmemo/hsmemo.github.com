@@ -13,10 +13,10 @@ title: Memory allocation (& GC 処理) ： Garbage Collection を補佐する処
 (#Under Construction)
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 BytecodeInterpreter::run()   or  BytecodeInterpreter::runWithChecks()
--> OrderAccess::release_store()   (← Barrier Set の該当箇所を dirty 化する)
-```
+-&gt; OrderAccess::release_store()   (← Barrier Set の該当箇所を dirty 化する)
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 (#Under Construction)

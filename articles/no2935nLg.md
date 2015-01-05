@@ -12,31 +12,31 @@ title: Serviceability 機能 ： JVMTI の処理 ： JVMTI 関数の処理 ： �
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### 初期化処理
-```
-(See: [here](no30592Ee.html) for details)
--> JvmtiEnvBase::globally_initialize()
-   -> JvmtiExtensions::register_extensions()
-```
+<div class="flow-abst"><pre>
+(See: <a href="no30592Ee.html">here</a> for details)
+-&gt; JvmtiEnvBase::globally_initialize()
+   -&gt; JvmtiExtensions::register_extensions()
+</pre></div>
 
 ### GetExtensionFunctions() の処理
-```
+<div class="flow-abst"><pre>
 JvmtiEnv::GetExtensionFunctions()
--> JvmtiExtensions::get_functions()
-```
+-&gt; JvmtiExtensions::get_functions()
+</pre></div>
 
 ### GetExtensionEvents() の処理
-```
+<div class="flow-abst"><pre>
 JvmtiEnv::GetExtensionEvents()
--> JvmtiExtensions::get_events()
-```
+-&gt; JvmtiExtensions::get_events()
+</pre></div>
 
 ### SetExtensionEventCallback() の処理
-```
+<div class="flow-abst"><pre>
 JvmtiEnv::SetExtensionEventCallback()
--> JvmtiExtensions::set_event_callback()
-   -> JvmtiEventController::set_extension_event_callback()
-      -> JvmtiEventControllerPrivate::set_extension_event_callback()
-```
+-&gt; JvmtiExtensions::set_event_callback()
+   -&gt; JvmtiEventController::set_extension_event_callback()
+      -&gt; JvmtiEventControllerPrivate::set_extension_event_callback()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### JvmtiExtensions::register_extensions()

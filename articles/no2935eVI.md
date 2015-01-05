@@ -16,28 +16,28 @@ G1CollectedHeap は CollectedHeap::collect() をオーバーライドしてい�
 この中で Minor GC または Major GC が実行される.
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 G1CollectedHeap::collect()
--> * Concurrent Full GC を実行すべき場合:
-     -> VMThread::execute()
-        -> (略) (See: [here](no2935qaz.html) for details)
-           -> VM_G1IncCollectionPause::doit()
-              -> (略) (See: [here](no2935YzN.html) for details)
+-&gt; * Concurrent Full GC を実行すべき場合:
+     -&gt; VMThread::execute()
+        -&gt; (略) (See: <a href="no2935qaz.html">here</a> for details)
+           -&gt; VM_G1IncCollectionPause::doit()
+              -&gt; (略) (See: <a href="no2935YzN.html">here</a> for details)
 
    * Concurrent Full GC の必要はなく, 呼び出し元が GC_locker の場合:
-     -> VMThread::execute()
-        -> (略) (See: [here](no2935qaz.html) for details)
-           -> VM_G1IncCollectionPause::doit()
-              -> (略) (See: [here](no2935YzN.html) for details)
+     -&gt; VMThread::execute()
+        -&gt; (略) (See: <a href="no2935qaz.html">here</a> for details)
+           -&gt; VM_G1IncCollectionPause::doit()
+              -&gt; (略) (See: <a href="no2935YzN.html">here</a> for details)
 
    * Concurrent Full GC の必要はなく, 呼び出し元が GC_locker 以外の場合:
-     -> VMThread::execute()
-        -> (略) (See: [here](no2935qaz.html) for details)
-           -> VM_G1CollectFull::doit()
-              -> G1CollectedHeap::do_full_collection()
-                 -> G1CollectedHeap::do_collection()
-                    -> (略) (See: [here](no2935ATn.html) for details)
-```
+     -&gt; VMThread::execute()
+        -&gt; (略) (See: <a href="no2935qaz.html">here</a> for details)
+           -&gt; VM_G1CollectFull::doit()
+              -&gt; G1CollectedHeap::do_full_collection()
+                 -&gt; G1CollectedHeap::do_collection()
+                    -&gt; (略) (See: <a href="no2935ATn.html">here</a> for details)
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### G1CollectedHeap::collect()

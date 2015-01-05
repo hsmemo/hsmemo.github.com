@@ -32,51 +32,51 @@ sleep 用のシステムコールを呼び出すだけ.
 
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 JVM_Sleep() (= java.lang.Thread.sleep(long millis))
--> (条件に応じて, 以下のどれかを呼び出す)
+-&gt; (条件に応じて, 以下のどれかを呼び出す)
    * 引数の sleep 時間が 0 で, ConvertSleepToYield オプションも指定されている
-     -> os::yield()
-        -> OS によって処理が異なる.
+     -&gt; os::yield()
+        -&gt; OS によって処理が異なる.
            * Linux の場合
-             -> sched_yield()  (<= スレッドが SCHED_OTHER なんだが, この場合も sched_yield() でいいんだっけ?? 要確認 #TODO)
+             -&gt; sched_yield()  (&lt;= スレッドが SCHED_OTHER なんだが, この場合も sched_yield() でいいんだっけ?? 要確認 #TODO)
            * Solaris の場合
-             -> os::sleep()    (<= 引数の interruptible は false)
-                -> (上述)
+             -&gt; os::sleep()    (&lt;= 引数の interruptible は false)
+                -&gt; (上述)
            * Windows の場合
-             -> os::NakedYield()
+             -&gt; os::NakedYield()
                 以下のどちらかを呼び出す.
-                -> SwitchToThread()
-                -> Sleep()
+                -&gt; SwitchToThread()
+                -&gt; Sleep()
    * 引数の sleep 時間が 0 で, ConvertSleepToYield オプションは指定されていない
-     -> os::sleep()    (<= 引数の interruptible は false)
-        -> OS によって処理が異なる.
+     -&gt; os::sleep()    (&lt;= 引数の interruptible は false)
+        -&gt; OS によって処理が異なる.
            * Linux の場合
-             -> ParkEvent::park()
+             -&gt; ParkEvent::park()
            * Solaris の場合
              以下のどちらかを呼び出す
-             -> thr_yield()  (<= 指定されたスリープ時間が 0 以下の場合)
-             -> os_sleep()   (<= それ以外の場合)
+             -&gt; thr_yield()  (&lt;= 指定されたスリープ時間が 0 以下の場合)
+             -&gt; os_sleep()   (&lt;= それ以外の場合)
            * Windows の場合
-             -> Sleep()
+             -&gt; Sleep()
    * 引数の sleep 時間が 0 ではない
-     -> os::sleep()    (<= 引数の interruptible は true)
+     -&gt; os::sleep()    (&lt;= 引数の interruptible は true)
         * Linux の場合
-          -> os::is_interrupted()
-          -> ParkEvent::park()
-          -> JavaThread::check_and_wait_while_suspended()   (See: [here](no2114zBI.html) for details)
-             -> JavaThread::handle_special_suspend_equivalent_condition()
-             -> JavaThread::java_suspend_self()
+          -&gt; os::is_interrupted()
+          -&gt; ParkEvent::park()
+          -&gt; JavaThread::check_and_wait_while_suspended()   (See: <a href="no2114zBI.html">here</a> for details)
+             -&gt; JavaThread::handle_special_suspend_equivalent_condition()
+             -&gt; JavaThread::java_suspend_self()
         * Solaris の場合
-          -> os_sleep()
-             -> (上述)
-          -> JavaThread::check_and_wait_while_suspended()   (See: [here](no2114zBI.html) for details)
-             -> (上述)
+          -&gt; os_sleep()
+             -&gt; (上述)
+          -&gt; JavaThread::check_and_wait_while_suspended()   (See: <a href="no2114zBI.html">here</a> for details)
+             -&gt; (上述)
         * Windows の場合
-          -> WaitForMultipleObjects()
-          -> JavaThread::check_and_wait_while_suspended()   (See: [here](no2114zBI.html) for details)
-             -> (上述)
-```
+          -&gt; WaitForMultipleObjects()
+          -&gt; JavaThread::check_and_wait_while_suspended()   (See: <a href="no2114zBI.html">here</a> for details)
+             -&gt; (上述)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

@@ -30,15 +30,15 @@ PermanentGenerationSpec::init() 内で(のみ)生成されている.
 
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
-(G1CollectedHeap の初期化処理) (See: [here](no2114tfN.html) for details)
--> G1CollectedHeap::initialize()
-   -> PermanentGenerationSpec::init()
+<div class="flow-abst"><pre>
+(G1CollectedHeap の初期化処理) (See: <a href="no2114tfN.html">here</a> for details)
+-&gt; G1CollectedHeap::initialize()
+   -&gt; PermanentGenerationSpec::init()
 
-(GenCollectedHeap の初期化処理) (See: [here](no2114gVH.html) for details)
--> GenCollectedHeap::initialize()
-   -> PermanentGenerationSpec::init()
-```
+(GenCollectedHeap の初期化処理) (See: <a href="no2114gVH.html">here</a> for details)
+-&gt; GenCollectedHeap::initialize()
+   -&gt; PermanentGenerationSpec::init()
+</pre></div>
 
 
 

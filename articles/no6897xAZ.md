@@ -39,86 +39,86 @@ title: 配列クラスの生成処理
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### プリミティブ型の1次元配列クラスの作成処理
-```
-(HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
--> Threads::create_vm()
-   -> init_globals()
-      -> universe2_init()
-         -> Universe::genesis()
-            -> typeArrayKlass::create_klass(BasicType type, int scale, TRAPS)
-               -> typeArrayKlass::create_klass(BasicType type, int scale, const char* name_str, TRAPS)
-                  -> (1) 新しい typeArrayKlass オブジェクトを生成する
-                         -> arrayKlass::base_create_array_klass()
-                            -> Klass::base_create_klass()
-                               -> Klass::base_create_klass_oop()
-                                  -> Klass_vtbl::allocate_permanent(KlassHandle& klass, int size, TRAPS) (を各サブクラスがオーバーライドしたもの)
-                                     -> (1) 新しい Klass クラス (のサブクラス) オブジェクトを確保
+<div class="flow-abst"><pre>
+(HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+-&gt; Threads::create_vm()
+   -&gt; init_globals()
+      -&gt; universe2_init()
+         -&gt; Universe::genesis()
+            -&gt; typeArrayKlass::create_klass(BasicType type, int scale, TRAPS)
+               -&gt; typeArrayKlass::create_klass(BasicType type, int scale, const char* name_str, TRAPS)
+                  -&gt; (1) 新しい typeArrayKlass オブジェクトを生成する
+                         -&gt; arrayKlass::base_create_array_klass()
+                            -&gt; Klass::base_create_klass()
+                               -&gt; Klass::base_create_klass_oop()
+                                  -&gt; Klass_vtbl::allocate_permanent(KlassHandle&amp; klass, int size, TRAPS) (を各サブクラスがオーバーライドしたもの)
+                                     -&gt; (1) 新しい Klass クラス (のサブクラス) オブジェクトを確保
                                         (1) 確保した klassOop の klass フィールドを初期化
-                                            -> Klass_vtbl::post_new_init_klass()
-                                               -> CollectedHeap::post_allocation_install_obj_klass()
+                                            -&gt; Klass_vtbl::post_new_init_klass()
+                                               -&gt; CollectedHeap::post_allocation_install_obj_klass()
 
                      (1) 生成した配列クラスの vtable や mirror オブジェクト (Java レベルのクラスオブジェクト) を生成する.
-                         -> arrayKlass::complete_create_array_klass()
-                            -> Klass::initialize_supers()
-                            -> klassVtable::initialize_vtable()
-                            -> java_lang_Class::create_mirror()
-```
+                         -&gt; arrayKlass::complete_create_array_klass()
+                            -&gt; Klass::initialize_supers()
+                            -&gt; klassVtable::initialize_vtable()
+                            -&gt; java_lang_Class::create_mirror()
+</pre></div>
 
 ### その他の配列クラスの作成処理
 * 配列クラスのロード処理 (See: [here](noIvSV0NZj.html) for details)
 
-```
-(See: [here](noIvSV0NZj.html) for details)
--> SystemDictionary::resolve_or_null(Symbol *class_name, Handle class_loader, Handle protection_domain, TRAPS)
-   -> * ロード対象が配列クラスの場合:
-        -> SystemDictionary::resolve_array_class_or_null()
-           -> * オブジェクト型の配列クラスの場合: (一次元配列のクラスだけでなく, 多次元配列のクラスも含む)
-                -> (1) 要素であるオブジェクト型のクラス(instanceKlass)を取得する
-                       -> SystemDictionary::resolve_instance_class_or_null()
-                          -> (See: [here](noIvSV0NZj.html) for details)
+<div class="flow-abst"><pre>
+(See: <a href="noIvSV0NZj.html">here</a> for details)
+-&gt; SystemDictionary::resolve_or_null(Symbol *class_name, Handle class_loader, Handle protection_domain, TRAPS)
+   -&gt; * ロード対象が配列クラスの場合:
+        -&gt; SystemDictionary::resolve_array_class_or_null()
+           -&gt; * オブジェクト型の配列クラスの場合: (一次元配列のクラスだけでなく, 多次元配列のクラスも含む)
+                -&gt; (1) 要素であるオブジェクト型のクラス(instanceKlass)を取得する
+                       -&gt; SystemDictionary::resolve_instance_class_or_null()
+                          -&gt; (See: <a href="noIvSV0NZj.html">here</a> for details)
                    (1) 取得したinstanceKlassを基に配列クラスを取得する
-                       -> Klass::array_klass()
-                          -> instanceKlass::array_klass_impl()
-                             -> (1) まだ作成してなければ, 一次元配列クラスを作成する
-                                    -> objArrayKlassKlass::allocate_objArray_klass()
-                                       -> objArrayKlassKlass::allocate_objArray_klass_impl()
-                                          -> arrayKlass::base_create_array_klass()
-                                             -> (同上)
+                       -&gt; Klass::array_klass()
+                          -&gt; instanceKlass::array_klass_impl()
+                             -&gt; (1) まだ作成してなければ, 一次元配列クラスを作成する
+                                    -&gt; objArrayKlassKlass::allocate_objArray_klass()
+                                       -&gt; objArrayKlassKlass::allocate_objArray_klass_impl()
+                                          -&gt; arrayKlass::base_create_array_klass()
+                                             -&gt; (同上)
                                 (1) 対応する次元の配列クラスを取得する
-                                    -> Klass::array_klass()  (再帰呼び出し)
-                                       -> objArrayKlass::array_klass_impl()
-                                          -> (1) 引数の次元数が一致すれば, それをリターン
+                                    -&gt; Klass::array_klass()  (再帰呼び出し)
+                                       -&gt; objArrayKlass::array_klass_impl()
+                                          -&gt; (1) 引数の次元数が一致すれば, それをリターン
                                              (1) まだ作成してなければ, 1つ高次元の配列クラスを作成する
-                                                 -> objArrayKlassKlass::allocate_objArray_klass()
-                                                    -> (同上)
+                                                 -&gt; objArrayKlassKlass::allocate_objArray_klass()
+                                                    -&gt; (同上)
                                              (1) 1つ高次元の配列クラスに対して再帰呼び出し
-                                                 -> Klass::array_klass()  (再帰呼び出し)
-                                                    -> objArrayKlass::array_klass_impl()
-                                                       -> (以下, 繰り返し)
+                                                 -&gt; Klass::array_klass()  (再帰呼び出し)
+                                                    -&gt; objArrayKlass::array_klass_impl()
+                                                       -&gt; (以下, 繰り返し)
 
               * プリミティブ型の配列クラスの場合: (一次元配列のクラスだけでなく, 多次元配列のクラスも含む)
-                -> (1) プリミティブ型の1次元配列クラスを取得する
-                       -> Universe::typeArrayKlassObj()
+                -&gt; (1) プリミティブ型の1次元配列クラスを取得する
+                       -&gt; Universe::typeArrayKlassObj()
                    (1) 取得した配列クラスから配列クラスを取得する
-                       -> Klass::array_klass()
-                          -> typeArrayKlass::array_klass_impl()
-                             -> (1) 引数の次元数が一致すれば, それをリターン
+                       -&gt; Klass::array_klass()
+                          -&gt; typeArrayKlass::array_klass_impl()
+                             -&gt; (1) 引数の次元数が一致すれば, それをリターン
                                 (1) まだ作成してなければ, 配列クラスを作成する.
-                                    -> objArrayKlassKlass::allocate_objArray_klass()
-                                       -> (同上)
+                                    -&gt; objArrayKlassKlass::allocate_objArray_klass()
+                                       -&gt; (同上)
                                 (1) 再帰呼び出しにより, 対応する次元の配列クラスを取得する
-                                    -> Klass::array_klass()  (再帰呼び出し)
-                                       -> objArrayKlass::array_klass_impl()
-                                          -> (同上)
-```
+                                    -&gt; Klass::array_klass()  (再帰呼び出し)
+                                       -&gt; objArrayKlass::array_klass_impl()
+                                          -&gt; (同上)
+</pre></div>
 
 * JNI による配列処理 (See: [here](noj4FhtQM1.html) for details)
   
-```
+<div class="flow-abst"><pre>
 jni_NewObjectArray()
--> Klass::array_klass()
-   -> (同上)
-```
+-&gt; Klass::array_klass()
+   -&gt; (同上)
+</pre></div>
 
 * ...
 

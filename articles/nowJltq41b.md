@@ -26,18 +26,18 @@ ReferenceProcessor::process_phaseJNI() 内で行われている
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### NewWeakGlobalRef() の処理
-```
+<div class="flow-abst"><pre>
 jni_NewWeakGlobalRef()
--> JNIHandles::make_weak_global()
-   -> JNIHandleBlock::allocate_handle()
-      -> JNIHandleBlock::rebuild_free_list()  (<= どうしても空きが見つからない場合に呼び出す)
-```
+-&gt; JNIHandles::make_weak_global()
+   -&gt; JNIHandleBlock::allocate_handle()
+      -&gt; JNIHandleBlock::rebuild_free_list()  (&lt;= どうしても空きが見つからない場合に呼び出す)
+</pre></div>
 
 ### DeleteWeakGlobalRef() の処理
-```
+<div class="flow-abst"><pre>
 jni_DeleteWeakGlobalRef()
--> JNIHandles::destroy_weak_global()
-```
+-&gt; JNIHandles::destroy_weak_global()
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

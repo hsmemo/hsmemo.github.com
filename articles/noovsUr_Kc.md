@@ -46,21 +46,21 @@ JvmtiEnvBase クラスの _head_environment フィールドに(線形リスト�
 JvmtiEnv::create_a_jvmti() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている (See: [here](no2935bUk.html) and [here](no30592Ee.html) for details).
 
-```
+<div class="flow-abst"><pre>
 jni_GetEnv()
--> JvmtiExport::get_jvmti_interface()
-   -> JvmtiEnv::create_a_jvmti()
-```
+-&gt; JvmtiExport::get_jvmti_interface()
+   -&gt; JvmtiEnv::create_a_jvmti()
+</pre></div>
 
 #### 削除箇所(where its instances are deleted)
 JvmtiEnvBase::periodic_clean_up() 内で削除されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている. (See: JvmtiGCMarker)
 
-```
+<div class="flow-abst"><pre>
 JvmtiGCMarker::JvmtiGCMarker()
--> JvmtiEnvBase::check_for_periodic_clean_up()
-   -> JvmtiEnvBase::periodic_clean_up()
-```
+-&gt; JvmtiEnvBase::check_for_periodic_clean_up()
+   -&gt; JvmtiEnvBase::periodic_clean_up()
+</pre></div>
 
 ### 内部構造(Internal structure)
 内部には JVMTI の関数と同名のメソッドが定義されている (e.g. JvmtiEnv::Allocate(), JvmtiEnv::SetEventCallbacks(), etc).

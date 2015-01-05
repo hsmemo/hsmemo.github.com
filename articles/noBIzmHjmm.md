@@ -130,10 +130,10 @@ fast path で終わらなかったオブジェクト(= inflate したオブジ�
 ObjectSynchronizer::omAlloc() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 ObjectSynchronizer::inflate()
--> ObjectSynchronizer::omAlloc()
-```
+-&gt; ObjectSynchronizer::omAlloc()
+</pre></div>
 
 #### 削除箇所(where its instances are deleted)
 未使用のオブジェクトはフリーリスト管理するので削除(delete)されない?? #TODO
@@ -141,12 +141,12 @@ ObjectSynchronizer::inflate()
 Safepoint で実行される ObjectSynchronizer::deflate_idle_monitors() により, 
 使われていない ObjectMonitor オブジェクトは ObjectSynchronizer::gFreeList に戻される.
 
-```
-(略) (See: [here](noFCZ0Hp3S.html) for details)
--> SafepointSynchronize::begin()
-   -> SafepointSynchronize::do_cleanup_tasks()
-      -> ObjectSynchronizer::deflate_idle_monitors()
-```
+<div class="flow-abst"><pre>
+(略) (See: <a href="noFCZ0Hp3S.html">here</a> for details)
+-&gt; SafepointSynchronize::begin()
+   -&gt; SafepointSynchronize::do_cleanup_tasks()
+      -&gt; ObjectSynchronizer::deflate_idle_monitors()
+</pre></div>
 
 
 ```cpp

@@ -21,35 +21,35 @@ title: Thread の開始処理の枠組み ： 生成されたスレッド側で�
    実際には Thread の各サブクラスでオーバーライドされた run() メソッドが実行される.
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 java_start()
--> (1) TLS の設定
-       -> ThreadLocalStorage::set_thread()
+-&gt; (1) TLS の設定
+       -&gt; ThreadLocalStorage::set_thread()
 
    (1) スレッドの作成に失敗した場合は, ここで OSThread::startThread_lock() に対して Monitor::notify_all() して終了.
        (生成したスレッドと同期を取る処理)
 
    (1) NUMA 関係の設定
-       -> os::numa_get_group_id()
-       -> Thread::set_lgrp_id()
+       -&gt; os::numa_get_group_id()
+       -&gt; Thread::set_lgrp_id()
 
    (1) シグナルマスクの設定
-       -> os::Linux::hotspot_sigmask()
-          -> (See: [here](noNmlmYDJk.html) for details)
+       -&gt; os::Linux::hotspot_sigmask()
+          -&gt; (See: <a href="noNmlmYDJk.html">here</a> for details)
 
    (1) FPU 関係の初期化
-       -> os::Linux::init_thread_fpu_state()
+       -&gt; os::Linux::init_thread_fpu_state()
 
    (1) 生成元のスレッドと同期を取る
-       -> Monitor::notify_all()
+       -&gt; Monitor::notify_all()
           (OSThread::startThread_lock() に対して notify_all())
-       -> Monitor::wait()
+       -&gt; Monitor::wait()
           (OSThread::startThread_lock() に対して wait)
 
    (1) 実際にこのスレッドのメイン処理を実行
-       -> Thread::run()
-          -> (Thread の各サブクラスでオーバーライドされた run() メソッドが呼び出される)
-```
+       -&gt; Thread::run()
+          -&gt; (Thread の各サブクラスでオーバーライドされた run() メソッドが呼び出される)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

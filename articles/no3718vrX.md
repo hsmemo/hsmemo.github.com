@@ -67,59 +67,59 @@ GenCollectorPolicy::mem_allocate_work() に似ている.
 
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 ParallelScavengeHeap::mem_allocate()
--> (1) まず PSYoungGen::allocate() で確保を試みる. (この確保が成功すれば以下の処理は行わない)
-       -> PSYoungGen::allocate()
-          -> (See: [here](no28916rXC.html) for details)
+-&gt; (1) まず PSYoungGen::allocate() で確保を試みる. (この確保が成功すれば以下の処理は行わない)
+       -&gt; PSYoungGen::allocate()
+          -&gt; (See: <a href="no28916rXC.html">here</a> for details)
 
    (2) 確保に成功するまで以下の処理を繰り返す.
        (メモリ確保に成功するか, あるいは成功しないと判断するまでループ)
 
-       -> (1) Heap_lock を取った状態で PSYoungGen::allocate() 及び PSOldGen::allocate() による確保処理を行う
-              -> PSYoungGen::allocate()
-                 -> (See: [here](no28916rXC.html) for details)
-              -> PSOldGen::allocate()  (<= Young Gen にいれるには大きすぎる確保要求の場合)
-                 -> PSOldGen::allocate_noexpand()
-                 -> PSOldGen::expand_and_allocate()
+       -&gt; (1) Heap_lock を取った状態で PSYoungGen::allocate() 及び PSOldGen::allocate() による確保処理を行う
+              -&gt; PSYoungGen::allocate()
+                 -&gt; (See: <a href="no28916rXC.html">here</a> for details)
+              -&gt; PSOldGen::allocate()  (&lt;= Young Gen にいれるには大きすぎる確保要求の場合)
+                 -&gt; PSOldGen::allocate_noexpand()
+                 -&gt; PSOldGen::expand_and_allocate()
     
           (2) まだ確保できていなければ, GC を実行してから確保を試みる.
-              -> VM_ParallelGCFailedAllocation::doit()
-                 -> ParallelScavengeHeap::failed_mem_allocate()
+              -&gt; VM_ParallelGCFailedAllocation::doit()
+                 -&gt; ParallelScavengeHeap::failed_mem_allocate()
     
-                    -> (1) まず PSScavenge::invoke() で Minor GC を行い, その後 Young Generation から確保してみる.
-                           -> PSScavenge::invoke()
-                              -> (See: [here](no289165Un.html) for details)
-                           -> PSYoungGen::allocate()
-                              -> (See: [here](no28916rXC.html) for details)
+                    -&gt; (1) まず PSScavenge::invoke() で Minor GC を行い, その後 Young Generation から確保してみる.
+                           -&gt; PSScavenge::invoke()
+                              -&gt; (See: <a href="no289165Un.html">here</a> for details)
+                           -&gt; PSYoungGen::allocate()
+                              -&gt; (See: <a href="no28916rXC.html">here</a> for details)
        
                        (2) 確保に失敗したら, ParallelScavengeHeap::invoke_full_gc() で簡単に Full GC を行った後, もう一度 Young Generation からの確保を試みる.
-                           -> ParallelScavengeHeap::invoke_full_gc()
+                           -&gt; ParallelScavengeHeap::invoke_full_gc()
                               (UseParallelOldGC オプションに応じて, 以下のどちらかを呼び出す)
-                              -> PSParallelCompact::invoke()
-                                 -> (See: [here](no28916Gft.html) for details)
-                              -> PSMarkSweep::invoke()
-                                 -> (See: [here](no2114YqK.html) for details)
-                           -> PSYoungGen::allocate()
-                              -> (See: [here](no28916rXC.html) for details)
+                              -&gt; PSParallelCompact::invoke()
+                                 -&gt; (See: <a href="no28916Gft.html">here</a> for details)
+                              -&gt; PSMarkSweep::invoke()
+                                 -&gt; (See: <a href="no2114YqK.html">here</a> for details)
+                           -&gt; PSYoungGen::allocate()
+                              -&gt; (See: <a href="no28916rXC.html">here</a> for details)
        
                        (3) まだ確保が成功していなければ, Old Generation から確保してみる.
-                           -> PSOldGen::allocate()
-                              -> (同上)
+                           -&gt; PSOldGen::allocate()
+                              -&gt; (同上)
        
                        (4) まだ確保が成功していなければ, invoke_full_gc() で(今度は完璧に) Full GC を行い, その後 Young Generation からの確保を試みる.
-                           -> ParallelScavengeHeap::invoke_full_gc()
-                              -> (同上)
-                           -> PSYoungGen::allocate()
-                              -> (See: [here](no28916rXC.html) for details)
+                           -&gt; ParallelScavengeHeap::invoke_full_gc()
+                              -&gt; (同上)
+                           -&gt; PSYoungGen::allocate()
+                              -&gt; (See: <a href="no28916rXC.html">here</a> for details)
        
                        (5) それでもまだ確保が成功していなければ, もう一度 Old Generation から確保を試みる.
                            (今度は完璧に Full GC した後なので, さっきとは結果が変わる可能性がある)
-                           -> PSOldGen::allocate()
-                              -> (同上)
+                           -&gt; PSOldGen::allocate()
+                              -&gt; (同上)
 
           (3) GC 時間が制限を越えていれば NULL をリターン. そうでなければ, 確保が成功するまでループを繰り返す.
-```
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

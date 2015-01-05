@@ -235,19 +235,19 @@ java.lang.management.ThreadInfo 用の情報を蓄えるために使用されて
 値をリセットする関数も用意されている.
 以下の関数が呼び出されるとカウンタの値が初期値に戻る.
 
-```
+<div class="flow-abst"><pre>
 Java_sun_management_MemoryPoolImpl_resetPeakUsage0()
--> jmm_ResetStatistic()
-   -> ThreadService::reset_contention_count_stat()
+-&gt; jmm_ResetStatistic()
+   -&gt; ThreadService::reset_contention_count_stat()
 
 Java_sun_management_ThreadImpl_resetPeakThreadCount0()
--> jmm_ResetStatistic()
-   -> (同上)
+-&gt; jmm_ResetStatistic()
+   -&gt; (同上)
 
 Java_sun_management_ThreadImpl_resetContentionTimes0()
--> jmm_ResetStatistic()
-   -> (同上)
-```
+-&gt; jmm_ResetStatistic()
+   -&gt; (同上)
+</pre></div>
 
 
 

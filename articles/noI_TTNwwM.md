@@ -71,27 +71,27 @@ JvmtiEnvThreadState オブジェクトは _next フィールドで次の JvmtiEn
 JvmtiThreadState::add_env() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 JvmtiThreadState::JvmtiThreadState()
--> JvmtiThreadState::add_env()
+-&gt; JvmtiThreadState::add_env()
 
 JvmtiEnv::JvmtiEnv()
--> JvmtiEnvBase::JvmtiEnvBase()
-   -> JvmtiEventController::env_initialize()
-      -> JvmtiEventControllerPrivate::env_initialize()
-         -> JvmtiThreadState::add_env()
-```
+-&gt; JvmtiEnvBase::JvmtiEnvBase()
+   -&gt; JvmtiEventController::env_initialize()
+      -&gt; JvmtiEventControllerPrivate::env_initialize()
+         -&gt; JvmtiThreadState::add_env()
+</pre></div>
 
 #### 削除箇所(where its instances are deleted)
 JvmtiThreadState::periodic_clean_up() 内で削除されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている. (See: JvmtiGCMarker)
 
-```
+<div class="flow-abst"><pre>
 JvmtiGCMarker::JvmtiGCMarker()
--> JvmtiEnvBase::check_for_periodic_clean_up()
-   -> JvmtiEnvBase::periodic_clean_up()
-      -> JvmtiThreadState::periodic_clean_up()
-```
+-&gt; JvmtiEnvBase::check_for_periodic_clean_up()
+   -&gt; JvmtiEnvBase::periodic_clean_up()
+      -&gt; JvmtiThreadState::periodic_clean_up()
+</pre></div>
 
 ### 内部構造(Internal structure)
 SetThreadLocalStorage() でセットされたデータは以下のフィールドに格納される. (See: [here](no2935cPm.html) for details)
@@ -151,19 +151,19 @@ JvmtiEnvThreadState::get_frame_pops() 内で(のみ)生成されている (= 初
 
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 JvmtiEnvThreadState::is_frame_pop()
--> JvmtiEnvThreadState::get_frame_pops()
+-&gt; JvmtiEnvThreadState::get_frame_pops()
 
 JvmtiEventControllerPrivate::set_frame_pop()
--> JvmtiEnvThreadState::get_frame_pops()
+-&gt; JvmtiEnvThreadState::get_frame_pops()
 
 JvmtiEventControllerPrivate::clear_frame_pop()
--> JvmtiEnvThreadState::get_frame_pops()
+-&gt; JvmtiEnvThreadState::get_frame_pops()
 
 JvmtiEventControllerPrivate::clear_to_frame_pop()
--> JvmtiEnvThreadState::get_frame_pops()
-```
+-&gt; JvmtiEnvThreadState::get_frame_pops()
+</pre></div>
 
 ### 内部構造(Internal structure)
 定義されているフィールドは以下の1つのみ

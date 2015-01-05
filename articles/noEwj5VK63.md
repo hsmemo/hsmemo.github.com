@@ -624,35 +624,35 @@ Space::new_dcto_cl() というファクトリメソッドが用意されてお�
  それらのオーバーライドされたメソッドも同じパスでのみ呼び出されている.
  (See: ContiguousSpaceDCTOC, FreeListSpace_DCTOC))
 
-```
+<div class="flow-abst"><pre>
 * OneContigSpaceCardGeneration 用の処理
 
   OneContigSpaceCardGeneration::younger_refs_iterate()
-  -> Generation::younger_refs_in_space_iterate()
-     -> CardTableRS::younger_refs_in_space_iterate()
-        -> CardTableModRefBS::non_clean_card_iterate_possibly_parallel()
-           -> Space::new_dcto_cl()
+  -&gt; Generation::younger_refs_in_space_iterate()
+     -&gt; CardTableRS::younger_refs_in_space_iterate()
+        -&gt; CardTableModRefBS::non_clean_card_iterate_possibly_parallel()
+           -&gt; Space::new_dcto_cl()
 
 * CompactingPermGenGen 用の処理
 
   CompactingPermGenGen::younger_refs_iterate()
-  -> CardTableRS::younger_refs_in_space_iterate()
-     -> (同上)
+  -&gt; CardTableRS::younger_refs_in_space_iterate()
+     -&gt; (同上)
 
 * ConcurrentMarkSweepGeneration 用の処理 (CMS 用)
 
   ConcurrentMarkSweepGeneration::younger_refs_iterate()
-  -> Generation::younger_refs_in_space_iterate()
-     -> (同上)
+  -&gt; Generation::younger_refs_in_space_iterate()
+     -&gt; (同上)
 
 * ParNew 用の処理
 
   CardTableRS::younger_refs_in_space_iterate()
-  -> CardTableModRefBS::non_clean_card_iterate_possibly_parallel()
-     -> CardTableModRefBS::non_clean_card_iterate_parallel_work()
-        -> CardTableModRefBS::process_stride()
-           -> Space::new_dcto_cl()
-```
+  -&gt; CardTableModRefBS::non_clean_card_iterate_possibly_parallel()
+     -&gt; CardTableModRefBS::non_clean_card_iterate_parallel_work()
+        -&gt; CardTableModRefBS::process_stride()
+           -&gt; Space::new_dcto_cl()
+</pre></div>
 
 #### 使用箇所(where its instances are used)
 ClearNoncleanCardWrapper::do_MemRegion() 内で(のみ)使用されている.
@@ -798,31 +798,31 @@ ContiguousSpace::new_dcto_cl() というファクトリメソッドが用意さ�
 (なお, このパスはオーバーライド元である Space::new_dcto_cl() の呼び出しパスと同一.
  (See: DirtyCardToOopClosure))
 
-```
+<div class="flow-abst"><pre>
 * OneContigSpaceCardGeneration 用の処理
   OneContigSpaceCardGeneration::younger_refs_iterate()
-  -> Generation::younger_refs_in_space_iterate()
-     -> CardTableRS::younger_refs_in_space_iterate()
-        -> CardTableModRefBS::non_clean_card_iterate_possibly_parallel()
-           -> Space::new_dcto_cl()
+  -&gt; Generation::younger_refs_in_space_iterate()
+     -&gt; CardTableRS::younger_refs_in_space_iterate()
+        -&gt; CardTableModRefBS::non_clean_card_iterate_possibly_parallel()
+           -&gt; Space::new_dcto_cl()
 
 * CompactingPermGenGen 用の処理
   CompactingPermGenGen::younger_refs_iterate()
-  -> CardTableRS::younger_refs_in_space_iterate()
-     -> (同上)
+  -&gt; CardTableRS::younger_refs_in_space_iterate()
+     -&gt; (同上)
 
 * ConcurrentMarkSweepGeneration 用の処理 (CMS 用)
   ConcurrentMarkSweepGeneration::younger_refs_iterate()
-  -> Generation::younger_refs_in_space_iterate()
-     -> (同上)
+  -&gt; Generation::younger_refs_in_space_iterate()
+     -&gt; (同上)
 
 * ParNew 用の処理
   CardTableRS::younger_refs_in_space_iterate()
-  -> CardTableModRefBS::non_clean_card_iterate_possibly_parallel()
-     -> CardTableModRefBS::non_clean_card_iterate_parallel_work()
-        -> CardTableModRefBS::process_stride()
-           -> Space::new_dcto_cl()
-```
+  -&gt; CardTableModRefBS::non_clean_card_iterate_possibly_parallel()
+     -&gt; CardTableModRefBS::non_clean_card_iterate_parallel_work()
+        -&gt; CardTableModRefBS::process_stride()
+           -&gt; Space::new_dcto_cl()
+</pre></div>
 
 
 

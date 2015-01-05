@@ -188,15 +188,15 @@ JIT コンパイラのためのクラス.
 methodDataKlass::allocate() というファクトリメソッドが用意されており, その中で生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 methodOopDesc::build_interpreter_method_data()
--> oopFactory::new_methodData()
-   -> methodDataKlass::allocate()
+-&gt; oopFactory::new_methodData()
+   -&gt; methodDataKlass::allocate()
 
 MethodHandleCompiler::get_method_oop()
--> oopFactory::new_methodData()
-   -> (同上)
-```
+-&gt; oopFactory::new_methodData()
+   -&gt; (同上)
+</pre></div>
 
 #### 情報の記録箇所(where information is recorded)
 以下の関数内で情報の記録処理が行われている. (See: [here](no2935fdD.html) for details).

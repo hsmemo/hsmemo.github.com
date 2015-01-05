@@ -45,141 +45,141 @@ InterpreterGenerator::generate_native_entry() が生成したコードは
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### 初期化時の処理 
-```
+<div class="flow-abst"><pre>
 * slow_signature_handler の生成処理
 
-  (See: [here](no3059SwU.html) for details)
-  -> TemplateInterpreterGenerator::generate_all()
-     -> AbstractInterpreterGenerator::generate_all()
-        -> AbstractInterpreterGenerator::generate_slow_signature_handler()
+  (See: <a href="no3059SwU.html">here</a> for details)
+  -&gt; TemplateInterpreterGenerator::generate_all()
+     -&gt; AbstractInterpreterGenerator::generate_all()
+        -&gt; AbstractInterpreterGenerator::generate_slow_signature_handler()
 
 * result handler の生成処理
 
-  (See: [here](no3059SwU.html) for details)
-  -> TemplateInterpreterGenerator::generate_all()
-     -> TemplateInterpreterGenerator::generate_result_handler_for()
+  (See: <a href="no3059SwU.html">here</a> for details)
+  -&gt; TemplateInterpreterGenerator::generate_all()
+     -&gt; TemplateInterpreterGenerator::generate_result_handler_for()
 
 * method entry 部コードの生成処理
 
-  (See: [here](no3059n2f.html) for details)
-  -> AbstractInterpreterGenerator::generate_method_entry()
-     -> InterpreterGenerator::generate_native_entry()
-```
+  (See: <a href="no3059n2f.html">here</a> for details)
+  -&gt; AbstractInterpreterGenerator::generate_method_entry()
+     -&gt; InterpreterGenerator::generate_native_entry()
+</pre></div>
 
 
 ### ネイティブメソッドの呼び出し処理 : sparc の場合
-```
+<div class="flow-abst"><pre>
 InterpreterGenerator::generate_native_entry() が生成するコード
--> (1) スタック上に新しいフレームを確保する
-       -> TemplateInterpreterGenerator::generate_fixed_frame() が生成したコード
+-&gt; (1) スタック上に新しいフレームを確保する
+       -&gt; TemplateInterpreterGenerator::generate_fixed_frame() が生成したコード
 
    (1) JIT コンパイラを使う場合は, invocation counter 値を増加させて値をチェックする
-       -> InterpreterGenerator::generate_counter_incr() が生成したコード
+       -&gt; InterpreterGenerator::generate_counter_incr() が生成したコード
 
    (1) stack overflow をチェックする (stack banging コード)
-       -> AbstractInterpreterGenerator::bang_stack_shadow_pages() が生成したコード
+       -&gt; AbstractInterpreterGenerator::bang_stack_shadow_pages() が生成したコード
 
    (1) synchronized method の場合はロックを取得する
-       -> InterpreterGenerator::lock_method() が生成したコード
-          -> (See: [here](no9662EYy.html) for details)
+       -&gt; InterpreterGenerator::lock_method() が生成したコード
+          -&gt; (See: <a href="no9662EYy.html">here</a> for details)
 
    (1) (まだ設定されていなければ) 対応するネイティブ関数のアドレスやシグネチャハンドラを設定しておく
-       -> InterpreterRuntime::prepare_native_call()
-          -> (1) (もしまだ終わっていなければ) 呼び出し先の関数へのダイナミックリンクを行う
-                 -> NativeLookup::lookup()
-                    -> (後述) (See: [here](no3059err.html) for details)
+       -&gt; InterpreterRuntime::prepare_native_call()
+          -&gt; (1) (もしまだ終わっていなければ) 呼び出し先の関数へのダイナミックリンクを行う
+                 -&gt; NativeLookup::lookup()
+                    -&gt; (後述) (See: <a href="no3059err.html">here</a> for details)
              (1) (もしまだ終わっていなければ) シグネチャハンドラの設定を行う
-                 -> SignatureHandlerLibrary::add()
-                    -> * 既に (1回以上呼び出されているため) 設定済みの場合: 
-                         -> 何もしない
+                 -&gt; SignatureHandlerLibrary::add()
+                    -&gt; * 既に (1回以上呼び出されているため) 設定済みの場合: 
+                         -&gt; 何もしない
                        * 何らかの理由で特注のシグネチャハンドラが用意できないメソッドの場合 (引数の数が多すぎる, 等):
-                         -> AbstractInterpreter::slow_signature_handler()  (<= デフォルトのハンドラが返される)
+                         -&gt; AbstractInterpreter::slow_signature_handler()  (&lt;= デフォルトのハンドラが返される)
                        * 既に同じ型用のシグネチャハンドラを作ってメモイズしてある場合:
-                         -> それを流用する
+                         -&gt; それを流用する
                        * それ以外の場合: 
-                         -> InterpreterRuntime::SignatureHandlerGenerator::generate() (<= シグネチャハンドラを作成)
-                            -> SignatureIterator::iterate()
-                               -> SignatureIterator::parse_type()
-                                  -> NativeSignatureIterator::do_<type>()
-                                     -> InterpreterRuntime::SignatureHandlerGenerator::pass_*()
-                                        -> MacroAssembler::store_*_argument()
+                         -&gt; InterpreterRuntime::SignatureHandlerGenerator::generate() (&lt;= シグネチャハンドラを作成)
+                            -&gt; SignatureIterator::iterate()
+                               -&gt; SignatureIterator::parse_type()
+                                  -&gt; NativeSignatureIterator::do_&lt;type&gt;()
+                                     -&gt; InterpreterRuntime::SignatureHandlerGenerator::pass_*()
+                                        -&gt; MacroAssembler::store_*_argument()
 
    (1) ダミーフレームを作ってレジスタを待避する
 
    (1) シグネチャハンドラを呼んで引数を詰め直す
 
    (1) native メソッドの呼び出しを行う
-       -> (native メソッドの処理が実行される)
+       -&gt; (native メソッドの処理が実行される)
     
    (1) もし Safepoint 停止が開始されていた場合は, ここで block する. 
-       -> JavaThread::check_special_condition_for_native_trans()
+       -&gt; JavaThread::check_special_condition_for_native_trans()
 
    (1) スタック上の yellow page が disabled になっていたら, 元に戻す.
-       -> SharedRuntime::reguard_yellow_pages()
+       -&gt; SharedRuntime::reguard_yellow_pages()
 
    (1) 例外が起きていれば伝搬させる. この場合は以降の処理は行わない.
-       -> MacroAssembler::call_VM()
-          -> (See: [here](no2935dSX.html) for details)
-             -> InterpreterRuntime::throw_pending_exception()
-                -> (See: [here](no3059d4M.html) for details)
+       -&gt; MacroAssembler::call_VM()
+          -&gt; (See: <a href="no2935dSX.html">here</a> for details)
+             -&gt; InterpreterRuntime::throw_pending_exception()
+                -&gt; (See: <a href="no3059d4M.html">here</a> for details)
 
    (1) synchronized method の場合はロックを解放する
-       -> InterpreterGenerator::unlock_method() が生成したコード
-          -> (See: [here](no3059F5A.html) for details)
+       -&gt; InterpreterGenerator::unlock_method() が生成したコード
+          -&gt; (See: <a href="no3059F5A.html">here</a> for details)
 
    (1) リザルトハンドラを実行する
 
    (1) ダミーフレームを削除する
 
    (1) 呼び出し元にリターン
-```
+</pre></div>
 
 ### ネイティブメソッドの呼び出し処理 : x86_64 の場合
-```
+<div class="flow-abst"><pre>
 InterpreterGenerator::generate_native_entry() が生成するコード
--> (1) スタック上に新しいフレームを確保する
-       -> TemplateInterpreterGenerator::generate_fixed_frame() が生成したコード
+-&gt; (1) スタック上に新しいフレームを確保する
+       -&gt; TemplateInterpreterGenerator::generate_fixed_frame() が生成したコード
 
    (1) JIT コンパイラを使う場合は, invocation counter 値を増加させて値をチェックする
-       -> InterpreterGenerator::generate_counter_incr() が生成したコード
+       -&gt; InterpreterGenerator::generate_counter_incr() が生成したコード
 
    (1) stack overflow をチェックする (stack banging コード)
-       -> AbstractInterpreterGenerator::bang_stack_shadow_pages() が生成したコード
+       -&gt; AbstractInterpreterGenerator::bang_stack_shadow_pages() が生成したコード
 
    (1) synchronized method の場合はロックを取得する
-       -> InterpreterGenerator::lock_method() が生成したコード
-          -> (See: [here](no9662EYy.html) for details)
+       -&gt; InterpreterGenerator::lock_method() が生成したコード
+          -&gt; (See: <a href="no9662EYy.html">here</a> for details)
 
    (1) ダミーフレームを作る
 
    (1) (まだ設定されていなければ) 対応するネイティブ関数のアドレスやシグネチャハンドラを設定しておく
-       -> InterpreterRuntime::prepare_native_call()
-          -> (同上)
+       -&gt; InterpreterRuntime::prepare_native_call()
+          -&gt; (同上)
 
    (1) シグネチャハンドラを呼んで引数を詰め直す
 
    (1) native メソッドの呼び出しを行う
-       -> (native メソッドの処理が実行される)
+       -&gt; (native メソッドの処理が実行される)
     
    (1) もし Safepoint 停止が開始されていた場合は, ここで block する. 
-       -> JavaThread::check_special_condition_for_native_trans()
+       -&gt; JavaThread::check_special_condition_for_native_trans()
 
    (1) レジスタの復帰させ, ダミーフレームを削除する
 
    (1) 例外が起きていれば伝搬させる. この場合は以降の処理は行わない.
-       -> MacroAssembler::call_VM()
-          -> (See: [here](no2935dSX.html) for details)
-             -> InterpreterRuntime::throw_pending_exception()
-                -> (See: [here](no3059d4M.html) for details)
+       -&gt; MacroAssembler::call_VM()
+          -&gt; (See: <a href="no2935dSX.html">here</a> for details)
+             -&gt; InterpreterRuntime::throw_pending_exception()
+                -&gt; (See: <a href="no3059d4M.html">here</a> for details)
 
    (1) synchronized method の場合はロックを解放する
-       -> InterpreterGenerator::unlock_method() が生成したコード
-          -> (See: [here](no3059F5A.html) for details)
+       -&gt; InterpreterGenerator::unlock_method() が生成したコード
+          -&gt; (See: <a href="no3059F5A.html">here</a> for details)
 
    (1) リザルトハンドラを実行する
 
    (1) 呼び出し元にリターン
-```
+</pre></div>
 
 
 

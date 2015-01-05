@@ -11,28 +11,28 @@ title: Class 情報関係の初期化処理
 (#Under Construction)
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
-(HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
--> Threads::create_vm()
-   -> init_globals()
-      -> classLoader_init()
-         -> ClassLoader::initialize()
-            -> (1) libzip をロードする
-                   -> ClassLoader::load_zip_library()
+<div class="flow-abst"><pre>
+(HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+-&gt; Threads::create_vm()
+   -&gt; init_globals()
+      -&gt; classLoader_init()
+         -&gt; ClassLoader::initialize()
+            -&gt; (1) libzip をロードする
+                   -&gt; ClassLoader::load_zip_library()
                (1) ClassPathEntry オブジェクトの初期化を行う.
                    (system class path (boot class path) に対応する
                    ClassPathEntry オブジェクトを生成し, ClassLoader 内に登録する)
-                   -> ClassLoader::setup_bootstrap_search_path()
-                      -> ClassLoader::update_class_path_entry_list()
-                         -> ClassLoader::create_class_path_entry()
-                            -> LazyClassPathEntry::LazyClassPathEntry()
+                   -&gt; ClassLoader::setup_bootstrap_search_path()
+                      -&gt; ClassLoader::update_class_path_entry_list()
+                         -&gt; ClassLoader::create_class_path_entry()
+                            -&gt; LazyClassPathEntry::LazyClassPathEntry()
                                or ClassPathZipEntry::ClassPathZipEntry()
                                or ClassPathDirEntry::ClassPathDirEntry()
-                         -> ClassLoader::add_to_list()
+                         -&gt; ClassLoader::add_to_list()
                (1) 遅延ロードの必要があれば (= LazyBootClassLoader オプションが指定されていれば)
                    MetaIndex の初期化を行う (See: MetaIndex)
-                   -> ClassLoader::setup_meta_index()
-```
+                   -&gt; ClassLoader::setup_meta_index()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### classLoader_init()

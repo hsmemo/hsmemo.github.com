@@ -11,28 +11,28 @@ title: Serviceability 機能 ： HotSpot Monitoring and Management Interface (JM
 (See: JSR-174)
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 sun.management.ThreadImpl.findDeadlockedThreads()
--> sun.management.ThreadImpl.findDeadlockedThreads0()
-   -> Java_sun_management_ThreadImpl_findDeadlockedThreads0()
-      -> jmm_FindDeadlockedThreads()        (<= なお, 呼び出し側では jmm interface の FindDeadlocks() を呼び出している. 少し名称がずれているので注意.)
-         -> find_deadlocks()
-            -> VMThread::execute()
-               -> (See: [here](no2935qaz.html) for details)
-                  -> VM_FindDeadlocks::doit_prologue()
-                  -> VM_FindDeadlocks::doit()
-                     -> ThreadService::find_deadlocks_at_safepoint()
-            -> DeadlockCycle::threads()
-```
+-&gt; sun.management.ThreadImpl.findDeadlockedThreads0()
+   -&gt; Java_sun_management_ThreadImpl_findDeadlockedThreads0()
+      -&gt; jmm_FindDeadlockedThreads()        (&lt;= なお, 呼び出し側では jmm interface の FindDeadlocks() を呼び出している. 少し名称がずれているので注意.)
+         -&gt; find_deadlocks()
+            -&gt; VMThread::execute()
+               -&gt; (See: <a href="no2935qaz.html">here</a> for details)
+                  -&gt; VM_FindDeadlocks::doit_prologue()
+                  -&gt; VM_FindDeadlocks::doit()
+                     -&gt; ThreadService::find_deadlocks_at_safepoint()
+            -&gt; DeadlockCycle::threads()
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 sun.management.ThreadImpl.findMonitorDeadlockedThreads()
--> sun.management.ThreadImpl.findMonitorDeadlockedThreads0()
-   -> Java_sun_management_ThreadImpl_findMonitorDeadlockedThreads0()
-      -> jmm_FindMonitorDeadlockedThreads() (<= なお, 呼び出し側では jmm interface の FindCircularBlockedThreads() を呼び出している. 少し名称がずれているので注意.)
-         -> find_deadlocks()
-            -> (同上)
-```
+-&gt; sun.management.ThreadImpl.findMonitorDeadlockedThreads0()
+   -&gt; Java_sun_management_ThreadImpl_findMonitorDeadlockedThreads0()
+      -&gt; jmm_FindMonitorDeadlockedThreads() (&lt;= なお, 呼び出し側では jmm interface の FindCircularBlockedThreads() を呼び出している. 少し名称がずれているので注意.)
+         -&gt; find_deadlocks()
+            -&gt; (同上)
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 

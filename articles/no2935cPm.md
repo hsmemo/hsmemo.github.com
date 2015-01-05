@@ -15,16 +15,16 @@ title: Serviceability 機能 ： JVMTI の処理 ： JVMTI 関数の処理 ： �
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### SetThreadLocalStorage() の処理
-```
+<div class="flow-abst"><pre>
 JvmtiEnv::SetThreadLocalStorage()
--> JvmtiEnvThreadState::set_agent_thread_local_storage_data()
-```
+-&gt; JvmtiEnvThreadState::set_agent_thread_local_storage_data()
+</pre></div>
 
 ### GetThreadLocalStorage() の処理
-```
+<div class="flow-abst"><pre>
 JvmtiEnv::GetThreadLocalStorage()
--> JvmtiEnvThreadState::get_agent_thread_local_storage_data()
-```
+-&gt; JvmtiEnvThreadState::get_agent_thread_local_storage_data()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### JvmtiEnv::SetThreadLocalStorage()

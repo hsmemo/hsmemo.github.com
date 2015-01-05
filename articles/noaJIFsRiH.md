@@ -11,11 +11,11 @@ title: Exception の処理 ： 処理の詳細 (3) ： 例外の送出処理 ：
 athrow の処理は, 基本的には TemplateInterpreterGenerator::generate_throw_exception() で生成した送出処理を実行するだけ.
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 TemplateTable::athrow() が生成するコード
--> Interpreter::throw_exception_entry() が指しているコード (= TemplateInterpreterGenerator::generate_throw_exception() が生成したコード)
-   -> (See: [here](no30593YX.html) for details)
-```
+-&gt; Interpreter::throw_exception_entry() が指しているコード (= TemplateInterpreterGenerator::generate_throw_exception() が生成したコード)
+   -&gt; (See: <a href="no30593YX.html">here</a> for details)
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### TemplateTable::athrow() (sparc の場合)

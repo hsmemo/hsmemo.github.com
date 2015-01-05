@@ -851,55 +851,55 @@ PerfData オブジェクトを束ねておくためのコンテナクラス.
   
 そして, これらの関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 * 各種 PerfData の生成時
   
   PerfDataManager::create_long_constant(CounterNS ns, const char* name, PerfData::Units u, jlong val, TRAPS)
-  -> PerfDataManager::add_item()
+  -&gt; PerfDataManager::add_item()
 
   PerfDataManager::create_long_variable(CounterNS ns, const char* name, PerfData::Units u, jlong ival, TRAPS)
-  -> PerfDataManager::add_item()
+  -&gt; PerfDataManager::add_item()
 
   PerfDataManager::create_long_variable(CounterNS ns, const char* name, PerfData::Units u, jlong* sp, TRAPS)
-  -> PerfDataManager::add_item()
+  -&gt; PerfDataManager::add_item()
 
   PerfDataManager::create_long_variable(CounterNS ns, const char* name, PerfData::Units u, PerfSampleHelper* sh, TRAPS)
-  -> PerfDataManager::add_item()
+  -&gt; PerfDataManager::add_item()
 
   PerfDataManager::create_long_counter(CounterNS ns, const char* name, PerfData::Units u, jlong ival, TRAPS)
-  -> PerfDataManager::add_item()
+  -&gt; PerfDataManager::add_item()
 
   PerfDataManager::create_long_counter(CounterNS ns, const char* name, PerfData::Units u, jlong* sp, TRAPS)
-  -> PerfDataManager::add_item()
+  -&gt; PerfDataManager::add_item()
 
   PerfDataManager::create_long_counter(CounterNS ns, const char* name, PerfData::Units u, PerfSampleHelper* sh, TRAPS)
-  -> PerfDataManager::add_item()
+  -&gt; PerfDataManager::add_item()
 
   PerfDataManager::create_string_constant(CounterNS ns, const char* name, const char* s, TRAPS)
-  -> PerfDataManager::add_item()
+  -&gt; PerfDataManager::add_item()
 
   PerfDataManager::create_string_variable(CounterNS ns, const char* name, jint max_length, const char* s, TRAPS)
-  -> PerfDataManager::add_item()
+  -&gt; PerfDataManager::add_item()
 
 * StatSampler の開始時
   
-  (HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
-  -> Threads::create_vm()
-     -> StatSampler::engage()
-        -> StatSampler::initialize()
-           -> PerfDataManager::sampled()
-              -> PerfDataList::clone()
+  (HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+  -&gt; Threads::create_vm()
+     -&gt; StatSampler::engage()
+        -&gt; StatSampler::initialize()
+           -&gt; PerfDataManager::sampled()
+              -&gt; PerfDataList::clone()
 
 * ?? (使用箇所が見当たらない)
   
   ??
-  -> PerfDataManager::all()
-     -> PerfDataList::clone()
+  -&gt; PerfDataManager::all()
+     -&gt; PerfDataList::clone()
 
   ??
-  -> PerfDataManager::constants()
-     -> PerfDataList::clone()
-```
+  -&gt; PerfDataManager::constants()
+     -&gt; PerfDataList::clone()
+</pre></div>
 
 
 

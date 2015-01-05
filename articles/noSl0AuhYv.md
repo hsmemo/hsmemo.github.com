@@ -44,57 +44,57 @@ sun.launcher.LauncherHelper.checkAndLoadMain() メソッドの処理は大きく
 
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
-(See: [here](nokAq80V3Y.html) for details)
--> LoadMainClass()
-   -> (1) ブートストラップクラスローダーを使って "sun.launcher.LauncherHelper" クラスを取得する.
-          -> GetLauncherHelperClass()
-             -> FindBootStrapClass()
-                -> dlsym() or GetProcAddress()  (<= JVM_FindClassFromBootLoader() を取得)
-                -> JVM_FindClassFromBootLoader()
-                   -> SystemDictionary::resolve_or_null()
-                      -> (See: [here](noIvSV0NZj.html) for details)
+<div class="flow-abst"><pre>
+(See: <a href="nokAq80V3Y.html">here</a> for details)
+-&gt; LoadMainClass()
+   -&gt; (1) ブートストラップクラスローダーを使って &quot;sun.launcher.LauncherHelper&quot; クラスを取得する.
+          -&gt; GetLauncherHelperClass()
+             -&gt; FindBootStrapClass()
+                -&gt; dlsym() or GetProcAddress()  (&lt;= JVM_FindClassFromBootLoader() を取得)
+                -&gt; JVM_FindClassFromBootLoader()
+                   -&gt; SystemDictionary::resolve_or_null()
+                      -&gt; (See: <a href="noIvSV0NZj.html">here</a> for details)
       (2) sun.launcher.LauncherHelper クラスの checkAndLoadMain() メソッドを取得する.
-          -> jni_GetStaticMethodID()
-             -> (See: [here](no3059-0k.html) for details)
+          -&gt; jni_GetStaticMethodID()
+             -&gt; (See: <a href="no3059-0k.html">here</a> for details)
       (3) sun.launcher.LauncherHelper クラスの checkAndLoadMain() メソッドを呼んで, メインクラスのロードを行う.
-          -> jni_CallStaticObjectMethod()
-             -> (See: [here](no3059-0k.html) for details)
-                -> sun.launcher.LauncherHelper.checkAndLoadMain()
-                   -> (1) システムクラスローダを取得する.
-                          -> java.lang.ClassLoader.getSystemClassLoader()
-                             -> java.lang.ClassLoader.initSystemClassLoader()
+          -&gt; jni_CallStaticObjectMethod()
+             -&gt; (See: <a href="no3059-0k.html">here</a> for details)
+                -&gt; sun.launcher.LauncherHelper.checkAndLoadMain()
+                   -&gt; (1) システムクラスローダを取得する.
+                          -&gt; java.lang.ClassLoader.getSystemClassLoader()
+                             -&gt; java.lang.ClassLoader.initSystemClassLoader()
                                 (1) デフォルトのシステムクラスローダ(sun.misc.Launcher$AppClassLoader)を取得する.
-                                    -> sun.misc.Launcher.getLauncher()  (<= sun.misc.Launcher$AppClassLoader.getAppClassLoader() で取得した値が返される)
-                                (1) ユーザが指定したシステムクラスローダ("java.system.class.loader" システムプロパティに設定されたクラスローダ)を取得する.
-                                    ("java.system.class.loader" が空の場合は, デフォルトのシステムクラスローダが返される)
-                                    -> java.lang.SystemClassLoaderAction.run()
+                                    -&gt; sun.misc.Launcher.getLauncher()  (&lt;= sun.misc.Launcher$AppClassLoader.getAppClassLoader() で取得した値が返される)
+                                (1) ユーザが指定したシステムクラスローダ(&quot;java.system.class.loader&quot; システムプロパティに設定されたクラスローダ)を取得する.
+                                    (&quot;java.system.class.loader&quot; が空の場合は, デフォルトのシステムクラスローダが返される)
+                                    -&gt; java.lang.SystemClassLoaderAction.run()
 
                       (2) メインクラス名を取得する.
-                          -> * 指定されたクラスファイルがメインクラスである場合:
-                               -> (引数で指定されたクラス名をそのまま使用)
+                          -&gt; * 指定されたクラスファイルがメインクラスである場合:
+                               -&gt; (引数で指定されたクラス名をそのまま使用)
                              * 指定された JAR ファイル内からメインクラスを探す場合: (= JAR 中の manifest ファイルから取得する場合)
-                               -> sun.launcher.LauncherHelper.getMainClassFromJar()
+                               -&gt; sun.launcher.LauncherHelper.getMainClassFromJar()
          
                       (3) システムクラスローダの ClassLoader.loadClass() を呼び出し, メインクラスをロードする
                           (なお, オプショナルな第2引数である resolve 引数については false (resolve しない) で呼び出している)
-                          -> sun.misc.Launcher$AppClassLoader.loadClass()
-                             -> (See: [here](noYhX5khB4.html) for details)                             
+                          -&gt; sun.misc.Launcher$AppClassLoader.loadClass()
+                             -&gt; (See: <a href="noYhX5khB4.html">here</a> for details)                             
          
                       (4) ロードしたクラスに main() メソッドがあり, static メソッドでかつ返値が void であることを確認.
-                          -> sun.launcher.LauncherHelper.getMainMethod()
-                             -> java.lang.Class.getMethod()
-                                -> java.lang.Class.getMethod0()
-                                   -> java.lang.Class.privateGetDeclaredMethods()
-                                      -> java.lang.Class.getDeclaredMethods0()
-                                         -> JVM_GetClassDeclaredMethods() (= java.lang.Class.getDeclaredMethods0())
-                                            -> instanceKlass::link_class()
-                                               -> (See: [here](no3059xqe.html) for details)
-                                            -> Reflection::new_method()
-                                   -> java.lang.Class.searchMethods()
-                                   -> java.lang.Class.getMethod0()
-                                      -> (同上)
-```
+                          -&gt; sun.launcher.LauncherHelper.getMainMethod()
+                             -&gt; java.lang.Class.getMethod()
+                                -&gt; java.lang.Class.getMethod0()
+                                   -&gt; java.lang.Class.privateGetDeclaredMethods()
+                                      -&gt; java.lang.Class.getDeclaredMethods0()
+                                         -&gt; JVM_GetClassDeclaredMethods() (= java.lang.Class.getDeclaredMethods0())
+                                            -&gt; instanceKlass::link_class()
+                                               -&gt; (See: <a href="no3059xqe.html">here</a> for details)
+                                            -&gt; Reflection::new_method()
+                                   -&gt; java.lang.Class.searchMethods()
+                                   -&gt; java.lang.Class.getMethod0()
+                                      -&gt; (同上)
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### LoadMainClass()

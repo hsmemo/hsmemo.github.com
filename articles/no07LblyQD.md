@@ -145,11 +145,11 @@ WatcherThread::start() 内で(のみ)生成されている.
 
 (ただし, この時点で PeriodicTask オブジェクトが 1つも存在していなければ生成されない)
 
-```
-(HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
--> Threads::create_vm()
-   -> WatcherThread::start()
-```
+<div class="flow-abst"><pre>
+(HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+-&gt; Threads::create_vm()
+   -&gt; WatcherThread::start()
+</pre></div>
 
 
 
@@ -190,41 +190,41 @@ JavaThread オブジェクトは _next フィールドで次の JavaThread オ�
 #### 生成箇所(where its instances are created)
 以下の箇所で(のみ)生成されている.
 
-```
+<div class="flow-abst"><pre>
 * メインスレッド用の JavaThread オブジェクトの生成処理
 
-  (HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
-  -> Threads::create_vm()
+  (HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+  -&gt; Threads::create_vm()
 
-* シグナル処理を行うためのスレッド("Signal Dispatcher" スレッド)の生成処理
+* シグナル処理を行うためのスレッド(&quot;Signal Dispatcher&quot; スレッド)の生成処理
   
-  (略) (See: [here](noNmlmYDJk.html) for details)
-  -> os::signal_init()
+  (略) (See: <a href="noNmlmYDJk.html">here</a> for details)
+  -&gt; os::signal_init()
 
 * JavaThread の開始処理 (java.lang.Thread.start() の処理)
 
-  (略) (See: [here](no2935KMw.html) for details)
-  -> JVM_StartThread()
+  (略) (See: <a href="no2935KMw.html">here</a> for details)
+  -&gt; JVM_StartThread()
 
 * JNI の AttachCurrentThread() 及び AttachCurrentThreadAsDaemon() の処理
 
-  (略) (See: [here](noxegGjntv.html) for details)
-  -> jni_AttachCurrentThread()
-     -> attach_current_thread()
-        -> JvmtiExport::post_thread_start()
-           -> (同上)
+  (略) (See: <a href="noxegGjntv.html">here</a> for details)
+  -&gt; jni_AttachCurrentThread()
+     -&gt; attach_current_thread()
+        -&gt; JvmtiExport::post_thread_start()
+           -&gt; (同上)
 
-  (略) (See: [here](noxegGjntv.html) for details)
-  -> jni_AttachCurrentThreadAsDaemon()
-     -> attach_current_thread()
-        -> JvmtiExport::post_thread_start()
-           -> (同上)
+  (略) (See: <a href="noxegGjntv.html">here</a> for details)
+  -&gt; jni_AttachCurrentThreadAsDaemon()
+     -&gt; attach_current_thread()
+        -&gt; JvmtiExport::post_thread_start()
+           -&gt; (同上)
 
 * AttachListener の処理を行うスレッドの生成処理
   
-  (略) (See: [here](no3026gMG.html) for details)
-  -> AttachListener::init()
-```
+  (略) (See: <a href="no3026gMG.html">here</a> for details)
+  -&gt; AttachListener::init()
+</pre></div>
 
 
 
@@ -260,13 +260,13 @@ JavaThread オブジェクトは _next フィールドで次の JavaThread オ�
 CompileBroker::make_compiler_thread() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
-(HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
--> Threads::create_vm()
-   -> CompileBroker::compilation_init()
-      -> CompileBroker::init_compiler_threads()
-         -> CompileBroker::make_compiler_thread()
-```
+<div class="flow-abst"><pre>
+(HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+-&gt; Threads::create_vm()
+   -&gt; CompileBroker::compilation_init()
+      -&gt; CompileBroker::init_compiler_threads()
+         -&gt; CompileBroker::make_compiler_thread()
+</pre></div>
 
 
 

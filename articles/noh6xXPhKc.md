@@ -81,57 +81,57 @@ Solaris 上での実装について:
 
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 sun.management.ThreadImpl.getCurrentThreadCpuTime()
--> sun.management.ThreadImpl.getThreadTotalCpuTime0()
-   -> Java_sun_management_ThreadImpl_getThreadTotalCpuTime0()
-      -> jmm_GetThreadCpuTimeWithKind()
+-&gt; sun.management.ThreadImpl.getThreadTotalCpuTime0()
+   -&gt; Java_sun_management_ThreadImpl_getThreadTotalCpuTime0()
+      -&gt; jmm_GetThreadCpuTimeWithKind()
          以下のどちらかを呼び出す.
-         -> os::current_thread_cpu_time()
-         -> os::thread_cpu_time()
-```
+         -&gt; os::current_thread_cpu_time()
+         -&gt; os::thread_cpu_time()
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 sun.management.ThreadImpl.getThreadCpuTime(long id)
--> sun.management.ThreadImpl.getThreadCpuTime(long[] ids)
+-&gt; sun.management.ThreadImpl.getThreadCpuTime(long[] ids)
    以下のどちらかを呼び出す.
-   -> sun.management.ThreadImpl.getThreadTotalCpuTime0()
-      -> (同上)
-   -> sun.management.ThreadImpl.getThreadTotalCpuTime1()
-      -> Java_sun_management_ThreadImpl_getThreadTotalCpuTime1()
-         -> jmm_GetThreadCpuTimesWithKind()
-            -> os::thread_cpu_time()
-```
+   -&gt; sun.management.ThreadImpl.getThreadTotalCpuTime0()
+      -&gt; (同上)
+   -&gt; sun.management.ThreadImpl.getThreadTotalCpuTime1()
+      -&gt; Java_sun_management_ThreadImpl_getThreadTotalCpuTime1()
+         -&gt; jmm_GetThreadCpuTimesWithKind()
+            -&gt; os::thread_cpu_time()
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 sun.management.ThreadImpl.getThreadCpuTime(long[] ids)
--> (同上)
-```
+-&gt; (同上)
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 sun.management.ThreadImpl.getCurrentThreadUserTime()
--> sun.management.ThreadImpl.getThreadUserCpuTime0()
-   -> Java_sun_management_ThreadImpl_getThreadUserCpuTime0()
-      -> jmm_GetThreadCpuTimeWithKind()
-         -> (同上)
-```
+-&gt; sun.management.ThreadImpl.getThreadUserCpuTime0()
+   -&gt; Java_sun_management_ThreadImpl_getThreadUserCpuTime0()
+      -&gt; jmm_GetThreadCpuTimeWithKind()
+         -&gt; (同上)
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 sun.management.ThreadImpl.getThreadUserTime(long id)
--> sun.management.ThreadImpl.getThreadUserTime(long[] ids)
+-&gt; sun.management.ThreadImpl.getThreadUserTime(long[] ids)
    以下のどちらかを呼び出す.
-   -> sun.management.ThreadImpl.getThreadUserCpuTime0()
-      -> (同上)
-   -> sun.management.ThreadImpl.getThreadUserCpuTime1()
-      -> Java_sun_management_ThreadImpl_getThreadUserCpuTime1()
-         -> jmm_GetThreadCpuTimesWithKind()
-            -> (同上)
-```
+   -&gt; sun.management.ThreadImpl.getThreadUserCpuTime0()
+      -&gt; (同上)
+   -&gt; sun.management.ThreadImpl.getThreadUserCpuTime1()
+      -&gt; Java_sun_management_ThreadImpl_getThreadUserCpuTime1()
+         -&gt; jmm_GetThreadCpuTimesWithKind()
+            -&gt; (同上)
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 sun.management.ThreadImpl.getThreadUserTime(long[] ids)
--> (同上)
-```
+-&gt; (同上)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

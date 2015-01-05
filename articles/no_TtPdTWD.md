@@ -570,22 +570,22 @@ safepoint ではない箇所について,
 
 そして, これらの関数は現在は以下のパスで呼び出されている. (#TODO 他のパス)
 
-```
+<div class="flow-abst"><pre>
 Compile::Init()
--> Node_Notes::make()
+-&gt; Node_Notes::make()
 
 Parse::make_node_notes()
--> Node_Notes::clone()
+-&gt; Node_Notes::clone()
 
 LateInlineCallGenerator::do_late_inline()
--> Node_Notes::clone()
+-&gt; Node_Notes::clone()
 
 Compile::build_start_state()
--> Node_Notes::clone()
+-&gt; Node_Notes::clone()
 
 Compile::locate_node_notes()
--> Compile::grow_node_notes()
-```
+-&gt; Compile::grow_node_notes()
+</pre></div>
 
 #### 使用箇所(where its instances are used)
 以下の箇所で使用されている. (#TODO 他の使用箇所)

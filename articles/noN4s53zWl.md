@@ -126,11 +126,11 @@ See: [here](../doxygen/classSystemDictionaryHandles.html) for details
 SystemDictionary::print_class_statistics() 内で(のみ)使用されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 print_statistics()
--> SystemDictionary::print_class_statistics()
-   -> ClassStatistics::print()
-```
+-&gt; SystemDictionary::print_class_statistics()
+   -&gt; ClassStatistics::print()
+</pre></div>
 
 なお, このクラスは (デバッグ時であることに加えて) PrintClassStatistics オプションが指定されている場合にしか使用されない.
 
@@ -179,11 +179,11 @@ See: [here](../doxygen/classClassStatistics.html) for details
 SystemDictionary::print_method_statistics() 内で(のみ)使用されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 print_statistics()
--> SystemDictionary::print_method_statistics()
-   -> MethodStatistics::print()
-```
+-&gt; SystemDictionary::print_method_statistics()
+   -&gt; MethodStatistics::print()
+</pre></div>
 
 なお, このクラスは (デバッグ時であることに加えて) PrintMethodStatistics オプションが指定されている場合にしか使用されない.
 

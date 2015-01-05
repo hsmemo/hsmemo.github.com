@@ -92,11 +92,11 @@ SafepointSynchronize クラス用の補助クラス.
 ThreadSafepointState::create() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 JavaThread::JavaThread()
--> JavaThread::initialize()
-   -> ThreadSafepointState::create()
-```
+-&gt; JavaThread::initialize()
+   -&gt; ThreadSafepointState::create()
+</pre></div>
 
 
 

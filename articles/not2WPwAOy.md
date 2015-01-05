@@ -81,11 +81,11 @@ RedefineClass 時に,
 VM_RedefineClasses::transfer_old_native_function_registrations() 内で(のみ)使用されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている (See: [here](no2935-Vj.html) for details).
 
-```
+<div class="flow-abst"><pre>
 VM_RedefineClasses::doit()
--> VM_RedefineClasses::redefine_single_class()
-   -> VM_RedefineClasses::transfer_old_native_function_registrations()
-```
+-&gt; VM_RedefineClasses::redefine_single_class()
+   -&gt; VM_RedefineClasses::transfer_old_native_function_registrations()
+</pre></div>
 
 
 

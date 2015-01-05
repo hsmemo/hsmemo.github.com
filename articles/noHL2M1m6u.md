@@ -17,9 +17,9 @@ HotSpot が構築済みであれば, 個数としては 1 がリターンされ,
 1つのプロセス内には最大1つしか VM は作らせないように制御しているため (See: [here](no2114J7x.html) for details).
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 JNI_GetCreatedJavaVMs()
-```
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### JNI_GetCreatedJavaVMs()

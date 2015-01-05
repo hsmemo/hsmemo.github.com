@@ -37,23 +37,23 @@ ThreadLocalStorage::thread() (もしくは ThreadLocalStorage::get_thread_slow()
 HotSpot 内で使用されるスレッドは, 初期化中に ThreadLocalStorage::set_thread() を呼び出している
 (これにより, ネイティブスレッドと HotSpot の Thread オブジェクトを対応付けが TLS に記録される).
 
-```
-スレッドの初期化処理 (See: [here](no2114J7x.html), [here](no7882jgS.html), [here](no2935qaz.html) and [here](no2935d4w.html) for details, (no24805iK)) (他にもある #TODO)
--> Thread::initialize_thread_local_storage()
-   -> ThreadLocalStorage::set_thread()
-      -> ThreadLocalStorage::pd_set_thread()
-         -> (各 OS 毎の TLS 操作処理)
-```
+<div class="flow-abst"><pre>
+スレッドの初期化処理 (See: <a href="no2114J7x.html">here</a>, <a href="no7882jgS.html">here</a>, <a href="no2935qaz.html">here</a> and <a href="no2935d4w.html">here</a> for details, (no24805iK)) (他にもある #TODO)
+-&gt; Thread::initialize_thread_local_storage()
+   -&gt; ThreadLocalStorage::set_thread()
+      -&gt; ThreadLocalStorage::pd_set_thread()
+         -&gt; (各 OS 毎の TLS 操作処理)
+</pre></div>
 
 また, HotSpot 内で生成していないスレッドの場合も, 
 JNI 関数でアタッチされると ThreadLocalStorage::set_thread() で対応付けを行う.
 
-```
-(略) (See: [here](noxegGjntv.html) for details)
--> attach_current_thread()
-   -> Thread::initialize_thread_local_storage()
-      -> (同上)
-```
+<div class="flow-abst"><pre>
+(略) (See: <a href="noxegGjntv.html">here</a> for details)
+-&gt; attach_current_thread()
+   -&gt; Thread::initialize_thread_local_storage()
+      -&gt; (同上)
+</pre></div>
 
 逆に TLS の値が NULL であれば, HotSpot と無関係なスレッド 
 (= HotSpot 内で生成されておらず HotSpot に Attach もしていないスレッド) だと分かる.

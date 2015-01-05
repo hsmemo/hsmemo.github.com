@@ -37,20 +37,20 @@ SystemDictionary::initialize_preloaded_classes() 内で行われている.
 instanceKlass オブジェクトや instanceRefKlass オブジェクトが生成されることもある.
 instanceMirrorKlass オブジェクトは, クラス名が java.lang.Class である場合にのみ生成される.)
 
-```
-(HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
--> Threads::create_vm()
-   -> init_globals()
-      -> universe2_init()
-         -> Universe::genesis()
-            -> SystemDictionary::initialize()
-               -> SystemDictionary::initialize_preloaded_classes()
-                  -> SystemDictionary::initialize_wk_klasses_through()
-                     -> SystemDictionary::initialize_wk_klasses_until()
-                        -> SystemDictionary::initialize_wk_klass()
-                           -> SystemDictionary::resolve_or_fail()
-                              -> (See: [here](noIvSV0NZj.html) for details)
-```
+<div class="flow-abst"><pre>
+(HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+-&gt; Threads::create_vm()
+   -&gt; init_globals()
+      -&gt; universe2_init()
+         -&gt; Universe::genesis()
+            -&gt; SystemDictionary::initialize()
+               -&gt; SystemDictionary::initialize_preloaded_classes()
+                  -&gt; SystemDictionary::initialize_wk_klasses_through()
+                     -&gt; SystemDictionary::initialize_wk_klasses_until()
+                        -&gt; SystemDictionary::initialize_wk_klass()
+                           -&gt; SystemDictionary::resolve_or_fail()
+                              -&gt; (See: <a href="noIvSV0NZj.html">here</a> for details)
+</pre></div>
 
 ### 内部構造(Internal structure)
 クラスオブジェクトは static フィールドの数が不定なため,

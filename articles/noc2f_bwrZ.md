@@ -63,29 +63,29 @@ JvmtiThreadState::state_for_while_locked() 内で(のみ)生成されている
 
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 JvmtiEventControllerPrivate::recompute_enabled()
--> JvmtiThreadState::state_for_while_locked()
+-&gt; JvmtiThreadState::state_for_while_locked()
 
 JvmtiEventControllerPrivate::thread_started()
--> JvmtiThreadState::state_for_while_locked()
+-&gt; JvmtiThreadState::state_for_while_locked()
 
 JvmtiEventControllerPrivate::set_user_enabled()
--> JvmtiThreadState::state_for_while_locked()
+-&gt; JvmtiThreadState::state_for_while_locked()
 
 JvmtiThreadState::state_for()
--> JvmtiThreadState::state_for_while_locked()
-```
+-&gt; JvmtiThreadState::state_for_while_locked()
+</pre></div>
 
 #### 削除箇所(where its instances are deleted)
 JvmtiEventControllerPrivate::thread_ended() 内で削除されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 JavaThread::exit()
--> JvmtiExport::cleanup_thread()
-   -> JvmtiEventController::thread_ended()
-```
+-&gt; JvmtiExport::cleanup_thread()
+   -&gt; JvmtiEventController::thread_ended()
+</pre></div>
 
 
 

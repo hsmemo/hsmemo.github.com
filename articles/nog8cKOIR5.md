@@ -50,16 +50,16 @@ collector_func_load() が存在しない環境では呼び出しが NOP にな�
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### Forte::register_stub() の処理
-```
+<div class="flow-abst"><pre>
 Forte::register_stub()
--> collector_func_load()
-```
+-&gt; collector_func_load()
+</pre></div>
 
 ### AsyncGetCallTrace() の処理
-```
+<div class="flow-abst"><pre>
 AsyncGetCallTrace()
--> forte_fill_call_trace_given_top()
-```
+-&gt; forte_fill_call_trace_given_top()
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

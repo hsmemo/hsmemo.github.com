@@ -12,15 +12,15 @@ title: Serviceability 機能 ： JVMTI の処理 ： JVMTI 関数の処理 ： �
 最終的には JavaThread::send_thread_stop() で対象のスレッド内に pending exception を埋め込むことで実現される.
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 JvmtiEnv::StopThread()
--> Thread::send_async_exception()
-   -> VMThread::execute()
-      -> (See: [here](no2935qaz.html) for details)
-         -> VM_ThreadStop::doit()
-            -> JavaThread::send_thread_stop()
-               -> JavaThread::set_pending_async_exception()
-```
+-&gt; Thread::send_async_exception()
+   -&gt; VMThread::execute()
+      -&gt; (See: <a href="no2935qaz.html">here</a> for details)
+         -&gt; VM_ThreadStop::doit()
+            -&gt; JavaThread::send_thread_stop()
+               -&gt; JavaThread::set_pending_async_exception()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### JvmtiEnv::StopThread()

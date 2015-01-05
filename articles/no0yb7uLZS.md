@@ -571,11 +571,11 @@ LoadLNode クラスのサブクラスの1つ.
 Parse::fetch_interpreter_state() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 Parse::Parse()
--> Parse::load_interpreter_state()
-   -> Parse::fetch_interpreter_state()
-```
+-&gt; Parse::load_interpreter_state()
+   -&gt; Parse::fetch_interpreter_state()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 3つの入力ノードを持つ.
@@ -684,11 +684,11 @@ LoadLNode クラスのサブクラスの1つ.
 Parse::fetch_interpreter_state() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 Parse::Parse()
--> Parse::load_interpreter_state()
-   -> Parse::fetch_interpreter_state()
-```
+-&gt; Parse::load_interpreter_state()
+   -&gt; Parse::fetch_interpreter_state()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 3つの入力ノードを持つ.
@@ -1205,14 +1205,14 @@ Concurrent な GC アルゴリズム(CMS, G1GC)を使っている場合の card 
 IdealKit::storeCM() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 GraphKit::post_barrier()
--> GraphKit::write_barrier_post()
-   -> IdealKit::storeCM()
--> GraphKit::g1_write_barrier_post()
-   -> GraphKit::g1_mark_card()
-      -> IdealKit::storeCM()
-```
+-&gt; GraphKit::write_barrier_post()
+   -&gt; IdealKit::storeCM()
+-&gt; GraphKit::g1_write_barrier_post()
+   -&gt; GraphKit::g1_mark_card()
+      -&gt; IdealKit::storeCM()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 5つの入力ノードを持つ.
@@ -1591,11 +1591,11 @@ LoadStoreNode クラスの具象サブクラスの1つ.
 LibraryCallKit::inline_unsafe_CAS() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 LibraryIntrinsic::generate()
--> LibraryCallKit::try_to_inline()
-   -> LibraryCallKit::inline_unsafe_CAS()
-```
+-&gt; LibraryCallKit::try_to_inline()
+   -&gt; LibraryCallKit::inline_unsafe_CAS()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 5つの入力ノードを持つ (See: LoadStoreNode).
@@ -1665,11 +1665,11 @@ LoadStoreNode クラスの具象サブクラスの1つ.
 LibraryCallKit::inline_unsafe_CAS() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 LibraryIntrinsic::generate()
--> LibraryCallKit::try_to_inline()
-   -> LibraryCallKit::inline_unsafe_CAS()
-```
+-&gt; LibraryCallKit::try_to_inline()
+   -&gt; LibraryCallKit::inline_unsafe_CAS()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 5つの入力ノードを持つ (See: LoadStoreNode).
@@ -1739,11 +1739,11 @@ LoadStoreNode クラスの具象サブクラスの1つ.
 LibraryCallKit::inline_unsafe_CAS() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 LibraryIntrinsic::generate()
--> LibraryCallKit::try_to_inline()
-   -> LibraryCallKit::inline_unsafe_CAS()
-```
+-&gt; LibraryCallKit::try_to_inline()
+   -&gt; LibraryCallKit::inline_unsafe_CAS()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 5つの入力ノードを持つ (See: LoadStoreNode).
@@ -1813,11 +1813,11 @@ LoadStoreNode クラスの具象サブクラスの1つ.
 LibraryCallKit::inline_unsafe_CAS() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 LibraryIntrinsic::generate()
--> LibraryCallKit::try_to_inline()
-   -> LibraryCallKit::inline_unsafe_CAS()
-```
+-&gt; LibraryCallKit::try_to_inline()
+   -&gt; LibraryCallKit::inline_unsafe_CAS()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 5つの入力ノードを持つ (See: LoadStoreNode).
@@ -1975,12 +1975,12 @@ LibraryCallKit::make_string_method_node() 内で(のみ)生成されている
 (より正確に言うと Op_StrComp 定数を引数としてこの関数が呼び出された場合にのみ生成される).
 そして, この関数は現在は以下のパスで(のみ) Op_StrComp 定数を引数として呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 LibraryIntrinsic::generate()
--> LibraryCallKit::try_to_inline()
-   -> LibraryCallKit::inline_string_compareTo()
-      -> LibraryCallKit::make_string_method_node()
-```
+-&gt; LibraryCallKit::try_to_inline()
+   -&gt; LibraryCallKit::inline_string_compareTo()
+      -&gt; LibraryCallKit::make_string_method_node()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 6つの入力ノードを持つ. 
@@ -2030,12 +2030,12 @@ LibraryCallKit::make_string_method_node() 内で(のみ)生成されている
 (より正確に言うと Op_StrEquals 定数を引数としてこの関数が呼び出された場合にのみ生成される).
 そして, この関数は現在は以下のパスで(のみ) Op_StrEquals 定数を引数として呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 LibraryIntrinsic::generate()
--> LibraryCallKit::try_to_inline()
-   -> LibraryCallKit::inline_string_equals()
-      -> LibraryCallKit::make_string_method_node()
-```
+-&gt; LibraryCallKit::try_to_inline()
+   -&gt; LibraryCallKit::inline_string_equals()
+      -&gt; LibraryCallKit::make_string_method_node()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 5つの入力ノードを持つ. 
@@ -2084,12 +2084,12 @@ LibraryCallKit::make_string_method_node() 内で(のみ)生成されている
 (より正確に言うと Op_StrIndexOf 定数を引数としてこの関数が呼び出された場合にのみ生成される).
 そして, この関数は現在は以下のパスで(のみ) Op_StrIndexOf 定数を引数として呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 LibraryIntrinsic::generate()
--> LibraryCallKit::try_to_inline()
-   -> LibraryCallKit::inline_string_indexOf()
-      -> LibraryCallKit::make_string_method_node()
-```
+-&gt; LibraryCallKit::try_to_inline()
+   -&gt; LibraryCallKit::inline_string_indexOf()
+      -&gt; LibraryCallKit::make_string_method_node()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 6つの入力ノードを持つ. 
@@ -2138,11 +2138,11 @@ StrIntrinsicNode クラスの具象サブクラスの1つ.
 LibraryCallKit::inline_array_equals() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 LibraryIntrinsic::generate()
--> LibraryCallKit::try_to_inline()
-   -> LibraryCallKit::inline_array_equals()
-```
+-&gt; LibraryCallKit::try_to_inline()
+   -&gt; LibraryCallKit::inline_array_equals()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 4つの入力ノードを持つ. 
@@ -2271,13 +2271,13 @@ MemBarNode クラスの具象サブクラスの1つ.
 MemBarNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 GraphKit::insert_mem_bar()
--> MemBarNode::make()
+-&gt; MemBarNode::make()
 
 GraphKit::insert_mem_bar_volatile()
--> MemBarNode::make()
-```
+-&gt; MemBarNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 5つまたは6つの入力ノードを持つ (See: MemBar).
@@ -2317,13 +2317,13 @@ MemBarNode クラスの具象サブクラスの1つ.
 MemBarNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 GraphKit::insert_mem_bar()
--> MemBarNode::make()
+-&gt; MemBarNode::make()
 
 GraphKit::insert_mem_bar_volatile()
--> MemBarNode::make()
-```
+-&gt; MemBarNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 5つまたは6つの入力ノードを持つ (See: MemBar).
@@ -2365,18 +2365,18 @@ MemBarNode クラスの具象サブクラスの1つ.
 
 そして, これらの関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 GraphKit::insert_mem_bar()
--> MemBarNode::make()
+-&gt; MemBarNode::make()
 
 GraphKit::insert_mem_bar_volatile()
--> MemBarNode::make()
-```
+-&gt; MemBarNode::make()
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 Compile::Compile()
--> GraphKit::gen_stub()
-```
+-&gt; GraphKit::gen_stub()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 5つまたは6つの入力ノードを持つ (See: MemBar).
@@ -2417,13 +2417,13 @@ JIT コンパイラ内での最適化によるリオーダを禁止するため�
 MemBarNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 GraphKit::insert_mem_bar()
--> MemBarNode::make()
+-&gt; MemBarNode::make()
 
 GraphKit::insert_mem_bar_volatile()
--> MemBarNode::make()
-```
+-&gt; MemBarNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 5つまたは6つの入力ノードを持つ (See: MemBar).
@@ -2560,13 +2560,13 @@ MemBarNode クラスの具象サブクラスの1つ.
 MemBarNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 GraphKit::insert_mem_bar()
--> MemBarNode::make()
+-&gt; MemBarNode::make()
 
 GraphKit::insert_mem_bar_volatile()
--> MemBarNode::make()
-```
+-&gt; MemBarNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 5つまたは6つの入力ノードを持つ (See: MemBar).
@@ -2674,11 +2674,11 @@ Node クラスの具象サブクラスの1つ.
 LibraryCallKit::inline_unsafe_prefetch() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 LibraryIntrinsic::generate()
--> LibraryCallKit::try_to_inline()
-   -> LibraryCallKit::inline_unsafe_prefetch()
-```
+-&gt; LibraryCallKit::try_to_inline()
+   -&gt; LibraryCallKit::inline_unsafe_prefetch()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 3つの入力ノードを持つ. 
@@ -2727,16 +2727,16 @@ Node クラスの具象サブクラスの1つ.
 
 そして, これらの関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 LibraryIntrinsic::generate()
--> LibraryCallKit::try_to_inline()
-   -> LibraryCallKit::inline_unsafe_prefetch()
-```
+-&gt; LibraryCallKit::try_to_inline()
+   -&gt; LibraryCallKit::inline_unsafe_prefetch()
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 PhaseMacroExpand::expand_allocate_common()
--> PhaseMacroExpand::prefetch_allocation()
-```
+-&gt; PhaseMacroExpand::prefetch_allocation()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 3つの入力ノードを持つ. 

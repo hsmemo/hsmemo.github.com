@@ -48,11 +48,11 @@ instanceOopDesc 用の Klass クラス.
 instanceKlassKlass::allocate_instance_klass() というファクトリメソッドが用意されており, その中で(のみ)生成されている. 
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている (See: [here](no7882m2Z.html) for details).
 
-```
+<div class="flow-abst"><pre>
 ClassFileParser::parseClassFile()
--> oopFactory::new_instanceKlass()
-   -> instanceKlassKlass::allocate_instance_klass()
-```
+-&gt; oopFactory::new_instanceKlass()
+   -&gt; instanceKlassKlass::allocate_instance_klass()
+</pre></div>
 
 ### 内部構造(Internal structure)
 定義されているフィールドは以下の通り.
@@ -638,35 +638,35 @@ JNIid オブジェクトは _next フィールドで次の JNIid オブジェク
 instanceKlass::jni_id_for_impl() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 * JNI の GetStaticFieldID() 関数の処理
   jni_GetStaticFieldID()
-  -> instanceKlass::jni_id_for()
-     -> instanceKlass::jni_id_for_impl()
+  -&gt; instanceKlass::jni_id_for()
+     -&gt; instanceKlass::jni_id_for_impl()
 
 * JNI の FromReflectedField() 関数の処理
   jni_FromReflectedField()
-  -> instanceKlass::jni_id_for()
-     -> (同上)
+  -&gt; instanceKlass::jni_id_for()
+     -&gt; (同上)
 
 * JVMTI の field access 監視機能の処理 (See: SetFieldAccessWatch())
   InterpreterRuntime::post_field_access()
-  -> jfieldIDWorkaround::to_jfieldID()
-     -> instanceKlass::jni_id_for()
-        -> (同上)
+  -&gt; jfieldIDWorkaround::to_jfieldID()
+     -&gt; instanceKlass::jni_id_for()
+        -&gt; (同上)
 
 * JVMTI の field modification 監視機能の処理 (See: SetFieldModificationWatch())
   InterpreterRuntime::post_field_access()
-  -> jfieldIDWorkaround::to_jfieldID()
-     -> instanceKlass::jni_id_for()
-        -> (同上)
+  -&gt; jfieldIDWorkaround::to_jfieldID()
+     -&gt; instanceKlass::jni_id_for()
+        -&gt; (同上)
 
 * JVMTI の GetClassFields() 関数の処理
   JvmtiEnv::GetClassFields()
-  -> jfieldIDWorkaround::to_jfieldID()
-     -> instanceKlass::jni_id_for()
-        -> (同上)
-```
+  -&gt; jfieldIDWorkaround::to_jfieldID()
+     -&gt; instanceKlass::jni_id_for()
+        -&gt; (同上)
+</pre></div>
 
 
 
@@ -716,11 +716,11 @@ RedefineClass() によって生じた EMCP メソッド (およびそれらに�
 instanceKlass::add_previous_version() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている (See: [here](no2935-Vj.html) for details).
 
-```
+<div class="flow-abst"><pre>
 VM_RedefineClasses::doit()
--> VM_RedefineClasses::redefine_single_class()
-   -> instanceKlass::add_previous_version()
-```
+-&gt; VM_RedefineClasses::redefine_single_class()
+   -&gt; instanceKlass::add_previous_version()
+</pre></div>
 
 #### 削除箇所(where its instances are deleted)
 以下の箇所で(のみ)削除されている.
@@ -860,45 +860,45 @@ nmethodBucket オブジェクトは _next フィールドで次の nmethodBucket
 instanceKlass::add_dependent_nmethod() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 * C1 の場合:
   (略) (See: )
-  -> Compilation::install_code()
-     -> ciEnv::register_method()
-        -> nmethod::new_nmethod()
-           -> instanceKlass::add_dependent_nmethod()
+  -&gt; Compilation::install_code()
+     -&gt; ciEnv::register_method()
+        -&gt; nmethod::new_nmethod()
+           -&gt; instanceKlass::add_dependent_nmethod()
 
 * C2 の場合:
-  (略) (See: [here](no3718SNC.html) for details)
-  -> Compile::Compile()
-     -> ciEnv::register_method()
-        -> nmethod::new_nmethod()
-           -> instanceKlass::add_dependent_nmethod()
+  (略) (See: <a href="no3718SNC.html">here</a> for details)
+  -&gt; Compile::Compile()
+     -&gt; ciEnv::register_method()
+        -&gt; nmethod::new_nmethod()
+           -&gt; instanceKlass::add_dependent_nmethod()
 
 * Shark の場合:
   (略) (See: )
-  -> SharkCompiler::compile_method()
-     -> ciEnv::register_method()
-        -> nmethod::new_nmethod()
-           -> instanceKlass::add_dependent_nmethod()
-```
+  -&gt; SharkCompiler::compile_method()
+     -&gt; ciEnv::register_method()
+        -&gt; nmethod::new_nmethod()
+           -&gt; instanceKlass::add_dependent_nmethod()
+</pre></div>
 
 #### 使用箇所(where its instances are used)
 instanceKlass::mark_dependent_nmethods() 内で(のみ)使用されている
 (この関数はクラス階層に変更があった場合に呼び出され, ここで印が付けられたものが deopt 対象になる).
 この関数は, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 SystemDictionary::parse_stream()
--> SystemDictionary::add_to_hierarchy()
-   -> Universe::flush_dependents_on()
-      -> CodeCache::mark_for_deoptimization(DepChange& changes)
-         -> instanceKlass::mark_dependent_nmethods()
+-&gt; SystemDictionary::add_to_hierarchy()
+   -&gt; Universe::flush_dependents_on()
+      -&gt; CodeCache::mark_for_deoptimization(DepChange&amp; changes)
+         -&gt; instanceKlass::mark_dependent_nmethods()
 
 SystemDictionary::define_instance_class()
--> SystemDictionary::add_to_hierarchy()
-   -> (同上)
-```
+-&gt; SystemDictionary::add_to_hierarchy()
+   -&gt; (同上)
+</pre></div>
 
 
 

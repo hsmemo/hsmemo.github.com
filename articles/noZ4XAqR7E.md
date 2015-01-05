@@ -12,19 +12,19 @@ title: Method に関する処理 ： Java のコードによるメソッド呼�
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### sparc の場合
-```
+<div class="flow-abst"><pre>
 TemplateTable::invokespecial() が生成したコード
--> InterpreterMacroAssembler::call_from_interpreter()  が生成したコード
-   -> (実際の呼び出し先にジャンプ)
-```
+-&gt; InterpreterMacroAssembler::call_from_interpreter()  が生成したコード
+   -&gt; (実際の呼び出し先にジャンプ)
+</pre></div>
 
 ### x86_64 の場合
-```
+<div class="flow-abst"><pre>
 TemplateTable::invokespecial() が生成したコード
--> InterpreterMacroAssembler::jump_from_interpreted()  が生成したコード
-   -> InterpreterMacroAssembler::prepare_to_jump_from_interpreted()  が生成したコード
-   -> (実際の呼び出し先にジャンプ)
-```
+-&gt; InterpreterMacroAssembler::jump_from_interpreted()  が生成したコード
+   -&gt; InterpreterMacroAssembler::prepare_to_jump_from_interpreted()  が生成したコード
+   -&gt; (実際の呼び出し先にジャンプ)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

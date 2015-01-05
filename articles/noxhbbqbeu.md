@@ -18,10 +18,10 @@ title: JNI の処理 ： Invocation API の処理 ： JNI_GetDefaultJavaVMInitAr
   * javaStackSize についても, デフォルトのスタックサイズを書き込む.
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 JNI_GetDefaultJavaVMInitArgs()
--> Threads::is_supported_jni_version()
-```
+-&gt; Threads::is_supported_jni_version()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### JNI_GetDefaultJavaVMInitArgs()

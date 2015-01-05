@@ -102,14 +102,14 @@ RegionNode クラスのサブクラス.
 
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> IdealLoopTree::beautify_loops()
-   -> IdealLoopTree::split_outer_loop()
--> IdealLoopTree::iteration_split()
-   -> IdealLoopTree::iteration_split_impl()
-      -> PhaseIdealLoop::partial_peel()
-```
+-&gt; IdealLoopTree::beautify_loops()
+   -&gt; IdealLoopTree::split_outer_loop()
+-&gt; IdealLoopTree::iteration_split()
+   -&gt; IdealLoopTree::iteration_split_impl()
+      -&gt; PhaseIdealLoop::partial_peel()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 3つの入力ノードを持つ. 
@@ -167,11 +167,11 @@ See: [here](../doxygen/classLoopNode.html) for details
 PhaseIdealLoop::is_counted_loop() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> IdealLoopTree::counted_loop()
-   -> PhaseIdealLoop::is_counted_loop()
-```
+-&gt; IdealLoopTree::counted_loop()
+   -&gt; PhaseIdealLoop::is_counted_loop()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 3つの入力ノードを持つ. 
@@ -220,11 +220,11 @@ CountedLoopNode が表すループの終了判定を示す特殊な IfNode.
 PhaseIdealLoop::is_counted_loop() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> IdealLoopTree::counted_loop()
-   -> PhaseIdealLoop::is_counted_loop()
-```
+-&gt; IdealLoopTree::counted_loop()
+   -&gt; PhaseIdealLoop::is_counted_loop()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 2つの入力ノードを持つ. それぞれの入力の意味は以下の通り.
@@ -373,13 +373,13 @@ PhaseIdealLoop クラス内で使用される補助クラス(ResourceObjクラ�
 
 そして, これらの関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> PhaseIdealLoop::build_loop_tree()
-   -> PhaseIdealLoop::build_loop_tree_impl()
--> IdealLoopTree::beautify_loops()
-   -> IdealLoopTree::merge_many_backedges()
-```
+-&gt; PhaseIdealLoop::build_loop_tree()
+   -&gt; PhaseIdealLoop::build_loop_tree_impl()
+-&gt; IdealLoopTree::beautify_loops()
+   -&gt; IdealLoopTree::merge_many_backedges()
+</pre></div>
 
 
 

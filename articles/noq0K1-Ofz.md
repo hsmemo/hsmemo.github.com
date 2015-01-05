@@ -50,12 +50,12 @@ JVMTI/JMM のいくつかの種類のイベントについて, 対応するコ�
 ServiceThread::initialize() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
-(HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
--> Threads::create_vm()
-   -> Management::initialize()
-      -> ServiceThread::initialize()
-```
+<div class="flow-abst"><pre>
+(HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+-&gt; Threads::create_vm()
+   -&gt; Management::initialize()
+      -&gt; ServiceThread::initialize()
+</pre></div>
 
 ### 内部構造(Internal structure)
 生成された ServiceThread スレッドの処理のエントリポイントは ServiceThread::service_thread_entry().

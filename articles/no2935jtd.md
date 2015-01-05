@@ -20,20 +20,20 @@ Java のレベルでは, 最終的には java.lang.Shutdown オブジェクト�
 最終的には exit() システムコールを呼ぶことで終了する.
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 java.lang.System.exit()
--> java.lang.Runtime.exit()
-   -> java.lang.Shutdown.exit()
-      -> java.lang.Shutdown.sequence()
-      -> java.lang.Shutdown.halt()           (← ここまでが Java の世界. 以下は HotSpot 内部の世界)
-         -> Java_java_lang_Shutdown_halt0()
-            -> JVM_Halt()
-               -> before_exit()
-               -> vm_exit()
-                  -> VM_Exit::doit()         (← ここは飛ばしていきなり vm_direct_exit() に行くパスもある)
-                     -> vm_direct_exit()
-                        -> exit()
-```
+-&gt; java.lang.Runtime.exit()
+   -&gt; java.lang.Shutdown.exit()
+      -&gt; java.lang.Shutdown.sequence()
+      -&gt; java.lang.Shutdown.halt()           (← ここまでが Java の世界. 以下は HotSpot 内部の世界)
+         -&gt; Java_java_lang_Shutdown_halt0()
+            -&gt; JVM_Halt()
+               -&gt; before_exit()
+               -&gt; vm_exit()
+                  -&gt; VM_Exit::doit()         (← ここは飛ばしていきなり vm_direct_exit() に行くパスもある)
+                     -&gt; vm_direct_exit()
+                        -&gt; exit()
+</pre></div>
 
 ## 備考(Notes)
 JVM_Exit() という関数も存在し, この中でも before_exit() や vm_exit() が呼ばれている.

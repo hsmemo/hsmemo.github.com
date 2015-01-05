@@ -14,186 +14,186 @@ title: 実行時コンスタントプールのシンボルの解決処理(resolu
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### クラスの解決
-```
+<div class="flow-abst"><pre>
 constantPoolOopDesc::klass_at()
--> constantPoolOopDesc::klass_at_impl()
-   -> (1) 既に一度解決済みかどうかを確認する (= 以前の結果が Constant Pool 中に記録されているかどうか)
-          -> constantPoolOopDesc::slot_at()
-          -> CPSlot::is_oop()
+-&gt; constantPoolOopDesc::klass_at_impl()
+   -&gt; (1) 既に一度解決済みかどうかを確認する (= 以前の結果が Constant Pool 中に記録されているかどうか)
+          -&gt; constantPoolOopDesc::slot_at()
+          -&gt; CPSlot::is_oop()
       (1) 確認結果に応じて分岐
           * 解決済みの場合:
             (この場合は Constant Pool 中の値をリターンするだけ)
-            -> CPSlot::get_oop()
+            -&gt; CPSlot::get_oop()
           * まだ解決されていない場合: 
-            -> (1) クラス名に基づき klassOop を取得する
-                   -> SystemDictionary::resolve_or_fail()
-                      -> (See: [here](noIvSV0NZj.html) for details)
+            -&gt; (1) クラス名に基づき klassOop を取得する
+                   -&gt; SystemDictionary::resolve_or_fail()
+                      -&gt; (See: <a href="noIvSV0NZj.html">here</a> for details)
                (1) 解決結果を Constant Pool 中にセットする
-                   -> constantPoolOopDesc::klass_at_put()
-```
+                   -&gt; constantPoolOopDesc::klass_at_put()
+</pre></div>
 
 ### フィールドの解決
-```
-LinkResolver::resolve_field(FieldAccessInfo& result, constantPoolHandle pool, int index, Bytecodes::Code byte, bool check_only, TRAPS)
--> LinkResolver::resolve_field(FieldAccessInfo& result, constantPoolHandle pool, int index, Bytecodes::Code byte, bool check_only, bool update_pool, TRAPS)
-   -> (1) 対象フィールドが属するクラスを取得する.
+<div class="flow-abst"><pre>
+LinkResolver::resolve_field(FieldAccessInfo&amp; result, constantPoolHandle pool, int index, Bytecodes::Code byte, bool check_only, TRAPS)
+-&gt; LinkResolver::resolve_field(FieldAccessInfo&amp; result, constantPoolHandle pool, int index, Bytecodes::Code byte, bool check_only, bool update_pool, TRAPS)
+   -&gt; (1) 対象フィールドが属するクラスを取得する.
           (クラスが constant pool 中で未解決な場合に解決処理を行うかどうかで2通り)
           * 解決処理を行う場合: 
-             -> LinkResolver::resolve_klass()
-                -> constantPoolOopDesc::klass_ref_at()
-                   -> constantPoolOopDesc::klass_ref_index_at()
-                      -> constantPoolOopDesc::impl_klass_ref_index_at()
-                   -> constantPoolOopDesc::klass_at()
-                      -> (同上)
+             -&gt; LinkResolver::resolve_klass()
+                -&gt; constantPoolOopDesc::klass_ref_at()
+                   -&gt; constantPoolOopDesc::klass_ref_index_at()
+                      -&gt; constantPoolOopDesc::impl_klass_ref_index_at()
+                   -&gt; constantPoolOopDesc::klass_at()
+                      -&gt; (同上)
           * 解決処理を行わない場合: 
-            -> LinkResolver::resolve_klass_no_update()
-               -> constantPoolOopDesc::klass_ref_at_if_loaded_check()
-                   -> constantPoolOopDesc::klass_ref_index_at()
-                     -> (同上)
-                   -> constantPoolOopDesc::klass_ref_index_at()
-                      -> CPSlot::.get_oop()  or  SystemDictionary::find()
+            -&gt; LinkResolver::resolve_klass_no_update()
+               -&gt; constantPoolOopDesc::klass_ref_at_if_loaded_check()
+                   -&gt; constantPoolOopDesc::klass_ref_index_at()
+                     -&gt; (同上)
+                   -&gt; constantPoolOopDesc::klass_ref_index_at()
+                      -&gt; CPSlot::.get_oop()  or  SystemDictionary::find()
 
       (1) 対象フィールドの情報を取得する
-          -> instanceKlass::find_field() 
-             -> (Java 仮想マシン仕様に従った順番で探索)
+          -&gt; instanceKlass::find_field() 
+             -&gt; (Java 仮想マシン仕様に従った順番で探索)
                 (1) 自分の中で探索
-                    -> instanceKlass::find_local_field()
+                    -&gt; instanceKlass::find_local_field()
                 (1) インターフェースの中で探索
-                    -> instanceKlass::find_interface_field()
-                       -> instanceKlass::find_local_field()
-                       -> instanceKlass::find_interface_field()  (superinterface に対して再帰呼び出し)
+                    -&gt; instanceKlass::find_interface_field()
+                       -&gt; instanceKlass::find_local_field()
+                       -&gt; instanceKlass::find_interface_field()  (superinterface に対して再帰呼び出し)
                 (1) スーパークラスの中で探索
-                    -> instanceKlass::find_field()  (super に対して再帰呼び出し)
+                    -&gt; instanceKlass::find_field()  (super に対して再帰呼び出し)
 
       (1) アクセス権をチェックする
-          -> LinkResolver::check_field_accessability()
+          -&gt; LinkResolver::check_field_accessability()
 
       (1) ロード制約(loading constraints)をチェックする.
-          -> SystemDictionary::check_signature_loaders()
+          -&gt; SystemDictionary::check_signature_loaders()
 
       (1) 引数で渡された FieldAccessInfo オブジェクトに解決結果をセット
-          -> FieldAccessInfo::set()
-```
+          -&gt; FieldAccessInfo::set()
+</pre></div>
 
 ### メソッドの解決
 * LinkResolver::resolve_invoke() の処理
 
-```
+<div class="flow-abst"><pre>
 LinkResolver::resolve_invoke()
--> バイトコード種別に応じたメソッドで処理を行う
+-&gt; バイトコード種別に応じたメソッドで処理を行う
    * invokestatic の場合
-     -> LinkResolver::resolve_invokestatic()
-        -> (1) 対象メソッドが属するクラス(及びその他の情報)を取得する
-               -> LinkResolver::resolve_pool()
-                  -> LinkResolver::resolve_klass()
-                     -> constantPoolOopDesc::klass_ref_at()
-                        -> constantPoolOopDesc::klass_ref_index_at()
-                           -> constantPoolOopDesc::impl_klass_ref_index_at()
-                        -> constantPoolOopDesc::klass_at()
-                           -> (同上)
+     -&gt; LinkResolver::resolve_invokestatic()
+        -&gt; (1) 対象メソッドが属するクラス(及びその他の情報)を取得する
+               -&gt; LinkResolver::resolve_pool()
+                  -&gt; LinkResolver::resolve_klass()
+                     -&gt; constantPoolOopDesc::klass_ref_at()
+                        -&gt; constantPoolOopDesc::klass_ref_index_at()
+                           -&gt; constantPoolOopDesc::impl_klass_ref_index_at()
+                        -&gt; constantPoolOopDesc::klass_at()
+                           -&gt; (同上)
            (1) 対象メソッドの解決処理を行う
-               -> LinkResolver::resolve_static_call()
-                  -> (1) 対象メソッドの情報を取得する
-                         -> LinkResolver::linktime_resolve_static_method()
-                            -> LinkResolver::resolve_method(methodHandle& resolved_method, KlassHandle resolved_klass, Symbol* method_name, Symbol* method_signature, KlassHandle current_klass, bool check_access, TRAPS)
-                               -> (1) 対象メソッドを, 自分及びスーパークラス階層の中で探索
-                                      -> LinkResolver::lookup_method_in_klasses()
-                                         -> instanceKlass::uncached_lookup_method()
-                                            -> instanceKlass::find_method(Symbol* name, Symbol* signature)
-                                               -> instanceKlass::find_method(objArrayOop methods, Symbol* name, Symbol* signature)
+               -&gt; LinkResolver::resolve_static_call()
+                  -&gt; (1) 対象メソッドの情報を取得する
+                         -&gt; LinkResolver::linktime_resolve_static_method()
+                            -&gt; LinkResolver::resolve_method(methodHandle&amp; resolved_method, KlassHandle resolved_klass, Symbol* method_name, Symbol* method_signature, KlassHandle current_klass, bool check_access, TRAPS)
+                               -&gt; (1) 対象メソッドを, 自分及びスーパークラス階層の中で探索
+                                      -&gt; LinkResolver::lookup_method_in_klasses()
+                                         -&gt; instanceKlass::uncached_lookup_method()
+                                            -&gt; instanceKlass::find_method(Symbol* name, Symbol* signature)
+                                               -&gt; instanceKlass::find_method(objArrayOop methods, Symbol* name, Symbol* signature)
                                   (1) (対象メソッドが見つからなければ) インターフェース階層の中で探索
-                                      -> LinkResolver::lookup_method_in_interfaces()
-                                         -> instanceKlass::lookup_method_in_all_interfaces()
-                                            -> Klass::lookup_method()
-                                               -> instanceKlass::uncached_lookup_method()
-                                                  -> (同上)
+                                      -&gt; LinkResolver::lookup_method_in_interfaces()
+                                         -&gt; instanceKlass::lookup_method_in_all_interfaces()
+                                            -&gt; Klass::lookup_method()
+                                               -&gt; instanceKlass::uncached_lookup_method()
+                                                  -&gt; (同上)
                                   (1) (対象メソッドが見つからなければ) 
-                                      -> LinkResolver::lookup_implicit_method()
-                                         -> 
+                                      -&gt; LinkResolver::lookup_implicit_method()
+                                         -&gt; 
                                   (1) アクセス権をチェックする
-                                      -> LinkResolver::check_method_accessability()
+                                      -&gt; LinkResolver::check_method_accessability()
                                   (1) ロード制約(loading constraints)をチェックする
-                                      -> SystemDictionary::check_signature_loaders()
+                                      -&gt; SystemDictionary::check_signature_loaders()
                      (1) 引数で渡された CallInfo オブジェクトに, 解決結果をセットする
-                         -> CallInfo::set_static()
-                            -> CallInfo::set_common() (※)
+                         -&gt; CallInfo::set_static()
+                            -&gt; CallInfo::set_common() (※)
 
    * invokespecial の場合
-     -> LinkResolver::resolve_invokespecial()
-        -> (1) 対象メソッドが属するクラス(及びその他の情報)を取得する
-               -> LinkResolver::resolve_pool()
-                  -> (同上)
+     -&gt; LinkResolver::resolve_invokespecial()
+        -&gt; (1) 対象メソッドが属するクラス(及びその他の情報)を取得する
+               -&gt; LinkResolver::resolve_pool()
+                  -&gt; (同上)
            (1) 対象メソッドの解決処理を行う
-               -> LinkResolver::resolve_special_call()
-                  -> (1) 対象メソッドの情報を取得する
-                         -> LinkResolver::linktime_resolve_special_method()
-                            -> LinkResolver::resolve_method(methodHandle& resolved_method, KlassHandle resolved_klass, Symbol* method_name, Symbol* method_signature, KlassHandle current_klass, bool check_access, TRAPS)
-                               -> (同上)
+               -&gt; LinkResolver::resolve_special_call()
+                  -&gt; (1) 対象メソッドの情報を取得する
+                         -&gt; LinkResolver::linktime_resolve_special_method()
+                            -&gt; LinkResolver::resolve_method(methodHandle&amp; resolved_method, KlassHandle resolved_klass, Symbol* method_name, Symbol* method_signature, KlassHandle current_klass, bool check_access, TRAPS)
+                               -&gt; (同上)
                      (1) 解決結果をチェックし, 問題なければ引数で渡された CallInfo オブジェクトに結果をセットする
-                         -> LinkResolver::runtime_resolve_special_method()
-                            -> CallInfo::set_static()
-                               -> (同上)
+                         -&gt; LinkResolver::runtime_resolve_special_method()
+                            -&gt; CallInfo::set_static()
+                               -&gt; (同上)
 
    * invokevirtual の場合
-     -> LinkResolver::resolve_invokevirtual()
-        -> (1) 対象メソッドが属するクラス(及びその他の情報)を取得する
-               -> LinkResolver::resolve_pool()
-                  -> (同上)
+     -&gt; LinkResolver::resolve_invokevirtual()
+        -&gt; (1) 対象メソッドが属するクラス(及びその他の情報)を取得する
+               -&gt; LinkResolver::resolve_pool()
+                  -&gt; (同上)
            (1) 対象メソッドの解決処理を行う
-               -> LinkResolver::resolve_virtual_call()
-                  -> (1) 対象メソッドの情報を取得する
-                         -> LinkResolver::linktime_resolve_virtual_method()
-                            -> LinkResolver::resolve_method(methodHandle& resolved_method, KlassHandle resolved_klass, Symbol* method_name, Symbol* method_signature, KlassHandle current_klass, bool check_access, TRAPS)
-                               -> (同上)
+               -&gt; LinkResolver::resolve_virtual_call()
+                  -&gt; (1) 対象メソッドの情報を取得する
+                         -&gt; LinkResolver::linktime_resolve_virtual_method()
+                            -&gt; LinkResolver::resolve_method(methodHandle&amp; resolved_method, KlassHandle resolved_klass, Symbol* method_name, Symbol* method_signature, KlassHandle current_klass, bool check_access, TRAPS)
+                               -&gt; (同上)
                      (1) 解決結果をチェックし, 問題なければ引数で渡された CallInfo オブジェクトに結果をセットする
-                         -> LinkResolver::runtime_resolve_virtual_method()
-                            -> CallInfo::set_virtual()
-                               -> CallInfo::set_common()
+                         -&gt; LinkResolver::runtime_resolve_virtual_method()
+                            -&gt; CallInfo::set_virtual()
+                               -&gt; CallInfo::set_common()
 
    * invokeinterface の場合
-     -> LinkResolver::resolve_invokeinterface()
-        -> (1) 対象メソッドが属するクラス(及びその他の情報)を取得する
-               -> LinkResolver::resolve_pool()
-                  -> (同上)
+     -&gt; LinkResolver::resolve_invokeinterface()
+        -&gt; (1) 対象メソッドが属するクラス(及びその他の情報)を取得する
+               -&gt; LinkResolver::resolve_pool()
+                  -&gt; (同上)
            (1) 対象メソッドの解決処理を行う
-               -> LinkResolver::resolve_interface_call()
-                  -> (1) 対象メソッドの情報を取得する
-                         -> LinkResolver::linktime_resolve_interface_method()
-                            -> LinkResolver::resolve_interface_method(methodHandle& resolved_method, KlassHandle resolved_klass, Symbol* method_name, Symbol* method_signature, KlassHandle current_klass, bool check_access, TRAPS)
-                               -> (1) 対象メソッドを, 自分及びスーパークラス階層の中で探索
-                                      -> LinkResolver::lookup_instance_method_in_klasses()
-                                         -> instanceKlass::uncached_lookup_method()
-                                            -> (同上)
+               -&gt; LinkResolver::resolve_interface_call()
+                  -&gt; (1) 対象メソッドの情報を取得する
+                         -&gt; LinkResolver::linktime_resolve_interface_method()
+                            -&gt; LinkResolver::resolve_interface_method(methodHandle&amp; resolved_method, KlassHandle resolved_klass, Symbol* method_name, Symbol* method_signature, KlassHandle current_klass, bool check_access, TRAPS)
+                               -&gt; (1) 対象メソッドを, 自分及びスーパークラス階層の中で探索
+                                      -&gt; LinkResolver::lookup_instance_method_in_klasses()
+                                         -&gt; instanceKlass::uncached_lookup_method()
+                                            -&gt; (同上)
                                   (1) (対象メソッドが見つからなければ) インターフェース階層の中で探索
-                                      -> LinkResolver::lookup_method_in_interfaces()
-                                         -> (同上)
+                                      -&gt; LinkResolver::lookup_method_in_interfaces()
+                                         -&gt; (同上)
                                   (1) ロード制約(loading constraints)をチェックする
-                                      -> SystemDictionary::check_signature_loaders()
+                                      -&gt; SystemDictionary::check_signature_loaders()
 
                      (1) 解決結果をチェックし, 問題なければ引数で渡された CallInfo オブジェクトに結果をセットする
-                         -> LinkResolver::runtime_resolve_interface_method()
-                            -> CallInfo::set_interface()
-                               -> CallInfo::set_common()
+                         -&gt; LinkResolver::runtime_resolve_interface_method()
+                            -&gt; CallInfo::set_interface()
+                               -&gt; CallInfo::set_common()
 
    * invokedynamic の場合
-     -> LinkResolver::resolve_invokedynamic()
-        -> 
+     -&gt; LinkResolver::resolve_invokedynamic()
+        -&gt; 
 
 (※ -Xcomp 時には, この中で CompileBroker::compile_method() を呼んで JIT コンパイルも実行)
-```
+</pre></div>
 
 * ...
 
 
 ### 文字列オブジェクトの解決
-```
+<div class="flow-abst"><pre>
 constantPoolOopDesc::string_at()
--> constantPoolOopDesc::string_at_impl()
-   -> (1) 文字列をインターンし, 対応する文字列オブジェクトを取得する
-          -> StringTable::intern()
+-&gt; constantPoolOopDesc::string_at_impl()
+   -&gt; (1) 文字列をインターンし, 対応する文字列オブジェクトを取得する
+          -&gt; StringTable::intern()
       (1) 解決結果を Constant Pool 中にセットする
-          -> constantPoolOopDesc::string_at_put()
-```
+          -&gt; constantPoolOopDesc::string_at_put()
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

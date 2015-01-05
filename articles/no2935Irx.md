@@ -37,24 +37,24 @@ StubGenerator_generate() 内で(のみ)使用されている.
  順番としては, まず stubRoutines_init1() を行った後で universe::genesis(universe の初期化)を行い, 
  改めて stubRoutines_init2() を行う).
 
-```
+<div class="flow-abst"><pre>
 JNI_CreateJavaVM()
--> (HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
-   -> init_globals()
+-&gt; (HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+   -&gt; init_globals()
       ...
-      -> stubRoutines_init1()
-         -> StubRoutines::initialize1()
-            -> StubGenerator_generate()          (第2引数 false で呼び出される)
-               -> StubGenerator::StubGenerator() (第2引数 false で呼び出される)
-                  -> StubGenerator::generate_initial()
-      -> universe_init()
+      -&gt; stubRoutines_init1()
+         -&gt; StubRoutines::initialize1()
+            -&gt; StubGenerator_generate()          (第2引数 false で呼び出される)
+               -&gt; StubGenerator::StubGenerator() (第2引数 false で呼び出される)
+                  -&gt; StubGenerator::generate_initial()
+      -&gt; universe_init()
       ...
-      -> stubRoutines_init2()
-         -> StubRoutines::initialize2()
-            -> StubGenerator_generate()          (第2引数 true で呼び出される)
-               -> StubGenerator::StubGenerator() (第2引数 true で呼び出される)
-                  -> StubGenerator::generate_all()
-```
+      -&gt; stubRoutines_init2()
+         -&gt; StubRoutines::initialize2()
+            -&gt; StubGenerator_generate()          (第2引数 true で呼び出される)
+               -&gt; StubGenerator::StubGenerator() (第2引数 true で呼び出される)
+                  -&gt; StubGenerator::generate_all()
+</pre></div>
 
 #### 参考(for your information): StubGenerator_generate() (x86 32bit の場合)
 See: [here](no2935H_G.html) for details

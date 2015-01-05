@@ -80,30 +80,30 @@ InlineTree::ok_to_inline() でインライン展開すべきかどうかを判�
 
 そして, これらの関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 Compile::Compile()
--> InlineTree::build_inline_tree_root()
+-&gt; InlineTree::build_inline_tree_root()
 
 Parse::Parse()
--> Parse::do_all_blocks()
-   -> Parse::do_one_block()
-      -> Parse::do_call()
-         -> Compile::call_generator()
-            -> CallGenerator::for_method_handle_inline()
-               -> Compile::call_generator()
-            -> InlineTree::ok_to_inline()
-               -> InlineTree::build_inline_tree_for_callee()
-            -> InlineTree::find_subtree_from_root()
-               -> InlineTree::build_inline_tree_for_callee()
+-&gt; Parse::do_all_blocks()
+   -&gt; Parse::do_one_block()
+      -&gt; Parse::do_call()
+         -&gt; Compile::call_generator()
+            -&gt; CallGenerator::for_method_handle_inline()
+               -&gt; Compile::call_generator()
+            -&gt; InlineTree::ok_to_inline()
+               -&gt; InlineTree::build_inline_tree_for_callee()
+            -&gt; InlineTree::find_subtree_from_root()
+               -&gt; InlineTree::build_inline_tree_for_callee()
 
 Parse::Parse()
--> InlineTree::find_subtree_from_root()  (ただし #ifndef PRODUCT 時にのみ呼び出す)
-   -> (同上)
+-&gt; InlineTree::find_subtree_from_root()  (ただし #ifndef PRODUCT 時にのみ呼び出す)
+   -&gt; (同上)
 
 Parse::show_parse_info()  (ただし, これは #ifndef PRODUCT 時にのみ定義される関数)
--> InlineTree::find_subtree_from_root()
-   -> (同上)
-```
+-&gt; InlineTree::find_subtree_from_root()
+   -&gt; (同上)
+</pre></div>
 
 
 

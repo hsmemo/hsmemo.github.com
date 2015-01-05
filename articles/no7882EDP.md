@@ -52,49 +52,49 @@ interp_only_mode 用に様々な最適化オプションが無効になる (See:
 JvmtiEventControllerPrivate::recompute_enabled() の中で
 JvmtiEnvThreadState::reset_current_location() が行われる. #TODO)
 
-```
+<div class="flow-abst"><pre>
 JvmtiEnv::SetEventCallbacks()
--> (略) (See: [here](no2935C7Z.html) for details)
-   -> JvmtiEventControllerPrivate::recompute_enabled()
-      -> VMThread::execute()
-         -> (略) (See: [here](no2935qaz.html) for details)
-            -> VM_ChangeSingleStep::doit()
-               -> JvmtiEventControllerPrivate::set_should_post_single_step()
-                  -> JvmtiExport::set_should_post_single_step()
-                     -> Interpreter::notice_safepoints() (をサブクラスがオーバーライドしたもの)
-```
+-&gt; (略) (See: <a href="no2935C7Z.html">here</a> for details)
+   -&gt; JvmtiEventControllerPrivate::recompute_enabled()
+      -&gt; VMThread::execute()
+         -&gt; (略) (See: <a href="no2935qaz.html">here</a> for details)
+            -&gt; VM_ChangeSingleStep::doit()
+               -&gt; JvmtiEventControllerPrivate::set_should_post_single_step()
+                  -&gt; JvmtiExport::set_should_post_single_step()
+                     -&gt; Interpreter::notice_safepoints() (をサブクラスがオーバーライドしたもの)
+</pre></div>
 
 ### singlestep 関係のイベント通知の有効化処理 (NotificationMode() の処理)
 (なお breakpoint の場合には,
 JvmtiEventControllerPrivate::recompute_enabled() の中で
 JvmtiEnvThreadState::reset_current_location() が行われる. #TODO)
 
-```
+<div class="flow-abst"><pre>
 JvmtiEnv::SetEventNotificationMode()
--> (略) (See: [here](no2935C7Z.html) for details)
-   -> JvmtiEventControllerPrivate::recompute_enabled()
-      -> VMThread::execute()
-         -> (略) (See: [here](no2935qaz.html) for details)
-            -> VM_ChangeSingleStep::doit()
-               -> (同上)
-```
+-&gt; (略) (See: <a href="no2935C7Z.html">here</a> for details)
+   -&gt; JvmtiEventControllerPrivate::recompute_enabled()
+      -&gt; VMThread::execute()
+         -&gt; (略) (See: <a href="no2935qaz.html">here</a> for details)
+            -&gt; VM_ChangeSingleStep::doit()
+               -&gt; (同上)
+</pre></div>
 
 ### singlestep モードでの実行処理
-```
+<div class="flow-abst"><pre>
 * Template Interpreter の場合:
 
   _safept_table の各エントリ
-  -> (略) (See: [here](no7882rhh.html) for details)
-      -> InterpreterRuntime::at_safepoint()
-         -> JvmtiExport::at_single_stepping_point()
-            -> JvmtiExport::post_single_step()
+  -&gt; (略) (See: <a href="no7882rhh.html">here</a> for details)
+      -&gt; InterpreterRuntime::at_safepoint()
+         -&gt; JvmtiExport::at_single_stepping_point()
+            -&gt; JvmtiExport::post_single_step()
 
 * C++ Interpreter の場合:
 
   DEBUGGER_SINGLE_STEP_NOTIFY() マクロ
-  -> InterpreterRuntime::at_safepoint()
-     -> (同上)
-```
+  -&gt; InterpreterRuntime::at_safepoint()
+     -&gt; (同上)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

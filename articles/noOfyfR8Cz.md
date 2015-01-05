@@ -44,57 +44,57 @@ zombie 化された nmethod, 及びそれらを指している Inline cache, 等
 ### 使われ方(Usage)
 以下の箇所で(のみ)使用されている.
 
-```
+<div class="flow-abst"><pre>
 * 回収処理の開始 (毎回の Safepoint 時の実施)
 
   SafepointSynchronize::do_cleanup_tasks()
-  -> NMethodSweeper::scan_stacks()
+  -&gt; NMethodSweeper::scan_stacks()
 
 * CompilerBroker によるインクリメンタルな回収処理
 
   CompileQueue::get()
-  -> NMethodSweeper::possibly_sweep()
+  -&gt; NMethodSweeper::possibly_sweep()
 
 * nmethod に変化があった場合の処理
 
   nmethod::make_unloaded()
-  -> NMethodSweeper::notify()
+  -&gt; NMethodSweeper::notify()
 
   nmethod::make_not_entrant_or_zombie()
-  -> NMethodSweeper::notify()
+  -&gt; NMethodSweeper::notify()
 
 * nmethod の zombie 化のための処理
 
   nmethod::mark_as_seen_on_stack()
-  -> NMethodSweeper::traversal_count()
+  -&gt; NMethodSweeper::traversal_count()
 
   nmethod::can_not_entrant_be_converted()
-  -> NMethodSweeper::traversal_count()
+  -&gt; NMethodSweeper::traversal_count()
 
 * CodeCache が一杯になった場合の処理
 
   CompileBroker::compiler_thread_loop()
-  -> CompileBroker::handle_full_code_cache()
-     -> NMethodSweeper::handle_full_code_cache()
-        -> VMThread::execute()
-           -> (略) (See: [here](no2935qaz.html) for details)
-              -> VM_HandleFullCodeCache::doit()
-                 -> NMethodSweeper::speculative_disconnect_nmethods()
-  -> NMethodSweeper::handle_full_code_cache()
-     -> (同上)
+  -&gt; CompileBroker::handle_full_code_cache()
+     -&gt; NMethodSweeper::handle_full_code_cache()
+        -&gt; VMThread::execute()
+           -&gt; (略) (See: <a href="no2935qaz.html">here</a> for details)
+              -&gt; VM_HandleFullCodeCache::doit()
+                 -&gt; NMethodSweeper::speculative_disconnect_nmethods()
+  -&gt; NMethodSweeper::handle_full_code_cache()
+     -&gt; (同上)
 
   ciEnv::register_method()
-  -> CompileBroker::handle_full_code_cache()
-     -> (同上)
+  -&gt; CompileBroker::handle_full_code_cache()
+     -&gt; (同上)
 
   AdapterHandlerLibrary::get_adapter()
-  -> CompileBroker::handle_full_code_cache()
-     -> (同上)
+  -&gt; CompileBroker::handle_full_code_cache()
+     -&gt; (同上)
 
   AdapterHandlerLibrary::create_native_wrapper()
-  -> CompileBroker::handle_full_code_cache()
-     -> (同上)
-```
+  -&gt; CompileBroker::handle_full_code_cache()
+     -&gt; (同上)
+</pre></div>
   
 
 
@@ -140,10 +140,10 @@ NMethodSweeper::possibly_sweep() 内で(のみ)生成されている.
 現在は, NMethodSweeper::record_sweep() 内で(のみ)記録されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 SWEEP() マクロ
--> NMethodSweeper::record_sweep()
-```
+-&gt; NMethodSweeper::record_sweep()
+</pre></div>
 
 
 ```cpp

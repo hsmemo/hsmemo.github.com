@@ -11,15 +11,15 @@ title: Serviceability 機能 ： JVMTI の処理 ： JVMTI 関数の処理 ： �
 (See: JVMTI 仕様)
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
-(See: [here](no2114rPX.html) for details)
--> ClassFileParser::parseClassFile()
-   -> JvmtiExport::post_class_file_load_hook()
-      -> JvmtiClassFileLoadHookPoster::post()
-         -> JvmtiClassFileLoadHookPoster::post_all_envs()
-            -> JvmtiClassFileLoadHookPoster::post_to_env()
-               -> (登録されているコールバックを呼び出す)
-```
+<div class="flow-abst"><pre>
+(See: <a href="no2114rPX.html">here</a> for details)
+-&gt; ClassFileParser::parseClassFile()
+   -&gt; JvmtiExport::post_class_file_load_hook()
+      -&gt; JvmtiClassFileLoadHookPoster::post()
+         -&gt; JvmtiClassFileLoadHookPoster::post_all_envs()
+            -&gt; JvmtiClassFileLoadHookPoster::post_to_env()
+               -&gt; (登録されているコールバックを呼び出す)
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 

@@ -85,51 +85,51 @@ ObjectWaiter オブジェクトの _notified というフィールドを使っ�
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### java.lang.Object.wait(long timeout) の処理の流れ
-```
+<div class="flow-abst"><pre>
 JVM_MonitorWait()
--> ObjectSynchronizer::wait()
-   -> BiasedLocking::revoke_and_rebias()
-   -> ObjectSynchronizer::inflate()
-   -> ObjectMonitor::wait()
-      -> CHECK_OWNER()
-      -> ObjectMonitor::AddWaiter()
-      -> ObjectMonitor::exit()
-         -> (See: [here](noS3vRzujM.html) for details)
-      -> os::PlatformEvent::park()  or  os::PlatformEvent::park(jlong millis)
-         -> (See: [here](no2114COc.html) for details)
-      -> ObjectMonitor::DequeueSpecificWaiter()
-      -> ObjectMonitor::enter()  or  ObjectMonitor::ReenterI()
-         -> (See: [here](no96623Ns.html) for details)
-```
+-&gt; ObjectSynchronizer::wait()
+   -&gt; BiasedLocking::revoke_and_rebias()
+   -&gt; ObjectSynchronizer::inflate()
+   -&gt; ObjectMonitor::wait()
+      -&gt; CHECK_OWNER()
+      -&gt; ObjectMonitor::AddWaiter()
+      -&gt; ObjectMonitor::exit()
+         -&gt; (See: <a href="noS3vRzujM.html">here</a> for details)
+      -&gt; os::PlatformEvent::park()  or  os::PlatformEvent::park(jlong millis)
+         -&gt; (See: <a href="no2114COc.html">here</a> for details)
+      -&gt; ObjectMonitor::DequeueSpecificWaiter()
+      -&gt; ObjectMonitor::enter()  or  ObjectMonitor::ReenterI()
+         -&gt; (See: <a href="no96623Ns.html">here</a> for details)
+</pre></div>
 
 ### java.lang.Object.wait() 及び java.lang.Object.wait(long timeout, int nanos) の処理の流れ
-```
+<div class="flow-abst"><pre>
 java.lang.Object.wait()
--> java.lang.Object.wait(long timeout)
-   -> (上述)
+-&gt; java.lang.Object.wait(long timeout)
+   -&gt; (上述)
 
 java.lang.Object.wait(long timeout, int nanos)
--> java.lang.Object.wait(long timeout)
-   -> (上述)
-```
+-&gt; java.lang.Object.wait(long timeout)
+   -&gt; (上述)
+</pre></div>
 
 ### java.lang.Object.notify() の処理の流れ
-```
+<div class="flow-abst"><pre>
 JVM_MonitorNotify()
--> ObjectSynchronizer::notify()
-   -> ObjectMonitor::notify()
-      -> CHECK_OWNER()
-      -> ObjectMonitor::DequeueWaiter()
-```
+-&gt; ObjectSynchronizer::notify()
+   -&gt; ObjectMonitor::notify()
+      -&gt; CHECK_OWNER()
+      -&gt; ObjectMonitor::DequeueWaiter()
+</pre></div>
 
 ### java.lang.Object.notifyAll() の処理の流れ
-```
+<div class="flow-abst"><pre>
 JVM_MonitorNotifyAll()
--> ObjectSynchronizer::notifyall()
-   -> ObjectMonitor::notifyAll()
-      -> CHECK_OWNER()
-      -> ObjectMonitor::DequeueWaiter()
-```
+-&gt; ObjectSynchronizer::notifyall()
+   -&gt; ObjectMonitor::notifyAll()
+      -&gt; CHECK_OWNER()
+      -&gt; ObjectMonitor::DequeueWaiter()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### java.lang.Object.wait()

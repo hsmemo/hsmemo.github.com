@@ -13,17 +13,17 @@ JavaThread::jni_environment() の初期化は JavaThread オブジェクトの�
 
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
-(See: [here](no2935KMw.html) for details)
--> JavaThread::initialize()
-   -> (1) 使用する JNIEnv を取得する
-          -> jni_functions()
-             -> 以下のどちらかをリターンする
+<div class="flow-abst"><pre>
+(See: <a href="no2935KMw.html">here</a> for details)
+-&gt; JavaThread::initialize()
+   -&gt; (1) 使用する JNIEnv を取得する
+          -&gt; jni_functions()
+             -&gt; 以下のどちらかをリターンする
                 * jni_NativeInterface
-                * checked_jni_NativeInterface (<= jni_functions_check() の呼び出しにより取得)
+                * checked_jni_NativeInterface (&lt;= jni_functions_check() の呼び出しにより取得)
       (1) JavaThread::jni_environment() に JNIEnv をセットする
-          -> JavaThread::set_jni_functions()
-```
+          -&gt; JavaThread::set_jni_functions()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### jni_functions()

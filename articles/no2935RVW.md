@@ -11,16 +11,16 @@ title: Serviceability 機能 ： JVMTI の処理 ： JVMTI 関数の処理 ： �
 (See: JVMTI 仕様)
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 JvmtiEnv::GetFrameLocation()
--> * 対象のスレッドがサスペンドしている場合:
-     -> JvmtiEnvBase::get_frame_location()
+-&gt; * 対象のスレッドがサスペンドしている場合:
+     -&gt; JvmtiEnvBase::get_frame_location()
    * 〃 がサスペンドしていない場合:
-     -> VMThread::execute()
-        -> (略) (See: [here](no2935qaz.html) for details)
-           -> VM_GetFrameLocation::doit()
-              -> JvmtiEnvBase::get_frame_location()
-```
+     -&gt; VMThread::execute()
+        -&gt; (略) (See: <a href="no2935qaz.html">here</a> for details)
+           -&gt; VM_GetFrameLocation::doit()
+              -&gt; JvmtiEnvBase::get_frame_location()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### JvmtiEnv::GetFrameLocation()

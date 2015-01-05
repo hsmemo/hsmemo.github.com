@@ -212,78 +212,78 @@ Solaris 版では, 以下の2つのオプションによって
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### ParkEvent::Allocate() の流れ
-```
+<div class="flow-abst"><pre>
 ParkEvent::Allocate()
-```
+</pre></div>
 
 ### os::PlatformEvent::park() の流れ
 #### Linux の場合
-```
+<div class="flow-abst"><pre>
 os::PlatformEvent::park()
--> pthread_cond_wait()
-```
+-&gt; pthread_cond_wait()
+</pre></div>
 
 #### Solaris の場合
-```
+<div class="flow-abst"><pre>
 os::PlatformEvent::park()
--> os::Solaris::cond_wait()
-   -> _lwp_cond_wait() or pthread_cond_wait() or cond_wait()
-```
+-&gt; os::Solaris::cond_wait()
+   -&gt; _lwp_cond_wait() or pthread_cond_wait() or cond_wait()
+</pre></div>
 
 #### Windows の場合
-```
+<div class="flow-abst"><pre>
 os::PlatformEvent::park()
--> WaitForSingleObject()
-```
+-&gt; WaitForSingleObject()
+</pre></div>
 
 
 ### os::PlatformEvent::park(jlong millis) の流れ
 #### Linux の場合
-```
+<div class="flow-abst"><pre>
 os::PlatformEvent::park(jlong millis)
--> os::Linux::safe_cond_timedwait()
-   -> pthread_cond_timedwait()
-```
+-&gt; os::Linux::safe_cond_timedwait()
+   -&gt; pthread_cond_timedwait()
+</pre></div>
 
 #### Solaris の場合
-```
+<div class="flow-abst"><pre>
 os::PlatformEvent::park(jlong millis)
--> os::Solaris::cond_timedwait()
-   -> _lwp_cond_timedwait() or pthread_cond_timedwait() or cond_timedwait()
-```
+-&gt; os::Solaris::cond_timedwait()
+   -&gt; _lwp_cond_timedwait() or pthread_cond_timedwait() or cond_timedwait()
+</pre></div>
 
 #### Windows の場合
-```
+<div class="flow-abst"><pre>
 os::PlatformEvent::park(jlong millis)
--> WaitForSingleObject()
-```
+-&gt; WaitForSingleObject()
+</pre></div>
 
 
 ### os::PlatformEvent::unpark() の流れ
 #### Linux の場合
-```
+<div class="flow-abst"><pre>
 os::PlatformEvent::unpark()
--> pthread_cond_signal()
-```
+-&gt; pthread_cond_signal()
+</pre></div>
 
 #### Solaris の場合
-```
+<div class="flow-abst"><pre>
 os::PlatformEvent::unpark()
--> os::Solaris::cond_signal()
-   -> _lwp_cond_signal() or pthread_cond_signal() or cond_signal()
-```
+-&gt; os::Solaris::cond_signal()
+   -&gt; _lwp_cond_signal() or pthread_cond_signal() or cond_signal()
+</pre></div>
 
 #### Windows の場合
-```
+<div class="flow-abst"><pre>
 os::PlatformEvent::unpark()
--> SetEvent()
-```
+-&gt; SetEvent()
+</pre></div>
 
 
 ### ParkEvent::Release() の流れ
-```
+<div class="flow-abst"><pre>
 ParkEvent::Release()
-```
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

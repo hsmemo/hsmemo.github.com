@@ -205,27 +205,27 @@ priocntl_ptr という関数ポインタ経由で priocntl() を呼び出して�
 
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 java.lang.Thread.setPriority()
--> JVM_SetThreadPriority() (= java.lang.Thread.setPriority0())
-   -> java_lang_Thread::set_priority()
-      -> java.lang.Thread オブジェクトの priority フィールドに値をセットするだけ.
-   -> Thread::set_priority()
-      -> os::set_priority()
-         -> os::set_native_priority()
-            -> OS によって処理が異なる.
+-&gt; JVM_SetThreadPriority() (= java.lang.Thread.setPriority0())
+   -&gt; java_lang_Thread::set_priority()
+      -&gt; java.lang.Thread オブジェクトの priority フィールドに値をセットするだけ.
+   -&gt; Thread::set_priority()
+      -&gt; os::set_priority()
+         -&gt; os::set_native_priority()
+            -&gt; OS によって処理が異なる.
                * Linux の場合
                  (なお, UseThreadPriorities オプションが指定されていない場合や ThreadPriorityPolicy オプションが 0 の場合には, 何もしない)
-                 -> setpriority()
+                 -&gt; setpriority()
                * Solaris の場合
                  (なお, UseThreadPriorities オプションが指定されていない場合は, 何もしない)
-                 -> thr_setprio()
-                 -> set_lwp_priority()
-                    -> priocntl()
+                 -&gt; thr_setprio()
+                 -&gt; set_lwp_priority()
+                    -&gt; priocntl()
                * Windows の場合
                  (なお, UseThreadPriorities オプションが指定されていない場合は, 何もしない)
-                 -> SetThreadPriority()
-```
+                 -&gt; SetThreadPriority()
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

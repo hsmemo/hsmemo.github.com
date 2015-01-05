@@ -23,31 +23,31 @@ Biased Locking 機能は HotSpot の起動時に初期化される.
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### HotSpot 起動時の初期化処理
-```
-(HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
--> Threads::create_vm()
-   -> BiasedLocking::init()
+<div class="flow-abst"><pre>
+(HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+-&gt; Threads::create_vm()
+   -&gt; BiasedLocking::init()
       (BiasedLockingStartupDelay オプションの値に応じて, 以下のどちらかが行われる)
       * BiasedLockingStartupDelay が 0 よりも大きい値の場合:
         (EnableBiasedLockingTask が生成され, 指定時間後に VM_EnableBiasedLocking が呼び出される)
-        -> EnableBiasedLockingTask::EnableBiasedLockingTask()
-        -> PeriodicTask::enroll()
+        -&gt; EnableBiasedLockingTask::EnableBiasedLockingTask()
+        -&gt; PeriodicTask::enroll()
       * そうでない場合: 
         (この関数内で VM_EnableBiasedLocking により biased locking が有効化される)
-        -> VMThread::execute()
-           -> (See: [here](no2935qaz.html) for details)
-              -> VM_EnableBiasedLocking::doit()
-```
+        -&gt; VMThread::execute()
+           -&gt; (See: <a href="no2935qaz.html">here</a> for details)
+              -&gt; VM_EnableBiasedLocking::doit()
+</pre></div>
 
 ### 上記の初期化処理で登録された EnableBiasedLockingTask の処理
-```
+<div class="flow-abst"><pre>
 WatcherThread::run()
--> (See: [here](nohcAO37b3.html) for details)
-   -> EnableBiasedLockingTask::task()
-      -> VMThread::execute()
-         -> (See: [here](no2935qaz.html) for details)
-            -> VM_EnableBiasedLocking::doit()
-```
+-&gt; (See: <a href="nohcAO37b3.html">here</a> for details)
+   -&gt; EnableBiasedLockingTask::task()
+      -&gt; VMThread::execute()
+         -&gt; (See: <a href="no2935qaz.html">here</a> for details)
+            -&gt; VM_EnableBiasedLocking::doit()
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

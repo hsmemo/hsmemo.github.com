@@ -39,10 +39,10 @@ Compile クラス内で使用される補助クラス.
 Compile::ScheduleAndBundle() 内で(のみ)使用されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 Compile::Output()
--> Compile::ScheduleAndBundle()
-```
+-&gt; Compile::ScheduleAndBundle()
+</pre></div>
 
 
 
@@ -71,10 +71,10 @@ safepoint ではない箇所のメタ情報を DebugInformationRecorder に記�
 Compile::Fill_buffer() 内で(のみ)使用されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 Compile::Output()
--> Compile::Fill_buffer()
-```
+-&gt; Compile::Fill_buffer()
+</pre></div>
 
 
 

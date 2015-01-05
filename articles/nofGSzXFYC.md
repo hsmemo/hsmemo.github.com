@@ -756,15 +756,15 @@ GenerateOopMap クラス内で使用される補助クラス.
 GenerateOopMap::expand_current_instr() 内で(のみ)使用されている.
 この関数は, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 GenerateOopMap::compute_map()
--> GenerateOopMap::do_interpretation()
-   -> GenerateOopMap::rewrite_refval_conflicts()
-      -> GenerateOopMap::rewrite_refval_conflict()
-         -> GenerateOopMap::rewrite_refval_conflict_inst()
-            -> GenerateOopMap::rewrite_load_or_store()
-               -> GenerateOopMap::expand_current_instr()
-```
+-&gt; GenerateOopMap::do_interpretation()
+   -&gt; GenerateOopMap::rewrite_refval_conflicts()
+      -&gt; GenerateOopMap::rewrite_refval_conflict()
+         -&gt; GenerateOopMap::rewrite_refval_conflict_inst()
+            -&gt; GenerateOopMap::rewrite_load_or_store()
+               -&gt; GenerateOopMap::expand_current_instr()
+</pre></div>
 
 
 
@@ -798,21 +798,21 @@ ResolveOopMapConflicts::do_potential_rewrite() で, メソッドの書き換え�
 Rewriter::rewrite_jsrs() 内で(のみ)使用されている.
 この関数は, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 instanceKlass::link_class_impl()
--> instanceKlass::relocate_and_link_methods()
-   -> Rewriter::relocate_and_link(instanceKlassHandle this_oop, TRAPS)
-      -> Rewriter::relocate_and_link(instanceKlassHandle this_oop, objArrayHandle methods, TRAPS)
-         -> Rewriter::rewrite_jsrs()
+-&gt; instanceKlass::relocate_and_link_methods()
+   -&gt; Rewriter::relocate_and_link(instanceKlassHandle this_oop, TRAPS)
+      -&gt; Rewriter::relocate_and_link(instanceKlassHandle this_oop, objArrayHandle methods, TRAPS)
+         -&gt; Rewriter::rewrite_jsrs()
 
 VM_RedefineClasses::load_new_class_versions()
--> Rewriter::relocate_and_link(instanceKlassHandle this_oop, TRAPS)
-   -> (同上)
+-&gt; Rewriter::relocate_and_link(instanceKlassHandle this_oop, TRAPS)
+   -&gt; (同上)
 
 MethodHandleCompiler::get_method_oop()
--> Rewriter::relocate_and_link(instanceKlassHandle this_oop, objArrayHandle methods, TRAPS)
-   -> (同上)
-```
+-&gt; Rewriter::relocate_and_link(instanceKlassHandle this_oop, objArrayHandle methods, TRAPS)
+   -&gt; (同上)
+</pre></div>
 
 
 

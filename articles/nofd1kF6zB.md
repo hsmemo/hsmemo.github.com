@@ -40,54 +40,54 @@ JRT_BLOCK/JRT_BLOCK_END というマクロも用意されている.
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### JRT_ENTRY マクロ ~ JRT_END マクロ
-```
+<div class="flow-abst"><pre>
 JRT_ENTRY マクロ
--> ThreadInVMfromJava::ThreadInVMfromJava()
-   -> (See: [here](no8p2E6iLf.html) for details)
-```
+-&gt; ThreadInVMfromJava::ThreadInVMfromJava()
+   -&gt; (See: <a href="no8p2E6iLf.html">here</a> for details)
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 JRT_END マクロ
 (JRT_ENTRY マクロで宣言されていた ThreadInVMfromJava のデストラクタが呼ばれる)
--> ThreadInVMfromJava::~ThreadInVMfromJava()
-   -> (See: [here](no8p2E6iLf.html) for details)
-```
+-&gt; ThreadInVMfromJava::~ThreadInVMfromJava()
+   -&gt; (See: <a href="no8p2E6iLf.html">here</a> for details)
+</pre></div>
 
 
 ### IRT_LEAF マクロ ~ IRT_END マクロ
-```
+<div class="flow-abst"><pre>
 (Safepoint チェック処理はない)
-```
+</pre></div>
 
 
 ### JRT_BLOCK マクロ ~ JRT_BLOCK_END マクロ
-```
+<div class="flow-abst"><pre>
 JRT_BLOCK マクロ
--> ThreadInVMfromJava::ThreadInVMfromJava()
-   -> (See: [here](no8p2E6iLf.html) for details)
-```
+-&gt; ThreadInVMfromJava::ThreadInVMfromJava()
+   -&gt; (See: <a href="no8p2E6iLf.html">here</a> for details)
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 JRT_BLOCK_END マクロ
 (JRT_BLOCK マクロで宣言されていた ThreadInVMfromJava のデストラクタが呼ばれる)
--> ThreadInVMfromJava::~ThreadInVMfromJava()
-   -> (See: [here](no8p2E6iLf.html) for details)
-```
+-&gt; ThreadInVMfromJava::~ThreadInVMfromJava()
+   -&gt; (See: <a href="no8p2E6iLf.html">here</a> for details)
+</pre></div>
 
 
 ### JRT_ENTRY_NO_ASYNC マクロ ~ JRT_END マクロ
-```
+<div class="flow-abst"><pre>
 JRT_ENTRY_NO_ASYNC マクロ
--> ThreadInVMfromJavaNoAsyncException::ThreadInVMfromJavaNoAsyncException()
-   -> (See: [here](no8p2E6iLf.html) for details)
-```
+-&gt; ThreadInVMfromJavaNoAsyncException::ThreadInVMfromJavaNoAsyncException()
+   -&gt; (See: <a href="no8p2E6iLf.html">here</a> for details)
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 JRT_END マクロ
 (JRT_ENTRY_NO_ASYNC マクロで宣言されていた ThreadInVMfromJavaNoAsyncException のデストラクタが呼ばれる)
--> ThreadInVMfromJavaNoAsyncException::~ThreadInVMfromJavaNoAsyncException()
-   -> (See: [here](no8p2E6iLf.html) for details)
-```
+-&gt; ThreadInVMfromJavaNoAsyncException::~ThreadInVMfromJavaNoAsyncException()
+   -&gt; (See: <a href="no8p2E6iLf.html">here</a> for details)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

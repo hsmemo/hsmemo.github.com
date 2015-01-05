@@ -719,20 +719,20 @@ MacroAssembler::push_CPU_state() と MacroAssembler::pop_CPU_state() を使用�
   なお, この関数は, 現在は以下のパスで(のみ)呼び出されている
   (が, MacroAssembler::print_CPU_state() 自体の使用箇所が見当たらない...).
   
-```
+<div class="flow-abst"><pre>
 MacroAssembler::print_CPU_state() が生成するコード
--> _print_CPU_state()
-```
+-&gt; _print_CPU_state()
+</pre></div>
 
 * _verify_FPU() 内 
   
   VerifyFPU オプションが指定されている場合にのみ, 
   MacroAssembler::verify_FPU() が生成するコード内で呼び出される.
   
-```
+<div class="flow-abst"><pre>
 MacroAssembler::verify_FPU() が生成するコード
--> _verify_FPU()  (VerifyFPU オプションが指定されている場合にのみ呼び出す)
-```
+-&gt; _verify_FPU()  (VerifyFPU オプションが指定されている場合にのみ呼び出す)
+</pre></div>
 
 ### 内部構造(Internal structure)
 定義されているフィールドは以下の通り.

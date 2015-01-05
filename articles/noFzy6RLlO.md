@@ -16,34 +16,34 @@ yield 用のシステムコールを呼び出すだけ.
 
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 JVM_Yield() (= java.lang.Thread.yield())
--> ConvertYieldToSleep オプションの値に応じて, 2通りに分岐
+-&gt; ConvertYieldToSleep オプションの値に応じて, 2通りに分岐
    * ConvertYieldToSleep オプションが指定されている場合:
-     -> os::sleep()    (<= 引数の interruptible は false)
-        -> OS によって処理が異なる.
+     -&gt; os::sleep()    (&lt;= 引数の interruptible は false)
+        -&gt; OS によって処理が異なる.
            * Linux の場合
-             -> ParkEvent::park()
+             -&gt; ParkEvent::park()
            * Solaris の場合
              以下のどちらかを呼び出す
-             -> thr_yield()  (<= 指定されたスリープ時間が 0 以下の場合)
-             -> os_sleep()   (<= それ以外の場合)
+             -&gt; thr_yield()  (&lt;= 指定されたスリープ時間が 0 以下の場合)
+             -&gt; os_sleep()   (&lt;= それ以外の場合)
            * Windows の場合
-             -> Sleep()
+             -&gt; Sleep()
    * ConvertYieldToSleep オプションが指定されていない場合:
-     -> os::yield()
-        -> OS によって処理が異なる.
+     -&gt; os::yield()
+        -&gt; OS によって処理が異なる.
            * Linux の場合
-             -> sched_yield()  (<= スレッドが SCHED_OTHER なんだが, この場合も sched_yield() でいいんだっけ?? 要確認 #TODO)
+             -&gt; sched_yield()  (&lt;= スレッドが SCHED_OTHER なんだが, この場合も sched_yield() でいいんだっけ?? 要確認 #TODO)
            * Solaris の場合
-             -> os::sleep()    (<= 引数の interruptible は false)
-                -> (上述)
+             -&gt; os::sleep()    (&lt;= 引数の interruptible は false)
+                -&gt; (上述)
            * Windows の場合
-             -> os::NakedYield()
+             -&gt; os::NakedYield()
                 以下のどちらかを呼び出す.
-                -> SwitchToThread()
-                -> Sleep()
-```
+                -&gt; SwitchToThread()
+                -&gt; Sleep()
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

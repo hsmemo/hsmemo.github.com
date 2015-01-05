@@ -185,13 +185,13 @@ Compile クラス内で使用される補助クラス.
 Compile::AliasType::Init() で(のみ)行われている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 * Compile::Init()
-  -> Compile::AliasType::Init()
+  -&gt; Compile::AliasType::Init()
 
 * Compile::find_alias_type()
-  -> Compile::AliasType::Init()
-```
+  -&gt; Compile::AliasType::Init()
+</pre></div>
 
 ### 内部構造(Internal structure)
 以下の 3種類がデフォルトで用意されている

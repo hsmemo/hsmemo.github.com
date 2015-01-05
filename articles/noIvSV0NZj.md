@@ -97,123 +97,123 @@ SystemDictionary クラスは次のような public メソッドを持つ.
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### SystemDictionary::resolve_or_null(Symbol *class_name, Handle class_loader, Handle protection_domain, TRAPS)
-```
+<div class="flow-abst"><pre>
 SystemDictionary::resolve_or_null(Symbol *class_name, Handle class_loader, Handle protection_domain, TRAPS)
--> * 配列クラスの場合:
-     -> SystemDictionary::resolve_array_class_or_null()
-        -> * オブジェクト型の配列クラスの場合: (一次元配列のクラスだけでなく, 多次元配列のクラスも含む)
-             -> SystemDictionary::resolve_instance_class_or_null()
-                -> (後述)
-             -> Klass::array_klass()
+-&gt; * 配列クラスの場合:
+     -&gt; SystemDictionary::resolve_array_class_or_null()
+        -&gt; * オブジェクト型の配列クラスの場合: (一次元配列のクラスだけでなく, 多次元配列のクラスも含む)
+             -&gt; SystemDictionary::resolve_instance_class_or_null()
+                -&gt; (後述)
+             -&gt; Klass::array_klass()
            * プリミティブ型の配列クラスの場合: (一次元配列のクラスだけでなく, 多次元配列のクラスも含む)
-             -> Universe::typeArrayKlassObj()
-             -> Klass::array_klass()
+             -&gt; Universe::typeArrayKlassObj()
+             -&gt; Klass::array_klass()
 
    * 配列クラスではない場合:
-     -> SystemDictionary::resolve_instance_class_or_null()
-        -> (1) ロード対象のクラスに対応する PlaceholderEntry を PlaceholderTable 内に登録する.
-               -> PlaceholderTable::find_and_add()
+     -&gt; SystemDictionary::resolve_instance_class_or_null()
+        -&gt; (1) ロード対象のクラスに対応する PlaceholderEntry を PlaceholderTable 内に登録する.
+               -&gt; PlaceholderTable::find_and_add()
 
            (1) 実際のロード処理を行う.
-               -> SystemDictionary::load_instance_class()
-                  -> 使用する ClassLoader が指定されているかどうかで 2通りに分岐.
+               -&gt; SystemDictionary::load_instance_class()
+                  -&gt; 使用する ClassLoader が指定されているかどうかで 2通りに分岐.
                      * 使用する ClassLoader が指定されていない場合
                        (1) まずは, shared archive (Class Data Sharing の領域) から探す.
-                           -> SystemDictionary::load_shared_class()
+                           -&gt; SystemDictionary::load_shared_class()
 
                        (2) 見つからなければ, HotSpot 内蔵のクラスローダ(ブートストラップ・クラスローダ)でロードを試みる.
-                           -> ClassLoader::load_classfile()
-                              -> ClassFileParser::parseClassFile()
-                                 -> (See: [here](no2114rPX.html) for details)
-                              -> ClassLoader::add_package()
+                           -&gt; ClassLoader::load_classfile()
+                              -&gt; ClassFileParser::parseClassFile()
+                                 -&gt; (See: <a href="no2114rPX.html">here</a> for details)
+                              -&gt; ClassLoader::add_package()
   
                        (3) (#ifdef KERNEL の場合) #TODO
-                           -> SystemDictionary::download_and_retry_class_load()
+                           -&gt; SystemDictionary::download_and_retry_class_load()
 
                        (4) 以上の処理でクラスで見つかった場合は, SystemDictionary に登録する.
-                           -> SystemDictionary::find_or_define_instance_class()
-                              -> SystemDictionary::define_instance_class()
-                                 -> (1) クラスローダーにクラスを登録する
-                                        -> JavaCalls::call()
-                                           -> (See: [here](no3059iJu.html) for details)
-                                              -> java.lang.ClassLoader.addClass()
+                           -&gt; SystemDictionary::find_or_define_instance_class()
+                              -&gt; SystemDictionary::define_instance_class()
+                                 -&gt; (1) クラスローダーにクラスを登録する
+                                        -&gt; JavaCalls::call()
+                                           -&gt; (See: <a href="no3059iJu.html">here</a> for details)
+                                              -&gt; java.lang.ClassLoader.addClass()
                                     (2) クラスを SystemDictionary に追加する
-                                        -> SystemDictionary::add_to_hierarchy()
-                                           -> Universe::flush_dependents_on()
-                                        -> SystemDictionary::update_dictionary()
-                                           -> Dictionary::add_klass()
-                                        -> instanceKlass::eager_initialize()
+                                        -&gt; SystemDictionary::add_to_hierarchy()
+                                           -&gt; Universe::flush_dependents_on()
+                                        -&gt; SystemDictionary::update_dictionary()
+                                           -&gt; Dictionary::add_klass()
+                                        -&gt; instanceKlass::eager_initialize()
 
                      * 使用する ClassLoader が指定されている場合
                        (1) 指定された ClassLoader の loadClassInternal() もしくは loadClass() でロードを行う.
-                           -> JavaCalls::call_special() or JavaCalls::call_virtual()
-```
+                           -&gt; JavaCalls::call_special() or JavaCalls::call_virtual()
+</pre></div>
 
 ### SystemDictionary::resolve_or_null(Symbol *class_name, TRAPS)
-```
+<div class="flow-abst"><pre>
 SystemDictionary::resolve_or_null(Symbol *class_name, TRAPS)
--> SystemDictionary::resolve_or_null(Symbol *class_name, Handle class_loader, Handle protection_domain, TRAPS)
-   -> (上述)
-```
+-&gt; SystemDictionary::resolve_or_null(Symbol *class_name, Handle class_loader, Handle protection_domain, TRAPS)
+   -&gt; (上述)
+</pre></div>
 
 ### SystemDictionary::resolve_or_fail(Symbol *class_name, Handle class_loader, Handle protection_domain, bool throw_error, TRAPS)
-```
+<div class="flow-abst"><pre>
 SystemDictionary::resolve_or_fail(Symbol *class_name, Handle class_loader, Handle protection_domain, bool throw_error, TRAPS)
--> SystemDictionary::resolve_or_null(Symbol *class_name, Handle class_loader, Handle protection_domain, TRAPS)
-   -> (上記参照)
--> SystemDictionary::handle_resolution_exception()
-```
+-&gt; SystemDictionary::resolve_or_null(Symbol *class_name, Handle class_loader, Handle protection_domain, TRAPS)
+   -&gt; (上記参照)
+-&gt; SystemDictionary::handle_resolution_exception()
+</pre></div>
 
 ### SystemDictionary::resolve_or_fail(Symbol *class_name, bool throw_error, TRAPS)
-```
+<div class="flow-abst"><pre>
 SystemDictionary::resolve_or_fail(Symbol *class_name, bool throw_error, TRAPS)
--> SystemDictionary::resolve_or_fail(Symbol *class_name, Handle class_loader, Handle protection_domain, bool throw_error, TRAPS)
-   -> (上述)
-```
+-&gt; SystemDictionary::resolve_or_fail(Symbol *class_name, Handle class_loader, Handle protection_domain, bool throw_error, TRAPS)
+   -&gt; (上述)
+</pre></div>
 
 ### SystemDictionary::resolve_super_or_fail(Symbol *child_name, Symbol *class_name, Handle class_loader, Handle protection_domain, bool is_superclass, TRAPS)
-```
+<div class="flow-abst"><pre>
 #TODO
-```
+</pre></div>
 
 ### SystemDictionary::parse_stream(Symbol *class_name, Handle class_loader, Handle protection_domain, ClassFileStream *st, TRAPS)
-```
+<div class="flow-abst"><pre>
 SystemDictionary::parse_stream(Symbol *class_name, Handle class_loader, Handle protection_domain, ClassFileStream *st, TRAPS)
--> SystemDictionary::parse_stream(Symbol *class_name, Handle class_loader, Handle protection_domain, ClassFileStream *st, KlassHandle host_klass, GrowableArray< Handle > *cp_patches, TRAPS)
-   -> (下記参照)
-```
+-&gt; SystemDictionary::parse_stream(Symbol *class_name, Handle class_loader, Handle protection_domain, ClassFileStream *st, KlassHandle host_klass, GrowableArray&lt; Handle &gt; *cp_patches, TRAPS)
+   -&gt; (下記参照)
+</pre></div>
 
 ### SystemDictionary::parse_stream(Symbol *class_name, Handle class_loader, Handle protection_domain, ClassFileStream *st, KlassHandle host_klass, GrowableArray< Handle > *cp_patches, TRAPS)
-```
-SystemDictionary::parse_stream(Symbol *class_name, Handle class_loader, Handle protection_domain, ClassFileStream *st, KlassHandle host_klass, GrowableArray< Handle > *cp_patches, TRAPS)
--> ClassFileParser::parseClassFile()
-   -> (See: [here](no2114rPX.html) for details)
--> SystemDictionary::add_to_hierarchy()
-```
+<div class="flow-abst"><pre>
+SystemDictionary::parse_stream(Symbol *class_name, Handle class_loader, Handle protection_domain, ClassFileStream *st, KlassHandle host_klass, GrowableArray&lt; Handle &gt; *cp_patches, TRAPS)
+-&gt; ClassFileParser::parseClassFile()
+   -&gt; (See: <a href="no2114rPX.html">here</a> for details)
+-&gt; SystemDictionary::add_to_hierarchy()
+</pre></div>
 
 ### SystemDictionary::resolve_from_stream(Symbol *class_name, Handle class_loader, Handle protection_domain, ClassFileStream *st, bool verify, TRAPS)
-```
+<div class="flow-abst"><pre>
 SystemDictionary::resolve_from_stream()
--> (1) クラスファイルのパース処理を行う
-       -> ClassFileParser::parseClassFile()
-          -> (See: [here](no2114rPX.html) for details)
+-&gt; (1) クラスファイルのパース処理を行う
+       -&gt; ClassFileParser::parseClassFile()
+          -&gt; (See: <a href="no2114rPX.html">here</a> for details)
    (1) SystemDictionary に登録する.
        * 並行に処理できる場合:
-         -> SystemDictionary::find_or_define_instance_class()
-            -> SystemDictionary::define_instance_class()
-               -> (下記参照)
+         -&gt; SystemDictionary::find_or_define_instance_class()
+            -&gt; SystemDictionary::define_instance_class()
+               -&gt; (下記参照)
        * 〃できない場合:
-         -> SystemDictionary::define_instance_class()
-            -> (1) クラスローダーにクラスを登録する
-                   -> JavaCalls::call()
-                      -> (See: [here](no3059iJu.html) for details)
-                         -> java.lang.ClassLoader.addClass()
+         -&gt; SystemDictionary::define_instance_class()
+            -&gt; (1) クラスローダーにクラスを登録する
+                   -&gt; JavaCalls::call()
+                      -&gt; (See: <a href="no3059iJu.html">here</a> for details)
+                         -&gt; java.lang.ClassLoader.addClass()
                (2) クラスを SystemDictionary に追加する
-                   -> SystemDictionary::add_to_hierarchy()
-                      -> Universe::flush_dependents_on()
-                   -> SystemDictionary::update_dictionary()
-                      -> Dictionary::add_klass()
-```
+                   -&gt; SystemDictionary::add_to_hierarchy()
+                      -&gt; Universe::flush_dependents_on()
+                   -&gt; SystemDictionary::update_dictionary()
+                      -&gt; Dictionary::add_klass()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### SystemDictionary::resolve_or_fail(Symbol *class_name, Handle class_loader, Handle protection_domain, bool throw_error, TRAPS)

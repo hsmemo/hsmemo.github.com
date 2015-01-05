@@ -14,68 +14,68 @@ sun.management.ClassLoadingImpl クラスのメソッドは, 単にその統計�
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### 統計情報の更新処理
-```
+<div class="flow-abst"><pre>
 ClassFileParser::parseClassFile()
--> ClassLoadingService::notify_class_loaded()
-```
+-&gt; ClassLoadingService::notify_class_loaded()
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 ClassFileParser::parse_method()
--> ClassLoadingService::add_class_method_size()
-```
+-&gt; ClassLoadingService::add_class_method_size()
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 SystemDictionary::load_shared_class()
--> ClassLoadingService::notify_class_loaded()
-```
+-&gt; ClassLoadingService::notify_class_loaded()
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 Dictionary::do_unloading()
--> ClassLoadingService::notify_class_unloaded()
-```
+-&gt; ClassLoadingService::notify_class_unloaded()
+</pre></div>
 
 ### sun.management.ClassLoadingImpl クラスのメソッドの処理 (統計情報の取得処理)
-```
+<div class="flow-abst"><pre>
 sun.management.ClassLoadingImpl.isVerbose()
--> sun.management.VMManagementImpl.getVerboseClass()
-   -> Java_sun_management_VMManagementImpl_getVerboseClass()
-      -> jmm_GetBoolAttribute()  (JMM_VERBOSE_CLASS を引数として呼び出される)
-         -> ClassLoadingService::get_verbose()
-```
+-&gt; sun.management.VMManagementImpl.getVerboseClass()
+   -&gt; Java_sun_management_VMManagementImpl_getVerboseClass()
+      -&gt; jmm_GetBoolAttribute()  (JMM_VERBOSE_CLASS を引数として呼び出される)
+         -&gt; ClassLoadingService::get_verbose()
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 sun.management.ClassLoadingImpl.setVerboseClass()
--> Java_sun_management_ClassLoadingImpl_setVerboseClass()
-   -> jmm_SetBoolAttribute()  (JMM_VERBOSE_CLASS を引数として呼び出される)
-      -> ClassLoadingService::set_verbose()
-```
+-&gt; Java_sun_management_ClassLoadingImpl_setVerboseClass()
+   -&gt; jmm_SetBoolAttribute()  (JMM_VERBOSE_CLASS を引数として呼び出される)
+      -&gt; ClassLoadingService::set_verbose()
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 sun.management.ClassLoadingImpl.getTotalLoadedClassCount()
--> sun.management.VMManagementImpl.getTotalClassCount()
-   -> Java_sun_management_VMManagementImpl_getTotalClassCount()
-      -> jmm_GetLongAttribute()  (JMM_CLASS_LOADED_COUNT を引数として呼び出される)
-         -> get_long_attribute()
-            -> ClassLoadingService::loaded_class_count()
-```
+-&gt; sun.management.VMManagementImpl.getTotalClassCount()
+   -&gt; Java_sun_management_VMManagementImpl_getTotalClassCount()
+      -&gt; jmm_GetLongAttribute()  (JMM_CLASS_LOADED_COUNT を引数として呼び出される)
+         -&gt; get_long_attribute()
+            -&gt; ClassLoadingService::loaded_class_count()
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 sun.management.ClassLoadingImpl.getUnloadedClassCount()
--> sun.management.VMManagementImpl.getUnloadedClassCount()
-   -> Java_sun_management_VMManagementImpl_getUnloadedClassCount()
-      -> jmm_GetLongAttribute()  (JMM_CLASS_UNLOADED_COUNT を引数として呼び出される)
-         -> get_long_attribute()
-            -> ClassLoadingService::unloaded_class_count()
-```
+-&gt; sun.management.VMManagementImpl.getUnloadedClassCount()
+   -&gt; Java_sun_management_VMManagementImpl_getUnloadedClassCount()
+      -&gt; jmm_GetLongAttribute()  (JMM_CLASS_UNLOADED_COUNT を引数として呼び出される)
+         -&gt; get_long_attribute()
+            -&gt; ClassLoadingService::unloaded_class_count()
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 sun.management.ClassLoadingImpl.getLoadedClassCount()
--> sun.management.VMManagementImpl.getLoadedClassCount()
-   -> sun.management.VMManagementImpl.getTotalClassCount()
-      -> (同上)
-   -> sun.management.VMManagementImpl.getUnloadedClassCount()
-      -> (同上)
-```
+-&gt; sun.management.VMManagementImpl.getLoadedClassCount()
+   -&gt; sun.management.VMManagementImpl.getTotalClassCount()
+      -&gt; (同上)
+   -&gt; sun.management.VMManagementImpl.getUnloadedClassCount()
+      -&gt; (同上)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

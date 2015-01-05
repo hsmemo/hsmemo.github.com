@@ -11,22 +11,22 @@ title: Serviceability 機能 ： JVMTI の処理 ： JVMTI 関数の処理 ： �
 (See: JVMTI 仕様)
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
-(See: [here](noIvSV0NZj.html) for details)
--> SystemDictionary::parse_stream()
-   -> JvmtiExport::post_class_load()
-      -> (登録されているコールバックを呼び出す)
+<div class="flow-abst"><pre>
+(See: <a href="noIvSV0NZj.html">here</a> for details)
+-&gt; SystemDictionary::parse_stream()
+   -&gt; JvmtiExport::post_class_load()
+      -&gt; (登録されているコールバックを呼び出す)
 
-(See: [here](noIvSV0NZj.html) for details)
--> SystemDictionary::resolve_instance_class_or_null()
-   -> JvmtiExport::post_class_load()
-      -> (同上)
+(See: <a href="noIvSV0NZj.html">here</a> for details)
+-&gt; SystemDictionary::resolve_instance_class_or_null()
+   -&gt; JvmtiExport::post_class_load()
+      -&gt; (同上)
 
-(See: [here](noIvSV0NZj.html) for details)
--> SystemDictionary::define_instance_class()
-   -> JvmtiExport::post_class_load()
-      -> (同上)
-```
+(See: <a href="noIvSV0NZj.html">here</a> for details)
+-&gt; SystemDictionary::define_instance_class()
+   -&gt; JvmtiExport::post_class_load()
+      -&gt; (同上)
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 

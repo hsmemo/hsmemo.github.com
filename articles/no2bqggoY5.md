@@ -15,10 +15,10 @@ title: JNI の処理 ： JNI Functions の処理 ： バージョン情報(Versi
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### GetVersion() の処理
-```
+<div class="flow-abst"><pre>
 jni_GetVersion()
--> (CurrentVersion 変数の値をリターンするだけ)
-```
+-&gt; (CurrentVersion 変数の値をリターンするだけ)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

@@ -34,76 +34,76 @@ FlatProfiler::record_vm_tick() では,
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### FlatProfiler の起動処理
-```
-(HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
--> Threads::create_vm()
-   -> FlatProfiler::engage()
-```
+<div class="flow-abst"><pre>
+(HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+-&gt; Threads::create_vm()
+   -&gt; FlatProfiler::engage()
+</pre></div>
 
 #### (Linux の場合のみの処理) SR_signum 関係の初期化処理
-```
-(HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
--> Threads::create_vm()
-   -> os::init_2()
-      -> SR_initialize()
-```
+<div class="flow-abst"><pre>
+(HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+-&gt; Threads::create_vm()
+   -&gt; os::init_2()
+      -&gt; SR_initialize()
+</pre></div>
 
 ### FlatProfilerTask による計測処理
-```
+<div class="flow-abst"><pre>
 FlatProfilerTask::task()
--> (1) ProfileVM オプションが指定されている場合, 以下の計測処理を行う.
-       -> FlatProfiler::record_vm_tick()
-          -> os::get_thread_pc()
-             -> * Linux の場合
+-&gt; (1) ProfileVM オプションが指定されている場合, 以下の計測処理を行う.
+       -&gt; FlatProfiler::record_vm_tick()
+          -&gt; os::get_thread_pc()
+             -&gt; * Linux の場合
                   * 停止させる側
-                    -> do_suspend()
-                       -> os::Linux::SuspendResume::set_suspend_action()
-                       -> pthread_kill()              (<= SR_handler() を起動させて処理を停止させる)
-                    -> os::Linux::ucontext_get_pc()
-                    -> do_resume()
-                       -> os::Linux::SuspendResume::set_suspend_action()
-                       -> pthread_kill()              (<= 処理を再開させる)
+                    -&gt; do_suspend()
+                       -&gt; os::Linux::SuspendResume::set_suspend_action()
+                       -&gt; pthread_kill()              (&lt;= SR_handler() を起動させて処理を停止させる)
+                    -&gt; os::Linux::ucontext_get_pc()
+                    -&gt; do_resume()
+                       -&gt; os::Linux::SuspendResume::set_suspend_action()
+                       -&gt; pthread_kill()              (&lt;= 処理を再開させる)
 
                   * 停止させられる側
-                    -> SR_handler()
-                       -> os::Linux::SuspendResume::set_suspended()
-                       -> sigsuspend()                (<= 再開させられるまで待機)
-                       -> resume_clear_context()
+                    -&gt; SR_handler()
+                       -&gt; os::Linux::SuspendResume::set_suspended()
+                       -&gt; sigsuspend()                (&lt;= 再開させられるまで待機)
+                       -&gt; resume_clear_context()
 
                 * Solaris の場合
                   * 停止させる側
-                    -> OSThread::Sync_Interrupt_Callback::interrupt()
-                       -> OSThread::set_interrupt_callback()
-                       -> thr_kill()       (<= シグナルハンドラを起動させる)
-                       -> Monitor::wait()  (<= 処理が終わるまで待機)
-                       -> OSThread::remove_interrupt_callback()
-                    -> GetThreadPC_Callback::addr()
+                    -&gt; OSThread::Sync_Interrupt_Callback::interrupt()
+                       -&gt; OSThread::set_interrupt_callback()
+                       -&gt; thr_kill()       (&lt;= シグナルハンドラを起動させる)
+                       -&gt; Monitor::wait()  (&lt;= 処理が終わるまで待機)
+                       -&gt; OSThread::remove_interrupt_callback()
+                    -&gt; GetThreadPC_Callback::addr()
 
                   * 停止させられる側
-                    -> JVM_handle_solaris_signal()
-                       -> OSThread::do_interrupt_callbacks_at_interrupt()
-                          -> GetThreadPC_Callback::execute()
-                          -> OSThread::Sync_Interrupt_Callback::leave_callback()
-                             -> Monitor::notify_all()  (<= 停止させる側を起床させる)
+                    -&gt; JVM_handle_solaris_signal()
+                       -&gt; OSThread::do_interrupt_callbacks_at_interrupt()
+                          -&gt; GetThreadPC_Callback::execute()
+                          -&gt; OSThread::Sync_Interrupt_Callback::leave_callback()
+                             -&gt; Monitor::notify_all()  (&lt;= 停止させる側を起床させる)
 
                 * Windows の場合
                   * 停止させる側
-                    -> GetThreadContext()
+                    -&gt; GetThreadContext()
 
    (2) 何らかの VM_Operation が実行中の場合, 以下の計測処理を行う.
-       -> FlatProfiler::record_vm_operation()
+       -&gt; FlatProfiler::record_vm_operation()
 
    (3) Safepoint が開始されていない場合, 以下の計測処理を行う.
-       -> FlatProfiler::record_thread_ticks()
-```
+       -&gt; FlatProfiler::record_thread_ticks()
+</pre></div>
 
 ### FlatProfiler の終了処理
-```
-(See: [here](no3059oro.html) for details)
--> before_exit()
-   -> FlatProfiler::disengage()
-   -> FlatProfiler::print()
-```
+<div class="flow-abst"><pre>
+(See: <a href="no3059oro.html">here</a> for details)
+-&gt; before_exit()
+   -&gt; FlatProfiler::disengage()
+   -&gt; FlatProfiler::print()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### SR_initialize()

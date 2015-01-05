@@ -11,11 +11,11 @@ title: Serviceability 機能 ： JVMTI の処理 ： JVMTI 関数の処理 ： �
 (See: JVMTI 仕様)
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 JvmtiEnv::GetBytecodes()
--> JvmtiEnvBase::allocate()
--> JvmtiClassFileReconstituter::copy_bytecodes()
-```
+-&gt; JvmtiEnvBase::allocate()
+-&gt; JvmtiClassFileReconstituter::copy_bytecodes()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### JvmtiEnv::GetBytecodes()

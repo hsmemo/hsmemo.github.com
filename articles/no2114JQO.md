@@ -11,13 +11,13 @@ title: Serviceability 機能 ： HotSpot Monitoring and Management Interface (JM
 (#Under Construction)
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 sun.management.HotSpotDiagnostic.dumpHeap()
--> Java_sun_management_HotSpotDiagnostic_dumpHeap()
-   -> jmm_DumpHeap0()
-      -> HeapDumper::dump()
-         -> VM_HeapDumper::doit()
-```
+-&gt; Java_sun_management_HotSpotDiagnostic_dumpHeap()
+   -&gt; jmm_DumpHeap0()
+      -&gt; HeapDumper::dump()
+         -&gt; VM_HeapDumper::doit()
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

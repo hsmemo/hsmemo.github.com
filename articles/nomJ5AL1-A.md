@@ -176,15 +176,15 @@ See: [here](../doxygen/classDoubleFlagSetting.html) for details
 
 * コマンドラインオプションのパース処理 (より正確には, パースした値を同名の大域変数にセットする処理)
   
-```
+<div class="flow-abst"><pre>
   Arguments::process_argument()
-  -> Arguments::parse_argument()
-     -> set_bool_flag()
-     -> set_fp_numeric_flag()
-     -> set_numeric_flag()
-     -> set_string_flag()
-     -> append_to_string_flag()
-```
+  -&gt; Arguments::parse_argument()
+     -&gt; set_bool_flag()
+     -&gt; set_fp_numeric_flag()
+     -&gt; set_numeric_flag()
+     -&gt; set_string_flag()
+     -&gt; append_to_string_flag()
+</pre></div>
 
 
 ```cpp
@@ -227,14 +227,14 @@ See: [here](../doxygen/classDoubleFlagSetting.html) for details
 
 * Attach API の setflag コマンド
 
-```
+<div class="flow-abst"><pre>
   set_flag()
-  -> set_bool_flag()
-  -> set_intx_flag()
-  -> set_uintx_flag()
-  -> set_uint64_t_flag()
-  -> set_ccstr_flag()
-```
+  -&gt; set_bool_flag()
+  -&gt; set_intx_flag()
+  -&gt; set_uintx_flag()
+  -&gt; set_uint64_t_flag()
+  -&gt; set_ccstr_flag()
+</pre></div>
 
 
 ```cpp
@@ -277,13 +277,13 @@ See: [here](../doxygen/classDoubleFlagSetting.html) for details
 
 * JMM の処理 (sun.management.MemoryImpl.setVerboseGC(), sun.management.ClassLoadingImpl.setVerboseClass() の処理)
 
-```
+<div class="flow-abst"><pre>
   jmm_SetBoolAttribute() (JMM_VERBOSE_GC を引数として呼び出される)
-  -> MemoryService::set_verbose()
+  -&gt; MemoryService::set_verbose()
 
   jmm_SetBoolAttribute() (JMM_VERBOSE_CLASS を引数として呼び出される)
-  -> ClassLoadingService::set_verbose()
-```
+  -&gt; ClassLoadingService::set_verbose()
+</pre></div>
 
 
 ```cpp
@@ -315,16 +315,16 @@ See: [here](../doxygen/classDoubleFlagSetting.html) for details
 * sun.management.Flag クラスの処理 
   (sun.management.Flag.setLongValue(), sun.management.Flag.setBooleanValue(), sun.management.Flag.setStringValue() の処理)
   
-```
+<div class="flow-abst"><pre>
   Java_sun_management_Flag_setLongValue()
-  -> jmm_SetVMGlobal()
+  -&gt; jmm_SetVMGlobal()
 
   Java_sun_management_Flag_setBooleanValue()
-  -> jmm_SetVMGlobal()
+  -&gt; jmm_SetVMGlobal()
 
   Java_sun_management_Flag_setStringValue()
-  -> jmm_SetVMGlobal()
-```
+  -&gt; jmm_SetVMGlobal()
+</pre></div>
 
 
 ```cpp
@@ -344,19 +344,19 @@ See: [here](../doxygen/classDoubleFlagSetting.html) for details
 
 * DTrace 関連のコマンドラインオプションの値を実行中に変える処理
   
-```
+<div class="flow-abst"><pre>
   DTrace::enable_dprobes()
-  -> set_bool_flag()
+  -&gt; set_bool_flag()
 
   DTrace::disable_dprobes()
-  -> set_bool_flag()
+  -&gt; set_bool_flag()
 
   DTrace::set_extended_dprobes()
-  -> set_bool_flag()
+  -&gt; set_bool_flag()
   
   DTrace::set_monitor_dprobes()
-  -> set_bool_flag()
-```
+  -&gt; set_bool_flag()
+</pre></div>
 
 
 ```cpp
@@ -369,13 +369,13 @@ See: [here](../doxygen/classDoubleFlagSetting.html) for details
 
 * ?? (デバッグ用(開発時用)の機能である模様. 外部から値を参照する/変更するための機能?)
 
-```
+<div class="flow-abst"><pre>
   ?? (使用箇所が見当たらない)
-  -> JVM_AccessVMBooleanFlag()
+  -&gt; JVM_AccessVMBooleanFlag()
 
   ?? (使用箇所が見当たらない)
-  -> JVM_AccessVMIntFlag()
-```
+  -&gt; JVM_AccessVMIntFlag()
+</pre></div>
 
 
 ```cpp

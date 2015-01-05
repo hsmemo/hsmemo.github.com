@@ -59,43 +59,43 @@ Arguments::_agentList フィールドに移される.
 (なお, Arguments::parse_each_vm_init_arg() は 
 Arguments::parse_vm_init_args() 内の 3箇所で呼び出されている)
 
-```
-(HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
--> Threads::create_vm()
-   -> (1) 関連するオプション(-Xrun, -agentlib, -agentpath)のパース処理を行う
-          -> Arguments::parse()
-             -> Arguments::parse_vm_init_args()
-                -> Arguments::parse_each_vm_init_arg()
-                   -> Arguments::add_init_library()  (<= -Xrun オプションの処理)
-                      -> AgentLibraryList::add()
-                   -> Arguments::add_init_agent()    (<= -agentlib オプション及び -agentpath オプションの処理)
-                      -> AgentLibraryList::add()
-                -> Arguments::parse_java_options_environment_variable()
-                   -> Arguments::parse_options_environment_variable()
-                      -> Arguments::parse_each_vm_init_arg()
-                         -> (同上)
-                -> Arguments::parse_java_tool_options_environment_variable()
-                   -> Arguments::parse_options_environment_variable()
-                      -> (同上)
+<div class="flow-abst"><pre>
+(HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+-&gt; Threads::create_vm()
+   -&gt; (1) 関連するオプション(-Xrun, -agentlib, -agentpath)のパース処理を行う
+          -&gt; Arguments::parse()
+             -&gt; Arguments::parse_vm_init_args()
+                -&gt; Arguments::parse_each_vm_init_arg()
+                   -&gt; Arguments::add_init_library()  (&lt;= -Xrun オプションの処理)
+                      -&gt; AgentLibraryList::add()
+                   -&gt; Arguments::add_init_agent()    (&lt;= -agentlib オプション及び -agentpath オプションの処理)
+                      -&gt; AgentLibraryList::add()
+                -&gt; Arguments::parse_java_options_environment_variable()
+                   -&gt; Arguments::parse_options_environment_variable()
+                      -&gt; Arguments::parse_each_vm_init_arg()
+                         -&gt; (同上)
+                -&gt; Arguments::parse_java_tool_options_environment_variable()
+                   -&gt; Arguments::parse_options_environment_variable()
+                      -&gt; (同上)
 
       (1) -Xrun オプションの値を -agentlib/-agentpath の形式に変換する (ただし JVM_OnLoad() が定義されているものについては変換しない)
-          -> Threads::convert_vm_init_libraries_to_agents()
-             -> Arguments::convert_library_to_agent()
-                -> AgentLibraryList::remove()
-                -> AgentLibraryList::add()
+          -&gt; Threads::convert_vm_init_libraries_to_agents()
+             -&gt; Arguments::convert_library_to_agent()
+                -&gt; AgentLibraryList::remove()
+                -&gt; AgentLibraryList::add()
 
       (1) エージェントをロードし, それぞれの Agent_OnLoad() 関数を呼び出す
-          -> Threads::create_vm_init_agents()
-             -> lookup_agent_on_load()
-                -> lookup_on_load()
-                   -> os::dll_build_name()
-                   -> os::dll_load()
-                   -> os::dll_lookup()
-             -> それぞれのエージェント(.soファイル等)の Agent_OnLoad() 関数を呼び出す
+          -&gt; Threads::create_vm_init_agents()
+             -&gt; lookup_agent_on_load()
+                -&gt; lookup_on_load()
+                   -&gt; os::dll_build_name()
+                   -&gt; os::dll_load()
+                   -&gt; os::dll_lookup()
+             -&gt; それぞれのエージェント(.soファイル等)の Agent_OnLoad() 関数を呼び出す
 
       (1) -Xrun オプションで指定されたエージェントで JVM_OnLoad() が定義されているものについて, それぞれの JVM_OnLoad() 関数を呼び出す
-          -> Threads::create_vm_init_libraries()
-```
+          -&gt; Threads::create_vm_init_libraries()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### Arguments::add_init_library()

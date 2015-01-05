@@ -262,12 +262,12 @@ PosParPRT 内で追加の PerRegionTable オブジェクトが確保される
 PerRegionTable::alloc() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
-(略) (See: [here](no2935YzN.html) for details)
--> OtherRegionsTable::add_reference()
-   -> PosParPRT::par_expand()
-      -> PerRegionTable::alloc()
-```
+<div class="flow-abst"><pre>
+(略) (See: <a href="no2935YzN.html">here</a> for details)
+-&gt; OtherRegionsTable::add_reference()
+   -&gt; PosParPRT::par_expand()
+      -&gt; PerRegionTable::alloc()
+</pre></div>
 
 ### 内部構造(Internal structure)
 内部的には BitMap クラスを用いて情報を記録している
@@ -338,11 +338,11 @@ OtherRegionsTable クラス内で使用される補助クラス
 PosParPRT::alloc() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
-(略) (See: [here](no2935YzN.html) and [here](no3420WIS.html) for details)
--> OtherRegionsTable::add_reference()
-   -> PosParPRT::alloc()
-```
+<div class="flow-abst"><pre>
+(略) (See: <a href="no2935YzN.html">here</a> and <a href="no3420WIS.html">here</a> for details)
+-&gt; OtherRegionsTable::add_reference()
+   -&gt; PosParPRT::alloc()
+</pre></div>
 
 (なお, OtherRegionsTable::_fine_grain_regions フィールドの配列用のメモリ領域は, 
  OtherRegionsTable::OtherRegionsTable() 内で(のみ)確保されている)

@@ -65,49 +65,49 @@ title: constantPoolOopDesc クラス関連のクラス (CPSlot, constantPoolOopD
 constantPoolKlass::allocate() というファクトリメソッドが用意されており, その中で生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 * クラスファイルのパース処理時
 
   ClassFileParser::parseClassFile()
-  -> ClassFileParser::parse_constant_pool()
-     -> oopFactory::new_constantPool()
-        -> constantPoolKlass::allocate()
+  -&gt; ClassFileParser::parse_constant_pool()
+     -&gt; oopFactory::new_constantPool()
+        -&gt; constantPoolKlass::allocate()
 
 * JVMTI の RedefineClasses() 及び RetransformClasses() の処理時
 
   VM_RedefineClasses::doit_prologue()
-  -> VM_RedefineClasses::load_new_class_versions()
-     -> VM_RedefineClasses::merge_cp_and_rewrite()
-        -> oopFactory::new_constantPool()
-           -> (同上)
-        -> VM_RedefineClasses::set_new_constant_pool()
-           -> oopFactory::new_constantPool()
-              -> (同上)
+  -&gt; VM_RedefineClasses::load_new_class_versions()
+     -&gt; VM_RedefineClasses::merge_cp_and_rewrite()
+        -&gt; oopFactory::new_constantPool()
+           -&gt; (同上)
+        -&gt; VM_RedefineClasses::set_new_constant_pool()
+           -&gt; oopFactory::new_constantPool()
+              -&gt; (同上)
 
 * MethodHandle に対応する methodOop の生成処理時
 
   MethodHandleCompiler::compile()
-  -> MethodHandleWalker::walk()
-     -> MethodHandleCompiler::make_invoke()
-        -> methodOopDesc::make_invoke_method()
-           -> oopFactory::new_constantPool()
-              -> (同上)
-  -> MethodHandleCompiler::get_method_oop()
-     -> MethodHandleCompiler::get_constant_pool()
-        -> oopFactory::new_constantPool()
-           -> (同上)
+  -&gt; MethodHandleWalker::walk()
+     -&gt; MethodHandleCompiler::make_invoke()
+        -&gt; methodOopDesc::make_invoke_method()
+           -&gt; oopFactory::new_constantPool()
+              -&gt; (同上)
+  -&gt; MethodHandleCompiler::get_method_oop()
+     -&gt; MethodHandleCompiler::get_constant_pool()
+        -&gt; oopFactory::new_constantPool()
+           -&gt; (同上)
 
 * ?? (#TODO)
 
   MethodHandleWalker::retype_raw_conversion()
-  -> MethodHandleCompiler::make_invoke()
-     -> (同上)
+  -&gt; MethodHandleCompiler::make_invoke()
+     -&gt; (同上)
 
   SystemDictionary::find_method_handle_invoke()
-  -> methodOopDesc::make_invoke_method()
-     -> oopFactory::new_constantPool()
-        -> (同上)
-```
+  -&gt; methodOopDesc::make_invoke_method()
+     -&gt; oopFactory::new_constantPool()
+        -&gt; (同上)
+</pre></div>
 
 ### 内部構造(Internal structure)
 定義されているフィールドは以下の通り.

@@ -13,143 +13,143 @@ title: Memory allocation (& GC 処理) ： メモリ関係の初期化処理の�
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### CollectorPolicy の初期化
 #### 非 CMS 用
-```
-(See: [here](noYV_1Xq7P.html) for details)
--> MarkSweepPolicy::MarkSweepPolicy()
-   -> (1) スーパークラスのコンストラクタの呼び出し
-          -> CollectorPolicy::CollectorPolicy()
+<div class="flow-abst"><pre>
+(See: <a href="noYV_1Xq7P.html">here</a> for details)
+-&gt; MarkSweepPolicy::MarkSweepPolicy()
+   -&gt; (1) スーパークラスのコンストラクタの呼び出し
+          -&gt; CollectorPolicy::CollectorPolicy()
 
       (1) 各世代(Young/Old/Perm)の領域サイズを決定し, 対応する GenerationSpec オブジェクトを作成する.
-          -> GenCollectorPolicy::initialize_all()
-             -> (1) ヒープサイズに関するコマンドラインオプション(-Xms,-Xmx等)の値を取得する
-                    -> TwoGenerationCollectorPolicy::initialize_flags()
-                       -> GenCollectorPolicy::initialize_flags()
-                          -> CollectorPolicy::initialize_flags()
+          -&gt; GenCollectorPolicy::initialize_all()
+             -&gt; (1) ヒープサイズに関するコマンドラインオプション(-Xms,-Xmx等)の値を取得する
+                    -&gt; TwoGenerationCollectorPolicy::initialize_flags()
+                       -&gt; GenCollectorPolicy::initialize_flags()
+                          -&gt; CollectorPolicy::initialize_flags()
 
                 (2) 各世代(Young/Old/Perm)の領域サイズを決定する
-                    -> TwoGenerationCollectorPolicy::initialize_size_info()
-                       -> GenCollectorPolicy::initialize_size_info()
-                          -> CollectorPolicy::initialize_size_info()
+                    -&gt; TwoGenerationCollectorPolicy::initialize_size_info()
+                       -&gt; GenCollectorPolicy::initialize_size_info()
+                          -&gt; CollectorPolicy::initialize_size_info()
 
                 (3) 各世代に対応する GenerationSpec オブジェクトを作成する
-                    -> MarkSweepPolicy::initialize_generations()
-```
+                    -&gt; MarkSweepPolicy::initialize_generations()
+</pre></div>
 
 #### CMS 用
-```
-(See: [here](noYV_1Xq7P.html) for details)
--> ConcurrentMarkSweepPolicy::ConcurrentMarkSweepPolicy()
-   -> GenCollectorPolicy::initialize_all()
-      -> (同上)
+<div class="flow-abst"><pre>
+(See: <a href="noYV_1Xq7P.html">here</a> for details)
+-&gt; ConcurrentMarkSweepPolicy::ConcurrentMarkSweepPolicy()
+   -&gt; GenCollectorPolicy::initialize_all()
+      -&gt; (同上)
 
-(See: [here](noYV_1Xq7P.html) for details)
--> ASConcurrentMarkSweepPolicy::ASConcurrentMarkSweepPolicy()
-   -> 特にオーバーライドされていないので, ConcurrentMarkSweepPolicy::ConcurrentMarkSweepPolicy() と同じ
-      -> (同上)
+(See: <a href="noYV_1Xq7P.html">here</a> for details)
+-&gt; ASConcurrentMarkSweepPolicy::ASConcurrentMarkSweepPolicy()
+   -&gt; 特にオーバーライドされていないので, ConcurrentMarkSweepPolicy::ConcurrentMarkSweepPolicy() と同じ
+      -&gt; (同上)
 
-```
+</pre></div>
 
 ### CollectedHeap の初期化
-```
-(See: [here](noYV_1Xq7P.html) for details)
--> GenCollectedHeap::initialize()
-   -> (1) 初期化処理の前準備を行う
-          -> CollectedHeap::pre_initialize()
+<div class="flow-abst"><pre>
+(See: <a href="noYV_1Xq7P.html">here</a> for details)
+-&gt; GenCollectedHeap::initialize()
+   -&gt; (1) 初期化処理の前準備を行う
+          -&gt; CollectedHeap::pre_initialize()
 
       (1) ヒープ領域をメモリ空間上に reserve する (まず Young, Old, Perm の全世代分をまとめて1つの連続領域として確保)
-          -> GenCollectedHeap::allocate()
-             -> (1) ヒープ領域として確保するサイズ, および確保場所として望ましい仮想アドレスを計算する
-                    -> Universe::preferred_heap_base()
+          -&gt; GenCollectedHeap::allocate()
+             -&gt; (1) ヒープ領域として確保するサイズ, および確保場所として望ましい仮想アドレスを計算する
+                    -&gt; Universe::preferred_heap_base()
 
                 (2) ヒープ領域をメモリ空間上に reserve する
-                    -> ReservedHeapSpace::ReservedHeapSpace(size_t size, size_t forced_base_alignment, bool large, char* requested_address)
-                       -> ReservedSpace::ReservedSpace()
-                          -> ReservedSpace::initialize()
-                             -> (1) 以下のどれかでメモリ領域を reserve する.
+                    -&gt; ReservedHeapSpace::ReservedHeapSpace(size_t size, size_t forced_base_alignment, bool large, char* requested_address)
+                       -&gt; ReservedSpace::ReservedSpace()
+                          -&gt; ReservedSpace::initialize()
+                             -&gt; (1) 以下のどれかでメモリ領域を reserve する.
                                     * Large Page を使用したいが, OS の制約により large page については
                                       reserve と commit は同時に行わなくてはいけない場合:
-                                      -> os::reserve_memory_special()
-                                         -> shmat(), VirtualAlloc(), etc
+                                      -&gt; os::reserve_memory_special()
+                                         -&gt; shmat(), VirtualAlloc(), etc
                                             (各 OS 固有の large page なメモリ空間確保用のシステムコールを呼び出す)
                                     * 確保するアドレスが指定されている場合:
-                                      -> os::attempt_reserve_memory_at()
-                                         -> os::reserve_memory()
-                                            -> mmap(), VirtualAlloc(), etc
+                                      -&gt; os::attempt_reserve_memory_at()
+                                         -&gt; os::reserve_memory()
+                                            -&gt; mmap(), VirtualAlloc(), etc
                                                (各 OS 固有の仮想メモリ空間確保用のシステムコール)
                                     * それ以外の場合:
-                                      -> os::reserve_memory()
-                                         -> (同上)
-                       -> ReservedSpace::protect_noaccess_prefix()
-                          -> os::protect_memory()          (← UseCompressedOops の場合のみ実行)
+                                      -&gt; os::reserve_memory()
+                                         -&gt; (同上)
+                       -&gt; ReservedSpace::protect_noaccess_prefix()
+                          -&gt; os::protect_memory()          (← UseCompressedOops の場合のみ実行)
 
       (1) 確保したヒープ領域に対応する Remembered Set (GenRemSet オブジェクト) を生成
-          -> CollectorPolicy::create_rem_set()
+          -&gt; CollectorPolicy::create_rem_set()
 
       (1) 1つの連続領域として確保したヒープ空間を各世代(Young/Old/Perm)に分け,
           New/Old に対応する Generation オブジェクトを生成.
           (あわせて, ここまでは reserve しただけだった メモリ領域の commit も行う)
 
-          -> GenerationSpec::init()
-             -> 各Generationクラスのコンストラクタを呼び出す. 呼び出し先はGenerationクラスに応じて異なる.
+          -&gt; GenerationSpec::init()
+             -&gt; 各Generationクラスのコンストラクタを呼び出す. 呼び出し先はGenerationクラスに応じて異なる.
 
                 * Generation::DefNew の場合:
-                  -> DefNewGeneration::DefNewGeneration()
-                     -> Generation::Generation()
-                        -> VirtualSpace::initialize()
-                           -> VirtualSpace::expand_by()
-                              -> os::commit_memory()
+                  -&gt; DefNewGeneration::DefNewGeneration()
+                     -&gt; Generation::Generation()
+                        -&gt; VirtualSpace::initialize()
+                           -&gt; VirtualSpace::expand_by()
+                              -&gt; os::commit_memory()
 
                 * Generation::MarkSweepCompact の場合:
-                  -> TenuredGeneration::TenuredGeneration()
-                     -> OneContigSpaceCardGeneration::OneContigSpaceCardGeneration()
-                        -> CardGeneration::CardGeneration()
-                           -> Generation::Generation()
-                              -> (同上)
+                  -&gt; TenuredGeneration::TenuredGeneration()
+                     -&gt; OneContigSpaceCardGeneration::OneContigSpaceCardGeneration()
+                        -&gt; CardGeneration::CardGeneration()
+                           -&gt; Generation::Generation()
+                              -&gt; (同上)
 
                 * Generation::ParNew の場合:
-                  -> ParNewGeneration::ParNewGeneration()
-                     -> DefNewGeneration::DefNewGeneration()
-                        -> (同上)
+                  -&gt; ParNewGeneration::ParNewGeneration()
+                     -&gt; DefNewGeneration::DefNewGeneration()
+                        -&gt; (同上)
 
                 * Generation::ASParNew の場合:
-                  -> ASParNewGeneration::ASParNewGeneration()
-                     -> ParNewGeneration::ParNewGeneration()
-                        -> (同上)
+                  -&gt; ASParNewGeneration::ASParNewGeneration()
+                     -&gt; ParNewGeneration::ParNewGeneration()
+                        -&gt; (同上)
 
                 * Generation::ConcurrentMarkSweep の場合:
-                  -> ConcurrentMarkSweepGeneration::ConcurrentMarkSweepGeneration()
-                     -> CardGeneration::CardGeneration()
-                        -> Generation::Generation()
-                           -> (同上)
-                  -> ConcurrentMarkSweepGeneration::initialize_performance_counters()
+                  -&gt; ConcurrentMarkSweepGeneration::ConcurrentMarkSweepGeneration()
+                     -&gt; CardGeneration::CardGeneration()
+                        -&gt; Generation::Generation()
+                           -&gt; (同上)
+                  -&gt; ConcurrentMarkSweepGeneration::initialize_performance_counters()
 
                 * Generation::ASConcurrentMarkSweep の場合:
-                  -> ASConcurrentMarkSweepGeneration::ASConcurrentMarkSweepGeneration()
-                     -> ConcurrentMarkSweepGeneration::ConcurrentMarkSweepGeneration()
-                        -> (同上)
-                  -> ConcurrentMarkSweepGeneration::initialize_performance_counters()
+                  -&gt; ASConcurrentMarkSweepGeneration::ASConcurrentMarkSweepGeneration()
+                     -&gt; ConcurrentMarkSweepGeneration::ConcurrentMarkSweepGeneration()
+                        -&gt; (同上)
+                  -&gt; ConcurrentMarkSweepGeneration::initialize_performance_counters()
 
       (1) Perm に対応する Generation オブジェクトを生成
-          -> PermanentGenerationSpec::init()
-             -> 各Generationクラスのコンストラクタを呼び出す. 呼び出し先はGenerationクラスに応じて異なる.
+          -&gt; PermanentGenerationSpec::init()
+             -&gt; 各Generationクラスのコンストラクタを呼び出す. 呼び出し先はGenerationクラスに応じて異なる.
                 * PermGen::MarkSweepCompact の場合:
-                  -> CompactingPermGen::CompactingPermGen()
-                     -> CompactingPermGenGen::CompactingPermGenGen()
-                        -> OneContigSpaceCardGeneration::OneContigSpaceCardGeneration()
-                           -> CardGeneration::CardGeneration()
-                              -> Generation::Generation()
-                                 -> (同上)
-                     -> CompactingPermGenGen::initialize_performance_counters()
+                  -&gt; CompactingPermGen::CompactingPermGen()
+                     -&gt; CompactingPermGenGen::CompactingPermGenGen()
+                        -&gt; OneContigSpaceCardGeneration::OneContigSpaceCardGeneration()
+                           -&gt; CardGeneration::CardGeneration()
+                              -&gt; Generation::Generation()
+                                 -&gt; (同上)
+                     -&gt; CompactingPermGenGen::initialize_performance_counters()
 
                 * PermGen::ConcurrentMarkSweep の場合:
-                  -> CMSPermGen::CMSPermGen()
+                  -&gt; CMSPermGen::CMSPermGen()
 
       (1) 
-          -> GenCollectedHeap::clear_incremental_collection_failed()
+          -&gt; GenCollectedHeap::clear_incremental_collection_failed()
 
       (1) もし CMS であれば, GC 用のスレッドを作成する.
-          -> GenCollectedHeap::create_cms_collector()
-```
+          -&gt; GenCollectedHeap::create_cms_collector()
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

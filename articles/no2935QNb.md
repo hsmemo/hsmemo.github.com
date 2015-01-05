@@ -11,14 +11,14 @@ title: Serviceability 機能 ： JVMTI の処理 ： JVMTI 関数の処理 ： �
 (See: JVMTI 仕様)
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 JvmtiEnv::GetObjectMonitorUsage()
--> JvmtiEnvBase::get_object_monitor_usage()
--> VMThread::execute()
-   -> (略) (See: [here](no2935qaz.html) for details)
-      -> VM_GetObjectMonitorUsage::doit()
-         -> JvmtiEnvBase::get_object_monitor_usage()
-```
+-&gt; JvmtiEnvBase::get_object_monitor_usage()
+-&gt; VMThread::execute()
+   -&gt; (略) (See: <a href="no2935qaz.html">here</a> for details)
+      -&gt; VM_GetObjectMonitorUsage::doit()
+         -&gt; JvmtiEnvBase::get_object_monitor_usage()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### JvmtiEnv::GetObjectMonitorUsage()

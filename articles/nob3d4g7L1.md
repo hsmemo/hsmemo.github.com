@@ -47,32 +47,32 @@ constantPoolOopDesc オブジェクトの _cache フィールドに(のみ)格�
 constantPoolCacheKlass::allocate() というファクトリメソッドが用意されており, その中で生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 * クラスの link 処理時
 
   instanceKlass::link_class_impl()
-  -> instanceKlass::rewrite_class()
-     -> Rewriter::rewrite(instanceKlassHandle klass, TRAPS)
-        -> Rewriter::Rewriter()
-           -> Rewriter::make_constant_pool_cache()
-              -> oopFactory::new_constantPoolCache()
-                 -> constantPoolCacheKlass::allocate()
+  -&gt; instanceKlass::rewrite_class()
+     -&gt; Rewriter::rewrite(instanceKlassHandle klass, TRAPS)
+        -&gt; Rewriter::Rewriter()
+           -&gt; Rewriter::make_constant_pool_cache()
+              -&gt; oopFactory::new_constantPoolCache()
+                 -&gt; constantPoolCacheKlass::allocate()
 
 * JVMTI の RedefineClasses() 及び RetransformClasses() の処理時
 
   VM_RedefineClasses::doit_prologue()
-  -> VM_RedefineClasses::load_new_class_versions()
-     -> Rewriter::rewrite(instanceKlassHandle klass, TRAPS)
-        -> (同上)
+  -&gt; VM_RedefineClasses::load_new_class_versions()
+     -&gt; Rewriter::rewrite(instanceKlassHandle klass, TRAPS)
+        -&gt; (同上)
 
 * MethodHandle に対応する methodOop の生成処理時
 
   MethodHandleCompiler::compile()
-  -> MethodHandleCompiler::get_method_oop()
-     -> Rewriter::rewrite(instanceKlassHandle klass, constantPoolHandle cpool, objArrayHandle methods, TRAPS)
-        -> Rewriter::Rewriter()
-           -> (同上)
-```
+  -&gt; MethodHandleCompiler::get_method_oop()
+     -&gt; Rewriter::rewrite(instanceKlassHandle klass, constantPoolHandle cpool, objArrayHandle methods, TRAPS)
+        -&gt; Rewriter::Rewriter()
+           -&gt; (同上)
+</pre></div>
 
 ### 内部構造(Internal structure)
 定義されているフィールドは以下の通り.

@@ -53,14 +53,14 @@ TLAB が空になったら, 次の TLAB 用の領域を大域の空き領域か�
 
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
-(HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
--> Threads::create_vm()
-   -> init_globals()
-      -> universe_init()
-         -> Universe::initialize_heap()
-             -> ThreadLocalAllocBuffer::startup_initialization()
-```
+<div class="flow-abst"><pre>
+(HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+-&gt; Threads::create_vm()
+   -&gt; init_globals()
+      -&gt; universe_init()
+         -&gt; Universe::initialize_heap()
+             -&gt; ThreadLocalAllocBuffer::startup_initialization()
+</pre></div>
 
 #### インスタンスの格納場所(where its instances are stored)
 各 Thread オブジェクトの _tlab フィールドに(のみ)格納されている.
@@ -74,54 +74,54 @@ TLAB が空になったら, 次の TLAB 用の領域を大域の空き領域か�
 
 そして, この関数は現在は以下のパスで呼び出されている. (#TODO 他のパス)
 
-```
+<div class="flow-abst"><pre>
 * HotSpot の起動時処理時 (= メインスレッド用の ThreadLocalAllocBuffer の初期化処理)
   
-  (HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
-  -> Threads::create_vm()
-     -> init_globals()
-        -> universe_init()
-           -> Universe::initialize_heap()
-              -> ThreadLocalAllocBuffer::startup_initialization()
-                 -> ThreadLocalAllocBuffer::initialize()
+  (HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+  -&gt; Threads::create_vm()
+     -&gt; init_globals()
+        -&gt; universe_init()
+           -&gt; Universe::initialize_heap()
+              -&gt; ThreadLocalAllocBuffer::startup_initialization()
+                 -&gt; ThreadLocalAllocBuffer::initialize()
 
 * JavaThread の実行開始時
 
   JavaThread::run()
-  -> Thread::initialize_tlab()
-     -> ThreadLocalAllocBuffer::initialize()
-```
+  -&gt; Thread::initialize_tlab()
+     -&gt; ThreadLocalAllocBuffer::initialize()
+</pre></div>
 
 #### 使用箇所(where its instances are used)
 以下の箇所で使用されている. (#TODO 他の使用箇所)
 
-```
+<div class="flow-abst"><pre>
 * TLAB 内からのオブジェクトの確保処理
   
-  (略) (See: [here](no28916Rgx.html) for details)
-  -> TemplateTable::_new() が生成するコード
+  (略) (See: <a href="no28916Rgx.html">here</a> for details)
+  -&gt; TemplateTable::_new() が生成するコード
 
   (略) ...(#TODO)
-  -> BytecodeInterpreter::run()
-     -> ThreadLocalAllocBuffer::allocate()
+  -&gt; BytecodeInterpreter::run()
+     -&gt; ThreadLocalAllocBuffer::allocate()
 
   (略) ...(#TODO)
-  -> ThreadLocalAllocBuffer::allocate()
+  -&gt; ThreadLocalAllocBuffer::allocate()
   
   (略) ...(#TODO)
   
 * 新しい TLAB 用領域の確保処理
   
-  (略) (See: [here](no28916Q0G.html) for details)
-  -> CollectedHeap::allocate_from_tlab_slow()
-     -> CollectedHeap::allocate_new_tlab() (を各サブクラスがオーバーライドしたもの)
-        -> (略) (See: [here](no28916rXC.html), [here](no289164hI.html) and [here](no28916FsO.html) for details)
+  (略) (See: <a href="no28916Q0G.html">here</a> for details)
+  -&gt; CollectedHeap::allocate_from_tlab_slow()
+     -&gt; CollectedHeap::allocate_new_tlab() (を各サブクラスがオーバーライドしたもの)
+        -&gt; (略) (See: <a href="no28916rXC.html">here</a>, <a href="no289164hI.html">here</a> and <a href="no28916FsO.html">here</a> for details)
 
 * TLAB の動的サイズ調整処理
 
-  (略) (See: [here](no28916dR0.html) for details)
-  -> ...(#TODO)
-```
+  (略) (See: <a href="no28916dR0.html">here</a> for details)
+  -&gt; ...(#TODO)
+</pre></div>
 
 ### 内部構造(Internal structure)
 内部的には, 以下の4つのアドレスで TLAB として使用するメモリ領域を管理している.
@@ -201,29 +201,29 @@ static フィールドである ThreadLocalAllocBuffer::_global_stats に格納�
 
 そして, これらのメソッドは以下の箇所で使用されている.
 
-```
+<div class="flow-abst"><pre>
 * TLAB の初期サイズの計算処理
 
-  (See: [here](no7882jgS.html) for details)
-  -> ThreadLocalAllocBuffer::initial_desired_size()
-     -> GlobalTLABStats::allocating_threads_avg()
+  (See: <a href="no7882jgS.html">here</a> for details)
+  -&gt; ThreadLocalAllocBuffer::initial_desired_size()
+     -&gt; GlobalTLABStats::allocating_threads_avg()
 
 * 情報の出力処理が行われている
 
-  (See: [here](no28916dR0.html) for details)
-  -> ThreadLocalAllocBuffer::accumulate_statistics_before_gc()
-     -> GlobalTLABStats::initialize()
-     -> GlobalTLABStats::allocation()
-     -> GlobalTLABStats::publish()
-     -> GlobalTLABStats::print()
-     -> ThreadLocalAllocBuffer::accumulate_statistics()
-        -> GlobalTLABStats::update_allocating_threads()
-        -> GlobalTLABStats::update_number_of_refills() 
-        -> GlobalTLABStats::update_allocation()	   
-        -> GlobalTLABStats::update_gc_waste()	   
-        -> GlobalTLABStats::update_slow_refill_waste() 
-        -> GlobalTLABStats::update_slow_allocations()  
-```
+  (See: <a href="no28916dR0.html">here</a> for details)
+  -&gt; ThreadLocalAllocBuffer::accumulate_statistics_before_gc()
+     -&gt; GlobalTLABStats::initialize()
+     -&gt; GlobalTLABStats::allocation()
+     -&gt; GlobalTLABStats::publish()
+     -&gt; GlobalTLABStats::print()
+     -&gt; ThreadLocalAllocBuffer::accumulate_statistics()
+        -&gt; GlobalTLABStats::update_allocating_threads()
+        -&gt; GlobalTLABStats::update_number_of_refills() 
+        -&gt; GlobalTLABStats::update_allocation()	   
+        -&gt; GlobalTLABStats::update_gc_waste()	   
+        -&gt; GlobalTLABStats::update_slow_refill_waste() 
+        -&gt; GlobalTLABStats::update_slow_allocations()  
+</pre></div>
 
 ### 内部構造(Internal structure)
 内部では, (UsePerfData オプションが指定されている場合には) PerfVariable も使用している.

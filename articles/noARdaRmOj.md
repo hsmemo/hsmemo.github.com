@@ -18,22 +18,22 @@ CPU 種別によって生成されるコードは異なるがどちらも処理�
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### sparc の場合
-```
+<div class="flow-abst"><pre>
 TemplateTable::monitorexit() が生成したコード
--> InterpreterMacroAssembler::unlock_object() が生成したコード
-   -> MacroAssembler::biased_locking_exit() が生成したコード  (← biased locking を使用している場合にのみ呼び出される)
-   -> InterpreterRuntime::monitorexit()                    (← fast-path が成功しなかった場合にのみ呼び出す)
-      -> (See: [here](noGAuAWXSd.html) for details)
-```
+-&gt; InterpreterMacroAssembler::unlock_object() が生成したコード
+   -&gt; MacroAssembler::biased_locking_exit() が生成したコード  (← biased locking を使用している場合にのみ呼び出される)
+   -&gt; InterpreterRuntime::monitorexit()                    (← fast-path が成功しなかった場合にのみ呼び出す)
+      -&gt; (See: <a href="noGAuAWXSd.html">here</a> for details)
+</pre></div>
 
 ### x86_64 の場合
-```
+<div class="flow-abst"><pre>
 TemplateTable::monitorexit() が生成したコード
--> InterpreterMacroAssembler::unlock_object() が生成したコード
-   -> MacroAssembler::biased_locking_exit() が生成したコード  (← biased locking を使用している場合にのみ呼び出される)
-   -> InterpreterRuntime::monitorexit()                    (← fast-path が成功しなかった場合にのみ呼び出す)
-      -> (See: [here](noGAuAWXSd.html) for details)
-```
+-&gt; InterpreterMacroAssembler::unlock_object() が生成したコード
+   -&gt; MacroAssembler::biased_locking_exit() が生成したコード  (← biased locking を使用している場合にのみ呼び出される)
+   -&gt; InterpreterRuntime::monitorexit()                    (← fast-path が成功しなかった場合にのみ呼び出す)
+      -&gt; (See: <a href="noGAuAWXSd.html">here</a> for details)
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### TemplateTable::monitorexit() (sparc の場合)

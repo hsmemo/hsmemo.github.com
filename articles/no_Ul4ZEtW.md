@@ -42,11 +42,11 @@ VMThread クラスの _vm_thread フィールド (static フィールド) に(�
 VMThread::create() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている (See: [here](no-la6kE9R.html) for details).
 
-```
-(HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
--> Threads::create_vm()
-   -> VMThread::create()
-```
+<div class="flow-abst"><pre>
+(HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+-&gt; Threads::create_vm()
+   -&gt; VMThread::create()
+</pre></div>
 
 
 
@@ -83,11 +83,11 @@ VMThread クラスの _vm_queue フィールド (static フィールド) に(の
 VMThread::create() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている (See: [here](no-la6kE9R.html) for details).
 
-```
-(HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
--> Threads::create_vm()
-   -> VMThread::create()
-```
+<div class="flow-abst"><pre>
+(HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+-&gt; Threads::create_vm()
+   -&gt; VMThread::create()
+</pre></div>
 
 ### 内部構造(Internal structure)
 登録された VM_Operation オブジェクトは, 優先度毎の doubly linked list で管理している.

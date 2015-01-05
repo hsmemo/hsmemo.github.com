@@ -11,20 +11,20 @@ title: Serviceability 機能 ： JVMTI の処理 ： JVMTI 関数の処理 ： �
 (See: JVMTI 仕様)
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 JvmtiEnv::GenerateEvents()
--> * event_type 引数が JVMTI_EVENT_COMPILED_METHOD_LOAD の場合:
-     -> JvmtiCodeBlobEvents::generate_compiled_method_load_events()
-        -> JvmtiExport::post_compiled_method_load()
-           -> JvmtiCompiledMethodLoadEventMark::JvmtiCompiledMethodLoadEventMark()
-              -> JvmtiCodeBlobEvents::build_jvmti_addr_location_map()
+-&gt; * event_type 引数が JVMTI_EVENT_COMPILED_METHOD_LOAD の場合:
+     -&gt; JvmtiCodeBlobEvents::generate_compiled_method_load_events()
+        -&gt; JvmtiExport::post_compiled_method_load()
+           -&gt; JvmtiCompiledMethodLoadEventMark::JvmtiCompiledMethodLoadEventMark()
+              -&gt; JvmtiCodeBlobEvents::build_jvmti_addr_location_map()
    * event_type 引数が JVMTI_EVENT_DYNAMIC_CODE_GENERATED の場合:
-     -> JvmtiCodeBlobEvents::generate_dynamic_code_events()
-        -> CodeBlobCollector::collect()
-           -> CodeCache::blobs_do(void f(CodeBlob* cb))() (<= 引数は CodeBlobCollector::do_blob())
-              -> CodeBlobCollector::do_blob()
-        -> JvmtiExport::post_dynamic_code_generated(JvmtiEnv* env, const char *name, const void *code_begin, const void *code_end)
-```
+     -&gt; JvmtiCodeBlobEvents::generate_dynamic_code_events()
+        -&gt; CodeBlobCollector::collect()
+           -&gt; CodeCache::blobs_do(void f(CodeBlob* cb))() (&lt;= 引数は CodeBlobCollector::do_blob())
+              -&gt; CodeBlobCollector::do_blob()
+        -&gt; JvmtiExport::post_dynamic_code_generated(JvmtiEnv* env, const char *name, const void *code_begin, const void *code_end)
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### JvmtiEnv::GenerateEvents()

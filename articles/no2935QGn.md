@@ -12,28 +12,28 @@ title: Serviceability 機能 ： JVMTI の処理 ： JVMTI 関数の処理 ： �
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### GetOwnedMonitorInfo() の処理
-```
+<div class="flow-abst"><pre>
 JvmtiEnv::GetOwnedMonitorInfo()
--> * 対象のスレッドがサスペンドしている場合:
-     -> JvmtiEnvBase::get_owned_monitors()
+-&gt; * 対象のスレッドがサスペンドしている場合:
+     -&gt; JvmtiEnvBase::get_owned_monitors()
    * 〃 がサスペンドしていない場合:
-     -> VMThread::execute()
-        -> (略) (See: [here](no2935qaz.html) for details)
-           -> VM_GetOwnedMonitorInfo::doit()
-              -> JvmtiEnvBase::get_owned_monitors()
-```
+     -&gt; VMThread::execute()
+        -&gt; (略) (See: <a href="no2935qaz.html">here</a> for details)
+           -&gt; VM_GetOwnedMonitorInfo::doit()
+              -&gt; JvmtiEnvBase::get_owned_monitors()
+</pre></div>
 
 ### GetOwnedMonitorStackDepthInfo() の処理
-```
+<div class="flow-abst"><pre>
 JvmtiEnv::GetOwnedMonitorStackDepthInfo()
--> * 対象のスレッドがサスペンドしている場合:
-     -> JvmtiEnvBase::get_owned_monitors()
+-&gt; * 対象のスレッドがサスペンドしている場合:
+     -&gt; JvmtiEnvBase::get_owned_monitors()
    * 〃 がサスペンドしていない場合:
-     -> VMThread::execute()
-        -> (略) (See: [here](no2935qaz.html) for details)
-           -> VM_GetOwnedMonitorInfo::doit()
-              -> JvmtiEnvBase::get_owned_monitors()
-```
+     -&gt; VMThread::execute()
+        -&gt; (略) (See: <a href="no2935qaz.html">here</a> for details)
+           -&gt; VM_GetOwnedMonitorInfo::doit()
+              -&gt; JvmtiEnvBase::get_owned_monitors()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### JvmtiEnv::GetOwnedMonitorInfo()

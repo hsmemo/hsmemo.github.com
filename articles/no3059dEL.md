@@ -26,13 +26,13 @@ JavaThread 内の例外関係のフィールドを設定しておく必要があ
 どんなスレッドも最初にランタイムが JavaCalls で Java のメソッドを呼び出す所から始まるので.
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
-各種のスタックの unwind 処理 (See: [here](noQ5C359iU.html) for details)
--> StubRoutines::catch_exception_entry() が指しているコード (= StubGenerator::generate_catch_exception() が生成したコード)
-   -> JavaThread 内の例外関係のフィールドを設定
-   -> StubRoutines::_call_stub_return_address が指しているアドレスにジャンプ 
+<div class="flow-abst"><pre>
+各種のスタックの unwind 処理 (See: <a href="noQ5C359iU.html">here</a> for details)
+-&gt; StubRoutines::catch_exception_entry() が指しているコード (= StubGenerator::generate_catch_exception() が生成したコード)
+   -&gt; JavaThread 内の例外関係のフィールドを設定
+   -&gt; StubRoutines::_call_stub_return_address が指しているアドレスにジャンプ 
       (リターンとほぼ同義. スタックフレームが既に無いので単にジャンプする)
-```
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

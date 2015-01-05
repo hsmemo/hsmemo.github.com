@@ -27,13 +27,13 @@ JVMTI の PopFrame() 関数でポップされた場合は (JVMTI の仕様通り
 
 (JvmtiEnvThreadState::is_frame_pop() が true を返しても, そのまま JvmtiEnvThreadState::clear_frame_pop() で消去するだけ)
 
-```
+<div class="flow-abst"><pre>
 JvmtiEnv::PopFrame()
--> JvmtiThreadState::update_for_pop_top_frame()
-   -> JvmtiThreadState::cur_stack_depth()
-   -> JvmtiEnvThreadState::is_frame_pop()
-   -> JvmtiEnvThreadState::clear_frame_pop()
-```
+-&gt; JvmtiThreadState::update_for_pop_top_frame()
+   -&gt; JvmtiThreadState::cur_stack_depth()
+   -&gt; JvmtiEnvThreadState::is_frame_pop()
+   -&gt; JvmtiEnvThreadState::clear_frame_pop()
+</pre></div>
 
 
 ```cpp
@@ -71,28 +71,28 @@ NotifyFramePop() によるイベント通知は interp_only_mode なイベント
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### JvmtiEnv::NotifyFramePop() の呼び出し時の処理
-```
+<div class="flow-abst"><pre>
 JvmtiEnv::NotifyFramePop()
--> JvmtiEnvThreadState::set_frame_pop()
-   -> JvmtiEventController::set_frame_pop()
-      -> JvmtiEventControllerPrivate::set_frame_pop()
-         -> JvmtiFramePops::set()
-```
+-&gt; JvmtiEnvThreadState::set_frame_pop()
+   -&gt; JvmtiEventController::set_frame_pop()
+      -&gt; JvmtiEventControllerPrivate::set_frame_pop()
+         -&gt; JvmtiFramePops::set()
+</pre></div>
 
 ### 各メソッドの終了時の処理
-```
+<div class="flow-abst"><pre>
 JvmtiExport::post_method_exit()
--> JvmtiThreadState::cur_stack_depth()
-   -> JvmtiThreadState::count_frames()
--> JvmtiEnvThreadState::is_frame_pop()
-   -> JvmtiFramePops::contains()
--> FramePop イベントの通知
--> JvmtiEnvThreadState::clear_frame_pop()
-   -> JvmtiEventController::clear_frame_pop()
-      -> JvmtiEventControllerPrivate::clear_frame_pop()
-         -> JvmtiEventControllerPrivate::clear_frame_pop()
-            -> JvmtiFramePops::clear()
-```
+-&gt; JvmtiThreadState::cur_stack_depth()
+   -&gt; JvmtiThreadState::count_frames()
+-&gt; JvmtiEnvThreadState::is_frame_pop()
+   -&gt; JvmtiFramePops::contains()
+-&gt; FramePop イベントの通知
+-&gt; JvmtiEnvThreadState::clear_frame_pop()
+   -&gt; JvmtiEventController::clear_frame_pop()
+      -&gt; JvmtiEventControllerPrivate::clear_frame_pop()
+         -&gt; JvmtiEventControllerPrivate::clear_frame_pop()
+            -&gt; JvmtiFramePops::clear()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### JvmtiEnv::NotifyFramePop()

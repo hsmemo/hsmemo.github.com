@@ -239,15 +239,15 @@ MulNode クラスの具象サブクラスの1つ.
 long_by_long_mulhi() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 DivLNode::Ideal()
--> transform_long_divide()
-   -> long_by_long_mulhi() 
+-&gt; transform_long_divide()
+   -&gt; long_by_long_mulhi() 
 
 ModLNode::Ideal()
--> transform_long_divide()
-   -> long_by_long_mulhi() 
-```
+-&gt; transform_long_divide()
+   -&gt; long_by_long_mulhi() 
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.

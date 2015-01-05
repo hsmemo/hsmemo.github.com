@@ -46,22 +46,22 @@ StackValueCollection クラス用の補助クラス.
 
 そして, これらの関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 * 脱最適化処理 (Deoptimization 処理)
 
   Deoptimization::fetch_unroll_info_helper()
-  -> Deoptimization::reassign_fields()
-     -> instanceKlass::do_nonstatic_fields()
-        -> FieldReassigner::do_field()
-           -> StackValue::create_stack_value()
-     -> Deoptimization::reassign_type_array_elements()
-        -> StackValue::create_stack_value()
-     -> Deoptimization::reassign_object_array_elements()
-        -> StackValue::create_stack_value()
-  -> Deoptimization::create_vframeArray()
-     -> vframeArray::allocate()
-        -> vframeArray::fill_in()
-           -> vframeArrayElement::fill_in()
+  -&gt; Deoptimization::reassign_fields()
+     -&gt; instanceKlass::do_nonstatic_fields()
+        -&gt; FieldReassigner::do_field()
+           -&gt; StackValue::create_stack_value()
+     -&gt; Deoptimization::reassign_type_array_elements()
+        -&gt; StackValue::create_stack_value()
+     -&gt; Deoptimization::reassign_object_array_elements()
+        -&gt; StackValue::create_stack_value()
+  -&gt; Deoptimization::create_vframeArray()
+     -&gt; vframeArray::allocate()
+        -&gt; vframeArray::fill_in()
+           -&gt; vframeArrayElement::fill_in()
 
 * interpretedVFrame/compiledVFrame 関係の処理 (#TODO)
 
@@ -70,17 +70,17 @@ StackValueCollection クラス用の補助クラス.
   interpretedVFrame::expressions()
   
   compiledVFrame::locals()
-  -> compiledVFrame::create_stack_value()
-     -> StackValue::create_stack_value()
+  -&gt; compiledVFrame::create_stack_value()
+     -&gt; StackValue::create_stack_value()
   
   compiledVFrame::expressions()
-  -> compiledVFrame::create_stack_value()
-     -> StackValue::create_stack_value()
+  -&gt; compiledVFrame::create_stack_value()
+     -&gt; StackValue::create_stack_value()
   
   compiledVFrame::monitors()
-  -> compiledVFrame::create_stack_value()
-     -> StackValue::create_stack_value()
-```
+  -&gt; compiledVFrame::create_stack_value()
+     -&gt; StackValue::create_stack_value()
+</pre></div>
 
 なお, StackValueCollection::_values フィールドの GrowableArray 自体は 
 StackValueCollection::StackValueCollection() 内で(のみ)確保されている. 

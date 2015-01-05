@@ -134,17 +134,17 @@ GCTack 実行の前後で TimeStamp オブジェクトを使って時間を記�
 なお, この関数は PSParallelCompact::invoke_no_policy() や
 PSScavenge::invoke_no_policy() 内から以下のように呼び出される.
 
-```
+<div class="flow-abst"><pre>
 PSParallelCompact::invoke_no_policy()
--> GCTaskManager::print_task_time_stamps()
-   -> GCTaskThread::print_task_time_stamps()
-```
+-&gt; GCTaskManager::print_task_time_stamps()
+   -&gt; GCTaskThread::print_task_time_stamps()
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 PSScavenge::invoke_no_policy()
--> GCTaskManager::print_task_time_stamps()
-   -> 同上
-```
+-&gt; GCTaskManager::print_task_time_stamps()
+   -&gt; 同上
+</pre></div>
 
 #### 参考(for your information): GCTaskManager::print_task_time_stamps()
 See: [here](no7882drl.html) for details

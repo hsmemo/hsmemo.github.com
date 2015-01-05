@@ -152,122 +152,122 @@ vframe::new_vframe() というファクトリメソッドが用意されてお�
 
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 * 脱最適化処理 (Deoptimization 処理)
   
   Deoptimization::fetch_unroll_info_helper()
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
   Deoptimization::revoke_biases_of_monitors(JavaThread* thread, frame fr, RegisterMap* map)
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
   Deoptimization::revoke_biases_of_monitors(CodeBlob* cb)
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
   Deoptimization::uncommon_trap_inner()
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
   Deoptimization::unpack_frames()
-  -> vframeArray::unpack_to_stack()
-     -> vframeArrayElement::unpack_on_stack()
-        -> vframe::new_vframe()
+  -&gt; vframeArray::unpack_to_stack()
+     -&gt; vframeArrayElement::unpack_on_stack()
+        -&gt; vframe::new_vframe()
 
   Deoptimization::fetch_unroll_info_helper()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
   Deoptimization::revoke_biases_of_monitors()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
   Deoptimization::revoke_biases_of_monitors()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
 * RFrame オブジェクトの生成処理
 
   InterpretedRFrame::InterpretedRFrame(frame fr, JavaThread* thread, RFrame*const callee)
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
   InterpretedRFrame::InterpretedRFrame(frame fr, JavaThread* thread, methodHandle m)
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
   CompiledRFrame::init()
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
 * (#TODO)
 
   JavaThread::last_java_vframe()
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
   JavaThread::last_java_vframe()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
 * (#TODO)
 
   vframe::top()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
   vframe::java_sender()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
 * JVMTI による「root または指定したオブジェクトから辿れる範囲を再帰的に辿る」処理
 
   VM_HeapWalkOperation::collect_stack_roots()
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
   VM_HeapWalkOperation::collect_stack_roots()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
 * JVMTI による「interp_only_mode」に遷移する処理
   
   VM_EnterInterpOnlyMode::doit()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
 * 保守運用機能によるヒープダンプ処理
 
   VM_HeapDumper::do_thread()
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
   VM_HeapDumper::do_thread()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
   ThreadStackTrace::dump_stack_at_safepoint()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
 * デバッグ用(開発時用)のチェック処理
 
   VMEntryWrapper::~VMEntryWrapper()
-  -> InterfaceSupport::walk_stack()
-     -> InterfaceSupport::walk_stack_from()
-        -> vframe::sender()
-           -> vframe::new_vframe()
+  -&gt; InterfaceSupport::walk_stack()
+     -&gt; InterfaceSupport::walk_stack_from()
+        -&gt; vframe::sender()
+           -&gt; vframe::new_vframe()
 
 * デバッグ用のトレース出力処理
 
   JavaThread::print_stack_on()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
   JavaThread::trace_stack_from()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
 * デバッグ用のユーティリティ関数 (ps)
 
   * ps()
-    -> vframe::new_vframe()
+    -&gt; vframe::new_vframe()
   * ps()
-    -> vframe::sender()
-       -> vframe::new_vframe()
-```
+    -&gt; vframe::sender()
+       -&gt; vframe::new_vframe()
+</pre></div>
 
 
 
@@ -298,122 +298,122 @@ vframe::new_vframe() というファクトリメソッドが用意されてお�
 
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 * 脱最適化処理 (Deoptimization 処理)
   
   Deoptimization::fetch_unroll_info_helper()
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
   Deoptimization::revoke_biases_of_monitors(JavaThread* thread, frame fr, RegisterMap* map)
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
   Deoptimization::revoke_biases_of_monitors(CodeBlob* cb)
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
   Deoptimization::uncommon_trap_inner()
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
   Deoptimization::unpack_frames()
-  -> vframeArray::unpack_to_stack()
-     -> vframeArrayElement::unpack_on_stack()
-        -> vframe::new_vframe()
+  -&gt; vframeArray::unpack_to_stack()
+     -&gt; vframeArrayElement::unpack_on_stack()
+        -&gt; vframe::new_vframe()
 
   Deoptimization::fetch_unroll_info_helper()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
   Deoptimization::revoke_biases_of_monitors()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
   Deoptimization::revoke_biases_of_monitors()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
 * RFrame オブジェクトの生成処理
 
   InterpretedRFrame::InterpretedRFrame(frame fr, JavaThread* thread, RFrame*const callee)
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
   InterpretedRFrame::InterpretedRFrame(frame fr, JavaThread* thread, methodHandle m)
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
   CompiledRFrame::init()
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
 * (#TODO)
 
   JavaThread::last_java_vframe()
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
   JavaThread::last_java_vframe()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
 * (#TODO)
 
   vframe::top()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
   vframe::java_sender()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
 * JVMTI による「root または指定したオブジェクトから辿れる範囲を再帰的に辿る」処理
 
   VM_HeapWalkOperation::collect_stack_roots()
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
   VM_HeapWalkOperation::collect_stack_roots()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
 * JVMTI による「interp_only_mode」に遷移する処理
   
   VM_EnterInterpOnlyMode::doit()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
 * 保守運用機能によるヒープダンプ処理
 
   VM_HeapDumper::do_thread()
-  -> vframe::new_vframe()
+  -&gt; vframe::new_vframe()
 
   VM_HeapDumper::do_thread()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
   ThreadStackTrace::dump_stack_at_safepoint()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
 * デバッグ用(開発時用)のチェック処理
 
   VMEntryWrapper::~VMEntryWrapper()
-  -> InterfaceSupport::walk_stack()
-     -> InterfaceSupport::walk_stack_from()
-        -> vframe::sender()
-           -> vframe::new_vframe()
+  -&gt; InterfaceSupport::walk_stack()
+     -&gt; InterfaceSupport::walk_stack_from()
+        -&gt; vframe::sender()
+           -&gt; vframe::new_vframe()
 
 * デバッグ用のトレース出力処理
 
   JavaThread::print_stack_on()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
   JavaThread::trace_stack_from()
-  -> vframe::sender()
-     -> vframe::new_vframe()
+  -&gt; vframe::sender()
+     -&gt; vframe::new_vframe()
 
 * デバッグ用のユーティリティ関数 (ps)
 
   * ps()
-    -> vframe::new_vframe()
+    -&gt; vframe::new_vframe()
   * ps()
-    -> vframe::sender()
-       -> vframe::new_vframe()
-```
+    -&gt; vframe::sender()
+       -&gt; vframe::new_vframe()
+</pre></div>
 
 
 
@@ -472,83 +472,83 @@ Platform MXBean の java.lang.management.MonitorInfo クラスを実装すると
 
 そして, これらの関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 * Biased locking 関係の処理 (revoke/rebias 処理, GC 時の mark フィールドの待避処理)
 
   revoke_bias()
-  -> get_or_compute_monitor_info()
-     -> javaVFrame::monitors()
+  -&gt; get_or_compute_monitor_info()
+     -&gt; javaVFrame::monitors()
 
   bulk_revoke_or_rebias_at_safepoint()
-  -> get_or_compute_monitor_info()
-     -> javaVFrame::monitors()
+  -&gt; get_or_compute_monitor_info()
+     -&gt; javaVFrame::monitors()
 
   BiasedLocking::preserve_marks()
-  -> javaVFrame::monitors()
+  -&gt; javaVFrame::monitors()
 
 * 脱最適化処理 (Deoptimization 処理)
 
   Deoptimization::revoke_biases_of_monitors(JavaThread* thread, frame fr, RegisterMap* map)
-  -> collect_monitors()
-     -> javaVFrame::monitors()
+  -&gt; collect_monitors()
+     -&gt; javaVFrame::monitors()
 
   Deoptimization::revoke_biases_of_monitors(CodeBlob* cb)
-  -> collect_monitors()
-     -> javaVFrame::monitors()
+  -&gt; collect_monitors()
+     -&gt; javaVFrame::monitors()
 
   Deoptimization::fetch_unroll_info_helper()
-  -> javaVFrame::monitors()
+  -&gt; javaVFrame::monitors()
 
   Deoptimization::fetch_unroll_info_helper()
-  -> Deoptimization::create_vframeArray()
-     -> vframeArray::allocate()
-        -> vframeArray::fill_in()
-           -> vframeArrayElement::fill_in()
+  -&gt; Deoptimization::create_vframeArray()
+     -&gt; vframeArray::allocate()
+        -&gt; vframeArray::fill_in()
+           -&gt; vframeArrayElement::fill_in()
 
 * JVMTI によるモニター情報の取得処理
 
   JvmtiEnv::GetObjectMonitorUsage()
-  -> JvmtiEnvBase::get_object_monitor_usage()
-     -> JvmtiEnvBase::count_locked_objects()
-        -> javaVFrame::monitors()
-  -> VMThread::execute()
-     -> (略) (See: [here](no2935qaz.html) for details)
-        -> VM_GetObjectMonitorUsage::doit()
-           -> JvmtiEnvBase::get_object_monitor_usage()
-              -> (同上)
+  -&gt; JvmtiEnvBase::get_object_monitor_usage()
+     -&gt; JvmtiEnvBase::count_locked_objects()
+        -&gt; javaVFrame::monitors()
+  -&gt; VMThread::execute()
+     -&gt; (略) (See: <a href="no2935qaz.html">here</a> for details)
+        -&gt; VM_GetObjectMonitorUsage::doit()
+           -&gt; JvmtiEnvBase::get_object_monitor_usage()
+              -&gt; (同上)
 
 * JVMTI による取得済みのモニターに関する情報の取得処理
 
   JvmtiEnv::GetOwnedMonitorInfo()
-  -> JvmtiEnvBase::get_owned_monitors()
-     -> JvmtiEnvBase::get_locked_objects_in_frame()
-        -> javaVFrame::monitors()
+  -&gt; JvmtiEnvBase::get_owned_monitors()
+     -&gt; JvmtiEnvBase::get_locked_objects_in_frame()
+        -&gt; javaVFrame::monitors()
      
   JvmtiEnv::GetOwnedMonitorStackDepthInfo()
-  -> JvmtiEnvBase::get_owned_monitors()
-     -> javaVFrame::monitors()
-  -> VMThread::execute()
-     -> (略) (See: [here](no2935qaz.html) for details)
-        -> VM_GetOwnedMonitorInfo::doit()
-           -> JvmtiEnvBase::get_owned_monitors()
-              -> (同上)
+  -&gt; JvmtiEnvBase::get_owned_monitors()
+     -&gt; javaVFrame::monitors()
+  -&gt; VMThread::execute()
+     -&gt; (略) (See: <a href="no2935qaz.html">here</a> for details)
+        -&gt; VM_GetOwnedMonitorInfo::doit()
+           -&gt; JvmtiEnvBase::get_owned_monitors()
+              -&gt; (同上)
 
 * JMM による java.lang.management.ThreadInfo オブジェクトの処理
 
   ThreadStackTrace::add_stack_frame()
-  -> StackFrameInfo::StackFrameInfo()
-     -> javaVFrame::locked_monitors()
-        -> javaVFrame::monitors()
+  -&gt; StackFrameInfo::StackFrameInfo()
+     -&gt; javaVFrame::locked_monitors()
+        -&gt; javaVFrame::monitors()
 
 * デバッグ用のトレース出力処理
 
   JavaThread::print_stack_on()
-  -> javaVFrame::print_lock_info_on()
-     -> javaVFrame::monitors()
+  -&gt; javaVFrame::print_lock_info_on()
+     -&gt; javaVFrame::monitors()
 
   javaVFrame::print()
-  -> javaVFrame::monitors()
-```
+  -&gt; javaVFrame::monitors()
+</pre></div>
 
 ### 内部構造(Internal structure)
 定義されているフィールドは以下の通り

@@ -17,53 +17,53 @@ JavaThread::run() からは,
 この thread_entry() 内でメインの処理を行う java.lang.Thread.run() が呼び出される.
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
--> JavaThread::run()
-   -> (1) TLAB(ThreadLocalAllocBuffer) の初期化を行う.
-          -> JavaThread::initialize_tlab()
-             -> ThreadLocalAllocBuffer::initialize()
+<div class="flow-abst"><pre>
+-&gt; JavaThread::run()
+   -&gt; (1) TLAB(ThreadLocalAllocBuffer) の初期化を行う.
+          -&gt; JavaThread::initialize_tlab()
+             -&gt; ThreadLocalAllocBuffer::initialize()
 
       (1) スタック領域関連のフィールドを初期化する.
-          -> JavaThread::record_base_of_stack_pointer()
+          -&gt; JavaThread::record_base_of_stack_pointer()
 
       (1) スタック領域関連のフィールドを初期化する.
-          -> Thread::record_stack_base_and_size()
+          -&gt; Thread::record_stack_base_and_size()
 
       (1) 現在実行中のネイティブスレッドに, この JavaThread オブジェクトを対応付ける.
-          -> Thread::initialize_thread_local_storage()
+          -&gt; Thread::initialize_thread_local_storage()
 
       (1) カレントスレッドのスタック上に guard page を設定.
-          -> JavaThread::create_stack_guard_pages()
+          -&gt; JavaThread::create_stack_guard_pages()
 
       (1) プラットフォーム固有のフィールドを(もしそんなものがあれば)初期化.
-          -> JavaThread::cache_global_variables()
+          -&gt; JavaThread::cache_global_variables()
 
       (1) カレントスレッドの JavaThreadState を _thread_new から _thread_in_vm に変更.
-          -> ThreadStateTransition::transition_and_fence()
+          -&gt; ThreadStateTransition::transition_and_fence()
 
       (1) カレントスレッドの JNI ローカル参照フレームを作成.
-          -> JNIHandleBlock::allocate_block()
-          -> Thread::set_active_handles()
+          -&gt; JNIHandleBlock::allocate_block()
+          -&gt; Thread::set_active_handles()
 
       (1) カレントスレッドのメイン処理(及びメイン処理終了後の後片付け処理)を行う.
-          -> JavaThread::thread_main_inner()
-             -> (1) カレントスレッドのメイン処理を実行する
-                    -> JavaThread::entry_point()()
+          -&gt; JavaThread::thread_main_inner()
+             -&gt; (1) カレントスレッドのメイン処理を実行する
+                    -&gt; JavaThread::entry_point()()
                        (JavaThread::entry_point() が thread_entry へのポインタを返し, それが呼び出される)
                         これにより, コンストラクタ引数で渡されていた thread_entry() が呼び出される.
-                    -> thread_entry()
-                       -> JavaCalls::call_virtual()
-                          -> (See: [here](no3059iJu.html) for details)
-                             -> java.lang.Thread.run()
+                    -&gt; thread_entry()
+                       -&gt; JavaCalls::call_virtual()
+                          -&gt; (See: <a href="no3059iJu.html">here</a> for details)
+                             -&gt; java.lang.Thread.run()
                                 (ここで実際の処理が行われる.
                                  Thread のサブクラスを作った場合は, そちらでオーバライドした run() メソッドが呼ばれる.
                                  そうでなければ, java.lang.Thread.run() の中で,
                                  登録した Runnable オブジェクトの run() メソッドが呼ばれる)
 
                 (1) メイン処理終了後の後片付けを行う
-                    -> JavaThread::exit()
-                       -> (See: [here](no2935w3j.html) for details)
-```
+                    -&gt; JavaThread::exit()
+                       -&gt; (See: <a href="no2935w3j.html">here</a> for details)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

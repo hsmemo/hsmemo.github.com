@@ -12,62 +12,62 @@ title: Memory allocation (& GC 処理) ： メモリ関係の初期化処理の�
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### CollectorPolicy の初期化
-```
-(See: [here](noYV_1Xq7P.html) for details)
--> G1CollectorPolicy_BestRegionsFirst::G1CollectorPolicy_BestRegionsFirst()
-   -> (1) スーパークラスのコンストラクタの呼び出し
-          -> G1CollectorPolicy::G1CollectorPolicy()
-             -> CollectorPolicy::CollectorPolicy()
-             -> HeapRegion::setup_heap_region_size()
-             -> HeapRegionRemSet::setup_remset_size()
-             -> G1CollectorPolicy::initialize_all()
-                -> G1CollectorPolicy::initialize_flags()
-                   -> CollectorPolicy::initialize_flags()
-                -> CollectorPolicy::initialize_size_info()
-                -> CollectorPolicy::initialize_perm_generation()
+<div class="flow-abst"><pre>
+(See: <a href="noYV_1Xq7P.html">here</a> for details)
+-&gt; G1CollectorPolicy_BestRegionsFirst::G1CollectorPolicy_BestRegionsFirst()
+   -&gt; (1) スーパークラスのコンストラクタの呼び出し
+          -&gt; G1CollectorPolicy::G1CollectorPolicy()
+             -&gt; CollectorPolicy::CollectorPolicy()
+             -&gt; HeapRegion::setup_heap_region_size()
+             -&gt; HeapRegionRemSet::setup_remset_size()
+             -&gt; G1CollectorPolicy::initialize_all()
+                -&gt; G1CollectorPolicy::initialize_flags()
+                   -&gt; CollectorPolicy::initialize_flags()
+                -&gt; CollectorPolicy::initialize_size_info()
+                -&gt; CollectorPolicy::initialize_perm_generation()
 
       (2) CollectionSetChooser オブジェクトを生成する
-          -> CollectionSetChooser::CollectionSetChooser()
-```
+          -&gt; CollectionSetChooser::CollectionSetChooser()
+</pre></div>
 
 ### CollectedHeap の初期化
-```
-(See: [here](noYV_1Xq7P.html) for details)
--> G1CollectedHeap::initialize()
-   -> (1) 初期化処理の前準備を行う
-          -> CollectedHeap::pre_initialize()
-          -> os::enable_vtime()
-             -> OS によって処理が異なる. ただし Solaris 以外の場合は何もしない.
+<div class="flow-abst"><pre>
+(See: <a href="noYV_1Xq7P.html">here</a> for details)
+-&gt; G1CollectedHeap::initialize()
+   -&gt; (1) 初期化処理の前準備を行う
+          -&gt; CollectedHeap::pre_initialize()
+          -&gt; os::enable_vtime()
+             -&gt; OS によって処理が異なる. ただし Solaris 以外の場合は何もしない.
                 * Linux の場合:
                 * Windows の場合:
-                  -> 何もしない
+                  -&gt; 何もしない
                 * Solaris の場合:
-                  -> open("/proc/self/ctl", O_WRONLY)
-                  -> write(fd, { PCSET, PR_MSACCT }, ...)
+                  -&gt; open(&quot;/proc/self/ctl&quot;, O_WRONLY)
+                  -&gt; write(fd, { PCSET, PR_MSACCT }, ...)
 
       (1) ヒープ領域として確保するサイズ, および確保場所として望ましい仮想アドレスを計算する
-          -> Universe::preferred_heap_base()
+          -&gt; Universe::preferred_heap_base()
 
       (1) ヒープ領域をメモリ空間上に reserve する (まず Young, Old, Perm の全世代分をまとめて1つの連続領域として確保)
-          -> ReservedSpace::ReservedSpace(size_t size, size_t alignment, bool large, char* requested_address = NULL, const size_t noaccess_prefix = 0)
-             -> ReservedSpace::initialize()
-                -> (1) 以下のどれかでメモリ領域を reserve する.
+          -&gt; ReservedSpace::ReservedSpace(size_t size, size_t alignment, bool large, char* requested_address = NULL, const size_t noaccess_prefix = 0)
+             -&gt; ReservedSpace::initialize()
+                -&gt; (1) 以下のどれかでメモリ領域を reserve する.
                        * Large Page を使用したいが, OS の制約により large page については
                          reserve と commit は同時に行わなくてはいけない場合:
-                         -> os::reserve_memory_special()
-                            -> shmat(), VirtualAlloc(), etc
+                         -&gt; os::reserve_memory_special()
+                            -&gt; shmat(), VirtualAlloc(), etc
                                (各 OS 固有の large page なメモリ空間確保用のシステムコールを呼び出す)
                        * 確保するアドレスが指定されている場合:
-                         -> os::attempt_reserve_memory_at()
-                            -> os::reserve_memory()
-                               -> mmap(), VirtualAlloc(), etc
+                         -&gt; os::attempt_reserve_memory_at()
+                            -&gt; os::reserve_memory()
+                               -&gt; mmap(), VirtualAlloc(), etc
                                   (各 OS 固有の仮想メモリ空間確保用のシステムコール)
                        * それ以外の場合:
-                         -> os::reserve_memory()
-                            -> (同上)
+                         -&gt; os::reserve_memory()
+                            -&gt; (同上)
 
       (1) 
-```
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

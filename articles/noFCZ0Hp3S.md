@@ -23,57 +23,57 @@ SafepointSynchronize::begin() と SafepointSynchronize::end() は
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### SafepointSynchronize::begin() の処理
-```
+<div class="flow-abst"><pre>
 SafepointSynchronize::begin()
--> (1) Threads_lock をロックしておく. (これは SafepointSynchronize::end() の中で開放する)
-       -> Monitor::lock()
+-&gt; (1) Threads_lock をロックしておく. (これは SafepointSynchronize::end() の中で開放する)
+       -&gt; Monitor::lock()
 
    (1) SafepointSynchronize::_state を _synchronizing に変更
 
    (1) serialize page のメモリプロテクションを変化させる.
-       -> os::serialize_thread_states()
+       -&gt; os::serialize_thread_states()
 
    (1) インタープリタ実行中のスレッドを止めるための処理を行う (dispatch table を Safepoint 用のものに置き換える, 等)
-       -> Interpreter::notice_safepoints() (またはそれをサブクラスがオーバーライドしたもの)
+       -&gt; Interpreter::notice_safepoints() (またはそれをサブクラスがオーバーライドしたもの)
 
    (1) Safepoint Polling page をアクセス不可にしておく.
-       -> os::make_polling_page_unreadable()
+       -&gt; os::make_polling_page_unreadable()
 
    (1) 全ての JavaThread の ThreadSafepointState が running 以外の状態に変わるまで待機
-       -> ThreadSafepointState::examine_state_of_thread()
-       -> ThreadSafepointState::is_running()
-       -> SpinPause()  or  os::NakedYield()  or  os::yield_all()
+       -&gt; ThreadSafepointState::examine_state_of_thread()
+       -&gt; ThreadSafepointState::is_running()
+       -&gt; SpinPause()  or  os::NakedYield()  or  os::yield_all()
 
    (1) _waiting_to_block が 0 になるまで待機
-       -> Monitior::wait()  (Safepoint_lock に対して. 起こす処理は SafepointSynchronize::block() で行われる)
+       -&gt; Monitior::wait()  (Safepoint_lock に対して. 起こす処理は SafepointSynchronize::block() で行われる)
 
    (1) SafepointSynchronize::_state を _synchronized に変更
 
    (1) 様々なクリーンアップ処理を実行
-       -> SafepointSynchronize::do_cleanup_tasks()
-          -> ObjectSynchronizer::deflate_idle_monitors()
-          -> InlineCacheBuffer::update_inline_caches()
-          -> CompilationPolicy::do_safepoint_work() (を各サブクラスがオーバーライドしたもの)
-          -> NMethodSweeper::scan_stacks()
-```
+       -&gt; SafepointSynchronize::do_cleanup_tasks()
+          -&gt; ObjectSynchronizer::deflate_idle_monitors()
+          -&gt; InlineCacheBuffer::update_inline_caches()
+          -&gt; CompilationPolicy::do_safepoint_work() (を各サブクラスがオーバーライドしたもの)
+          -&gt; NMethodSweeper::scan_stacks()
+</pre></div>
 
 ### SafepointSynchronize::end() の処理
-```
+<div class="flow-abst"><pre>
 SafepointSynchronize::end()
--> (1) Safepoint Polling page をアクセス可能な状態に戻す
-       -> os::make_polling_page_readable()
+-&gt; (1) Safepoint Polling page をアクセス可能な状態に戻す
+       -&gt; os::make_polling_page_readable()
 
    (1) インタープリタ実行中のスレッドを再開させるための処理を行う (dispatch table を通常時用のものに戻す, 等)
-       -> Interpreter::ignore_safepoints() (またはそれをサブクラスがオーバーライドしたもの)
+       -&gt; Interpreter::ignore_safepoints() (またはそれをサブクラスがオーバーライドしたもの)
 
    (1) SafepointSynchronize::_state を _not_synchronized に戻す.
 
    (1) 全ての JavaThread を起床させる.
-       -> ThreadSafepointState::restart()
+       -&gt; ThreadSafepointState::restart()
 
    (1) Threads_lock のロックを解除する.
-       -> Monitor::unlock()
-```
+       -&gt; Monitor::unlock()
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

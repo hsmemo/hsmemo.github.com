@@ -14,20 +14,20 @@ title: Thread の一時停止処理の枠組み (Safepoint 処理) ： 停止さ
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### ネイティブメソッド呼び出し処理中での確認処理
-```
+<div class="flow-abst"><pre>
 InterpreterGenerator::generate_native_entry()  or  SharedRuntime::generate_native_wrapper()  が生成したコード
--> (1) JavaThreadState を _thread_in_native_trans に変更
+-&gt; (1) JavaThreadState を _thread_in_native_trans に変更
    (1) メモリアクセスの順序づけを行う
-       -> MacroAssembler::membar() or MacroAssembler::serialize_memory() が生成したコード
+       -&gt; MacroAssembler::membar() or MacroAssembler::serialize_memory() が生成したコード
    (1) SafepointSynchronize::_state の値を確認
-```
+</pre></div>
 
 ### 上記確認処理でメモリアクセス違反が生じた場合の処理
-```
-シグナルハンドラ (JVM_handle_linux_signal() or JVM_handle_solaris_signal() or topLevelExceptionFilter()) (See: [here](noNmlmYDJk.html) for details)
--> (1) os::serialize_thread_states() の処理との同期を取る
-       -> os::block_on_serialize_page_trap()
-```
+<div class="flow-abst"><pre>
+シグナルハンドラ (JVM_handle_linux_signal() or JVM_handle_solaris_signal() or topLevelExceptionFilter()) (See: <a href="noNmlmYDJk.html">here</a> for details)
+-&gt; (1) os::serialize_thread_states() の処理との同期を取る
+       -&gt; os::block_on_serialize_page_trap()
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

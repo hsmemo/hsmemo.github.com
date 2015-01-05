@@ -54,11 +54,11 @@ GenerationSpec::init() 内で(のみ)生成されている.
 
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
-(略) (See: [here](no2114gVH.html) for details)
--> GenCollectedHeap::initialize()
-   -> GenerationSpec::init()
-```
+<div class="flow-abst"><pre>
+(略) (See: <a href="no2114gVH.html">here</a> for details)
+-&gt; GenCollectedHeap::initialize()
+   -&gt; GenerationSpec::init()
+</pre></div>
 
 #### 使用箇所(where its instances are used)
 ...

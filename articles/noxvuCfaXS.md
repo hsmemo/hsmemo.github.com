@@ -56,20 +56,20 @@ jfieldID 値のエンコード方式は以下の通り.
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### GetFieldID() の処理
-```
+<div class="flow-abst"><pre>
 jni_GetFieldID()
--> instanceKlass::find_field()
--> jfieldIDWorkaround::to_instance_jfieldID()
-```
+-&gt; instanceKlass::find_field()
+-&gt; jfieldIDWorkaround::to_instance_jfieldID()
+</pre></div>
 
 ### GetStaticFieldID() の処理
-```
+<div class="flow-abst"><pre>
 jni_GetStaticFieldID()
--> instanceKlass::find_field()
--> instanceKlass::jni_id_for()
-   -> instanceKlass::jni_id_for_impl()
--> jfieldIDWorkaround::to_static_jfieldID()
-```
+-&gt; instanceKlass::find_field()
+-&gt; instanceKlass::jni_id_for()
+   -&gt; instanceKlass::jni_id_for_impl()
+-&gt; jfieldIDWorkaround::to_static_jfieldID()
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

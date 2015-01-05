@@ -23,32 +23,32 @@ SafepointSynchronize::do_call_back() で,
 ついでに, SafepointSynchronize::is_at_safepoint() という類似品もあるが, こっちは assert 内でしか使われていない模様(?)
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 (種々の状態遷移処理)
--> SafepointSynchronize::block()
-   -> (1) 処理対象のスレッドが既に終了していれば, ここでリターンする or 永久にブロックする
+-&gt; SafepointSynchronize::block()
+   -&gt; (1) 処理対象のスレッドが既に終了していれば, ここでリターンする or 永久にブロックする
           (HotSpot の終了処理が始まったことでスレッドが終了した場合は永久にブロック)
-          -> JavaThread::block_if_vm_exited()
+          -&gt; JavaThread::block_if_vm_exited()
 
       (1) スタックフレームを辿れるようにしておく
-          -> JavaFrameAnchor::make_walkable()
+          -&gt; JavaFrameAnchor::make_walkable()
 
       (1) JavaThreadState を _thread_blocked に変更する.
-          -> JavaThread::set_thread_state()
+          -&gt; JavaThread::set_thread_state()
 
       (1) 対象のスレッドの JavaThreadState が _thread_in_vm_trans または _thread_in_Java であり,
           かつ既に VMThread による Safepoint 処理が開始されており, さらに自分が最後のスレッドの場合は, VM Thread を起こしておく.
-          -> Monitor::notify_all()
+          -&gt; Monitor::notify_all()
 
       (1) ブロックする
-          -> Monitor::lock_without_safepoint_check()
+          -&gt; Monitor::lock_without_safepoint_check()
 
       (1) JavaThreadState を元に戻す.
-          -> JavaThread::set_thread_state()
+          -&gt; JavaThread::set_thread_state()
 
 (明示的な safepoint チェック処理)
--> SafepointSynchronize::do_call_back()
-```
+-&gt; SafepointSynchronize::do_call_back()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### SafepointSynchronize::block()

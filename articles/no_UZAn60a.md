@@ -15,90 +15,90 @@ title: Serviceability 機能 ： HotSpot Monitoring and Management Interface (JM
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### java.lang.management.ManagementFactory.getOperatingSystemMXBean() の処理
-```
+<div class="flow-abst"><pre>
 java.lang.management.ManagementFactory.getOperatingSystemMXBean()
- -> sun.management.ManagementFactoryHelper.getOperatingSystemMXBean()
-    -> com.sun.management.OSMBeanFactory.getOperatingSystemMXBean()
+ -&gt; sun.management.ManagementFactoryHelper.getOperatingSystemMXBean()
+    -&gt; com.sun.management.OSMBeanFactory.getOperatingSystemMXBean()
        (このメソッドは OS 毎に実装が用意されている)
        * Solaris の場合 (Linux も兼用?? #TODO):
-         -> com.sun.management.UnixOperatingSystem のインスタンスが返される
+         -&gt; com.sun.management.UnixOperatingSystem のインスタンスが返される
        * Windows の場合:
-         -> com.sun.management.OperatingSystem のインスタンスが返される
-```
+         -&gt; com.sun.management.OperatingSystem のインスタンスが返される
+</pre></div>
 
 ### java.lang.management.ManagementFactory.getRuntimeMXBean() の処理
-```
+<div class="flow-abst"><pre>
 java.lang.management.ManagementFactory.getRuntimeMXBean()
- -> sun.management.ManagementFactoryHelper.getRuntimeMXBean()
-    -> sun.management.RuntimeImpl のインスタンスが返される.
-```
+ -&gt; sun.management.ManagementFactoryHelper.getRuntimeMXBean()
+    -&gt; sun.management.RuntimeImpl のインスタンスが返される.
+</pre></div>
 
 ### java.lang.management.ManagementFactory.getCompilationMXBean() の処理
-```
+<div class="flow-abst"><pre>
 java.lang.management.ManagementFactory.getCompilationMXBean()
- -> sun.management.ManagementFactoryHelper.getCompilationMXBean()
-    -> sun.management.CompilationImpl のインスタンスが返される.
-```
+ -&gt; sun.management.ManagementFactoryHelper.getCompilationMXBean()
+    -&gt; sun.management.CompilationImpl のインスタンスが返される.
+</pre></div>
 
 ### java.lang.management.ManagementFactory.getClassLoadingMXBean() の処理
-```
+<div class="flow-abst"><pre>
 java.lang.management.ManagementFactory.getClassLoadingMXBean()
- -> sun.management.ManagementFactoryHelper.getClassLoadingMXBean()
-    -> sun.management.ClassLoadingImpl のインスタンスが返される.
-```
+ -&gt; sun.management.ManagementFactoryHelper.getClassLoadingMXBean()
+    -&gt; sun.management.ClassLoadingImpl のインスタンスが返される.
+</pre></div>
 
 ### java.lang.management.ManagementFactory.getThreadMXBean() の処理
-```
+<div class="flow-abst"><pre>
 java.lang.management.ManagementFactory.getThreadMXBean()
- -> sun.management.ManagementFactoryHelper.getThreadMXBean()
-    -> sun.management.ThreadImpl のインスタンスが返される.
-```
+ -&gt; sun.management.ManagementFactoryHelper.getThreadMXBean()
+    -&gt; sun.management.ThreadImpl のインスタンスが返される.
+</pre></div>
 
 ### java.lang.management.ManagementFactory.getMemoryMXBean() の処理
-```
+<div class="flow-abst"><pre>
 java.lang.management.ManagementFactory.getMemoryMXBean()
- -> sun.management.ManagementFactoryHelper.getMemoryMXBean()
-    -> sun.management.MemoryImpl のインスタンスが返される.
-```
+ -&gt; sun.management.ManagementFactoryHelper.getMemoryMXBean()
+    -&gt; sun.management.MemoryImpl のインスタンスが返される.
+</pre></div>
 
 ### java.lang.management.ManagementFactory.getGarbageCollectorMXBeans() の処理
-```
+<div class="flow-abst"><pre>
 java.lang.management.ManagementFactory.getGarbageCollectorMXBeans()
- -> sun.management.ManagementFactoryHelper.getGarbageCollectorMXBeans()
-    -> sun.management.MemoryImpl.getMemoryManagers()
-       -> sun.management.MemoryImpl.getMemoryManagers0()
-          -> Java_sun_management_MemoryImpl_getMemoryManagers0()
-             -> jmm_GetMemoryManagers()
-                -> MemoryManager::get_memory_manager_instance()
-                   -> sun.management.ManagementFactory.createGarbageCollector()
-                      -> sun.management.GarbageCollectorImpl のインスタンスが返される
-```
+ -&gt; sun.management.ManagementFactoryHelper.getGarbageCollectorMXBeans()
+    -&gt; sun.management.MemoryImpl.getMemoryManagers()
+       -&gt; sun.management.MemoryImpl.getMemoryManagers0()
+          -&gt; Java_sun_management_MemoryImpl_getMemoryManagers0()
+             -&gt; jmm_GetMemoryManagers()
+                -&gt; MemoryManager::get_memory_manager_instance()
+                   -&gt; sun.management.ManagementFactory.createGarbageCollector()
+                      -&gt; sun.management.GarbageCollectorImpl のインスタンスが返される
+</pre></div>
 
 ### java.lang.management.ManagementFactory.getMemoryManagerMXBeans() の処理
-```
+<div class="flow-abst"><pre>
 java.lang.management.ManagementFactory.getMemoryManagerMXBeans()
- -> sun.management.ManagementFactoryHelper.getMemoryManagerMXBeans()
-    -> sun.management.MemoryImpl.getMemoryManagers()
-       -> sun.management.MemoryImpl.getMemoryManagers0()
-          -> Java_sun_management_MemoryImpl_getMemoryManagers0()
-             -> jmm_GetMemoryManagers()
-                -> MemoryManager::get_memory_manager_instance()
-                   -> sun.management.ManagementFactory.createMemoryManager()
-                      -> sun.management.MemoryManagerImpl のインスタンスが返される
-```
+ -&gt; sun.management.ManagementFactoryHelper.getMemoryManagerMXBeans()
+    -&gt; sun.management.MemoryImpl.getMemoryManagers()
+       -&gt; sun.management.MemoryImpl.getMemoryManagers0()
+          -&gt; Java_sun_management_MemoryImpl_getMemoryManagers0()
+             -&gt; jmm_GetMemoryManagers()
+                -&gt; MemoryManager::get_memory_manager_instance()
+                   -&gt; sun.management.ManagementFactory.createMemoryManager()
+                      -&gt; sun.management.MemoryManagerImpl のインスタンスが返される
+</pre></div>
 
 ### java.lang.management.ManagementFactory.getMemoryPoolMXBeans() の処理
-```
+<div class="flow-abst"><pre>
 java.lang.management.ManagementFactory.getMemoryPoolMXBeans()
- -> sun.management.ManagementFactoryHelper.getMemoryPoolMXBeans()
-    -> sun.management.MemoryImpl.getMemoryPools()
-       -> sun.management.MemoryImpl.getMemoryPools0()
-          -> Java_sun_management_MemoryImpl_getMemoryPools0()
-             -> jmm_GetMemoryPools()
-                -> MemoryPool::get_memory_pool_instance()
-                   -> sun.management.ManagementFactory.createMemoryPool()
-                      -> sun.management.MemoryPoolImpl のインスタンスが返される
-```
+ -&gt; sun.management.ManagementFactoryHelper.getMemoryPoolMXBeans()
+    -&gt; sun.management.MemoryImpl.getMemoryPools()
+       -&gt; sun.management.MemoryImpl.getMemoryPools0()
+          -&gt; Java_sun_management_MemoryImpl_getMemoryPools0()
+             -&gt; jmm_GetMemoryPools()
+                -&gt; MemoryPool::get_memory_pool_instance()
+                   -&gt; sun.management.ManagementFactory.createMemoryPool()
+                      -&gt; sun.management.MemoryPoolImpl のインスタンスが返される
+</pre></div>
 
 ## 備考(Notes)
 なお, HotSpot 独自の MBean については以下のメソッドで取得できる.

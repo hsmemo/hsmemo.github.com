@@ -83,37 +83,37 @@ See: [here](no2114okz.html) for details
 Parker::Allocate() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 JavaThread::JavaThread()
--> JavaThread::initialize()
-   -> Parker::Allocate()
-```
+-&gt; JavaThread::initialize()
+   -&gt; Parker::Allocate()
+</pre></div>
 
 #### 使用箇所(where its instances are used)
 以下の箇所で(のみ)使用されている.
 
-```
+<div class="flow-abst"><pre>
 * java.util.concurrent の処理 (java.util.concurrent.locks.LockSupport.park() および java.util.concurrent.locks.LockSupport.unpark() の処理)
 
-  (略) (See: [here](no2114PYi.html) for details)
-  -> Unsafe_Park()
-     -> Parker::park()
+  (略) (See: <a href="no2114PYi.html">here</a> for details)
+  -&gt; Unsafe_Park()
+     -&gt; Parker::park()
 
-  (略) (See: [here](no2114PYi.html) for details)
-  -> Unsafe_Unpark()
-     -> Parker::unpark()
+  (略) (See: <a href="no2114PYi.html">here</a> for details)
+  -&gt; Unsafe_Unpark()
+     -&gt; Parker::unpark()
 
 * java.lang.Thread.interrupt() の処理 (java.util.concurrent.locks.LockSupport.park() で待機しているスレッドに割り込む処理)
 
-  (略) (See: [here](no2114A-l.html) for details)
-  -> os::interrupt()
-     -> * Linux の場合
-          -> Parker::unpark()
+  (略) (See: <a href="no2114A-l.html">here</a> for details)
+  -&gt; os::interrupt()
+     -&gt; * Linux の場合
+          -&gt; Parker::unpark()
         * Solaris の場合
-          -> Parker::unpark()
+          -&gt; Parker::unpark()
         * Windows の場合
-          -> Parker::unpark()
-```
+          -&gt; Parker::unpark()
+</pre></div>
 
 ### 内部構造(Internal structure)
 実際の処理のほとんどは os::PlatformParker クラスに丸投げしている.

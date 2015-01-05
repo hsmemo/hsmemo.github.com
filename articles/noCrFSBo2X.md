@@ -34,12 +34,12 @@ CompilationPolicy クラスの _policy フィールド (static フィールド) 
 compilationPolicy_init() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
-(HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
--> Threads::create_vm()
-   -> init_globals()
-      -> compilationPolicy_init()
-```
+<div class="flow-abst"><pre>
+(HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+-&gt; Threads::create_vm()
+   -&gt; init_globals()
+      -&gt; compilationPolicy_init()
+</pre></div>
 
 
 

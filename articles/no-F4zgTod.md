@@ -37,13 +37,13 @@ CompileBroker::compilation_init() 内で(のみ)生成されている.
 #### 使用箇所(where its instances are used)
 以下の処理で使用される. (#TODO 他の使用箇所)
 
-```
+<div class="flow-abst"><pre>
 * JIT コンパイルの開始処理
 
   CompileBroker::compiler_thread_loop()
-  -> CompileBroker::invoke_compiler_on_method()
-     -> C2Compiler::compile_method()
-```
+  -&gt; CompileBroker::invoke_compiler_on_method()
+     -&gt; C2Compiler::compile_method()
+</pre></div>
 
 
 

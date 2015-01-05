@@ -100,10 +100,10 @@ SparsePRT オブジェクトでは 2種類の RSHashTable オブジェクトを�
 ### 備考(Notes)
 拡張(expand)された SparsePRT オブジェクトは, _head_expanded_list 大域変数につながれている (See: SparsePRT::expand()).
 
-```
+<div class="flow-abst"><pre>
 SparsePRT::expand()
--> SparsePRT::add_to_expanded_list()
-```
+-&gt; SparsePRT::add_to_expanded_list()
+</pre></div>
 
 (ただし, expand しても _next が realloc されるだけでその時点では増えない. 
 GC 時に _cur を _next に置き換える処理が行われる (See: G1RemSet::cleanupHRRS()))
@@ -111,23 +111,23 @@ GC 時に _cur を _next に置き換える処理が行われる (See: G1RemSet:
 _head_expanded_list 大域変数につながれた SparsePRT オブジェクトは, 
 SparsePRT::get_from_expanded_list() で取得されて処理される.
 
-```
+<div class="flow-abst"><pre>
 G1CollectedHeap::do_collection()
--> G1RemSet::cleanupHRRS()
-   -> HeapRegionRemSet::cleanup()
-      -> SparsePRT::cleanup_all()
-         -> SparsePRT::get_from_expanded_list()
-         -> SparsePRT::cleanup()
+-&gt; G1RemSet::cleanupHRRS()
+   -&gt; HeapRegionRemSet::cleanup()
+      -&gt; SparsePRT::cleanup_all()
+         -&gt; SparsePRT::get_from_expanded_list()
+         -&gt; SparsePRT::cleanup()
 
 G1CollectedHeap::evacuate_collection_set()
--> G1RemSet::prepare_for_oops_into_collection_set_do()
-   -> G1RemSet::cleanupHRRS()
-      -> (同上)
+-&gt; G1RemSet::prepare_for_oops_into_collection_set_do()
+   -&gt; G1RemSet::cleanupHRRS()
+      -&gt; (同上)
 
 G1RemSet::prepare_for_verify()
--> G1RemSet::cleanupHRRS()
-   -> (同上)
-```
+-&gt; G1RemSet::cleanupHRRS()
+   -&gt; (同上)
+</pre></div>
 
 
 なお, _head_expanded_list 大域変数のリストは Concurrent Marking 処理が起こると

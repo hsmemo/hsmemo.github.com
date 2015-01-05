@@ -139,35 +139,35 @@ title: Thread の待機処理の枠組み ： SpinLock, Mux による処理
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### Thread::SpinAcquire()
-```
+<div class="flow-abst"><pre>
 Thread::SpinAcquire()
--> Atomic::cmpxchg() と待機を繰り返す.
+-&gt; Atomic::cmpxchg() と待機を繰り返す.
    待機処理では以下のどれかが呼び出される.
    * os::NakedYield()
    * os::PlatformEvent::park()
    * SpinPause())
-```
+</pre></div>
 
 ### Thread::SpinRelease()
-```
+<div class="flow-abst"><pre>
 Thread::SpinRelease()
--> OrderAccess::fence() でメモリバリアを張った後,
+-&gt; OrderAccess::fence() でメモリバリアを張った後,
    引数(adr)で指定された箇所を 0 で上書きする(= ロックを解放する)だけ
-```
+</pre></div>
 
 ### Thread::muxAcquire()
-```
+<div class="flow-abst"><pre>
 Thread::muxAcquire()
--> Atomic::cmpxchg_ptr() によるスピンロックと
+-&gt; Atomic::cmpxchg_ptr() によるスピンロックと
    os::PlatformEvent::park() による待機が繰り返される
-```
+</pre></div>
 
 ### Thread::muxRelease()
-```
+<div class="flow-abst"><pre>
 Thread::muxRelease()
--> Atomic::cmpxchg_ptr()
--> os::PlatformEvent::unpark()
-```
+-&gt; Atomic::cmpxchg_ptr()
+-&gt; os::PlatformEvent::unpark()
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

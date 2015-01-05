@@ -22,54 +22,54 @@ title: JNI の処理 ： JNI Functions の処理 ： JNI による例外処理(E
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### Throw() の処理
-```
+<div class="flow-abst"><pre>
 jni_Throw()
--> THROW_OOP_()
-   -> (See: [here](no3059qOR.html) for details)
-```
+-&gt; THROW_OOP_()
+   -&gt; (See: <a href="no3059qOR.html">here</a> for details)
+</pre></div>
 
 ### ThrowNew() の処理
-```
+<div class="flow-abst"><pre>
 jni_ThrowNew()
--> THROW_MSG_LOADER_()
-   -> (See: [here](no3059qOR.html) for details)
-```
+-&gt; THROW_MSG_LOADER_()
+   -&gt; (See: <a href="no3059qOR.html">here</a> for details)
+</pre></div>
 
 ### ExceptionOccurred() の処理
-```
+<div class="flow-abst"><pre>
 jni_ExceptionOccurred()
--> jni_check_async_exceptions()
-   -> JavaThread::check_and_handle_async_exceptions()
--> ThreadShadow::pending_exception()
-```
+-&gt; jni_check_async_exceptions()
+   -&gt; JavaThread::check_and_handle_async_exceptions()
+-&gt; ThreadShadow::pending_exception()
+</pre></div>
 
 ### ExceptionDescribe() の処理
-```
+<div class="flow-abst"><pre>
 jni_ExceptionDescribe()
--> JavaCalls::call_virtual()
-   -> (See: [here](no3059iJu.html) for details)
-      -> java.lang.Throwable.printStackTrace()
-```
+-&gt; JavaCalls::call_virtual()
+   -&gt; (See: <a href="no3059iJu.html">here</a> for details)
+      -&gt; java.lang.Throwable.printStackTrace()
+</pre></div>
 
 ### ExceptionClear() の処理
-```
+<div class="flow-abst"><pre>
 jni_ExceptionClear()
--> ThreadShadow::clear_pending_exception()
-```
+-&gt; ThreadShadow::clear_pending_exception()
+</pre></div>
 
 ### FatalError() の処理
-```
+<div class="flow-abst"><pre>
 jni_FatalError()
--> os::abort()
-```
+-&gt; os::abort()
+</pre></div>
 
 ### ExceptionCheck() の処理
-```
+<div class="flow-abst"><pre>
 jni_ExceptionCheck()
--> jni_check_async_exceptions()
-   -> JavaThread::check_and_handle_async_exceptions()
--> ThreadShadow::has_pending_exception()
-```
+-&gt; jni_check_async_exceptions()
+   -&gt; JavaThread::check_and_handle_async_exceptions()
+-&gt; ThreadShadow::has_pending_exception()
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

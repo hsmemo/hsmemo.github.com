@@ -110,57 +110,57 @@ See: [here](no2935oMn.html) for details
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### PopFrame() の処理
-```
+<div class="flow-abst"><pre>
 JvmtiEnv::PopFrame()
--> (1) 先頭2つのフレームのうち compiled frame のものについては interpreter frame に戻しておく.
-       -> Deoptimization::deoptimize_frame()
+-&gt; (1) 先頭2つのフレームのうち compiled frame のものについては interpreter frame に戻しておく.
+       -&gt; Deoptimization::deoptimize_frame()
 
    (2) 先頭フレームに対して FramePop イベント通知が登録されていれば取り消す
-       -> JvmtiThreadState::update_for_pop_top_frame()
+       -&gt; JvmtiThreadState::update_for_pop_top_frame()
 
    (3) PopFrame の処理対象になっていることを JavaThread オブジェクトや JvmtiThreadState オブジェクト内に記録しておく
-       -> JavaThread::set_popframe_condition()
-       -> JvmtiThreadState::set_pending_step_for_popframe()
-```
+       -&gt; JavaThread::set_popframe_condition()
+       -&gt; JvmtiThreadState::set_pending_step_for_popframe()
+</pre></div>
 
 ### 実際の pop 処理 
 #### compiled frame の場合
-```
+<div class="flow-abst"><pre>
 deopt 処理 (See: )
--> vframeArrayElement::unpack_on_stack()
-   -> JavaThread::has_pending_popframe() が true の場合は,
+-&gt; vframeArrayElement::unpack_on_stack()
+   -&gt; JavaThread::has_pending_popframe() が true の場合は,
       復帰先の PC として Interpreter::remove_activation_preserving_args_entry() を選択する
       (なお, JavaThread::has_pending_popframe() は
       JavaThread::_popframe_condition フィールドをチェックする関数)
-```
+</pre></div>
 
 #### template interpreter frame の場合
-```
+<div class="flow-abst"><pre>
 * sparc の場合:
 
-  (略) (See: [here](no2935dSX.html) for details)
-  -> MacroAssembler::call_VM_base() が生成するコード
-     -> MacroAssembler::check_and_forward_exception() が生成するコード
-        -> InterpreterMacroAssembler::check_and_handle_popframe() が生成するコード
-           -> Interpreter::remove_activation_preserving_args_entry() が指しているコード
+  (略) (See: <a href="no2935dSX.html">here</a> for details)
+  -&gt; MacroAssembler::call_VM_base() が生成するコード
+     -&gt; MacroAssembler::check_and_forward_exception() が生成するコード
+        -&gt; InterpreterMacroAssembler::check_and_handle_popframe() が生成するコード
+           -&gt; Interpreter::remove_activation_preserving_args_entry() が指しているコード
               (= TemplateInterpreterGenerator::generate_throw_exception() が生成するコード)
 
 * x86 の場合:
 
-  (略) (See: [here](no2935dSX.html) for details)
-  -> MacroAssembler::call_VM_base() が生成するコード
-     -> InterpreterMacroAssembler::check_and_handle_popframe() が生成するコード
-        -> Interpreter::remove_activation_preserving_args_entry() が指しているコード
+  (略) (See: <a href="no2935dSX.html">here</a> for details)
+  -&gt; MacroAssembler::call_VM_base() が生成するコード
+     -&gt; InterpreterMacroAssembler::check_and_handle_popframe() が生成するコード
+        -&gt; Interpreter::remove_activation_preserving_args_entry() が指しているコード
            (= TemplateInterpreterGenerator::generate_throw_exception() が生成するコード)
-```
+</pre></div>
 
 ### SingleStep 時の後片付け処理
-```
-(略) (See: [here](no7882EDP.html) for details)
--> JvmtiExport::at_single_stepping_point()
-   -> JvmtiThreadState::is_pending_step_for_popframe() が true の場合は,
+<div class="flow-abst"><pre>
+(略) (See: <a href="no7882EDP.html">here</a> for details)
+-&gt; JvmtiExport::at_single_stepping_point()
+   -&gt; JvmtiThreadState::is_pending_step_for_popframe() が true の場合は,
       JvmtiThreadState::process_pending_step_for_popframe() を呼び出す
-```
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

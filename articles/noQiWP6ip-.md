@@ -21,32 +21,32 @@ title: Thread の開始処理の枠組み ： 生成されたスレッド側で�
    実際には Thread の各サブクラスでオーバーライドされた run() メソッドが実行される.
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 java_start()
--> (1) LWP 関係の設定
-       -> _lwp_self()
-       -> OSThread::set_lwp_id()
+-&gt; (1) LWP 関係の設定
+       -&gt; _lwp_self()
+       -&gt; OSThread::set_lwp_id()
 
    (1) NUMA 関係の設定
-       -> os::numa_get_group_id()
-       -> Thread::set_lgrp_id()
+       -&gt; os::numa_get_group_id()
+       -&gt; Thread::set_lgrp_id()
 
    (1) スレッドの優先度の設定
-       -> os::set_native_priority()
+       -&gt; os::set_native_priority()
 
    (1) シグナルマスクの設定
-       -> os::Solaris::hotspot_sigmask()
-          -> (See: [here](noNmlmYDJk.html) for details)
+       -&gt; os::Solaris::hotspot_sigmask()
+          -&gt; (See: <a href="noNmlmYDJk.html">here</a> for details)
 
    (1) 実際にこのスレッドのメイン処理を実行
-       -> Thread::run()
-          -> (Thread の各サブクラスでオーバーライドされた run() メソッドが呼び出される)
+       -&gt; Thread::run()
+          -&gt; (Thread の各サブクラスでオーバーライドされた run() メソッドが呼び出される)
 
    (1) 終了
-       -> thr_exit() (<= UseDetachedThreads オプションが指定されている場合には呼び出す.
+       -&gt; thr_exit() (&lt;= UseDetachedThreads オプションが指定されている場合には呼び出す.
                          この場合, スレッド自体が消えるのでここで実行は終了.
                          そうでなければ単にリターンすることで終了させる.)
-```
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### java_start() (Solaris の場合)

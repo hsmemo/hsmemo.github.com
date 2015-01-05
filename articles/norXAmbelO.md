@@ -59,61 +59,61 @@ title: OSThread クラス関連のクラス (OSThread, OSThreadWaitState, OSThre
 #### 生成箇所(where its instances are created)
 以下の箇所で(のみ)生成されている.
 
-```
+<div class="flow-abst"><pre>
 * os::create_thread()          (Linux の場合) (Solaris の場合) (Windows の場合)
 * os::create_attached_thread() (Linux の場合)
 * create_os_thread()           (Solaris の場合) (Windows の場合)
-```
+</pre></div>
 
 そして, これらの関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 * メインスレッドの初期化処理
 
-  (HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
-  -> Threads::create_vm()
-     -> Thread::set_as_starting_thread()
-        -> os::create_main_thread()
-           -> * Linux の場合:
-                -> os::create_attached_thread()
+  (HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+  -&gt; Threads::create_vm()
+     -&gt; Thread::set_as_starting_thread()
+        -&gt; os::create_main_thread()
+           -&gt; * Linux の場合:
+                -&gt; os::create_attached_thread()
               * Solaris の場合:
-                -> create_os_thread()
+                -&gt; create_os_thread()
               * Windows の場合:
-                -> create_os_thread()
+                -&gt; create_os_thread()
 
 * 各種スレッドの作成処理
                 
   JavaThread::JavaThread()
-  -> os::create_thread()
+  -&gt; os::create_thread()
   
-  Threads::create_vm()    (<= VMThread の作成処理)
-  -> os::create_thread()
+  Threads::create_vm()    (&lt;= VMThread の作成処理)
+  -&gt; os::create_thread()
   
   WatcherThread::WatcherThread()
-  -> os::create_thread()
+  -&gt; os::create_thread()
   
   ConcurrentMarkSweepThread::ConcurrentMarkSweepThread()
-  -> os::create_thread()
+  -&gt; os::create_thread()
   
   GCTaskThread::GCTaskThread()
-  -> os::create_thread()
+  -&gt; os::create_thread()
   
   ConcurrentGCThread::create_and_start()
-  -> os::create_thread()
+  -&gt; os::create_thread()
   
   WorkGang::initialize_workers()
-  -> os::create_thread()
+  -&gt; os::create_thread()
 
 * JNI の AttachCurrentThread() 及び AttachCurrentThreadAsDaemon() の処理
 
-  (略) (See: [here](noxegGjntv.html) for details)
-  -> attach_current_thread()
-     -> os::create_attached_thread()
-        -> * Solaris の場合:
-             -> create_os_thread()
+  (略) (See: <a href="noxegGjntv.html">here</a> for details)
+  -&gt; attach_current_thread()
+     -&gt; os::create_attached_thread()
+        -&gt; * Solaris の場合:
+             -&gt; create_os_thread()
            * Windows の場合:
-             -> create_os_thread()
-```
+             -&gt; create_os_thread()
+</pre></div>
 
 ### 備考(Notes)
 OSThread::_state フィールドの型である ThreadState (enum 型) は 

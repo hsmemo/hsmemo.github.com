@@ -189,108 +189,108 @@ sun.tools.attach.HotSpotAttachProvider というクラスに継承され (ただ
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### AttachListener スレッドの生成処理 (HotSpot の起動時の場合)
-```
-(HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
--> Threads::create_vm()
-   -> AttachListener::init_at_startup()
-   -> AttachListener::init()
-      -> JavaThread::JavaThread()   (<= なお, エントリポイントとしては attach_listener_thread_entry() 関数が指定されている)
-         -> (See: [here](no2935KMw.html) for details)
-      -> Thread::start()
-         -> (See: [here](no2935KMw.html) for details)
-```
+<div class="flow-abst"><pre>
+(HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+-&gt; Threads::create_vm()
+   -&gt; AttachListener::init_at_startup()
+   -&gt; AttachListener::init()
+      -&gt; JavaThread::JavaThread()   (&lt;= なお, エントリポイントとしては attach_listener_thread_entry() 関数が指定されている)
+         -&gt; (See: <a href="no2935KMw.html">here</a> for details)
+      -&gt; Thread::start()
+         -&gt; (See: <a href="no2935KMw.html">here</a> for details)
+</pre></div>
 
 ### AttachListener スレッドの生成処理 (HotSpot の実行中の場合) (&& Linux 又は Solaris の場合)
-```
-(See: [here](no28916GhX.html) for details)
--> signal_thread_entry()
-   -> AttachListener::is_init_trigger()
-      -> AttachListener::init()
-         -> (同上)
-```
+<div class="flow-abst"><pre>
+(See: <a href="no28916GhX.html">here</a> for details)
+-&gt; signal_thread_entry()
+   -&gt; AttachListener::is_init_trigger()
+      -&gt; AttachListener::init()
+         -&gt; (同上)
+</pre></div>
 
 ### 生成された AttachListener スレッドの処理
-```
+<div class="flow-abst"><pre>
 attach_listener_thread_entry()
--> (1) 通信処理用の初期化を行う
-       -> AttachListener::pd_init()  (<= このメソッドは各サブクラスでオーバーライドされている)
-          -> * Linux の場合:
-               -> LinuxAttachListener::init()
-                  -> (通信用の unix domain socket を作成)
+-&gt; (1) 通信処理用の初期化を行う
+       -&gt; AttachListener::pd_init()  (&lt;= このメソッドは各サブクラスでオーバーライドされている)
+          -&gt; * Linux の場合:
+               -&gt; LinuxAttachListener::init()
+                  -&gt; (通信用の unix domain socket を作成)
              * Solaris の場合:
-               -> SolarisAttachListener::init()
-                  -> SolarisAttachListener::create_door()
-                     -> (通信用の door を作成) (door のエントリポイントは enqueue_proc())
+               -&gt; SolarisAttachListener::init()
+                  -&gt; SolarisAttachListener::create_door()
+                     -&gt; (通信用の door を作成) (door のエントリポイントは enqueue_proc())
              * Windows の場合:
-               -> WindowsAttachListener::init()
+               -&gt; WindowsAttachListener::init()
 
    (1) 以下の処理を無限ループで繰り返す.
        (1) クライアントからの新しい要求を取得する
-           -> AttachListener::dequeue()  (<= このメソッドは各サブクラスでオーバーライドされている)
-              -> * Linux の場合:
-                   -> LinuxAttachListener::dequeue()
-                      -> LinuxAttachListener::read_request()
+           -&gt; AttachListener::dequeue()  (&lt;= このメソッドは各サブクラスでオーバーライドされている)
+              -&gt; * Linux の場合:
+                   -&gt; LinuxAttachListener::dequeue()
+                      -&gt; LinuxAttachListener::read_request()
                  * Solaris の場合:
-                   -> SolarisAttachListener::dequeue()
-                      -> SolarisAttachListener::head()
+                   -&gt; SolarisAttachListener::dequeue()
+                      -&gt; SolarisAttachListener::head()
                  * Windows の場合:
-                   -> Win32AttachListener::dequeue()
+                   -&gt; Win32AttachListener::dequeue()
 
        (1) 要求に対応する関数を呼び出す.
-           -> AttachListener::detachall()
-              -> * Linux の場合:
-                   -> AttachListener::pd_detachall()
+           -&gt; AttachListener::detachall()
+              -&gt; * Linux の場合:
+                   -&gt; AttachListener::pd_detachall()
                  * Solaris の場合:
-                   -> AttachListener::pd_detachall()
-                      -> DTrace::detach_all_clients()
+                   -&gt; AttachListener::pd_detachall()
+                      -&gt; DTrace::detach_all_clients()
                  * Windows の場合:
-                   -> AttachListener::pd_detachall()
-           -> get_agent_properties()
-           -> data_dump()
-           -> dump_heap()
-           -> JvmtiExport::load_agent_library()
-              -> os::dll_build_name()
-              -> os::dll_load()
-              -> os::dll_lookup()
-              -> (ロードしたライブラリの Agent_OnAttach() を呼び出す)
-           -> get_system_properties()
-           -> thread_dump()
-           -> heap_inspection()
-           -> set_flag()
-           -> print_flag()
+                   -&gt; AttachListener::pd_detachall()
+           -&gt; get_agent_properties()
+           -&gt; data_dump()
+           -&gt; dump_heap()
+           -&gt; JvmtiExport::load_agent_library()
+              -&gt; os::dll_build_name()
+              -&gt; os::dll_load()
+              -&gt; os::dll_lookup()
+              -&gt; (ロードしたライブラリの Agent_OnAttach() を呼び出す)
+           -&gt; get_system_properties()
+           -&gt; thread_dump()
+           -&gt; heap_inspection()
+           -&gt; set_flag()
+           -&gt; print_flag()
 
        (1) クライアントに結果を送信する
-           -> AttachOperation::complete()  (<= このメソッドは各サブクラスでオーバーライドされている)
-              -> * Linux の場合:
-                   -> LinuxAttachOperation::complete()
+           -&gt; AttachOperation::complete()  (&lt;= このメソッドは各サブクラスでオーバーライドされている)
+              -&gt; * Linux の場合:
+                   -&gt; LinuxAttachOperation::complete()
                  * Solaris の場合:
-                   -> SolarisAttachOperation::complete()
+                   -&gt; SolarisAttachOperation::complete()
                  * Windows の場合:
-                   -> Win32AttachOperation::complete()
-```
+                   -&gt; Win32AttachOperation::complete()
+</pre></div>
 
 #### door が呼び出された際の処理 (Solaris の場合)
-```
+<div class="flow-abst"><pre>
 enqueue_proc()
--> create_operation()
--> SolarisAttachListener::enqueue()
-```
+-&gt; create_operation()
+-&gt; SolarisAttachListener::enqueue()
+</pre></div>
 
 
 ### クライアントプロセスによる呼び出し処理
 #### com.sun.tools.attach.VirtualMachine.attach(String id) の処理
-```
+<div class="flow-abst"><pre>
 com.sun.tools.attach.VirtualMachine.attach(String id)
--> com.sun.tools.attach.spi.AttachProvider.providers()
-   -> 
--> com.sun.tools.attach.spi.AttachProvider.attachVirtualMachine()
-   -> 
-```
+-&gt; com.sun.tools.attach.spi.AttachProvider.providers()
+   -&gt; 
+-&gt; com.sun.tools.attach.spi.AttachProvider.attachVirtualMachine()
+   -&gt; 
+</pre></div>
 
 #### com.sun.tools.attach.VirtualMachine.detach() の処理
 (このメソッドは各サブクラスでオーバーライドされている)
 
-```
+<div class="flow-abst"><pre>
 * Linux の場合:
   sun.tools.attach.LinuxVirtualMachine.detach()
 
@@ -299,89 +299,89 @@ com.sun.tools.attach.VirtualMachine.attach(String id)
 
 * Windows の場合:
   sun.tools.attach.WindowsVirtualMachine.detach()
-```
+</pre></div>
 
 #### com.sun.tools.attach.VirtualMachine.loadAgent() の処理
-```
+<div class="flow-abst"><pre>
 sun.tools.attach.HotSpotVirtualMachine.loadAgent()
--> sun.tools.attach.HotSpotVirtualMachine.loadAgentLibrary(String agentLibrary, String options)  (<= 引数は "instrument" (libinstrumentの意))
-   -> sun.tools.attach.HotSpotVirtualMachine.loadAgentLibrary(String agentLibrary, boolean isAbsolute, String options)
-      -> (1) コマンドとして "load" を指定して execute() を呼び出す
-             -> sun.tools.attach.HotSpotVirtualMachine.execute() (<= このメソッドは各サブクラスでオーバーライドされている)
-                -> * Linux の場合:
-                     -> sun.tools.attach.LinuxVirtualMachine.execute()
-                        -> (unix domain socket 経由で実行させたいコマンド(およびその引数)を通知)
+-&gt; sun.tools.attach.HotSpotVirtualMachine.loadAgentLibrary(String agentLibrary, String options)  (&lt;= 引数は &quot;instrument&quot; (libinstrumentの意))
+   -&gt; sun.tools.attach.HotSpotVirtualMachine.loadAgentLibrary(String agentLibrary, boolean isAbsolute, String options)
+      -&gt; (1) コマンドとして &quot;load&quot; を指定して execute() を呼び出す
+             -&gt; sun.tools.attach.HotSpotVirtualMachine.execute() (&lt;= このメソッドは各サブクラスでオーバーライドされている)
+                -&gt; * Linux の場合:
+                     -&gt; sun.tools.attach.LinuxVirtualMachine.execute()
+                        -&gt; (unix domain socket 経由で実行させたいコマンド(およびその引数)を通知)
                    * Solaris の場合:
-                     -> sun.tools.attach.SolarisVirtualMachine.execute()
-                        -> (door 経由で実行させたいコマンド(およびその引数)を通知)
+                     -&gt; sun.tools.attach.SolarisVirtualMachine.execute()
+                        -&gt; (door 経由で実行させたいコマンド(およびその引数)を通知)
                    * Windows の場合:
-                     -> sun.tools.attach.WindowsVirtualMachine.execute()
-                        -> 
-```
+                     -&gt; sun.tools.attach.WindowsVirtualMachine.execute()
+                        -&gt; 
+</pre></div>
 
 #### com.sun.tools.attach.VirtualMachine.getSystemProperties() の処理
-```
+<div class="flow-abst"><pre>
 sun.tools.attach.HotSpotVirtualMachine.getSystemProperties()
--> sun.tools.attach.HotSpotVirtualMachine.executeCommand() (<= 引数は "properties")
-   -> sun.tools.attach.HotSpotVirtualMachine.execute()
-      -> (同上)
-```
+-&gt; sun.tools.attach.HotSpotVirtualMachine.executeCommand() (&lt;= 引数は &quot;properties&quot;)
+   -&gt; sun.tools.attach.HotSpotVirtualMachine.execute()
+      -&gt; (同上)
+</pre></div>
 
 #### com.sun.tools.attach.VirtualMachine.getAgentProperties() の処理
-```
+<div class="flow-abst"><pre>
 sun.tools.attach.HotSpotVirtualMachine.getAgentProperties()
--> sun.tools.attach.HotSpotVirtualMachine.executeCommand() (<= 引数は "agentProperties")
-   -> sun.tools.attach.HotSpotVirtualMachine.execute()
-      -> (同上)
-```
+-&gt; sun.tools.attach.HotSpotVirtualMachine.executeCommand() (&lt;= 引数は &quot;agentProperties&quot;)
+   -&gt; sun.tools.attach.HotSpotVirtualMachine.execute()
+      -&gt; (同上)
+</pre></div>
 
 #### sun.tools.attach.HotSpotVirtualMachine.localDataDump() の処理
-```
+<div class="flow-abst"><pre>
 sun.tools.attach.HotSpotVirtualMachine.localDataDump()
--> sun.tools.attach.HotSpotVirtualMachine.executeCommand() (<= 引数は "datadump")
-   -> sun.tools.attach.HotSpotVirtualMachine.execute()
-      -> (同上)
-```
+-&gt; sun.tools.attach.HotSpotVirtualMachine.executeCommand() (&lt;= 引数は &quot;datadump&quot;)
+   -&gt; sun.tools.attach.HotSpotVirtualMachine.execute()
+      -&gt; (同上)
+</pre></div>
 
 #### sun.tools.attach.HotSpotVirtualMachine.remoteDataDump() の処理
-```
+<div class="flow-abst"><pre>
 sun.tools.attach.HotSpotVirtualMachine.remoteDataDump()
--> sun.tools.attach.HotSpotVirtualMachine.executeCommand() (<= 引数は "threaddump")
-   -> sun.tools.attach.HotSpotVirtualMachine.execute()
-      -> (同上)
-```
+-&gt; sun.tools.attach.HotSpotVirtualMachine.executeCommand() (&lt;= 引数は &quot;threaddump&quot;)
+   -&gt; sun.tools.attach.HotSpotVirtualMachine.execute()
+      -&gt; (同上)
+</pre></div>
 
 #### sun.tools.attach.HotSpotVirtualMachine.dumpHeap() の処理
-```
+<div class="flow-abst"><pre>
 sun.tools.attach.HotSpotVirtualMachine.dumpHeap()
--> sun.tools.attach.HotSpotVirtualMachine.executeCommand() (<= 引数は "dumpheap")
-   -> sun.tools.attach.HotSpotVirtualMachine.execute()
-      -> (同上)
-```
+-&gt; sun.tools.attach.HotSpotVirtualMachine.executeCommand() (&lt;= 引数は &quot;dumpheap&quot;)
+   -&gt; sun.tools.attach.HotSpotVirtualMachine.execute()
+      -&gt; (同上)
+</pre></div>
 
 #### sun.tools.attach.HotSpotVirtualMachine.heapHisto() の処理
-```
+<div class="flow-abst"><pre>
 sun.tools.attach.HotSpotVirtualMachine.heapHisto()
--> sun.tools.attach.HotSpotVirtualMachine.executeCommand() (<= 引数は "inspectheap")
-   -> sun.tools.attach.HotSpotVirtualMachine.execute()
-      -> (同上)
-```
+-&gt; sun.tools.attach.HotSpotVirtualMachine.executeCommand() (&lt;= 引数は &quot;inspectheap&quot;)
+   -&gt; sun.tools.attach.HotSpotVirtualMachine.execute()
+      -&gt; (同上)
+</pre></div>
 
 #### sun.tools.attach.HotSpotVirtualMachine.setFlag() の処理
-```
+<div class="flow-abst"><pre>
 sun.tools.attach.HotSpotVirtualMachine.setFlag()
--> sun.tools.attach.HotSpotVirtualMachine.executeCommand() (<= 引数は "setflag")
-   -> sun.tools.attach.HotSpotVirtualMachine.execute()
-      -> (同上)
-```
+-&gt; sun.tools.attach.HotSpotVirtualMachine.executeCommand() (&lt;= 引数は &quot;setflag&quot;)
+   -&gt; sun.tools.attach.HotSpotVirtualMachine.execute()
+      -&gt; (同上)
+</pre></div>
 
 #### sun.tools.attach.HotSpotVirtualMachine.printFlag() の処理
-```
+<div class="flow-abst"><pre>
 sun.tools.attach.HotSpotVirtualMachine.printFlag()
--> sun.tools.attach.HotSpotVirtualMachine.executeCommand() (<= 引数は "printflag")
-   -> sun.tools.attach.HotSpotVirtualMachine.execute()
-      -> (同上)
-```
+-&gt; sun.tools.attach.HotSpotVirtualMachine.executeCommand() (&lt;= 引数は &quot;printflag&quot;)
+   -&gt; sun.tools.attach.HotSpotVirtualMachine.execute()
+      -&gt; (同上)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

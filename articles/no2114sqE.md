@@ -12,69 +12,69 @@ title: Serviceability 機能 ： HotSpot Monitoring and Management Interface (JM
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### sun.management.ThreadImpl.getThreadInfo() の処理
-```
+<div class="flow-abst"><pre>
 sun.management.ThreadImpl.getThreadInfo()
--> sun.management.ThreadImpl.getThreadInfo1()
-   -> Java_sun_management_ThreadImpl_getThreadInfo1()
-      -> jmm_GetThreadInfo()
+-&gt; sun.management.ThreadImpl.getThreadInfo1()
+   -&gt; Java_sun_management_ThreadImpl_getThreadInfo1()
+      -&gt; jmm_GetThreadInfo()
          (1) 以下のどちらかの方法で ThreadSnapshot オブジェクトを生成
              * スレッドのスタックダンプは必要ない場合:
-               -> ThreadSnapshot::ThreadSnapshot()
+               -&gt; ThreadSnapshot::ThreadSnapshot()
              * スレッドのスタックダンプまで必要な場合:
-               -> do_thread_dump()
-                  -> VMThread::execute()
-                     -> (See: [here](no2935qaz.html) for details)
-                        -> VM_ThreadDump::doit_prologue()
-                        -> VM_ThreadDump::doit()
-                           -> ConcurrentLocksDump::dump_at_safepoint()        (「現在ロックしているシンクロナイザの一覧」も取得する場合)
-                           -> VM_ThreadDump::snapshot_thread()
-                              -> ThreadSnapshot::dump_stack_at_safepoint()
-                                 -> ThreadStackTrace::dump_stack_at_safepointr()
-                                    -> ThreadStackTrace::add_stack_frame()
-                                       -> StackFrameInfo::StackFrameInfo()
-                                          -> javaVFrame::locked_monitors()    (「現在ロックしているオブジェクトモニターの一覧」も取得する場合)
-                                    -> ObjectSynchronizer::monitors_iterate() (「現在ロックしているオブジェクトモニターの一覧」も取得する場合)
-                                       -> InflatedMonitorsClosure::do_monitor()
-                        -> VM_ThreadDump::doit_epilogue()
+               -&gt; do_thread_dump()
+                  -&gt; VMThread::execute()
+                     -&gt; (See: <a href="no2935qaz.html">here</a> for details)
+                        -&gt; VM_ThreadDump::doit_prologue()
+                        -&gt; VM_ThreadDump::doit()
+                           -&gt; ConcurrentLocksDump::dump_at_safepoint()        (「現在ロックしているシンクロナイザの一覧」も取得する場合)
+                           -&gt; VM_ThreadDump::snapshot_thread()
+                              -&gt; ThreadSnapshot::dump_stack_at_safepoint()
+                                 -&gt; ThreadStackTrace::dump_stack_at_safepointr()
+                                    -&gt; ThreadStackTrace::add_stack_frame()
+                                       -&gt; StackFrameInfo::StackFrameInfo()
+                                          -&gt; javaVFrame::locked_monitors()    (「現在ロックしているオブジェクトモニターの一覧」も取得する場合)
+                                    -&gt; ObjectSynchronizer::monitors_iterate() (「現在ロックしているオブジェクトモニターの一覧」も取得する場合)
+                                       -&gt; InflatedMonitorsClosure::do_monitor()
+                        -&gt; VM_ThreadDump::doit_epilogue()
          (2) ThreadSnapshot オブジェクトから java.lang.management.ThreadInfo オブジェクトを生成
-             -> Management::create_thread_info_instance()
-                -> initialize_ThreadInfo_constructor_arguments()
-```
+             -&gt; Management::create_thread_info_instance()
+                -&gt; initialize_ThreadInfo_constructor_arguments()
+</pre></div>
 
 ### sun.management.ThreadImpl.getThreadInfo(long[] ids, boolean lockedMonitors, boolean lockedSynchronizers) の処理
-```
+<div class="flow-abst"><pre>
 sun.management.ThreadImpl.getThreadInfo(long[] ids, boolean lockedMonitors, boolean lockedSynchronizers)
--> sun.management.ThreadImpl.dumpThreads0()
-   -> Java_sun_management_ThreadImpl_dumpThreads0()
-      -> jmm_DumpThreads()
+-&gt; sun.management.ThreadImpl.dumpThreads0()
+   -&gt; Java_sun_management_ThreadImpl_dumpThreads0()
+      -&gt; jmm_DumpThreads()
          (1) 対象のスレッドの情報を ThreadSnapshot オブジェクトとして取得.
              * 引数で情報取得対象のスレッドが指定されている場合 (getThreadInfo() から呼び出された場合):
-               -> do_thread_dump()
-                  -> (同上)
+               -&gt; do_thread_dump()
+                  -&gt; (同上)
              * そうでない場合 (dumpAllThreads() から呼び出された場合):
-               -> VMThread::execute()
-                  -> (See: [here](no2935qaz.html) for details)
-                     -> VM_ThreadDump::doit_prologue()
-                     -> VM_ThreadDump::doit()
-                        -> (同上)
-                     -> VM_ThreadDump::doit_epilogue()
+               -&gt; VMThread::execute()
+                  -&gt; (See: <a href="no2935qaz.html">here</a> for details)
+                     -&gt; VM_ThreadDump::doit_prologue()
+                     -&gt; VM_ThreadDump::doit()
+                        -&gt; (同上)
+                     -&gt; VM_ThreadDump::doit_epilogue()
          (2) 「現在ロックしているオブジェクトモニターの一覧」も取得する場合には, 以下を呼び出す.
-             -> StackFrameInfo::locked_monitors()
-             -> ThreadStackTrace::jni_locked_monitors()
+             -&gt; StackFrameInfo::locked_monitors()
+             -&gt; ThreadStackTrace::jni_locked_monitors()
          (3) 「現在ロックしているシンクロナイザの一覧」も取得する場合には, 以下を呼び出す.
-             -> ThreadSnapshot::get_concurrent_locks()
-             -> ThreadConcurrentLocks::owned_locks()
+             -&gt; ThreadSnapshot::get_concurrent_locks()
+             -&gt; ThreadConcurrentLocks::owned_locks()
          (4) 以上で取得した値から java.lang.management.ThreadInfo オブジェクトを生成する.
-             -> Management::create_thread_info_instance()
-                -> (同上)
-```
+             -&gt; Management::create_thread_info_instance()
+                -&gt; (同上)
+</pre></div>
 
 ### sun.management.ThreadImpl.dumpAllThreads() の処理
-```
+<div class="flow-abst"><pre>
 sun.management.ThreadImpl.dumpAllThreads()
--> sun.management.ThreadImpl.dumpThreads0()
-   -> (同上)
-```
+-&gt; sun.management.ThreadImpl.dumpThreads0()
+   -&gt; (同上)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

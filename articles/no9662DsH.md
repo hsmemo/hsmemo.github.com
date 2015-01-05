@@ -16,16 +16,16 @@ fast-path が失敗すると InterpreterRuntime::monitorenter() による slow-p
 (See: [here](no96623Ns.html) for details).
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 InterpreterRuntime::monitorenter()
--> UseBiasedLocking オプションに応じてどちらかを呼び出す
+-&gt; UseBiasedLocking オプションに応じてどちらかを呼び出す
    * UseBiasedLocking オプションが指定されている場合:
-     -> ObjectSynchronizer::fast_enter()
-        -> (See: [here](no96623Ns.html) for details)
+     -&gt; ObjectSynchronizer::fast_enter()
+        -&gt; (See: <a href="no96623Ns.html">here</a> for details)
    * 〃 が指定されていない場合:
-     -> ObjectSynchronizer::slow_enter()
-        -> (See: [here](no96623Ns.html) for details)
-```
+     -&gt; ObjectSynchronizer::slow_enter()
+        -&gt; (See: <a href="no96623Ns.html">here</a> for details)
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### InterpreterRuntime::monitorenter()

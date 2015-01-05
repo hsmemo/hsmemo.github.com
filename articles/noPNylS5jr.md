@@ -176,13 +176,13 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -220,13 +220,13 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -264,13 +264,13 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -308,13 +308,13 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -352,13 +352,13 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -396,13 +396,13 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -440,13 +440,13 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -484,13 +484,13 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -528,13 +528,13 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -572,13 +572,13 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -616,13 +616,13 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -660,13 +660,13 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -704,13 +704,13 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -748,13 +748,13 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -792,13 +792,13 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -836,13 +836,13 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -880,13 +880,13 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -924,13 +924,13 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -968,13 +968,13 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -1012,13 +1012,13 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -1056,13 +1056,13 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -1100,13 +1100,13 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -1144,13 +1144,13 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -1188,13 +1188,13 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -1232,13 +1232,13 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -1276,13 +1276,13 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -1320,13 +1320,13 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -1364,13 +1364,13 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -1408,13 +1408,13 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ.
@@ -1488,13 +1488,13 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 VectorLoadNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 3つの入力ノードを持つ.
@@ -1533,13 +1533,13 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 VectorLoadNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 3つの入力ノードを持つ.
@@ -1578,13 +1578,13 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 VectorLoadNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 3つの入力ノードを持つ.
@@ -1623,13 +1623,13 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 VectorLoadNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 3つの入力ノードを持つ.
@@ -1668,13 +1668,13 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 VectorLoadNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 3つの入力ノードを持つ.
@@ -1713,13 +1713,13 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 VectorLoadNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 3つの入力ノードを持つ.
@@ -1758,13 +1758,13 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 VectorLoadNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 3つの入力ノードを持つ.
@@ -1803,13 +1803,13 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 VectorLoadNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 3つの入力ノードを持つ.
@@ -1848,13 +1848,13 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 VectorLoadNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 3つの入力ノードを持つ.
@@ -1893,13 +1893,13 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 VectorLoadNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 3つの入力ノードを持つ.
@@ -1938,13 +1938,13 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 VectorLoadNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 3つの入力ノードを持つ.
@@ -1983,13 +1983,13 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 VectorLoadNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 3つの入力ノードを持つ.
@@ -2028,13 +2028,13 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 VectorLoadNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 3つの入力ノードを持つ.
@@ -2073,13 +2073,13 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 VectorLoadNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 3つの入力ノードを持つ.
@@ -2118,13 +2118,13 @@ VectorLoadNode クラスの具象サブクラスの1つ.
 VectorLoadNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 3つの入力ノードを持つ.
@@ -2199,13 +2199,13 @@ VectorStoredNode クラスの具象サブクラスの1つ.
 VectorStoreNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorStoreNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorStoreNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 4つの入力ノードを持つ.
@@ -2244,13 +2244,13 @@ VectorStoredNode クラスの具象サブクラスの1つ.
 VectorStoreNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorStoreNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorStoreNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 4つの入力ノードを持つ.
@@ -2289,13 +2289,13 @@ VectorStoredNode クラスの具象サブクラスの1つ.
 VectorStoreNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorStoreNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorStoreNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 4つの入力ノードを持つ.
@@ -2334,13 +2334,13 @@ VectorStoredNode クラスの具象サブクラスの1つ.
 VectorStoreNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorStoreNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorStoreNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 4つの入力ノードを持つ.
@@ -2379,13 +2379,13 @@ VectorStoredNode クラスの具象サブクラスの1つ.
 VectorStoreNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorStoreNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorStoreNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 4つの入力ノードを持つ.
@@ -2424,13 +2424,13 @@ VectorStoredNode クラスの具象サブクラスの1つ.
 VectorStoreNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorStoreNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorStoreNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 4つの入力ノードを持つ.
@@ -2469,13 +2469,13 @@ VectorStoredNode クラスの具象サブクラスの1つ.
 VectorStoreNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorStoreNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorStoreNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 4つの入力ノードを持つ.
@@ -2514,13 +2514,13 @@ VectorStoredNode クラスの具象サブクラスの1つ.
 VectorStoreNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorStoreNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorStoreNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 4つの入力ノードを持つ.
@@ -2559,13 +2559,13 @@ VectorStoredNode クラスの具象サブクラスの1つ.
 VectorStoreNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorStoreNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorStoreNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 4つの入力ノードを持つ.
@@ -2604,13 +2604,13 @@ VectorStoredNode クラスの具象サブクラスの1つ.
 VectorStoreNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorStoreNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorStoreNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 4つの入力ノードを持つ.
@@ -2649,13 +2649,13 @@ VectorStoredNode クラスの具象サブクラスの1つ.
 VectorStoreNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorStoreNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorStoreNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 4つの入力ノードを持つ.
@@ -2694,13 +2694,13 @@ VectorStoredNode クラスの具象サブクラスの1つ.
 VectorStoreNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> VectorStoreNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; VectorStoreNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 4つの入力ノードを持つ.
@@ -2740,14 +2740,14 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::scalar2vector() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> SuperWord::vector_opd()
-            -> VectorNode::scalar2vector()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; SuperWord::vector_opd()
+            -&gt; VectorNode::scalar2vector()
+</pre></div>
 
 ### 内部構造(Internal structure)
 単項演算を表すノードなので (control input も含めて) 2つの入力ノードを持つ. 
@@ -2786,14 +2786,14 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::scalar2vector() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> SuperWord::vector_opd()
-            -> VectorNode::scalar2vector()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; SuperWord::vector_opd()
+            -&gt; VectorNode::scalar2vector()
+</pre></div>
 
 ### 内部構造(Internal structure)
 単項演算を表すノードなので (control input も含めて) 2つの入力ノードを持つ. 
@@ -2832,14 +2832,14 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::scalar2vector() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> SuperWord::vector_opd()
-            -> VectorNode::scalar2vector()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; SuperWord::vector_opd()
+            -&gt; VectorNode::scalar2vector()
+</pre></div>
 
 ### 内部構造(Internal structure)
 単項演算を表すノードなので (control input も含めて) 2つの入力ノードを持つ. 
@@ -2878,14 +2878,14 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::scalar2vector() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> SuperWord::vector_opd()
-            -> VectorNode::scalar2vector()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; SuperWord::vector_opd()
+            -&gt; VectorNode::scalar2vector()
+</pre></div>
 
 ### 内部構造(Internal structure)
 単項演算を表すノードなので (control input も含めて) 2つの入力ノードを持つ. 
@@ -2924,14 +2924,14 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::scalar2vector() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> SuperWord::vector_opd()
-            -> VectorNode::scalar2vector()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; SuperWord::vector_opd()
+            -&gt; VectorNode::scalar2vector()
+</pre></div>
 
 ### 内部構造(Internal structure)
 単項演算を表すノードなので (control input も含めて) 2つの入力ノードを持つ. 
@@ -2970,14 +2970,14 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::scalar2vector() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> SuperWord::vector_opd()
-            -> VectorNode::scalar2vector()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; SuperWord::vector_opd()
+            -&gt; VectorNode::scalar2vector()
+</pre></div>
 
 ### 内部構造(Internal structure)
 単項演算を表すノードなので (control input も含めて) 2つの入力ノードを持つ. 
@@ -3016,14 +3016,14 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::scalar2vector() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> SuperWord::vector_opd()
-            -> VectorNode::scalar2vector()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; SuperWord::vector_opd()
+            -&gt; VectorNode::scalar2vector()
+</pre></div>
 
 ### 内部構造(Internal structure)
 単項演算を表すノードなので (control input も含めて) 2つの入力ノードを持つ. 
@@ -3062,14 +3062,14 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::scalar2vector() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> SuperWord::vector_opd()
-            -> VectorNode::scalar2vector()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; SuperWord::vector_opd()
+            -&gt; VectorNode::scalar2vector()
+</pre></div>
 
 ### 内部構造(Internal structure)
 単項演算を表すノードなので (control input も含めて) 2つの入力ノードを持つ. 
@@ -3108,14 +3108,14 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::scalar2vector() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> SuperWord::vector_opd()
-            -> VectorNode::scalar2vector()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; SuperWord::vector_opd()
+            -&gt; VectorNode::scalar2vector()
+</pre></div>
 
 ### 内部構造(Internal structure)
 単項演算を表すノードなので (control input も含めて) 2つの入力ノードを持つ. 
@@ -3154,14 +3154,14 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::scalar2vector() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> SuperWord::vector_opd()
-            -> VectorNode::scalar2vector()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; SuperWord::vector_opd()
+            -&gt; VectorNode::scalar2vector()
+</pre></div>
 
 ### 内部構造(Internal structure)
 単項演算を表すノードなので (control input も含めて) 2つの入力ノードを持つ. 
@@ -3200,14 +3200,14 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::scalar2vector() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> SuperWord::vector_opd()
-            -> VectorNode::scalar2vector()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; SuperWord::vector_opd()
+            -&gt; VectorNode::scalar2vector()
+</pre></div>
 
 ### 内部構造(Internal structure)
 単項演算を表すノードなので (control input も含めて) 2つの入力ノードを持つ. 
@@ -3246,14 +3246,14 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::scalar2vector() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> SuperWord::vector_opd()
-            -> VectorNode::scalar2vector()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; SuperWord::vector_opd()
+            -&gt; VectorNode::scalar2vector()
+</pre></div>
 
 ### 内部構造(Internal structure)
 単項演算を表すノードなので (control input も含めて) 2つの入力ノードを持つ. 
@@ -3292,14 +3292,14 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::scalar2vector() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> SuperWord::vector_opd()
-            -> VectorNode::scalar2vector()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; SuperWord::vector_opd()
+            -&gt; VectorNode::scalar2vector()
+</pre></div>
 
 ### 内部構造(Internal structure)
 単項演算を表すノードなので (control input も含めて) 2つの入力ノードを持つ. 
@@ -3338,14 +3338,14 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::scalar2vector() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> SuperWord::vector_opd()
-            -> VectorNode::scalar2vector()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; SuperWord::vector_opd()
+            -&gt; VectorNode::scalar2vector()
+</pre></div>
 
 ### 内部構造(Internal structure)
 単項演算を表すノードなので (control input も含めて) 2つの入力ノードを持つ. 
@@ -3384,14 +3384,14 @@ VectorNode クラスの具象サブクラスの1つ.
 VectorNode::scalar2vector() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> SuperWord::vector_opd()
-            -> VectorNode::scalar2vector()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; SuperWord::vector_opd()
+            -&gt; VectorNode::scalar2vector()
+</pre></div>
 
 ### 内部構造(Internal structure)
 単項演算を表すノードなので (control input も含めて) 2つの入力ノードを持つ. 
@@ -3467,14 +3467,14 @@ PackNode クラスの具象サブクラスの1つ.
 PackNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> SuperWord::vector_opd()
-            -> PackNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; SuperWord::vector_opd()
+            -&gt; PackNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 2つの入力ノードを持つ. ただし control input は常に空 (0 が設定される).
@@ -3511,14 +3511,14 @@ PackNode クラスの具象サブクラスの1つ.
 PackNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> SuperWord::vector_opd()
-            -> PackNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; SuperWord::vector_opd()
+            -&gt; PackNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 2つの入力ノードを持つ. ただし control input は常に空 (0 が設定される).
@@ -3555,14 +3555,14 @@ PackNode クラスの具象サブクラスの1つ.
 PackNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> SuperWord::vector_opd()
-            -> PackNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; SuperWord::vector_opd()
+            -&gt; PackNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 2つの入力ノードを持つ. ただし control input は常に空 (0 が設定される).
@@ -3603,21 +3603,21 @@ PackNode クラスの具象サブクラスの1つ.
 
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> SuperWord::vector_opd()
-            -> PackNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; SuperWord::vector_opd()
+            -&gt; PackNode::make()
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 Compile::Optimize()
--> Compile::final_graph_reshaping()
-   -> final_graph_reshaping_walk()
-      -> final_graph_reshaping_impl()
-```
+-&gt; Compile::final_graph_reshaping()
+   -&gt; final_graph_reshaping_walk()
+      -&gt; final_graph_reshaping_impl()
+</pre></div>
 
 ### 内部構造(Internal structure)
 単項演算の場合は (control input も含めて) 2つの入力ノードを持つ.
@@ -3662,21 +3662,21 @@ PackNode クラスの具象サブクラスの1つ.
 
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> SuperWord::vector_opd()
-            -> PackNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; SuperWord::vector_opd()
+            -&gt; PackNode::make()
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 Compile::Optimize()
--> Compile::final_graph_reshaping()
-   -> final_graph_reshaping_walk()
-      -> final_graph_reshaping_impl()
-```
+-&gt; Compile::final_graph_reshaping()
+   -&gt; final_graph_reshaping_walk()
+      -&gt; final_graph_reshaping_impl()
+</pre></div>
 
 ### 内部構造(Internal structure)
 単項演算の場合は (control input も含めて) 2つの入力ノードを持つ.
@@ -3721,21 +3721,21 @@ PackNode クラスの具象サブクラスの1つ.
 
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> SuperWord::vector_opd()
-            -> PackNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; SuperWord::vector_opd()
+            -&gt; PackNode::make()
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 Compile::Optimize()
--> Compile::final_graph_reshaping()
-   -> final_graph_reshaping_walk()
-      -> final_graph_reshaping_impl()
-```
+-&gt; Compile::final_graph_reshaping()
+   -&gt; final_graph_reshaping_walk()
+      -&gt; final_graph_reshaping_impl()
+</pre></div>
 
 ### 内部構造(Internal structure)
 単項演算の場合は (control input も含めて) 2つの入力ノードを持つ.
@@ -3780,21 +3780,21 @@ PackNode クラスの具象サブクラスの1つ.
 
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> SuperWord::vector_opd()
-            -> PackNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; SuperWord::vector_opd()
+            -&gt; PackNode::make()
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 Compile::Optimize()
--> Compile::final_graph_reshaping()
-   -> final_graph_reshaping_walk()
-      -> final_graph_reshaping_impl()
-```
+-&gt; Compile::final_graph_reshaping()
+   -&gt; final_graph_reshaping_walk()
+      -&gt; final_graph_reshaping_impl()
+</pre></div>
 
 ### 内部構造(Internal structure)
 単項演算の場合は (control input も含めて) 2つの入力ノードを持つ.
@@ -3843,12 +3843,12 @@ PackNode クラスの具象サブクラスの1つ.
 final_graph_reshaping_impl() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 Compile::Optimize()
--> Compile::final_graph_reshaping()
-   -> final_graph_reshaping_walk()
-      -> final_graph_reshaping_impl()
-```
+-&gt; Compile::final_graph_reshaping()
+   -&gt; final_graph_reshaping_walk()
+      -&gt; final_graph_reshaping_impl()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ. ただし control input は常に空 (0 が設定される).
@@ -3893,12 +3893,12 @@ PackNode クラスの具象サブクラスの1つ.
 final_graph_reshaping_impl() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 Compile::Optimize()
--> Compile::final_graph_reshaping()
-   -> final_graph_reshaping_walk()
-      -> final_graph_reshaping_impl()
-```
+-&gt; Compile::final_graph_reshaping()
+   -&gt; final_graph_reshaping_walk()
+      -&gt; final_graph_reshaping_impl()
+</pre></div>
 
 ### 内部構造(Internal structure)
 2項演算を表すノードなので, (control input も含めて) 3つの入力ノードを持つ. ただし control input は常に空 (0 が設定される).
@@ -3967,14 +3967,14 @@ ExtractNode クラスの具象サブクラスの1つ.
 ExtractNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> SuperWord::insert_extracts()
-            -> ExtractNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; SuperWord::insert_extracts()
+            -&gt; ExtractNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 3つの入力ノードを持つ. ただし control input は常に空 (0 が設定される). 
@@ -4016,14 +4016,14 @@ ExtractNode クラスの具象サブクラスの1つ.
 ExtractNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> SuperWord::insert_extracts()
-            -> ExtractNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; SuperWord::insert_extracts()
+            -&gt; ExtractNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 3つの入力ノードを持つ. ただし control input は常に空 (0 が設定される). 
@@ -4065,14 +4065,14 @@ ExtractNode クラスの具象サブクラスの1つ.
 ExtractNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> SuperWord::insert_extracts()
-            -> ExtractNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; SuperWord::insert_extracts()
+            -&gt; ExtractNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 3つの入力ノードを持つ. ただし control input は常に空 (0 が設定される). 
@@ -4114,14 +4114,14 @@ ExtractNode クラスの具象サブクラスの1つ.
 ExtractNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> SuperWord::insert_extracts()
-            -> ExtractNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; SuperWord::insert_extracts()
+            -&gt; ExtractNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 3つの入力ノードを持つ. ただし control input は常に空 (0 が設定される). 
@@ -4163,14 +4163,14 @@ ExtractNode クラスの具象サブクラスの1つ.
 ExtractNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> SuperWord::insert_extracts()
-            -> ExtractNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; SuperWord::insert_extracts()
+            -&gt; ExtractNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 3つの入力ノードを持つ. ただし control input は常に空 (0 が設定される). 
@@ -4212,14 +4212,14 @@ ExtractNode クラスの具象サブクラスの1つ.
 ExtractNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> SuperWord::insert_extracts()
-            -> ExtractNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; SuperWord::insert_extracts()
+            -&gt; ExtractNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 3つの入力ノードを持つ. ただし control input は常に空 (0 が設定される). 
@@ -4261,14 +4261,14 @@ ExtractNode クラスの具象サブクラスの1つ.
 ExtractNode::make() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> SuperWord::transform_loop()
-   -> SuperWord::SLP_extract()
-      -> SuperWord::output()
-         -> SuperWord::insert_extracts()
-            -> ExtractNode::make()
-```
+-&gt; SuperWord::transform_loop()
+   -&gt; SuperWord::SLP_extract()
+      -&gt; SuperWord::output()
+         -&gt; SuperWord::insert_extracts()
+            -&gt; ExtractNode::make()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 3つの入力ノードを持つ. ただし control input は常に空 (0 が設定される). 

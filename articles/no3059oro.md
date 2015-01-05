@@ -51,20 +51,20 @@ DestroyJavaVM() による HotSpot の終了処理は以下のようになる.
 
 (実際の処理の大半は Threads::destroy_vm() に実装されている)
 
-```
+<div class="flow-abst"><pre>
 jni_DestroyJavaVM()
--> jni_AttachCurrentThread()
--> Threads::destroy_vm()         (← この中で実際の終了処理の全てが行われる)
-   -> Universe::run_finalizers_on_exit()  or  JavaThread::invoke_shutdown_hooks()
-   -> before_exit()
-      -> 
-   -> JavaThread::exit()
-   -> VMThread::wait_for_vm_thread_exit()
-   -> VMThread::destroy()
-   -> VM_Exit::set_vm_exited()
-   -> notify_vm_shutdown()
-   -> exit_globals()
-```
+-&gt; jni_AttachCurrentThread()
+-&gt; Threads::destroy_vm()         (← この中で実際の終了処理の全てが行われる)
+   -&gt; Universe::run_finalizers_on_exit()  or  JavaThread::invoke_shutdown_hooks()
+   -&gt; before_exit()
+      -&gt; 
+   -&gt; JavaThread::exit()
+   -&gt; VMThread::wait_for_vm_thread_exit()
+   -&gt; VMThread::destroy()
+   -&gt; VM_Exit::set_vm_exited()
+   -&gt; notify_vm_shutdown()
+   -&gt; exit_globals()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### jni_DestroyJavaVM()

@@ -34,315 +34,315 @@ title: Class のロード/リンク/初期化 ： 初期化処理 (1) ： 初期
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### 起動中の標準ライブラリクラスの初期化処理
-```
-(HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
--> Threads::create_vm()
-   -> Klass::initialize() (※)
-      -> (See: [here](no9AAGw84F.html) for details)
-   -> initialize_class()
-      -> Klass::initialize()
-         -> (See: [here](no9AAGw84F.html) for details)
+<div class="flow-abst"><pre>
+(HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+-&gt; Threads::create_vm()
+   -&gt; Klass::initialize() (※)
+      -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
+   -&gt; initialize_class()
+      -&gt; Klass::initialize()
+         -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
 
 (※) 初期化されているのは java.util.HashMap 及び java.lang.StringValue
-```
+</pre></div>
 
 ### 実行時コンスタントプールのシンボルの解決(resolution)時
 #### static フィールドへのアクセス時
-```
-(See: [here](no7882NqI.html) for details)
--> LinkResolver::resolve_field()
-   -> Klass::initialize()
-      -> (See: [here](no9AAGw84F.html) for details)
-```
+<div class="flow-abst"><pre>
+(See: <a href="no7882NqI.html">here</a> for details)
+-&gt; LinkResolver::resolve_field()
+   -&gt; Klass::initialize()
+      -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
+</pre></div>
 
 #### static メソッドへのアクセス時
-```
-(See: [here](no7882NqI.html) for details)
--> LinkResolver::resolve_static_call()
-   -> Klass::initialize()
-      -> (See: [here](no9AAGw84F.html) for details)
-```
+<div class="flow-abst"><pre>
+(See: <a href="no7882NqI.html">here</a> for details)
+-&gt; LinkResolver::resolve_static_call()
+   -&gt; Klass::initialize()
+      -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
+</pre></div>
 
 #### インスタンスの生成時
-```
+<div class="flow-abst"><pre>
 (See: )
--> InterpreterRuntime::_new()
-   -> Klass::initialize()
-      -> (See: [here](no9AAGw84F.html) for details)
+-&gt; InterpreterRuntime::_new()
+   -&gt; Klass::initialize()
+      -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
 
 (See: ) 
--> Runtime1::new_instance()
-   -> Klass::initialize()
-      -> (See: [here](no9AAGw84F.html) for details)
+-&gt; Runtime1::new_instance()
+   -&gt; Klass::initialize()
+      -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
   
 (See: ) 
--> OptoRuntime::new_instance_C()
-   -> Klass::initialize()
-      -> (See: [here](no9AAGw84F.html) for details)
-```
+-&gt; OptoRuntime::new_instance_C()
+   -&gt; Klass::initialize()
+      -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
+</pre></div>
 
 ### 上記以外のフィールド/メソッドへのアクセスやインスタンス生成を行う処理
 #### Reflection API による処理時
 (#Under Construction)
 
-```
+<div class="flow-abst"><pre>
 (#TODO)
--> Reflection::invoke()
-   -> Klass::initialize()
-      -> (See: [here](no9AAGw84F.html) for details)
+-&gt; Reflection::invoke()
+   -&gt; Klass::initialize()
+      -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
   
 (#TODO)
--> Reflection::invoke_constructor()
-   -> Klass::initialize()
-      -> (See: [here](no9AAGw84F.html) for details)
+-&gt; Reflection::invoke_constructor()
+   -&gt; Klass::initialize()
+      -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
   
 (#TODO)
--> Reflection::resolve_field()
-   -> Klass::initialize()
-      -> (See: [here](no9AAGw84F.html) for details)
-```
+-&gt; Reflection::resolve_field()
+   -&gt; Klass::initialize()
+      -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
+</pre></div>
 
 #### JNI 関数による処理時
 * フィールドへのアクセス時 (See: [here](noxvuCfaXS.html) for details)
 
-```
+<div class="flow-abst"><pre>
 jni_GetFieldID()
--> Klass::initialize()
-   -> (See: [here](no9AAGw84F.html) for details)
+-&gt; Klass::initialize()
+   -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
 
 jni_GetStaticFieldID()
--> Klass::initialize()
-   -> (See: [here](no9AAGw84F.html) for details)
-```
+-&gt; Klass::initialize()
+   -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
+</pre></div>
 
 * メソッドへのアクセス時 (See: [here](no3059-0k.html) for details)
 
-```
+<div class="flow-abst"><pre>
 jni_GetMethodID()
--> get_method_id()
-   -> Klass::initialize()
-      -> (See: [here](no9AAGw84F.html) for details)
+-&gt; get_method_id()
+   -&gt; Klass::initialize()
+      -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
 
 jni_GetStaticMethodID()
--> get_method_id()
-   -> (同上)
-```
+-&gt; get_method_id()
+   -&gt; (同上)
+</pre></div>
 
 * オブジェクトの生成時 (See: [here](no2935TLm.html) for details)
 
-```
+<div class="flow-abst"><pre>
 jni_AllocObject()
--> alloc_object()
-   -> Klass::initialize()
-      -> (See: [here](no9AAGw84F.html) for details)
+-&gt; alloc_object()
+   -&gt; Klass::initialize()
+      -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
 
 jni_NewObject()
--> alloc_object()
-   -> (同上)
+-&gt; alloc_object()
+   -&gt; (同上)
 
 jni_NewObjectV()
--> alloc_object()
-   -> (同上)
+-&gt; alloc_object()
+   -&gt; (同上)
 
 jni_NewObjectA()
--> alloc_object()
-   -> (同上)
-```
+-&gt; alloc_object()
+   -&gt; (同上)
+</pre></div>
 
 * オブジェクト配列の生成時 (See: [here](noj4FhtQM1.html) for details)
 
-```
+<div class="flow-abst"><pre>
 jni_NewObjectArray()
--> Klass::initialize()
-   -> (See: [here](no9AAGw84F.html) for details)
-```
+-&gt; Klass::initialize()
+   -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
+</pre></div>
 
 * Reflection処理 (See: [here](nodj-PTmlM.html) for details)
 
-```
+<div class="flow-abst"><pre>
 jni_FromReflectedMethod()
--> Klass::initialize()
-   -> (See: [here](no9AAGw84F.html) for details)
+-&gt; Klass::initialize()
+   -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
 
 jni_FromReflectedField()
--> Klass::initialize()
-   -> (See: [here](no9AAGw84F.html) for details)
-```
+-&gt; Klass::initialize()
+   -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
+</pre></div>
 
 * DirectByteBuffer オブジェクトの生成時/へのアクセス時 (See: [here](no8QuCX1c9.html) for details)
 
-```
+<div class="flow-abst"><pre>
 jni_NewDirectByteBuffer()
--> initializeDirectBufferSupport()
-   -> lookupDirectBufferClasses()
-      -> lookupOne()
-         -> find_class_from_class_loader()
-            -> Klass::initialize()
-               -> (See: [here](no9AAGw84F.html) for details)
+-&gt; initializeDirectBufferSupport()
+   -&gt; lookupDirectBufferClasses()
+      -&gt; lookupOne()
+         -&gt; find_class_from_class_loader()
+            -&gt; Klass::initialize()
+               -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
 
 jni_GetDirectBufferAddress()
--> initializeDirectBufferSupport()
-   -> (同上)
+-&gt; initializeDirectBufferSupport()
+   -&gt; (同上)
 
 jni_GetDirectBufferCapacity()
--> initializeDirectBufferSupport()
-   -> (同上)
-```
+-&gt; initializeDirectBufferSupport()
+   -&gt; (同上)
+</pre></div>
 
 #### 上記以外のインスタンス生成時
 * 例外の発生時 (= 例外オブジェクトの生成時) (See: [here](no3059qOR.html) for details)
 
-```
-(See: [here](no3059qOR.html) for details)
--> Exceptions::new_exception()
-   -> Klass::initialize()
-      -> (See: [here](no9AAGw84F.html) for details)
-```
+<div class="flow-abst"><pre>
+(See: <a href="no3059qOR.html">here</a> for details)
+-&gt; Exceptions::new_exception()
+   -&gt; Klass::initialize()
+      -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
+</pre></div>
 
 * JMM 処理による運用管理オブジェクトの取得時 (= JMM 関係のオブジェクトの生成時) (See: [here](no2114S_x.html) for details)
 
-```
+<div class="flow-abst"><pre>
 (#TODO)
--> Management::load_and_initialize_klass()
-   -> Klass::initialize()
-      -> (See: [here](no9AAGw84F.html) for details)
-```
+-&gt; Management::load_and_initialize_klass()
+   -&gt; Klass::initialize()
+      -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
+</pre></div>
 
 * java.lang.ClassLoader のアサーションステータス関係の処理時
   (= 内部で使用する java.lang.AssertionStatusDirectives オブジェクトの生成時)
 
-```
+<div class="flow-abst"><pre>
 java.lang.ClassLoader.setDefaultAssertionStatus()
--> java.lang.ClassLoader.initializeJavaAssertionMaps()
-   -> JVM_AssertionStatusDirectives() (= java.lang.ClassLoader.retrieveDirectives())
-      -> JavaAssertions::createAssertionStatusDirectives()
-         -> Klass::initialize()
-            -> (See: [here](no9AAGw84F.html) for details)
+-&gt; java.lang.ClassLoader.initializeJavaAssertionMaps()
+   -&gt; JVM_AssertionStatusDirectives() (= java.lang.ClassLoader.retrieveDirectives())
+      -&gt; JavaAssertions::createAssertionStatusDirectives()
+         -&gt; Klass::initialize()
+            -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
 
 java.lang.ClassLoader.setPackageAssertionStatus()
--> java.lang.ClassLoader.initializeJavaAssertionMaps()
-   -> (同上)
+-&gt; java.lang.ClassLoader.initializeJavaAssertionMaps()
+   -&gt; (同上)
 
 java.lang.ClassLoader.setClassAssertionStatus()
--> java.lang.ClassLoader.initializeJavaAssertionMaps()
-   -> (同上)
-```
+-&gt; java.lang.ClassLoader.initializeJavaAssertionMaps()
+   -&gt; (同上)
+</pre></div>
 
 * Dynamic Attach 機能における "properties" コマンド及び "agentProperties" 機能の処理時
   (= 内部で使用する sun.misc.VMSupport オブジェクトの生成処理時)
 
-```
-(See: [here](no3026gMG.html) for details)
--> get_system_properties()
-   -> get_properties()
-      -> load_and_initialize_klass()
-         -> Klass::initialize()
-            -> (See: [here](no9AAGw84F.html) for details)
+<div class="flow-abst"><pre>
+(See: <a href="no3026gMG.html">here</a> for details)
+-&gt; get_system_properties()
+   -&gt; get_properties()
+      -&gt; load_and_initialize_klass()
+         -&gt; Klass::initialize()
+            -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
   
-(See: [here](no3026gMG.html) for details)
--> get_agent_properties()
-   -> get_properties()
-      -> (同上)
-```
+(See: <a href="no3026gMG.html">here</a> for details)
+-&gt; get_agent_properties()
+   -&gt; get_properties()
+      -&gt; (同上)
+</pre></div>
 
 * その他の Java の標準ライブラリオブジェクトの生成時 (#TODO)
 
-```
+<div class="flow-abst"><pre>
   java_lang_StackTraceElement::create()
-  -> Klass::initialize()
-     -> (See: [here](no9AAGw84F.html) for details)
+  -&gt; Klass::initialize()
+     -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
 
   java_lang_reflect_Constructor::create()
-  -> Klass::initialize()
-     -> (See: [here](no9AAGw84F.html) for details)
+  -&gt; Klass::initialize()
+     -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
 
   java_lang_reflect_Field::create()
-  -> Klass::initialize()
-     -> (See: [here](no9AAGw84F.html) for details)
+  -&gt; Klass::initialize()
+     -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
 
   sun_reflect_ConstantPool::create()
-  -> Klass::initialize()
-     -> (See: [here](no9AAGw84F.html) for details)
+  -&gt; Klass::initialize()
+     -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
 
   java_lang_boxing_object::initialize_and_allocate()
-  -> Klass::initialize()
-     -> (See: [here](no9AAGw84F.html) for details)
+  -&gt; Klass::initialize()
+     -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
 
   java_security_AccessControlContext::create()
-  -> Klass::initialize()
-     -> (See: [here](no9AAGw84F.html) for details)
-```
+  -&gt; Klass::initialize()
+     -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
+</pre></div>
 
 ### クラスの初期化を伴う API が明示的に呼ばれたとき
 #### java.lang.Class.forName(String className)
-```
+<div class="flow-abst"><pre>
 java.lang.Class.forName(String className) (※)
--> Java_java_lang_Class_forName0()  (= java.lang.Class.forName0())
-   -> JVM_FindClassFromClassLoader()
-      -> find_class_from_class_loader()
-         -> Klass::initialize()
-            -> (See: [here](no9AAGw84F.html) for details)
+-&gt; Java_java_lang_Class_forName0()  (= java.lang.Class.forName0())
+   -&gt; JVM_FindClassFromClassLoader()
+      -&gt; find_class_from_class_loader()
+         -&gt; Klass::initialize()
+            -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
 
 (※) なお, この関数はクラスローダーとして「現在のクラスを定義するクラスローダ」を使用.
-```
+</pre></div>
 
 #### java.lang.Class.forName(String name, boolean initialize, ClassLoader loader)
-```
+<div class="flow-abst"><pre>
 java.lang.Class.forName(String name, boolean initialize, ClassLoader loader) (※)
--> Java_java_lang_Class_forName0()  (= java.lang.Class.forName0())
-   -> (同上)
+-&gt; Java_java_lang_Class_forName0()  (= java.lang.Class.forName0())
+   -&gt; (同上)
 
 (※) なお, この関数はクラスローダーとして「loader 引数で指定されたクラスローダ」を使用.
-```
+</pre></div>
 
 #### JNI の FindClass() (See: [here](no1lbl8Grr.html) for details)
-```
+<div class="flow-abst"><pre>
 jni_FindClass()
--> find_class_from_class_loader()
-   -> Klass::initialize()
-      -> (See: [here](no9AAGw84F.html) for details)
-```
+-&gt; find_class_from_class_loader()
+   -&gt; Klass::initialize()
+      -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
+</pre></div>
 
 ### その他
 #### HotSpot の内部処理で初期化が必要になった際
 * sun.misc.Unsafe.ensureClassInitialized() の処理
 
-```
+<div class="flow-abst"><pre>
 (#TODO)
--> Unsafe_EnsureClassInitialized() (= sun.misc.Unsafe.ensureClassInitialized())
-   -> Klass::initialize()
-      -> (See: [here](no9AAGw84F.html) for details)
-```
+-&gt; Unsafe_EnsureClassInitialized() (= sun.misc.Unsafe.ensureClassInitialized())
+   -&gt; Klass::initialize()
+      -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
+</pre></div>
 
 #### 不明
-```
+<div class="flow-abst"><pre>
 (使われていない?)
 JVM_AllocateNewObject
--> Klass::initialize()
-   -> (See: [here](no9AAGw84F.html) for details)
+-&gt; Klass::initialize()
+   -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
 
 (使われていない?)
 JVM_AllocateNewArray
--> Klass::initialize()
-   -> (See: [here](no9AAGw84F.html) for details)
+-&gt; Klass::initialize()
+   -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
 
 (使われていない?)
 JVM_NewInstance
--> Klass::initialize()
-   -> (See: [here](no9AAGw84F.html) for details)
+-&gt; Klass::initialize()
+   -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
 
 (使われていない?)
  JVM_FindClassFromClass()
- -> find_class_from_class_loader()
-    -> Klass::initialize()
-       -> (See: [here](no9AAGw84F.html) for details)
+ -&gt; find_class_from_class_loader()
+    -&gt; Klass::initialize()
+       -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
 
 (使われていない?)
 JVM_LoadClass0()
--> find_class_from_class_loader()
-    -> Klass::initialize()
-       -> (See: [here](no9AAGw84F.html) for details)
-```
+-&gt; find_class_from_class_loader()
+    -&gt; Klass::initialize()
+       -&gt; (See: <a href="no9AAGw84F.html">here</a> for details)
+</pre></div>
 
 ### 未整理(#TODO)
 * MethodHandles

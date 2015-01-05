@@ -17,23 +17,23 @@ title: Thread の強制終了処理 (java.lang.Thread.stop() の処理)
 このメソッドは deprecated.
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 java.lang.Thread.stop()
--> java.lang.Thread.stop(Throwable obj)
-   -> JVM_StopThread() (= java.lang.Thread.stop0())
-      -> 処理対象のスレッドに応じて, 以下のどれかを呼び出す.
+-&gt; java.lang.Thread.stop(Throwable obj)
+   -&gt; JVM_StopThread() (= java.lang.Thread.stop0())
+      -&gt; 処理対象のスレッドに応じて, 以下のどれかを呼び出す.
          * 処理対象がいない場合 (まだ開始していない or もう死んでいる)
-           -> java_lang_Thread::set_stillborn()  (まだ開始していない場合)
+           -&gt; java_lang_Thread::set_stillborn()  (まだ開始していない場合)
          * 処理対象が自分自身の場合
-           -> THROW_OOP() マクロ
+           -&gt; THROW_OOP() マクロ
          * 処理対象が自分以外の場合
-           -> Thread::send_async_exception()
-              -> VMThread::execute()
-                 -> (See: [here](no2935qaz.html) for details)
-                    -> VM_ThreadStop::doit()
-                       -> JavaThread::send_thread_stop()
-                          -> JavaThread::set_pending_async_exception()
-```
+           -&gt; Thread::send_async_exception()
+              -&gt; VMThread::execute()
+                 -&gt; (See: <a href="no2935qaz.html">here</a> for details)
+                    -&gt; VM_ThreadStop::doit()
+                       -&gt; JavaThread::send_thread_stop()
+                          -&gt; JavaThread::set_pending_async_exception()
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

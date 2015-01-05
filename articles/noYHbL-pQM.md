@@ -29,48 +29,48 @@ title: Thread の開始処理の枠組み ： スレッドを生成する側の�
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### スレッドを生成する処理
-```
--> (Thread クラスの種々のサブクラスのコンストラクタ)
-   -> Thread::Thread()
+<div class="flow-abst"><pre>
+-&gt; (Thread クラスの種々のサブクラスのコンストラクタ)
+   -&gt; Thread::Thread()
 
--> os::create_thread()
-   -> OS によって処理が異なる.
+-&gt; os::create_thread()
+   -&gt; OS によって処理が異なる.
       * Linux の場合
-        -> OSThread::OSThread()
-           -> OSThread::pd_initialize()
-        -> pthread_attr_setdetachstate()
-        -> pthread_attr_setstacksize()   (<= 必要があれば呼び出す)
-        -> pthread_attr_setguardsize()
-        -> pthread_create()              (<= なお, エントリポイントとしては java_start() 関数が指定されている)
-        -> Monitor::wait()
+        -&gt; OSThread::OSThread()
+           -&gt; OSThread::pd_initialize()
+        -&gt; pthread_attr_setdetachstate()
+        -&gt; pthread_attr_setstacksize()   (&lt;= 必要があれば呼び出す)
+        -&gt; pthread_attr_setguardsize()
+        -&gt; pthread_create()              (&lt;= なお, エントリポイントとしては java_start() 関数が指定されている)
+        -&gt; Monitor::wait()
            (生成したスレッドと同期を取る処理. java_start() 内から Monitor::notify_all() されるまで待機)
       * Solaris の場合
-        -> OSThread::OSThread()
-           -> OSThread::pd_initialize()
-        -> thr_setconcurrency()          (<= 必要があれば呼び出す)
-        -> thr_create()                  (<= なお, エントリポイントとしては java_start() 関数が指定されている)
-        -> thr_setprio()                 (<= 必要があれば呼び出す)
+        -&gt; OSThread::OSThread()
+           -&gt; OSThread::pd_initialize()
+        -&gt; thr_setconcurrency()          (&lt;= 必要があれば呼び出す)
+        -&gt; thr_create()                  (&lt;= なお, エントリポイントとしては java_start() 関数が指定されている)
+        -&gt; thr_setprio()                 (&lt;= 必要があれば呼び出す)
       * Windows の場合
-        -> OSThread::OSThread()
-           -> OSThread::pd_initialize()
-        -> CreateEvent()
-        -> _beginthredex()               (<= なお, エントリポイントとしては java_start() 関数が指定されている)
-```
+        -&gt; OSThread::OSThread()
+           -&gt; OSThread::pd_initialize()
+        -&gt; CreateEvent()
+        -&gt; _beginthredex()               (&lt;= なお, エントリポイントとしては java_start() 関数が指定されている)
+</pre></div>
 
 ### 生成したスレッドの実行を開始させる処理
-```
--> os::start_thread()
-   -> OSThread::set_state()
-   -> os::pd_start_thread()
-      -> OS によって処理が異なる.
+<div class="flow-abst"><pre>
+-&gt; os::start_thread()
+   -&gt; OSThread::set_state()
+   -&gt; os::pd_start_thread()
+      -&gt; OS によって処理が異なる.
          * Linux の場合
-           -> Monitor::notify()
+           -&gt; Monitor::notify()
               (生成したスレッドと同期を取る処理. java_start() 内で Monitor::wait() しているスレッドを起床させる)
          * Solaris の場合
-           -> thr_continue()
+           -&gt; thr_continue()
          * Windows の場合
-           -> ResumeThread()
-```
+           -&gt; ResumeThread()
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

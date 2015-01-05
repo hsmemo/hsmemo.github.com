@@ -492,11 +492,11 @@ PhaseIdealLoop::build_loop_tree_impl() 内で(のみ)生成されている
 
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> PhaseIdealLoop::build_loop_tree()
-   -> PhaseIdealLoop::build_loop_tree_impl()
-```
+-&gt; PhaseIdealLoop::build_loop_tree()
+   -&gt; PhaseIdealLoop::build_loop_tree_impl()
+</pre></div>
 
 ### 内部構造(Internal structure)
 入力ノードは control input のみ. control input は処理対象の MultiNode を指す.
@@ -641,15 +641,15 @@ lookupswitch/tableswitch バイトコードを表現するための Node.
 Parse::create_jump_tables() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 Parse::do_tableswitch()
--> Parse::jump_switch_ranges()
-   -> Parse::create_jump_tables()
+-&gt; Parse::jump_switch_ranges()
+   -&gt; Parse::create_jump_tables()
 
 Parse::do_lookupswitch()
--> Parse::jump_switch_ranges()
-   -> Parse::create_jump_tables()
-```
+-&gt; Parse::jump_switch_ranges()
+   -&gt; Parse::create_jump_tables()
+</pre></div>
 
 ### 内部構造(Internal structure)
 (control input も含めて) 2つの入力ノードを持つ. それぞれの入力の意味は以下の通り.
@@ -725,15 +725,15 @@ JumpNode から control flow を 1つ取り出す Node.
 Parse::create_jump_tables() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 Parse::do_tableswitch()
--> Parse::jump_switch_ranges()
-   -> Parse::create_jump_tables()
+-&gt; Parse::jump_switch_ranges()
+   -&gt; Parse::create_jump_tables()
 
 Parse::do_lookupswitch()
--> Parse::jump_switch_ranges()
-   -> Parse::create_jump_tables()
-```
+-&gt; Parse::jump_switch_ranges()
+   -&gt; Parse::create_jump_tables()
+</pre></div>
 
 ### 内部構造(Internal structure)
 入力ノードは control input のみ. control input は処理対象の JumpNode を指す
@@ -914,11 +914,11 @@ CFG をとりあえず構築するための Node, である模様 (#TODO).
 PhaseIdealLoop::build_loop_tree_impl() 内で(のみ)生成されている
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseIdealLoop::build_and_optimize()
--> PhaseIdealLoop::build_loop_tree()
-   -> PhaseIdealLoop::build_loop_tree_impl()
-```
+-&gt; PhaseIdealLoop::build_loop_tree()
+   -&gt; PhaseIdealLoop::build_loop_tree_impl()
+</pre></div>
 
 ### 内部構造(Internal structure)
 入力ノードは control input のみ. control input は NeverBranchNode の飛び元を示す.

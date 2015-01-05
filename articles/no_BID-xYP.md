@@ -18,37 +18,37 @@ title: JNI の処理 ： JNI Functions の処理 ： オブジェクトの処理
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### GetObjectClass() の処理
-```
+<div class="flow-abst"><pre>
 jni_GetObjectClass()
--> Klass::java_mirror()
--> JNIHandles::make_local()
-   -> (See: [here](noNzTqB3WT.html) for details)
-```
+-&gt; Klass::java_mirror()
+-&gt; JNIHandles::make_local()
+   -&gt; (See: <a href="noNzTqB3WT.html">here</a> for details)
+</pre></div>
 
 ### GetObjectRefType() の処理
-```
+<div class="flow-abst"><pre>
 jni_GetObjectRefType()
--> JNIHandles::is_local_handle()
-   -> JNIHandleBlock::chain_contains()
--> JNIHandles::is_frame_handle()
--> JNIHandles::is_global_handle()
-   -> JNIHandleBlock::chain_contains()
--> JNIHandles::is_weak_global_handle()
-   -> JNIHandleBlock::chain_contains()
-```
+-&gt; JNIHandles::is_local_handle()
+   -&gt; JNIHandleBlock::chain_contains()
+-&gt; JNIHandles::is_frame_handle()
+-&gt; JNIHandles::is_global_handle()
+   -&gt; JNIHandleBlock::chain_contains()
+-&gt; JNIHandles::is_weak_global_handle()
+   -&gt; JNIHandleBlock::chain_contains()
+</pre></div>
 
 ### IsInstanceOf() の処理
-```
+<div class="flow-abst"><pre>
 jni_IsInstanceOf()
--> oopDesc::is_a()
-   -> (See: ...#TODO)
-```
+-&gt; oopDesc::is_a()
+   -&gt; (See: ...#TODO)
+</pre></div>
 
 ### IsSameObject() の処理
-```
+<div class="flow-abst"><pre>
 jni_IsSameObject()
--> (ポインタ値を比較)
-```
+-&gt; (ポインタ値を比較)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

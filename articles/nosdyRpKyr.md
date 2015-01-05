@@ -11,12 +11,12 @@ title: Serviceability 機能 ： JVMTI の処理 ： JVMTI 関数の処理 ： �
 (See: JVMTI 仕様)
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
-(略) (See: [here](no96623Ns.html) and [here](no5248b4E.html) for details)
--> ObjectMonitor::enter()
-   -> JvmtiExport::post_monitor_contended_enter()
-      -> (登録されているコールバックを呼び出す)
-```
+<div class="flow-abst"><pre>
+(略) (See: <a href="no96623Ns.html">here</a> and <a href="no5248b4E.html">here</a> for details)
+-&gt; ObjectMonitor::enter()
+   -&gt; JvmtiExport::post_monitor_contended_enter()
+      -&gt; (登録されているコールバックを呼び出す)
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 

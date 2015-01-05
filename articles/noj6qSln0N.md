@@ -53,11 +53,11 @@ Interpreter フレーム用のフォーマットでスタックフレーム内�
 vframeArray::allocate() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 Deoptimization::fetch_unroll_info_helper()
--> Deoptimization::create_vframeArray()
-   -> vframeArray::allocate()
-```
+-&gt; Deoptimization::create_vframeArray()
+   -&gt; vframeArray::allocate()
+</pre></div>
 
 #### 削除箇所(where its instances are deleted)
 以下の箇所で(のみ)削除されている.
@@ -156,11 +156,11 @@ vframeArray クラス用の補助クラス.
 そのメモリ領域中に個別の vframeArrayElement オブジェクトを書き込む作業は vframeArrayElement::fill_in() 内で(のみ)行われている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 vframeArray::allocate()
--> vframeArray::fill_in()
-   -> vframeArrayElement::fill_in()
-```
+-&gt; vframeArray::fill_in()
+   -&gt; vframeArrayElement::fill_in()
+</pre></div>
 
 
 

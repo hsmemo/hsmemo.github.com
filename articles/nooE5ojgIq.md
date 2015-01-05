@@ -51,11 +51,11 @@ AbstractWorkGang オブジェクトの _gang_workers フィールドに(のみ)�
 YieldingFlexibleWorkGang::allocate_worker() というファクトリメソッドが用意されており, その中で(のみ)生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 CMSCollector::CMSCollector()
--> WorkGang::initialize_workers()
-   -> YieldingFlexibleWorkGang::allocate_worker()
-```
+-&gt; WorkGang::initialize_workers()
+   -&gt; YieldingFlexibleWorkGang::allocate_worker()
+</pre></div>
 
 
 

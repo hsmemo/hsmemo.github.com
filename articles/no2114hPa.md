@@ -22,99 +22,99 @@ TenuredGeneration::collect() から呼び出される GenMarkSweep::invoke_at_sa
   4. GenMarkSweep::mark_sweep_phase4() で, 各 live object を新しいアドレスに移動させる.
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 TenuredGeneration::collect()
--> OneContigSpaceCardGeneration::collect()
-   -> GenMarkSweep::invoke_at_safepoint()
-      -> (1) Phase 1: 全ての生きているオブジェクト(live object)にマークを付ける.
-             -> GenMarkSweep::mark_sweep_phase1()
+-&gt; OneContigSpaceCardGeneration::collect()
+   -&gt; GenMarkSweep::invoke_at_safepoint()
+      -&gt; (1) Phase 1: 全ての生きているオブジェクト(live object)にマークを付ける.
+             -&gt; GenMarkSweep::mark_sweep_phase1()
                 (1) strong root から辿り着けるオブジェクト全てに mark を付ける.
-                    -> GenCollectedHeap::gen_process_strong_roots()
+                    -&gt; GenCollectedHeap::gen_process_strong_roots()
                        (なお使用するクロージャーは (Perm領域用/非Perm領域用のどちらも) MarkSweep::FollowRootClosure)
-                       -> (See: [here](no2114uZg.html) for details)
-                          -> MarkSweep::FollowRootClosure::do_oop()
-                             -> MarkSweep::follow_root()
+                       -&gt; (See: <a href="no2114uZg.html">here</a> for details)
+                          -&gt; MarkSweep::FollowRootClosure::do_oop()
+                             -&gt; MarkSweep::follow_root()
                                 まだマークが付いていないオブジェクトであれば, 以下の処理を行う.
-                                -> MarkSweep::mark_object() でマークを付ける
-                                -> oopDesc::follow_contents()
-                                   -> *Klass::oop_follow_contents() で再帰的にポインタを辿ってマークを付けていく.
+                                -&gt; MarkSweep::mark_object() でマークを付ける
+                                -&gt; oopDesc::follow_contents()
+                                   -&gt; *Klass::oop_follow_contents() で再帰的にポインタを辿ってマークを付けていく.
                                       (#TODO  クラス毎に少しずつ違うけど, 基本的には MarkSweep::mark_and_push() で辿るだけ??)
                 (1) 以上の処理で見つかった参照オブジェクトを処理する.
-                    -> ReferenceProcessor::process_discovered_references()
+                    -&gt; ReferenceProcessor::process_discovered_references()
                        (なお使用するクロージャーは,
                        MarkSweep::IsAliveClosure, MarkSweep::KeepAliveClosure, MarkSweep::FollowStackClosure.
                        AbstractRefProcTaskExecutor は使用しない (NULL を渡す))
-                       -> (後述) (See: [here](no289169tf.html) for details)
+                       -&gt; (後述) (See: <a href="no289169tf.html">here</a> for details)
                 (1) 最後に, #TODO
-                    -> SystemDictionary::do_unloading()
-                    -> CodeCache::do_unloading()
-                    ->
-                    -> MarkSweep::follow_weak_klass_links()
-                    -> MarkSweep::follow_mdo_weak_refs()
-                    -> StringTable::unlink()
-                    -> SymbolTable::unlink()
+                    -&gt; SystemDictionary::do_unloading()
+                    -&gt; CodeCache::do_unloading()
+                    -&gt;
+                    -&gt; MarkSweep::follow_weak_klass_links()
+                    -&gt; MarkSweep::follow_mdo_weak_refs()
+                    -&gt; StringTable::unlink()
+                    -&gt; SymbolTable::unlink()
     
          (1) Phase 2: 各 live object に対して, コンパクション後の新しいアドレスを計算する.
-             -> GenMarkSweep::mark_sweep_phase2()
-                -> GenCollectedHeap::prepare_for_compaction()  (New/Old 領域用)
-                   -> Generation::prepare_for_compaction()     (<= この関数が New と Old 用に ２回呼ばれる)
-                      -> ContiguousSpace::prepare_for_compaction()  (<= この関数は, 各世代で保有している Space の数だけ呼ばれる)
-                         -> SCAN_AND_FORWARD
-                            -> CompactibleSpace::forward()
-                -> Generation::prepare_for_compaction()        (Perm 領域用)
+             -&gt; GenMarkSweep::mark_sweep_phase2()
+                -&gt; GenCollectedHeap::prepare_for_compaction()  (New/Old 領域用)
+                   -&gt; Generation::prepare_for_compaction()     (&lt;= この関数が New と Old 用に ２回呼ばれる)
+                      -&gt; ContiguousSpace::prepare_for_compaction()  (&lt;= この関数は, 各世代で保有している Space の数だけ呼ばれる)
+                         -&gt; SCAN_AND_FORWARD
+                            -&gt; CompactibleSpace::forward()
+                -&gt; Generation::prepare_for_compaction()        (Perm 領域用)
     
          (1) Phase 3: 各 live object 内のポインタを新しいアドレスに修正する.    
-             -> GenMarkSweep::mark_sweep_phase3()
-                -> CompactingPermGenGen::pre_adjust_pointers()
-                -> GenCollectedHeap::gen_process_strong_roots()
+             -&gt; GenMarkSweep::mark_sweep_phase3()
+                -&gt; CompactingPermGenGen::pre_adjust_pointers()
+                -&gt; GenCollectedHeap::gen_process_strong_roots()
                    (なお使用するクロージャーは (Perm領域用/非Perm領域用のどちらも) MarkSweep::AdjustPointerClosure)
-                   -> (上述)
-                      -> MarkSweep::AdjustPointerClosure::do_oop()
-                         -> MarkSweep::adjust_pointer()
-                -> GenCollectedHeap::gen_process_weak_roots()
-                   ->
-                -> MarkSweep::adjust_marks()
-                -> GenCollectedHeap::generation_iterate()  (New/Old 領域用)
+                   -&gt; (上述)
+                      -&gt; MarkSweep::AdjustPointerClosure::do_oop()
+                         -&gt; MarkSweep::adjust_pointer()
+                -&gt; GenCollectedHeap::gen_process_weak_roots()
+                   -&gt;
+                -&gt; MarkSweep::adjust_marks()
+                -&gt; GenCollectedHeap::generation_iterate()  (New/Old 領域用)
                    (なお使用するクロージャーは GenAdjustPointersClosure)
-                   -> GenAdjustPointersClosure::do_generation()   (Old 用)
-                      -> Generation::adjust_pointers()
-                         -> OneContigSpaceCardGeneration::space_iterate()
-                            -> AdjustPointersClosure::do_space()
-                               -> CompactibleSpace::adjust_pointers()
-                                  -> SCAN_AND_ADJUST_POINTERS
-                                     -> oopDesc::adjust_pointers()
-                                        -> Klass::oop_adjust_pointers()
+                   -&gt; GenAdjustPointersClosure::do_generation()   (Old 用)
+                      -&gt; Generation::adjust_pointers()
+                         -&gt; OneContigSpaceCardGeneration::space_iterate()
+                            -&gt; AdjustPointersClosure::do_space()
+                               -&gt; CompactibleSpace::adjust_pointers()
+                                  -&gt; SCAN_AND_ADJUST_POINTERS
+                                     -&gt; oopDesc::adjust_pointers()
+                                        -&gt; Klass::oop_adjust_pointers()
                                            (#TODO  クラス毎に少しずつ違うけど, 基本的には MarkSweep::adjust_pointer() でポインタを修正するだけ??)
-                   -> GenAdjustPointersClosure::do_generation()   (New 用)
-                      -> (同上)
-                         -> DefNewGeneration::space_iterate()
-                            -> AdjustPointersClosure::do_space()  (Eden 用)
-                            -> AdjustPointersClosure::do_space()  (From 用)
-                            -> AdjustPointersClosure::do_space()  (To 用)
-                -> CompactingPermGenGen::adjust_pointers()
-                   -> CompactibleSpace::adjust_pointers()
-                      -> (同上)
+                   -&gt; GenAdjustPointersClosure::do_generation()   (New 用)
+                      -&gt; (同上)
+                         -&gt; DefNewGeneration::space_iterate()
+                            -&gt; AdjustPointersClosure::do_space()  (Eden 用)
+                            -&gt; AdjustPointersClosure::do_space()  (From 用)
+                            -&gt; AdjustPointersClosure::do_space()  (To 用)
+                -&gt; CompactingPermGenGen::adjust_pointers()
+                   -&gt; CompactibleSpace::adjust_pointers()
+                      -&gt; (同上)
     
          (1) Phase 4: 各 live object を新しいアドレスに移動させる.
-             -> GenMarkSweep::mark_sweep_phase4()
-                -> Generation::compact()                   (Perm 領域用)
-                   ->
-                -> GenCollectedHeap::generation_iterate()  (New/Old 領域用)
+             -&gt; GenMarkSweep::mark_sweep_phase4()
+                -&gt; Generation::compact()                   (Perm 領域用)
+                   -&gt;
+                -&gt; GenCollectedHeap::generation_iterate()  (New/Old 領域用)
                    (なお使用するクロージャーは GenCompactClosure)
-                   -> (同上)
-                      -> GenCompactClosure::do_generation()   (Old 用)
-                         -> Generation::compact()
-                            -> CompactibleSpace::compact()
-                               -> SCAN_AND_COMPACT
-                                  -> Copy::aligned_conjoint_words()
-                                  -> oopDesc::init_mark()
-                      -> GenCompactClosure::do_generation()   (New 用)
-                         -> (同上)
-                -> Generation::post_compact()               (Perm 領域用)
-                   -> #TODO
+                   -&gt; (同上)
+                      -&gt; GenCompactClosure::do_generation()   (Old 用)
+                         -&gt; Generation::compact()
+                            -&gt; CompactibleSpace::compact()
+                               -&gt; SCAN_AND_COMPACT
+                                  -&gt; Copy::aligned_conjoint_words()
+                                  -&gt; oopDesc::init_mark()
+                      -&gt; GenCompactClosure::do_generation()   (New 用)
+                         -&gt; (同上)
+                -&gt; Generation::post_compact()               (Perm 領域用)
+                   -&gt; #TODO
 
-      ->
-```
+      -&gt;
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### TenuredGeneration::collect()

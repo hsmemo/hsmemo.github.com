@@ -34,54 +34,54 @@ IRT_ENTRY マクロとの違いは, ThreadInVMfromJava ではなく ThreadInVMfr
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### IRT_ENTRY マクロ ~ IRT_END マクロ
-```
+<div class="flow-abst"><pre>
 IRT_ENTRY マクロ
--> ThreadInVMfromJava::ThreadInVMfromJava()
-   -> (See: [here](no8p2E6iLf.html) for details)
-```
+-&gt; ThreadInVMfromJava::ThreadInVMfromJava()
+   -&gt; (See: <a href="no8p2E6iLf.html">here</a> for details)
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 IRT_END マクロ
 (IRT_ENTRY マクロで宣言されていた ThreadInVMfromJava のデストラクタが呼ばれる)
--> ThreadInVMfromJava::~ThreadInVMfromJava()
-   -> (See: [here](no8p2E6iLf.html) for details)
-```
+-&gt; ThreadInVMfromJava::~ThreadInVMfromJava()
+   -&gt; (See: <a href="no8p2E6iLf.html">here</a> for details)
+</pre></div>
 
 
 ### IRT_LEAF マクロ ~ IRT_END マクロ
-```
+<div class="flow-abst"><pre>
 (Safepoint チェック処理はない)
-```
+</pre></div>
 
 
 ### IRT_ENTRY_NO_ASYNC マクロ ~ IRT_END マクロ
-```
+<div class="flow-abst"><pre>
 IRT_ENTRY_NO_ASYNC マクロ
--> ThreadInVMfromJavaNoAsyncException::ThreadInVMfromJavaNoAsyncException()
-   -> (See: [here](no8p2E6iLf.html) for details)
-```
+-&gt; ThreadInVMfromJavaNoAsyncException::ThreadInVMfromJavaNoAsyncException()
+   -&gt; (See: <a href="no8p2E6iLf.html">here</a> for details)
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 IRT_END マクロ
 (IRT_ENTRY_NO_ASYNC マクロで宣言されていた ThreadInVMfromJavaNoAsyncException のデストラクタが呼ばれる)
--> ThreadInVMfromJavaNoAsyncException::~ThreadInVMfromJavaNoAsyncException()
-   -> (See: [here](no8p2E6iLf.html) for details)
-```
+-&gt; ThreadInVMfromJavaNoAsyncException::~ThreadInVMfromJavaNoAsyncException()
+   -&gt; (See: <a href="no8p2E6iLf.html">here</a> for details)
+</pre></div>
 
 
 ### IRT_ENTRY_FOR_NMETHOD マクロ ~ IRT_END マクロ
-```
+<div class="flow-abst"><pre>
 IRT_ENTRY_FOR_NMETHOD マクロ
--> ThreadInVMfromJavaNoAsyncException::ThreadInVMfromJavaNoAsyncException()
-   -> (See: [here](no8p2E6iLf.html) for details)
-```
+-&gt; ThreadInVMfromJavaNoAsyncException::ThreadInVMfromJavaNoAsyncException()
+   -&gt; (See: <a href="no8p2E6iLf.html">here</a> for details)
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 IRT_END マクロ
 (IRT_ENTRY_FOR_NMETHOD マクロで宣言されていた ThreadInVMfromJavaNoAsyncException のデストラクタが呼ばれる)
--> ThreadInVMfromJavaNoAsyncException::~ThreadInVMfromJavaNoAsyncException()
-   -> (See: [here](no8p2E6iLf.html) for details)
-```
+-&gt; ThreadInVMfromJavaNoAsyncException::~ThreadInVMfromJavaNoAsyncException()
+   -&gt; (See: <a href="no8p2E6iLf.html">here</a> for details)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

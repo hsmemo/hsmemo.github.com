@@ -18,36 +18,36 @@ title: JNI の処理 ： JNI Functions の処理 ： クラスに関する処理
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### DefineClass() の処理
-```
+<div class="flow-abst"><pre>
 jni_DefineClass()
--> SystemDictionary::resolve_from_stream()
-   -> (See: [here](noIvSV0NZj.html) for details)
-```
+-&gt; SystemDictionary::resolve_from_stream()
+   -&gt; (See: <a href="noIvSV0NZj.html">here</a> for details)
+</pre></div>
 
 ### FindClass() の処理
-```
+<div class="flow-abst"><pre>
 jni_FindClass() (※)
--> find_class_from_class_loader()
-   -> SystemDictionary::resolve_or_fail()
-      -> (See: [here](noIvSV0NZj.html) for details)
--> CompilationPolicy::completed_vm_startup()  (<= 初回の呼び出し時のみ)
+-&gt; find_class_from_class_loader()
+   -&gt; SystemDictionary::resolve_or_fail()
+      -&gt; (See: <a href="noIvSV0NZj.html">here</a> for details)
+-&gt; CompilationPolicy::completed_vm_startup()  (&lt;= 初回の呼び出し時のみ)
 
 (※) なお, この関数はクラスローダーとして「呼び出し元のクラスをロードしたクラスローダ (呼び出し元のクラスが存在しなければシステムクラスローダー)」を使用.
-```
+</pre></div>
 
 ### GetSuperclass() の処理
-```
+<div class="flow-abst"><pre>
 jni_GetSuperclass()
--> Klass::java_super()
+-&gt; Klass::java_super()
    (instanceKlass::java_super() と arrayKlass::java_super() でオーバーライドされている)
-```
+</pre></div>
 
 ### IsAssignableFrom() の処理
-```
+<div class="flow-abst"><pre>
 jni_IsAssignableFrom()
--> Klass::is_subtype_of()
-   -> (See: ...#TODO)
-```
+-&gt; Klass::is_subtype_of()
+   -&gt; (See: ...#TODO)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

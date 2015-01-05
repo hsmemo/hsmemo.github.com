@@ -22,55 +22,55 @@ title: Class のロード/リンク/初期化 ： 初期化処理 (2) ： 初期
 
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
-Klass::initialize() (<= 実際にはこのメソッドの中身は必要なサブクラスでオーバーライドされている. オーバーライドされていないサブクラスについては呼ばれることはない)
--> * instanceKlass の場合:
-     -> instanceKlass::initialize()
-        -> instanceKlass::initialize_impl()
-           -> (1) (初期化前にリンクされていないとまずいので) リンクが終わった状態にしておく
-                  -> instanceKlass::link_class()
-                     -> (See: [here](no3059xqe.html) for details)
+<div class="flow-abst"><pre>
+Klass::initialize() (&lt;= 実際にはこのメソッドの中身は必要なサブクラスでオーバーライドされている. オーバーライドされていないサブクラスについては呼ばれることはない)
+-&gt; * instanceKlass の場合:
+     -&gt; instanceKlass::initialize()
+        -&gt; instanceKlass::initialize_impl()
+           -&gt; (1) (初期化前にリンクされていないとまずいので) リンクが終わった状態にしておく
+                  -&gt; instanceKlass::link_class()
+                     -&gt; (See: <a href="no3059xqe.html">here</a> for details)
               (1) 他のスレッドが同時に初期化しようとしている可能性があるため, 排他を取る.
                   (他のスレッドが初期化中であればここで待機.
                    また, この時点で初期化されていたりあるいはエラーになっていれば, ここで終了)
-                  (Java 仮想マシン仕様の "5.5 Initialization" における Step 1. ~ Step 6 の内容)
-                  -> ObjectLocker::waitUninterruptibly() (※1)
-                  -> instanceKlass::set_init_state()
-                  -> instanceKlass::set_init_thread()
+                  (Java 仮想マシン仕様の &quot;5.5 Initialization&quot; における Step 1. ~ Step 6 の内容)
+                  -&gt; ObjectLocker::waitUninterruptibly() (※1)
+                  -&gt; instanceKlass::set_init_state()
+                  -&gt; instanceKlass::set_init_thread()
               (1) スーパークラスの初期化が必要であれば, 先にスーパークラスを初期化する.
-                  (Java 仮想マシン仕様の "5.5 Initialization" における Step 7. の内容)
-                  -> instanceKlass::initialize()  (super に対して再帰呼び出し)
-              (1) 対象クラスを初期化する (= <clinit> メソッドを呼び出す)
-                  (Java 仮想マシン仕様の "5.5 Initialization" における Step 9. の内容)
-                  -> instanceKlass::call_class_initializer()
-                     -> instanceKlass::call_class_initializer_impl()
-                        -> instanceKlass::class_initializer()
-                        -> JavaCalls::call()
-                           -> (See: [here](no3059iJu.html) for details)
+                  (Java 仮想マシン仕様の &quot;5.5 Initialization&quot; における Step 7. の内容)
+                  -&gt; instanceKlass::initialize()  (super に対して再帰呼び出し)
+              (1) 対象クラスを初期化する (= &lt;clinit&gt; メソッドを呼び出す)
+                  (Java 仮想マシン仕様の &quot;5.5 Initialization&quot; における Step 9. の内容)
+                  -&gt; instanceKlass::call_class_initializer()
+                     -&gt; instanceKlass::call_class_initializer_impl()
+                        -&gt; instanceKlass::class_initializer()
+                        -&gt; JavaCalls::call()
+                           -&gt; (See: <a href="no3059iJu.html">here</a> for details)
               (1) もし初期化処理が正常に終了した場合は, 排他を解除して終了
-                  (Java 仮想マシン仕様の "5.5 Initialization" における Step 10. の内容)
-                  -> instanceKlass::set_initialization_state_and_notify()
-                     -> instanceKlass::set_initialization_state_and_notify_impl()
-                        -> instanceKlass::set_init_state()
-                        -> ObjectLocker::notifyAll() (※1で待機しているスレッドを起こす)
+                  (Java 仮想マシン仕様の &quot;5.5 Initialization&quot; における Step 10. の内容)
+                  -&gt; instanceKlass::set_initialization_state_and_notify()
+                     -&gt; instanceKlass::set_initialization_state_and_notify_impl()
+                        -&gt; instanceKlass::set_init_state()
+                        -&gt; ObjectLocker::notifyAll() (※1で待機しているスレッドを起こす)
               (1) もし初期化処理で例外が出ていれば, 排他を解除した後, 例外を投げ直す
-                  (Java 仮想マシン仕様の "5.5 Initialization" における Step 11. 及び Step 12. の内容)
-                  -> instanceKlass::set_initialization_state_and_notify()
-                     -> (同上)
-                  -> THROW_OOP() or THROW_ARG()
+                  (Java 仮想マシン仕様の &quot;5.5 Initialization&quot; における Step 11. 及び Step 12. の内容)
+                  -&gt; instanceKlass::set_initialization_state_and_notify()
+                     -&gt; (同上)
+                  -&gt; THROW_OOP() or THROW_ARG()
 
    * objArrayKlass の場合:
-     -> objArrayKlass::initialize()
-        -> instanceKlass::initialize() or typeArrayKlass::initialize()
+     -&gt; objArrayKlass::initialize()
+        -&gt; instanceKlass::initialize() or typeArrayKlass::initialize()
 
    * typeArrayKlass の場合:
-     -> typeArrayKlass::initialize()
-        -> (何もしない)
+     -&gt; typeArrayKlass::initialize()
+        -&gt; (何もしない)
 
    * その他の場合(オーバーライドされていない場合)
-     -> Klass::initialize()
-        -> ShouldNotReachHere()
-```
+     -&gt; Klass::initialize()
+        -&gt; ShouldNotReachHere()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### Klass::initialize()

@@ -19,24 +19,24 @@ title: 同期排他処理 ： ロック解放処理 ： fast-path の処理 ： 
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### sparc の場合
-```
-TemplateInterpreterGenerator::generate_throw_exception() が生成したコード (See: [here](no30593YX.html) for details)
--> InterpreterMacroAssembler::unlock_if_synchronized_method() が生成したコード
-   -> InterpreterMacroAssembler::unlock_object() が生成したコード
-      -> MacroAssembler::biased_locking_exit() が生成したコード  (← biased locking を使用している場合にのみ呼び出される)
-      -> InterpreterRuntime::monitorexit()                    (← fast-path が成功しなかった場合にのみ呼び出す)
-         -> (See: [here](noGAuAWXSd.html) for details)
-```
+<div class="flow-abst"><pre>
+TemplateInterpreterGenerator::generate_throw_exception() が生成したコード (See: <a href="no30593YX.html">here</a> for details)
+-&gt; InterpreterMacroAssembler::unlock_if_synchronized_method() が生成したコード
+   -&gt; InterpreterMacroAssembler::unlock_object() が生成したコード
+      -&gt; MacroAssembler::biased_locking_exit() が生成したコード  (← biased locking を使用している場合にのみ呼び出される)
+      -&gt; InterpreterRuntime::monitorexit()                    (← fast-path が成功しなかった場合にのみ呼び出す)
+         -&gt; (See: <a href="noGAuAWXSd.html">here</a> for details)
+</pre></div>
 
 ### x86_64 の場合
-```
-TemplateInterpreterGenerator::generate_throw_exception() が生成したコード (See: [here](no30593YX.html) for details)
--> InterpreterMacroAssembler::remove_activation() が生成したコード (See: [here](no30590Am.html) for details)
-   -> InterpreterMacroAssembler::unlock_object() が生成したコード
-      -> MacroAssembler::biased_locking_exit() が生成したコード  (← biased locking を使用している場合にのみ呼び出される)
-      -> InterpreterRuntime::monitorexit()                    (← fast-path が成功しなかった場合にのみ呼び出す)
-         -> (See: [here](noGAuAWXSd.html) for details)
-```
+<div class="flow-abst"><pre>
+TemplateInterpreterGenerator::generate_throw_exception() が生成したコード (See: <a href="no30593YX.html">here</a> for details)
+-&gt; InterpreterMacroAssembler::remove_activation() が生成したコード (See: <a href="no30590Am.html">here</a> for details)
+   -&gt; InterpreterMacroAssembler::unlock_object() が生成したコード
+      -&gt; MacroAssembler::biased_locking_exit() が生成したコード  (← biased locking を使用している場合にのみ呼び出される)
+      -&gt; InterpreterRuntime::monitorexit()                    (← fast-path が成功しなかった場合にのみ呼び出す)
+         -&gt; (See: <a href="noGAuAWXSd.html">here</a> for details)
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### InterpreterMacroAssembler::unlock_if_synchronized_method() (sparc の場合)

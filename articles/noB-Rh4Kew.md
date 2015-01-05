@@ -191,28 +191,28 @@ FilteredFieldStream の処理でスキップしたいフィールドを管理す
 ### 使われ方(Usage)
 以下の箇所で(のみ)使用されている.
 
-```
+<div class="flow-abst"><pre>
 * このクラスの初期化処理
 
   javaClasses_init()
-  -> FilteredFieldsMap::initialize()
+  -&gt; FilteredFieldsMap::initialize()
 
 * FilteredFieldStream の処理
 
   FilteredFieldStream::FilteredFieldStream()
-  -> FilteredFieldsMap::filtered_fields_count()
+  -&gt; FilteredFieldsMap::filtered_fields_count()
 
   FilteredFieldStream::next()
-  -> FilteredFieldsMap::filtered_fields_count()
+  -&gt; FilteredFieldsMap::filtered_fields_count()
 
   FilteredFieldStream::next()
-  -> FilteredFieldsMap::is_filtered_field()
+  -&gt; FilteredFieldsMap::is_filtered_field()
 
 * GC 処理 (より正確に言うと GC 時に FilteredFieldsMap 内に格納しているポインタを辿る処理)
 
   SystemDictionary::preloaded_oops_do()
-  -> FilteredFieldsMap::klasses_oops_do()
-```
+  -&gt; FilteredFieldsMap::klasses_oops_do()
+</pre></div>
 
 ### 内部構造(Internal structure)
 実際のスキップ対象の情報は FilteredField オブジェクトが格納している.

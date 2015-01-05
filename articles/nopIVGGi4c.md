@@ -417,12 +417,12 @@ ParallelCompactData オブジェクトの _region_data フィールドに(のみ
 ParallelCompactData::initialize_region_data() 内で(のみ)生成されている.
 この関数は, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 ParallelScavengeHeap::initialize()
--> PSParallelCompact::initialize()
-   -> ParallelCompactData::initialize()
-      -> ParallelCompactData::initialize_region_data()
-```
+-&gt; PSParallelCompact::initialize()
+   -&gt; ParallelCompactData::initialize()
+      -&gt; ParallelCompactData::initialize_region_data()
+</pre></div>
 
 #### 参考(for your information): ParallelScavengeHeap::initialize()
 See: [here](no344Yjc.html) for details

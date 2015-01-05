@@ -15,28 +15,28 @@ title: Thread のスタックフレームを取得する処理 (java.lang.Thread
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### java.lang.Thread.getStackTrace() の処理
-```
+<div class="flow-abst"><pre>
 java.lang.Thread.getStackTrace()
--> JVM_DumpThreads() (= java.lang.Thread.dumpThreads())
-   -> ThreadService::dump_stack_traces()
-      -> VMThread::execute()
-         -> (See: [here](no2935qaz.html) for details)
-            -> VM_ThreadDump::doit_prologue()
-            -> VM_ThreadDump::doit()
-               -> VM_ThreadDump::snapshot_thread()
-                  -> ThreadSnapshot::dump_stack_at_safepoint()
-                     -> ThreadStackTrace::dump_stack_at_safepointr()
-                        -> ThreadStackTrace::add_stack_frame()
-                           -> StackFrameInfo::StackFrameInfo()
-            -> VM_ThreadDump::doit_epilogue()
-```
+-&gt; JVM_DumpThreads() (= java.lang.Thread.dumpThreads())
+   -&gt; ThreadService::dump_stack_traces()
+      -&gt; VMThread::execute()
+         -&gt; (See: <a href="no2935qaz.html">here</a> for details)
+            -&gt; VM_ThreadDump::doit_prologue()
+            -&gt; VM_ThreadDump::doit()
+               -&gt; VM_ThreadDump::snapshot_thread()
+                  -&gt; ThreadSnapshot::dump_stack_at_safepoint()
+                     -&gt; ThreadStackTrace::dump_stack_at_safepointr()
+                        -&gt; ThreadStackTrace::add_stack_frame()
+                           -&gt; StackFrameInfo::StackFrameInfo()
+            -&gt; VM_ThreadDump::doit_epilogue()
+</pre></div>
 
 ### java.lang.Thread.getAllStackTraces() の処理
-```
+<div class="flow-abst"><pre>
 java.lang.Thread.getAllStackTraces()
--> JVM_DumpThreads() (= java.lang.Thread.dumpThreads())
-   -> (同上)
-```
+-&gt; JVM_DumpThreads() (= java.lang.Thread.dumpThreads())
+   -&gt; (同上)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

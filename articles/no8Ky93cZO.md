@@ -24,11 +24,11 @@ PhaseCFG クラス内で使用される補助クラス.
 
 そして, これらの関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 PhaseCFG::GlobalCodeMotion()
--> PhaseCFG::ComputeLatenciesBackwards()
--> PhaseCFG::schedule_late()
-```
+-&gt; PhaseCFG::ComputeLatenciesBackwards()
+-&gt; PhaseCFG::schedule_late()
+</pre></div>
 
 
 

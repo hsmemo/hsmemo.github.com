@@ -37,46 +37,46 @@ interp_only_mode 用に様々な最適化オプションが無効になる (See:
 ### 監視対象の指定処理 (SetFieldAccessWatch(), ClearFieldAccessWatch(), SetFieldModificationWatch(), ClearFieldModificationWatch() の処理)
 (処理の流れは4つともほぼ同じなので, 以下では JvmtiEnv::SetFieldAccessWatch() のみ記述)
 
-```
+<div class="flow-abst"><pre>
 JvmtiEnv::SetFieldAccessWatch()
--> JvmtiEventController::change_field_watch()
-   -> JvmtiEventControllerPrivate::change_field_watch()
-      -> JvmtiEventControllerPrivate::recompute_enabled()
-         -> (略) (See: [here](no2935C7Z.html) for details)
-```
+-&gt; JvmtiEventController::change_field_watch()
+   -&gt; JvmtiEventControllerPrivate::change_field_watch()
+      -&gt; JvmtiEventControllerPrivate::recompute_enabled()
+         -&gt; (略) (See: <a href="no2935C7Z.html">here</a> for details)
+</pre></div>
 
 ### watch point のフック処理
-```
+<div class="flow-abst"><pre>
 * Template Interpreter の場合:
 
   TemplateTable::getfield_or_static() もしくは TemplateTable::fast_accessfield() が生成するコード
-  -> TemplateTable::jvmti_post_field_access() が生成するコード
-     -> JvmtiExport::can_post_field_access()
-     -> InterpreterRuntime::post_field_access()
-        -> JvmtiExport::post_field_access()
+  -&gt; TemplateTable::jvmti_post_field_access() が生成するコード
+     -&gt; JvmtiExport::can_post_field_access()
+     -&gt; InterpreterRuntime::post_field_access()
+        -&gt; JvmtiExport::post_field_access()
 
   TemplateTable::putfield_or_static()
-  -> TemplateTable::jvmti_post_field_mod() が生成するコード
-     -> JvmtiExport::can_post_field_modification()
-     -> InterpreterRuntime::post_field_modification()
-        -> JvmtiExport::post_raw_field_modification()
+  -&gt; TemplateTable::jvmti_post_field_mod() が生成するコード
+     -&gt; JvmtiExport::can_post_field_modification()
+     -&gt; InterpreterRuntime::post_field_modification()
+        -&gt; JvmtiExport::post_raw_field_modification()
 
   TemplateTable::fast_storefield()
-  -> TemplateTable::jvmti_post_fast_field_mod() が生成するコード
-     -> JvmtiExport::can_post_field_modification()
-     -> InterpreterRuntime::post_field_modification()
-        -> (同上)
+  -&gt; TemplateTable::jvmti_post_fast_field_mod() が生成するコード
+     -&gt; JvmtiExport::can_post_field_modification()
+     -&gt; InterpreterRuntime::post_field_modification()
+        -&gt; (同上)
 
 * C++ Interpreter の場合:
 
   BytecodeInterpreter::run() もしくは BytecodeInterpreter::runWithChecks()
-  -> InterpreterRuntime::post_field_access()
-     -> (同上)
+  -&gt; InterpreterRuntime::post_field_access()
+     -&gt; (同上)
 
   BytecodeInterpreter::run() もしくは BytecodeInterpreter::runWithChecks()
-  -> InterpreterRuntime::post_field_modification()
-     -> (同上)
-```
+  -&gt; InterpreterRuntime::post_field_modification()
+     -&gt; (同上)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

@@ -28,19 +28,19 @@ prepare_invoke() 等の中で引数に応じて適切なアドレスを選んで
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### 後片付け処理コードの生成処理
-```
-(See: [here](no3059kZk.html) for details)
--> TemplateInterpreterGenerator::generate_all()
-   -> TemplateInterpreterGenerator::generate_return_entry_for()
-```
+<div class="flow-abst"><pre>
+(See: <a href="no3059kZk.html">here</a> for details)
+-&gt; TemplateInterpreterGenerator::generate_all()
+   -&gt; TemplateInterpreterGenerator::generate_return_entry_for()
+</pre></div>
 
 ### 後片付け処理
-```
+<div class="flow-abst"><pre>
 TemplateInterpreterGenerator::generate_return_entry_for() が生成したコード
--> (1) レジスタの値を復帰させる
+-&gt; (1) レジスタの値を復帰させる
    (1) 次のバイトコードに対応するテンプレートへとジャンプする
-       -> InterpreterMacroAssembler::dispatch_next() が生成するコード
-```
+       -&gt; InterpreterMacroAssembler::dispatch_next() が生成するコード
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

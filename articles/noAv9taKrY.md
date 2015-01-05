@@ -29,55 +29,55 @@ PerfData 用の shared memory file ("hsperfdata" ファイル) を管理する�
 ### 使われ方(Usage)
 以下の箇所で(のみ)使用されている.
 
-```
+<div class="flow-abst"><pre>
 * hsperfdata ファイルを作成する処理
   
-  (HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
-  -> Threads::create_vm()
-     -> vm_init_globals()
-        -> perfMemory_init()
-           -> PerfMemory::initialize()
+  (HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+  -&gt; Threads::create_vm()
+     -&gt; vm_init_globals()
+        -&gt; perfMemory_init()
+           -&gt; PerfMemory::initialize()
 
 * hsperfdata ファイルの初期化完了を宣言する処理
 
   (PerfDataPrologue::accessible フィールドを true に変更する処理. 
    sun.jvmstat.perfdata.monitor.v2_0.isAccessible() が true を返すようになる.)
 
-  (HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
-  -> Threads::create_vm()
-     -> TraceVmCreationTime::end()
-        -> Management::record_vm_startup_time()
-           -> PerfMemory::set_accessible()
+  (HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+  -&gt; Threads::create_vm()
+     -&gt; TraceVmCreationTime::end()
+        -&gt; Management::record_vm_startup_time()
+           -&gt; PerfMemory::set_accessible()
 
 * PerfData を生成する処理
   
   PerfLong::PerfLong()
-  -> PerfData::create_entry()
-     -> PerfMemory::alloc()
-     -> PerfMemory::mark_updated()
+  -&gt; PerfData::create_entry()
+     -&gt; PerfMemory::alloc()
+     -&gt; PerfMemory::mark_updated()
 
   PerfByteArray::PerfByteArray()
-  -> PerfData::create_entry()
-     -> (同上)
+  -&gt; PerfData::create_entry()
+     -&gt; (同上)
 
 * hsperfdata ファイルを破棄する処理
   
-  (略) (See: [here](no3420acA.html) for details)
-  -> perfMemory_exit()
-     -> PerfMemory::destroy()
+  (略) (See: <a href="no3420acA.html">here</a> for details)
+  -&gt; perfMemory_exit()
+     -&gt; PerfMemory::destroy()
 
 * 他 HotSpot の hsperfdata ファイルにアタッチする処理
   
   sun.misc.Perf.attach()
-  -> Perf_Attach()
-     -> PerfMemory::attach()
+  -&gt; Perf_Attach()
+     -&gt; PerfMemory::attach()
 
 * 他 HotSpot の hsperfdata ファイルからデタッチする処理
   
   sun.misc.Perf.detach()
-  -> Perf_Detach()
-     -> PerfMemory::detach()
-```
+  -&gt; Perf_Detach()
+     -&gt; PerfMemory::detach()
+</pre></div>
 
 
 

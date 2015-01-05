@@ -20,27 +20,27 @@ VMThread は Thread::run() をオーバーライドしているので,
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### VMThread を作成する処理
-```
-(HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
--> Threads::create_vm()
-   -> VMThread::create()
-      -> VMThread::VMThread()
-         -> NamedThread::NamedThread()
-            -> Thread::Thread()
-      -> VMOperationQueue::VMOperationQueue()
-   -> os::create_thread()
-      -> (See: [here](noYHbL-pQM.html) for details)
-   -> os::start_thread()
-      -> (See: [here](noYHbL-pQM.html) for details)
-```
+<div class="flow-abst"><pre>
+(HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+-&gt; Threads::create_vm()
+   -&gt; VMThread::create()
+      -&gt; VMThread::VMThread()
+         -&gt; NamedThread::NamedThread()
+            -&gt; Thread::Thread()
+      -&gt; VMOperationQueue::VMOperationQueue()
+   -&gt; os::create_thread()
+      -&gt; (See: <a href="noYHbL-pQM.html">here</a> for details)
+   -&gt; os::start_thread()
+      -&gt; (See: <a href="noYHbL-pQM.html">here</a> for details)
+</pre></div>
 
 ### 生成された VMThread 側の処理
-```
--> java_start()
-   -> (See: [here](noaGdrH-zs.html), [here](noQiWP6ip-.html) and [here](nobwSeebST.html) for details)
-      -> VMThread::run()
-         -> (See: [here](no2935qaz.html) for details)
-```
+<div class="flow-abst"><pre>
+-&gt; java_start()
+   -&gt; (See: <a href="noaGdrH-zs.html">here</a>, <a href="noQiWP6ip-.html">here</a> and <a href="nobwSeebST.html">here</a> for details)
+      -&gt; VMThread::run()
+         -&gt; (See: <a href="no2935qaz.html">here</a> for details)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

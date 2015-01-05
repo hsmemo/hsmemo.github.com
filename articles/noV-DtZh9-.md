@@ -74,18 +74,18 @@ JDK_Version クラスの _current フィールド (static フィールド) に(�
 #### 初期化箇所(where its instances are initialized)
 Threads::create_vm() 内で(のみ)初期化されている.
 
-```
-(HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
--> Threads::create_vm()
-   -> JDK_Version_init()
-      -> JDK_Version::initialize()
+<div class="flow-abst"><pre>
+(HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+-&gt; Threads::create_vm()
+   -&gt; JDK_Version_init()
+      -&gt; JDK_Version::initialize()
          (libjava.so が GetVersion() を提供してくれていれば, ここで検出して設定する)
-   -> init_globals()
-      -> universe2_init()
-         -> Universe::genesis()
+   -&gt; init_globals()
+      -&gt; universe2_init()
+         -&gt; Universe::genesis()
             (libjava.so が GetVersion() を提供してくれていなければ, ここでバージョンを推定して設定する)
-            -> JDK_Version::fully_initialize()
-```
+            -&gt; JDK_Version::fully_initialize()
+</pre></div>
 
 #### 参考(for your information): JDK_Version_init()
 See: [here](no17119E8A.html) for details
@@ -170,10 +170,10 @@ register_on_exit_function() 内で(のみ)生成されている.
 
 (が, この JVM_OnExit() は使われていないような...?? #TODO)
 
-```
+<div class="flow-abst"><pre>
 JVM_OnExit()
--> register_on_exit_function()
-```
+-&gt; register_on_exit_function()
+</pre></div>
 
 #### 使用箇所(where its instances are used)
 before_exit() 内で(のみ)使用されている.

@@ -15,34 +15,34 @@ title: Serviceability 機能 ： HotSpot Monitoring and Management Interface (JM
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### sun.management.HotspotThreadMBean.getInternalThreadCount() の処理
-```
+<div class="flow-abst"><pre>
 sun.management.HotspotThread.getInternalThreadCount()
--> Java_sun_management_HotspotThread_getInternalThreadCount()
-   -> jmm_GetLongAttribute()  (JMM_VM_THREAD_COUNT を引数として呼び出される)
-      -> get_long_attribute()
-         -> get_vm_thread_count()
-            -> Threads::threads_do()
-               -> (See: )
-                  -> VmThreadCountClosure::do_thread()
-```
+-&gt; Java_sun_management_HotspotThread_getInternalThreadCount()
+   -&gt; jmm_GetLongAttribute()  (JMM_VM_THREAD_COUNT を引数として呼び出される)
+      -&gt; get_long_attribute()
+         -&gt; get_vm_thread_count()
+            -&gt; Threads::threads_do()
+               -&gt; (See: )
+                  -&gt; VmThreadCountClosure::do_thread()
+</pre></div>
 
 ### sun.management.HotspotThreadMBean.getInternalThreadCpuTimes() の処理
-```
+<div class="flow-abst"><pre>
 sun.management.HotspotThread.getInternalThreadCpuTimes()
--> sun.management.HotspotThread.getInternalThreadTimes0()
-   -> Java_sun_management_HotspotThread_getInternalThreadTimes0()
-      -> jmm_GetInternalThreadTimes()
-         -> Threads::threads_do()
-            -> (See: )
-               -> ThreadTimesClosure::do_thread()
-```
+-&gt; sun.management.HotspotThread.getInternalThreadTimes0()
+   -&gt; Java_sun_management_HotspotThread_getInternalThreadTimes0()
+      -&gt; jmm_GetInternalThreadTimes()
+         -&gt; Threads::threads_do()
+            -&gt; (See: )
+               -&gt; ThreadTimesClosure::do_thread()
+</pre></div>
 
 ### sun.management.HotspotThreadMBean.getInternalThreadingCounters() の処理
-```
+<div class="flow-abst"><pre>
 sun.management.HotspotThread.getInternalThreadingCounters()
--> sun.management.VMManagementImpl.getInternalCounters()
-   -> (See: [here](norvN2FPOq.html) for details)
-```
+-&gt; sun.management.VMManagementImpl.getInternalCounters()
+   -&gt; (See: <a href="norvN2FPOq.html">here</a> for details)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

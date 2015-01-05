@@ -128,51 +128,51 @@ JvmtiManageCapabilities::relinquish_capabilities() が呼び出されている.
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### GetEnv() 時の大域的な初期化処理
-```
-(See: [here](no30592Ee.html) for details)
--> JvmtiEnvBase::globally_initialize()
-   -> JvmtiManageCapabilities::initialize()
-      -> JvmtiManageCapabilities::init_always_capabilities()
-      -> JvmtiManageCapabilities::recompute_always_capabilities()
-      -> JvmtiManageCapabilities::init_onload_capabilities()
-      -> JvmtiManageCapabilities::init_always_solo_capabilities()
-      -> JvmtiManageCapabilities::init_onload_solo_capabilities()
-```
+<div class="flow-abst"><pre>
+(See: <a href="no30592Ee.html">here</a> for details)
+-&gt; JvmtiEnvBase::globally_initialize()
+   -&gt; JvmtiManageCapabilities::initialize()
+      -&gt; JvmtiManageCapabilities::init_always_capabilities()
+      -&gt; JvmtiManageCapabilities::recompute_always_capabilities()
+      -&gt; JvmtiManageCapabilities::init_onload_capabilities()
+      -&gt; JvmtiManageCapabilities::init_always_solo_capabilities()
+      -&gt; JvmtiManageCapabilities::init_onload_solo_capabilities()
+</pre></div>
 
 ### GetPotentialCapabilities() の処理
-```
+<div class="flow-abst"><pre>
 JvmtiEnv::GetPotentialCapabilities()
--> JvmtiManageCapabilities::get_potential_capabilities()
-```
+-&gt; JvmtiManageCapabilities::get_potential_capabilities()
+</pre></div>
 
 ### AddCapabilities() の処理
-```
+<div class="flow-abst"><pre>
 JvmtiEnv::AddCapabilities()
--> JvmtiManageCapabilities::add_capabilities()
-   -> いろいろと削除したり追加したり
-   -> JvmtiManageCapabilities::update()
-```
+-&gt; JvmtiManageCapabilities::add_capabilities()
+   -&gt; いろいろと削除したり追加したり
+   -&gt; JvmtiManageCapabilities::update()
+</pre></div>
 
 ### RelinquishCapabilities() の処理
-```
+<div class="flow-abst"><pre>
 JvmtiEnv::RelinquishCapabilities()
--> JvmtiManageCapabilities::relinquish_capabilities()
-   -> いろいろと削除したり追加したり
-   -> JvmtiManageCapabilities::update()
-```
+-&gt; JvmtiManageCapabilities::relinquish_capabilities()
+   -&gt; いろいろと削除したり追加したり
+   -&gt; JvmtiManageCapabilities::update()
+</pre></div>
 
 ### GetCapabilities() の処理
-```
+<div class="flow-abst"><pre>
 JvmtiEnv::GetCapabilities()
--> JvmtiManageCapabilities::copy_capabilities()
-```
+-&gt; JvmtiManageCapabilities::copy_capabilities()
+</pre></div>
 
 ### DisposeEnvironment() 時の処理
-```
-(See: [here](no2935HVZ.html) for details)
--> JvmtiEnvBase::env_dispose()
-   -> JvmtiManageCapabilities::relinquish_capabilities()
-```
+<div class="flow-abst"><pre>
+(See: <a href="no2935HVZ.html">here</a> for details)
+-&gt; JvmtiEnvBase::env_dispose()
+   -&gt; JvmtiManageCapabilities::relinquish_capabilities()
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

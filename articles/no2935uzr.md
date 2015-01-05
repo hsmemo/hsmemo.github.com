@@ -18,61 +18,61 @@ JvmtiPendingMonitors というクラスが用意されている.
 起動処理の終了後にメインスレッドを表す JavaThread へと引き継がれる.
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 * JvmtiEnv::CreateRawMonitor() の処理
 
   JvmtiEnv::CreateRawMonitor()
-  -> JvmtiRawMonitor::JvmtiRawMonitor()
+  -&gt; JvmtiRawMonitor::JvmtiRawMonitor()
 
 * JvmtiEnv::DestroyRawMonitor() の処理
 
   JvmtiEnv::DestroyRawMonitor()
-  -> JvmtiPendingMonitors::destroy()     (<= HotSpot の起動中であれば呼び出す)
-  -> JvmtiRawMonitor::~JvmtiRawMonitor()
+  -&gt; JvmtiPendingMonitors::destroy()     (&lt;= HotSpot の起動中であれば呼び出す)
+  -&gt; JvmtiRawMonitor::~JvmtiRawMonitor()
 
 * JvmtiEnv::RawMonitorEnter() の処理
 
   JvmtiEnv::RawMonitorEnter()
-  -> * HotSpot の起動中の場合:
-       -> JvmtiPendingMonitors::enter()
+  -&gt; * HotSpot の起動中の場合:
+       -&gt; JvmtiPendingMonitors::enter()
      * 起動中ではない場合:
-       -> JvmtiRawMonitor::raw_enter()
-          -> JvmtiRawMonitor::SimpleEnter()
+       -&gt; JvmtiRawMonitor::raw_enter()
+          -&gt; JvmtiRawMonitor::SimpleEnter()
 
 * JvmtiEnv::RawMonitorExit() の処理
 
   JvmtiEnv::RawMonitorExit()
-  -> * HotSpot の起動中の場合:
-       -> JvmtiPendingMonitors::exit()
+  -&gt; * HotSpot の起動中の場合:
+       -&gt; JvmtiPendingMonitors::exit()
      * 起動中ではない場合:
-       -> JvmtiRawMonitor::raw_exit()
-          -> JvmtiRawMonitor::SimpleExit()
+       -&gt; JvmtiRawMonitor::raw_exit()
+          -&gt; JvmtiRawMonitor::SimpleExit()
 
 * JvmtiEnv::RawMonitorWait() の処理
 
   JvmtiEnv::RawMonitorWait()
-  -> JvmtiRawMonitor::raw_wait()
-     -> JvmtiRawMonitor::SimpleWait()
+  -&gt; JvmtiRawMonitor::raw_wait()
+     -&gt; JvmtiRawMonitor::SimpleWait()
 
 * JvmtiEnv::RawMonitorNotify() の処理
 
   JvmtiEnv::RawMonitorNotify()
-  -> JvmtiRawMonitor::raw_notify()
-     -> JvmtiRawMonitor::SimpleNotify()
+  -&gt; JvmtiRawMonitor::raw_notify()
+     -&gt; JvmtiRawMonitor::SimpleNotify()
 
 * JvmtiEnv::RawMonitorNotifyAll() の処理
 
   JvmtiEnv::RawMonitorNotifyAll()
-  -> JvmtiRawMonitor::raw_notifyAll()
-     -> JvmtiRawMonitor::SimpleNotify()
+  -&gt; JvmtiRawMonitor::raw_notifyAll()
+     -&gt; JvmtiRawMonitor::SimpleNotify()
 
 * 起動処理後の引き継ぎ処理
 
   Threads::create_vm()
-  -> JvmtiExport::transition_pending_onload_raw_monitors()
-     -> JvmtiPendingMonitors::transition_raw_monitors()
+  -&gt; JvmtiExport::transition_pending_onload_raw_monitors()
+     -&gt; JvmtiPendingMonitors::transition_raw_monitors()
 
-```
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

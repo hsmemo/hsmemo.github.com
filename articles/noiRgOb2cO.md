@@ -67,11 +67,11 @@ ciObject クラス (およびそのサブクラス) 用のファクトリメソ�
 ciObjectFactory::create_new_object() が ciObject (とそのサブクラス) 用のファクトリメソッドになっている.
 このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 ciEnv::get_object()
--> ciObjectFactory::get()
-   -> ciObjectFactory::create_new_object()
-```
+-&gt; ciObjectFactory::get()
+   -&gt; ciObjectFactory::create_new_object()
+</pre></div>
 
 
 

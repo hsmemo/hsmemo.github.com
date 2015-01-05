@@ -11,13 +11,13 @@ title: Serviceability 機能 ： JVMTI の処理 ： JVMTI 関数の処理 ： �
 (See: JVMTI 仕様)
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 JvmtiEnv::GetConstantPool()
--> JvmtiConstantPoolReconstituter::JvmtiConstantPoolReconstituter()
--> JvmtiEnvBase::allocate()
--> JvmtiConstantPoolReconstituter::copy_cpool_bytes()
--> JvmtiConstantPoolReconstituter::~JvmtiConstantPoolReconstituter()
-```
+-&gt; JvmtiConstantPoolReconstituter::JvmtiConstantPoolReconstituter()
+-&gt; JvmtiEnvBase::allocate()
+-&gt; JvmtiConstantPoolReconstituter::copy_cpool_bytes()
+-&gt; JvmtiConstantPoolReconstituter::~JvmtiConstantPoolReconstituter()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### JvmtiEnv::GetConstantPool()

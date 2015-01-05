@@ -109,57 +109,57 @@ PopFrame に似てて, 最後の処理だけ違う, とのこと.
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### ForceEarlyReturn*() の処理
-```
+<div class="flow-abst"><pre>
 JvmtiEnv::ForceEarlyReturn*()
--> JvmtiEnvBase::force_early_return()
-   -> (1) 先頭フレームが compiled frame であれば interpreter frame に戻しておく.
-          -> JvmtiEnvBase::check_top_frame()
+-&gt; JvmtiEnvBase::force_early_return()
+   -&gt; (1) 先頭フレームが compiled frame であれば interpreter frame に戻しておく.
+          -&gt; JvmtiEnvBase::check_top_frame()
 
       (2) ForceEarlyReturn* の処理対象になっていることを JvmtiThreadState オブジェクト内に記録しておく
-          -> JvmtiThreadState::set_earlyret_pending()
-          -> JvmtiThreadState::set_earlyret_oop()
-          -> JvmtiThreadState::set_earlyret_value()
-          -> JvmtiThreadState::set_pending_step_for_earlyret()
-```
+          -&gt; JvmtiThreadState::set_earlyret_pending()
+          -&gt; JvmtiThreadState::set_earlyret_oop()
+          -&gt; JvmtiThreadState::set_earlyret_value()
+          -&gt; JvmtiThreadState::set_pending_step_for_earlyret()
+</pre></div>
 
 ### 実際の強制復帰処理 
 #### compiled frame の場合
-```
+<div class="flow-abst"><pre>
 deopt 処理 (See: )
--> vframeArrayElement::unpack_on_stack()
-   -> JvmtiThreadState::is_earlyret_pending() が true の場合は,
+-&gt; vframeArrayElement::unpack_on_stack()
+   -&gt; JvmtiThreadState::is_earlyret_pending() が true の場合は,
       復帰先の PC として Interpreter::remove_activation_early_entry() を選択する
       (なお, JvmtiThreadState::is_earlyret_pending() は
       JvmtiThreadState::_earlyret_state フィールドをチェックする関数)
-```
+</pre></div>
 
 #### template interpreter frame の場合
-```
+<div class="flow-abst"><pre>
 * sparc の場合:
 
-  (略) (See: [here](no2935dSX.html) for details)
-  -> MacroAssembler::call_VM_base() が生成するコード
-     -> MacroAssembler::check_and_forward_exception() が生成するコード
-        -> InterpreterMacroAssembler::check_and_handle_earlyret() が生成するコード
-           -> Interpreter::remove_activation_early_entry() が指しているコード
+  (略) (See: <a href="no2935dSX.html">here</a> for details)
+  -&gt; MacroAssembler::call_VM_base() が生成するコード
+     -&gt; MacroAssembler::check_and_forward_exception() が生成するコード
+        -&gt; InterpreterMacroAssembler::check_and_handle_earlyret() が生成するコード
+           -&gt; Interpreter::remove_activation_early_entry() が指しているコード
               (= TemplateInterpreterGenerator::generate_earlyret_entry_for() が生成するコード)
 
 * x86 の場合:
 
-  (略) (See: [here](no2935dSX.html) for details)
-  -> MacroAssembler::call_VM_base() が生成するコード
-     -> InterpreterMacroAssembler::check_and_handle_earlyret() が生成するコード
-        -> Interpreter::remove_activation_early_entry() が指しているコード
+  (略) (See: <a href="no2935dSX.html">here</a> for details)
+  -&gt; MacroAssembler::call_VM_base() が生成するコード
+     -&gt; InterpreterMacroAssembler::check_and_handle_earlyret() が生成するコード
+        -&gt; Interpreter::remove_activation_early_entry() が指しているコード
            (= TemplateInterpreterGenerator::generate_earlyret_entry_for() が生成するコード)
-```
+</pre></div>
 
 ### SingleStep 時の後片付け処理
-```
-(略) (See: [here](no7882EDP.html) for details)
--> JvmtiExport::at_single_stepping_point()
-   -> JvmtiThreadState::is_pending_step_for_earlyret() が true の場合は,
+<div class="flow-abst"><pre>
+(略) (See: <a href="no7882EDP.html">here</a> for details)
+-&gt; JvmtiExport::at_single_stepping_point()
+   -&gt; JvmtiThreadState::is_pending_step_for_earlyret() が true の場合は,
       JvmtiThreadState::process_pending_step_for_earlyret() を呼び出す.
-```
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

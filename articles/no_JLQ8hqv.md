@@ -58,26 +58,26 @@ title: Relocator クラス関連のクラス (RelocatorListener, Relocator, 及�
 
 そして, これらの関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 * GenerateOopMap::expand_current_instr() の呼び出しパス
 
   GenerateOopMap::compute_map()
-  -> GenerateOopMap::do_interpretation()
-     -> GenerateOopMap::rewrite_refval_conflicts()
-        -> GenerateOopMap::rewrite_refval_conflict()
-           -> GenerateOopMap::rewrite_refval_conflict_inst()
-              -> GenerateOopMap::rewrite_load_or_store()
-                 -> GenerateOopMap::expand_current_instr()
+  -&gt; GenerateOopMap::do_interpretation()
+     -&gt; GenerateOopMap::rewrite_refval_conflicts()
+        -&gt; GenerateOopMap::rewrite_refval_conflict()
+           -&gt; GenerateOopMap::rewrite_refval_conflict_inst()
+              -&gt; GenerateOopMap::rewrite_load_or_store()
+                 -&gt; GenerateOopMap::expand_current_instr()
 
 * VM_RedefineClasses::rewrite_cp_refs_in_method() の呼び出しパス
   
   VM_RedefineClasses::doit_prologue()
-  -> VM_RedefineClasses::load_new_class_versions()
-     -> VM_RedefineClasses::merge_cp_and_rewrite()
-        -> VM_RedefineClasses::rewrite_cp_refs()
-           -> VM_RedefineClasses::rewrite_cp_refs_in_methods()
-              -> VM_RedefineClasses::rewrite_cp_refs_in_method()
-```
+  -&gt; VM_RedefineClasses::load_new_class_versions()
+     -&gt; VM_RedefineClasses::merge_cp_and_rewrite()
+        -&gt; VM_RedefineClasses::rewrite_cp_refs()
+           -&gt; VM_RedefineClasses::rewrite_cp_refs_in_methods()
+              -&gt; VM_RedefineClasses::rewrite_cp_refs_in_method()
+</pre></div>
 
 ### 内部構造(Internal structure)
 バイトコード中の命令に関しては, 変更が必要な箇所があまり自明でなく, 

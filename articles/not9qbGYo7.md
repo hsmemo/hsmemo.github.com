@@ -18,20 +18,20 @@ C++ Interpreter の場合, 以下の箇所で明示的な SAFEPOINT check を行
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### メソッド呼び出し時(invoke* バイトコード), およびリターン時(*return バイトコード)
-```
+<div class="flow-abst"><pre>
 BytecodeInterpreter::run() もしくは BytecodeInterpreter::runWithChecks()
--> SAFEPOINT マクロ
-   -> SafepointSynchronize::is_synchronizing()
-   -> SafepointSynchronize::block()
-```
+-&gt; SAFEPOINT マクロ
+   -&gt; SafepointSynchronize::is_synchronizing()
+   -&gt; SafepointSynchronize::block()
+</pre></div>
 
 ### backward branch 時
-```
+<div class="flow-abst"><pre>
 BytecodeInterpreter::run() もしくは BytecodeInterpreter::runWithChecks()
--> DO_BACKEDGE_CHECKS マクロ
-   -> SAFEPOINT マクロ
-      -> (同上)
-```
+-&gt; DO_BACKEDGE_CHECKS マクロ
+   -&gt; SAFEPOINT マクロ
+      -&gt; (同上)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

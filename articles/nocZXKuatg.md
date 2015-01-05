@@ -35,15 +35,15 @@ InlineCallGenerator クラスの具象サブクラスの1つ.
 Compile::make_vm_intrinsic() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 Compile::call_generator()
--> Compile::find_intrinsic()
-   -> Compile::make_vm_intrinsic()
+-&gt; Compile::find_intrinsic()
+   -&gt; Compile::make_vm_intrinsic()
 
 Compile::Compile( ciEnv* ci_env, C2Compiler* compiler, ciMethod* target, int osr_bci, bool subsume_loads, bool do_escape_analysis )
--> Compile::find_intrinsic()
-   -> (同上)
-```
+-&gt; Compile::find_intrinsic()
+   -&gt; (同上)
+</pre></div>
 
 ### 備考(Notes)
 現在このクラスのインライン展開対象になっているメソッドは以下の通り.

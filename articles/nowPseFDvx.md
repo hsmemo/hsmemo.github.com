@@ -14,16 +14,16 @@ Bytecode table の初期化処理は, HotSpot の起動時に呼び出される 
 Bytecode table については Bytecodes クラスも参照 (See: Bytecodes).
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
-(HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
--> Threads::create_vm()
-   -> init_globals()
-      -> bytecodes_init()
-         -> Bytecodes::initialize()
-            -> Bytecodes::def()
-               -> Bytecodes::compute_flags()
-            -> Bytecodes::pd_initialize()
-```
+<div class="flow-abst"><pre>
+(HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+-&gt; Threads::create_vm()
+   -&gt; init_globals()
+      -&gt; bytecodes_init()
+         -&gt; Bytecodes::initialize()
+            -&gt; Bytecodes::def()
+               -&gt; Bytecodes::compute_flags()
+            -&gt; Bytecodes::pd_initialize()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### bytecodes_init()

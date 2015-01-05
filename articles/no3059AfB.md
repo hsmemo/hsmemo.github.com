@@ -67,59 +67,59 @@ title: Class のロード/リンク/初期化 ： リンク処理 (4) ： rewrit
 ## 処理の流れ (概要)(Execution Flows : Summary)
 * Rewriter::rewrite() の処理
 
-```
+<div class="flow-abst"><pre>
 Rewriter::rewrite(instanceKlassHandle klass, TRAPS)
--> Rewriter::Rewriter()
-   -> (1) 対象が java.lang.Object の場合は, コンストラクタ(<init>()) 中の return 命令を return_register_finalizer 命令に書き換える.
+-&gt; Rewriter::Rewriter()
+   -&gt; (1) 対象が java.lang.Object の場合は, コンストラクタ(&lt;init&gt;()) 中の return 命令を return_register_finalizer 命令に書き換える.
           (なお, RegisterFinalizersAtInit オプションがセットされていない場合は, この処理は行わない)
-          -> Rewriter::rewrite_Object_init()
+          -&gt; Rewriter::rewrite_Object_init()
 
       (1) 処理対象クラス内の各メソッドに対して, 上記以外のバイトコード書き換え処理を行う.
-          -> Rewriter::scan_method()
-             -> 全てのメソッド内の各バイトコードに対して書き換えを行う.
+          -&gt; Rewriter::scan_method()
+             -&gt; 全てのメソッド内の各バイトコードに対して書き換えを行う.
                 * lookupswitch 命令の場合:
-                  -> fast_linearswitch 命令または fast_binaryswitch 命令に書き換える
+                  -&gt; fast_linearswitch 命令または fast_binaryswitch 命令に書き換える
 
                 * fast_linearswitch 命令または fast_binaryswitch 命令の場合:
-                  -> lookupswitch 命令に書き換える (元に戻す)
+                  -&gt; lookupswitch 命令に書き換える (元に戻す)
 
                 * {get|put}{static|field} 命令や invoke* 命令(invokedynamic除く) の場合:
-                  -> Rewriter::rewrite_member_reference()
+                  -&gt; Rewriter::rewrite_member_reference()
                      (バイトコード命令中の Constant Pool index が埋まっている 2byte を 
                      Constant Pool Cache の index に書き換える)
 
                 * invokedynamic 命令の場合:
-                  -> Rewriter::rewrite_invokedynamic()
+                  -&gt; Rewriter::rewrite_invokedynamic()
                      (バイトコード命令中の Constant Pool index が埋まっている 4byte を 
                      Constant Pool Cache の index に書き換える)
 
                 * ldc 命令または ldc_w 命令の場合:
-                  -> Rewriter::maybe_rewrite_ldc()
+                  -&gt; Rewriter::maybe_rewrite_ldc()
                      (ロード対象が method handle もしくは method type の場合, 
                      fast_aldc 命令または fast_aldc_w 命令に置き換える)
 
       (1) 収集した constant pool cache index の情報を元に constant pool cache (constantPoolCacheOop オブジェクト) を生成する.
-          -> Rewriter::make_constant_pool_cache()
-             -> oopFactory::new_constantPoolCache()
-                 -> constantPoolCacheKlass::allocate()
-```
+          -&gt; Rewriter::make_constant_pool_cache()
+             -&gt; oopFactory::new_constantPoolCache()
+                 -&gt; constantPoolCacheKlass::allocate()
+</pre></div>
 
 * Rewriter::relocate_and_link() の処理
 
-```
+<div class="flow-abst"><pre>
 Rewriter::relocate_and_link(instanceKlassHandle this_oop, TRAPS)
--> Rewriter::relocate_and_link(instanceKlassHandle this_oop, objArrayHandle methods, TRAPS)
-   -> (1) jsr バイトコードに関する再配置処理を行う
-          -> Rewriter::rewrite_jsrs()
-             -> ResolveOopMapConflicts::do_potential_rewrite()
-                -> GenerateOopMap::compute_map()
-                   -> 
+-&gt; Rewriter::relocate_and_link(instanceKlassHandle this_oop, objArrayHandle methods, TRAPS)
+   -&gt; (1) jsr バイトコードに関する再配置処理を行う
+          -&gt; Rewriter::rewrite_jsrs()
+             -&gt; ResolveOopMapConflicts::do_potential_rewrite()
+                -&gt; GenerateOopMap::compute_map()
+                   -&gt; 
 
       (1) 対象のメソッドにエントリポイントを設定する
           (これにより, このメソッドはインタープリタ／JIT生成コードから呼び出せるようになる)
-          -> methodOopDesc::link_method()
-             -> (See: [here](no7882a7C.html) for details)
-```
+          -&gt; methodOopDesc::link_method()
+             -&gt; (See: <a href="no7882a7C.html">here</a> for details)
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### Rewriter::rewrite(instanceKlassHandle klass, TRAPS)

@@ -110,55 +110,55 @@ signal handler で検出した場合や明示的なチェックで検出した�
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### Exceptions::new_exception() の処理
-```
+<div class="flow-abst"><pre>
 Exceptions::new_exception()
--> instanceKlass::allocate_instance_handle()
--> JavaCalls::call_special()
-   -> (See: [here](no3059iJu.html) for details)
-      -> 例外オブジェクトのコンストラクタ(<init> メソッド)
--> JavaCalls::call_special()  (<= cause を設定する必要があれば呼び出す)
-   -> (See: [here](no3059iJu.html) for details)
-      -> java.lang.Throwable.initCause()
-```
+-&gt; instanceKlass::allocate_instance_handle()
+-&gt; JavaCalls::call_special()
+   -&gt; (See: <a href="no3059iJu.html">here</a> for details)
+      -&gt; 例外オブジェクトのコンストラクタ(&lt;init&gt; メソッド)
+-&gt; JavaCalls::call_special()  (&lt;= cause を設定する必要があれば呼び出す)
+   -&gt; (See: <a href="no3059iJu.html">here</a> for details)
+      -&gt; java.lang.Throwable.initCause()
+</pre></div>
 
 ### Exceptions::_throw_*() の処理
-```
+<div class="flow-abst"><pre>
 Exceptions::_throw()
--> ThreadShadow::set_pending_exception()
-```
+-&gt; ThreadShadow::set_pending_exception()
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 Exceptions::_throw_msg()
--> Exceptions::new_exception()
-   -> (同上)
--> Exceptions::_throw()
-   -> (同上)
-```
+-&gt; Exceptions::new_exception()
+   -&gt; (同上)
+-&gt; Exceptions::_throw()
+   -&gt; (同上)
+</pre></div>
 
 ### THROW_* マクロの処理
-```
+<div class="flow-abst"><pre>
 THROW_HANDLE()
--> Exceptions::_throw()
-   -> (同上)
-```
+-&gt; Exceptions::_throw()
+   -&gt; (同上)
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 THROW_MSG()
--> Exceptions::_throw_msg()
-   -> (同上)
-```
+-&gt; Exceptions::_throw_msg()
+   -&gt; (同上)
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 THROW_OOP_()
--> Exceptions::_throw_oop()
-   -> 
-```
+-&gt; Exceptions::_throw_oop()
+   -&gt; 
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 THROW_MSG_LOADER_()
--> Exceptions::_throw_msg()
-   -> (同上)
-```
+-&gt; Exceptions::_throw_msg()
+   -&gt; (同上)
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### Exceptions::new_exception()

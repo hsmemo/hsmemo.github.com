@@ -74,73 +74,73 @@ VMルーチンはC++コードであるため, 処理としては native メソ�
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### sparc の場合
 #### MacroAssembler::call_VM() (last_java_sp 指定無し) の場合
-```
+<div class="flow-abst"><pre>
 MacroAssembler::call_VM() (引数 1~3 個版)  が生成するコード
--> MacroAssembler::call_VM() (引数可変個版)  が生成するコード
-   -> InterpreterMacroAssembler::call_VM_base()  が生成するコード
-      -> MacroAssembler::call_VM_base()  が生成するコード
-         -> JavaFrameAnchor に, 呼び出し元の Java メソッドの PC と SP を退避
-         -> 指定されたエントリポイントを呼び出す
-         -> 呼び出し元の Java メソッドの PC と SP を復帰
-         -> MacroAssembler::check_and_forward_exception() が生成するコード
+-&gt; MacroAssembler::call_VM() (引数可変個版)  が生成するコード
+   -&gt; InterpreterMacroAssembler::call_VM_base()  が生成するコード
+      -&gt; MacroAssembler::call_VM_base()  が生成するコード
+         -&gt; JavaFrameAnchor に, 呼び出し元の Java メソッドの PC と SP を退避
+         -&gt; 指定されたエントリポイントを呼び出す
+         -&gt; 呼び出し元の Java メソッドの PC と SP を復帰
+         -&gt; MacroAssembler::check_and_forward_exception() が生成するコード
             (例外や PopFrame, ForceEarlyReturn のチェックを行う. 必要に応じてそれぞれの処理ルーチンにジャンプ)
-            -> InterpreterMacroAssembler::check_and_handle_popframe()  が生成するコード
-               -> (See: [here](no2935cDo.html) for details)
-            -> InterpreterMacroAssembler::check_and_handle_earlyret()  が生成するコード
-               -> (See: [here](no3059azN.html) for details)
-            -> 例外チェックを行い, 発生していれば例外処理ルーチンへジャンプ (StubRoutines::forward_exception_entry()).
-               -> (See: [here](no293560A.html) for details)
-```
+            -&gt; InterpreterMacroAssembler::check_and_handle_popframe()  が生成するコード
+               -&gt; (See: <a href="no2935cDo.html">here</a> for details)
+            -&gt; InterpreterMacroAssembler::check_and_handle_earlyret()  が生成するコード
+               -&gt; (See: <a href="no3059azN.html">here</a> for details)
+            -&gt; 例外チェックを行い, 発生していれば例外処理ルーチンへジャンプ (StubRoutines::forward_exception_entry()).
+               -&gt; (See: <a href="no293560A.html">here</a> for details)
+</pre></div>
 
 #### MacroAssembler::call_VM() (last_java_sp 指定有り) の場合
-```
+<div class="flow-abst"><pre>
 MacroAssembler::call_VM() (引数 1~3 個版, last_java_sp 指定有り)  が生成するコード
--> MacroAssembler::call_VM() (引数可変個版, last_java_sp 指定有り)  が生成するコード
-   -> InterpreterMacroAssembler::call_VM_base()  が生成するコード
-      -> (同上)
-```
+-&gt; MacroAssembler::call_VM() (引数可変個版, last_java_sp 指定有り)  が生成するコード
+   -&gt; InterpreterMacroAssembler::call_VM_base()  が生成するコード
+      -&gt; (同上)
+</pre></div>
 
 #### MacroAssembler::call_VM_leaf() の場合
-```
+<div class="flow-abst"><pre>
 MacroAssembler::call_VM_leaf() (引数 1~3 個版)  が生成するコード
--> MacroAssembler::call_VM_leaf() (引数可変個版)  が生成するコード
-   -> InterpreterMacroAssembler::call_VM_leaf_base()  が生成するコード
-      -> MacroAssembler::call_VM_leaf_base()  が生成するコード
-```
+-&gt; MacroAssembler::call_VM_leaf() (引数可変個版)  が生成するコード
+   -&gt; InterpreterMacroAssembler::call_VM_leaf_base()  が生成するコード
+      -&gt; MacroAssembler::call_VM_leaf_base()  が生成するコード
+</pre></div>
 
 ### x86_64 の場合
 #### MacroAssembler::call_VM() (last_java_sp 指定無し) の場合
-```
+<div class="flow-abst"><pre>
 MacroAssembler::call_VM() (引数 1~3 個, 及び可変個版)  が生成するコード
--> MacroAssembler::call_VM_helper()  が生成するコード
-   -> InterpreterMacroAssembler::call_VM_base()  が生成するコード
-      -> MacroAssembler::call_VM_base()  が生成するコード
-         -> MacroAssembler::call_VM_leaf_base()  が生成するコード
-            -> 指定されたエントリポイントを呼び出す
-         -> InterpreterMacroAssembler::check_and_handle_popframe()  が生成するコード
-            -> (See: [here](no2935cDo.html) for details)
-         -> InterpreterMacroAssembler::check_and_handle_earlyret()  が生成するコード
-            -> (See: [here](no3059azN.html) for details)
-         -> 例外チェックを行い, 発生していれば例外処理ルーチンへジャンプ (StubRoutines::forward_exception_entry()).
-            -> (See: [here](no293560A.html) for details)
-```
+-&gt; MacroAssembler::call_VM_helper()  が生成するコード
+   -&gt; InterpreterMacroAssembler::call_VM_base()  が生成するコード
+      -&gt; MacroAssembler::call_VM_base()  が生成するコード
+         -&gt; MacroAssembler::call_VM_leaf_base()  が生成するコード
+            -&gt; 指定されたエントリポイントを呼び出す
+         -&gt; InterpreterMacroAssembler::check_and_handle_popframe()  が生成するコード
+            -&gt; (See: <a href="no2935cDo.html">here</a> for details)
+         -&gt; InterpreterMacroAssembler::check_and_handle_earlyret()  が生成するコード
+            -&gt; (See: <a href="no3059azN.html">here</a> for details)
+         -&gt; 例外チェックを行い, 発生していれば例外処理ルーチンへジャンプ (StubRoutines::forward_exception_entry()).
+            -&gt; (See: <a href="no293560A.html">here</a> for details)
+</pre></div>
 
 #### MacroAssembler::call_VM() (last_java_sp 指定有り) の場合
-```
+<div class="flow-abst"><pre>
 MacroAssembler::call_VM() (引数 1~3 個版, last_java_sp 指定有り)  が生成するコード
--> MacroAssembler::call_VM() (引数可変個版, last_java_sp 指定有り)  が生成するコード
-   -> InterpreterMacroAssembler::call_VM_base()  が生成するコード
-      -> (同上)
-```
+-&gt; MacroAssembler::call_VM() (引数可変個版, last_java_sp 指定有り)  が生成するコード
+   -&gt; InterpreterMacroAssembler::call_VM_base()  が生成するコード
+      -&gt; (同上)
+</pre></div>
 
 #### MacroAssembler::call_VM_leaf() の場合
-```
+<div class="flow-abst"><pre>
 MacroAssembler::call_VM_leaf() (引数 1~3 個版)  が生成するコード
--> MacroAssembler::call_VM_leaf() (引数可変個版)  が生成するコード
-   -> InterpreterMacroAssembler::call_VM_leaf_base()  が生成するコード
-      -> MacroAssembler::call_VM_leaf_base()  が生成するコード
-         -> (同上)
-```
+-&gt; MacroAssembler::call_VM_leaf() (引数可変個版)  が生成するコード
+   -&gt; InterpreterMacroAssembler::call_VM_leaf_base()  が生成するコード
+      -&gt; MacroAssembler::call_VM_leaf_base()  が生成するコード
+         -&gt; (同上)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

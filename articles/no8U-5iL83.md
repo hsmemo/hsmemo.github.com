@@ -33,115 +33,115 @@ title: Class のロード/リンク/初期化 ： リンク処理 (1) ： リン
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### 起動中の標準ライブラリクラスの初期化処理
-```
-(HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
--> Threads::create_vm()
-   -> init_globals()
-      -> universe_post_init()
-         -> instanceKlass::link_class()
-            -> (See: [here](no3059xqe.html) for details)
-         -> instanceKlass::link_class_or_fail()
-            -> instanceKlass::link_class_impl()
-               -> (See: [here](no3059xqe.html) for details)
-```
+<div class="flow-abst"><pre>
+(HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+-&gt; Threads::create_vm()
+   -&gt; init_globals()
+      -&gt; universe_post_init()
+         -&gt; instanceKlass::link_class()
+            -&gt; (See: <a href="no3059xqe.html">here</a> for details)
+         -&gt; instanceKlass::link_class_or_fail()
+            -&gt; instanceKlass::link_class_impl()
+               -&gt; (See: <a href="no3059xqe.html">here</a> for details)
+</pre></div>
 
 ### クラスの初期化処理
-```
-(See: [here](no9AAGw84F.html) for details)
--> instanceKlass::initialize()
-   -> instanceKlass::initialize_impl()
-      -> instanceKlass::link_class()
-         -> (See: [here](no3059xqe.html) for details)
-```
+<div class="flow-abst"><pre>
+(See: <a href="no9AAGw84F.html">here</a> for details)
+-&gt; instanceKlass::initialize()
+   -&gt; instanceKlass::initialize_impl()
+      -&gt; instanceKlass::link_class()
+         -&gt; (See: <a href="no3059xqe.html">here</a> for details)
+</pre></div>
 
 ### Reflection 処理
-```
-(See: [here](no1904Wlh.html) for details)
--> JVM_GetClassDeclaredFields()
-   -> instanceKlass::link_class()
-      -> (See: [here](no3059xqe.html) for details)
+<div class="flow-abst"><pre>
+(See: <a href="no1904Wlh.html">here</a> for details)
+-&gt; JVM_GetClassDeclaredFields()
+   -&gt; instanceKlass::link_class()
+      -&gt; (See: <a href="no3059xqe.html">here</a> for details)
   
-(See: [here](no1904Wlh.html) for details)
--> JVM_GetClassDeclaredMethods()
-   -> instanceKlass::link_class()
-      -> (See: [here](no3059xqe.html) for details)
+(See: <a href="no1904Wlh.html">here</a> for details)
+-&gt; JVM_GetClassDeclaredMethods()
+   -&gt; instanceKlass::link_class()
+      -&gt; (See: <a href="no3059xqe.html">here</a> for details)
   
-(See: [here](no1904Wlh.html) for details)
--> JVM_GetClassDeclaredConstructors()
-   -> instanceKlass::link_class()
-      -> (See: [here](no3059xqe.html) for details)
+(See: <a href="no1904Wlh.html">here</a> for details)
+-&gt; JVM_GetClassDeclaredConstructors()
+   -&gt; instanceKlass::link_class()
+      -&gt; (See: <a href="no3059xqe.html">here</a> for details)
   
-(See: [here](no1904Wlh.html) for details)
--> Reflection::reflect_field()
-   -> instanceKlass::link_class()
-      -> (See: [here](no3059xqe.html) for details)
+(See: <a href="no1904Wlh.html">here</a> for details)
+-&gt; Reflection::reflect_field()
+   -&gt; instanceKlass::link_class()
+      -&gt; (See: <a href="no3059xqe.html">here</a> for details)
   
-(See: [here](no1904Wlh.html) for details)
--> Reflection::reflect_fields()
-   -> instanceKlass::link_class()
-      -> (See: [here](no3059xqe.html) for details)
+(See: <a href="no1904Wlh.html">here</a> for details)
+-&gt; Reflection::reflect_fields()
+   -&gt; instanceKlass::link_class()
+      -&gt; (See: <a href="no3059xqe.html">here</a> for details)
   
-(See: [here](no1904Wlh.html) for details)
--> Reflection::reflect_method()
-   -> instanceKlass::link_class()
-      -> (See: [here](no3059xqe.html) for details)
+(See: <a href="no1904Wlh.html">here</a> for details)
+-&gt; Reflection::reflect_method()
+   -&gt; instanceKlass::link_class()
+      -&gt; (See: <a href="no3059xqe.html">here</a> for details)
   
-(See: [here](no1904Wlh.html) for details)
--> Reflection::reflect_methods()
-   -> instanceKlass::link_class()
-      -> (See: [here](no3059xqe.html) for details)
+(See: <a href="no1904Wlh.html">here</a> for details)
+-&gt; Reflection::reflect_methods()
+   -&gt; instanceKlass::link_class()
+      -&gt; (See: <a href="no3059xqe.html">here</a> for details)
   
-(See: [here](no1904Wlh.html) for details)
--> Reflection::reflect_constructor()
-   -> instanceKlass::link_class()
-      -> (See: [here](no3059xqe.html) for details)
+(See: <a href="no1904Wlh.html">here</a> for details)
+-&gt; Reflection::reflect_constructor()
+   -&gt; instanceKlass::link_class()
+      -&gt; (See: <a href="no3059xqe.html">here</a> for details)
   
-(See: [here](no1904Wlh.html) for details)
--> Reflection::reflect_constructors()
-   -> instanceKlass::link_class()
-      -> (See: [here](no3059xqe.html) for details)
-```
+(See: <a href="no1904Wlh.html">here</a> for details)
+-&gt; Reflection::reflect_constructors()
+   -&gt; instanceKlass::link_class()
+      -&gt; (See: <a href="no3059xqe.html">here</a> for details)
+</pre></div>
 
 ### JVMTI の RedefineClasses() 処理
-```
-(See: [here](no2935-Vj.html) for details)
--> VM_RedefineClasses::load_new_class_versions()
-   -> instanceKlass::link_class()
-      -> (See: [here](no3059xqe.html) for details)
-```
+<div class="flow-abst"><pre>
+(See: <a href="no2935-Vj.html">here</a> for details)
+-&gt; VM_RedefineClasses::load_new_class_versions()
+   -&gt; instanceKlass::link_class()
+      -&gt; (See: <a href="no3059xqe.html">here</a> for details)
+</pre></div>
 
 ### MethodHandles 関係の処理(#TODO)
-```
+<div class="flow-abst"><pre>
 MethodHandles::resolve_MemberName()
--> instanceKlass::link_class()
-    -> (See: [here](no3059xqe.html) for details)
+-&gt; instanceKlass::link_class()
+    -&gt; (See: <a href="no3059xqe.html">here</a> for details)
 
 MethodHandles::init_DirectMethodHandle()
--> instanceKlass::link_class()
-    -> (See: [here](no3059xqe.html) for details)
-```
+-&gt; instanceKlass::link_class()
+    -&gt; (See: <a href="no3059xqe.html">here</a> for details)
+</pre></div>
 
 ### Class Data Sharing (CDS) のダンプ出力処理
-```
-(See: [here](no2114Sn1.html) for details)
--> GenCollectedHeap::preload_and_dump()
-   -> instanceKlass::link_class()
-      -> (See: [here](no3059xqe.html) for details)
+<div class="flow-abst"><pre>
+(See: <a href="no2114Sn1.html">here</a> for details)
+-&gt; GenCollectedHeap::preload_and_dump()
+   -&gt; instanceKlass::link_class()
+      -&gt; (See: <a href="no3059xqe.html">here</a> for details)
 
-(See: [here](no2114Sn1.html) for details)
--> LinkClassesClosure::do_object()
-   -> instanceKlass::link_class()
-      -> (See: [here](no3059xqe.html) for details)
-```
+(See: <a href="no2114Sn1.html">here</a> for details)
+-&gt; LinkClassesClosure::do_object()
+   -&gt; instanceKlass::link_class()
+      -&gt; (See: <a href="no3059xqe.html">here</a> for details)
+</pre></div>
 
 ### デバッグ用の処理 (EagerInitialization オプションの処理)
-```
-(See: [here](noIvSV0NZj.html) for details)
--> instanceKlass::eager_initialize()
-   -> instanceKlass::eager_initialize_impl() @ hotspot/src/share/vm/oops/instanceKlass.cpp
-      -> instanceKlass::link_class_impl()
-         -> (See: [here](no3059xqe.html) for details)
-```
+<div class="flow-abst"><pre>
+(See: <a href="noIvSV0NZj.html">here</a> for details)
+-&gt; instanceKlass::eager_initialize()
+   -&gt; instanceKlass::eager_initialize_impl() @ hotspot/src/share/vm/oops/instanceKlass.cpp
+      -&gt; instanceKlass::link_class_impl()
+         -&gt; (See: <a href="no3059xqe.html">here</a> for details)
+</pre></div>
 
 
 

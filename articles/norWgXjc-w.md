@@ -405,12 +405,12 @@ java.lang.Class よりも先にロードされたクラスに対して mirror �
 Universe::fixup_mirrors() 内で(のみ)使用されている.
 この関数は, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 Universe::genesis()
--> SystemDictionary::initialize()
-   -> SystemDictionary::initialize_preloaded_classes()
-      -> Universe::fixup_mirrors()
-```
+-&gt; SystemDictionary::initialize()
+   -&gt; SystemDictionary::initialize_preloaded_classes()
+      -&gt; Universe::fixup_mirrors()
+</pre></div>
 
 ### 内部構造(Internal structure)
 FixupMirrorClosure::do_object() 中では, java_lang_Class::fixup_mirror()

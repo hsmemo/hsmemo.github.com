@@ -27,39 +27,39 @@ InterpreterMacroAssembler::lock_object() が生成するコードでロック確
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### sparc の場合
 #### native method ではない場合
-```
-InterpreterGenerator::generate_normal_entry() が生成したコード (See: [here](no2935G1h.html) for details)
--> InterpreterGenerator::lock_method() が生成したコード
-   -> InterpreterMacroAssembler::lock_object() が生成したコード
-      -> MacroAssembler::biased_locking_enter() が生成したコード  (← biased locking を使用している場合にのみ呼び出される)
-      -> InterpreterRuntime::monitorenter()                    (← fast-path が成功しなかった場合にのみ呼び出す)
-         -> (See: [here](no9662DsH.html) for details)
-```
+<div class="flow-abst"><pre>
+InterpreterGenerator::generate_normal_entry() が生成したコード (See: <a href="no2935G1h.html">here</a> for details)
+-&gt; InterpreterGenerator::lock_method() が生成したコード
+   -&gt; InterpreterMacroAssembler::lock_object() が生成したコード
+      -&gt; MacroAssembler::biased_locking_enter() が生成したコード  (← biased locking を使用している場合にのみ呼び出される)
+      -&gt; InterpreterRuntime::monitorenter()                    (← fast-path が成功しなかった場合にのみ呼び出す)
+         -&gt; (See: <a href="no9662DsH.html">here</a> for details)
+</pre></div>
 
 #### native method の場合
-```
-InterpreterGenerator::generate_native_entry() が生成したコード (See: [here](no3059asZ.html) for details)
--> InterpreterGenerator::lock_method() が生成したコード
-   -> (同上)
-```
+<div class="flow-abst"><pre>
+InterpreterGenerator::generate_native_entry() が生成したコード (See: <a href="no3059asZ.html">here</a> for details)
+-&gt; InterpreterGenerator::lock_method() が生成したコード
+   -&gt; (同上)
+</pre></div>
 
 ### x86_64 の場合
 #### native method ではない場合
-```
-InterpreterGenerator::generate_normal_entry() が生成したコード (See: [here](no2935G1h.html) for details)
--> InterpreterGenerator::lock_method() が生成したコード
-   -> InterpreterMacroAssembler::lock_object() が生成したコード
-      -> MacroAssembler::biased_locking_enter() が生成したコード  (← biased locking を使用している場合にのみ呼び出される)
-      -> InterpreterRuntime::monitorenter()                    (← fast-path が成功しなかった場合にのみ呼び出す)
-         -> (See: [here](no9662DsH.html) for details)
-```
+<div class="flow-abst"><pre>
+InterpreterGenerator::generate_normal_entry() が生成したコード (See: <a href="no2935G1h.html">here</a> for details)
+-&gt; InterpreterGenerator::lock_method() が生成したコード
+   -&gt; InterpreterMacroAssembler::lock_object() が生成したコード
+      -&gt; MacroAssembler::biased_locking_enter() が生成したコード  (← biased locking を使用している場合にのみ呼び出される)
+      -&gt; InterpreterRuntime::monitorenter()                    (← fast-path が成功しなかった場合にのみ呼び出す)
+         -&gt; (See: <a href="no9662DsH.html">here</a> for details)
+</pre></div>
 
 #### native method の場合
-```
-InterpreterGenerator::generate_native_entry() が生成したコード (See: [here](no3059asZ.html) for details)
--> InterpreterGenerator::lock_method() が生成したコード
-   -> (同上)
-```
+<div class="flow-abst"><pre>
+InterpreterGenerator::generate_native_entry() が生成したコード (See: <a href="no3059asZ.html">here</a> for details)
+-&gt; InterpreterGenerator::lock_method() が生成したコード
+   -&gt; (同上)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

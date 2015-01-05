@@ -21,16 +21,16 @@ title: Thread の開始処理の枠組み ： 生成されたスレッド側で�
    実際には Thread の各サブクラスでオーバーライドされた run() メソッドが実行される.
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 java_start()
--> (1) NUMA 関係の設定
-       -> os::numa_get_group_id()
-       -> Thread::set_lgrp_id()
+-&gt; (1) NUMA 関係の設定
+       -&gt; os::numa_get_group_id()
+       -&gt; Thread::set_lgrp_id()
 
    (1) 実際にこのスレッドのメイン処理を実行
-       -> Thread::run()
-          -> (Thread の各サブクラスでオーバーライドされた run() メソッドが呼び出される)
-```
+       -&gt; Thread::run()
+          -&gt; (Thread の各サブクラスでオーバーライドされた run() メソッドが呼び出される)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

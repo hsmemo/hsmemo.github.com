@@ -65,33 +65,33 @@ JIT Compiler からクラスのフィールド情報にアクセスするため�
 
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 ciBytecodeStream::get_field()
--> ciEnv::get_field_by_index()
-   -> ciEnv::get_field_by_index_impl()
+-&gt; ciEnv::get_field_by_index()
+   -&gt; ciEnv::get_field_by_index_impl()
 
 ciInstanceKlass::nof_nonstatic_fields()
--> ciInstanceKlass::compute_nonstatic_fields()
-   -> ciInstanceKlass::compute_nonstatic_fields_impl()
+-&gt; ciInstanceKlass::compute_nonstatic_fields()
+   -&gt; ciInstanceKlass::compute_nonstatic_fields_impl()
 
 ciObjectFactory::init_shared_objects()
--> ciInstanceKlass::compute_nonstatic_fields()
-   -> (同上)
+-&gt; ciInstanceKlass::compute_nonstatic_fields()
+   -&gt; (同上)
 
 ciInstanceKlass::get_canonical_holder()
--> ciInstanceKlass::nof_nonstatic_fields()
-   -> (同上)
+-&gt; ciInstanceKlass::nof_nonstatic_fields()
+   -&gt; (同上)
 
 ciInstanceKlass::get_field_by_offset()
--> ciInstanceKlass::nof_nonstatic_fields()
-   -> (同上)
+-&gt; ciInstanceKlass::nof_nonstatic_fields()
+   -&gt; (同上)
 
 ciInstanceKlass::get_field_by_name()
 
 ciInstanceKlass::non_static_fields()
--> instanceKlass::do_nonstatic_fields()
-   -> NonStaticFieldFiller::do_field()
-```
+-&gt; instanceKlass::do_nonstatic_fields()
+   -&gt; NonStaticFieldFiller::do_field()
+</pre></div>
 
 
 

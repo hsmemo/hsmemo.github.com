@@ -81,12 +81,12 @@ See: G1CollectorPolicy::G1CollectorPolicy()).
 この NumerSeq に溜められた情報は SurvRateGroup::print_surv_rate_summary() でのみ使用されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 G1CollectedHeap::do_collection_pause_at_safepoint()
--> G1CollectedHeap::print_tracing_info()          (<= ExitAfterGCNum オプションが指定されている場合にのみ呼び出す)
-   -> G1CollectorPolicy::print_yg_surv_rate_info()
-      -> SurvRateGroup::print_surv_rate_summary() (<= #ifndef PRODUCT 時にのみ呼び出す)
-```
+-&gt; G1CollectedHeap::print_tracing_info()          (&lt;= ExitAfterGCNum オプションが指定されている場合にのみ呼び出す)
+   -&gt; G1CollectorPolicy::print_yg_surv_rate_info()
+      -&gt; SurvRateGroup::print_surv_rate_summary() (&lt;= #ifndef PRODUCT 時にのみ呼び出す)
+</pre></div>
 
 
 

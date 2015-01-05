@@ -21,25 +21,25 @@ JNIHandleBlock の確保/開放を行って Thread::_active_handles フィール
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### EnsureLocalCapacity() の処理
-```
+<div class="flow-abst"><pre>
 jni_EnsureLocalCapacity()
-```
+</pre></div>
 
 ### PushLocalFrame() の処理
-```
+<div class="flow-abst"><pre>
 jni_PushLocalFrame()
--> JNIHandleBlock::allocate_block()
--> JNIHandleBlock::set_pop_frame_link()
--> Thread::set_active_handles()
-```
+-&gt; JNIHandleBlock::allocate_block()
+-&gt; JNIHandleBlock::set_pop_frame_link()
+-&gt; Thread::set_active_handles()
+</pre></div>
 
 ### PopLocalFrame() の処理
-```
+<div class="flow-abst"><pre>
 jni_PopLocalFrame()
--> Thread::set_active_handles()
--> JNIHandleBlock::set_pop_frame_link()
--> JNIHandleBlock::release_block()
-```
+-&gt; Thread::set_active_handles()
+-&gt; JNIHandleBlock::set_pop_frame_link()
+-&gt; JNIHandleBlock::release_block()
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

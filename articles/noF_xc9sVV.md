@@ -38,41 +38,41 @@ JIT Compiler 用のクラス (より正確に言うと, 脱最適化処理用の
 vframeArrayElement::fill_in() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 * 脱最適化処理 (Deoptimization 処理)
 
   Deoptimization::fetch_unroll_info_helper()
-  -> Deoptimization::create_vframeArray()
-     -> vframeArray::allocate()
-        -> vframeArray::fill_in()
-           -> vframeArrayElement::fill_in()
-```
+  -&gt; Deoptimization::create_vframeArray()
+     -&gt; vframeArray::allocate()
+        -&gt; vframeArray::fill_in()
+           -&gt; vframeArrayElement::fill_in()
+</pre></div>
 
 なお, vframeArrayElement::fill_in() 内で JavaThread::_monitor_chunks への登録も行われている.
 
 #### 使用箇所(where its instances are used)
 JavaThread::_monitor_chunks フィールドは以下の箇所で(のみ)参照されている.
 
-```
+<div class="flow-abst"><pre>
   JavaThread::is_lock_owned()
-  -> JavaThread::monitor_chunks()
+  -&gt; JavaThread::monitor_chunks()
 
   JavaThread::oops_do()
-  -> JavaThread::monitor_chunks()
-```
+  -&gt; JavaThread::monitor_chunks()
+</pre></div>
 
 #### 削除箇所(where its instances are deleted)
 vframeArrayElement::free_monitors() 内で(のみ)削除されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 * 脱最適化処理 (Deoptimization 処理)
   
   Deoptimization::unpack_frames()
-  -> vframeArray::unpack_to_stack()
-     -> vframeArray::deallocate_monitor_chunks()
-        -> vframeArrayElement::free_monitors()
-```
+  -&gt; vframeArray::unpack_to_stack()
+     -&gt; vframeArray::deallocate_monitor_chunks()
+        -&gt; vframeArrayElement::free_monitors()
+</pre></div>
 
 なお, vframeArrayElement::free_monitors() 内で JavaThread::_monitor_chunks からの登録解除も行われている.
 

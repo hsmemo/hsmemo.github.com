@@ -25,51 +25,51 @@ AllocObject() の場合はコンストラクタ呼び出しはない. これは 
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### AllocObject() の処理
-```
+<div class="flow-abst"><pre>
 jni_AllocObject()
--> alloc_object()
-   -> instanceKlass::check_valid_for_instantiation()
-   -> instanceKlass::allocate_instance()
-      -> (See: [here](no30267vB.html) for details)
--> JNIHandles::make_local()
-   -> (See: [here](noNzTqB3WT.html) for details)
-```
+-&gt; alloc_object()
+   -&gt; instanceKlass::check_valid_for_instantiation()
+   -&gt; instanceKlass::allocate_instance()
+      -&gt; (See: <a href="no30267vB.html">here</a> for details)
+-&gt; JNIHandles::make_local()
+   -&gt; (See: <a href="noNzTqB3WT.html">here</a> for details)
+</pre></div>
 
 ### NewObject() の処理
-```
+<div class="flow-abst"><pre>
 jni_NewObject()
--> alloc_object()
-   -> (同上)
--> JNIHandles::make_local()
-   -> (See: [here](noNzTqB3WT.html) for details)
--> jni_invoke_nonstatic()
-   -> (See: [here](no3059-0k.html) for details)
-      -> (指定されたコンストラクタメソッド)
-```
+-&gt; alloc_object()
+   -&gt; (同上)
+-&gt; JNIHandles::make_local()
+   -&gt; (See: <a href="noNzTqB3WT.html">here</a> for details)
+-&gt; jni_invoke_nonstatic()
+   -&gt; (See: <a href="no3059-0k.html">here</a> for details)
+      -&gt; (指定されたコンストラクタメソッド)
+</pre></div>
 
 ### NewObjectV() の処理
-```
+<div class="flow-abst"><pre>
 jni_NewObjectV()
--> alloc_object()
-   -> (同上)
--> JNIHandles::make_local()
-   -> (See: [here](noNzTqB3WT.html) for details)
--> jni_invoke_nonstatic()
-   -> (See: [here](no3059-0k.html) for details)
-      -> (指定されたコンストラクタメソッド)
-```
+-&gt; alloc_object()
+   -&gt; (同上)
+-&gt; JNIHandles::make_local()
+   -&gt; (See: <a href="noNzTqB3WT.html">here</a> for details)
+-&gt; jni_invoke_nonstatic()
+   -&gt; (See: <a href="no3059-0k.html">here</a> for details)
+      -&gt; (指定されたコンストラクタメソッド)
+</pre></div>
 
 ### NewObjectA() の処理
-```
+<div class="flow-abst"><pre>
 jni_NewObjectA()
--> alloc_object()
-   -> (同上)
--> JNIHandles::make_local()
-   -> (See: [here](noNzTqB3WT.html) for details)
--> jni_invoke_nonstatic()
-   -> (See: [here](no3059-0k.html) for details)
-      -> (指定されたコンストラクタメソッド)
-```
+-&gt; alloc_object()
+   -&gt; (同上)
+-&gt; JNIHandles::make_local()
+   -&gt; (See: <a href="noNzTqB3WT.html">here</a> for details)
+-&gt; jni_invoke_nonstatic()
+   -&gt; (See: <a href="no3059-0k.html">here</a> for details)
+      -&gt; (指定されたコンストラクタメソッド)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

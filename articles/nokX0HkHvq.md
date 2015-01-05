@@ -14,12 +14,12 @@ java.lang.Thread のコンストラクタは複数存在するが,
 この java.lang.Thread.init() 内で初期化が行われる.
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
-java.lang.Thread.<init>()
--> java.lang.Thread.init()
-   -> java.lang.ThreadGroup.addUnstarted()
-   -> フィールドの初期化等
-```
+<div class="flow-abst"><pre>
+java.lang.Thread.&lt;init&gt;()
+-&gt; java.lang.Thread.init()
+   -&gt; java.lang.ThreadGroup.addUnstarted()
+   -&gt; フィールドの初期化等
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### `java.lang.Thread.<init>()`

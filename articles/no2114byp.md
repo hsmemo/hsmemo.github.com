@@ -17,41 +17,41 @@ RuntimeService クラス内の値を取得するか,
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### sun.management.HotspotRuntimeMBean.getSafepointCount() の処理
-```
+<div class="flow-abst"><pre>
 sun.management.HotspotRuntime.getSafepointCount()
--> sun.management.VMManagementImpl.getSafepointCount()
-   -> Java_sun_management_VMManagementImpl_getSafepointCount()
-      -> jmm_GetLongAttribute()  (JMM_SAFEPOINT_COUNT を引数として呼び出される)
-         -> get_long_attribute()
-            -> RuntimeService::safepoint_count()
-```
+-&gt; sun.management.VMManagementImpl.getSafepointCount()
+   -&gt; Java_sun_management_VMManagementImpl_getSafepointCount()
+      -&gt; jmm_GetLongAttribute()  (JMM_SAFEPOINT_COUNT を引数として呼び出される)
+         -&gt; get_long_attribute()
+            -&gt; RuntimeService::safepoint_count()
+</pre></div>
 
 ### sun.management.HotspotRuntimeMBean.getTotalSafepointTime() の処理
-```
+<div class="flow-abst"><pre>
 sun.management.HotspotRuntime.getTotalSafepointTime()
--> sun.management.VMManagementImpl.getTotalSafepointTime()
-   -> Java_sun_management_VMManagementImpl_getTotalSafepointTime()
-      -> jmm_GetLongAttribute()  (JMM_TOTAL_STOPPED_TIME_MS を引数として呼び出される)
-         -> get_long_attribute()
-            -> RuntimeService::safepoint_time_ms()
-```
+-&gt; sun.management.VMManagementImpl.getTotalSafepointTime()
+   -&gt; Java_sun_management_VMManagementImpl_getTotalSafepointTime()
+      -&gt; jmm_GetLongAttribute()  (JMM_TOTAL_STOPPED_TIME_MS を引数として呼び出される)
+         -&gt; get_long_attribute()
+            -&gt; RuntimeService::safepoint_time_ms()
+</pre></div>
 
 ### sun.management.HotspotRuntimeMBean.getSafepointSyncTime() の処理
-```
+<div class="flow-abst"><pre>
 sun.management.HotspotRuntime.getSafepointSyncTime()
--> sun.management.VMManagementImpl.getSafepointSyncTime()
-   -> Java_sun_management_VMManagementImpl_getSafepointSyncTime()
-      -> jmm_GetLongAttribute()  (JMM_TOTAL_SAFEPOINTSYNC_TIME_MS を引数として呼び出される)
-         -> get_long_attribute()
-            -> RuntimeService::safepoint_sync_time_ms()
-```
+-&gt; sun.management.VMManagementImpl.getSafepointSyncTime()
+   -&gt; Java_sun_management_VMManagementImpl_getSafepointSyncTime()
+      -&gt; jmm_GetLongAttribute()  (JMM_TOTAL_SAFEPOINTSYNC_TIME_MS を引数として呼び出される)
+         -&gt; get_long_attribute()
+            -&gt; RuntimeService::safepoint_sync_time_ms()
+</pre></div>
 
 ### sun.management.HotspotRuntimeMBean.getInternalRuntimeCounters() の処理
-```
+<div class="flow-abst"><pre>
 sun.management.HotspotRuntime.getInternalRuntimeCounters()
--> sun.management.VMManagementImpl.getInternalCounters()
-   -> (See: [here](norvN2FPOq.html) for details)
-```
+-&gt; sun.management.VMManagementImpl.getInternalCounters()
+   -&gt; (See: <a href="norvN2FPOq.html">here</a> for details)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

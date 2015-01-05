@@ -11,13 +11,13 @@ title: Serviceability 機能 ： JVMTI の処理 ： JVMTI 関数の処理 ： �
 (See: JVMTI 仕様)
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 JvmtiEnv::DisposeEnvironment()
--> JvmtiEnvBase::dispose()
-   -> JvmtiEventController::env_dispose()
-      -> JvmtiEventControllerPrivate::env_dispose()
-         -> JvmtiEnvBase::env_dispose()
-```
+-&gt; JvmtiEnvBase::dispose()
+   -&gt; JvmtiEventController::env_dispose()
+      -&gt; JvmtiEventControllerPrivate::env_dispose()
+         -&gt; JvmtiEnvBase::env_dispose()
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### JvmtiEnv::DisposeEnvironment()

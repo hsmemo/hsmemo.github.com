@@ -12,20 +12,20 @@ title: Serviceability 機能 ： JVMTI の処理 ： JVMTI 関数の処理 ： �
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### AddToBootstrapClassLoaderSearch() の処理
-```
+<div class="flow-abst"><pre>
 JvmtiEnv::AddToBootstrapClassLoaderSearch()
--> ClassLoader::create_class_path_zip_entry()
-   -> ClassPathZipEntry::ClassPathZipEntry()
-   -> ClassLoader::add_to_list()
-```
+-&gt; ClassLoader::create_class_path_zip_entry()
+   -&gt; ClassPathZipEntry::ClassPathZipEntry()
+   -&gt; ClassLoader::add_to_list()
+</pre></div>
 
 ### AddToSystemClassLoaderSearch() の処理
-```
+<div class="flow-abst"><pre>
 JvmtiEnv::AddToSystemClassLoaderSearch()
--> ClassLoader::create_class_path_zip_entry()
--> JavaCalls::call_special()
-   -> sun.misc.Launcher.AppClassLoader.appendToClassPathForInstrumentation()
-```
+-&gt; ClassLoader::create_class_path_zip_entry()
+-&gt; JavaCalls::call_special()
+   -&gt; sun.misc.Launcher.AppClassLoader.appendToClassPathForInstrumentation()
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

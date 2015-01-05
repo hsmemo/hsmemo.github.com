@@ -24,70 +24,70 @@ VMThread::evaluate_operation() で VM Operation を実行する.
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### VMThread の処理の流れ
-```
+<div class="flow-abst"><pre>
 VMThread::run()
--> (1) VMThread の初期化を行う
-       -> Thread::initialize_thread_local_storage()
-       -> Thread::record_stack_base_and_size()
-       -> JNIHandleBlock::allocate_block()
-       -> Thread::set_active_handles()
-       -> os::set_native_priority()
+-&gt; (1) VMThread の初期化を行う
+       -&gt; Thread::initialize_thread_local_storage()
+       -&gt; Thread::record_stack_base_and_size()
+       -&gt; JNIHandleBlock::allocate_block()
+       -&gt; Thread::set_active_handles()
+       -&gt; os::set_native_priority()
 
    (1) VMThread のメイン処理を実行
-       -> VMThread::loop()
+       -&gt; VMThread::loop()
           (以下の処理を無限ループ)
-          -> (1) VM Operation 要求が来るまで待機する
-                 -> VMOperationQueue::remove_next()
-                 -> Monitor::wait()
+          -&gt; (1) VM Operation 要求が来るまで待機する
+                 -&gt; VMOperationQueue::remove_next()
+                 -&gt; Monitor::wait()
 
              (1) Safepoint 停止が必要であれば Safepoint 処理を開始させる
-                 -> SafepointSynchronize::begin()   (← 必要に応じて)
-                    -> (See: [here](noFCZ0Hp3S.html) for details)
+                 -&gt; SafepointSynchronize::begin()   (← 必要に応じて)
+                    -&gt; (See: <a href="noFCZ0Hp3S.html">here</a> for details)
 
              (1) 取得した VM Operation 要求を実行する
                  (なお safepoint が必要な VM Operation だった場合には,
                  safepoint 停止回数ができるだけ少なくなるように
                  VMThread::_vm_queue 内の他の safepoint を要求する VM Operation も全部実行する.)
-                 -> VMThread::evaluate_operation()
-                    -> VM_Operation::evaluate()
-                       -> VM_Operation::doit()  (← ここで実際の VM Operation 処理が行われる. 
+                 -&gt; VMThread::evaluate_operation()
+                    -&gt; VM_Operation::evaluate()
+                       -&gt; VM_Operation::doit()  (← ここで実際の VM Operation 処理が行われる. 
                                                     doit() は各サブクラスでオーバーライドされている)
 
              (1) Safepoint 停止した場合には Safepoint を解除する
-                 -> SafepointSynchronize::end()     (← 必要に応じて)
-                    -> (See: [here](noFCZ0Hp3S.html) for details)
+                 -&gt; SafepointSynchronize::end()     (← 必要に応じて)
+                    -&gt; (See: <a href="noFCZ0Hp3S.html">here</a> for details)
 
              (1) VM Operation 要求を出したスレッドが完了を待っているかもしれないため, 起床させておく
-                 -> Monitor::notify_all()
+                 -&gt; Monitor::notify_all()
 
    (1) VMThread の終了処理を行う
-       -> SafepointSynchronize::begin()
-       -> CompileBroker::set_should_block()
-       -> VM_Exit::wait_for_threads_in_native_to_block()
-```
+       -&gt; SafepointSynchronize::begin()
+       -&gt; CompileBroker::set_should_block()
+       -&gt; VM_Exit::wait_for_threads_in_native_to_block()
+</pre></div>
 
 ### VM Operation 要求を出す側の流れ
-```
+<div class="flow-abst"><pre>
 VMThread::execute()
--> (VMThread自身から呼び出されたかどうかで, 以下の２通りのパスが存在)
+-&gt; (VMThread自身から呼び出されたかどうかで, 以下の２通りのパスが存在)
    * VMThread 以外から呼び出されたケース (nested VM Operation ではない場合)
-     -> VM_Operation::doit_prologue() (をサブクラスがオーバーライドしたもの)
-     -> _vm_queue に VM_Operation オブジェクトを追加
-     -> VMOperationQueue_lock に対して Monitor::notify() を呼び出す
-     -> (完了するまで待つように指定されている VM Operation の場合には)
+     -&gt; VM_Operation::doit_prologue() (をサブクラスがオーバーライドしたもの)
+     -&gt; _vm_queue に VM_Operation オブジェクトを追加
+     -&gt; VMOperationQueue_lock に対して Monitor::notify() を呼び出す
+     -&gt; (完了するまで待つように指定されている VM Operation の場合には)
         VMOperationRequest_lock に対して Monitor::wait() して VM Operation の完了を待つ
-     -> (VMThread に delete されない種類の VM_Operation であれば)
+     -&gt; (VMThread に delete されない種類の VM_Operation であれば)
         VM_Operation::doit_epilogue() (をサブクラスがオーバーライドしたもの)
 
    * VMThread から呼び出されたケース (nested VM Operation 等の場合)
-     -> SafepointSynchronize::begin()   (← 必要に応じて)
-        -> (See: [here](noFCZ0Hp3S.html) for details)
-     -> VM_Operation::evaluate()
-        -> VM_Operation::doit()  (← ここで実際の VM Operation 処理が行われる. 
+     -&gt; SafepointSynchronize::begin()   (← 必要に応じて)
+        -&gt; (See: <a href="noFCZ0Hp3S.html">here</a> for details)
+     -&gt; VM_Operation::evaluate()
+        -&gt; VM_Operation::doit()  (← ここで実際の VM Operation 処理が行われる. 
                                      doit() は各サブクラスでオーバーライドされている)
-     -> SafepointSynchronize::end()     (← 必要に応じて)
-        -> (See: [here](noFCZ0Hp3S.html) for details)
-```
+     -&gt; SafepointSynchronize::end()     (← 必要に応じて)
+        -&gt; (See: <a href="noFCZ0Hp3S.html">here</a> for details)
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

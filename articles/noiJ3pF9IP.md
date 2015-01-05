@@ -25,50 +25,50 @@ CVMI 関数の呼び出し時には, 明示的に SafepointSynchronize::_state �
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### JVM_ENTRY マクロ ~ JVM_END マクロ
-```
+<div class="flow-abst"><pre>
 JVM_ENTRY マクロ
--> ThreadInVMfromNative::ThreadInVMfromNative()
-   -> (See: [here](no8p2E6iLf.html) for details)
-```
+-&gt; ThreadInVMfromNative::ThreadInVMfromNative()
+   -&gt; (See: <a href="no8p2E6iLf.html">here</a> for details)
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 JVM_END マクロ
 (JVM_ENTRY マクロで宣言されていた ThreadInVMfromNative のデストラクタが呼ばれる)
--> ThreadInVMfromNative::~ThreadInVMfromNative()
-   -> (See: [here](no8p2E6iLf.html) for details)
-```
+-&gt; ThreadInVMfromNative::~ThreadInVMfromNative()
+   -&gt; (See: <a href="no8p2E6iLf.html">here</a> for details)
+</pre></div>
 
 
 ### JVM_ENTRY_NO_ENV マクロ ~ JVM_END マクロ
-```
+<div class="flow-abst"><pre>
 JVM_ENTRY_NO_ENV マクロ
--> ThreadInVMfromNative::ThreadInVMfromNative()
-   -> (See: [here](no8p2E6iLf.html) for details)
-```
+-&gt; ThreadInVMfromNative::ThreadInVMfromNative()
+   -&gt; (See: <a href="no8p2E6iLf.html">here</a> for details)
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 JVM_END マクロ
--> (同上)
-```
+-&gt; (同上)
+</pre></div>
 
 
 ### JVM_QUICK_ENTRY マクロ ~ JVM_END マクロ
-```
+<div class="flow-abst"><pre>
 JVM_ENTRY_NO_ENV マクロ
--> ThreadInVMfromNative::ThreadInVMfromNative()
-   -> (See: [here](no8p2E6iLf.html) for details)
-```
+-&gt; ThreadInVMfromNative::ThreadInVMfromNative()
+   -&gt; (See: <a href="no8p2E6iLf.html">here</a> for details)
+</pre></div>
 
-```
+<div class="flow-abst"><pre>
 JVM_END マクロ
--> (同上)
-```
+-&gt; (同上)
+</pre></div>
 
 
 ### JVM_LEAF マクロ ~ JVM_END マクロ
-```
+<div class="flow-abst"><pre>
 (Safepoint チェック処理はない)
-```
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

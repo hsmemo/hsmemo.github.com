@@ -135,14 +135,14 @@ PerfData から出力するための補助クラス(PerfSampleHelperクラス).
 StatSampler::create_sampled_perfdata() 内で(のみ)生成されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
-(HotSpot の起動時処理) (See: [here](no2114J7x.html) for details)
--> Threads::create_vm()
-   -> StatSampler::engage()
-      -> StatSampler::initialize()
-         -> StatSampler::create_misc_perfdata()
-            -> StatSampler::create_sampled_perfdata()
-```
+<div class="flow-abst"><pre>
+(HotSpot の起動時処理) (See: <a href="no2114J7x.html">here</a> for details)
+-&gt; Threads::create_vm()
+   -&gt; StatSampler::engage()
+      -&gt; StatSampler::initialize()
+         -&gt; StatSampler::create_misc_perfdata()
+            -&gt; StatSampler::create_sampled_perfdata()
+</pre></div>
 
 #### 使用箇所(where its instances are used)
 "sun.os.hrt.ticks" という名前の PerfCounter を作る際に, コンストラクタ引数として渡される

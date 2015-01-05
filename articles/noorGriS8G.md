@@ -17,15 +17,15 @@ GenCollectedHeap は CollectedHeap::collect() をオーバーライドしてい�
 (See: [here](no28916YTF.html) and [here](noz6ysK1-k.html) for details)
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 GenCollectedHeap::collect(GCCause::Cause cause)
--> * アルゴリズムが CMS で, かつ特定のオプション(※)がセットされている場合:
-     -> GenCollectedHeap::collect_mostly_concurrent()
-        -> (See: [here](noz6ysK1-k.html) for details)
+-&gt; * アルゴリズムが CMS で, かつ特定のオプション(※)がセットされている場合:
+     -&gt; GenCollectedHeap::collect_mostly_concurrent()
+        -&gt; (See: <a href="noz6ysK1-k.html">here</a> for details)
    * それ以外の場合:
-     -> GenCollectedHeap::collect(GCCause::Cause cause, int max_level)
-        -> (See: [here](no28916YTF.html) for details)
-```
+     -&gt; GenCollectedHeap::collect(GCCause::Cause cause, int max_level)
+        -&gt; (See: <a href="no28916YTF.html">here</a> for details)
+</pre></div>
 
 (※) java.lang.System.gc() が原因の場合は ExplicitGCInvokesConcurrent オプション, 
 JNI の ReleasePrimitiveArrayCritical() 及び ReleaseStringCritical() が原因の場合は GCLockerInvokesConcurrent オプションがセットされているとこちらになる.

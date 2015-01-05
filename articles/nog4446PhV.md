@@ -47,27 +47,27 @@ Java レベルでの「メソッド」を表すためのクラス.
 methodKlass::allocate() というファクトリメソッドが用意されており, その中で生成されている.
 そして, このファクトリメソッドは, 現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 * 
   ClassFileParser::parse_method()
-  -> oopFactory::new_method()
-     -> methodKlass::allocate()
+  -&gt; oopFactory::new_method()
+     -&gt; methodKlass::allocate()
 
 * 
   methodOopDesc::make_invoke_method()
-  -> oopFactory::new_method()
-     -> (同上)
+  -&gt; oopFactory::new_method()
+     -&gt; (同上)
   
 * 
   methodOopDesc::clone_with_new_data()
-  -> oopFactory::new_method()
-     -> (同上)
+  -&gt; oopFactory::new_method()
+     -&gt; (同上)
 
 * 
   MethodHandleCompiler::get_method_oop
-  -> oopFactory::new_method()
-     -> (同上)
-```
+  -&gt; oopFactory::new_method()
+     -&gt; (同上)
+</pre></div>
 
 ### 内部構造(Internal structure)
 定義されているフィールドは以下の通り.

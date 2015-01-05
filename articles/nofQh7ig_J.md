@@ -123,20 +123,20 @@ OptoRuntime::new_named_counter() 内で(のみ)生成されている
 
 そして, この関数は現在は以下のパスで(のみ) NamedCounter::LockCounter 定数を引数として呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 GraphKit::shared_lock()
--> AbstractLockNode::create_lock_counter()  (ただし, #ifndef PRODUCT 時かつ PrintLockStatistics 指定時にしか呼び出されない)
-   -> OptoRuntime::new_named_counter()
-```
+-&gt; AbstractLockNode::create_lock_counter()  (ただし, #ifndef PRODUCT 時かつ PrintLockStatistics 指定時にしか呼び出されない)
+   -&gt; OptoRuntime::new_named_counter()
+</pre></div>
 
 #### 情報の記録箇所(where information is recorded)
 現在は, GraphKit::increment_counter() が生成するコード内で(のみ)記録されている.
 そして, この関数は現在は以下のパスで(のみ)呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 GraphKit::shared_lock()
--> GraphKit::increment_counter()
-```
+-&gt; GraphKit::increment_counter()
+</pre></div>
 
 #### 情報の出力箇所(where the recorded information is output)
 現在は, OptoRuntime::print_named_counters() 内で(のみ)出力されている.
@@ -220,11 +220,11 @@ OptoRuntime::new_named_counter() 内で(のみ)生成されている
 (より正確に言うと NamedCounter::BiasedLockingCounter 定数を引数としてこの関数が呼び出された場合にのみ生成される)
 そして, この関数は現在は以下のパスで(のみ) NamedCounter::BiasedLockingCounter 定数を引数として呼び出されている.
 
-```
+<div class="flow-abst"><pre>
 GraphKit::shared_lock()
--> FastLockNode::create_lock_counter()  (ただし, PrintPreciseBiasedLockingStatistics 指定時にしか呼び出されない)
-   -> OptoRuntime::new_named_counter()
-```
+-&gt; FastLockNode::create_lock_counter()  (ただし, PrintPreciseBiasedLockingStatistics 指定時にしか呼び出されない)
+   -&gt; OptoRuntime::new_named_counter()
+</pre></div>
 
 #### 情報の記録箇所(where information is recorded)
 現在は, 以下の箇所で(のみ)記録されている.

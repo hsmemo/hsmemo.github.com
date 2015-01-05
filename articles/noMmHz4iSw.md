@@ -16,17 +16,17 @@ title: Serviceability 機能 ： OS のプロファイラ機能との連携 ： 
 この機能を使用するには UseOprofile オプションをセットする必要がある.
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
-```
+<div class="flow-abst"><pre>
 (See: )
--> CodeHeap::reserve()
-   -> CodeHeap::on_code_mapping()
-      -> linux_wrap_code()
+-&gt; CodeHeap::reserve()
+   -&gt; CodeHeap::on_code_mapping()
+      -&gt; linux_wrap_code()
 
 (See: )
--> CodeHeap::expand_by()
-   -> CodeHeap::on_code_mapping()
-      -> (同上)
-```
+-&gt; CodeHeap::expand_by()
+   -&gt; CodeHeap::on_code_mapping()
+      -&gt; (同上)
+</pre></div>
 
 ## 処理の流れ (詳細)(Execution Flows : Details)
 

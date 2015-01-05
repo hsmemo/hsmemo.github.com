@@ -76,79 +76,79 @@ Mutator である通常の JavaThread も処理に加わる) (See: [here](no2114
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### ConcurrentG1RefineThread を作成する処理
-```
-G1CollectedHeap::initialize() (See: [here](no2114tfN.html) for details)
--> ConcurrentG1Refine::ConcurrentG1Refine()
-   -> ConcurrentG1RefineThread::ConcurrentG1RefineThread()
-      -> ConcurrentG1RefineThread::initialize()
-      -> ConcurrentGCThread::create_and_start()
-         -> os::create_thread()
-            -> (See: [here](noYHbL-pQM.html) for details)
-         -> os::set_priority()
-         -> os::start_thread()
-            -> (See: [here](noYHbL-pQM.html) for details)
-```
+<div class="flow-abst"><pre>
+G1CollectedHeap::initialize() (See: <a href="no2114tfN.html">here</a> for details)
+-&gt; ConcurrentG1Refine::ConcurrentG1Refine()
+   -&gt; ConcurrentG1RefineThread::ConcurrentG1RefineThread()
+      -&gt; ConcurrentG1RefineThread::initialize()
+      -&gt; ConcurrentGCThread::create_and_start()
+         -&gt; os::create_thread()
+            -&gt; (See: <a href="noYHbL-pQM.html">here</a> for details)
+         -&gt; os::set_priority()
+         -&gt; os::start_thread()
+            -&gt; (See: <a href="noYHbL-pQM.html">here</a> for details)
+</pre></div>
 
 ### 生成された ConcurrentG1RefineThread 側の処理
-```
--> java_start()
-   -> (See: [here](noaGdrH-zs.html), [here](noQiWP6ip-.html) and [here](nobwSeebST.html) for details)
-      -> ConcurrentG1RefineThread::run()
-         -> (1) 初期化
-                -> ConcurrentGCThread::initialize_in_thread()
+<div class="flow-abst"><pre>
+-&gt; java_start()
+   -&gt; (See: <a href="noaGdrH-zs.html">here</a>, <a href="noQiWP6ip-.html">here</a> and <a href="nobwSeebST.html">here</a> for details)
+      -&gt; ConcurrentG1RefineThread::run()
+         -&gt; (1) 初期化
+                -&gt; ConcurrentGCThread::initialize_in_thread()
 
             (2) HotSpot の初期化が終わるまで待機する
-                -> ConcurrentGCThread::wait_for_universe_init()
+                -&gt; ConcurrentGCThread::wait_for_universe_init()
 
             (3) HotSpot が終了するまで, 以下の処理を無限ループ
-                (1) 仕事がくるまで待機 (= Write Barrier 処理, もしくは他の ConcurrentG1RefineThread から起こされるまで待つ) (See: [here](no2114EV0.html) for details, ConcurrentG1RefineThread::run())
-                    -> ConcurrentG1RefineThread::wait_for_completed_buffers()
+                (1) 仕事がくるまで待機 (= Write Barrier 処理, もしくは他の ConcurrentG1RefineThread から起こされるまで待つ) (See: <a href="no2114EV0.html">here</a> for details, ConcurrentG1RefineThread::run())
+                    -&gt; ConcurrentG1RefineThread::wait_for_completed_buffers()
 
                 (1) 処理量に応じて, ConcurrentG1RefineThread の稼働数を増減させる
                     * 処理量が少ない場合:
-                      -> ConcurrentG1RefineThread::deactivate()
+                      -&gt; ConcurrentG1RefineThread::deactivate()
                     * 処理量が多い場合:
-                      -> ConcurrentG1RefineThread::activate() (<= 他の ConcurrentG1RefineThread を起こす処理)
+                      -&gt; ConcurrentG1RefineThread::activate() (&lt;= 他の ConcurrentG1RefineThread を起こす処理)
 
                 (1) card の処理を行う
-                    -> DirtyCardQueueSet::apply_closure_to_completed_buffer(int worker_i, int stop_at, bool during_pause)
-                       -> DirtyCardQueueSet::apply_closure_to_completed_buffer(CardTableEntryClosure* cl, int worker_i, int stop_at, bool during_pause)
-                          -> DirtyCardQueueSet::get_completed_buffer()
-                          -> DirtyCardQueueSet::apply_closure_to_completed_buffer_helper()
-                             -> DirtyCardQueue::apply_closure_to_buffer()
-                                -> RefineCardTableEntryClosure::do_card_ptr()
-                                   -> G1RemSet::concurrentRefineOneCard()
-                                      -> ConcurrentG1Refine::cache_insert()
-                                      -> G1RemSet::concurrentRefineOneCard_impl()
-                                         -> HeapRegion::oops_on_card_seq_iterate_careful()
+                    -&gt; DirtyCardQueueSet::apply_closure_to_completed_buffer(int worker_i, int stop_at, bool during_pause)
+                       -&gt; DirtyCardQueueSet::apply_closure_to_completed_buffer(CardTableEntryClosure* cl, int worker_i, int stop_at, bool during_pause)
+                          -&gt; DirtyCardQueueSet::get_completed_buffer()
+                          -&gt; DirtyCardQueueSet::apply_closure_to_completed_buffer_helper()
+                             -&gt; DirtyCardQueue::apply_closure_to_buffer()
+                                -&gt; RefineCardTableEntryClosure::do_card_ptr()
+                                   -&gt; G1RemSet::concurrentRefineOneCard()
+                                      -&gt; ConcurrentG1Refine::cache_insert()
+                                      -&gt; G1RemSet::concurrentRefineOneCard_impl()
+                                         -&gt; HeapRegion::oops_on_card_seq_iterate_careful()
                                             (この場合のクロージャーは, check_for_refs_into_cset 引数が false なので, UpdateRSOrPushRefOopClosure を FilterOutOfRegionClosure でくるんだもの)
-                                            -> oopDesc::oop_iterate()
-                                               -> FilterOutOfRegionClosure::do_oop()
-                                                  -> FilterOutOfRegionClosure::do_oop_nv()
-                                                     -> UpdateRSOrPushRefOopClosure::do_oop()
-                                                        -> UpdateRSOrPushRefOopClosure::do_oop_work()
-                                                           -> G1RemSet::par_write_ref()
-                                                              -> HeapRegionRemSet::add_reference(OopOrNarrowOopStar from, int tid)
-                                                                 -> OtherRegionsTable::add_reference()
-                                                                    -> OtherRegionsTable::find_region_table()
-                                                                    -> 新しいエントリが必要なら以下の処理を行う.
-                                                                       -> SparsePRT::add_card() (<= これは, 成功すればここでリターン)
-                                                                          -> RSHashTable::add_card()
-                                                                             -> RSHashTable::entry_for_region_ind_create()
-                                                                             -> SparsePRTEntry::add_card()
-                                                                       -> * もういっぱいなので coarse map に追い出して確保する場合
-                                                                            -> OtherRegionsTable::delete_region_table()
+                                            -&gt; oopDesc::oop_iterate()
+                                               -&gt; FilterOutOfRegionClosure::do_oop()
+                                                  -&gt; FilterOutOfRegionClosure::do_oop_nv()
+                                                     -&gt; UpdateRSOrPushRefOopClosure::do_oop()
+                                                        -&gt; UpdateRSOrPushRefOopClosure::do_oop_work()
+                                                           -&gt; G1RemSet::par_write_ref()
+                                                              -&gt; HeapRegionRemSet::add_reference(OopOrNarrowOopStar from, int tid)
+                                                                 -&gt; OtherRegionsTable::add_reference()
+                                                                    -&gt; OtherRegionsTable::find_region_table()
+                                                                    -&gt; 新しいエントリが必要なら以下の処理を行う.
+                                                                       -&gt; SparsePRT::add_card() (&lt;= これは, 成功すればここでリターン)
+                                                                          -&gt; RSHashTable::add_card()
+                                                                             -&gt; RSHashTable::entry_for_region_ind_create()
+                                                                             -&gt; SparsePRTEntry::add_card()
+                                                                       -&gt; * もういっぱいなので coarse map に追い出して確保する場合
+                                                                            -&gt; OtherRegionsTable::delete_region_table()
                                                                           * まだ空きがある場合
-                                                                            -> PosParPRT::alloc()
-                                                                    -> PosParPRT::add_reference()
-                                                                       -> PerRegionTable::add_reference()
-                                                                          -> PerRegionTable::add_reference_work()
-                                                                             -> PerRegionTable::add_card_work()
-                                                                                -> * 
-                                                                                     -> BitMap::par_at_put()
+                                                                            -&gt; PosParPRT::alloc()
+                                                                    -&gt; PosParPRT::add_reference()
+                                                                       -&gt; PerRegionTable::add_reference()
+                                                                          -&gt; PerRegionTable::add_reference_work()
+                                                                             -&gt; PerRegionTable::add_card_work()
+                                                                                -&gt; * 
+                                                                                     -&gt; BitMap::par_at_put()
                                                                                    * 
-                                                                                     -> BitMap::at_put()
-```
+                                                                                     -&gt; BitMap::at_put()
+</pre></div>
 
 
 ## 処理の流れ (詳細)(Execution Flows : Details)

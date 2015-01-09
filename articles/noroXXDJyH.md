@@ -37,7 +37,7 @@ JNI 機能(より具体的に言うと, ネイティブメソッドに対する�
 
   これは, メソッドの JIT コンパイル処理を行う関数.
   対象のメソッドがネイティブメソッドの場合, NativeLookup::lookup() が呼び出される.
-  (See: [here](no3718SNC.html), [here](no293548G.html) and [here](no3059err.html) for details)
+  (See: [here](nobV3Ayv16.html), [here](no293548G.html) and [here](no3059err.html) for details)
 
 * InterpreterRuntime::prepare_native_call()
 

@@ -227,10 +227,8 @@ See: [here](no30595On.html) for details
 
 
 ### InterpreterGenerator::generate_native_entry() (Sparc の場合)
-(#Under Construction)
 See: [here](no3718Gvm.html) for details
 ### InterpreterGenerator::generate_native_entry() (x86_64 の場合)
-(#Under Construction)
 See: [here](no1695P8Y.html) for details
 
 ### TemplateInterpreterGenerator::generate_fixed_frame()

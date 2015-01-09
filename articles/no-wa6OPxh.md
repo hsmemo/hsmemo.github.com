@@ -1,19 +1,25 @@
 ---
 layout: default
-title: (#TBD) JIT Compiler ： (2) 各 JIT コンパイラ固有の部分
+title: JIT Compiler の処理 (3) ： JIT コンパイラによるコード生成処理
 ---
 [Up](noQrGfj91w.html) [Top](../index.html)
 
-#### (#TBD) JIT Compiler ： (2) 各 JIT コンパイラ固有の部分
+#### JIT Compiler の処理 (3) ： JIT コンパイラによるコード生成処理
 
 --- 
-#Under Construction
+## 概要(Summary)
+JIT コンパイラによるコードの生成処理は, ネイティブメソッドかどうかで 2通りに分かれる.
+
+  * ネイティブメソッドではない場合: (See: [here](noAZLuzPM1.html) for details)
+    
+  * ネイティブメソッドの場合: (See: [here](no293548G.html) for details)
+
+
 
 
 ## Subcategories
-* [(#TBD) JIT Compiler ： (2) 各 JIT コンパイラ固有の部分 ： C1 の場合](noWKg0YPu8.html)
-* [(#TBD) JIT Compiler ： (2) 各 JIT コンパイラ固有の部分 ： C2 の場合](noo7BHeg-E.html)
-* [(#TBD) JIT Compiler ： (2) 各 JIT コンパイラ固有の部分 ： Shark の場合](noiIylqdKX.html)
+* [JIT Compiler の処理 (3) ： JIT コンパイラによるコード生成処理 ： ネイティブメソッドではない場合](noAZLuzPM1.html)
+* [JIT Compiler の処理 (3) ： JIT コンパイラによるコード生成処理 ： ネイティブメソッドの場合  ](no293548G.html)
 
 
 

@@ -20,7 +20,7 @@ title: HotSpot 内部での処理 ： 詳細(Execution Flows ： Details)
 * [Exception の処理 (送出処理/捕捉処理) ](no2114VSZ.html)
 * [Memory allocation (& GC 処理)  ](no6897XsM.html)
 * [JNI の処理 (Java Native Interface)](noTiWFvTIw.html)
-* [(#TBD) JIT Compiler](noQrGfj91w.html)
+* [JIT Compiler の処理](noQrGfj91w.html)
 * [Serviceability 機能](noOQc_VTg2.html)
 * [(#TBD) その他](nosXQJWNE9.html)
 

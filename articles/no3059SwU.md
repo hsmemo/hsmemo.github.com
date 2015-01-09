@@ -21,6 +21,12 @@ InterpreterGenerator のコンストラクタ内の処理は cpu/ ごとに定�
 TemplateInterpreterGenerator::generate_all() を呼び出すだけになっている.
 (なぜ share/ 以下で共通化していない? #TODO)
 
+## 備考(Notes)
+なお, TemplateInterpreter が使用する TemplateTable の初期化処理 (TemplateTable::initialize()) については, 
+TemplateInterpreter の初期化処理 (TemplateInterpreter::initialize()) から呼び出されているほか, 
+init_globals() 内で呼ばれる templateTable_init() からも呼び出されている.
+
+とはいえ, 一度でいいと思うので templateTable_init() の処理は要らない気がするが...?? #TODO.
 
 ## 処理の流れ (概要)(Execution Flows : Summary)
 <div class="flow-abst"><pre>
@@ -175,6 +181,8 @@ See: [here](no3059A3y.html) for details
 See: [here](no3059yAC.html) for details
 ### TemplateInterpreterGenerator::set_safepoints_for_all_bytes()
 See: [here](no3059ZfU.html) for details
+### templateTable_init()
+See: [here](no28564BqU.html) for details
 
 
 

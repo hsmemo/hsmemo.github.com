@@ -15,7 +15,7 @@ title: AdvancedThresholdPolicy クラス
 C1/C2 JIT Compiler 用の補助クラス (#ifdef TIERED 時にしか定義されない).
 
 Tiered Compilation 用の CompilationPolicy クラス(= メソッドをコンパイルするかどうかの条件/閾値を管理するクラス)
-(See: [here](no3718SNC.html) and [here](no3420B0e.html) for details).
+(See: [here](noi9gh3rMo.html) and [here](no3420B0e.html) for details).
 
 なお, このクラスは CompilationPolicyChoice オプションが 3 の場合にのみ使用される
 (そして Tiered Compilation 使用時のデフォルトは 3). 

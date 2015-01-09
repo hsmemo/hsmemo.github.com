@@ -15,11 +15,12 @@ title: Thread の一時停止処理の枠組み (Safepoint 処理) ： 停止さ
 ## 処理の流れ (概要)(Execution Flows : Summary)
 ### ネイティブメソッド呼び出し処理中での確認処理
 <div class="flow-abst"><pre>
-InterpreterGenerator::generate_native_entry()  or  SharedRuntime::generate_native_wrapper()  が生成したコード
--&gt; (1) JavaThreadState を _thread_in_native_trans に変更
-   (1) メモリアクセスの順序づけを行う
-       -&gt; MacroAssembler::membar() or MacroAssembler::serialize_memory() が生成したコード
-   (1) SafepointSynchronize::_state の値を確認
+(See: <a href="no3059asZ.html">here</a> and <a href="no1904s1R.html">here</a> for details)
+-&gt; InterpreterGenerator::generate_native_entry()  or  SharedRuntime::generate_native_wrapper()  が生成したコード
+   -&gt; (1) JavaThreadState を _thread_in_native_trans に変更
+      (1) メモリアクセスの順序づけを行う
+          -&gt; MacroAssembler::membar() or MacroAssembler::serialize_memory() が生成したコード
+      (1) SafepointSynchronize::_state の値を確認
 </pre></div>
 
 ### 上記確認処理でメモリアクセス違反が生じた場合の処理
@@ -33,17 +34,12 @@ InterpreterGenerator::generate_native_entry()  or  SharedRuntime::generate_nativ
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### InterpreterGenerator::generate_native_entry() (Sparc の場合)
 See: [here](no3718Gvm.html) for details
-(#Under Construction)
-
 ### InterpreterGenerator::generate_native_entry() (x86_64 の場合)
-(#Under Construction)
-
+See: [here](no1695P8Y.html) for details
 ### SharedRuntime::generate_native_wrapper() (Sparc の場合)
-(#Under Construction)
-
+See: [here](no7995P7K.html) for details
 ### SharedRuntime::generate_native_wrapper() (x86_64 の場合)
-(#Under Construction)
-
+See: [here](no7995Qup.html) for details
 ### os::block_on_serialize_page_trap()
 See: [here](no7882G-o.html) for details
 

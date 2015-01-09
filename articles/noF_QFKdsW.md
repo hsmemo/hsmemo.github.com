@@ -25,7 +25,7 @@ HotSpot 内の calling convention にそった引数をネイティブの callin
 
 ## Subcategories
 * [JNI の処理 ： native method の処理 ： native method の呼び出し処理 ： JIT コンパイル対象になっていない native method の場合  ](no3059asZ.html)
-* [(#TBD) JNI の処理 ： native method の処理 ： native method の呼び出し処理 ： JIT コンパイル対象になった native method の場合  ](no1904s1R.html)
+* [JNI の処理 ： native method の処理 ： native method の呼び出し処理 ： JIT コンパイル対象になった native method の場合  ](no1904s1R.html)
 
 
 

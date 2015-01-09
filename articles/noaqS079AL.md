@@ -41,7 +41,7 @@ Template Interpreter によるバイトコードの実行処理は,
 * [(#TBD) Template Interpreter によるバイトコードの実行処理 ： 配列要素へのアクセス／配列の長さ取得 (?aload, ?astore, arraylength)](no5OWF9j69.html)
 * [(#TBD) Template Interpreter によるバイトコードの実行処理 ： 動的型検査／型キャスト (instanceof, checkcast)](no5F7e42op.html)
 * [(#TBD) Template Interpreter によるバイトコードの実行処理 ： オペランド・スタック管理 (pop*, dup*, swap)](noFjLJhfzP.html)
-* [(#TBD) Template Interpreter によるバイトコードの実行処理 ： 制御の移行 (if*, tableswitch, lookupswitch, goto*, jsr*, ret)](noS59wryRf.html)
+* [Template Interpreter によるバイトコードの実行処理 ： 制御の移行 (if*, tableswitch, lookupswitch, goto*, jsr*, ret)](noS59wryRf.html)
 * [Template Interpreter によるバイトコードの実行処理 ： メソッド起動/リターン (invoke*, ?return/return)](noGGvnx01v.html)
 * [Template Interpreter によるバイトコードの実行処理 ： 例外のスロー (athrow)](no8SJ62fep.html)
 * [Template Interpreter によるバイトコードの実行処理 ： 同期化 (monitorenter, monitorexit)](noGFzgRIDH.html)

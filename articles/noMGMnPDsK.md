@@ -8,7 +8,7 @@ title: CompilationPolicy クラス関連のクラス (CompilationPolicy, NonTier
 
 これらは, JIT Compiler 用のクラス.
 より具体的に言うと, メソッドをコンパイルするかどうかの条件/閾値を管理するクラス
-(See: [here](no3718SNC.html) for details).
+(See: [here](noi9gh3rMo.html) for details).
 
 
 ```cpp
@@ -36,7 +36,7 @@ JIT Compiler 用のクラス.
 メソッドをコンパイルするかどうかの条件/閾値を管理するクラス(の基底クラス).
 
 なお, このクラス自体は abstract class であり, 実際に使われるのはサブクラス
-(See: [here](no3718SNC.html) for details).
+(See: [here](noi9gh3rMo.html) for details).
 
 
 ```cpp
@@ -115,7 +115,7 @@ See: [here](../doxygen/classSimpleCompPolicy.html) for details
 C2 JIT Compiler 用の補助クラス (#ifdef COMPILER2 時にしか定義されない).
 
 C2 JIT Compiler 用の CompilationPolicy クラス(= メソッドをコンパイルするかどうかの条件/閾値を管理するクラス)
-(See: [here](no3718SNC.html) and [here](no34200pY.html) for details).
+(See: [here](noi9gh3rMo.html) and [here](no34200pY.html) for details).
 
 なお, このクラスは CompilationPolicyChoice オプションが 1 の場合にのみ使用される. 
 (See: compilationPolicy_init())

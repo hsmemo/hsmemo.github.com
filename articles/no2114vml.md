@@ -44,7 +44,6 @@ sun.management.HotspotThread.getInternalThreadingCounters()
    -&gt; (See: <a href="norvN2FPOq.html">here</a> for details)
 </pre></div>
 
-
 ## 処理の流れ (詳細)(Execution Flows : Details)
 ### Java_sun_management_HotspotThread_getInternalThreadCount()
 See: [here](no2114I6q.html) for details

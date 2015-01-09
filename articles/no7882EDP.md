@@ -109,7 +109,6 @@ See: [here](no2935M9A.html) for details
 See: [here](no7882qZm.html) for details
 ### CppInterpreter::notice_safepoints()
 See: [here](no7882dPg.html) for details
-
 ### InterpreterRuntime::at_safepoint()
 See: [here](no7882eXb.html) for details
 ### JvmtiExport::at_single_stepping_point()
